@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="view_bio_template_list" model="ir.ui.view">
+        <field name="name">bio.template.list</field>
+        <field name="model">bio.template</field>
+        <field name="arch" type="xml">
+            <list string="Bio Template">
+                <field name="employee_id"/>
+                <field name="user_id"/>
+                <field name="number"/>
+                <field name="valid" optional="hide"/>
+                <field name="duress" optional="hide"/>
+                <field name="type_bio" />
+                <field name="version" />
+                <field name="format_bio" optional="hide"/>
+                <field name="device_id"/>
+                <field name="device_user_id" optional="hide"/>
+            </list>
+        </field>
+    </record>
+
+    <record id="view_bio_template_form" model="ir.ui.view">
+        <field name="name">bio.template.form</field>
+        <field name="model">bio.template</field>
+        <field name="arch" type="xml">
+            <form string="Bio Template" edit="0" delete="0">
+                <sheet>
+                    <group>
+                        <group>
+                            <field name="device_id"/>
+                            <field name="device_user_id"/>
+                            <field name="employee_id"/>
+                            <field name="user_id"/>
+                            <field name="number"/>
+                        </group>
+                        <group>
+                            <field name="valid"/>
+                            <field name="duress"/>
+                            <field name="type_bio"/>
+                            <field name="version"/>
+                            <field name="format_bio"/>
+                        </group>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="view_bio_template_search" model="ir.ui.view">
+        <field name="name">bio.template.search</field>
+        <field name="model">bio.template</field>
+        <field name="arch" type="xml">
+            <search string="Bio Template">
+                <group >
+                    <filter string="Device" name="device" domain="[]" context="{'group_by': 'device_id'}"/>
+                    <filter string="Employee" name="employee" domain="[]" context="{'group_by': 'employee_id'}"/>
+                    <filter string="Type" name="type_bio" domain="[]" context="{'group_by': 'type_bio'}"/>
+                </group>
+            </search>
+        </field>
+    </record>
+
+    <record id="action_bio_template" model="ir.actions.act_window">
+        <field name="name">Biometric Templates</field>
+        <field name="res_model">bio.template</field>
+        <field name="view_mode">list,form</field>
+        <field name="search_view_id" ref="view_bio_template_search"/>
+        <field name="context">{}</field>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+                No biometric template found
+            </p>
+            <p>
+                Biometric templates are biometric data stored in the attendance device.
+            </p>
+        </field>
+    </record>
+
+    <menuitem id="menu_bio_template"
+        name="Biometric Templates"
+        sequence="30"
+        parent="attendace_device_menu"
+        action="action_bio_template"/>
+
+</odoo>

@@ -1,0 +1,734 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Biometric Attendance Machines Integration</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+</head>
+
+<body>
+<div class="container">
+
+  <!-- Overview / Hero -->
+  <section id="overview_block" style="margin-top: 1.5rem; margin-bottom: 1.5rem;">
+    <div class="rounded p-4" style="background-color: #00BBCE; background-image: linear-gradient(135deg, #00BBCE 0%, #7F4282 100%); border-radius: 15px;">
+      <div class="row mx-0 p-3 align-items-center" style="border-radius: 15px; background-color: rgba(232, 249, 250, 0.96);">
+        <div class="col-sm-12 col-md-12 col-lg-4 text-center text-lg-start p-2">
+          <a href="/apps/modules/browse?author=Viindoo">
+            <img src="https://raw.githubusercontent.com/Viindoo/branding/2a5af87f5d75189c1dba7021e165f8085b36b086/viin_brand/static/img/viindoo-logo-slogan.svg" style="width: auto; height: 80px;" alt="Viindoo Logo" />
+          </a>
+        </div>
+        <div class="col-sm-12 col-md-12 col-lg-8 d-flex flex-column flex-lg-row justify-content-end p-3" style="gap: 10px;">
+          <div class="btn text-md-nowrap d-flex align-items-center justify-content-center" style="border-radius: 10px; color: #ffffff; background-color: #00BBCE; padding: 10px 20px;">
+            <i class="fa fa-check-circle-o" style="margin-right: 8px;"></i>
+            <span>Odoo Community</span>
+          </div>
+          <div class="btn text-md-nowrap d-flex align-items-center justify-content-center" style="border-radius: 10px; color: #ffffff; background-color: #00BBCE; padding: 10px 20px;">
+            <i class="fa fa-check-circle-o" style="margin-right: 8px;"></i>
+            <span>Odoo Enterprise</span>
+          </div>
+          <div class="btn text-md-nowrap d-flex align-items-center justify-content-center" style="border-radius: 10px; color: #ffffff; background-color: #00BBCE; padding: 10px 20px;">
+            <i class="fa fa-check-circle-o" style="margin-right: 8px;"></i>
+            <span>Viindoo Cloud</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="row mt-4 text-center">
+        <div class="col-md-12">
+          <h2 style="color: #ffffff; font-weight: 700; font-size: 36px; margin-bottom: 12px;">
+            ZKTeco biometric attendance integration for Odoo/Viindoo
+          </h2>
+          <p class="mx-auto" style="color: #ffffff; font-size: 18px; line-height: 26px; max-width: 78%; margin-bottom: 14px;">
+            Connect - sync - automate all attendance logs from ZKTeco devices into your HR system. Manage device users, support multiple devices - locations - timezones, keep safe audit trails and long term retention.
+          </p>
+          <p class="mx-auto" style="color: #EAF9FA; font-size: 14px; line-height: 22px; max-width: 78%; margin-bottom: 0;">
+            Supports TCP - UDP - optional "iCloud" push mode for devices. Streamline check-in workflows, reduce manual entry, and get payroll ready.
+          </p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Main Screenshot -->
+    <div class="row mt-4">
+      <div class="col-md-10 offset-md-1 text-center" style="border-radius: 20px; padding: 3px; background: linear-gradient(135deg, #00BBCE 0%, #7F4282 100%);">
+        <!-- to do: replace with main overview image -->
+        <img alt="Biometric attendance integration overview" class="img-fluid" loading="lazy"
+             src="assets/biometric_attendance_integration_overview.gif"
+             style="border-radius: 15px; display: block; width: 100%; height: auto;" />
+      </div>
+    </div>
+  </section>
+
+  <!-- Key Features -->
+  <section id="key_features_block" class="py-4">
+    <div style="background-color: #EAF9FA; padding: 40px; border-radius: 15px;">
+      <h2 class="text-center mb-4" style="color: #21272B; font-size: 28px; font-weight: bold;">Key features</h2>
+      <p class="text-center mx-auto mb-5" style="max-width: 820px; font-size: 16px; color: #4A4F55; line-height: 1.6;">
+        A production-ready attendance integration framework for ZKTeco devices. Flexible connectivity, safe synchronization, scalable across devices - locations - timezones, with permanent storage in Odoo/Viindoo.
+      </p>
+
+      <div class="row g-4">
+        <div class="col-md-6 col-lg-4 d-flex">
+          <div class="d-flex align-items-start flex-fill" style="padding: 24px; border-radius: 12px; background-color: #ffffff; border: 1px solid #F2F2F2;">
+            <div class="me-3"><i class="fa fa-plug" style="font-size: 28px; color: #7F4282;"></i></div>
+            <div>
+              <h4 style="font-size: 16px; font-weight: 600;">Flexible connectivity</h4>
+              <p class="mb-0" style="font-size: 14px;">Connect via IP or domain using TCP or UDP. Optional "iCloud" mode lets devices push logs into the app.</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-md-6 col-lg-4 d-flex">
+          <div class="d-flex align-items-start flex-fill" style="padding: 24px; border-radius: 12px; background-color: #ffffff; border: 1px solid #F2F2F2;">
+            <div class="me-3"><i class="fa fa-users" style="font-size: 28px; color: #7F4282;"></i></div>
+            <div>
+              <h4 style="font-size: 16px; font-weight: 600;">On-device user management</h4>
+              <p class="mb-0" style="font-size: 14px;">Import - remove users, auto-map to employee profiles in Odoo. Track in - out - overtime states.</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-md-6 col-lg-4 d-flex">
+          <div class="d-flex align-items-start flex-fill" style="padding: 24px; border-radius: 12px; background-color: #ffffff; border: 1px solid #F2F2F2;">
+            <div class="me-3"><i class="fa fa-building" style="font-size: 28px; color: #7F4282;"></i></div>
+            <div>
+              <h4 style="font-size: 16px; font-weight: 600;">Multi-device - multi-site</h4>
+              <p class="mb-0" style="font-size: 14px;">Operate many ZKTeco devices across multiple locations and timezones, consolidate logs centrally.</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-md-6 col-lg-4 d-flex">
+          <div class="d-flex align-items-start flex-fill" style="padding: 24px; border-radius: 12px; background-color: #ffffff; border: 1px solid #F2F2F2;">
+            <div class="me-3"><i class="fa fa-refresh" style="font-size: 28px; color: #7F4282;"></i></div>
+            <div>
+              <h4 style="font-size: 16px; font-weight: 600;">Automated synchronization</h4>
+              <p class="mb-0" style="font-size: 14px;">Schedule or run manual pulls. Auto cleanup on device per configuration. Permanent storage in Odoo.</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-md-6 col-lg-4 d-flex">
+          <div class="d-flex align-items-start flex-fill" style="padding: 24px; border-radius: 12px; background-color: #ffffff; border: 1px solid #F2F2F2;">
+            <div class="me-3"><i class="fa fa-shield" style="font-size: 28px; color: #7F4282;"></i></div>
+            <div>
+              <h4 style="font-size: 16px; font-weight: 600;">Secure connection</h4>
+              <p class="mb-0" style="font-size: 14px;">Password-based authentication when pairing devices with Odoo/Viindoo. Prevent unauthorized access and preserve integrity.</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-md-6 col-lg-4 d-flex">
+          <div class="d-flex align-items-start flex-fill" style="padding: 24px; border-radius: 12px; background-color: #ffffff; border: 1px solid #F2F2F2;">
+            <div class="me-3"><i class="fa fa-list-ul" style="font-size: 28px; color: #7F4282;"></i></div>
+            <div>
+              <h4 style="font-size: 16px; font-weight: 600;">Broad device compatibility</h4>
+              <p class="mb-0" style="font-size: 14px;">Compatible with many ZKTeco and Ronald Jack models. Tested with SpeedFace, Uface, K-series, iFace, iClock, and more (see below).</p>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- Benefits -->
+  <section id="benefit_block" class="py-4">
+    <div style="background-color: #F2F2F2; padding: 40px; border-radius: 15px;">
+      <h2 class="text-center mb-4" style="color: #21272B; font-size: 28px; font-weight: bold;">Key benefits</h2>
+      <div class="bg-white rounded" style="padding: 24px; border: 1px solid #F2F2F2;">
+        <div class="d-flex align-items-start gap-3 p-2">
+          <i class="fa fa-dot-circle-o" style="font-size: 22px; color: #7F4282; margin-top: 4px;"></i>
+          <div>
+            <strong>Process automation</strong>
+            <p class="mb-0" style="font-size: 15px;">Reduce manual entry, minimize errors, and shorten time-to-payroll.</p>
+          </div>
+        </div>
+        <div class="d-flex align-items-start gap-3 p-2">
+          <i class="fa fa-dot-circle-o" style="font-size: 22px; color: #7F4282; margin-top: 4px;"></i>
+          <div>
+            <strong>Consistent synchronization</strong>
+            <p class="mb-0" style="font-size: 15px;">Unify in - out - overtime data with HR records and Odoo Attendance.</p>
+          </div>
+        </div>
+        <div class="d-flex align-items-start gap-3 p-2">
+          <i class="fa fa-dot-circle-o" style="font-size: 22px; color: #7F4282; margin-top: 4px;"></i>
+          <div>
+            <strong>Reporting and analytics</strong>
+            <p class="mb-0" style="font-size: 15px;">Enable workforce analytics, support payroll and compliance needs.</p>
+          </div>
+        </div>
+        <div class="d-flex align-items-start gap-3 p-2">
+          <i class="fa fa-dot-circle-o" style="font-size: 22px; color: #7F4282; margin-top: 4px;"></i>
+          <div>
+            <strong>Cost efficiency</strong>
+            <p class="mb-0" style="font-size: 15px;">Leverage existing devices, simple configuration, lower operating cost.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Tabs -->
+  <div id="tabs" class="container px-0">
+    <ul class="nav nav-tabs justify-content-center bg-white py-2" id="myTab" role="tablist" style="border-radius: 6px 6px 0 0;">
+      <li class="nav-item" role="presentation">
+        <a class="nav-link active" id="feature-tab" data-bs-toggle="tab" href="#feature" role="tab" aria-controls="feature" aria-selected="true" style="color: #121212; font-weight: 500; font-size: 16px;">Detailed features</a>
+      </li>
+      <li class="nav-item" role="presentation">
+        <a class="nav-link" id="demo-tab" data-bs-toggle="tab" href="#demo" role="tab" aria-controls="demo" aria-selected="false" style="color: #121212; font-weight: 500; font-size: 16px;">Demo</a>
+      </li>
+      <li class="nav-item" role="presentation">
+        <a class="nav-link" id="support-tab" data-bs-toggle="tab" href="#support" role="tab" aria-controls="support" aria-selected="false" style="color: #121212; font-weight: 500; font-size: 16px;">Support</a>
+      </li>
+      <li class="nav-item" role="presentation">
+        <a class="nav-link" id="requirement-tab" data-bs-toggle="tab" href="#requirement" role="tab" aria-controls="requirement" aria-selected="false" style="color: #121212; font-weight: 500; font-size: 16px;">Technical requirements</a>
+      </li>
+      <li class="nav-item" role="presentation">
+        <a class="nav-link" id="releases-tab" data-bs-toggle="tab" href="#releases" role="tab" aria-controls="releases" aria-selected="false" style="color: #121212; font-weight: 500; font-size: 16px;">Changelog</a>
+      </li>
+    </ul>
+  </div>
+
+  <div class="tab-content" id="myTabContent">
+
+    <!-- Detailed Features Tab -->
+    <div aria-labelledby="feature-tab" class="tab-pane fade show active" id="feature" role="tabpanel">
+
+      <!-- Connection -->
+      <section class="py-4">
+        <div style="background-color: #EAF9FA; padding: 32px; border-radius: 15px;">
+          <div class="row align-items-center">
+            <div class="col-md-12 col-xl-4">
+              <h3 class="text-xl-start text-center" style="color: #21272B; font-weight: 700; font-size: 22px; line-height: 30px;">Connect devices</h3>
+              <ul style="font-size: 15px; line-height: 26px; padding-left: 20px;">
+                <li>Connect using IP or domain via TCP - UDP.</li>
+                <li>Optional "iCloud" mode for device-to-app push.</li>
+                <li>Secure with connection password to harden access.</li>
+              </ul>
+            </div>
+            <div class="col-md-12 col-xl-8 mt-3 mt-xl-0 d-flex justify-content-center">
+              <!-- to do: connection settings screenshot -->
+              <img alt="Device connection settings" class="img-fluid" loading="lazy"
+                   src="assets/flexible_connectivity.gif"
+                   style="border-radius: 15px; width: 100%; height: auto;" />
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Device and user management -->
+      <section class="py-4">
+        <div style="background-color: #F2F2F2; padding: 32px; border-radius: 15px;">
+          <div class="row align-items-center">
+            <div class="col-md-12 col-xl-8 order-2 order-xl-1 mt-3 mt-xl-0 d-flex justify-content-center">
+              <!-- to do: device and user management screenshot -->
+              <img alt="Device and user management" class="img-fluid" loading="lazy"
+                   src="assets/device_user_management.gif"
+                   style="border-radius: 15px; width: 100%; height: auto;" />
+            </div>
+            <div class="col-md-12 col-xl-4 order-1 order-xl-2">
+              <h3 class="text-xl-start text-center" style="color: #21272B; font-weight: 700; font-size: 22px; line-height: 30px;">User Management on Attendance Machines</h3>
+              <ul style="font-size: 15px; line-height: 26px; padding-left: 20px;">
+                <li>Support multiple ZKTeco attendance machines at different locations, time zones at various locations.</li>
+                <li>Import - remove users to devices from employee lists.</li>
+                <li>Automatically map users on attendance machines with employee profiles in Odoo.</li>
+                <li>Support multiple attendance statuses (e.g., Check-in, Check-out, Start Overtime, End Overtime, etc.).</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Sync and retention -->
+      <section class="py-4">
+        <div style="background-color: #EAF9FA; padding: 32px; border-radius: 15px;">
+          <div class="row align-items-center">
+            <div class="col-md-12 col-xl-4">
+              <h3 class="text-xl-start text-center" style="color: #21272B; font-weight: 700; font-size: 22px; line-height: 30px;">Attendance Data</h3>
+              <ul style="font-size: 15px; line-height: 26px; padding-left: 20px;">
+                <li>Automatically download attendance data from machines and synchronize it with the HR system in Odoo (users can configure automatic or manual synchronization).</li>
+                <li>Automatically clear attendance data from machines according to the configuration or manually clear it.</li>
+                <li>Permanently store attendance data in Odoo/Viindoo</li>
+              </ul>
+            </div>
+            <div class="col-md-12 col-xl-8 mt-3 mt-xl-0 d-flex justify-content-center">
+              <!-- to do: scheduler screenshot -->
+              <img alt="Attendance synchronization" class="img-fluid" loading="lazy"
+                   src="assets/attendance_data.gif"
+                   style="border-radius: 15px; width: 100%; height: auto;" />
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- iCloud option -->
+      <section class="py-4">
+        <div style="background-color: #F2F2F2; padding: 32px; border-radius: 15px;">
+          <h3 class="text-center" style="color: #21272B; font-weight: 700; font-size: 22px; line-height: 30px;">"Icloud" option for Odoo 17+</h3>
+          <div class="row g-4">
+
+	      <!-- Column 1: Introduce -->
+	      <div class="col-md-6 d-flex">
+	        <div class="flex-fill p-4" style="border-radius: 15px; background-color: #ffffff; border: 1px solid #E0E0E0;">
+	          <h4 style="font-size: 18px; font-weight: 600; color: #21272B; margin-bottom: 10px;">
+	            Introduce ADSM iCloud Feature
+	          </h4>
+	          <p style="font-size: 14px; color: #4A4F55; line-height: 1.6;">
+	            Since Odoo 17, new feature was added call <strong>'Icloud'</strong> to allow machine to push data into software. 
+	            Before we only can get data from the machine, some client might get trouble when configure the machine 
+	            because it need static IP and Modem configuration.
+	          </p>
+	          <p style="font-size: 14px; color: #4A4F55; line-height: 1.6;">
+	            With this feature (optional, by default we still use either UDP or TCP one, we encourage to use this 
+	            icloud option as the last one only because it has some security risk) you only need to configure in the 
+	            machine by following instruction (this instruction use SpeedFace-H5L[P], but don't worry other machines 
+	            have the same one):
+	          </p>
+	          <div class="mt-3">
+	            <img src="assets/icloud-ADMS.gif" alt="iCloud Feature Overview" class="img-fluid" 
+	                 style="border-radius: 10px; width: 100%; height: auto;">
+	          </div>
+	        </div>
+	      </div>
+
+	      <!-- Column 2: Quick Guide -->
+	      <div class="col-md-6 d-flex">
+	        <div class="flex-fill p-4" style="border-radius: 15px; background-color: #ffffff; border: 1px solid #E0E0E0;">
+	          <h4 style="font-size: 18px; font-weight: 600; color: #21272B; margin-bottom: 10px;">
+	            Quick Guide
+	          </h4>
+	          <p style="font-size: 14px; color: #4A4F55; line-height: 1.6;">
+	            (this instruction use SpeedFace-H5L[P], but don't worry other machines have the same one):
+	          </p>
+	          <ul style="font-size: 14px; color: #4A4F55; line-height: 1.6; padding-left: 20px;">
+	            <li>Go to <strong>'Comm'</strong> setting of the machine</li>
+	            <li>
+	              Select <strong>Cloud Server Setting</strong> and you will see some configuration:
+	              <ul style="margin-top: 5px; margin-bottom: 5px;">
+	                <li><strong>Enable Domain Name:</strong> enable this if you going to use domain name</li>
+	                <li><strong>Server Address:</strong> enter IP address like 192.168.1.1 (check this by going to internet setting) or your domain name like example.viindoo.com</li>
+	                <li><strong>Server Port:</strong> If it hosted online, probably '443' is fine or any port that your server has. In the local environment it should be the port to run Odoo config (8069 for example)</li>
+	                <li><strong>Enable Proxy Server (Some machines have):</strong> activate Proxy, after that you will need to specify Server IP and Port of the proxy one</li>
+	                <li><strong>HTTPS (Some machines have):</strong> Support https when pushing data, need to activate this unless you use local environment to develop. Note this, some machines might not have this, in that case it is necessary to change the nginx settings to prevent redirection to https for routers related to machines.</li>
+	              </ul>
+	            </li>
+	            <li>Then go to machine manager to create a new one with protocol <strong>'icloud'</strong>, we have chosen the best setting for you so you do not need to do that</li>
+	            <li>Fill the <strong>'Serial Number'</strong> (In the machine, go to <em>'System Info' → 'Device Info'</em> to see the Serial Number)</li>
+	            <li>Hit button <strong>'Upload Setting'</strong> to push setting into the machine</li>
+	            <li>From now on, your machine is ready to push data into the software</li>
+	          </ul>
+	        </div>
+	      </div>
+        </div>
+    </div>
+      </section>
+
+      <!-- Supported devices -->
+      <section class="py-4">
+		  <div style="background-color: #EAF9FA; padding: 32px; border-radius: 15px;">
+		    <h3 class="text-left" style="color: #21272B; font-weight: 700; font-size: 22px; line-height: 30px;">Supported Devices</h3>
+		    <p class="mx-auto" style="font-size: 14px; text-align: left; margin-left: auto; margin-right: auto;">
+		      Supports various models of ZKTeco machine.
+		    </p>
+		    <div class="row g-3">
+		      <!-- Column 1 -->
+		      <div class="col-12 col-md-6">
+		        <h4 class="mb-2" style="font-size:16px; font-weight:700;">Fully tested with the following devices:</h4>
+		        <ul class="mb-0" style="margin:0; padding-left:18px;">
+		          <li>ZKTeco SENSEFACE 7A</li>
+		          <li>RONALD JACK B3-C</li>
+		          <li>ZKTeco K50</li>
+		          <li>ZKTeco MA300</li>
+		          <li>ZKTeco T4C</li>
+		          <li>ZKTeco G3</li>
+		          <li>RONALD JACK iClock260</li>
+		          <li>ZKTeco K14</li>
+		          <li>iFace702</li>
+		          <li>Uface 800 (worked with finger and face)</li>
+		          <li>ZKTeco K40</li>
+		          <li>ZKTeco K20</li>
+		          <li>ZKTeco U580</li>
+		          <li>ZKTeco F18</li>
+		          <li>ZKTeco F19</li>
+		          <li>iFace402/ID</li>
+		          <li>iFace800</li>
+		          <li>iClock3000</li>
+		          <li>iClock880-H</li>
+		          <li>iclock 700​</li>
+		          <li>Ronald Jack T8</li>
+		          <li>Ronald jack 1000Plus</li>
+		          <li>ZKTeco MB20</li>
+		          <li>ZKteco IN0A-1</li>
+		          <li>Uface 800</li>
+		          <li>SpeedFace V5L</li>
+		          <li>Speedface H5L(P)</li>
+		          <li>VF680</li>
+		          <li>RSP10k1</li>
+		          <li>Uface 302</li>
+		          <li>... (please advise us your machines. Tks!)</li>
+		        </ul>
+		      </div>
+
+		      <!-- Column 2 -->
+		      <div class="col-12 col-md-6">
+		        <h4 class="mb-2" style="font-size:16px; font-weight:700;">Devices reported working by customers:</h4>
+		        <ul class="mb-0" style="margin:0; padding-left:18px;">
+		          <li>SpeedPalm-V5L</li>
+		          <li>SenseFace 7</li>
+		          <li>SenseFace 4</li>
+		          <li>SenseFace 3</li>
+		          <li>SenseFace 2A</li>
+		          <li>MB series</li>
+		          <li>F21</li>
+		          <li>F22</li>
+		          <li>SF400</li>
+		          <li>uFace series</li>
+		          <li>SilkBio series</li>
+		          <li>IN05 &amp; IN05-A</li>
+		          <li>X628-C</li>
+		          <li>U300-C</li>
+		          <li>U260-C</li>
+		          <li>iClock680</li>
+		          <li>iClock360</li>
+		          <li>UA series</li>
+		          <li>WL series</li>
+		          <li>P series</li>
+		          <li>EFace10</li>
+		          <li>... (Support devices with ADMS feature)</li>
+		        </ul>
+		      </div>
+		    </div>
+		  </div>
+	</section>
+    </div>
+
+    <!-- Demo Tab-->
+            <div aria-labelledby="demo-tab" class="tab-pane fade" id="demo" role="tabpanel">
+                <!-- YouTube Link Style -->
+                <section id="demo_block" class="py-4">
+                    <div style="background-color: #EEF8FF; border-radius: 20px; padding: 48px 24px;">
+                        <div style="max-width: 960px; margin: 0 auto;">
+                            <div style="background-color: #ffffff; border-radius: 18px; padding: 36px 32px; text-align: center; box-shadow: 0 12px 28px rgba(8, 116, 255, 0.16);">
+                                <h3 style="font-size: 24px; font-weight: 700; color: #21272B; margin-bottom: 12px;">
+                                    Watch Video Tutorial
+                                </h3>
+                                <p style="font-size: 16px; color: #4A4F55; line-height: 1.7; max-width: 640px; margin: 0 auto 24px auto;">
+                                   Open the video introduction for ZKTeco biometric attendance integration odoo/Viindoo
+                                </p>
+                                <div class="media_iframe_video col-lg-10 rounded"
+                                  data-oe-expression="//www.youtube.com/embed/hR0cVYze0UE?si=xSTm1f-xFRNsAxZ5">
+                                </div>
+                            </div>
+                            <div class="row g-4 mt-3">
+                                <div class="col-12 col-lg-6">
+                                    <div style="background-color: #ffffff; border-radius: 16px; padding: 28px; height: 100%; box-shadow: 0 10px 24px rgba(0, 187, 206, 0.12);">
+                                        <div style="display: flex; align-items: flex-start; gap: 16px;">
+                                            <i class="fa fa-book me-2" style="font-size: 26px; color: #00BBCE;"></i>
+                                            <div>
+                                                <h4 style="font-size: 20px; font-weight: 600; color: #21272B;">Read User Guide</h4>
+                                            </div>
+                                        </div>
+                                        <div style="display: inline-flex; align-items: center; border-radius: 14px; overflow: hidden; border: 1px solid #00BBCE; box-shadow: 0 6px 14px rgba(0, 187, 206, 0.15);">
+                                            <span class="me-2" style="background-color: #ffffff; color: #00BBCE; font-size: 12px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.5px; padding: 11px 18px; white-space: nowrap;">
+                                                Copy Link
+                                            </span>
+                                            <span style="background-color: #00BBCE; color: #ffffff; font-size: 14px; font-weight: 500; padding: 11px 18px; user-select: all; white-space: nowrap;">
+                                                viindoo.com/r/biometric_attendance
+                                            </span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-12 col-lg-6">
+                                    <div style="background-color: #ffffff; border-radius: 16px; padding: 28px; height: 100%; box-shadow: 0 10px 24px rgba(127, 66, 130, 0.12);">
+                                        <div style="display: flex; align-items: flex-start; gap: 16px;">
+                                            <i class="fa fa-desktop me-2" style="font-size: 26px; color: #7F4282;"></i>
+                                            <div>
+                                                <h4 style="font-size: 20px; font-weight: 600; color: #21272B;">Explore Live Demo</h4>
+                                            </div>
+                                        </div>
+                                        <div style="display: inline-flex; align-items: center; border-radius: 14px; overflow: hidden; border: 1px solid #7F4282; box-shadow: 0 6px 14px rgba(127, 66, 130, 0.15);">
+                                            <span class="me-2" style="background-color: #ffffff; color: #7F4282; font-size: 12px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.5px; padding: 11px 18px; white-space: nowrap;">
+                                                Copy Link
+                                            </span>
+                                            <span style="background-color: #7F4282; color: #ffffff; font-size: 14px; font-weight: 500; padding: 11px 18px; user-select: all; white-space: nowrap;">
+                                                v18-biometric.demo.viindoo.cloud
+                                            </span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+            </div>
+
+            <!-- Support Tab-->
+            <div aria-labelledby="support-tab" class="tab-pane fade" id="support" role="tabpanel">
+                <section id="support_block" class="py-4">
+                    <div style="padding: 47px; border-radius: 15px; background-color: #F2F2F2;">
+                        <!-- Heading -->
+                        <h2 class="text-center" style="color: #21272B; font-size: 32px; font-weight: bold;">
+                            Need a help for this module?
+                        </h2>
+                        <p class="mb-5" style="text-align: center; font-size: 18px;">
+                            If you have questions, need any help, or have a customizations request, please contact us
+                        </p>
+                        <div class="row">
+                            <div class="col-lg-6 col-md-12 mb-4">
+                                <div class="d-flex flex-column align-items-center "
+                                    style="background-color: #EAF9FA; padding: 47px; border-radius: 15px; min-height: 500px;">
+                                    <!-- Heading -->
+                                    <h2 class="text-center mb-5" style="color: #00bcd4; font-size: 32px; font-weight: bold;">
+                                        Pre-Sales Question
+                                    </h2>
+                                    <!-- Extensions Grid -->
+                                    <div class="d-flex align-items-center"
+                                        style="border-radius: 15px; overflow: hidden; border: 1px solid #00bcd4; background-color: white;">
+                                        <div class="d-flex align-items-center justify-content-center"
+                                            style="background-color: white; padding: 0px 26px;">
+                                            <a href="mailto:sales@viindoo.com">
+                                                <i class="fa fa-envelope-o" style="font-size: 28px; color: #00bcd4;"></i>
+                                            </a>
+                                        </div>
+                                        <div style="background-color: #00bcd4; padding: 14px 26px; flex: 1; border-top-right-radius: 15px; border-bottom-right-radius: 15px;">
+                                            <a href="mailto:sales@viindoo.com" style="color: white; font-size: 20px; font-weight: 500; text-decoration: none;">
+                                                sales@viindoo.com
+                                            </a>
+                                        </div>
+                                    </div>
+                                    <div class="mt-4 text-left">
+                                        If you need pre-purchase support, please email us with the necessary
+                                        information to assist you:
+                                        <ul class="pl-4 mt-2 d-inline-block text-left">
+                                            <li class="mb-2">
+                                                The module you are exploring: name and version
+                                            </li>
+                                            <li class="mb-2">
+                                                Edition in use: CE, EE</li>
+                                            <li class="mb-2">
+                                                Your issue: trial, payment, installation, etc.
+                                            </li>
+                                            <li class="mb-2">
+                                                Provide screenshots or videos, if available.
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-6 col-md-12 mb-4">
+                                <div class="d-flex flex-column align-items-center "
+                                    style="background-color: #FFFAFF; padding: 47px; border-radius: 15px; min-height: 500px;">
+                                    <!-- Heading -->
+                                    <h2 class="text-center mb-5"
+                                        style="color: #7F4282; font-size: 32px; font-weight: bold;">Support
+                                    </h2>
+                                    <!-- Extensions Grid -->
+                                    <div class="d-flex align-items-center"
+                                        style="border-radius: 15px; overflow: hidden; border: 1px solid #7F4282; background-color: white; overflow: hidden;">
+                                        <div class="d-flex align-items-center justify-content-center"
+                                            style="background-color: white; padding: 0px 26px;">
+                                            <a href="mailto:apps.support@viindoo.com">
+                                                <i class="fa fa-envelope-o" style="font-size: 28px; color: #7F4282;"></i>
+                                            </a>
+                                        </div>
+                                        <div style="background-color: #7F4282; padding: 14px 26px; flex: 1; border-top-right-radius: 15px; border-bottom-right-radius: 15px;">
+                                            <a href="mailto:apps.support@viindoo.com" style="color: white; font-size: 20px; font-weight: 500; text-decoration: none;">
+                                                apps.support@viindoo.com
+                                            </a>
+                                        </div>
+                                    </div>
+                                    <div class="mt-4 text-left">
+                                        If you encounter any issues while using our application, please provide the necessary information so we can assist you promptly:
+                                        <ul class="pl-4 mt-2 d-inline-block text-left">
+                                            <li class="mb-2">
+                                                Your order number and attach a screenshot
+                                            </li>
+                                            <li class="mb-2">
+                                                A description of the issue you're experiencing
+                                            </li>
+                                            <li class="mb-2">
+                                                Your expectations for resolving the situation
+                                            </li>
+                                            <li class="mb-2">
+                                                Include images or videos that replicate the issue
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+            </div>
+
+    <!-- Technical Requirement Tab -->
+    <div aria-labelledby="requirement-tab" class="tab-pane fade" id="requirement" role="tabpanel">
+      <section id="requirement_block" class="py-4">
+        <div style="background-color: #F2F2F2; padding: 40px; border-radius: 15px;">
+          <h2 class="text-center mb-4" style="color: #21272B; font-size: 26px; font-weight: bold;">Technical requirements</h2>
+          <div class="p-3 bg-white rounded">
+            <div class="d-flex align-items-center gap-3 p-2">
+              <i class="fa fa-dot-circle-o" style="font-size: 18px; color: #7F4282;"></i>
+              <div style="font-size: 15px;">
+                <strong>Odoo Version:</strong> 18.0
+              </div>
+            </div>
+            <div class="d-flex align-items-center gap-3 p-2">
+              <i class="fa fa-dot-circle-o" style="font-size: 18px; color: #7F4282;"></i>
+              <div style="font-size: 15px;">
+                <strong>Dependencies:</strong> hr_attendance, to_base.
+              </div>
+            </div>
+            <div class="d-flex align-items-center gap-3 p-2">
+              <i class="fa fa-dot-circle-o" style="font-size: 18px; color: #7F4282;"></i>
+              <div style="font-size: 15px;">
+                <strong>Python libraries:</strong> setuptools.
+              </div>
+            </div>
+            <div class="d-flex align-items-center gap-3 p-2">
+              <i class="fa fa-dot-circle-o" style="font-size: 18px; color: #7F4282;"></i>
+              <div style="font-size: 15px;">
+                <strong>Network:</strong> NAT - port forwarding to the device or the optional "iCloud" mode.
+              </div>
+            </div>
+          </div>
+          <p class="mt-3" style="font-size: 13px; color: #666;">
+            Compatibility depends on firmware - protocol - distribution region. Test on a demo environment before rolling out to production.
+          </p>
+        </div>
+      </section>
+    </div>
+
+    <!-- Changes Log Tab -->
+    <div aria-labelledby="releases-tab" class="tab-pane fade" id="releases" role="tabpanel">
+      <section id="changes_log_block" class="py-4">
+        <div style="background-color: #F2F2F2; padding: 40px; border-radius: 15px;">
+          <div class="row">
+            <div class="col-md-12 col-xl-4 d-flex align-items-center justify-content-center">
+              <h2 class="text-center" style="color: #21272B; font-size: 26px; font-weight: bold;">Changelog</h2>
+            </div>
+            <div class="col-md-12 col-xl-8" style="border-left: 2px solid #e0e0e0;">
+              <div class="d-flex flex-column justify-content-center" style="height: 100%;">
+                <div class="mb-4">
+                  <h3 style="color: #282F33; font-size: 18px; margin-bottom: 6px;">
+                    <span style="color: #3498db;">18.1.1.7</span> - compatibility and stability updates
+                  </h3>
+                  <ul style="padding-left: 20px; font-size: 14px; color: #555;">
+                    <li>Improved TCP - UDP connection stability.</li>
+                    <li>Optimized sync for multiple attendance states.</li>
+                    <li>Updated guidance for the optional "iCloud" configuration.</li>
+                  </ul>
+                </div>
+                <!-- to do: add newer versions here -->
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+    </div>
+
+  </div>
+
+  <!-- Recommended Combos -->
+  <section id="recommended_combos_block" class="py-4">
+    <div style="background-color: #F2F2F2; padding: 40px; border-radius: 15px;">
+      <h2 class="text-center mb-4" style="color: #21272B; font-size: 26px; font-weight: bold;">Others info</h2>
+      <div class="row g-4">
+      
+      <!-- Credit Column -->
+      <div class="col-md-6 d-flex">
+        <div class="flex-fill p-4" style="border-radius: 15px; background-color: #ffffff; border: 1px solid #E0E0E0;">
+          <h4 style="font-size: 18px; font-weight: 600; color: #21272B; margin-bottom: 10px;">
+            Credit
+          </h4>
+          <p style="font-size: 14px; color: #4A4F55; line-height: 1.6;">
+            Tons of thanks to <strong>Fananimi</strong> for his excellent 
+            <a href="https://github.com/fananimi/pyzk" target="_blank" rel="noopener" style="color: #00BBCE; text-decoration: none;">
+              pyzk library
+            </a>.
+          </p>
+          <p style="font-size: 14px; color: #4A4F55; line-height: 1.6;">
+            We took inspiration from it and extended it with additional features 
+            such as <em>machine information, Python 3 support, and TCP/IP support</em>, 
+            before integrating it into Odoo through this powerful 
+            <strong>Attendance Machine application</strong>.
+          </p>
+        </div>
+      </div>
+
+      <!-- Known Issues Column -->
+      <div class="col-md-6 d-flex">
+        <div class="flex-fill p-4" style="border-radius: 15px; background-color: #ffffff; border: 1px solid #E0E0E0;">
+          <h4 style="font-size: 18px; font-weight: 600; color: #21272B; margin-bottom: 10px;">
+            Known Issues
+          </h4>
+          <p style="font-size: 14px; color: #4A4F55; line-height: 1.6;">
+            To make this module work perfectly, your device must be accessible 
+            via the internet (if using an online platform like <em>odoo.sh</em> 
+            or a self-hosted instance).
+          </p>
+          <p style="font-size: 14px; color: #4A4F55; line-height: 1.6;">
+            Don't worry if the device is connected but still cannot download data, it could be one of following reason:
+          </p>
+          <ul style="font-size: 14px; color: #4A4F55; line-height: 1.6; padding-left: 20px;">
+            <li>Wrong device mode (we support mode call <em>Time Attendance</em> other mode <em>like Access Control</em> will not work)</li>
+            <li>Lacking device configuration (by default some device will ignore the in/out checking stuff therefore we can not download your attendance data).</li>
+          </ul>
+          <p style="font-size: 14px; color: #4A4F55; line-height: 1.6;">
+            For troubleshooting, please contact us at 
+            <a href="https://viindoo.com/ticket/team/8" target="_blank" rel="noopener" style="color: #7F4282; text-decoration: none;">
+              https://viindoo.com/ticket/team/8
+            </a>.
+          </p>
+        </div>
+      </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Target Users -->
+  <section id="target_users_block" class="py-4">
+    <div style="background-color: #EAF9FA; padding: 40px; border-radius: 15px;">
+      <h2 class="text-center mb-4" style="color: #21272B; font-size: 26px; font-weight: bold;">Who should use this</h2>
+      <div class="row g-4">
+        <div class="col-md-6 col-lg-4 d-flex">
+          <div class="flex-fill p-3" style="border-radius: 12px; background-color: #ffffff; border: 1px solid #F2F2F2;">
+            <h4 style="font-size: 18px; font-weight: 600;">Companies with many devices</h4>
+            <p style="font-size: 14px; margin-bottom: 0;">Operate multiple checkpoints and need centralized synchronization.</p>
+          </div>
+        </div>
+        <div class="col-md-6 col-lg-4 d-flex">
+          <div class="flex-fill p-3" style="border-radius: 12px; background-color: #ffffff; border: 1px solid #F2F2F2;">
+            <h4 style="font-size: 18px; font-weight: 600;">Large workforce</h4>
+            <p style="font-size: 14px; margin-bottom: 0;">Lower manual workload, improve accuracy, stay payroll ready.</p>
+          </div>
+        </div>
+        <div class="col-md-6 col-lg-4 d-flex">
+          <div class="flex-fill p-3" style="border-radius: 12px; background-color: #ffffff; border: 1px solid #F2F2F2;">
+            <h4 style="font-size: 18px; font-weight: 600;">Compliance heavy environments</h4>
+            <p style="font-size: 14px; margin-bottom: 0;">Require consistent, auditable attendance trails stored safely.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer small info -->
+  <section class="py-3">
+    <div class="text-center" style="font-size: 12px; color: #6B6D70;">
+      Version: 18.0 - Category: Human Resources - License: OPL-1
+    </div>
+  </section>
+
+</div>
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

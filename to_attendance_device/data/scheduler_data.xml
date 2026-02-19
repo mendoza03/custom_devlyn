@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+	<data noupdate="1">
+		<record id="ir_cron_scheduler_sync_attendance" model="ir.cron">
+			<field name="name">User Attendance: Synchronize attendances scheduler</field>
+			<field name="model_id" ref="model_user_attendance" />
+			<field name="user_id" ref="base.user_root" />
+			<field name="state">code</field>
+			<field name="interval_number">30</field>
+			<field name="interval_type">minutes</field>
+			<field name="code">model._cron_synch_hr_attendance()</field>
+		</record>
+
+		<record id="ir_cron_scheduler_download_attendance" model="ir.cron">
+			<field name="name">Attendance Device: Download attendances scheduler</field>
+			<field name="model_id" ref="model_attendance_device" />
+			<field name="user_id" ref="base.user_root" />
+			<field name="state">code</field>
+			<field name="interval_number">30</field>
+			<field name="interval_type">minutes</field>
+			<field name="code">model._cron_download_device_attendance()</field>
+		</record>
+
+		<record id="ir_cron_scheduler_delete_old_commands" model="ir.cron">
+			<field name="name">Attendance Device: Delete old commands scheduler</field>
+			<field name="model_id" ref="model_attendance_command_device" />
+			<field name="user_id" ref="base.user_root" />
+			<field name="state">code</field>
+			<field name="interval_number">1</field>
+			<field name="interval_type">days</field>
+			<field name="priority">8</field>
+			<field name="code">model._cron_delete_old_commands(days=180)</field>
+		</record>
+	</data>
+</odoo>

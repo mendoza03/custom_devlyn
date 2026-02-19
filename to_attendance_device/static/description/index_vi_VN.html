@@ -1,0 +1,729 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tích hợp Máy chấm công Sinh trắc học ZKTeco</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+</head>
+
+<body>
+<div class="container">
+
+  <!-- Overview / Hero -->
+  <section id="overview_block" style="margin-top: 1.5rem; margin-bottom: 1.5rem;">
+    <div class="rounded p-4" style="background-color: #00BBCE; background-image: linear-gradient(135deg, #00BBCE 0%, #7F4282 100%); border-radius: 15px;">
+      <div class="row mx-0 p-3 align-items-center" style="border-radius: 15px; background-color: rgba(232, 249, 250, 0.96);">
+        <div class="col-sm-12 col-md-12 col-lg-4 text-center text-lg-start p-2">
+          <a href="/apps/modules/browse?author=Viindoo">
+            <img src="https://raw.githubusercontent.com/Viindoo/branding/2a5af87f5d75189c1dba7021e165f8085b36b086/viin_brand/static/img/viindoo-logo-slogan.svg" style="width: auto; height: 80px;" alt="Viindoo Logo" />
+          </a>
+        </div>
+        <div class="col-sm-12 col-md-12 col-lg-8 d-flex flex-column flex-lg-row justify-content-end p-3" style="gap: 10px;">
+          <div class="btn text-md-nowrap d-flex align-items-center justify-content-center" style="border-radius: 10px; color: #ffffff; background-color: #00BBCE; padding: 10px 20px;">
+            <i class="fa fa-check-circle-o" style="margin-right: 8px;"></i>
+            <span>Odoo Community</span>
+          </div>
+          <div class="btn text-md-nowrap d-flex align-items-center justify-content-center" style="border-radius: 10px; color: #ffffff; background-color: #00BBCE; padding: 10px 20px;">
+            <i class="fa fa-check-circle-o" style="margin-right: 8px;"></i>
+            <span>Odoo Enterprise</span>
+          </div>
+          <div class="btn text-md-nowrap d-flex align-items-center justify-content-center" style="border-radius: 10px; color: #ffffff; background-color: #00BBCE; padding: 10px 20px;">
+            <i class="fa fa-check-circle-o" style="margin-right: 8px;"></i>
+            <span>Viindoo Cloud</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="row mt-4 text-center">
+        <div class="col-md-12">
+          <h2 style="color: #ffffff; font-weight: 700; font-size: 36px; margin-bottom: 12px;">
+            Tích hợp máy chấm công sinh trắc học ZKTeco với Odoo/Viindoo
+          </h2>
+          <p class="mx-auto" style="color: #ffffff; font-size: 18px; line-height: 26px; max-width: 78%; margin-bottom: 14px;">
+            Kết nối - đồng bộ - tự động hóa toàn bộ dữ liệu chấm công từ các thiết bị ZKTeco vào hệ thống Nhân sự. Quản lý người dùng trên thiết bị, hỗ trợ nhiều thiết bị - nhiều địa điểm - nhiều múi giờ.
+          </p>
+          <p class="mx-auto" style="color: #EAF9FA; font-size: 14px; line-height: 22px; max-width: 78%; margin-bottom: 0;">
+            Hỗ trợ kết nối máy chấm công qua IP hoặc tên miền, sử dụng giao thức TCP và UDP. Tối ưu hóa quy trình chấm công, giảm nhập liệu thủ công và sẵn sàng dữ liệu cho bảng lương.
+          </p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Main Screenshot -->
+    <div class="row mt-4">
+      <div class="col-md-10 offset-md-1 text-center" style="border-radius: 20px; padding: 3px; background: linear-gradient(135deg, #00BBCE 0%, #7F4282 100%);">
+        <!-- to do: replace with main overview image -->
+        <img alt="Biometric attendance integration overview" class="img-fluid" loading="lazy"
+             src="assets/biometric_attendance_integration_overview.gif"
+             style="border-radius: 15px; display: block; width: 100%; height: auto;" />
+      </div>
+    </div>
+  </section>
+
+  <!-- Key Features -->
+  <section id="key_features_block" class="py-4">
+    <div style="background-color: #EAF9FA; padding: 40px; border-radius: 15px;">
+      <h2 class="text-center mb-4" style="color: #21272B; font-size: 28px; font-weight: bold;">Tính năng chính</h2>
+      <p class="text-center mx-auto mb-5" style="max-width: 820px; font-size: 16px; color: #4A4F55; line-height: 1.6;">
+        Mô-đun này cung cấp khả năng quản lý máy chấm công sinh trắc học ZKTeco, cho phép quản lý và đồng bộ dữ liệu người dùng và dữ liệu từ máy chấm công vào hệ thống quản lý nhân sự.
+      </p>
+
+      <div class="row g-4">
+        <div class="col-md-6 col-lg-4 d-flex">
+          <div class="d-flex align-items-start flex-fill" style="padding: 24px; border-radius: 12px; background-color: #ffffff; border: 1px solid #F2F2F2;">
+            <div class="me-3"><i class="fa fa-plug" style="font-size: 28px; color: #7F4282;"></i></div>
+            <div>
+              <h4 style="font-size: 16px; font-weight: 600;">Kết nối linh hoạt</h4>
+              <p class="mb-0" style="font-size: 14px;">Kết nối qua IP hoặc tên miền bằng TCP hoặc UDP. Tùy chọn chế độ “iCloud” cho phép thiết bị tự đẩy dữ liệu chấm công vào ứng dụng.</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-md-6 col-lg-4 d-flex">
+          <div class="d-flex align-items-start flex-fill" style="padding: 24px; border-radius: 12px; background-color: #ffffff; border: 1px solid #F2F2F2;">
+            <div class="me-3"><i class="fa fa-users" style="font-size: 28px; color: #7F4282;"></i></div>
+            <div>
+              <h4 style="font-size: 16px; font-weight: 600;">Quản lý người dùng trên thiết bị</h4>
+              <p class="mb-0" style="font-size: 14px;">Nhập - xóa người dùng trên thiết bị từ danh sách nhân viên, tự động map với hồ sơ nhân viên trong Odoo và theo dõi trạng thái vào - ra - tăng ca.</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-md-6 col-lg-4 d-flex">
+          <div class="d-flex align-items-start flex-fill" style="padding: 24px; border-radius: 12px; background-color: #ffffff; border: 1px solid #F2F2F2;">
+            <div class="me-3"><i class="fa fa-building" style="font-size: 28px; color: #7F4282;"></i></div>
+            <div>
+              <h4 style="font-size: 16px; font-weight: 600;">Nhiều thiết bị - nhiều địa điểm</h4>
+              <p class="mb-0" style="font-size: 14px;">Vận hành nhiều thiết bị ZKTeco tại nhiều chi nhánh, nhiều múi giờ và hợp nhất dữ liệu chấm công về một nơi.</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-md-6 col-lg-4 d-flex">
+          <div class="d-flex align-items-start flex-fill" style="padding: 24px; border-radius: 12px; background-color: #ffffff; border: 1px solid #F2F2F2;">
+            <div class="me-3"><i class="fa fa-refresh" style="font-size: 28px; color: #7F4282;"></i></div>
+            <div>
+              <h4 style="font-size: 16px; font-weight: 600;">Đồng bộ tự động</h4>
+              <p class="mb-0" style="font-size: 14px;">Cho phép thiết lập lịch đồng bộ hoặc chạy thủ công. Hỗ trợ tự xóa dữ liệu trên máy theo cấu hình và lưu trữ vĩnh viễn trong Odoo.</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-md-6 col-lg-4 d-flex">
+          <div class="d-flex align-items-start flex-fill" style="padding: 24px; border-radius: 12px; background-color: #ffffff; border: 1px solid #F2F2F2;">
+            <div class="me-3"><i class="fa fa-shield" style="font-size: 28px; color: #7F4282;"></i></div>
+            <div>
+              <h4 style="font-size: 16px; font-weight: 600;">Kết nối an toàn</h4>
+              <p class="mb-0" style="font-size: 14px;">Xác thực bằng mật khẩu khi ghép nối thiết bị với Odoo/Viindoo, ngăn truy cập trái phép và đảm bảo toàn vẹn dữ liệu.</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-md-6 col-lg-4 d-flex">
+          <div class="d-flex align-items-start flex-fill" style="padding: 24px; border-radius: 12px; background-color: #ffffff; border: 1px solid #F2F2F2;">
+            <div class="me-3"><i class="fa fa-list-ul" style="font-size: 28px; color: #7F4282;"></i></div>
+            <div>
+              <h4 style="font-size: 16px; font-weight: 600;">Tương thích nhiều dòng máy ZKTeco</h4>
+              <p class="mb-0" style="font-size: 14px;">Tương thích với nhiều dòng máy ZKTeco. Đã kiểm thử với SpeedFace, Uface, K-series, iFace, iClock và nhiều mẫu khác (xem bên dưới).</p>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- Benefits -->
+  <section id="benefit_block" class="py-4">
+    <div style="background-color: #F2F2F2; padding: 40px; border-radius: 15px;">
+      <h2 class="text-center mb-4" style="color: #21272B; font-size: 28px; font-weight: bold;">Lợi ích</h2>
+      <div class="bg-white rounded" style="padding: 24px; border: 1px solid #F2F2F2;">
+        <div class="d-flex align-items-start gap-3 p-2">
+          <i class="fa fa-dot-circle-o" style="font-size: 22px; color: #7F4282; margin-top: 4px;"></i>
+          <div>
+            <strong>Tự động hóa quy trình</strong>
+            <p class="mb-0" style="font-size: 15px;">Giảm nhập liệu thủ công, hạn chế sai sót và rút ngắn thời gian xử lý bảng lương.</p>
+          </div>
+        </div>
+        <div class="d-flex align-items-start gap-3 p-2">
+          <i class="fa fa-dot-circle-o" style="font-size: 22px; color: #7F4282; margin-top: 4px;"></i>
+          <div>
+            <strong>Đồng bộ thống nhất</strong>
+            <p class="mb-0" style="font-size: 15px;">Chuẩn hóa dữ liệu vào - ra - tăng ca với hồ sơ nhân sự và phân hệ Chấm công của Odoo/Viindoo.</p>
+          </div>
+        </div>
+        <div class="d-flex align-items-start gap-3 p-2">
+          <i class="fa fa-dot-circle-o" style="font-size: 22px; color: #7F4282; margin-top: 4px;"></i>
+          <div>
+            <strong>Báo cáo và phân tích</strong>
+            <p class="mb-0" style="font-size: 15px;">Hỗ trợ phân tích lực lượng lao động, tính lương và đáp ứng yêu cầu tuân thủ.</p>
+          </div>
+        </div>
+        <div class="d-flex align-items-start gap-3 p-2">
+          <i class="fa fa-dot-circle-o" style="font-size: 22px; color: #7F4282; margin-top: 4px;"></i>
+          <div>
+            <strong>Tiết kiệm chi phí</strong>
+            <p class="mb-0" style="font-size: 15px;">Tận dụng thiết bị sẵn có, cấu hình đơn giản và giảm chi phí vận hành.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Tabs -->
+  <div id="tabs" class="container px-0">
+    <ul class="nav nav-tabs justify-content-center bg-white py-2" id="myTab" role="tablist" style="border-radius: 6px 6px 0 0;">
+      <li class="nav-item" role="presentation">
+        <a class="nav-link active" id="feature-tab" data-bs-toggle="tab" href="#feature" role="tab" aria-controls="feature" aria-selected="true" style="color: #121212; font-weight: 500; font-size: 16px;">Tính năng</a>
+      </li>
+      <li class="nav-item" role="presentation">
+        <a class="nav-link" id="demo-tab" data-bs-toggle="tab" href="#demo" role="tab" aria-controls="demo" aria-selected="false" style="color: #121212; font-weight: 500; font-size: 16px;">Demo</a>
+      </li>
+      <li class="nav-item" role="presentation">
+        <a class="nav-link" id="support-tab" data-bs-toggle="tab" href="#support" role="tab" aria-controls="support" aria-selected="false" style="color: #121212; font-weight: 500; font-size: 16px;">Hỗ trợ</a>
+      </li>
+      <li class="nav-item" role="presentation">
+        <a class="nav-link" id="requirement-tab" data-bs-toggle="tab" href="#requirement" role="tab" aria-controls="requirement" aria-selected="false" style="color: #121212; font-weight: 500; font-size: 16px;">Yêu cầu Kỹ thuật</a>
+      </li>
+      <li class="nav-item" role="presentation">
+        <a class="nav-link" id="releases-tab" data-bs-toggle="tab" href="#releases" role="tab" aria-controls="releases" aria-selected="false" style="color: #121212; font-weight: 500; font-size: 16px;">Lịch sử thay đổi</a>
+      </li>
+    </ul>
+  </div>
+
+  <div class="tab-content" id="myTabContent">
+
+    <!-- Detailed Features Tab -->
+    <div aria-labelledby="feature-tab" class="tab-pane fade show active" id="feature" role="tabpanel">
+
+      <!-- Connection -->
+      <section class="py-4">
+        <div style="background-color: #EAF9FA; padding: 32px; border-radius: 15px;">
+          <div class="row align-items-center">
+            <div class="col-md-12 col-xl-4">
+              <h3 class="text-xl-start text-center" style="color: #21272B; font-weight: 700; font-size: 22px; line-height: 30px;">Kết nối thiết bị</h3>
+              <ul style="font-size: 15px; line-height: 26px; padding-left: 20px;">
+                <li>Kết nối bằng IP hoặc tên miền qua TCP - UDP.</li>
+                <li>Tùy chọn chế độ “iCloud” để thiết bị đẩy dữ liệu trực tiếp vào ứng dụng.</li>
+                <li>Bảo vệ bằng mật khẩu kết nối để tăng cường an toàn truy cập.</li>
+              </ul>
+            </div>
+            <div class="col-md-12 col-xl-8 mt-3 mt-xl-0 d-flex justify-content-center">
+              <!-- to do: connection settings screenshot -->
+              <img alt="Device connection settings" class="img-fluid" loading="lazy"
+                   src="assets/flexible_connectivity.gif"
+                   style="border-radius: 15px; width: 100%; height: auto;" />
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Device and user management -->
+      <section class="py-4">
+        <div style="background-color: #F2F2F2; padding: 32px; border-radius: 15px;">
+          <div class="row align-items-center">
+            <div class="col-md-12 col-xl-8 order-2 order-xl-1 mt-3 mt-xl-0 d-flex justify-content-center">
+              <!-- to do: device and user management screenshot -->
+              <img alt="Device and user management" class="img-fluid" loading="lazy"
+                   src="assets/device_user_management.gif"
+                   style="border-radius: 15px; width: 100%; height: auto;" />
+            </div>
+            <div class="col-md-12 col-xl-4 order-1 order-xl-2">
+              <h3 class="text-xl-start text-center" style="color: #21272B; font-weight: 700; font-size: 22px; line-height: 30px;">Quản lý người dùng trên máy chấm công</h3>
+              <ul style="font-size: 15px; line-height: 26px; padding-left: 20px;">
+                <li>Hỗ trợ nhiều máy chấm công ZKTeco tại các địa điểm, múi giờ khác nhau.</li>
+                <li>Nhập - xóa người dùng lên thiết bị từ danh sách nhân viên.</li>
+                <li>Tự động map người dùng trên máy chấm công với hồ sơ nhân viên trong Odoo/Viindoo.</li>
+                <li>Hỗ trợ nhiều trạng thái chấm công (ví dụ: Check-in, Check-out, Bắt đầu tăng ca, Kết thúc tăng ca...).</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Sync and retention -->
+      <section class="py-4">
+        <div style="background-color: #EAF9FA; padding: 32px; border-radius: 15px;">
+          <div class="row align-items-center">
+            <div class="col-md-12 col-xl-4">
+              <h3 class="text-xl-start text-center" style="color: #21272B; font-weight: 700; font-size: 22px; line-height: 30px;">Dữ liệu chấm công</h3>
+              <ul style="font-size: 15px; line-height: 26px; padding-left: 20px;">
+                <li>Tự động tải dữ liệu chấm công từ máy và đồng bộ vào hệ thống nhân sự trong Odoo/Viindoo (có thể cấu hình chế độ tự động hoặc thủ công).</li>
+                <li>Tự động xóa dữ liệu chấm công trên máy theo cấu hình hoặc xóa thủ công.</li>
+                <li>Lưu trữ lâu dài dữ liệu chấm công trong Odoo/Viindoo.</li>
+              </ul>
+            </div>
+            <div class="col-md-12 col-xl-8 mt-3 mt-xl-0 d-flex justify-content-center">
+              <!-- to do: scheduler screenshot -->
+              <img alt="Attendance synchronization" class="img-fluid" loading="lazy"
+                   src="assets/attendance_data.gif"
+                   style="border-radius: 15px; width: 100%; height: auto;" />
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- iCloud option -->
+      <section class="py-4">
+        <div style="background-color: #F2F2F2; padding: 32px; border-radius: 15px;">
+          <h3 class="text-center" style="color: #21272B; font-weight: 700; font-size: 22px; line-height: 30px;">Tùy chọn "iCloud" cho Odoo 17+</h3>
+          <div class="row g-4">
+
+	      <!-- Column 1: Introduce -->
+	      <div class="col-md-6 d-flex">
+	        <div class="flex-fill p-4" style="border-radius: 15px; background-color: #ffffff; border: 1px solid #E0E0E0;">
+	          <h4 style="font-size: 18px; font-weight: 600; color: #21272B; margin-bottom: 10px;">
+	            Giới thiệu tính năng ADSM iCloud
+	          </h4>
+	          <p style="font-size: 14px; color: #4A4F55; line-height: 1.6;">
+	            Từ Odoo 17, một tính năng mới được bổ sung là <strong>'Icloud'</strong> cho phép máy chấm công đẩy dữ liệu trực tiếp vào phần mềm. 
+	            Trước đây, hệ thống chỉ có thể lấy dữ liệu từ máy; 
+	            một số khách hàng gặp khó khăn khi cấu hình vì cần IP tĩnh và cấu hình modem.
+	          </p>
+	          <p style="font-size: 14px; color: #4A4F55; line-height: 1.6;">
+	            Với tính năng này (tùy chọn, mặc định hệ thống vẫn ưu tiên sử dụng UDP hoặc TCP; 
+	            chúng tôi khuyến nghị chỉ dùng iCloud như phương án cuối vì có một số rủi ro bảo mật), 
+	            bạn chỉ cần cấu hình trên máy chấm công theo hướng dẫn (ví dụ với SpeedFace-H5L[P], nhưng các máy khác cũng tương tự):
+	          </p>
+	          <div class="mt-3">
+	            <img src="assets/icloud-ADMS.gif" alt="iCloud Feature Overview" class="img-fluid" 
+	                 style="border-radius: 10px; width: 100%; height: auto;">
+	          </div>
+	        </div>
+	      </div>
+
+	      <!-- Column 2: Quick Guide -->
+	      <div class="col-md-6 d-flex">
+	        <div class="flex-fill p-4" style="border-radius: 15px; background-color: #ffffff; border: 1px solid #E0E0E0;">
+	          <h4 style="font-size: 18px; font-weight: 600; color: #21272B; margin-bottom: 10px;">
+	            Hướng dẫn nhanh
+	          </h4>
+	          <p style="font-size: 14px; color: #4A4F55; line-height: 1.6;">
+	            (Ví dụ minh họa với SpeedFace-H5L[P], nhưng các dòng máy khác có cấu hình tương tự):
+	          </p>
+	          <ul style="font-size: 14px; color: #4A4F55; line-height: 1.6; padding-left: 20px;">
+	            <li>Vào phần thiết lập  <strong>'Comm'</strong> của máy</li>
+	            <li>
+	              Chọn <strong>Cloud Server Setting</strong>  và bạn sẽ thấy một số thiết lập:
+	              <ul style="margin-top: 5px; margin-bottom: 5px;">
+	                <li><strong>Enable Domain Name:</strong> bật nếu bạn sử dụng tên miền</li>
+	                <li><strong>Server Address:</strong> nhập địa chỉ IP như 192.168.1.1 (kiểm tra trong thiết lập mạng) hoặc tên miền như example.viindoo.com</li>
+	                <li><strong>Server Port:</strong> nếu máy chủ đặt online, thường cổng "443" là phù hợp hoặc cổng mà máy chủ của bạn sử dụng. Trong môi trường nội bộ, đây là cổng chạy Odoo (ví dụ 8069)</li>
+	                <li><strong>Enable Proxy Server (một số máy có):</strong> bật Proxy, sau đó khai báo IP và Port của máy chủ proxy</li>
+	                <li><strong>HTTPS (một số máy có):</strong> hỗ trợ https khi đẩy dữ liệu, nên bật trừ khi bạn dùng môi trường nội bộ để phát triển. Lưu ý một số máy không có tùy chọn này, khi đó cần điều chỉnh cấu hình nginx để tránh tự động chuyển hướng sang https cho các route dùng cho máy chấm công.</li>
+	              </ul>
+	            </li>
+	            <li>Sau đó vào phần quản lý máy trong Odoo để tạo một máy mới với giao thức <strong>icloud</strong>, các thiết lập tối ưu đã được cấu hình sẵn cho bạn.</li>
+	            <li>Nhập <strong>Serial Number</strong> (trên máy, vào "System Info" → "Device Info" để xem số Serial).</li>
+	            <li>Nhấn nút <strong>Upload Setting</strong> để đẩy cấu hình lên máy chấm công.</li>
+	            <li>Từ thời điểm này, máy chấm công đã sẵn sàng đẩy dữ liệu vào phần mềm.</li>
+	          </ul>
+	        </div>
+	      </div>
+        </div>
+    </div>
+      </section>
+
+      <!-- Supported devices -->
+      <section class="py-4">
+		  <div style="background-color: #EAF9FA; padding: 32px; border-radius: 15px;">
+		    <h3 class="text-left" style="color: #21272B; font-weight: 700; font-size: 22px; line-height: 30px;">Thiết bị được hỗ trợ</h3>
+		    <p class="mx-auto" style="font-size: 14px; text-align: left; margin-left: auto; margin-right: auto;">
+		      Hỗ trợ nhiều dòng máy chấm công ZKTeco khác nhau.
+		    </p>
+		    <div class="row g-3">
+		      <!-- Column 1 -->
+		      <div class="col-12 col-md-6">
+		        <h4 class="mb-2" style="font-size:16px; font-weight:700;">Đã kiểm thử đầy đủ với các thiết bị sau:</h4>
+		        <ul class="mb-0" style="margin:0; padding-left:18px;">
+		          <li>ZKTeco SENSEFACE 7A</li>
+		          <li>RONALD JACK B3-C</li>
+		          <li>ZKTeco K50</li>
+		          <li>ZKTeco MA300</li>
+		          <li>ZKTeco T4C</li>
+		          <li>ZKTeco G3</li>
+		          <li>RONALD JACK iClock260</li>
+		          <li>ZKTeco K14</li>
+		          <li>iFace702</li>
+		          <li>Uface 800 (hỗ trợ vân tay và khuôn mặt)</li>
+		          <li>ZKTeco K40</li>
+		          <li>ZKTeco K20</li>
+		          <li>ZKTeco U580</li>
+		          <li>ZKTeco F18</li>
+		          <li>ZKTeco F19</li>
+		          <li>iFace402/ID</li>
+		          <li>iFace800</li>
+		          <li>iClock3000</li>
+		          <li>iClock880-H</li>
+		          <li>iclock 700​</li>
+		          <li>Ronald Jack T8</li>
+		          <li>Ronald jack 1000Plus</li>
+		          <li>ZKTeco MB20</li>
+		          <li>ZKteco IN0A-1</li>
+		          <li>Uface 800</li>
+		          <li>SpeedFace V5L</li>
+		          <li>Speedface H5L(P)</li>
+		          <li>VF680</li>
+		          <li>RSP10k1</li>
+		          <li>Uface 302</li>
+		          <li>... (vui lòng thông báo cho chúng tôi về thiết bị của bạn. Xin cảm ơn!)</li>
+		        </ul>
+		      </div>
+
+		      <!-- Column 2 -->
+		      <div class="col-12 col-md-6">
+		        <h4 class="mb-2" style="font-size:16px; font-weight:700;">Thiết bị được khách hàng báo lại hoạt động tốt:</h4>
+		        <ul class="mb-0" style="margin:0; padding-left:18px;">
+		          <li>SpeedPalm-V5L</li>
+		          <li>SenseFace 7</li>
+		          <li>SenseFace 4</li>
+		          <li>SenseFace 3</li>
+		          <li>SenseFace 2A</li>
+		          <li>MB series</li>
+		          <li>F21</li>
+		          <li>F22</li>
+		          <li>SF400</li>
+		          <li>uFace series</li>
+		          <li>SilkBio series</li>
+		          <li>IN05 &amp; IN05-A</li>
+		          <li>X628-C</li>
+		          <li>U300-C</li>
+		          <li>U260-C</li>
+		          <li>iClock680</li>
+		          <li>iClock360</li>
+		          <li>UA series</li>
+		          <li>WL series</li>
+		          <li>P series</li>
+		          <li>EFace10</li>
+		          <li>... (Hỗ trợ các thiết bị có tính năng ADMS)</li>
+		        </ul>
+		      </div>
+		    </div>
+		  </div>
+	</section>
+    </div>
+
+    <!-- Demo Tab-->
+            <div aria-labelledby="demo-tab" class="tab-pane fade" id="demo" role="tabpanel">
+                <!-- YouTube Link Style -->
+                <section id="demo_block" class="py-4">
+                    <div style="background-color: #EEF8FF; border-radius: 20px; padding: 48px 24px;">
+                        <div style="max-width: 960px; margin: 0 auto;">
+                            <div style="background-color: #ffffff; border-radius: 18px; padding: 36px 32px; text-align: center; box-shadow: 0 12px 28px rgba(8, 116, 255, 0.16);">
+                                <h3 style="font-size: 24px; font-weight: 700; color: #21272B; margin-bottom: 12px;">
+                                    Xem video hướng dẫn
+                                </h3>
+                                <p style="font-size: 16px; color: #4A4F55; line-height: 1.7; max-width: 640px; margin: 0 auto 24px auto;">
+                                   Mở video giới thiệu về tích hợp máy chấm công sinh trắc học ZKTeco với Odoo/Viindoo.
+                                </p>
+                                <div class="media_iframe_video col-lg-10 rounded"
+                                  data-oe-expression="//www.youtube.com/embed/hR0cVYze0UE?si=xSTm1f-xFRNsAxZ5">
+                                </div>
+                            </div>
+                            <div class="row g-4 mt-3">
+                                <div class="col-12 col-lg-6">
+                                    <div style="background-color: #ffffff; border-radius: 16px; padding: 28px; height: 100%; box-shadow: 0 10px 24px rgba(0, 187, 206, 0.12);">
+                                        <div style="display: flex; align-items: flex-start; gap: 16px;">
+                                            <i class="fa fa-book me-2" style="font-size: 26px; color: #00BBCE;"></i>
+                                            <div>
+                                                <h4 style="font-size: 20px; font-weight: 600; color: #21272B;">Xem hướng dẫn sử dụnge</h4>
+                                            </div>
+                                        </div>
+                                        <div style="display: inline-flex; align-items: center; border-radius: 14px; overflow: hidden; border: 1px solid #00BBCE; box-shadow: 0 6px 14px rgba(0, 187, 206, 0.15);">
+                                            <span class="me-2" style="background-color: #ffffff; color: #00BBCE; font-size: 12px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.5px; padding: 11px 18px; white-space: nowrap;">
+                                                Sao chép liên kết
+                                            </span>
+                                            <span style="background-color: #00BBCE; color: #ffffff; font-size: 14px; font-weight: 500; padding: 11px 18px; user-select: all; white-space: nowrap;">
+                                                viindoo.com/r/biometric_attendance
+                                            </span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-12 col-lg-6">
+                                    <div style="background-color: #ffffff; border-radius: 16px; padding: 28px; height: 100%; box-shadow: 0 10px 24px rgba(127, 66, 130, 0.12);">
+                                        <div style="display: flex; align-items: flex-start; gap: 16px;">
+                                            <i class="fa fa-desktop me-2" style="font-size: 26px; color: #7F4282;"></i>
+                                            <div>
+                                                <h4 style="font-size: 20px; font-weight: 600; color: #21272B;">rải nghiệm demo trực tiếp</h4>
+                                            </div>
+                                        </div>
+                                        <div style="display: inline-flex; align-items: center; border-radius: 14px; overflow: hidden; border: 1px solid #7F4282; box-shadow: 0 6px 14px rgba(127, 66, 130, 0.15);">
+                                            <span class="me-2" style="background-color: #ffffff; color: #7F4282; font-size: 12px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.5px; padding: 11px 18px; white-space: nowrap;">
+                                                Sao chép liên kết
+                                            </span>
+                                            <span style="background-color: #7F4282; color: #ffffff; font-size: 14px; font-weight: 500; padding: 11px 18px; user-select: all; white-space: nowrap;">
+                                                v18-biometric.demo.viindoo.cloud
+                                            </span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+            </div>
+
+            <!-- Support Tab-->
+            <div aria-labelledby="support-tab" class="tab-pane fade" id="support" role="tabpanel">
+                <section id="support_block" class="py-4">
+                    <div style="padding: 47px; border-radius: 15px; background-color: #F2F2F2;">
+                        <!-- Heading -->
+                        <h2 class="text-center" style="color: #21272B; font-size: 32px; font-weight: bold;">
+                            Cần hỗ trợ cho mô-đun này?
+                        </h2>
+                        <p class="mb-5" style="text-align: center; font-size: 18px;">
+                           Nếu bạn có câu hỏi, cần được hỗ trợ hoặc muốn yêu cầu tùy chỉnh, vui lòng liên hệ với chúng tôi
+                        </p>
+                        <div class="row">
+                            <div class="col-lg-6 col-md-12 mb-4">
+                                <div class="d-flex flex-column align-items-center "
+                                    style="background-color: #EAF9FA; padding: 47px; border-radius: 15px; min-height: 500px;">
+                                    <!-- Heading -->
+                                    <h2 class="text-center mb-5" style="color: #00bcd4; font-size: 32px; font-weight: bold;">
+                                        Câu hỏi trước khi mua
+                                    </h2>
+                                    <!-- Extensions Grid -->
+                                    <div class="d-flex align-items-center"
+                                        style="border-radius: 15px; overflow: hidden; border: 1px solid #00bcd4; background-color: white;">
+                                        <div class="d-flex align-items-center justify-content-center"
+                                            style="background-color: white; padding: 0px 26px;">
+                                            <a href="mailto:sales@viindoo.com">
+                                                <i class="fa fa-envelope-o" style="font-size: 28px; color: #00bcd4;"></i>
+                                            </a>
+                                        </div>
+                                        <div style="background-color: #00bcd4; padding: 14px 26px; flex: 1; border-top-right-radius: 15px; border-bottom-right-radius: 15px;">
+                                            <a href="mailto:sales@viindoo.com" style="color: white; font-size: 20px; font-weight: 500; text-decoration: none;">
+                                                sales@viindoo.com
+                                            </a>
+                                        </div>
+                                    </div>
+                                    <div class="mt-4 text-left">
+                                        Nếu bạn cần tư vấn trước khi mua, vui lòng gửi email cho chúng tôi với các thông tin sau:
+                                        <ul class="pl-4 mt-2 d-inline-block text-left">
+                                            <li class="mb-2">
+                                                Tên và phiên bản mô-đun bạn đang quan tâm
+                                            </li>
+                                            <li class="mb-2">
+                                                Phiên bản Odoo bạn đang dùng: CE hay EE</li>
+                                            <li class="mb-2">
+                                                Vấn đề bạn gặp phải: dùng thử, thanh toán, cài đặt, v.v.
+                                            </li>
+                                            <li class="mb-2">
+                                                Đính kèm ảnh chụp màn hình hoặc video (nếu có).
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-6 col-md-12 mb-4">
+                                <div class="d-flex flex-column align-items-center "
+                                    style="background-color: #FFFAFF; padding: 47px; border-radius: 15px; min-height: 500px;">
+                                    <!-- Heading -->
+                                    <h2 class="text-center mb-5"
+                                        style="color: #7F4282; font-size: 32px; font-weight: bold;">Hỗ trợ khác
+                                    </h2>
+                                    <!-- Extensions Grid -->
+                                    <div class="d-flex align-items-center"
+                                        style="border-radius: 15px; overflow: hidden; border: 1px solid #7F4282; background-color: white; overflow: hidden;">
+                                        <div class="d-flex align-items-center justify-content-center"
+                                            style="background-color: white; padding: 0px 26px;">
+                                            <a href="mailto:apps.support@viindoo.com">
+                                                <i class="fa fa-envelope-o" style="font-size: 28px; color: #7F4282;"></i>
+                                            </a>
+                                        </div>
+                                        <div style="background-color: #7F4282; padding: 14px 26px; flex: 1; border-top-right-radius: 15px; border-bottom-right-radius: 15px;">
+                                            <a href="mailto:apps.support@viindoo.com" style="color: white; font-size: 20px; font-weight: 500; text-decoration: none;">
+                                                apps.support@viindoo.com
+                                            </a>
+                                        </div>
+                                    </div>
+                                    <div class="mt-4 text-left">
+                                        Nếu bạn gặp sự cố trong quá trình sử dụng ứng dụng, vui lòng cung cấp các thông tin sau để chúng tôi hỗ trợ nhanh nhất:
+                                        <ul class="pl-4 mt-2 d-inline-block text-left">
+                                            <li class="mb-2">
+                                                Số đơn hàng và ảnh chụp màn hình liên quan
+                                            </li>
+                                            <li class="mb-2">
+                                                Mô tả chi tiết vấn đề bạn đang gặp phải
+                                            </li>
+                                            <li class="mb-2">
+                                                Kỳ vọng của bạn về cách xử lý tình huống
+                                            </li>
+                                            <li class="mb-2">
+                                                Đính kèm hình ảnh hoặc video mô phỏng lại lỗi (nếu có).
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+            </div>
+
+    <!-- Technical Requirement Tab -->
+    <div aria-labelledby="requirement-tab" class="tab-pane fade" id="requirement" role="tabpanel">
+      <section id="requirement_block" class="py-4">
+        <div style="background-color: #F2F2F2; padding: 40px; border-radius: 15px;">
+          <h2 class="text-center mb-4" style="color: #21272B; font-size: 26px; font-weight: bold;">Yêu cầu kỹ thuật</h2>
+          <div class="p-3 bg-white rounded">
+            <div class="d-flex align-items-center gap-3 p-2">
+              <i class="fa fa-dot-circle-o" style="font-size: 18px; color: #7F4282;"></i>
+              <div style="font-size: 15px;">
+                <strong>Phiên bản Odoo:</strong> 18.0
+              </div>
+            </div>
+            <div class="d-flex align-items-center gap-3 p-2">
+              <i class="fa fa-dot-circle-o" style="font-size: 18px; color: #7F4282;"></i>
+              <div style="font-size: 15px;">
+                <strong>Mô-đun phụ thuộc:</strong> hr_attendance, to_base.
+              </div>
+            </div>
+            <div class="d-flex align-items-center gap-3 p-2">
+              <i class="fa fa-dot-circle-o" style="font-size: 18px; color: #7F4282;"></i>
+              <div style="font-size: 15px;">
+                <strong>Thư viện Python:</strong> setuptools.
+              </div>
+            </div>
+            <div class="d-flex align-items-center gap-3 p-2">
+              <i class="fa fa-dot-circle-o" style="font-size: 18px; color: #7F4282;"></i>
+              <div style="font-size: 15px;">
+                <strong>Mạng:</strong> NAT - port forwarding đến thiết bị hoặc sử dụng tùy chọn chế độ “iCloud”.
+              </div>
+            </div>
+          </div>
+          <p class="mt-3" style="font-size: 13px; color: #666;">
+            Khả năng tương thích phụ thuộc vào firmware - giao thức - khu vực phân phối thiết bị. Nên kiểm thử trên môi trường demo trước khi triển khai chính thức.
+          </p>
+        </div>
+      </section>
+    </div>
+
+    <!-- Changes Log Tab -->
+    <div aria-labelledby="releases-tab" class="tab-pane fade" id="releases" role="tabpanel">
+      <section id="changes_log_block" class="py-4">
+        <div style="background-color: #F2F2F2; padding: 40px; border-radius: 15px;">
+          <div class="row">
+            <div class="col-md-12 col-xl-4 d-flex align-items-center justify-content-center">
+              <h2 class="text-center" style="color: #21272B; font-size: 26px; font-weight: bold;">Lịch sử thay đổi</h2>
+            </div>
+            <div class="col-md-12 col-xl-8" style="border-left: 2px solid #e0e0e0;">
+              <div class="d-flex flex-column justify-content-center" style="height: 100%;">
+                <div class="mb-4">
+                  <h3 style="color: #282F33; font-size: 18px; margin-bottom: 6px;">
+                    <span style="color: #3498db;">18.1.1.7</span> - cập nhật tương thích và ổn định
+                  </h3>
+                  <ul style="padding-left: 20px; font-size: 14px; color: #555;">
+                    <li>Cải thiện độ ổn định kết nối TCP - UDP.</li>
+                    <li>Tối ưu đồng bộ cho nhiều trạng thái chấm công.</li>
+                    <li>Cập nhật hướng dẫn cấu hình cho tùy chọn “iCloud”.</li>
+                  </ul>
+                </div>
+                <!-- to do: add newer versions here -->
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+    </div>
+
+  </div>
+
+  <!-- Recommended Combos -->
+  <section id="recommended_combos_block" class="py-4">
+    <div style="background-color: #F2F2F2; padding: 40px; border-radius: 15px;">
+      <h2 class="text-center mb-4" style="color: #21272B; font-size: 26px; font-weight: bold;">Thông tin khác</h2>
+      <div class="row g-4">
+      
+      <!-- Credit Column -->
+      <div class="col-md-6 d-flex">
+        <div class="flex-fill p-4" style="border-radius: 15px; background-color: #ffffff; border: 1px solid #E0E0E0;">
+          <h4 style="font-size: 18px; font-weight: 600; color: #21272B; margin-bottom: 10px;">
+            Ghi nhận
+          </h4>
+          <p style="font-size: 14px; color: #4A4F55; line-height: 1.6;">
+            Xin gửi lời cảm ơn chân thành tới <strong>Fananimi</strong> vì 
+            <a href="https://github.com/fananimi/pyzk" target="_blank" rel="noopener" style="color: #00BBCE; text-decoration: none;">
+              thư viện pyzk
+            </a> của anh ấy.
+          </p>
+          <p style="font-size: 14px; color: #4A4F55; line-height: 1.6;">
+            Chúng tôi đã tham khảo thư viện này và mở rộng thêm các tính năng như <em>ấy thông tin máy, hỗ trợ Python 3, hỗ trợ TCP/IP</em>, 
+            trước khi tích hợp vào Odoo/Viindoo thông qua
+            <strong>ứng dụng tích hợp Máy chấm công</strong> mạnh mẽ này.
+          </p>
+        </div>
+      </div>
+
+      <!-- Known Issues Column -->
+      <div class="col-md-6 d-flex">
+        <div class="flex-fill p-4" style="border-radius: 15px; background-color: #ffffff; border: 1px solid #E0E0E0;">
+          <h4 style="font-size: 18px; font-weight: 600; color: #21272B; margin-bottom: 10px;">
+            Vấn đề đã biết
+          </h4>
+          <p style="font-size: 14px; color: #4A4F55; line-height: 1.6;">
+            Để mô-đun này hoạt động tốt, thiết bị của bạn cần có khả năng truy cập được qua internet (nếu sử dụng nền tảng online như odoo.sh hoặc máy chủ tự triển khai).
+          </p>
+          <p style="font-size: 14px; color: #4A4F55; line-height: 1.6;">
+            Nếu thiết bị đã kết nối nhưng vẫn không tải được dữ liệu, có thể do một trong các nguyên nhân sau:
+          </p>
+          <ul style="font-size: 14px; color: #4A4F55; line-height: 1.6; padding-left: 20px;">
+            <li>Sai chế độ hoạt động của thiết bị (mô-đun hỗ trợ chế độ Time Attendance, các chế độ khác như Access Control sẽ không hoạt động).</li>
+            <li>Thiếu cấu hình trên thiết bị (mặc định một số thiết bị bỏ qua thông tin vào/ra nên hệ thống không thể tải dữ liệu chấm công).</li>
+          </ul>
+          <p style="font-size: 14px; color: #4A4F55; line-height: 1.6;">
+            Để được hỗ trợ xử lý lỗi, vui lòng liên hệ chúng tôi tại
+            <a href="https://viindoo.com/ticket/team/8" target="_blank" rel="noopener" style="color: #7F4282; text-decoration: none;">
+              https://viindoo.com/ticket/team/8
+            </a>.
+          </p>
+        </div>
+      </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Target Users -->
+  <section id="target_users_block" class="py-4">
+    <div style="background-color: #EAF9FA; padding: 40px; border-radius: 15px;">
+      <h2 class="text-center mb-4" style="color: #21272B; font-size: 26px; font-weight: bold;">Ai nên sử dụng mô-đun này</h2>
+      <div class="row g-4">
+        <div class="col-md-6 col-lg-4 d-flex">
+          <div class="flex-fill p-3" style="border-radius: 12px; background-color: #ffffff; border: 1px solid #F2F2F2;">
+            <h4 style="font-size: 18px; font-weight: 600;">Doanh nghiệp có nhiều thiết bị máy chấm công</h4>
+            <p style="font-size: 14px; margin-bottom: 0;">Vận hành nhiều điểm chấm công và cần đồng bộ dữ liệu tập trung.</p>
+          </div>
+        </div>
+        <div class="col-md-6 col-lg-4 d-flex">
+          <div class="flex-fill p-3" style="border-radius: 12px; background-color: #ffffff; border: 1px solid #F2F2F2;">
+            <h4 style="font-size: 18px; font-weight: 600;">Doanh nghiệp có nhiều nhân sự</h4>
+            <p style="font-size: 14px; margin-bottom: 0;">Giảm khối lượng nhập liệu thủ công, tăng độ chính xác và luôn sẵn sàng dữ liệu cho bảng lương.</p>
+          </div>
+        </div>
+        <div class="col-md-6 col-lg-4 d-flex">
+          <div class="flex-fill p-3" style="border-radius: 12px; background-color: #ffffff; border: 1px solid #F2F2F2;">
+            <h4 style="font-size: 18px; font-weight: 600;">Môi trường yêu cầu tuân thủ cao</h4>
+            <p style="font-size: 14px; margin-bottom: 0;">Cần dữ liệu chấm công nhất quán, có thể kiểm toán và lưu trữ an toàn.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer small info -->
+  <section class="py-3">
+    <div class="text-center" style="font-size: 12px; color: #6B6D70;">
+      Phiên bản: 18.0 - Danh mục: Nhân sự - Giấy phép: OPL-1
+    </div>
+  </section>
+
+</div>
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
