@@ -1,0 +1,245 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* to_base
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 19.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2025-10-23 09:10+0000\n"
+"PO-Revision-Date: 2025-10-23 09:10+0000\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+#. module: to_base
+#: model:ir.model,name:to_base.model_base
+msgid "Base"
+msgstr "Base"
+
+#. module: to_base
+#. odoo-python
+#: code:addons/to_base/models/to_base.py:0
+msgid "Cannot get the size of a file or folder"
+msgstr "No se puede obtener el tamaño de un archivo o carpeta"
+
+#. module: to_base
+#: model:ir.model,name:to_base.model_res_company
+msgid "Companies"
+msgstr "Empresas"
+
+#. module: to_base
+#: model:ir.model.fields,field_description:to_base.field_res_company__favicon
+#: model:ir.model.fields,field_description:to_base.field_res_config_settings__favicon
+msgid "Company Favicon"
+msgstr "Favicon de la empresa"
+
+#. module: to_base
+#: model:ir.model,name:to_base.model_res_config_settings
+msgid "Config Settings"
+msgstr "Configuración"
+
+#. module: to_base
+#: model:ir.model,name:to_base.model_res_partner
+msgid "Contact"
+msgstr "Contacto"
+
+#. module: to_base
+#: model:ir.model,name:to_base.model_res_currency_rate
+msgid "Currency Rate"
+msgstr "Tipo de cambio"
+
+#. module: to_base
+#. odoo-python
+#: code:addons/to_base/controllers/main.py:0
+msgid "Database does not exist in server."
+msgstr "La base de datos no existe en el servidor."
+
+#. module: to_base
+#: model:ir.model.fields,field_description:to_base.field_base_language_install__display_name
+#: model:ir.model.fields,field_description:to_base.field_ir_module_module__display_name
+#: model:ir.model.fields,field_description:to_base.field_ir_ui_menu__display_name
+#: model:ir.model.fields,field_description:to_base.field_mail_thread__display_name
+#: model:ir.model.fields,field_description:to_base.field_res_company__display_name
+#: model:ir.model.fields,field_description:to_base.field_res_config_settings__display_name
+#: model:ir.model.fields,field_description:to_base.field_res_currency_rate__display_name
+#: model:ir.model.fields,field_description:to_base.field_res_partner__display_name
+#: model:ir.model.fields,field_description:to_base.field_res_users__display_name
+#: model:ir.model.fields,field_description:to_base.field_to_base__display_name
+msgid "Display Name"
+msgstr "Nombre para mostrar"
+
+#. module: to_base
+#: model:res.partner.category,name:to_base.res_partner_category_erp_vendor
+msgid "ERP Vendor"
+msgstr "Proveedor ERP"
+
+#. module: to_base
+#: model:ir.model,name:to_base.model_mail_thread
+msgid "Email Thread"
+msgstr "Hilo de correo"
+
+#. module: to_base
+#: model:ir.model.fields,help:to_base.field_res_users__marketplace_merchant
+msgid ""
+"External user with limited access to marketplace merchant functionalities"
+msgstr ""
+"Usuario externo con acceso limitado a las funcionalidades de comerciante del marketplace"
+
+#. module: to_base
+#: model:ir.model.fields,field_description:to_base.field_res_company__font
+msgid "Font"
+msgstr "Fuente"
+
+#. module: to_base
+#. odoo-python
+#: code:addons/to_base/models/to_base.py:0
+msgid "For the hour period, the given date should be in datetime"
+msgstr "Para el periodo por hora, la fecha proporcionada debe ser tipo datetime"
+
+#. module: to_base
+#: model:ir.model.fields,field_description:to_base.field_base_language_install__id
+#: model:ir.model.fields,field_description:to_base.field_ir_module_module__id
+#: model:ir.model.fields,field_description:to_base.field_ir_ui_menu__id
+#: model:ir.model.fields,field_description:to_base.field_mail_thread__id
+#: model:ir.model.fields,field_description:to_base.field_res_company__id
+#: model:ir.model.fields,field_description:to_base.field_res_config_settings__id
+#: model:ir.model.fields,field_description:to_base.field_res_currency_rate__id
+#: model:ir.model.fields,field_description:to_base.field_res_partner__id
+#: model:ir.model.fields,field_description:to_base.field_res_users__id
+#: model:ir.model.fields,field_description:to_base.field_to_base__id
+msgid "ID"
+msgstr "ID"
+
+#. module: to_base
+#: model:ir.model,name:to_base.model_base_language_install
+msgid "Install Language"
+msgstr "Instalar idioma"
+
+#. module: to_base
+#. odoo-python
+#: code:addons/to_base/models/base.py:0
+msgid ""
+"Invalid `custom_order_position` value: %s. Must be 'before', 'after', or "
+"'replace'."
+msgstr ""
+"Valor inválido en `custom_order_position`: %s. Debe ser 'before', 'after' o 'replace'."
+
+#. module: to_base
+#. odoo-python
+#: code:addons/to_base/models/to_base.py:0
+msgid "Invalid input base number for EAN13 code"
+msgstr "Número base inválido para generar el código EAN13"
+
+#. module: to_base
+#. odoo-python
+#: code:addons/to_base/models/to_base.py:0
+msgid "Invalid year '%s'"
+msgstr "Año inválido '%s'"
+
+#. module: to_base
+#. odoo-python
+#: code:addons/to_base/models/to_base.py:0
+msgid ""
+"Local time zone is not defined. You may need to set a time zone in your "
+"user's Preferences."
+msgstr ""
+"La zona horaria local no está definida. Puede que necesites configurarla en las preferencias del usuario."
+
+#. module: to_base
+#: model:ir.model.fields,field_description:to_base.field_res_users__marketplace_merchant
+msgid "Marketplace Merchant User"
+msgstr "Usuario comerciante del marketplace"
+
+#. module: to_base
+#. odoo-python
+#: code:addons/to_base/controllers/main.py:0
+msgid "Master password is not correct."
+msgstr "La contraseña maestra no es correcta"
+
+#. module: to_base
+#: model:ir.model,name:to_base.model_ir_ui_menu
+msgid "Menu"
+msgstr "Menú"
+
+#. module: to_base
+#: model:ir.model,name:to_base.model_ir_module_module
+msgid "Module"
+msgstr "Módulo"
+
+#. module: to_base
+#. odoo-python
+#: code:addons/to_base/models/to_base.py:0
+msgid "Number of terms must be greater than zero (0)"
+msgstr "El número de términos debe ser mayor que cero (0)"
+
+#. module: to_base
+#. odoo-python
+#: code:addons/to_base/models/res_currency_rate.py:0
+msgid "Only one currency rate per day allowed!"
+msgstr "¡Solo se permite un tipo de cambio por día!"
+
+#. module: to_base
+#. odoo-python
+#: code:addons/to_base/models/ir_module_module.py:0
+msgid "Operation is not supported"
+msgstr "La operación no está soportada"
+
+#. module: to_base
+#. odoo-python
+#: code:addons/to_base/helper/multi_threading.py:0
+msgid ""
+"Progamming Error! The field `%(field)s` is not a Many2one field of the model"
+" %(obj_name)s's"
+msgstr ""
+"¡Error de programación! El campo `%(field)s` no es un campo Many2one del modelo %(obj_name)s"
+
+#. module: to_base
+#. odoo-python
+#: code:addons/to_base/helper/multi_threading.py:0
+msgid ""
+"Progamming Error! The field `%(field)s` is not a field of the model "
+"%(obj_name)s's"
+msgstr ""
+"¡Error de programación! El campo `%(field)s` no es un campo del modelo %(obj_name)s"
+
+#. module: to_base
+#: model:ir.model.fields,field_description:to_base.field_ir_module_module__should_installed_but_not_installed
+#: model_terms:ir.ui.view,arch_db:to_base.ir_module_module_view_search
+msgid "Should Have Been Installed"
+msgstr "Debería haber sido instalado"
+
+#. module: to_base
+#: model:ir.model,name:to_base.model_to_base
+msgid "TVTMA Base Model"
+msgstr "Modelo base TVTMA"
+
+#. module: to_base
+#: model:ir.model.fields.selection,name:to_base.selection__res_company__font__times_new_roman
+msgid "Times New Roman"
+msgstr "Times New Roman"
+
+#. module: to_base
+#: model:ir.model,name:to_base.model_res_users
+msgid "User"
+msgstr "Usuario"
+
+#. module: to_base
+#: model:res.partner.category,name:to_base.res_partner_category_viindoo_consulting
+msgid "Viindoo Consulting Services"
+msgstr "Servicios de consultoría Viindoo"
+
+#. module: to_base
+#. odoo-python
+#: code:addons/to_base/tests/test_currency_rate_constrains.py:0
+msgid "expected errors as validation error"
+msgstr "errores esperados como error de validación"
+
+#. module: to_base
+#. odoo-python
+#: code:addons/to_base/models/to_base.py:0
+msgid "the method guess_lang has not been implemented yet"
+msgstr "el método guess_lang aún no ha sido implementado"
