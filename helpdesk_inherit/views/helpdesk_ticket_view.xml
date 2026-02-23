@@ -1,0 +1,35 @@
+<odoo>
+    <record id="view_helpdesk_ticket_form_custom" model="ir.ui.view">
+        <field name="name">helpdesk.ticket.form.custom</field>
+        <field name="model">helpdesk.ticket</field>
+        <field name="inherit_id" ref="helpdesk.helpdesk_ticket_view_form"/>
+        <field name="arch" type="xml">
+
+            <xpath expr="//sheet" position="replace">
+                <sheet>
+                    <group string="General Information">
+
+                        <group>
+                            <field name="general_description"/>
+                        </group>
+
+                        <group>
+                            <field name="section_id"/>
+                        </group>
+
+                        <group>
+                            <field name="category_id"/>
+                            <field name="subcategory_id"/>
+                        </group>
+
+                        <group>
+                            <field name="detailed_description" widget="html"/>
+                        </group>
+
+                    </group>
+                </sheet>
+            </xpath>
+
+        </field>
+    </record>
+</odoo>
