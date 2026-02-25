@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+
+    <!-- Categorías para la sección CAS -->
+    <record id="helpdesk_ticket_category_cas_coppel" model="helpdesk.ticket.category">
+        <field name="name">Coppel</field>
+        <field name="section_id" ref="helpdesk_section_cas"/>
+        <field name="sequence">10</field>
+    </record>
+
+    <record id="helpdesk_ticket_category_cas_devlyn" model="helpdesk.ticket.category">
+        <field name="name">Devlyn</field>
+        <field name="section_id" ref="helpdesk_section_cas"/>
+        <field name="sequence">20</field>
+    </record>
+
+    <record id="helpdesk_ticket_category_cas_franquicia" model="helpdesk.ticket.category">
+        <field name="name">Franquicia</field>
+        <field name="section_id" ref="helpdesk_section_cas"/>
+        <field name="sequence">30</field>
+    </record>
+
+    <record id="helpdesk_ticket_category_cas_hospitales" model="helpdesk.ticket.category">
+        <field name="name">Hospitales</field>
+        <field name="section_id" ref="helpdesk_section_cas"/>
+        <field name="sequence">40</field>
+    </record>
+
+    <record id="helpdesk_ticket_category_cas_sears" model="helpdesk.ticket.category">
+        <field name="name">Sears</field>
+        <field name="section_id" ref="helpdesk_section_cas"/>
+        <field name="sequence">50</field>
+    </record>
+
+    <record id="helpdesk_ticket_category_cas_chapur" model="helpdesk.ticket.category">
+        <field name="name">Chapur</field>
+        <field name="section_id" ref="helpdesk_section_cas"/>
+        <field name="sequence">60</field>
+    </record>
+
+    <record id="helpdesk_ticket_category_cas_cimaco" model="helpdesk.ticket.category">
+        <field name="name">Cimaco</field>
+        <field name="section_id" ref="helpdesk_section_cas"/>
+        <field name="sequence">70</field>
+    </record>
+
+    <record id="helpdesk_ticket_category_cas_ecommerce_devlyn" model="helpdesk.ticket.category">
+        <field name="name">E-Commerce Devlyn</field>
+        <field name="section_id" ref="helpdesk_section_cas"/>
+        <field name="sequence">80</field>
+    </record>
+
+    <record id="helpdesk_ticket_category_cas_mercado_libre" model="helpdesk.ticket.category">
+        <field name="name">Mercado libre</field>
+        <field name="section_id" ref="helpdesk_section_cas"/>
+        <field name="sequence">90</field>
+    </record>
+
+    <record id="helpdesk_ticket_category_cas_outlet" model="helpdesk.ticket.category">
+        <field name="name">Outlet</field>
+        <field name="section_id" ref="helpdesk_section_cas"/>
+        <field name="sequence">100</field>
+    </record>
+
+    <record id="helpdesk_ticket_category_cas_virtual" model="helpdesk.ticket.category">
+        <field name="name">Virtual</field>
+        <field name="section_id" ref="helpdesk_section_cas"/>
+        <field name="sequence">110</field>
+    </record>
+
+</odoo>
