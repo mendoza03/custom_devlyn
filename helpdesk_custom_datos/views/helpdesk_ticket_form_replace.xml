@@ -90,10 +90,22 @@
                                 <field name="x_order_type_adaptation" required="1" />
                             </group>
                         </div>
-                        <div class="mt16" invisible="x_subcategory_code != 'satisfaccion_imagen'">
+
+                        <div class="mt16"
+                            invisible="x_order_type != 'satisfaccion_imagen'">
 
                             <div class="o_form_sheet bg-success text-white p-2 rounded-2 mb-3">
-                                <strong>Satisfacción total de imagen</strong>
+                                <strong>Satisfacción total de adaptación</strong>
+                            </div>
+
+                            <group col="6">
+                                <field name="x_order_type_adaptation" required="1" />
+                            </group>
+                        </div>
+                        <div class="mt16" invisible="x_subcategory_code != 'trabajos_atrasados'">
+
+                            <div class="o_form_sheet bg-success text-white p-2 rounded-2 mb-3">
+                                <strong>Trabajos atrasados</strong>
                             </div>
 
                             <group col="6">
