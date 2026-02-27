@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <odoo>
 
-    <!-- SUBCATEGORY: list -->
     <record id="view_helpdesk_ticket_subcategory_list" model="ir.ui.view">
         <field name="name">helpdesk.ticket.subcategory.list</field>
         <field name="model">helpdesk.ticket.subcategory</field>
@@ -15,7 +14,6 @@
         </field>
     </record>
 
-    <!-- SUBCATEGORY: form -->
     <record id="view_helpdesk_ticket_subcategory_form" model="ir.ui.view">
         <field name="name">helpdesk.ticket.subcategory.form</field>
         <field name="model">helpdesk.ticket.subcategory</field>

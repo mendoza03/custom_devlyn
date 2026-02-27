@@ -1,0 +1,997 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* to_attendance_device
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 19.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2025-10-23 09:16+0000\n"
+"PO-Revision-Date: 2025-10-23 09:16+0000\n"
+"Last-Translator: \n"
+"Language-Team: Spanish (Mexico)\n"
+"Language: es_MX\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+#. module: to_attendance_device
+#. odoo-python
+msgid ""
+"\n"
+"Data that caused the error: %s"
+msgstr ""
+"\n"
+"Datos que causaron el error: %s"
+
+#. module: to_attendance_device
+msgid "1024 bytes"
+msgstr "1024 bytes"
+
+msgid "16384 bytes"
+msgstr "16384 bytes"
+
+msgid "2048 bytes"
+msgstr "2048 bytes"
+
+msgid "32768 bytes"
+msgstr "32768 bytes"
+
+msgid "4096 bytes"
+msgstr "4096 bytes"
+
+msgid "65472 bytes"
+msgstr "65472 bytes"
+
+msgid "8192 bytes"
+msgstr "8192 bytes"
+
+#. EMAIL TEMPLATE
+msgid "<p>Hello <t t-out=\"object.user_id.partner_id.name or ''\"/>,</p>"
+msgstr "<p>Hola <t t-out=\"object.user_id.partner_id.name or ''\"/>,</p>"
+
+msgid "Best Regard,"
+msgstr "Saludos,"
+
+msgid "The system tried to delete attendance data from the machine"
+msgstr "El sistema intentó eliminar los datos de asistencia del dispositivo"
+
+msgid "Please check and troubleshoot."
+msgstr "Por favor, revisa y soluciona el problema."
+
+msgid "There are some problems with attendance machine"
+msgstr "Hay algunos problemas con el dispositivo de asistencia"
+
+msgid "Here is the debugging information"
+msgstr "Aquí está la información de depuración"
+
+#. FIELDS / UI
+msgid "ATTLOG Stamp"
+msgstr "Marca ATTLOG"
+
+msgid "ATTPHOTOStamp"
+msgstr "Marca ATTPHOTO"
+
+msgid "Action Needed"
+msgstr "Acción requerida"
+
+msgid "Active"
+msgstr "Activo"
+
+msgid "Activities"
+msgstr "Actividades"
+
+msgid "Activity"
+msgstr "Actividad"
+
+msgid "Activity Exception Decoration"
+msgstr "Decoración de excepción de actividad"
+
+msgid "Activity State"
+msgstr "Estado de la actividad"
+
+msgid "Activity Type"
+msgstr "Tipo de actividad"
+
+msgid "Activity Type Icon"
+msgstr "Ícono del tipo de actividad"
+
+msgid "Always try to map users and employees (if any new found) before downloading attendance data."
+msgstr "Siempre intenta vincular usuarios y empleados (si hay nuevos) antes de descargar los datos de asistencia."
+
+msgid "An integer to express the state code"
+msgstr "Un número entero para representar el código de estado"
+
+msgid "Archived"
+msgstr "Archivado"
+
+msgid "Are you sure to restart the machine: %s?"
+msgstr "¿Estás seguro de reiniciar el dispositivo: %s?"
+
+msgid "Attachment Count"
+msgstr "Cantidad de archivos adjuntos"
+
+msgid "Attendance"
+msgstr "Asistencia"
+
+msgid "Attendance Activities"
+msgstr "Actividades de asistencia"
+
+msgid "Attendance Activity"
+msgstr "Actividad de asistencia"
+
+msgid "Attendance Command To Device"
+msgstr "Comando de asistencia al dispositivo"
+
+msgid "Attendance Data"
+msgstr "Datos de asistencia"
+
+msgid "Attendance Device Location"
+msgstr "Ubicación del dispositivo de asistencia"
+
+msgid "Attendance Location"
+msgstr "Ubicación de asistencia"
+
+msgid "Attendance Machine"
+msgstr "Dispositivo de asistencia"
+
+msgid "Attendance Machine - Send by Email"
+msgstr "Dispositivo de asistencia - Enviado por correo"
+
+msgid "Attendance Machine Connection Problem"
+msgstr "Problema de conexión del dispositivo de asistencia"
+
+msgid "Attendance Machine Manager"
+msgstr "Administrador de dispositivos de asistencia"
+
+msgid "Attendance Machine State"
+msgstr "Estado del dispositivo de asistencia"
+
+msgid "Attendance Machine User"
+msgstr "Usuario del dispositivo de asistencia"
+
+msgid "Attendance Machines"
+msgstr "Dispositivos de asistencia"
+
+msgid "Attendance Record"
+msgstr "Registro de asistencia"
+
+msgid "Attendance Records"
+msgstr "Registros de asistencia"
+
+msgid "Attendance State"
+msgstr "Estado de asistencia"
+
+msgid "Attendance Status"
+msgstr "Estado de asistencia"
+
+msgid "Attendance Status Codes"
+msgstr "Códigos de estado de asistencia"
+
+msgid "Attendance Status conflict! The status number from machine must match the attendance status defined in System."
+msgstr "¡Conflicto en estado de asistencia! El código del dispositivo debe coincidir con el definido en el sistema."
+
+msgid "Attendance Statuses"
+msgstr "Estados de asistencia"
+
+msgid "Attendance activity, e.g. Normal Working, Overtime, etc"
+msgstr "Actividad de asistencia, por ejemplo: trabajo normal, horas extra, etc."
+
+msgid "Attendance device location"
+msgstr "Ubicación del dispositivo de asistencia"
+
+msgid "Auto Clear At"
+msgstr "Borrar automáticamente a las"
+
+msgid "Auto Clear Attendance Data"
+msgstr "Borrar automáticamente datos de asistencia"
+
+msgid "Auto Clear Attendance Notif."
+msgstr "Notificación de borrado automático"
+
+msgid "Auto Clear On"
+msgstr "Borrar automáticamente en"
+
+msgid "Auto Clear Schedule"
+msgstr "Programación de borrado automático"
+
+msgid "AutoSyncData"
+msgstr "Sincronización automática de datos"
+
+msgid "Bio Template"
+msgstr "Plantilla biométrica"
+
+msgid "Bio Template Data"
+msgstr "Datos de plantilla biométrica"
+
+msgid "Biometric ID"
+msgstr "ID biométrico"
+
+msgid "Biometric Templates"
+msgstr "Plantillas biométricas"
+
+msgid "Biometric Type"
+msgstr "Tipo biométrico"
+
+msgid "Biometric algorithm version"
+msgstr "Versión del algoritmo biométrico"
+
+msgid "Biometric templates are biometric data stored in the attendance device."
+msgstr "Las plantillas biométricas son datos almacenados en el dispositivo de asistencia."
+
+msgid "Break"
+msgstr "Descanso"
+
+msgid "Cancel"
+msgstr "Cancelar"
+
+msgid "Cancelled"
+msgstr "Cancelado"
+
+msgid "Capacity limit"
+msgstr "Límite de capacidad"
+
+msgid "Changing User Information"
+msgstr "Cambio de información del usuario"
+
+msgid "Changing a Fingerprint"
+msgstr "Cambio de huella digital"
+
+msgid "Check connection"
+msgstr "Verificar conexión"
+
+msgid "Check-in"
+msgstr "Entrada"
+
+msgid "Check-out"
+msgstr "Salida"
+
+msgid "Checkin Device"
+msgstr "Dispositivo de entrada"
+
+msgid "Checkout Device"
+msgstr "Dispositivo de salida"
+
+msgid "Clear Attendance Data"
+msgstr "Eliminar datos de asistencia"
+
+msgid "Code Number"
+msgstr "Número de código"
+
+msgid "Color Index"
+msgstr "Índice de color"
+
+msgid "Comand Name"
+msgstr "Nombre del comando"
+
+msgid "Command Device"
+msgstr "Comando del dispositivo"
+
+msgid "Command Name"
+msgstr "Nombre del comando"
+
+msgid "Command Name Count"
+msgstr "Cantidad de comandos"
+
+msgid "Command To Device"
+msgstr "Comando al dispositivo"
+
+msgid "Command execution timeout"
+msgstr "Tiempo de ejecución del comando agotado"
+
+msgid "Command name for sending to the device"
+msgstr "Nombre del comando para enviar al dispositivo"
+
+msgid "Commands To Device"
+msgstr "Comandos al dispositivo"
+
+msgid "Company"
+msgstr "Empresa"
+
+msgid "Confirmation content"
+msgstr "Contenido de confirmación"
+
+msgid "Confirmed"
+msgstr "Confirmado"
+
+msgid "Connect to the machine %s successfully!"
+msgstr "¡Conectado correctamente al dispositivo %s!"
+
+msgid "Connection Unauthorized! The machine %s may require password."
+msgstr "¡Conexión no autorizada! El dispositivo %s puede requerir contraseña."
+
+msgid "Could not clear all data from the machine %s"
+msgstr "No se pudieron eliminar todos los datos del dispositivo %s"
+
+msgid "Create the first attendance device location"
+msgstr "Crear la primera ubicación del dispositivo"
+
+msgid "Create the first attendance machine"
+msgstr "Crear el primer dispositivo de asistencia"
+
+msgid "Create the first attendance status"
+msgstr "Crear el primer estado de asistencia"
+
+msgid "Created by"
+msgstr "Creado por"
+
+#. module: to_attendance_device
+msgid "Created from Device"
+msgstr "Creado desde el dispositivo"
+
+msgid "Created from an Attendance Machine"
+msgstr "Creado desde un dispositivo de asistencia"
+
+msgid "Created on"
+msgstr "Creado el"
+
+msgid "Current Attendance"
+msgstr "Asistencia actual"
+
+msgid "Data Transfer"
+msgstr "Transferencia de datos"
+
+msgid "Data Transfer To Device"
+msgstr "Transferencia de datos al dispositivo"
+
+msgid "Data inconsistent with device configuration"
+msgstr "Datos inconsistentes con la configuración del dispositivo"
+
+msgid "Data is sent down to the device."
+msgstr "Los datos se envían al dispositivo"
+
+msgid "Data too long"
+msgstr "Datos demasiado largos"
+
+msgid "Debug Message"
+msgstr "Mensaje de depuración"
+
+msgid "Delay"
+msgstr "Retraso"
+
+msgid "Delete In Machine?"
+msgstr "¿Eliminar en el dispositivo?"
+
+msgid "Description"
+msgstr "Descripción"
+
+msgid "Description Code"
+msgstr "Código de descripción"
+
+msgid "Device"
+msgstr "Dispositivo"
+
+msgid "Device busy"
+msgstr "Dispositivo ocupado"
+
+msgid "Device not supported"
+msgstr "Dispositivo no soportado"
+
+msgid "Devices"
+msgstr "Dispositivos"
+
+msgid "Display Name"
+msgstr "Nombre mostrado"
+
+msgid "Done"
+msgstr "Hecho"
+
+msgid "Download Attendance"
+msgstr "Descargar asistencia"
+
+msgid "Download Attendance Data"
+msgstr "Descargar datos de asistencia"
+
+msgid "Download Biometrics"
+msgstr "Descargar datos biométricos"
+
+msgid "Download Error Notification"
+msgstr "Notificación de error de descarga"
+
+msgid "Download Fingerprints and Biometrics From Machine"
+msgstr "Descargar huellas y datos biométricos del dispositivo"
+
+msgid "Download Users"
+msgstr "Descargar usuarios"
+
+msgid "Download Users From Machine"
+msgstr "Descargar usuarios desde el dispositivo"
+
+msgid "Draft"
+msgstr "Borrador"
+
+msgid "Duress"
+msgstr "Coacción"
+
+msgid "Employee"
+msgstr "Empleado"
+
+msgid ""
+"Employee '%s' is connected to the attendance device using protocol 'TCP or UDP'. Therefore, the 'icloud' protocol cannot be used to upload"
+msgstr ""
+"El empleado '%s' está conectado al dispositivo de asistencia usando el protocolo 'TCP o UDP'. Por lo tanto, no se puede usar el protocolo 'icloud' para subir datos"
+
+msgid ""
+"Employee '%s' is connected to the attendance device using protocol 'icloud'. Therefore, the 'TCP or UDP' protocol cannot be used to upload"
+msgstr ""
+"El empleado '%s' está conectado al dispositivo de asistencia usando el protocolo 'icloud'. Por lo tanto, no se puede usar el protocolo 'TCP o UDP' para subir datos"
+
+msgid "Employee Upload Details"
+msgstr "Detalles de carga de empleados"
+
+msgid "Employee Upload Wizard"
+msgstr "Asistente de carga de empleados"
+
+msgid "Employees"
+msgstr "Empleados"
+
+msgid "Employees to upload"
+msgstr "Empleados a cargar"
+
+msgid "Enable this to get notified when data download error occurs."
+msgstr "Activa esto para recibir notificaciones cuando ocurra un error al descargar datos"
+
+msgid "Encrypt"
+msgstr "Encriptar"
+
+msgid "Enrolling a New Fingerprint"
+msgstr "Registrando una nueva huella"
+
+msgid "Enrolling a New User"
+msgstr "Registrando un nuevo usuario"
+
+msgid "Error"
+msgstr "Error"
+
+msgid "Error Delay"
+msgstr "Retraso por error"
+
+msgid "Error Downloading Attendance Data (Ref {{ object.name }})"
+msgstr "Error al descargar datos de asistencia (Ref {{ object.name }})"
+
+msgid "Error Downloading Attendance Data - Send by Email"
+msgstr "Error al descargar datos de asistencia - enviado por correo"
+
+msgid ""
+"Error create DeviceUserAttendance record: device_id %(device_id)s; user_id %(user_id)s; timestamp %(timestamp)s; attendance_state_id %(attendance_state_id)s.<br />"
+msgstr ""
+"Error al crear el registro DeviceUserAttendance: device_id %(device_id)s; user_id %(user_id)s; timestamp %(timestamp)s; attendance_state_id %(attendance_state_id)s.<br />"
+
+msgid "Everyday"
+msgstr "Todos los días"
+
+msgid "Face Version"
+msgstr "Versión de reconocimiento facial"
+
+msgid ""
+"Fail to upload the employee: %(name)s to the machine: %(machine)s. %(err)s\n"
+msgstr ""
+"No se pudo cargar el empleado: %(name)s al dispositivo: %(machine)s. %(err)s\n"
+
+msgid "Failed to fetch data from the server"
+msgstr "No se pudieron obtener los datos del servidor"
+
+msgid "Feedback time of the command"
+msgstr "Tiempo de respuesta del comando"
+
+msgid "Feedback value of the command from the device"
+msgstr "Valor de respuesta del comando desde el dispositivo"
+
+msgid "Finger Id"
+msgstr "ID de huella"
+
+msgid "Finger Template"
+msgstr "Plantilla de huella"
+
+msgid "Finger Templates"
+msgstr "Plantillas de huella"
+
+msgid "Finger vein"
+msgstr "Vena del dedo"
+
+msgid "Fingerprint"
+msgstr "Huella digital"
+
+msgid "Fingerprint Algorithm"
+msgstr "Algoritmo de huella digital"
+
+msgid "Fingerprint Image"
+msgstr "Imagen de huella"
+
+msgid "Fingers Template"
+msgstr "Plantilla de huellas"
+
+msgid "Firmware Version"
+msgstr "Versión de firmware"
+
+msgid "Followers"
+msgstr "Seguidores"
+
+msgid "Followers (Partners)"
+msgstr "Seguidores (contactos)"
+
+msgid "Font awesome icon e.g. fa-tasks"
+msgstr "Ícono de Font Awesome, por ejemplo fa-tasks"
+
+msgid "Format"
+msgstr "Formato"
+
+msgid ""
+"Format Standards:\n"
+"Value = 0 or ZK: Format follows the ZKTeco standard.\n"
+"Value = 1 or ISO: Format follows the ISO standard.\n"
+"Value = 2 or ANSI: Format follows the ANSI standard."
+msgstr ""
+"Estándares de formato:\n"
+"Valor = 0 o ZK: formato basado en el estándar ZKTeco.\n"
+"Valor = 1 o ISO: formato basado en el estándar ISO.\n"
+"Valor = 2 o ANSI: formato basado en el estándar ANSI."
+
+msgid "Friday"
+msgstr "Viernes"
+
+msgid "Function Flag Name"
+msgstr "Nombre del indicador de función"
+
+msgid "General purpose"
+msgstr "Propósito general"
+
+msgid "Generate Employees During Mapping"
+msgstr "Generar empleados durante la vinculación"
+
+msgid "Get Machine Info"
+msgstr "Obtener información del dispositivo"
+
+msgid "Group"
+msgstr "Grupo"
+
+msgid "Group ID of the user on the attendance machines"
+msgstr "ID de grupo del usuario en el dispositivo"
+
+msgid "HR Attendance"
+msgstr "Asistencia de RRHH"
+
+msgid "Has Message"
+msgstr "Tiene mensaje"
+
+msgid "I am sure about this."
+msgstr "Estoy seguro de esto."
+
+msgid "ID"
+msgstr "ID"
+
+msgid "ID Number"
+msgstr "Número de ID"
+
+msgid "IP / Domain Name"
+msgstr "IP / Nombre de dominio"
+
+msgid "Icloud - ADMS"
+msgstr "Icloud - ADMS"
+
+msgid "Icloud Settings"
+msgstr "Configuración de Icloud"
+
+msgid "Icon"
+msgstr "Ícono"
+
+msgid "Icon to indicate an exception activity."
+msgstr "Ícono para indicar una actividad de excepción"
+
+msgid ""
+"If checked, debugging messages will be posted in OpenChatter for debugging purpose"
+msgstr ""
+"Si está marcado, los mensajes de depuración se publicarán en OpenChatter"
+
+msgid ""
+"If checked, during mapping between Machine's Users and company's employees, unmapped machine users will try to create a new employee then map accordingly."
+msgstr ""
+"Si está marcado, durante la vinculación entre usuarios del dispositivo y empleados, los usuarios no vinculados crearán automáticamente un nuevo empleado"
+
+msgid "Invalid parameter"
+msgstr "Parámetro inválido"
+
+msgid "Iris"
+msgstr "Iris"
+
+msgid "Is Follower"
+msgstr "Es seguidor"
+
+msgid "Last Sync."
+msgstr "Última sincronización"
+
+msgid "Last Updated by"
+msgstr "Última actualización por"
+
+msgid "Last Updated on"
+msgstr "Última actualización el"
+
+msgid "Location"
+msgstr "Ubicación"
+
+msgid "Machine"
+msgstr "Dispositivo"
+
+msgid "Machine Name"
+msgstr "Nombre del dispositivo"
+
+msgid "Machine User"
+msgstr "Usuario del dispositivo"
+
+msgid "Machine Users"
+msgstr "Usuarios del dispositivo"
+
+msgid "Machines Manager"
+msgstr "Administrador de dispositivos"
+
+msgid "Name"
+msgstr "Nombre"
+
+msgid "Monday"
+msgstr "Lunes"
+
+msgid "Normal Attendance"
+msgstr "Asistencia normal"
+
+msgid "Not Synchronized"
+msgstr "No sincronizado"
+
+msgid "Number of Actions"
+msgstr "Número de acciones"
+
+msgid "Number of errors"
+msgstr "Número de errores"
+
+msgid "Number of messages requiring action"
+msgstr "Número de mensajes que requieren acción"
+
+msgid "Number of messages with delivery error"
+msgstr "Número de mensajes con error de entrega"
+
+msgid "OEM Vendor"
+msgstr "Proveedor OEM"
+
+msgid "OK"
+msgstr "Aceptar"
+
+msgid "OPERLOG Stamp"
+msgstr "Marca OPERLOG"
+
+msgid "Omit Ping"
+msgstr "Omitir ping"
+
+msgid "Omit ping ip address when connecting to machine."
+msgstr "Omitir el ping de la dirección IP al conectarse al dispositivo."
+
+msgid "On Download Completion"
+msgstr "Al finalizar la descarga"
+
+msgid ""
+"On Download Completion: Delete attendance data as soon as download finished\n"
+"Time Scheduled: Delete attendance data on the time specified below"
+msgstr ""
+"Al finalizar la descarga: eliminar los datos de asistencia tan pronto termine la descarga\n"
+"Programado: eliminar los datos de asistencia en el horario especificado a continuación"
+
+msgid ""
+"Only confirmed machines will get their data synchronized automatically."
+msgstr "Solo los dispositivos confirmados sincronizarán sus datos automáticamente."
+
+msgid "Operation Log"
+msgstr "Registro de operaciones"
+
+msgid "Order number of the function"
+msgstr "Número de orden de la función"
+
+msgid "Overtime"
+msgstr "Horas extra"
+
+msgid "PIN"
+msgstr "PIN"
+
+msgid "PIN of the user"
+msgstr "PIN del usuario"
+
+msgid "Palm vein"
+msgstr "Vena de la palma"
+
+msgid "Palmprint"
+msgstr "Huella de la palma"
+
+msgid "Password"
+msgstr "Contraseña"
+
+msgid "Pending"
+msgstr "Pendiente"
+
+msgid "Platform"
+msgstr "Plataforma"
+
+msgid "Port"
+msgstr "Puerto"
+
+msgid "Privilege"
+msgstr "Privilegios"
+
+msgid "Privilege of the user on the attendance machines"
+msgstr "Privilegios del usuario en los dispositivos de asistencia"
+
+msgid "Protocol"
+msgstr "Protocolo"
+
+msgid "Push Version"
+msgstr "Versión Push"
+
+msgid "Raw template data of BIODATA"
+msgstr "Datos de plantilla sin procesar de BIODATA"
+
+msgid "Read/write error"
+msgstr "Error de lectura/escritura"
+
+msgid "Real Time"
+msgstr "Tiempo real"
+
+msgid "Responsible User"
+msgstr "Usuario responsable"
+
+msgid "Restart Machine"
+msgstr "Reiniciar dispositivo"
+
+msgid "Retinal image"
+msgstr "Imagen retinal"
+
+msgid "Return Time"
+msgstr "Tiempo de retorno"
+
+msgid "Return Value Code"
+msgstr "Código de valor de retorno"
+
+msgid "SMS Delivery error"
+msgstr "Error de entrega SMS"
+
+msgid "Safe Checked"
+msgstr "Seguridad verificada"
+
+msgid "Safety To Confirm"
+msgstr "Confirmación de seguridad"
+
+msgid "Saturday"
+msgstr "Sábado"
+
+msgid "Search Attendance Machines"
+msgstr "Buscar dispositivos de asistencia"
+
+msgid "Search User Attendance Data"
+msgstr "Buscar datos de asistencia de usuarios"
+
+msgid "Sequences"
+msgstr "Secuencias"
+
+msgid "Serial Number"
+msgstr "Número de serie"
+
+msgid "Server Version"
+msgstr "Versión del servidor"
+
+msgid "Settings"
+msgstr "Configuración"
+
+msgid "Show Machine Time"
+msgstr "Mostrar hora del dispositivo"
+
+msgid ""
+"Show attendance records that have no link to System's HR Atteandnce"
+msgstr "Mostrar registros de asistencia que no están vinculados con RRHH del sistema"
+
+msgid "Show biometric templates of this employee"
+msgstr "Mostrar plantillas biométricas de este empleado"
+
+msgid "Show biometrics templates of this employee"
+msgstr "Mostrar plantillas biométricas de este empleado"
+
+msgid "Show fingerprint templates of this employee"
+msgstr "Mostrar plantillas de huella digital de este empleado"
+
+msgid ""
+"Show users that are not in machines. They could be deleted outside System"
+msgstr "Mostrar usuarios que no están en los dispositivos. Podrían haber sido eliminados fuera del sistema"
+
+msgid "Size Of Finger Template"
+msgstr "Tamaño de la plantilla de huella"
+
+msgid "Software Attendance State"
+msgstr "Estado de asistencia en el sistema"
+
+msgid ""
+"Some Bad Machines allow uid duplication. In this case, uncheck this field. "
+"But it is recommended to change your machine."
+msgstr ""
+"Algunos dispositivos permiten duplicación de UID. En ese caso, desmarca este campo. "
+"Sin embargo, se recomienda cambiar el dispositivo."
+
+msgid ""
+"Some Machines support Unicode names such as the ZKTeco K50, some others do "
+"not. In addition to this, the name field on devices is usually limited at "
+"about 24 Latin characters or less Unicode characters. Unaccent is sometimes "
+"a workaround for long Unicode names"
+msgstr ""
+"Algunos dispositivos soportan nombres Unicode como el ZKTeco K50, otros no. "
+"Además, el campo de nombre suele limitarse a unos 24 caracteres latinos o menos Unicode. "
+"Eliminar acentos puede ser una solución para nombres largos."
+
+msgid ""
+"Some old devices do not support TCP. In such the case, please try on "
+"switching to UDP."
+msgstr ""
+"Algunos dispositivos antiguos no soportan TCP. En ese caso, intenta usar UDP."
+
+msgid ""
+"Specific biological individual number, default value is 0.\n"
+"Fingerprint: Number is: 0-9, corresponding fingers are: \n"
+"Left hand: Little finger/Ring finger/Middle finger/Index finger/Thumb, \n"
+"Right hand: Thumb/Index finger/Middle finger/Ring finger/Little finger;\n"
+"Finger vein: Same as fingerprint\n"
+"Face: All are 0\n"
+"Iris: 0 for left eye, 1 for right eye\n"
+"Palm: 0 for left hand, 1 for right hand"
+msgstr ""
+"Número biológico específico, valor por defecto es 0.\n"
+"Huella digital: Número de 0-9, correspondiente a los dedos:\n"
+"Mano izquierda: meñique/anular/medio/índice/pulgar,\n"
+"Mano derecha: pulgar/índice/medio/anular/meñique;\n"
+"Vena del dedo: igual que huella\n"
+"Rostro: todos son 0\n"
+"Iris: 0 ojo izquierdo, 1 ojo derecho\n"
+"Palma: 0 mano izquierda, 1 mano derecha"
+
+msgid ""
+"Specify the types of data that the device will automatically send to the "
+"server when there are changes."
+msgstr ""
+"Especifica los tipos de datos que el dispositivo enviará automáticamente al servidor cuando haya cambios."
+
+msgid "State"
+msgstr "Estado"
+
+msgid "State Code"
+msgstr "Código de estado"
+
+msgid "State Codes"
+msgstr "Códigos de estado"
+
+msgid "Status"
+msgstr "Estado"
+
+msgid "Status Count"
+msgstr "Cantidad de estados"
+
+msgid "Status Done"
+msgstr "Estado completado"
+
+msgid "Status Draft"
+msgstr "Estado borrador"
+
+msgid "Status Error"
+msgstr "Estado error"
+
+msgid "Status Pending"
+msgstr "Estado pendiente"
+
+msgid ""
+"Status based on activities\n"
+"Overdue: Due date is already passed\n"
+"Today: Activity date is today\n"
+"Planned: Future activities."
+msgstr ""
+"Estado basado en actividades\n"
+"Vencido: la fecha límite ya pasó\n"
+"Hoy: la actividad es hoy\n"
+"Planeado: actividades futuras"
+
+msgid "Success"
+msgstr "Éxito"
+
+msgid "Sunday"
+msgstr "Domingo"
+
+msgid "Support Biometric"
+msgstr "Soporta biometría"
+
+msgid "Synced"
+msgstr "Sincronizado"
+
+msgid "Synchronize Data"
+msgstr "Sincronizar datos"
+
+msgid "Synchronize HR Attendances"
+msgstr "Sincronizar asistencias de RRHH"
+
+msgid ""
+"System will connect and clear all the attendance data in this machine. Are "
+"you sure about this?"
+msgstr ""
+"El sistema se conectará y eliminará todos los datos de asistencia en este dispositivo. "
+"¿Estás seguro de esto?"
+
+msgid ""
+"System will connect and download all the fingers template from your machine."
+" Do you want to proceed?"
+msgstr ""
+"El sistema se conectará y descargará todas las plantillas de huellas del dispositivo. "
+"¿Deseas continuar?"
+
+msgid ""
+"System will connect and download all the users from your machine (without "
+"mapping those with the existing Employees in System). Do you want to "
+"proceed?"
+msgstr ""
+"El sistema se conectará y descargará todos los usuarios del dispositivo (sin vincularlos con empleados existentes). "
+"¿Deseas continuar?"
+
+msgid ""
+"System will connect and download all the users from your machine and try to "
+"map those with the System's employees. Do you want to proceed?"
+msgstr ""
+"El sistema se conectará y descargará todos los usuarios del dispositivo e intentará vincularlos con los empleados del sistema. "
+"¿Deseas continuar?"
+
+msgid ""
+"System will map the existing users with System's employees. The unmapped "
+"employees will be uploaded to this machine as new users and then download "
+"those new users into System and map them again with those unmapped "
+"employees. Do you want to proceed?"
+msgstr ""
+"El sistema vinculará los usuarios existentes con los empleados. Los empleados no vinculados se subirán como nuevos usuarios y luego se descargarán para vincularlos nuevamente. "
+"¿Deseas continuar?"
+
+msgid ""
+"System will try to map those with the System's employees. Do you want to "
+"proceed?"
+msgstr ""
+"El sistema intentará vincularlos con los empleados del sistema. "
+"¿Deseas continuar?"
+
+msgid "TCP"
+msgstr "TCP"
+
+msgid "TCP Max-Size"
+msgstr "Tamaño máximo TCP"
+
+msgid "Technical Settings"
+msgstr "Configuración técnica"
+
+msgid ""
+"Technical field to indicate this user is not available in machine storage. "
+"It could be deleted outside System."
+msgstr ""
+"Campo técnico que indica que este usuario no está disponible en el dispositivo. "
+"Puede haber sido eliminado fuera del sistema."
+
+msgid "Technician"
+msgstr "Técnico"
+
+msgid "Template"
+msgstr "Plantilla"
+
+msgid ""
+"The Activity Type and Activity must be unique! Please recheck if you have "
+"previously defined an attendance status with the same Activity Type and "
+"Activity"
+msgstr ""
+"El tipo de actividad y la actividad deben ser únicos. Verifica si ya existe uno con los mismos valores."
+
+msgid "The Code must be unique per Machine"
+msgstr "El código debe ser único por dispositivo"
+
+msgid "The Code must be unique!"
+msgstr "El código debe ser único"
+
+msgid "The Employee must be unique per machine"
+msgstr "El empleado debe ser único por dispositivo"
+
+msgid "The Employee who is corresponding to this machine user"
+msgstr "El empleado correspondiente a este usuario del dispositivo"
+
+msgid "The Timestamp and User must be unique per machine"
+msgstr "El timestamp y el usuario deben ser únicos por dispositivo"
