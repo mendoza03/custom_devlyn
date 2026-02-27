@@ -88,7 +88,7 @@ class HelpdeskTicket(models.Model):
     )
 
     x_branch_email = fields.Char(string="Correo electronico de Sucursal", copy=False)
-    x_email_issue_type = fields.Char(string="Tipo de Error, Envio o Recepción",copy=False)
+    x_email_issue_type_2 = fields.Char(string="Tipo de Error, Envio o Recepción",copy=False)
     x_contact_number = fields.Char(string="Número de contacto", copy=False)
 
     x_internal_folio_number = fields.Char(string="Número de folio interno.", copy=False)
