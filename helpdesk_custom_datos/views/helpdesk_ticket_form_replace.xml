@@ -4,26 +4,21 @@
     <record id="helpdesk_ticket_view_form_custom_replace" model="ir.ui.view">
         <field name="name">helpdesk.ticket.form.custom.replace</field>
         <field name="model">helpdesk.ticket</field>
-        <!-- Odoo 19 Helpdesk: este suele ser el form base -->
         <field name="inherit_id" ref="helpdesk.helpdesk_ticket_view_form" />
         <field name="priority">99</field>
         <field name="arch" type="xml">
 
-            <!-- Reemplaza TODO el form -->
+
             <xpath expr="//form" position="replace">
                 <form string="Ticket">
 
-                    <!-- Mantengo el statusbar (Nuevo/En progreso/En espera/...) como en tu
-                    screenshot -->
                     <header>
                         <field name="stage_id" widget="statusbar" options="{'clickable': True}" />
                     </header>
 
                     <sheet>
                         <div class="oe_title">
-                            <!-- Aquí reemplazamos el texto tipo placeholder “por ejemplo, el
-                            producto llegó dañado”
-                                 por el label que quieres: Descripción General (*) -->
+
                             <label for="x_general_description" string="Descripción General (*)" />
                             <h1>
                                 <field name="x_general_description"

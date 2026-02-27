@@ -23,14 +23,12 @@ class HelpdeskTicketAttachmentLine(models.Model):
         records = self.env[self._name]
 
         for vals in vals_list:
-            # 1️⃣ Tomar nombre automático del archivo subido
             if not vals.get("filename"):
                 ctx_filename = self.env.context.get("filename")
                 vals["filename"] = ctx_filename or "archivo_adjunto"
 
             rec = super(HelpdeskTicketAttachmentLine, self).create(vals)
 
-            # 2️⃣ Crear ir.attachment real
             att = self.env["ir.attachment"].create({
                 "name": rec.filename,
                 "datas": rec.file,

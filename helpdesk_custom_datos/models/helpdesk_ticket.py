@@ -7,7 +7,6 @@ class HelpdeskTicket(models.Model):
     x_general_description = fields.Char(string="Descripción General", required=True)
     x_section_id = fields.Many2one("helpdesk.section", string="Sección", required=True)
 
-    # Si ya tienes category/subcategory en tu sistema, reemplaza estos por los modelos reales.
     x_category_id = fields.Many2one(
         "helpdesk.ticket.category",
         string="Categoría",
@@ -33,7 +32,6 @@ class HelpdeskTicket(models.Model):
         copy=False,
     )
 
-    # Campos del bloque "Micas sin cortar"
     x_order_number = fields.Char(string="Pedido", copy=False)
     x_bag = fields.Char(string="Bolsa", copy=False)
     x_customer_warehouse = fields.Selection(
