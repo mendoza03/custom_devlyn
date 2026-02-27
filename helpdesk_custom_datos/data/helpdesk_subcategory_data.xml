@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo noupdate="0">
+
+    <!-- Subcategorías para Categoría: Coppel (Sección: CAS) -->
+    <record id="helpdesk_ticket_subcategory_cas_coppel_select" model="helpdesk.ticket.subcategory">
+        <field name="name">-- seleccionar --</field>
+        <field name="category_id" ref="helpdesk_ticket_category_cas_coppel"/>
+        <field name="sequence">1</field>
+        <field name="active">True</field>
+    </record>
+
+    <record id="helpdesk_ticket_subcategory_cas_coppel_micas_sin_cortar" model="helpdesk.ticket.subcategory">
+        <field name="name">Micas sin cortar</field>
+        <field name="category_id" ref="helpdesk_ticket_category_cas_coppel"/>
+        <field name="sequence">10</field>
+        <field name="active">True</field>
+        <field name="code">micas_sin_cortar</field>
+
+    </record>
+
+    <record id="helpdesk_ticket_subcategory_cas_coppel_trabajos_atrasados" model="helpdesk.ticket.subcategory">
+        <field name="name">Trabajos atrasados</field>
+        <field name="category_id" ref="helpdesk_ticket_category_cas_coppel"/>
+        <field name="sequence">20</field>
+        <field name="active">True</field>
+    </record>
+
+</odoo>

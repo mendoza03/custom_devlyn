@@ -1,0 +1,133 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <record id="helpdesk_section_select" model="helpdesk.section">
+        <field name="name">-- seleccionar --</field>
+        <field name="sequence">1</field>
+        <field name="active">True</field>
+    </record>
+
+    <record id="helpdesk_section_cas" model="helpdesk.section">
+        <field name="name">(CAS) Centro de atención y servicio</field>
+        <field name="sequence">2</field>
+    </record>
+
+    <record id="helpdesk_section_facturacion" model="helpdesk.section">
+        <field name="name">Facturación</field>
+        <field name="sequence">3</field>
+    </record>
+
+    <record id="helpdesk_section_soporte_tecnico" model="helpdesk.section">
+        <field name="name">Soporte Técnico</field>
+        <field name="sequence">4</field>
+    </record>
+
+    <record id="helpdesk_section_devoluciones_reales" model="helpdesk.section">
+        <field name="name">Devoluciones Reales</field>
+        <field name="sequence">5</field>
+    </record>
+
+    <record id="helpdesk_section_rrhh" model="helpdesk.section">
+        <field name="name">Recursos Humanos</field>
+        <field name="sequence">6</field>
+    </record>
+
+    <record id="helpdesk_section_mantenimiento" model="helpdesk.section">
+        <field name="name">Mantenimiento</field>
+        <field name="sequence">7</field>
+    </record>
+
+    <record id="helpdesk_section_equipo_optico" model="helpdesk.section">
+        <field name="name">Equipo óptico</field>
+        <field name="sequence">8</field>
+    </record>
+
+    <record id="helpdesk_section_publicidad" model="helpdesk.section">
+        <field name="name">Publicidad</field>
+        <field name="sequence">9</field>
+    </record>
+
+    <record id="helpdesk_section_pdv" model="helpdesk.section">
+        <field name="name">Punto de venta</field>
+        <field name="sequence">10</field>
+    </record>
+
+    <record id="helpdesk_section_rescate_cancelaciones" model="helpdesk.section">
+        <field name="name">Rescate de Cancelaciones</field>
+        <field name="sequence">11</field>
+    </record>
+
+    <record id="helpdesk_section_fullfilment" model="helpdesk.section">
+        <field name="name">Fullfilment</field>
+        <field name="sequence">12</field>
+    </record>
+
+    <record id="helpdesk_section_receta_lc" model="helpdesk.section">
+        <field name="name">Receta lente de contacto</field>
+        <field name="sequence">13</field>
+    </record>
+
+    <record id="helpdesk_section_garantia_calidad" model="helpdesk.section">
+        <field name="name">Garantía de calidad</field>
+        <field name="sequence">14</field>
+    </record>
+
+    <record id="helpdesk_section_medallia" model="helpdesk.section">
+        <field name="name">Medallia</field>
+        <field name="sequence">15</field>
+    </record>
+
+    <record id="helpdesk_section_paqueteria" model="helpdesk.section">
+        <field name="name">Paquetería, mensajería y embarques</field>
+        <field name="sequence">16</field>
+    </record>
+
+    <record id="helpdesk_section_prevencion_perdidas" model="helpdesk.section">
+        <field name="name">Prevención de Pérdidas</field>
+        <field name="sequence">17</field>
+    </record>
+
+    <record id="helpdesk_section_herramientas_essilor" model="helpdesk.section">
+        <field name="name">Herramientas y dispositivos Essilor</field>
+        <field name="sequence">18</field>
+    </record>
+
+    <record id="helpdesk_section_micas_cortesia" model="helpdesk.section">
+        <field name="name">Micas de cortesía</field>
+        <field name="sequence">19</field>
+    </record>
+
+    <record id="helpdesk_section_resurtido_consumibles" model="helpdesk.section">
+        <field name="name">Resurtido de consumibles</field>
+        <field name="sequence">20</field>
+    </record>
+
+    <record id="helpdesk_section_plataforma_citas" model="helpdesk.section">
+        <field name="name">Plataforma citas</field>
+        <field name="sequence">21</field>
+    </record>
+
+    <record id="helpdesk_section_internet" model="helpdesk.section">
+        <field name="name">Internet</field>
+        <field name="sequence">22</field>
+    </record>
+
+    <record id="helpdesk_section_usuario_contrasena" model="helpdesk.section">
+        <field name="name">Usuario y contraseña</field>
+        <field name="sequence">23</field>
+    </record>
+
+    <record id="helpdesk_section_labs_locales" model="helpdesk.section">
+        <field name="name">Laboratorios Locales</field>
+        <field name="sequence">24</field>
+    </record>
+
+    <record id="helpdesk_section_papeleria" model="helpdesk.section">
+        <field name="name">Solicitud de papelería</field>
+        <field name="sequence">25</field>
+    </record>
+
+    <record id="helpdesk_section_abasto_cuadro_basico" model="helpdesk.section">
+        <field name="name">Abasto de Cuadro Básico</field>
+        <field name="sequence">26</field>
+    </record>
+</odoo>

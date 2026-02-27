@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+
+    <record id="helpdesk_ticket_view_form_custom_replace" model="ir.ui.view">
+        <field name="name">helpdesk.ticket.form.custom.replace</field>
+        <field name="model">helpdesk.ticket</field>
+        <!-- Odoo 19 Helpdesk: este suele ser el form base -->
+        <field name="inherit_id" ref="helpdesk.helpdesk_ticket_view_form" />
+        <field name="priority">99</field>
+        <field name="arch" type="xml">
+
+            <!-- Reemplaza TODO el form -->
+            <xpath expr="//form" position="replace">
+                <form string="Ticket">
+
+                    <!-- Mantengo el statusbar (Nuevo/En progreso/En espera/...) como en tu
+                    screenshot -->
+                    <header>
+                        <field name="stage_id" widget="statusbar" options="{'clickable': True}" />
+                    </header>
+
+                    <sheet>
+                        <div class="oe_title">
+                            <!-- Aquí reemplazamos el texto tipo placeholder “por ejemplo, el
+                            producto llegó dañado”
+                                 por el label que quieres: Descripción General (*) -->
+                            <label for="x_general_description" string="Descripción General (*)" />
+                            <h1>
+                                <field name="x_general_description"
+                                    placeholder=""
+                                    required="1"
+                                    class="oe_inline"
+                                />
+                            </h1>
+                        </div>
+
+                        <group string="Datos generales">
+                            <group>
+                                <field name="x_section_id" required="1" />
+                            </group>
+                        </group>
+
+                        <group>
+                            <group>
+                                <field name="x_category_id" required="1" />
+                            </group>
+                            <group>
+                                <field name="x_subcategory_id" required="1" />
+                                <field name="x_subcategory_code" invisible="1" />
+                            </group>
+                        </group>
+
+                        <group string="Descripción Detallada">
+                            <field name="x_detailed_description"
+                                widget="html"
+                                placeholder=""
+                            />
+                        </group>
+
+                        <div class="mt16">
+                            <strong>POR FAVOR, REVISAR QUE TODOS LOS DATOS SEAN CORRECTOS ANTES DE
+                                ENVIAR TICKET. GRACIAS</strong>
+                        </div>
+
+                        <div class="mt16" invisible="x_subcategory_code != 'micas_sin_cortar'">
+                            <div class="o_alert o_alert_info mb-2">
+                                <strong>Antes de levantar el ticket por favor revisa el comunicado
+                                    ENVIO MICAS SIN CORTAR</strong>
+                            </div>
+
+                            <group string="Micas sin cortar" col="6">
+                                <field name="x_order_number" required="1" />
+                                <field name="x_bag" required="1" />
+                                <field name="x_customer_warehouse" required="1" />
+
+                                <field name="x_authorized_by" required="1" />
+                                <field name="x_lab_indicated" required="1" />
+                                <field name="x_order_type" required="1" />
+                            </group>
+                        </div>
+                        <div class="mt16">
+                            <h3>Anexos</h3>
+
+                            <field name="x_attachment_line_ids" nolabel="1">
+                                <list editable="bottom" create="1" delete="0">
+
+                                    <field name="file" string="Fichero" filename="filename" />
+
+                                </list>
+                            </field>
+                        </div>
+                    </sheet>
+                </form>
+            </xpath>
+
+        </field>
+    </record>
+
+</odoo>

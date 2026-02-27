@@ -3,79 +3,66 @@
         <t t-call="website.layout">
             <div class="container mt-5">
 
-                <h3 class="mb-4">Datos generales</h3>
+                <h3>Datos generales</h3>
 
-                <form action="/helpdesk/submit" method="post" class="row g-3">
+                <form action="/helpdesk/submit" method="post" enctype="multipart/form-data" class="row g-3">
 
                     <!-- Descripción General -->
                     <div class="col-12">
-                        <label class="form-label">Descripción General (*)</label>
-                        <input type="text" name="name" class="form-control" required="1"/>
+                        <label>Descripción General (*)</label>
+                        <input type="text" name="x_general_description" class="form-control" required="1"/>
                     </div>
 
                     <!-- Sección -->
                     <div class="col-12">
-                        <label class="form-label">Sección (*)</label>
-                        <select name="seccion_id" class="form-select">
+                        <label>Sección (*)</label>
+                        <select name="x_section_id" id="section" class="form-select">
                             <option value="">-- seleccionar --</option>
-                            <t t-foreach="secciones" t-as="s">
-                                <option t-att-value="s.id">
-                                    <t t-esc="s.name"/>
-                                </option>
+                            <t t-foreach="sections" t-as="s">
+                                <option t-att-value="s.id"><t t-esc="s.name"/></option>
                             </t>
                         </select>
                     </div>
 
-                    <!-- Categoría + Subcategoría -->
+                    <!-- Categoría -->
                     <div class="col-md-6">
-                        <label class="form-label">Categoría (*)</label>
-                        <select name="categoria_id" class="form-select">
-                            <option value="">-- seleccionar --</option>
-                            <t t-foreach="categorias" t-as="c">
-                                <option t-att-value="c.id">
-                                    <t t-esc="c.name"/>
-                                </option>
-                            </t>
+                        <label>Categoría (*)</label>
+                        <select name="x_category_id" id="category" class="form-select">
+
                         </select>
                     </div>
 
+                    <!-- Subcategoría -->
                     <div class="col-md-6">
-                        <label class="form-label">Subcategoría (*)</label>
-                        <select name="subcategoria_id" class="form-select">
-                            <option value="">-- seleccionar --</option>
-                            <t t-foreach="subcategorias" t-as="sc">
-                                <option t-att-value="sc.id">
-                                    <t t-esc="sc.name"/>
-                                </option>
-                            </t>
+                        <label>Subcategoría (*)</label>
+                        <select name="x_subcategory_id" id="subcategory" class="form-select">
+
                         </select>
                     </div>
 
                     <!-- Descripción Detallada -->
                     <div class="col-12">
-                        <label class="form-label">Descripción Detallada</label>
-
-                        <div class="oe_wysiwyg_container">
-                            <textarea name="description" class="o_wysiwyg"/>
-                        </div>
+                        <label>Descripción Detallada</label>
+                        <textarea name="x_detailed_description" class="form-control o_wysiwyg"/>
                     </div>
 
-                    <!-- Footer -->
-                    <div class="col-12 mt-4">
-                        <p class="text-muted">
-                            POR FAVOR, REVISAR QUE TODOS LOS DATOS SEAN CORRECTOS ANTES DE ENVIAR TICKET. GRACIAS
-                        </p>
+                    <!-- Adjuntos -->
+                    <div class="col-12">
+                        <label>Adjuntar archivos</label>
+                        <input type="file" name="attachments" multiple="multiple" class="form-control"/>
                     </div>
 
-                    <!-- Botón -->
-                    <div class="col-12 m-4">
+                    <div class="col-12 mt-3 mb-3">
                         <button type="submit" class="btn btn-primary">
                             Enviar Ticket
                         </button>
                     </div>
 
+                    <input type="hidden" name="csrf_token" t-att-value="request.csrf_token()"/>
+
                 </form>
             </div>
+                        <script type="text/javascript" src="/helpdesk_web_form/static/src/js/index.js"></script>
         </t>
     </template>
 </odoo>
