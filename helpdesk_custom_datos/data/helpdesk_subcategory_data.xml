@@ -27,4 +27,29 @@
 
     </record>
 
+
+    <!-- Subcategorías para Categoría: Devlyn (Sección: CAS) -->
+
+    <record id="helpdesk_ticket_subcategory_cas_devlyn_select" model="helpdesk.ticket.subcategory">
+        <field name="name">-- seleccionar --</field>
+        <field name="category_id" ref="helpdesk_ticket_category_cas_devlyn"/>
+        <field name="sequence">1</field>
+        <field name="active">True</field>
+    </record>
+
+    <record id="helpdesk_ticket_subcategory_cas_devlyn_micas_sin_cortar" model="helpdesk.ticket.subcategory">
+        <field name="name">Micas sin cortar</field>
+        <field name="category_id" ref="helpdesk_ticket_category_cas_devlyn"/>
+        <field name="sequence">10</field>
+        <field name="active">True</field>
+        <field name="code">micas_sin_cortar</field>
+    </record>
+
+    <record id="helpdesk_ticket_subcategory_cas_devlyn_trabajos_atrasados" model="helpdesk.ticket.subcategory">
+        <field name="name">Trabajos atrasados</field>
+        <field name="category_id" ref="helpdesk_ticket_category_cas_devlyn"/>
+        <field name="sequence">20</field>
+        <field name="active">True</field>
+        <field name="code">trabajos_atrasados</field>
+    </record>
 </odoo>
