@@ -1,0 +1,81 @@
+<odoo>
+    <template id="helpdesk_form_template">
+        <t t-call="website.layout">
+            <div class="container mt-5">
+
+                <h3 class="mb-4">Datos generales</h3>
+
+                <form action="/helpdesk/submit" method="post" class="row g-3">
+
+                    <!-- Descripción General -->
+                    <div class="col-12">
+                        <label class="form-label">Descripción General (*)</label>
+                        <input type="text" name="name" class="form-control" required="1"/>
+                    </div>
+
+                    <!-- Sección -->
+                    <div class="col-12">
+                        <label class="form-label">Sección (*)</label>
+                        <select name="seccion_id" class="form-select">
+                            <option value="">-- seleccionar --</option>
+                            <t t-foreach="secciones" t-as="s">
+                                <option t-att-value="s.id">
+                                    <t t-esc="s.name"/>
+                                </option>
+                            </t>
+                        </select>
+                    </div>
+
+                    <!-- Categoría + Subcategoría -->
+                    <div class="col-md-6">
+                        <label class="form-label">Categoría (*)</label>
+                        <select name="categoria_id" class="form-select">
+                            <option value="">-- seleccionar --</option>
+                            <t t-foreach="categorias" t-as="c">
+                                <option t-att-value="c.id">
+                                    <t t-esc="c.name"/>
+                                </option>
+                            </t>
+                        </select>
+                    </div>
+
+                    <div class="col-md-6">
+                        <label class="form-label">Subcategoría (*)</label>
+                        <select name="subcategoria_id" class="form-select">
+                            <option value="">-- seleccionar --</option>
+                            <t t-foreach="subcategorias" t-as="sc">
+                                <option t-att-value="sc.id">
+                                    <t t-esc="sc.name"/>
+                                </option>
+                            </t>
+                        </select>
+                    </div>
+
+                    <!-- Descripción Detallada -->
+                    <div class="col-12">
+                        <label class="form-label">Descripción Detallada</label>
+
+                        <div class="oe_wysiwyg_container">
+                            <textarea name="description" class="o_wysiwyg"/>
+                        </div>
+                    </div>
+
+                    <!-- Footer -->
+                    <div class="col-12 mt-4">
+                        <p class="text-muted">
+                            POR FAVOR, REVISAR QUE TODOS LOS DATOS SEAN CORRECTOS ANTES DE ENVIAR TICKET. GRACIAS
+                        </p>
+                    </div>
+
+                    <!-- Botón -->
+                    <div class="col-12 m-4">
+                        <button type="submit" class="btn btn-primary">
+                            Enviar Ticket
+                        </button>
+                    </div>
+
+                </form>
+            </div>
+        </t>
+    </template>
+</odoo>
