@@ -59,6 +59,10 @@ class HelpdeskTicket(models.Model):
         default="select",
         copy=False,
     )
+    x_lab_indicated = fields.Char(string="LAB indicado en portal de seguimiento de trabajos", copy=False)
+
+    x_shipping_guide_number = fields.Char(string="Número de guía de envío de armazón", copy=False)
+    x_frame_bag_number = fields.Char(string="Número de bolsa de envío de armazón", copy=False)
     x_authorized_by = fields.Char(string="Persona que Autoriza", copy=False)
     x_order_type_adaptation = fields.Selection(
         [
