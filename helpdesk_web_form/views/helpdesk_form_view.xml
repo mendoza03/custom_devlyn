@@ -1,433 +1,464 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <odoo>
-  <template id="helpdesk_form_template">
-    <t t-call="website.layout">
-      <div class="container mt-5">
-        <h3>Datos generales</h3>
+    <template id="helpdesk_form_template">
+        <t t-call="website.layout">
+            <div class="container mt-5">
+                <h3>Datos generales</h3>
 
-        <form action="/helpdesk/submit" method="post" enctype="multipart/form-data" class="row g-3" id="helpdesk_form">
-          <div class="col-12">
-            <label>Descripción General (*)</label>
-            <input type="text" name="x_general_description" class="form-control" required="required"/>
-          </div>
+                <form action="/helpdesk/submit" method="post" enctype="multipart/form-data"
+                    class="row g-3" id="helpdesk_form">
+                    <div class="col-12">
+                        <label>Descripción General (*)</label>
+                        <input type="text" name="x_general_description" class="form-control"
+                            required="required" />
+                    </div>
 
-          <div class="col-12">
-            <label>Sección (*)</label>
-            <select name="x_section_id" id="section" class="form-select" required="required">
-              <option value="">-- seleccionar --</option>
-              <t t-foreach="sections" t-as="s">
-                <option t-att-value="s.id"><t t-esc="s.name"/></option>
-              </t>
-            </select>
-          </div>
+                    <div class="col-12">
+                        <label>Sección (*)</label>
+                        <select name="x_section_id" id="section" class="form-select"
+                            required="required">
+                            <option value="">-- seleccionar --</option>
+                            <t t-foreach="sections" t-as="s">
+                                <option t-att-value="s.id">
+                                    <t t-esc="s.name" />
+                                </option>
+                            </t>
+                        </select>
+                    </div>
 
-          <div class="col-md-6">
-            <label>Categoría (*)</label>
-            <select name="x_category_id" id="category" class="form-select" required="required">
-              <option value="">-- seleccionar --</option>
-            </select>
-          </div>
+                    <div class="col-md-6">
+                        <label>Categoría (*)</label>
+                        <select name="x_category_id" id="category" class="form-select"
+                            required="required">
+                            <option value="">-- seleccionar --</option>
+                        </select>
+                    </div>
 
-          <div class="col-md-6">
-            <label>Subcategoría (*)</label>
-            <select name="x_subcategory_id" id="subcategory" class="form-select" required="required">
-              <option value="">-- seleccionar --</option>
-            </select>
-          </div>
+                    <div class="col-md-6">
+                        <label>Subcategoría (*)</label>
+                        <select name="x_subcategory_id" id="subcategory" class="form-select"
+                            required="required">
+                            <option value="">-- seleccionar --</option>
+                        </select>
+                    </div>
 
-          <div class="col-12">
-            <label>Descripción Detallada</label>
-            <textarea name="x_detailed_description" class="form-control" rows="6"></textarea>
-          </div>
+                    <div class="col-12">
+                        <label>Descripción Detallada</label>
+                        <textarea name="x_detailed_description" class="form-control" rows="6"></textarea>
+                    </div>
 
-          <div class="col-12 mt-3">
-            <strong>POR FAVOR, REVISAR QUE TODOS LOS DATOS SEAN CORRECTOS ANTES DE ENVIAR TICKET. GRACIAS</strong>
-          </div>
+                    <div class="col-12 mt-3">
+                        <strong>POR FAVOR, REVISAR QUE TODOS LOS DATOS SEAN CORRECTOS ANTES DE
+                            ENVIAR TICKET. GRACIAS</strong>
+                    </div>
 
-          <div class="col-12 d-none" id="blk_micas_sin_cortar">
-            <div class="alert alert-info mt-3">
-              <strong>Antes de levantar el ticket por favor revisa el comunicado ENVIO MICAS SIN CORTAR</strong>
+                    <div class="col-12 d-none" id="blk_micas_sin_cortar">
+                        <div class="alert alert-info mt-3">
+                            <strong>Antes de levantar el ticket por favor revisa el comunicado ENVIO
+                                MICAS SIN CORTAR</strong>
+                        </div>
+                        <div class="row g-3">
+                            <div class="col-md-4">
+                                <label>Pedido (*)</label>
+                                <input type="text" name="x_order_number" class="form-control" />
+                            </div>
+                            <div class="col-md-4">
+                                <label>Bolsa (*)</label>
+                                <input type="text" name="x_bag" class="form-control" />
+                            </div>
+                            <div class="col-md-4">
+                                <label>Armazón del cliente? (*)</label>
+                                <select name="x_customer_warehouse" class="form-select">
+                                    <option value="select">-- seleccionar --</option>
+                                    <option value="si">Sí</option>
+                                    <option value="no">No</option>
+                                </select>
+                            </div>
+
+                            <div class="col-md-4">
+                                <label>Persona que Autoriza (*)</label>
+                                <input type="text" name="x_authorized_by" class="form-control" />
+                            </div>
+                            <div class="col-md-4">
+                                <label>LAB indicado en portal de seguimiento de trabajos (*)</label>
+                                <input type="text" name="x_lab_indicated" class="form-control" />
+                            </div>
+                            <div class="col-md-4">
+                                <label>Tipo de pedido (*)</label>
+                                <select name="x_order_type" id="x_order_type" class="form-select">
+                                    <option value="select">-- seleccionar --</option>
+                                    <option value="retallado">Retallado</option>
+                                    <option value="garantia_calidad">Garantía de calidad</option>
+                                    <option value="satisfaccion_adaptacion">Satisfacción total de
+                                        adaptación</option>
+                                    <option value="satisfaccion_imagen">Satisfacción total de imagen</option>
+                                    <option value="captura_primera_vez">Captura primera vez</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-12 d-none" id="blk_trabajos_atrasados">
+                        <div class="mt-3 p-2 rounded-2 text-white" style="background:#198754;">
+                            <strong>Trabajos atrasados</strong>
+                        </div>
+
+                        <div class="row g-3 mt-1">
+                            <div class="col-md-6">
+                                <label>Tipo de Trabajo (*)</label>
+                                <select name="x_job_type" class="form-select">
+                                    <option value="select">-- seleccionar --</option>
+                                    <option value="micas_sin_cortar">Micas sin cortar</option>
+                                    <option value="trabajos_atrasados">Trabajos atrasados</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="mt-3">
+                            <strong>POR FAVOR, VALIDAR EL NÚMERO DE PEDIDO EN EL ICONO DE LA LUPA.
+                                GRACIAS</strong>
+                        </div>
+
+                        <div class="row g-3 mt-1">
+                            <div class="col-md-4">
+                                <label>N° de pedido original (*)</label>
+                                <input type="text" name="x_original_order_number"
+                                    class="form-control" />
+                            </div>
+                            <div class="col-md-4">
+                                <label>Pedido. (*)</label>
+                                <input type="text" name="x_order_number" class="form-control" />
+                            </div>
+                            <div class="col-md-4">
+                                <label>Indicar si enviaron armazón (*)</label>
+                                <select name="x_customer_warehouse" class="form-select">
+                                    <option value="select">-- seleccionar --</option>
+                                    <option value="si">Sí</option>
+                                    <option value="no">No</option>
+                                </select>
+                            </div>
+
+                            <div class="col-md-6">
+                                <label>LAB indicado en portal de seguimiento de trabajos (*)</label>
+                                <input type="text" name="x_lab_indicated" class="form-control" />
+                            </div>
+                            <div class="col-md-6">
+                                <label>Tipo de pedido (*)</label>
+                                <select name="x_order_type" class="form-select">
+                                    <option value="select">-- seleccionar --</option>
+                                    <option value="retallado">Retallado</option>
+                                    <option value="garantia_calidad">Garantía de calidad</option>
+                                    <option value="satisfaccion_adaptacion">Satisfacción total de
+                                        adaptación</option>
+                                    <option value="satisfaccion_imagen">Satisfacción total de imagen</option>
+                                    <option value="captura_primera_vez">Captura primera vez</option>
+                                </select>
+                            </div>
+
+                            <div class="col-md-6">
+                                <label>Número de guía de envío de armazón (*)</label>
+                                <input type="text" name="x_shipping_guide_number"
+                                    class="form-control" />
+                            </div>
+                            <div class="col-md-6">
+                                <label>Número de bolsa de envío de armazón (*)</label>
+                                <input type="text" name="x_frame_bag_number" class="form-control" />
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-12 d-none" id="blk_satisfaccion_adaptacion">
+                        <div class="mt-3 p-2 rounded-2 text-white" style="background:#198754;">
+                            <strong>Satisfacción total de adaptación</strong>
+                        </div>
+                        <div class="row g-3 mt-1">
+                            <div class="col-md-6">
+                                <label>Tipo de pedido (*)</label>
+                                <select name="x_order_type_adaptation" class="form-select">
+                                    <option value="select">-- seleccionar --</option>
+                                    <option value="lab_indicated">LAB indicado en portal de
+                                        seguimiento de trabajo</option>
+                                    <option value="shipping_guide_number">Número de guía de envío de
+                                        armazón</option>
+                                    <option value="frame_bag_number">Número de bolsa de envío de
+                                        armazón</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-12 d-none" id="blk_satisfaccion_imagen">
+                        <div class="mt-3 p-2 rounded-2 text-white" style="background:#198754;">
+                            <strong>Satisfacción total de Imagen</strong>
+                        </div>
+                        <div class="row g-3 mt-1">
+                            <div class="col-md-6">
+                                <label>Tipo de pedido (*)</label>
+                                <select name="x_order_type_imagen" class="form-select">
+                                    <option value="select">-- seleccionar --</option>
+                                    <option value="lab_indicated">LAB indicado en portal de
+                                        seguimiento de trabajo</option>
+                                    <option value="shipping_guide_number">Número de guía de envío de
+                                        armazón</option>
+                                    <option value="frame_bag_number">Número de bolsa de envío de
+                                        armazón</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-12 d-none" id="blk_correo_electronico">
+                        <div class="mt-3 p-2 rounded-2 text-white" style="background:#198754;">
+                            <strong>Correo electrónico</strong>
+                        </div>
+                        <div class="row g-3 mt-1">
+                            <div class="col-md-4">
+                                <label>Correo electronico de Sucursal (*)</label>
+                                <input type="email" name="x_branch_email" class="form-control" />
+                            </div>
+                            <div class="col-md-4">
+                                <label>Tipo de Error, Envio o Recepción (*)</label>
+                                <select name="x_email_issue_type" class="form-select">
+                                    <option value="select">-- seleccionar --</option>
+                                    <option value="tipo_error">Tipo de Error</option>
+                                    <option value="envio">Envio</option>
+                                    <option value="recepcion">Recepción</option>
+                                </select>
+                            </div>
+                            <div class="col-md-4">
+                                <label>Número de contacto (*)</label>
+                                <input type="text" name="x_contact_number" class="form-control" />
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-12 d-none" id="blk_equipo_computo">
+                        <div class="mt-3 p-2 rounded-2 text-white" style="background:#198754;">
+                            <strong>Equipo de cómputo</strong>
+                        </div>
+
+                        <div class="row g-3 mt-1">
+                            <div class="col-md-6">
+                                <label>Número de folio interno. (*)</label>
+                                <input type="text" name="x_internal_folio_number"
+                                    class="form-control" />
+                            </div>
+                        </div>
+
+                        <div class="mt-3">
+                            <strong>Es obligatorio enviar a Centro de Servicios el equipo dañado.</strong>
+                        </div>
+
+                        <div class="row g-3 mt-1">
+                            <div class="col-md-4">
+                                <label>Tipo de equipo (*)</label>
+                                <select name="x_equipment_type" class="form-select">
+                                    <option value="select">-- seleccionar --</option>
+                                    <option value="scanner">Scanner</option>
+                                    <option value="impresora">Impresora</option>
+                                    <option value="cpu">CPU</option>
+                                    <option value="transfer">Transfer</option>
+                                    <option value="no_break">No break</option>
+                                    <option value="monitor">Monitor</option>
+                                    <option value="otro">Otro</option>
+                                </select>
+                            </div>
+                            <div class="col-md-4">
+                                <label>Modelo y/o marca (*)</label>
+                                <input type="text" name="x_model_or_brand" class="form-control" />
+                            </div>
+                            <div class="col-md-4">
+                                <label>Número de Serie (*)</label>
+                                <input type="text" name="x_serial_number" class="form-control" />
+                            </div>
+
+                            <div class="col-md-4">
+                                <label>N° de activo fijo (*)</label>
+                                <input type="text" name="x_fixed_asset_number" class="form-control" />
+                            </div>
+                            <div class="col-md-4">
+                                <label>N° de guía (*)</label>
+                                <input type="text" name="x_shipping_guide" class="form-control" />
+                            </div>
+                            <div class="col-md-4">
+                                <label>Mensajería (*)</label>
+                                <input type="text" name="x_courier" class="form-control" />
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-12 d-none" id="blk_interredes">
+                        <div class="mt-3 p-2 rounded-2 text-white" style="background:#198754;">
+                            <strong>Interredes</strong>
+                        </div>
+                        <div class="row g-3 mt-1">
+                            <div class="col-md-4">
+                                <label>N° de comercio (*)</label>
+                                <input type="text" name="x_store_number" class="form-control" />
+                            </div>
+                            <div class="col-md-4">
+                                <label>Usuario de Interredes (*)</label>
+                                <input type="text" name="x_interredes_user" class="form-control" />
+                            </div>
+                            <div class="col-md-4">
+                                <label>Número de contacto (*)</label>
+                                <input type="text" name="x_contact_number" class="form-control" />
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-12 d-none" id="blk_problemas_impresora">
+                        <div class="mt-3 p-2 rounded-2 text-white" style="background:#198754;">
+                            <strong>Problemas con impresora</strong>
+                        </div>
+                        <div class="row g-3 mt-1">
+                            <div class="col-md-3">
+                                <label>Modelo de impresora (*)</label>
+                                <input type="text" name="x_printer_model" class="form-control" />
+                            </div>
+                            <div class="col-md-3">
+                                <label>Número de contacto (*)</label>
+                                <input type="text" name="x_contact_number" class="form-control" />
+                            </div>
+                            <div class="col-md-3">
+                                <label>Número de Serie (*)</label>
+                                <input type="text" name="x_serial_number" class="form-control" />
+                            </div>
+                            <div class="col-md-3">
+                                <label>Nombre de la persona que nos contacto (*)</label>
+                                <input type="text" name="x_contact_person_name" class="form-control" />
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-12 d-none" id="blk_surtido_toner">
+                        <div class="mt-3 p-2 rounded-2 text-white" style="background:#198754;">
+                            <strong>Surtido de tóner</strong>
+                        </div>
+
+                        <div class="row g-3 mt-1">
+                            <div class="col-md-4">
+                                <label>Modelo de impresora (*)</label>
+                                <input type="text" name="x_printer_model" class="form-control" />
+                            </div>
+                            <div class="col-md-4">
+                                <label>Número de contacto (*)</label>
+                                <input type="text" name="x_contact_number" class="form-control" />
+                            </div>
+                            <div class="col-md-4">
+                                <label>Número de serie de la impresora (empieza ZD7) (*)</label>
+                                <input type="text" name="x_serial_number" class="form-control" />
+                            </div>
+                        </div>
+
+                        <div class="alert alert-info mt-3">
+                            <strong>Antes de levantar el ticket favor de leer el Manual para obtener
+                            el contador de impresiones y porcentaje de tóner de la impresora SAMSUNG
+                            M4020.</strong>
+              <br /> Recuerda que si se tiene más del 15% de tóner no
+                            procederá el envío del mismo. </div>
+
+                        <div class="row g-3 mt-1">
+                            <div class="col-md-6">
+                                <label>¿Tóner por debajo de 15%? (*)</label>
+                                <select name="x_toner_below_15" id="x_toner_below_15"
+                                    class="form-select">
+                                    <option value="">-- seleccionar --</option>
+                                    <option value="si">Sí</option>
+                                    <option value="no">No</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="alert alert-danger mt-3 d-none" id="toner_no_warn">
+                            <strong>El envío de tóner NO procede si el porcentaje es mayor al 15%.</strong>
+                        </div>
+                    </div>
+
+                    <div class="col-12 d-none" id="blk_iluminacion">
+                        <div class="mt-3 p-2 rounded-2 text-white" style="background:#198754;">
+                            <strong>Iluminación</strong>
+                        </div>
+                        <div class="mt-3">
+                            <strong>Adjuntar fotografía de lámparas</strong>
+                        </div>
+                    </div>
+
+                    <div class="col-12 d-none" id="blk_sanitarios">
+                        <div class="mt-3 p-2 rounded-2 text-white" style="background:#198754;">
+                            <strong>Sanitarios</strong>
+                        </div>
+                        <div class="mt-3">
+                            <strong>Adjuntar fotografía de sanitarios</strong>
+                        </div>
+                    </div>
+
+                    <div class="col-12 d-none" id="blk_mobiliario">
+                        <div class="mt-3 p-2 rounded-2 text-white" style="background:#198754;">
+                            <strong>Mobiliario</strong>
+                        </div>
+                        <div class="mt-3">
+                            <strong>Adjuntar fotografía de mobiliario</strong>
+                        </div>
+                    </div>
+
+                    <div class="col-12 d-none" id="blk_aparadores">
+                        <div class="mt-3 p-2 rounded-2 text-white" style="background:#198754;">
+                            <strong>Aparadores</strong>
+                        </div>
+                        <div class="mt-3">
+                            <strong>Adjuntar fotografía de aparadores</strong>
+                        </div>
+                    </div>
+
+                    <div class="col-12 d-none" id="blk_fletes">
+                        <div class="mt-3 p-2 rounded-2 text-white" style="background:#198754;">
+                            <strong>Fletes</strong>
+                        </div>
+                        <div class="mt-3">
+                            <strong>Adjuntar fotografía de fletes</strong>
+                        </div>
+                    </div>
+
+                    <div class="col-12 d-none" id="blk_limpieza_profunda">
+                        <div class="mt-3 p-2 rounded-2 text-white" style="background:#198754;">
+                            <strong>Limpieza profunda</strong>
+                        </div>
+
+                        <div class="row g-3 mt-1">
+                            <div class="col-md-6">
+                                <label>Área a limpiar (*)</label>
+                                <select name="x_cleaning_area" class="form-select">
+                                    <option value="select">-- seleccionar --</option>
+                                    <option value="aparadores">Aparadores</option>
+                                    <option value="piso">Piso</option>
+                                    <option value="bano">Baño</option>
+                                    <option value="anuncios">Anuncios</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="mt-3">
+                            <strong>Adjuntar fotografía de área a limpiar</strong>
+                        </div>
+                    </div>
+
+                    <div class="col-12 mt-3">
+                        <h3>Anexos</h3>
+                        <input type="file" name="attachments" multiple="multiple"
+                            class="form-control" />
+                    </div>
+
+                    <div class="col-12 mt-3 mb-3">
+                        <button type="submit" class="btn btn-primary">Enviar Ticket</button>
+                    </div>
+
+                    <input type="hidden" id="csrf_token" name="csrf_token"
+                        t-att-value="request.csrf_token()" />
+                </form>
             </div>
-            <div class="row g-3">
-              <div class="col-md-4">
-                <label>Pedido (*)</label>
-                <input type="text" name="x_order_number" class="form-control"/>
-              </div>
-              <div class="col-md-4">
-                <label>Bolsa (*)</label>
-                <input type="text" name="x_bag" class="form-control"/>
-              </div>
-              <div class="col-md-4">
-                <label>Armazón del cliente? (*)</label>
-                <select name="x_customer_warehouse" class="form-select">
-                  <option value="select">-- seleccionar --</option>
-                  <option value="si">Sí</option>
-                  <option value="no">No</option>
-                </select>
-              </div>
 
-              <div class="col-md-4">
-                <label>Persona que Autoriza (*)</label>
-                <input type="text" name="x_authorized_by" class="form-control"/>
-              </div>
-              <div class="col-md-4">
-                <label>LAB indicado en portal de seguimiento de trabajos (*)</label>
-                <input type="text" name="x_lab_indicated" class="form-control"/>
-              </div>
-              <div class="col-md-4">
-                <label>Tipo de pedido (*)</label>
-                <select name="x_order_type" id="x_order_type" class="form-select">
-                  <option value="select">-- seleccionar --</option>
-                  <option value="retallado">Retallado</option>
-                  <option value="garantia_calidad">Garantía de calidad</option>
-                  <option value="satisfaccion_adaptacion">Satisfacción total de adaptación</option>
-                  <option value="satisfaccion_imagen">Satisfacción total de imagen</option>
-                  <option value="captura_primera_vez">Captura primera vez</option>
-                </select>
-              </div>
-            </div>
-          </div>
-
-          <div class="col-12 d-none" id="blk_trabajos_atrasados">
-            <div class="mt-3 p-2 rounded-2 text-white" style="background:#198754;">
-              <strong>Trabajos atrasados</strong>
-            </div>
-
-            <div class="row g-3 mt-1">
-              <div class="col-md-6">
-                <label>Tipo de Trabajo (*)</label>
-                <select name="x_job_type" class="form-select">
-                  <option value="select">-- seleccionar --</option>
-                  <option value="micas_sin_cortar">Micas sin cortar</option>
-                  <option value="trabajos_atrasados">Trabajos atrasados</option>
-                </select>
-              </div>
-            </div>
-
-            <div class="mt-3">
-              <strong>POR FAVOR, VALIDAR EL NÚMERO DE PEDIDO EN EL ICONO DE LA LUPA. GRACIAS</strong>
-            </div>
-
-            <div class="row g-3 mt-1">
-              <div class="col-md-4">
-                <label>N° de pedido original (*)</label>
-                <input type="text" name="x_original_order_number" class="form-control"/>
-              </div>
-              <div class="col-md-4">
-                <label>Pedido. (*)</label>
-                <input type="text" name="x_order_number" class="form-control"/>
-              </div>
-              <div class="col-md-4">
-                <label>Indicar si enviaron armazón (*)</label>
-                <select name="x_customer_warehouse" class="form-select">
-                  <option value="select">-- seleccionar --</option>
-                  <option value="si">Sí</option>
-                  <option value="no">No</option>
-                </select>
-              </div>
-
-              <div class="col-md-6">
-                <label>LAB indicado en portal de seguimiento de trabajos (*)</label>
-                <input type="text" name="x_lab_indicated" class="form-control"/>
-              </div>
-              <div class="col-md-6">
-                <label>Tipo de pedido (*)</label>
-                <select name="x_order_type" class="form-select">
-                  <option value="select">-- seleccionar --</option>
-                  <option value="retallado">Retallado</option>
-                  <option value="garantia_calidad">Garantía de calidad</option>
-                  <option value="satisfaccion_adaptacion">Satisfacción total de adaptación</option>
-                  <option value="satisfaccion_imagen">Satisfacción total de imagen</option>
-                  <option value="captura_primera_vez">Captura primera vez</option>
-                </select>
-              </div>
-
-              <div class="col-md-6">
-                <label>Número de guía de envío de armazón (*)</label>
-                <input type="text" name="x_shipping_guide_number" class="form-control"/>
-              </div>
-              <div class="col-md-6">
-                <label>Número de bolsa de envío de armazón (*)</label>
-                <input type="text" name="x_frame_bag_number" class="form-control"/>
-              </div>
-            </div>
-          </div>
-
-          <div class="col-12 d-none" id="blk_satisfaccion_adaptacion">
-            <div class="mt-3 p-2 rounded-2 text-white" style="background:#198754;">
-              <strong>Satisfacción total de adaptación</strong>
-            </div>
-            <div class="row g-3 mt-1">
-              <div class="col-md-6">
-                <label>Tipo de pedido (*)</label>
-                <select name="x_order_type_adaptation" class="form-select">
-                  <option value="select">-- seleccionar --</option>
-                  <option value="lab_indicated">LAB indicado en portal de seguimiento de trabajo</option>
-                  <option value="shipping_guide_number">Número de guía de envío de armazón</option>
-                  <option value="frame_bag_number">Número de bolsa de envío de armazón</option>
-                </select>
-              </div>
-            </div>
-          </div>
-
-          <div class="col-12 d-none" id="blk_satisfaccion_imagen">
-            <div class="mt-3 p-2 rounded-2 text-white" style="background:#198754;">
-              <strong>Satisfacción total de Imagen</strong>
-            </div>
-            <div class="row g-3 mt-1">
-              <div class="col-md-6">
-                <label>Tipo de pedido (*)</label>
-                <select name="x_order_type_imagen" class="form-select">
-                  <option value="select">-- seleccionar --</option>
-                  <option value="lab_indicated">LAB indicado en portal de seguimiento de trabajo</option>
-                  <option value="shipping_guide_number">Número de guía de envío de armazón</option>
-                  <option value="frame_bag_number">Número de bolsa de envío de armazón</option>
-                </select>
-              </div>
-            </div>
-          </div>
-
-          <div class="col-12 d-none" id="blk_correo_electronico">
-            <div class="mt-3 p-2 rounded-2 text-white" style="background:#198754;">
-              <strong>Correo electrónico</strong>
-            </div>
-            <div class="row g-3 mt-1">
-              <div class="col-md-4">
-                <label>Correo electronico de Sucursal (*)</label>
-                <input type="email" name="x_branch_email" class="form-control"/>
-              </div>
-              <div class="col-md-4">
-                <label>Tipo de Error, Envio o Recepción (*)</label>
-                <select name="x_email_issue_type" class="form-select">
-                  <option value="select">-- seleccionar --</option>
-                  <option value="tipo_error">Tipo de Error</option>
-                  <option value="envio">Envio</option>
-                  <option value="recepcion">Recepción</option>
-                </select>
-              </div>
-              <div class="col-md-4">
-                <label>Número de contacto (*)</label>
-                <input type="text" name="x_contact_number" class="form-control"/>
-              </div>
-            </div>
-          </div>
-
-          <div class="col-12 d-none" id="blk_equipo_computo">
-            <div class="mt-3 p-2 rounded-2 text-white" style="background:#198754;">
-              <strong>Equipo de cómputo</strong>
-            </div>
-
-            <div class="row g-3 mt-1">
-              <div class="col-md-6">
-                <label>Número de folio interno. (*)</label>
-                <input type="text" name="x_internal_folio_number" class="form-control"/>
-              </div>
-            </div>
-
-            <div class="mt-3">
-              <strong>Es obligatorio enviar a Centro de Servicios el equipo dañado.</strong>
-            </div>
-
-            <div class="row g-3 mt-1">
-              <div class="col-md-4">
-                <label>Tipo de equipo (*)</label>
-                <select name="x_equipment_type" class="form-select">
-                  <option value="select">-- seleccionar --</option>
-                  <option value="scanner">Scanner</option>
-                  <option value="impresora">Impresora</option>
-                  <option value="cpu">CPU</option>
-                  <option value="transfer">Transfer</option>
-                  <option value="no_break">No break</option>
-                  <option value="monitor">Monitor</option>
-                  <option value="otro">Otro</option>
-                </select>
-              </div>
-              <div class="col-md-4">
-                <label>Modelo y/o marca (*)</label>
-                <input type="text" name="x_model_or_brand" class="form-control"/>
-              </div>
-              <div class="col-md-4">
-                <label>Número de Serie (*)</label>
-                <input type="text" name="x_serial_number" class="form-control"/>
-              </div>
-
-              <div class="col-md-4">
-                <label>N° de activo fijo (*)</label>
-                <input type="text" name="x_fixed_asset_number" class="form-control"/>
-              </div>
-              <div class="col-md-4">
-                <label>N° de guía (*)</label>
-                <input type="text" name="x_shipping_guide" class="form-control"/>
-              </div>
-              <div class="col-md-4">
-                <label>Mensajería (*)</label>
-                <input type="text" name="x_courier" class="form-control"/>
-              </div>
-            </div>
-          </div>
-
-          <div class="col-12 d-none" id="blk_interredes">
-            <div class="mt-3 p-2 rounded-2 text-white" style="background:#198754;">
-              <strong>Interredes</strong>
-            </div>
-            <div class="row g-3 mt-1">
-              <div class="col-md-4">
-                <label>N° de comercio (*)</label>
-                <input type="text" name="x_store_number" class="form-control"/>
-              </div>
-              <div class="col-md-4">
-                <label>Usuario de Interredes (*)</label>
-                <input type="text" name="x_interredes_user" class="form-control"/>
-              </div>
-              <div class="col-md-4">
-                <label>Número de contacto (*)</label>
-                <input type="text" name="x_contact_number" class="form-control"/>
-              </div>
-            </div>
-          </div>
-
-          <div class="col-12 d-none" id="blk_problemas_impresora">
-            <div class="mt-3 p-2 rounded-2 text-white" style="background:#198754;">
-              <strong>Problemas con impresora</strong>
-            </div>
-            <div class="row g-3 mt-1">
-              <div class="col-md-3">
-                <label>Modelo de impresora (*)</label>
-                <input type="text" name="x_printer_model" class="form-control"/>
-              </div>
-              <div class="col-md-3">
-                <label>Número de contacto (*)</label>
-                <input type="text" name="x_contact_number" class="form-control"/>
-              </div>
-              <div class="col-md-3">
-                <label>Número de Serie (*)</label>
-                <input type="text" name="x_serial_number" class="form-control"/>
-              </div>
-              <div class="col-md-3">
-                <label>Nombre de la persona que nos contacto (*)</label>
-                <input type="text" name="x_contact_person_name" class="form-control"/>
-              </div>
-            </div>
-          </div>
-
-          <div class="col-12 d-none" id="blk_surtido_toner">
-            <div class="mt-3 p-2 rounded-2 text-white" style="background:#198754;">
-              <strong>Surtido de tóner</strong>
-            </div>
-
-            <div class="row g-3 mt-1">
-              <div class="col-md-4">
-                <label>Modelo de impresora (*)</label>
-                <input type="text" name="x_printer_model" class="form-control"/>
-              </div>
-              <div class="col-md-4">
-                <label>Número de contacto (*)</label>
-                <input type="text" name="x_contact_number" class="form-control"/>
-              </div>
-              <div class="col-md-4">
-                <label>Número de serie de la impresora (empieza ZD7) (*)</label>
-                <input type="text" name="x_serial_number" class="form-control"/>
-              </div>
-            </div>
-
-            <div class="alert alert-info mt-3">
-              <strong>Antes de levantar el ticket favor de leer el Manual para obtener el contador de impresiones y porcentaje de tóner de la impresora SAMSUNG M4020.</strong>
-              <br/>
-              Recuerda que si se tiene más del 15% de tóner no procederá el envío del mismo.
-            </div>
-
-            <div class="row g-3 mt-1">
-              <div class="col-md-6">
-                <label>¿Tóner por debajo de 15%? (*)</label>
-                <select name="x_toner_below_15" id="x_toner_below_15" class="form-select">
-                  <option value="">-- seleccionar --</option>
-                  <option value="si">Sí</option>
-                  <option value="no">No</option>
-                </select>
-              </div>
-            </div>
-
-            <div class="alert alert-danger mt-3 d-none" id="toner_no_warn">
-              <strong>El envío de tóner NO procede si el porcentaje es mayor al 15%.</strong>
-            </div>
-          </div>
-
-          <div class="col-12 d-none" id="blk_iluminacion">
-            <div class="mt-3 p-2 rounded-2 text-white" style="background:#198754;">
-              <strong>Iluminación</strong>
-            </div>
-            <div class="mt-3">
-              <strong>Adjuntar fotografía de lámparas</strong>
-            </div>
-          </div>
-
-          <div class="col-12 d-none" id="blk_sanitarios">
-            <div class="mt-3 p-2 rounded-2 text-white" style="background:#198754;">
-              <strong>Sanitarios</strong>
-            </div>
-            <div class="mt-3">
-              <strong>Adjuntar fotografía de sanitarios</strong>
-            </div>
-          </div>
-
-          <div class="col-12 d-none" id="blk_mobiliario">
-            <div class="mt-3 p-2 rounded-2 text-white" style="background:#198754;">
-              <strong>Mobiliario</strong>
-            </div>
-            <div class="mt-3">
-              <strong>Adjuntar fotografía de mobiliario</strong>
-            </div>
-          </div>
-
-          <div class="col-12 d-none" id="blk_aparadores">
-            <div class="mt-3 p-2 rounded-2 text-white" style="background:#198754;">
-              <strong>Aparadores</strong>
-            </div>
-            <div class="mt-3">
-              <strong>Adjuntar fotografía de aparadores</strong>
-            </div>
-          </div>
-
-          <div class="col-12 d-none" id="blk_fletes">
-            <div class="mt-3 p-2 rounded-2 text-white" style="background:#198754;">
-              <strong>Fletes</strong>
-            </div>
-            <div class="mt-3">
-              <strong>Adjuntar fotografía de fletes</strong>
-            </div>
-          </div>
-
-          <div class="col-12 d-none" id="blk_limpieza_profunda">
-            <div class="mt-3 p-2 rounded-2 text-white" style="background:#198754;">
-              <strong>Limpieza profunda</strong>
-            </div>
-
-            <div class="row g-3 mt-1">
-              <div class="col-md-6">
-                <label>Área a limpiar (*)</label>
-                <input type="text" name="x_cleaning_area" class="form-control"/>
-              </div>
-            </div>
-
-            <div class="mt-3">
-              <strong>Adjuntar fotografía de área a limpiar</strong>
-            </div>
-          </div>
-
-          <div class="col-12 mt-3">
-            <h3>Anexos</h3>
-            <input type="file" name="attachments" multiple="multiple" class="form-control"/>
-          </div>
-
-          <div class="col-12 mt-3 mb-3">
-            <button type="submit" class="btn btn-primary">Enviar Ticket</button>
-          </div>
-
-          <input type="hidden" id="csrf_token" name="csrf_token" t-att-value="request.csrf_token()"/>
-        </form>
-      </div>
-
-      <script type="text/javascript" src="/helpdesk_web_form/static/src/js/index.js"></script>
-    </t>
-  </template>
+            <script type="text/javascript" src="/helpdesk_web_form/static/src/js/index.js"></script>
+        </t>
+    </template>
 </odoo>
