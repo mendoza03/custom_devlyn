@@ -121,7 +121,7 @@
                             invisible="x_order_type != 'satisfaccion_imagen'">
 
                             <div class="o_form_sheet bg-success text-white p-2 rounded-2 mb-3">
-                                <strong>Satisfacción total de adaptación</strong>
+                                <strong>Satisfacción total de Imagen</strong>
                             </div>
 
                             <group col="6">
