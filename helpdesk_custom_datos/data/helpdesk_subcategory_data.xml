@@ -3,20 +3,22 @@
 
     <record id="helpdesk_ticket_subcategory_cas_coppel_select" model="helpdesk.ticket.subcategory">
         <field name="name">-- seleccionar --</field>
-        <field name="category_id" ref="helpdesk_ticket_category_cas_coppel"/>
+        <field name="category_id" ref="helpdesk_ticket_category_cas_coppel" />
         <field name="sequence">1</field>
         <field name="active">True</field>
     </record>
-    <record id="helpdesk_ticket_subcategory_cas_coppel_micas_sin_cortar" model="helpdesk.ticket.subcategory">
+    <record id="helpdesk_ticket_subcategory_cas_coppel_micas_sin_cortar"
+        model="helpdesk.ticket.subcategory">
         <field name="name">Micas sin cortar</field>
-        <field name="category_id" ref="helpdesk_ticket_category_cas_coppel"/>
+        <field name="category_id" ref="helpdesk_ticket_category_cas_coppel" />
         <field name="sequence">10</field>
         <field name="active">True</field>
         <field name="code">micas_sin_cortar</field>
     </record>
-    <record id="helpdesk_ticket_subcategory_cas_coppel_trabajos_atrasados" model="helpdesk.ticket.subcategory">
+    <record id="helpdesk_ticket_subcategory_cas_coppel_trabajos_atrasados"
+        model="helpdesk.ticket.subcategory">
         <field name="name">Trabajos atrasados</field>
-        <field name="category_id" ref="helpdesk_ticket_category_cas_coppel"/>
+        <field name="category_id" ref="helpdesk_ticket_category_cas_coppel" />
         <field name="sequence">20</field>
         <field name="active">True</field>
         <field name="code">trabajos_atrasados</field>
@@ -24,62 +26,70 @@
 
     <record id="helpdesk_ticket_subcategory_cas_devlyn_select" model="helpdesk.ticket.subcategory">
         <field name="name">-- seleccionar --</field>
-        <field name="category_id" ref="helpdesk_ticket_category_cas_devlyn"/>
+        <field name="category_id" ref="helpdesk_ticket_category_cas_devlyn" />
         <field name="sequence">1</field>
         <field name="active">True</field>
     </record>
-    <record id="helpdesk_ticket_subcategory_cas_devlyn_micas_sin_cortar" model="helpdesk.ticket.subcategory">
+    <record id="helpdesk_ticket_subcategory_cas_devlyn_micas_sin_cortar"
+        model="helpdesk.ticket.subcategory">
         <field name="name">Micas sin cortar</field>
-        <field name="category_id" ref="helpdesk_ticket_category_cas_devlyn"/>
+        <field name="category_id" ref="helpdesk_ticket_category_cas_devlyn" />
         <field name="sequence">10</field>
         <field name="active">True</field>
         <field name="code">micas_sin_cortar</field>
     </record>
-    <record id="helpdesk_ticket_subcategory_cas_devlyn_trabajos_atrasados" model="helpdesk.ticket.subcategory">
+    <record id="helpdesk_ticket_subcategory_cas_devlyn_trabajos_atrasados"
+        model="helpdesk.ticket.subcategory">
         <field name="name">Trabajos atrasados</field>
-        <field name="category_id" ref="helpdesk_ticket_category_cas_devlyn"/>
+        <field name="category_id" ref="helpdesk_ticket_category_cas_devlyn" />
         <field name="sequence">20</field>
         <field name="active">True</field>
         <field name="code">trabajos_atrasados</field>
     </record>
 
-    <record id="helpdesk_ticket_subcategory_cas_franquicia_select" model="helpdesk.ticket.subcategory">
+    <record id="helpdesk_ticket_subcategory_cas_franquicia_select"
+        model="helpdesk.ticket.subcategory">
         <field name="name">-- seleccionar --</field>
-        <field name="category_id" ref="helpdesk_ticket_category_cas_franquicia"/>
+        <field name="category_id" ref="helpdesk_ticket_category_cas_franquicia" />
         <field name="sequence">1</field>
         <field name="active">True</field>
     </record>
-    <record id="helpdesk_ticket_subcategory_cas_franquicia_micas_sin_cortar" model="helpdesk.ticket.subcategory">
+    <record id="helpdesk_ticket_subcategory_cas_franquicia_micas_sin_cortar"
+        model="helpdesk.ticket.subcategory">
         <field name="name">Micas sin cortar</field>
-        <field name="category_id" ref="helpdesk_ticket_category_cas_franquicia"/>
+        <field name="category_id" ref="helpdesk_ticket_category_cas_franquicia" />
         <field name="sequence">10</field>
         <field name="active">True</field>
         <field name="code">micas_sin_cortar</field>
     </record>
-    <record id="helpdesk_ticket_subcategory_cas_franquicia_trabajos_atrasados" model="helpdesk.ticket.subcategory">
+    <record id="helpdesk_ticket_subcategory_cas_franquicia_trabajos_atrasados"
+        model="helpdesk.ticket.subcategory">
         <field name="name">Trabajos atrasados</field>
-        <field name="category_id" ref="helpdesk_ticket_category_cas_franquicia"/>
+        <field name="category_id" ref="helpdesk_ticket_category_cas_franquicia" />
         <field name="sequence">20</field>
         <field name="active">True</field>
         <field name="code">trabajos_atrasados</field>
     </record>
 
-    <record id="helpdesk_ticket_subcategory_cas_hospitales_select" model="helpdesk.ticket.subcategory">
+    <record id="helpdesk_ticket_subcategory_cas_hospitales_select"
+        model="helpdesk.ticket.subcategory">
         <field name="name">-- seleccionar --</field>
-        <field name="category_id" ref="helpdesk_ticket_category_cas_hospitales"/>
+        <field name="category_id" ref="helpdesk_ticket_category_cas_hospitales" />
         <field name="sequence">1</field>
         <field name="active">True</field>
     </record>
-    <record id="helpdesk_ticket_subcategory_cas_hospitales_micas_sin_cortar" model="helpdesk.ticket.subcategory">
+    <record id="helpdesk_ticket_subcategory_cas_hospitales_micas_sin_cortar"
+        model="helpdesk.ticket.subcategory">
         <field name="name">Micas sin cortar</field>
-        <field name="category_id" ref="helpdesk_ticket_category_cas_hospitales"/>
+        <field name="category_id" ref="helpdesk_ticket_category_cas_hospitales" />
         <field name="sequence">10</field>
         <field name="active">True</field>
         <field name="code">micas_sin_cortar</field>
     </record>
-    <record id="helpdesk_ticket_subcategory_cas_hospitales_trabajos_atrasados" model="helpdesk.ticket.subcategory">
+    <record id="helpdesk_ticket_subcategory_cas_hospitales_trabajos_atrasados"
+        model="helpdesk.ticket.subcategory">
         <field name="name">Trabajos atrasados</field>
-        <field name="category_id" ref="helpdesk_ticket_category_cas_hospitales"/>
+        <field name="category_id" ref="helpdesk_ticket_category_cas_hospitales" />
         <field name="sequence">20</field>
         <field name="active">True</field>
         <field name="code">trabajos_atrasados</field>
@@ -87,20 +97,22 @@
 
     <record id="helpdesk_ticket_subcategory_cas_sears_select" model="helpdesk.ticket.subcategory">
         <field name="name">-- seleccionar --</field>
-        <field name="category_id" ref="helpdesk_ticket_category_cas_sears"/>
+        <field name="category_id" ref="helpdesk_ticket_category_cas_sears" />
         <field name="sequence">1</field>
         <field name="active">True</field>
     </record>
-    <record id="helpdesk_ticket_subcategory_cas_sears_micas_sin_cortar" model="helpdesk.ticket.subcategory">
+    <record id="helpdesk_ticket_subcategory_cas_sears_micas_sin_cortar"
+        model="helpdesk.ticket.subcategory">
         <field name="name">Micas sin cortar</field>
-        <field name="category_id" ref="helpdesk_ticket_category_cas_sears"/>
+        <field name="category_id" ref="helpdesk_ticket_category_cas_sears" />
         <field name="sequence">10</field>
         <field name="active">True</field>
         <field name="code">micas_sin_cortar</field>
     </record>
-    <record id="helpdesk_ticket_subcategory_cas_sears_trabajos_atrasados" model="helpdesk.ticket.subcategory">
+    <record id="helpdesk_ticket_subcategory_cas_sears_trabajos_atrasados"
+        model="helpdesk.ticket.subcategory">
         <field name="name">Trabajos atrasados</field>
-        <field name="category_id" ref="helpdesk_ticket_category_cas_sears"/>
+        <field name="category_id" ref="helpdesk_ticket_category_cas_sears" />
         <field name="sequence">20</field>
         <field name="active">True</field>
         <field name="code">trabajos_atrasados</field>
@@ -108,20 +120,22 @@
 
     <record id="helpdesk_ticket_subcategory_cas_chapur_select" model="helpdesk.ticket.subcategory">
         <field name="name">-- seleccionar --</field>
-        <field name="category_id" ref="helpdesk_ticket_category_cas_chapur"/>
+        <field name="category_id" ref="helpdesk_ticket_category_cas_chapur" />
         <field name="sequence">1</field>
         <field name="active">True</field>
     </record>
-    <record id="helpdesk_ticket_subcategory_cas_chapur_micas_sin_cortar" model="helpdesk.ticket.subcategory">
+    <record id="helpdesk_ticket_subcategory_cas_chapur_micas_sin_cortar"
+        model="helpdesk.ticket.subcategory">
         <field name="name">Micas sin cortar</field>
-        <field name="category_id" ref="helpdesk_ticket_category_cas_chapur"/>
+        <field name="category_id" ref="helpdesk_ticket_category_cas_chapur" />
         <field name="sequence">10</field>
         <field name="active">True</field>
         <field name="code">micas_sin_cortar</field>
     </record>
-    <record id="helpdesk_ticket_subcategory_cas_chapur_trabajos_atrasados" model="helpdesk.ticket.subcategory">
+    <record id="helpdesk_ticket_subcategory_cas_chapur_trabajos_atrasados"
+        model="helpdesk.ticket.subcategory">
         <field name="name">Trabajos atrasados</field>
-        <field name="category_id" ref="helpdesk_ticket_category_cas_chapur"/>
+        <field name="category_id" ref="helpdesk_ticket_category_cas_chapur" />
         <field name="sequence">20</field>
         <field name="active">True</field>
         <field name="code">trabajos_atrasados</field>
@@ -129,62 +143,70 @@
 
     <record id="helpdesk_ticket_subcategory_cas_cimaco_select" model="helpdesk.ticket.subcategory">
         <field name="name">-- seleccionar --</field>
-        <field name="category_id" ref="helpdesk_ticket_category_cas_cimaco"/>
+        <field name="category_id" ref="helpdesk_ticket_category_cas_cimaco" />
         <field name="sequence">1</field>
         <field name="active">True</field>
     </record>
-    <record id="helpdesk_ticket_subcategory_cas_cimaco_micas_sin_cortar" model="helpdesk.ticket.subcategory">
+    <record id="helpdesk_ticket_subcategory_cas_cimaco_micas_sin_cortar"
+        model="helpdesk.ticket.subcategory">
         <field name="name">Micas sin cortar</field>
-        <field name="category_id" ref="helpdesk_ticket_category_cas_cimaco"/>
+        <field name="category_id" ref="helpdesk_ticket_category_cas_cimaco" />
         <field name="sequence">10</field>
         <field name="active">True</field>
         <field name="code">micas_sin_cortar</field>
     </record>
-    <record id="helpdesk_ticket_subcategory_cas_cimaco_trabajos_atrasados" model="helpdesk.ticket.subcategory">
+    <record id="helpdesk_ticket_subcategory_cas_cimaco_trabajos_atrasados"
+        model="helpdesk.ticket.subcategory">
         <field name="name">Trabajos atrasados</field>
-        <field name="category_id" ref="helpdesk_ticket_category_cas_cimaco"/>
+        <field name="category_id" ref="helpdesk_ticket_category_cas_cimaco" />
         <field name="sequence">20</field>
         <field name="active">True</field>
         <field name="code">trabajos_atrasados</field>
     </record>
 
-    <record id="helpdesk_ticket_subcategory_cas_ecommerce_devlyn_select" model="helpdesk.ticket.subcategory">
+    <record id="helpdesk_ticket_subcategory_cas_ecommerce_devlyn_select"
+        model="helpdesk.ticket.subcategory">
         <field name="name">-- seleccionar --</field>
-        <field name="category_id" ref="helpdesk_ticket_category_cas_ecommerce_devlyn"/>
+        <field name="category_id" ref="helpdesk_ticket_category_cas_ecommerce_devlyn" />
         <field name="sequence">1</field>
         <field name="active">True</field>
     </record>
-    <record id="helpdesk_ticket_subcategory_cas_ecommerce_devlyn_micas_sin_cortar" model="helpdesk.ticket.subcategory">
+    <record id="helpdesk_ticket_subcategory_cas_ecommerce_devlyn_micas_sin_cortar"
+        model="helpdesk.ticket.subcategory">
         <field name="name">Micas sin cortar</field>
-        <field name="category_id" ref="helpdesk_ticket_category_cas_ecommerce_devlyn"/>
+        <field name="category_id" ref="helpdesk_ticket_category_cas_ecommerce_devlyn" />
         <field name="sequence">10</field>
         <field name="active">True</field>
         <field name="code">micas_sin_cortar</field>
     </record>
-    <record id="helpdesk_ticket_subcategory_cas_ecommerce_devlyn_trabajos_atrasados" model="helpdesk.ticket.subcategory">
+    <record id="helpdesk_ticket_subcategory_cas_ecommerce_devlyn_trabajos_atrasados"
+        model="helpdesk.ticket.subcategory">
         <field name="name">Trabajos atrasados</field>
-        <field name="category_id" ref="helpdesk_ticket_category_cas_ecommerce_devlyn"/>
+        <field name="category_id" ref="helpdesk_ticket_category_cas_ecommerce_devlyn" />
         <field name="sequence">20</field>
         <field name="active">True</field>
         <field name="code">trabajos_atrasados</field>
     </record>
 
-    <record id="helpdesk_ticket_subcategory_cas_mercado_libre_select" model="helpdesk.ticket.subcategory">
+    <record id="helpdesk_ticket_subcategory_cas_mercado_libre_select"
+        model="helpdesk.ticket.subcategory">
         <field name="name">-- seleccionar --</field>
-        <field name="category_id" ref="helpdesk_ticket_category_cas_mercado_libre"/>
+        <field name="category_id" ref="helpdesk_ticket_category_cas_mercado_libre" />
         <field name="sequence">1</field>
         <field name="active">True</field>
     </record>
-    <record id="helpdesk_ticket_subcategory_cas_mercado_libre_micas_sin_cortar" model="helpdesk.ticket.subcategory">
+    <record id="helpdesk_ticket_subcategory_cas_mercado_libre_micas_sin_cortar"
+        model="helpdesk.ticket.subcategory">
         <field name="name">Micas sin cortar</field>
-        <field name="category_id" ref="helpdesk_ticket_category_cas_mercado_libre"/>
+        <field name="category_id" ref="helpdesk_ticket_category_cas_mercado_libre" />
         <field name="sequence">10</field>
         <field name="active">True</field>
         <field name="code">micas_sin_cortar</field>
     </record>
-    <record id="helpdesk_ticket_subcategory_cas_mercado_libre_trabajos_atrasados" model="helpdesk.ticket.subcategory">
+    <record id="helpdesk_ticket_subcategory_cas_mercado_libre_trabajos_atrasados"
+        model="helpdesk.ticket.subcategory">
         <field name="name">Trabajos atrasados</field>
-        <field name="category_id" ref="helpdesk_ticket_category_cas_mercado_libre"/>
+        <field name="category_id" ref="helpdesk_ticket_category_cas_mercado_libre" />
         <field name="sequence">20</field>
         <field name="active">True</field>
         <field name="code">trabajos_atrasados</field>
@@ -192,20 +214,22 @@
 
     <record id="helpdesk_ticket_subcategory_cas_outlet_select" model="helpdesk.ticket.subcategory">
         <field name="name">-- seleccionar --</field>
-        <field name="category_id" ref="helpdesk_ticket_category_cas_outlet"/>
+        <field name="category_id" ref="helpdesk_ticket_category_cas_outlet" />
         <field name="sequence">1</field>
         <field name="active">True</field>
     </record>
-    <record id="helpdesk_ticket_subcategory_cas_outlet_micas_sin_cortar" model="helpdesk.ticket.subcategory">
+    <record id="helpdesk_ticket_subcategory_cas_outlet_micas_sin_cortar"
+        model="helpdesk.ticket.subcategory">
         <field name="name">Micas sin cortar</field>
-        <field name="category_id" ref="helpdesk_ticket_category_cas_outlet"/>
+        <field name="category_id" ref="helpdesk_ticket_category_cas_outlet" />
         <field name="sequence">10</field>
         <field name="active">True</field>
         <field name="code">micas_sin_cortar</field>
     </record>
-    <record id="helpdesk_ticket_subcategory_cas_outlet_trabajos_atrasados" model="helpdesk.ticket.subcategory">
+    <record id="helpdesk_ticket_subcategory_cas_outlet_trabajos_atrasados"
+        model="helpdesk.ticket.subcategory">
         <field name="name">Trabajos atrasados</field>
-        <field name="category_id" ref="helpdesk_ticket_category_cas_outlet"/>
+        <field name="category_id" ref="helpdesk_ticket_category_cas_outlet" />
         <field name="sequence">20</field>
         <field name="active">True</field>
         <field name="code">trabajos_atrasados</field>
@@ -213,23 +237,164 @@
 
     <record id="helpdesk_ticket_subcategory_cas_virtual_select" model="helpdesk.ticket.subcategory">
         <field name="name">-- seleccionar --</field>
-        <field name="category_id" ref="helpdesk_ticket_category_cas_virtual"/>
+        <field name="category_id" ref="helpdesk_ticket_category_cas_virtual" />
         <field name="sequence">1</field>
         <field name="active">True</field>
     </record>
-    <record id="helpdesk_ticket_subcategory_cas_virtual_micas_sin_cortar" model="helpdesk.ticket.subcategory">
+    <record id="helpdesk_ticket_subcategory_cas_virtual_micas_sin_cortar"
+        model="helpdesk.ticket.subcategory">
         <field name="name">Micas sin cortar</field>
-        <field name="category_id" ref="helpdesk_ticket_category_cas_virtual"/>
+        <field name="category_id" ref="helpdesk_ticket_category_cas_virtual" />
         <field name="sequence">10</field>
         <field name="active">True</field>
         <field name="code">micas_sin_cortar</field>
     </record>
-    <record id="helpdesk_ticket_subcategory_cas_virtual_trabajos_atrasados" model="helpdesk.ticket.subcategory">
+    <record id="helpdesk_ticket_subcategory_cas_virtual_trabajos_atrasados"
+        model="helpdesk.ticket.subcategory">
         <field name="name">Trabajos atrasados</field>
-        <field name="category_id" ref="helpdesk_ticket_category_cas_virtual"/>
+        <field name="category_id" ref="helpdesk_ticket_category_cas_virtual" />
         <field name="sequence">20</field>
         <field name="active">True</field>
         <field name="code">trabajos_atrasados</field>
     </record>
+    <record id="helpdesk_ticket_subcategory_soporte_tecnico_equipo_comunicaciones_select"
+        model="helpdesk.ticket.subcategory">
+        <field name="name">-- seleccionar --</field>
+        <field name="category_id"
+            ref="helpdesk_ticket_category_soporte_tecnico_equipo_comunicaciones" />
+        <field name="sequence">1</field>
+        <field name="active">True</field>
+        <field name="code">select</field>
+    </record>
 
+    <record
+        id="helpdesk_ticket_subcategory_soporte_tecnico_equipo_comunicaciones_correo_electronico"
+        model="helpdesk.ticket.subcategory">
+        <field name="name">Correo electrónico</field>
+        <field name="category_id"
+            ref="helpdesk_ticket_category_soporte_tecnico_equipo_comunicaciones" />
+        <field name="sequence">10</field>
+        <field name="active">True</field>
+        <field name="code">correo_electronico</field>
+    </record>
+
+    <record id="helpdesk_ticket_subcategory_soporte_tecnico_equipo_comunicaciones_equipo_computo"
+        model="helpdesk.ticket.subcategory">
+        <field name="name">Equipo de computo</field>
+        <field name="category_id"
+            ref="helpdesk_ticket_category_soporte_tecnico_equipo_comunicaciones" />
+        <field name="sequence">20</field>
+        <field name="active">True</field>
+        <field name="code">equipo_computo</field>
+    </record>
+
+    <record id="helpdesk_ticket_subcategory_soporte_tecnico_equipo_comunicaciones_interredes"
+        model="helpdesk.ticket.subcategory">
+        <field name="name">Interredes</field>
+        <field name="category_id"
+            ref="helpdesk_ticket_category_soporte_tecnico_equipo_comunicaciones" />
+        <field name="sequence">30</field>
+        <field name="active">True</field>
+        <field name="code">interredes</field>
+    </record>
+
+    <record id="helpdesk_ticket_subcategory_soporte_tecnico_equipo_comunicaciones_optica_digital"
+        model="helpdesk.ticket.subcategory">
+        <field name="name">Optica digital (checklist app sucursal)</field>
+        <field name="category_id"
+            ref="helpdesk_ticket_category_soporte_tecnico_equipo_comunicaciones" />
+        <field name="sequence">40</field>
+        <field name="active">True</field>
+        <field name="code">optica_digital</field>
+    </record>
+
+    <record id="helpdesk_ticket_subcategory_soporte_tecnico_impresoras_select"
+        model="helpdesk.ticket.subcategory">
+        <field name="name">-- seleccionar --</field>
+        <field name="category_id" ref="helpdesk_ticket_category_soporte_tecnico_impresoras" />
+        <field name="sequence">1</field>
+        <field name="active">True</field>
+        <field name="code">select</field>
+    </record>
+
+    <record id="helpdesk_ticket_subcategory_soporte_tecnico_impresoras_problemas_impresora"
+        model="helpdesk.ticket.subcategory">
+        <field name="name">Problemas con impresora</field>
+        <field name="category_id" ref="helpdesk_ticket_category_soporte_tecnico_impresoras" />
+        <field name="sequence">10</field>
+        <field name="active">True</field>
+        <field name="code">problemas_impresora</field>
+    </record>
+
+    <record id="helpdesk_ticket_subcategory_soporte_tecnico_impresoras_surtido_toner"
+        model="helpdesk.ticket.subcategory">
+        <field name="name">Surtido de tóner</field>
+        <field name="category_id" ref="helpdesk_ticket_category_soporte_tecnico_impresoras" />
+        <field name="sequence">20</field>
+        <field name="active">True</field>
+        <field name="code">surtido_toner</field>
+    </record>
+
+    <record id="helpdesk_ticket_subcategory_mantenimiento_optica_select"
+        model="helpdesk.ticket.subcategory">
+        <field name="name">-- seleccionar --</field>
+        <field name="category_id" ref="helpdesk_ticket_category_mantenimiento_optica" />
+        <field name="sequence">1</field>
+        <field name="active">True</field>
+        <field name="code">select</field>
+    </record>
+
+    <record id="helpdesk_ticket_subcategory_mantenimiento_optica_iluminacion"
+        model="helpdesk.ticket.subcategory">
+        <field name="name">Iluminación</field>
+        <field name="category_id" ref="helpdesk_ticket_category_mantenimiento_optica" />
+        <field name="sequence">10</field>
+        <field name="active">True</field>
+        <field name="code">iluminacion</field>
+    </record>
+
+    <record id="helpdesk_ticket_subcategory_mantenimiento_optica_sanitarios"
+        model="helpdesk.ticket.subcategory">
+        <field name="name">Sanitarios</field>
+        <field name="category_id" ref="helpdesk_ticket_category_mantenimiento_optica" />
+        <field name="sequence">20</field>
+        <field name="active">True</field>
+        <field name="code">sanitarios</field>
+    </record>
+
+    <record id="helpdesk_ticket_subcategory_mantenimiento_optica_mobiliario"
+        model="helpdesk.ticket.subcategory">
+        <field name="name">Mobiliario</field>
+        <field name="category_id" ref="helpdesk_ticket_category_mantenimiento_optica" />
+        <field name="sequence">30</field>
+        <field name="active">True</field>
+        <field name="code">mobiliario</field>
+    </record>
+
+    <record id="helpdesk_ticket_subcategory_mantenimiento_optica_aparadores"
+        model="helpdesk.ticket.subcategory">
+        <field name="name">Aparadores</field>
+        <field name="category_id" ref="helpdesk_ticket_category_mantenimiento_optica" />
+        <field name="sequence">40</field>
+        <field name="active">True</field>
+        <field name="code">aparadores</field>
+    </record>
+
+    <record id="helpdesk_ticket_subcategory_mantenimiento_optica_limpieza_profunda"
+        model="helpdesk.ticket.subcategory">
+        <field name="name">Limpieza profunda</field>
+        <field name="category_id" ref="helpdesk_ticket_category_mantenimiento_optica" />
+        <field name="sequence">50</field>
+        <field name="active">True</field>
+        <field name="code">limpieza_profunda</field>
+    </record>
+
+    <record id="helpdesk_ticket_subcategory_mantenimiento_optica_fletes"
+        model="helpdesk.ticket.subcategory">
+        <field name="name">Fletes</field>
+        <field name="category_id" ref="helpdesk_ticket_category_mantenimiento_optica" />
+        <field name="sequence">60</field>
+        <field name="active">True</field>
+        <field name="code">fletes</field>
+    </record>
 </odoo>

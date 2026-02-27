@@ -128,6 +128,108 @@
                                 <field name="x_order_type_adaptation" required="1" />
                             </group>
                         </div>
+
+                        <div class="mt16" invisible="x_subcategory_code != 'correo_electronico'">
+                            <div class="o_form_sheet bg-success text-white p-2 rounded-2 mb-3">
+                                <strong>Correo electrónico</strong>
+                            </div>
+
+                            <group col="6">
+                                <field name="x_branch_email" required="1" />
+                                <field name="x_email_issue_type" required="1" />
+                                <field name="x_contact_number" required="1" />
+                            </group>
+                        </div>
+                        <div class="mt16" invisible="x_subcategory_code != 'equipo_computo'">
+                            <div class="o_form_sheet bg-success text-white p-2 rounded-2 mb-3">
+                                <strong>Equipo de cómputo</strong>
+                            </div>
+
+                            <group col="6">
+                                <field name="x_internal_folio_number" required="1" />
+                            </group>
+
+                            <div class="mt8">
+                                <strong>Es obligatorio enviar a Centro de Servicios el equipo
+                                    dañado.</strong>
+                            </div>
+
+                            <group col="6">
+                                <field name="x_equipment_type" required="1" />
+                                <field name="x_model_or_brand" required="1" />
+                                <field name="x_serial_number" required="1" />
+                                <field name="x_fixed_asset_number" required="1" />
+
+                                <field name="x_shipping_guide" required="1" />
+                                <field name="x_courier" required="1" />
+                            </group>
+                        </div>
+                        <div class="mt16" invisible="x_subcategory_code != 'interredes'">
+                            <div class="o_form_sheet bg-success text-white p-2 rounded-2 mb-3">
+                                <strong>Interredes</strong>
+                            </div>
+
+                            <group col="6">
+                                <field name="x_store_number" required="1" />
+                                <field name="x_interredes_user" required="1" />
+                                <field name="x_contact_number" required="1" />
+                            </group>
+                        </div>
+
+                        <div class="mt16" invisible="x_subcategory_code != 'problemas_impresora'">
+
+                            <div class="o_form_sheet bg-success text-white p-2 rounded-2 mb-3">
+                                <strong>Problemas con impresora</strong>
+                            </div>
+
+                            <group col="6">
+                                <field name="x_printer_model" required="1" />
+                                <field name="x_contact_number" required="1" />
+                                <field name="x_serial_number" required="1" />
+                                <field name="x_contact_person_name" required="1" />
+                            </group>
+
+                        </div>
+                        <div class="mt16" invisible="x_subcategory_code != 'surtido_toner'">
+
+                            <div class="o_form_sheet bg-success text-white p-2 rounded-2 mb-3">
+                                <strong>Surtido de tóner</strong>
+                            </div>
+
+                            <group col="6">
+                                <field name="x_printer_model" required="1" />
+                                <field name="x_contact_number" required="1" />
+                                <field name="x_serial_number"
+                                    string="Número de serie de la impresora (empieza ZD7)"
+                                    required="1" />
+                            </group>
+
+                            <div class="mt8 o_alert o_alert_info">
+                                <strong>
+                                    Antes de levantar el ticket favor de leer el Manual para obtener
+                                el
+                                    contador de impresiones y porcentaje de tóner de la impresora
+                                SAMSUNG M4020.
+                                </strong>
+        <br />
+                                Recuerda que si se tiene más del 15% de tóner no procederá el envío
+                                del mismo. </div>
+
+                            <group col="6" class="mt8">
+                                <field name="x_toner_below_15" required="1" />
+                            </group>
+
+                            <div class="mt8"
+                                invisible="x_toner_below_15 != 'no'">
+                                <div class="o_alert o_alert_danger">
+                                    <strong>
+                                        El envío de tóner NO procede si el porcentaje es mayor al
+                                        15%.
+                                    </strong>
+                                </div>
+                            </div>
+
+                        </div>
                         <div class="mt16">
                             <h3>Anexos</h3>
 

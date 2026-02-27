@@ -86,3 +86,55 @@ class HelpdeskTicket(models.Model):
         default="select",
         copy=False,
     )
+
+    x_branch_email = fields.Char(string="Correo electronico de Sucursal", copy=False)
+    x_email_issue_type = fields.Char(string="Tipo de Error, Envio o Recepción",copy=False)
+    x_contact_number = fields.Char(string="Número de contacto", copy=False)
+
+    x_internal_folio_number = fields.Char(string="Número de folio interno.", copy=False)
+
+    x_equipment_type = fields.Selection(
+        [
+            ("select", "-- seleccionar --"),
+            ("scanner", "Scanner"),
+            ("impresora", "Impresora"),
+            ("cpu", "CPU"),
+            ("transfer", "Transfer"),
+            ("no_break", "No break"),
+            ("monitor", "Monitor"),
+            ("otro", "Otro"),
+        ],
+        string="Tipo de equipo",
+        default="select",
+        copy=False,
+    )
+
+    x_model_or_brand = fields.Char(string="Modelo y/o marca", copy=False)
+    x_serial_number = fields.Char(string="Número de Serie", copy=False)
+    x_fixed_asset_number = fields.Char(string="N° de activo fijo", copy=False)
+    x_shipping_guide = fields.Char(string="N° de guía", copy=False)
+    x_courier = fields.Char(string="Mensajería", copy=False)
+
+    x_store_number = fields.Char(string="N° de comercio", copy=False)
+    x_interredes_user = fields.Char(string="Usuario de Interredes", copy=False)
+
+    x_printer_model = fields.Char(
+        string="Modelo de impresora",
+        copy=False,
+    )
+
+    x_contact_person_name = fields.Char(
+        string="Nombre de la persona que nos contactó",
+        copy=False,
+    )
+
+    x_toner_below_15 = fields.Selection(
+        [
+            ("select", "-- seleccionar --"),
+            ("si", "Sí"),
+            ("no", "No"),
+        ],
+        string="¿El tóner es menor o igual al 15%?",
+        default="select",
+        copy=False,
+    )
