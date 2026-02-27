@@ -230,6 +230,63 @@
                             </div>
 
                         </div>
+                        <div class="mt16" invisible="x_subcategory_code != 'iluminacion'">
+                            <div class="o_form_sheet bg-success text-white p-2 rounded-2 mb-3">
+                                <strong>Iluminación</strong>
+                            </div>
+                            <div class="mt8">
+                                <strong>Adjuntar fotografía de lámparas</strong>
+                            </div>
+                        </div>
+
+                        <div class="mt16" invisible="x_subcategory_code != 'sanitarios'">
+                            <div class="o_form_sheet bg-success text-white p-2 rounded-2 mb-3">
+                                <strong>Sanitarios</strong>
+                            </div>
+                            <div class="mt8">
+                                <strong>Adjuntar fotografía de sanitarios</strong>
+                            </div>
+                        </div>
+
+                        <div class="mt16" invisible="x_subcategory_code != 'mobiliario'">
+                            <div class="o_form_sheet bg-success text-white p-2 rounded-2 mb-3">
+                                <strong>Mobiliario</strong>
+                            </div>
+                            <div class="mt8">
+                                <strong>Adjuntar fotografía de mobiliario</strong>
+                            </div>
+                        </div>
+
+                        <div class="mt16" invisible="x_subcategory_code != 'aparadores'">
+                            <div class="o_form_sheet bg-success text-white p-2 rounded-2 mb-3">
+                                <strong>Aparadores</strong>
+                            </div>
+                            <div class="mt8">
+                                <strong>Adjuntar fotografía de aparadores</strong>
+                            </div>
+                        </div>
+
+                        <div class="mt16" invisible="x_subcategory_code != 'fletes'">
+                            <div class="o_form_sheet bg-success text-white p-2 rounded-2 mb-3">
+                                <strong>Fletes</strong>
+                            </div>
+                            <div class="mt8">
+                                <strong>Adjuntar fotografía de fletes</strong>
+                            </div>
+                        </div>
+                        <div class="mt16" invisible="x_subcategory_code != 'limpieza_profunda'">
+                            <div class="o_form_sheet bg-success text-white p-2 rounded-2 mb-3">
+                                <strong>Limpieza profunda</strong>
+                            </div>
+
+                            <group col="6">
+                                <field name="x_cleaning_area" required="1" />
+                            </group>
+
+                            <div class="mt8">
+                                <strong>Adjuntar fotografía de área a limpiar</strong>
+                            </div>
+                        </div>
                         <div class="mt16">
                             <h3>Anexos</h3>
 

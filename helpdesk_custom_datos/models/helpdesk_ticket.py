@@ -138,3 +138,16 @@ class HelpdeskTicket(models.Model):
         default="select",
         copy=False,
     )
+
+    x_cleaning_area = fields.Selection(
+        [
+            ("select", "-- seleccionar --"),
+            ("aparadores", "Aparadores"),
+            ("piso", "Piso"),
+            ("bano", "Baño"),
+            ("anuncios", "Anuncios"),
+        ],
+        string="Área",
+        default="select",
+        copy=False,
+    )
