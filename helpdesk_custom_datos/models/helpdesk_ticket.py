@@ -60,4 +60,27 @@ class HelpdeskTicket(models.Model):
         copy=False,
     )
     x_authorized_by = fields.Char(string="Persona que Autoriza", copy=False)
-    x_lab_indicated = fields.Char(string="LAB indicado en portal de seguimiento de trabajos", copy=False)
+    x_order_type_adaptation = fields.Selection(
+        [
+            ("select", "-- seleccionar --"),
+            ("lab_indicated", "LAB indicado en portal de seguimiento de trabajo"),
+            ("shipping_guide_number", "Número de guía de envío de armazón"),
+            ("frame_bag_number", "Número de bolsa de envío de armazón"),
+        ],
+        string="Tipo de pedido",
+        default="select",
+        copy=False,
+    )
+    x_original_order_number = fields.Char(string="N° de pedido original", copy=False)
+    x_job_type = fields.Char(string="Tipo de Trabajo", copy=False)
+    x_order_type_imagen = fields.Selection(
+        [
+            ("select", "-- seleccionar --"),
+            ("lab_indicated", "LAB indicado en portal de seguimiento de trabajo"),
+            ("shipping_guide_number", "Número de guía de envío de armazón"),
+            ("frame_bag_number", "Número de bolsa de envío de armazón"),
+        ],
+        string="Tipo de pedido",
+        default="select",
+        copy=False,
+    )

@@ -23,6 +23,8 @@
         <field name="category_id" ref="helpdesk_ticket_category_cas_coppel"/>
         <field name="sequence">20</field>
         <field name="active">True</field>
+        <field name="code">trabajos_atrasados</field>
+
     </record>
 
 </odoo>
