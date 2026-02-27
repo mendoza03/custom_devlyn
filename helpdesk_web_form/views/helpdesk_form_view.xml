@@ -1,0 +1,68 @@
+<odoo>
+    <template id="helpdesk_form_template">
+        <t t-call="website.layout">
+            <div class="container mt-5">
+
+                <h3>Datos generales</h3>
+
+                <form action="/helpdesk/submit" method="post" enctype="multipart/form-data" class="row g-3">
+
+                    <!-- Descripción General -->
+                    <div class="col-12">
+                        <label>Descripción General (*)</label>
+                        <input type="text" name="x_general_description" class="form-control" required="1"/>
+                    </div>
+
+                    <!-- Sección -->
+                    <div class="col-12">
+                        <label>Sección (*)</label>
+                        <select name="x_section_id" id="section" class="form-select">
+                            <option value="">-- seleccionar --</option>
+                            <t t-foreach="sections" t-as="s">
+                                <option t-att-value="s.id"><t t-esc="s.name"/></option>
+                            </t>
+                        </select>
+                    </div>
+
+                    <!-- Categoría -->
+                    <div class="col-md-6">
+                        <label>Categoría (*)</label>
+                        <select name="x_category_id" id="category" class="form-select">
+
+                        </select>
+                    </div>
+
+                    <!-- Subcategoría -->
+                    <div class="col-md-6">
+                        <label>Subcategoría (*)</label>
+                        <select name="x_subcategory_id" id="subcategory" class="form-select">
+
+                        </select>
+                    </div>
+
+                    <!-- Descripción Detallada -->
+                    <div class="col-12">
+                        <label>Descripción Detallada</label>
+                        <textarea name="x_detailed_description" class="form-control o_wysiwyg"/>
+                    </div>
+
+                    <!-- Adjuntos -->
+                    <div class="col-12">
+                        <label>Adjuntar archivos</label>
+                        <input type="file" name="attachments" multiple="multiple" class="form-control"/>
+                    </div>
+
+                    <div class="col-12 mt-3 mb-3">
+                        <button type="submit" class="btn btn-primary">
+                            Enviar Ticket
+                        </button>
+                    </div>
+
+                    <input type="hidden" name="csrf_token" t-att-value="request.csrf_token()"/>
+
+                </form>
+            </div>
+                        <script type="text/javascript" src="/helpdesk_web_form/static/src/js/index.js"></script>
+        </t>
+    </template>
+</odoo>
