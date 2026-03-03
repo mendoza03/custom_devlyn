@@ -151,3 +151,32 @@ class HelpdeskTicket(models.Model):
         default="select",
         copy=False,
     )
+
+    x_fact_busco_portal = fields.Selection(
+        [("select", "-- seleccionar --"), ("si", "Si"), ("no", "No")],
+        default="select",
+        copy=False,
+    )
+    x_fact_encontraste = fields.Selection(
+        [("select", "-- seleccionar --"), ("si", "Si"), ("no", "No")],
+        default="select",
+        copy=False,
+    )
+    x_fact_pdf_xml_incorrectos = fields.Selection(
+        [("select", "-- seleccionar --"), ("si", "Si"), ("no", "No")],
+        default="select",
+        copy=False,
+    )
+
+
+    x_is_facturacion_reenvio = fields.Boolean(compute="_compute_x_is_facturacion_reenvio", store=False)
+
+    @api.depends("x_category_id")
+    def _compute_x_is_facturacion_reenvio(self):
+        target = self.env.ref(
+            "helpdesk_custom_datos.helpdesk_ticket_category_facturacion_reenvio_pdf_xml",
+            raise_if_not_found=False,
+        )
+        target_id = target.id if target else False
+        for rec in self:
+            rec.x_is_facturacion_reenvio = bool(target_id and rec.x_category_id.id == target_id)

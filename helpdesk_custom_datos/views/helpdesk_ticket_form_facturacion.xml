@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+
+    <record id="helpdesk_ticket_view_form_facturacion_reenvio_modal" model="ir.ui.view">
+        <field name="name">helpdesk.ticket.form.facturacion.reenvio.modal</field>
+        <field name="model">helpdesk.ticket</field>
+        <field name="arch" type="xml">
+            <form string="No he recibido archivos PDF y XML de una factura realizada en portal">
+                <sheet>
+                    <group col="6">
+                        <field name="x_fact_busco_portal"
+                            string="Buscaste la factura en el portal? (*)" required="1" />
+                        <field name="x_fact_encontraste" string="La encontraste? (*)" required="1" />
+                        <field name="x_fact_pdf_xml_incorrectos"
+                            string="Recibiste el PDF y XML con datos incorrectos? (*)" required="1" />
+                    </group>
+
+                    <div class="mt16">
+                        <p>
+                            Para poder elaborar una nueva factura, el cliente deberá ingresar a su
+                            buzón tributario para aceptar la cancelación de la factura incorrecta.
+                        </p>
+                        <p>
+                            El equipo de facturación podrá realizar las correcciones solicitadas en
+                            el SOS hasta que el cliente acepte la cancelación.
+                        </p>
+                        <p>
+                            ¡La correcta categorización de tu solicitud nos permite ser más ágiles y
+                            oportunos, proporcionándote el mejor servicio!
+                        </p>
+                    </div>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+
+    <record id="action_helpdesk_ticket_facturacion_reenvio_modal" model="ir.actions.act_window">
+        <field name="name">Facturación - Reenvío PDF/XML</field>
+        <field name="res_model">helpdesk.ticket</field>
+        <field name="view_mode">form</field>
+        <field name="view_id" ref="helpdesk_ticket_view_form_facturacion_reenvio_modal" />
+        <field name="target">new</field>
+    </record>
+
+</odoo>

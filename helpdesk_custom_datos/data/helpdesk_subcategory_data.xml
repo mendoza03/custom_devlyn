@@ -397,4 +397,116 @@
         <field name="active">True</field>
         <field name="code">fletes</field>
     </record>
+
+    <record id="helpdesk_ticket_subcategory_facturacion_reenvio_select"
+        model="helpdesk.ticket.subcategory">
+        <field name="name">-- seleccionar --</field>
+        <field name="category_id"
+            ref="helpdesk_ticket_category_facturacion_reenvio_pdf_xml" />
+        <field name="sequence">1</field>
+        <field name="active">True</field>
+        <field name="code">select</field>
+    </record>
+
+    <record id="helpdesk_ticket_subcategory_facturacion_no_recibidos"
+        model="helpdesk.ticket.subcategory">
+        <field name="name">
+            No se recibieron archivos de facturación (xml y pdf)
+        </field>
+        <field name="category_id"
+            ref="helpdesk_ticket_category_facturacion_reenvio_pdf_xml" />
+        <field name="sequence">10</field>
+        <field name="active">True</field>
+        <field name="code">no_recibidos_facturacion</field>
+    </record>
+
+    <record id="helpdesk_ticket_subcategory_facturacion_refacturacion_select"
+        model="helpdesk.ticket.subcategory">
+        <field name="name">-- seleccionar --</field>
+        <field name="category_id" ref="helpdesk_ticket_category_facturacion_refacturacion" />
+        <field name="sequence">1</field>
+        <field name="active">True</field>
+        <field name="code">select</field>
+    </record>
+
+    <record id="helpdesk_ticket_subcategory_facturacion_refacturacion_error_datos_fiscales"
+        model="helpdesk.ticket.subcategory">
+        <field name="name">Error en captura de datos fiscales</field>
+        <field name="category_id" ref="helpdesk_ticket_category_facturacion_refacturacion" />
+        <field name="sequence">10</field>
+        <field name="active">True</field>
+        <field name="code">error_captura_datos_fiscales</field>
+    </record>
+
+    <record id="helpdesk_ticket_subcategory_facturacion_refacturacion_error_uso_cfdi"
+        model="helpdesk.ticket.subcategory">
+        <field name="name">Error en captura de uso de CFDI</field>
+        <field name="category_id" ref="helpdesk_ticket_category_facturacion_refacturacion" />
+        <field name="sequence">20</field>
+        <field name="active">True</field>
+        <field name="code">error_captura_uso_cfdi</field>
+    </record>
+
+    <record id="helpdesk_ticket_subcategory_facturacion_refacturacion_error_forma_pago"
+        model="helpdesk.ticket.subcategory">
+        <field name="name">Error en captura de forma de pago</field>
+        <field name="category_id" ref="helpdesk_ticket_category_facturacion_refacturacion" />
+        <field name="sequence">30</field>
+        <field name="active">True</field>
+        <field name="code">error_captura_forma_pago</field>
+    </record>
+
+    <record id="helpdesk_ticket_subcategory_facturacion_refacturacion_unificar_pedidos"
+        model="helpdesk.ticket.subcategory">
+        <field name="name">Unificar pedidos (dos pedidos, una factura)</field>
+        <field name="category_id" ref="helpdesk_ticket_category_facturacion_refacturacion" />
+        <field name="sequence">40</field>
+        <field name="active">True</field>
+        <field name="code">unificar_pedidos</field>
+    </record>
+
+    <record id="helpdesk_ticket_subcategory_facturacion_refacturacion_dividir_pedido"
+        model="helpdesk.ticket.subcategory">
+        <field name="name">Dividir pedido (un pedido, dos facturas)</field>
+        <field name="category_id" ref="helpdesk_ticket_category_facturacion_refacturacion" />
+        <field name="sequence">50</field>
+        <field name="active">True</field>
+        <field name="code">dividir_pedido</field>
+    </record>
+
+    <record id="helpdesk_ticket_subcategory_facturacion_refacturacion_unificar_conceptos"
+        model="helpdesk.ticket.subcategory">
+        <field name="name">Unificar conceptos (solo aplica armazón, micas y tratamientos)</field>
+        <field name="category_id" ref="helpdesk_ticket_category_facturacion_refacturacion" />
+        <field name="sequence">60</field>
+        <field name="active">True</field>
+        <field name="code">unificar_conceptos</field>
+    </record>
+
+    <record id="helpdesk_ticket_subcategory_facturacion_refacturacion_diferencia_convenio_credito"
+        model="helpdesk.ticket.subcategory">
+        <field name="name">Diferencia por convenio de crédito</field>
+        <field name="category_id" ref="helpdesk_ticket_category_facturacion_refacturacion" />
+        <field name="sequence">70</field>
+        <field name="active">True</field>
+        <field name="code">diferencia_convenio_credito</field>
+    </record>
+
+    <record id="helpdesk_ticket_subcategory_facturacion_refacturacion_facturar_monto_especifico"
+        model="helpdesk.ticket.subcategory">
+        <field name="name">Facturar por monto específico (no puede ser mayor al monto de la venta)</field>
+        <field name="category_id" ref="helpdesk_ticket_category_facturacion_refacturacion" />
+        <field name="sequence">80</field>
+        <field name="active">True</field>
+        <field name="code">facturar_monto_especifico</field>
+    </record>
+
+    <record id="helpdesk_ticket_subcategory_facturacion_refacturacion_periodo_facturacion_portal"
+        model="helpdesk.ticket.subcategory">
+        <field name="name">Por periodo de facturación en portal</field>
+        <field name="category_id" ref="helpdesk_ticket_category_facturacion_refacturacion" />
+        <field name="sequence">90</field>
+        <field name="active">True</field>
+        <field name="code">periodo_facturacion_portal</field>
+    </record>
 </odoo>

@@ -40,7 +40,8 @@
                                 <field name="x_category_id" required="1" />
                             </group>
                             <group>
-                                <field name="x_subcategory_id" required="1" />
+                                <field name="x_subcategory_id"
+                                    attrs="{'required': [('x_is_facturacion_reenvio','=',False)]}" />
                                 <field name="x_subcategory_code" invisible="1" />
                             </group>
                         </group>
@@ -304,5 +305,6 @@
 
         </field>
     </record>
+
 
 </odoo>
