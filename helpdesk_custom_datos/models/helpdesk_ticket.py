@@ -171,6 +171,112 @@ class HelpdeskTicket(models.Model):
 
     x_is_facturacion_reenvio = fields.Boolean(compute="_compute_x_is_facturacion_reenvio", store=False)
 
+    x_refac_order_number = fields.Char(string="Pedido (*)", copy=False)
+    x_refac_sale_order = fields.Char(string="Orden de Venta (*)", copy=False)
+    x_refac_legal_name = fields.Char(string="Nombre o denominación social (*)", copy=False)
+    x_refac_rfc = fields.Char(string="RFC (*)", copy=False)
+
+    x_refac_sat_screen_attached = fields.Selection(
+        [
+            ("select", "-- seleccionar --"),
+            ("si", "Sí"),
+            ("no", "No"),
+        ],
+        string="Dar click una vez que se adjunte la pantalla",
+        default="select",
+        copy=False,
+    )
+
+    x_refac_payment_method = fields.Selection(
+        [
+            ("select", "-- seleccionar --"),
+            ("efectivo", "Efectivo"),
+            ("tarjeta_debito", "Tarjeta de Débito"),
+            ("tarjeta_credito", "Tarjeta de crédito"),
+            ("cheque_nominativo", "Cheque nominativo"),
+            ("monedero_electronico", "Monedero electrónico"),
+        ],
+        string="Forma de Pago (*)",
+        default="select",
+        copy=False,
+    )
+
+    x_refac_person_type = fields.Selection(
+        [
+            ("select", "-- seleccionar --"),
+            ("fisica", "Fisica"),
+            ("moral", "Moral"),
+        ],
+        string="Tipo persona (*)",
+        default="select",
+        copy=False,
+    )
+
+    x_refac_cfdi_use = fields.Selection(
+        [
+            ("select", "-- seleccionar --"),
+            ("g01", "G01 Adquisición de mercancías."),
+            ("g02", "G02 Devoluciones, descuentos o bonificaciones."),
+            ("g03", "G03 Gastos en general."),
+            ("i01", "I01 Construcciones."),
+            ("i02", "I02 Mobiliario y equipo de oficina por inversiones."),
+            ("i03", "I03 Equipo de transporte."),
+            ("i04", "I04 Equipo de computo y accesorios."),
+            ("i05", "I05 Dados, troqueles, moldes, matrices y herramental."),
+            ("i06", "I06 Comunicaciones telefónicas."),
+            ("i07", "I07 Comunicaciones satelitales."),
+            ("i08", "I08 Otra maquinaria y equipo."),
+            ("d01", "D01 Honorarios médicos, dentales y gastos hospitalarios."),
+            ("d02", "D02 Gastos médicos por incapacidad o discapacidad."),
+            ("d03", "D03 Gastos funerales."),
+            ("d04", "D04 Donativos."),
+            ("d05", "D05 Intereses reales efectivamente pagados por créditos hipotecarios (casa habitación)."),
+            ("d06", "D06 Aportaciones voluntarias al SAR."),
+            ("d07", "D07 Primas por seguros de gastos médicos."),
+            ("d08", "D08 Gastos de transportación escolar obligatoria."),
+            ("d09", "D09 Depósitos en cuentas para el ahorro, primas que tengan como base planes de pensiones."),
+            ("d10", "D10 Pagos por servicios educativos (colegiaturas)."),
+            ("s01", "S01 Sin efectos fiscales."),
+            ("cp01", "CP01 Pagos"),
+            ("cn01", "CN01 Nómina"),
+        ],
+        string="Uso CFDI (*)",
+        default="select",
+        copy=False,
+    )
+
+    x_refac_fiscal_regime = fields.Selection(
+        [
+            ("select", "-- seleccionar --"),
+            ("601", "601 General de Ley Personas Morales"),
+            ("603", "603 Personas Morales con Fines no Lucrativos"),
+            ("606", "606 Arrendamiento"),
+            ("612", "612 Personas Físicas con Actividades Empresariales y Profesionales"),
+            ("620", "620 Sociedades Cooperativas de Producción que optan por Diferir sus Ingresos"),
+            ("621", "621 Incorporación Fiscal"),
+            ("622", "622 Actividades Agrícolas, Ganaderas, Silvícolas y Pesqueras"),
+            ("623", "623 Opcional para Grupos de Sociedades"),
+            ("624", "624 Coordinados"),
+            ("625", "625 Régimen de las Actividades Empresariales con ingresos a través de Plataformas Tecnológicas"),
+            ("626", "626 Régimen Simplificado de Confianza (RESICO)"),
+        ],
+        string="Régimen Fiscal (*)",
+        default="select",
+        copy=False,
+    )
+
+    x_refac_fiscal_address = fields.Selection(
+        [
+            ("select", "-- seleccionar --"),
+            ("solo_cp", "Solo CP"),
+        ],
+        string="Dirección fiscal (*)",
+        default="select",
+        copy=False,
+    )
+
+    x_refac_cp = fields.Char(string="CP (*)", copy=False)
+
     @api.depends("x_category_id")
     def _compute_x_is_facturacion_reenvio(self):
         target = self.env.ref(

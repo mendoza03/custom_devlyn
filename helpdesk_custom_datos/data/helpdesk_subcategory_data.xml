@@ -509,4 +509,984 @@
         <field name="active">True</field>
         <field name="code">periodo_facturacion_portal</field>
     </record>
+    <record id="helpdesk_ticket_subcategory_devoluciones_reales_tarjeta_credito_debito_select"
+        model="helpdesk.ticket.subcategory">
+        <field name="name">-- seleccionar --</field>
+        <field name="category_id"
+            ref="helpdesk_ticket_category_devoluciones_reales_tarjeta_credito_debito" />
+        <field name="sequence">1</field>
+        <field name="active">True</field>
+        <field name="code">select</field>
+    </record>
+
+    <record
+        id="helpdesk_ticket_subcategory_devoluciones_reales_tarjeta_credito_debito_cargos_duplicados"
+        model="helpdesk.ticket.subcategory">
+        <field name="name">Cargos duplicados</field>
+        <field name="category_id"
+            ref="helpdesk_ticket_category_devoluciones_reales_tarjeta_credito_debito" />
+        <field name="sequence">10</field>
+        <field name="active">True</field>
+        <field name="code">cargos_duplicados</field>
+    </record>
+
+    <record id="helpdesk_ticket_subcategory_devoluciones_reales_tarjeta_credito_debito_error_examen"
+        model="helpdesk.ticket.subcategory">
+        <field name="name">Error de examen</field>
+        <field name="category_id"
+            ref="helpdesk_ticket_category_devoluciones_reales_tarjeta_credito_debito" />
+        <field name="sequence">20</field>
+        <field name="active">True</field>
+        <field name="code">error_examen</field>
+    </record>
+
+    <record
+        id="helpdesk_ticket_subcategory_devoluciones_reales_tarjeta_credito_debito_fecha_entrega"
+        model="helpdesk.ticket.subcategory">
+        <field name="name">Fecha de entrega</field>
+        <field name="category_id"
+            ref="helpdesk_ticket_category_devoluciones_reales_tarjeta_credito_debito" />
+        <field name="sequence">30</field>
+        <field name="active">True</field>
+        <field name="code">fecha_entrega</field>
+    </record>
+
+    <record id="helpdesk_ticket_subcategory_devoluciones_reales_tarjeta_credito_debito_mal_servicio"
+        model="helpdesk.ticket.subcategory">
+        <field name="name">Mal servicio</field>
+        <field name="category_id"
+            ref="helpdesk_ticket_category_devoluciones_reales_tarjeta_credito_debito" />
+        <field name="sequence">40</field>
+        <field name="active">True</field>
+        <field name="code">mal_servicio</field>
+    </record>
+
+    <record id="helpdesk_ticket_subcategory_devoluciones_reales_efectivo_orden_pago_select"
+        model="helpdesk.ticket.subcategory">
+        <field name="name">-- seleccionar --</field>
+        <field name="category_id"
+            ref="helpdesk_ticket_category_devoluciones_reales_efectivo_orden_pago" />
+        <field name="sequence">1</field>
+        <field name="active">True</field>
+        <field name="code">select</field>
+    </record>
+
+    <record id="helpdesk_ticket_subcategory_devoluciones_reales_efectivo_orden_pago_error_examen"
+        model="helpdesk.ticket.subcategory">
+        <field name="name">Error de examen</field>
+        <field name="category_id"
+            ref="helpdesk_ticket_category_devoluciones_reales_efectivo_orden_pago" />
+        <field name="sequence">10</field>
+        <field name="active">True</field>
+        <field name="code">error_examen</field>
+    </record>
+
+    <record id="helpdesk_ticket_subcategory_devoluciones_reales_efectivo_orden_pago_fecha_entrega"
+        model="helpdesk.ticket.subcategory">
+        <field name="name">Fecha de entrega</field>
+        <field name="category_id"
+            ref="helpdesk_ticket_category_devoluciones_reales_efectivo_orden_pago" />
+        <field name="sequence">20</field>
+        <field name="active">True</field>
+        <field name="code">fecha_entrega</field>
+    </record>
+
+    <record id="helpdesk_ticket_subcategory_devoluciones_reales_efectivo_orden_pago_mal_servicio"
+        model="helpdesk.ticket.subcategory">
+        <field name="name">Mal servicio</field>
+        <field name="category_id"
+            ref="helpdesk_ticket_category_devoluciones_reales_efectivo_orden_pago" />
+        <field name="sequence">30</field>
+        <field name="active">True</field>
+        <field name="code">mal_servicio</field>
+    </record>
+    <record id="helpdesk_ticket_subcategory_devoluciones_reales_efectivo_transferencia_select"
+        model="helpdesk.ticket.subcategory">
+        <field name="name">-- seleccionar --</field>
+        <field name="category_id"
+            ref="helpdesk_ticket_category_devoluciones_reales_efectivo_transferencia" />
+        <field name="sequence">1</field>
+        <field name="active">True</field>
+        <field name="code">select</field>
+    </record>
+
+    <record id="helpdesk_ticket_subcategory_devoluciones_reales_efectivo_transferencia_error_examen"
+        model="helpdesk.ticket.subcategory">
+        <field name="name">Error de examen</field>
+        <field name="category_id"
+            ref="helpdesk_ticket_category_devoluciones_reales_efectivo_transferencia" />
+        <field name="sequence">10</field>
+        <field name="active">True</field>
+        <field name="code">error_examen</field>
+    </record>
+
+    <record
+        id="helpdesk_ticket_subcategory_devoluciones_reales_efectivo_transferencia_fecha_entrega"
+        model="helpdesk.ticket.subcategory">
+        <field name="name">Fecha de entrega</field>
+        <field name="category_id"
+            ref="helpdesk_ticket_category_devoluciones_reales_efectivo_transferencia" />
+        <field name="sequence">20</field>
+        <field name="active">True</field>
+        <field name="code">fecha_entrega</field>
+    </record>
+
+    <record id="helpdesk_ticket_subcategory_devoluciones_reales_efectivo_transferencia_mal_servicio"
+        model="helpdesk.ticket.subcategory">
+        <field name="name">Mal servicio</field>
+        <field name="category_id"
+            ref="helpdesk_ticket_category_devoluciones_reales_efectivo_transferencia" />
+        <field name="sequence">30</field>
+        <field name="active">True</field>
+        <field name="code">mal_servicio</field>
+    </record>
+
+    <record id="helpdesk_ticket_subcategory_rrhh_capacitacion_select"
+        model="helpdesk.ticket.subcategory">
+        <field name="name">-- seleccionar --</field>
+        <field name="category_id"
+            ref="helpdesk_ticket_category_rrhh_capacitacion" />
+        <field name="sequence">1</field>
+        <field name="active">True</field>
+        <field name="code">select</field>
+    </record>
+
+    <record id="helpdesk_ticket_subcategory_rrhh_capacitacion_ale_pagina_web"
+        model="helpdesk.ticket.subcategory">
+        <field name="name">ALE (página web)</field>
+        <field name="category_id"
+            ref="helpdesk_ticket_category_rrhh_capacitacion" />
+        <field name="sequence">10</field>
+        <field name="active">True</field>
+        <field name="code">ale_pagina_web</field>
+    </record>
+
+    <record id="helpdesk_ticket_subcategory_rrhh_capacitacion_universidad_devlyn"
+        model="helpdesk.ticket.subcategory">
+        <field name="name">Universidad Devlyn</field>
+        <field name="category_id"
+            ref="helpdesk_ticket_category_rrhh_capacitacion" />
+        <field name="sequence">20</field>
+        <field name="active">True</field>
+        <field name="code">universidad_devlyn</field>
+    </record>
+
+    <record id="helpdesk_ticket_subcategory_rrhh_capacitacion_pagina_evaluaciones_productos"
+        model="helpdesk.ticket.subcategory">
+        <field name="name">Página de evaluaciones | Carpeta de productos</field>
+        <field name="category_id"
+            ref="helpdesk_ticket_category_rrhh_capacitacion" />
+        <field name="sequence">30</field>
+        <field name="active">True</field>
+        <field name="code">pagina_evaluaciones_productos</field>
+    </record>
+
+    <record id="helpdesk_ticket_subcategory_rrhh_capacitacion_pagina_evaluaciones_politicas"
+        model="helpdesk.ticket.subcategory">
+        <field name="name">Página de evaluaciones (manual de políticas y procedimientos)</field>
+        <field name="category_id"
+            ref="helpdesk_ticket_category_rrhh_capacitacion" />
+        <field name="sequence">40</field>
+        <field name="active">True</field>
+        <field name="code">pagina_evaluaciones_politicas</field>
+    </record>
+
+    <record id="helpdesk_ticket_subcategory_rrhh_capacitacion_promocion_puesto"
+        model="helpdesk.ticket.subcategory">
+        <field name="name">Promoción de puesto</field>
+        <field name="category_id"
+            ref="helpdesk_ticket_category_rrhh_capacitacion" />
+        <field name="sequence">50</field>
+        <field name="active">True</field>
+        <field name="code">promocion_puesto</field>
+    </record>
+
+    <record id="helpdesk_ticket_subcategory_rrhh_compensaciones_retail_select"
+        model="helpdesk.ticket.subcategory">
+        <field name="name">-- seleccionar --</field>
+        <field name="category_id"
+            ref="helpdesk_ticket_category_rrhh_compensaciones_retail" />
+        <field name="sequence">1</field>
+        <field name="active">True</field>
+        <field name="code">select</field>
+    </record>
+
+    <record
+        id="helpdesk_ticket_subcategory_rrhh_compensaciones_retail_aclaracion_pago_bonos_incentivos"
+        model="helpdesk.ticket.subcategory">
+        <field name="name">Aclaración de pago de bonos e incentivos</field>
+        <field name="category_id"
+            ref="helpdesk_ticket_category_rrhh_compensaciones_retail" />
+        <field name="sequence">10</field>
+        <field name="active">True</field>
+        <field name="code">aclaracion_pago_bonos_incentivos</field>
+    </record>
+
+    <record id="helpdesk_ticket_subcategory_rrhh_nominas_select"
+        model="helpdesk.ticket.subcategory">
+        <field name="name">-- seleccionar --</field>
+        <field name="category_id"
+            ref="helpdesk_ticket_category_rrhh_nominas" />
+        <field name="sequence">1</field>
+        <field name="active">True</field>
+        <field name="code">select</field>
+    </record>
+
+    <record id="helpdesk_ticket_subcategory_rrhh_nominas_aclaracion_aguinaldo"
+        model="helpdesk.ticket.subcategory">
+        <field name="name">Aclaración de aguinaldo</field>
+        <field name="category_id"
+            ref="helpdesk_ticket_category_rrhh_nominas" />
+        <field name="sequence">10</field>
+        <field name="active">True</field>
+        <field name="code">aclaracion_aguinaldo</field>
+    </record>
+
+    <record id="helpdesk_ticket_subcategory_rrhh_nominas_aclaracion_faltas_injustificadas"
+        model="helpdesk.ticket.subcategory">
+        <field name="name">Aclaración de faltas injustificadas</field>
+        <field name="category_id"
+            ref="helpdesk_ticket_category_rrhh_nominas" />
+        <field name="sequence">20</field>
+        <field name="active">True</field>
+        <field name="code">aclaracion_faltas_injustificadas</field>
+    </record>
+
+    <record id="helpdesk_ticket_subcategory_rrhh_nominas_aclaracion_pagos_dias_festivos"
+        model="helpdesk.ticket.subcategory">
+        <field name="name">Aclaración de pagos de días festivos</field>
+        <field name="category_id"
+            ref="helpdesk_ticket_category_rrhh_nominas" />
+        <field name="sequence">30</field>
+        <field name="active">True</field>
+        <field name="code">aclaracion_pagos_dias_festivos</field>
+    </record>
+
+    <record id="helpdesk_ticket_subcategory_rrhh_nominas_aclaracion_prima_vacacional"
+        model="helpdesk.ticket.subcategory">
+        <field name="name">Aclaración de prima vacacional</field>
+        <field name="category_id"
+            ref="helpdesk_ticket_category_rrhh_nominas" />
+        <field name="sequence">40</field>
+        <field name="active">True</field>
+        <field name="code">aclaracion_prima_vacacional</field>
+    </record>
+
+    <record id="helpdesk_ticket_subcategory_rrhh_nominas_aclaracion_pagos_incapacidad"
+        model="helpdesk.ticket.subcategory">
+        <field name="name">Aclaraciones y/o pagos de incapacidad</field>
+        <field name="category_id"
+            ref="helpdesk_ticket_category_rrhh_nominas" />
+        <field name="sequence">50</field>
+        <field name="active">True</field>
+        <field name="code">aclaracion_pagos_incapacidad</field>
+    </record>
+
+    <record id="helpdesk_ticket_subcategory_rrhh_nominas_aclaracion_utilidades"
+        model="helpdesk.ticket.subcategory">
+        <field name="name">Aclaración de utilidades</field>
+        <field name="category_id"
+            ref="helpdesk_ticket_category_rrhh_nominas" />
+        <field name="sequence">60</field>
+        <field name="active">True</field>
+        <field name="code">aclaracion_utilidades</field>
+    </record>
+
+    <record id="helpdesk_ticket_subcategory_rrhh_nominas_beneficios_descuento_nomina"
+        model="helpdesk.ticket.subcategory">
+        <field name="name">Beneficios descuento vía nómina</field>
+        <field name="category_id"
+            ref="helpdesk_ticket_category_rrhh_nominas" />
+        <field name="sequence">70</field>
+        <field name="active">True</field>
+        <field name="code">beneficios_descuento_nomina</field>
+    </record>
+
+    <record id="helpdesk_ticket_subcategory_rrhh_nominas_desglose_nomina"
+        model="helpdesk.ticket.subcategory">
+        <field name="name">Desglose de nómina</field>
+        <field name="category_id"
+            ref="helpdesk_ticket_category_rrhh_nominas" />
+        <field name="sequence">80</field>
+        <field name="active">True</field>
+        <field name="code">desglose_nomina</field>
+    </record>
+
+    <record id="helpdesk_ticket_subcategory_rrhh_nominas_aclaracion_credito_infonavit"
+        model="helpdesk.ticket.subcategory">
+        <field name="name">Aclaración crédito INFONAVIT</field>
+        <field name="category_id"
+            ref="helpdesk_ticket_category_rrhh_nominas" />
+        <field name="sequence">90</field>
+        <field name="active">True</field>
+        <field name="code">aclaracion_credito_infonavit</field>
+    </record>
+
+    <record id="helpdesk_ticket_subcategory_rrhh_nominas_aclaracion_credito_fonacot"
+        model="helpdesk.ticket.subcategory">
+        <field name="name">Aclaración crédito FONACOT</field>
+        <field name="category_id"
+            ref="helpdesk_ticket_category_rrhh_nominas" />
+        <field name="sequence">100</field>
+        <field name="active">True</field>
+        <field name="code">aclaracion_credito_fonacot</field>
+    </record>
+    <record id="helpdesk_ticket_subcategory_rrhh_plataforma_siconsulta_select"
+        model="helpdesk.ticket.subcategory">
+        <field name="name">-- seleccionar --</field>
+        <field name="category_id"
+            ref="helpdesk_ticket_category_rrhh_plataforma_siconsulta" />
+        <field name="sequence">1</field>
+        <field name="active">True</field>
+        <field name="code">select</field>
+    </record>
+
+    <record
+        id="helpdesk_ticket_subcategory_rrhh_plataforma_siconsulta_desbloqueo_usuario_contrasena"
+        model="helpdesk.ticket.subcategory">
+        <field name="name">Desbloqueo usuario y contraseña</field>
+        <field name="category_id"
+            ref="helpdesk_ticket_category_rrhh_plataforma_siconsulta" />
+        <field name="sequence">10</field>
+        <field name="active">True</field>
+        <field name="code">desbloqueo_usuario_contrasena</field>
+    </record>
+
+    <record id="helpdesk_ticket_subcategory_rrhh_plataforma_siconsulta_aclaracion_saldo_vacaciones"
+        model="helpdesk.ticket.subcategory">
+        <field name="name">Aclaración de saldo de vacaciones</field>
+        <field name="category_id"
+            ref="helpdesk_ticket_category_rrhh_plataforma_siconsulta" />
+        <field name="sequence">20</field>
+        <field name="active">True</field>
+        <field name="code">aclaracion_saldo_vacaciones</field>
+    </record>
+
+    <record id="helpdesk_ticket_subcategory_rrhh_plataforma_siconsulta_error_plataforma"
+        model="helpdesk.ticket.subcategory">
+        <field name="name">Error en la plataforma</field>
+        <field name="category_id"
+            ref="helpdesk_ticket_category_rrhh_plataforma_siconsulta" />
+        <field name="sequence">30</field>
+        <field name="active">True</field>
+        <field name="code">error_plataforma</field>
+    </record>
+
+    <record id="helpdesk_ticket_subcategory_equipo_optico_select"
+        model="helpdesk.ticket.subcategory">
+        <field name="name">-- seleccionar --</field>
+        <field name="category_id"
+            ref="helpdesk_ticket_category_equipo_optico_mantenimiento_equipo_optico" />
+        <field name="sequence">1</field>
+        <field name="active">True</field>
+        <field name="code">select</field>
+    </record>
+
+    <record id="helpdesk_ticket_subcategory_equipo_optico_mantenimiento_equipo_optico"
+        model="helpdesk.ticket.subcategory">
+        <field name="name">Mantenimiento equipo óptico</field>
+        <field name="category_id"
+            ref="helpdesk_ticket_category_equipo_optico_mantenimiento_equipo_optico" />
+        <field name="sequence">10</field>
+        <field name="active">True</field>
+        <field name="code">mantenimiento_equipo_optico</field>
+    </record>
+    <record id="helpdesk_ticket_subcategory_publicidad_display_select"
+        model="helpdesk.ticket.subcategory">
+        <field name="name">-- seleccionar --</field>
+        <field name="category_id"
+            ref="helpdesk_ticket_category_publicidad_display" />
+        <field name="sequence">1</field>
+        <field name="active">True</field>
+        <field name="code">select</field>
+    </record>
+
+    <record id="helpdesk_ticket_subcategory_publicidad_display_campanas_aperturas"
+        model="helpdesk.ticket.subcategory">
+        <field name="name">Display campañas y aperturas</field>
+        <field name="category_id"
+            ref="helpdesk_ticket_category_publicidad_display" />
+        <field name="sequence">10</field>
+        <field name="active">True</field>
+        <field name="code">display_campanas_aperturas</field>
+    </record>
+    <record id="helpdesk_ticket_subcategory_publicidad_material_danado_select"
+        model="helpdesk.ticket.subcategory">
+        <field name="name">-- seleccionar --</field>
+        <field name="category_id"
+            ref="helpdesk_ticket_category_publicidad_material_danado" />
+        <field name="sequence">1</field>
+        <field name="active">True</field>
+        <field name="code">select</field>
+    </record>
+
+    <record id="helpdesk_ticket_subcategory_publicidad_material_danado_reposicion"
+        model="helpdesk.ticket.subcategory">
+        <field name="name">Reposición elemento dañado</field>
+        <field name="category_id"
+            ref="helpdesk_ticket_category_publicidad_material_danado" />
+        <field name="sequence">10</field>
+        <field name="active">True</field>
+        <field name="code">reposicion_elemento_danado</field>
+    </record>
+    <record id="helpdesk_ticket_subcategory_pdv_convenios_select"
+        model="helpdesk.ticket.subcategory">
+        <field name="name">-- seleccionar --</field>
+        <field name="category_id" ref="helpdesk_ticket_category_pdv_convenios" />
+        <field name="sequence">1</field>
+        <field name="active">True</field>
+        <field name="code">select</field>
+    </record>
+
+    <record id="helpdesk_ticket_subcategory_pdv_convenios_apoyo"
+        model="helpdesk.ticket.subcategory">
+        <field name="name">Apoyo para aplicar un convenio</field>
+        <field name="category_id" ref="helpdesk_ticket_category_pdv_convenios" />
+        <field name="sequence">10</field>
+        <field name="active">True</field>
+        <field name="code">apoyo_aplicar_convenio</field>
+    </record>
+
+    <record id="helpdesk_ticket_subcategory_pdv_convenios_institucionales"
+        model="helpdesk.ticket.subcategory">
+        <field name="name">Convenios institucionales</field>
+        <field name="category_id" ref="helpdesk_ticket_category_pdv_convenios" />
+        <field name="sequence">20</field>
+        <field name="active">True</field>
+        <field name="code">convenios_institucionales</field>
+    </record>
+
+    <record id="helpdesk_ticket_subcategory_pdv_convenios_manual"
+        model="helpdesk.ticket.subcategory">
+        <field name="name">Cuando no pueden entrar a la página de manuales</field>
+        <field name="category_id" ref="helpdesk_ticket_category_pdv_convenios" />
+        <field name="sequence">30</field>
+        <field name="active">True</field>
+        <field name="code">no_entran_manuales</field>
+    </record>
+
+    <record id="helpdesk_ticket_subcategory_pdv_convenios_promociones"
+        model="helpdesk.ticket.subcategory">
+        <field name="name">Dudas de promociones en general</field>
+        <field name="category_id" ref="helpdesk_ticket_category_pdv_convenios" />
+        <field name="sequence">40</field>
+        <field name="active">True</field>
+        <field name="code">dudas_promociones</field>
+    </record>
+    <record id="helpdesk_ticket_subcategory_pdv_pagos_select"
+        model="helpdesk.ticket.subcategory">
+        <field name="name">-- seleccionar --</field>
+        <field name="category_id" ref="helpdesk_ticket_category_pdv_problema_pagos" />
+        <field name="sequence">1</field>
+        <field name="active">True</field>
+        <field name="code">select</field>
+    </record>
+
+    <record id="helpdesk_ticket_subcategory_pdv_pagos_anticipos"
+        model="helpdesk.ticket.subcategory">
+        <field name="name">Problema de pagos (anticipos)</field>
+        <field name="category_id" ref="helpdesk_ticket_category_pdv_problema_pagos" />
+        <field name="sequence">10</field>
+        <field name="active">True</field>
+        <field name="code">problema_pagos_anticipos</field>
+    </record>
+    <record id="helpdesk_ticket_subcategory_pdv_pos_select"
+        model="helpdesk.ticket.subcategory">
+        <field name="name">-- seleccionar --</field>
+        <field name="category_id" ref="helpdesk_ticket_category_pdv_problema_pos" />
+        <field name="sequence">1</field>
+        <field name="active">True</field>
+        <field name="code">select</field>
+    </record>
+
+    <record id="helpdesk_ticket_subcategory_pdv_pos_captura_ov"
+        model="helpdesk.ticket.subcategory">
+        <field name="name">Captura OV</field>
+        <field name="category_id" ref="helpdesk_ticket_category_pdv_problema_pos" />
+        <field name="sequence">10</field>
+        <field name="active">True</field>
+        <field name="code">captura_ov</field>
+    </record>
+
+    <record id="helpdesk_ticket_subcategory_pdv_pos_cierre_diario"
+        model="helpdesk.ticket.subcategory">
+        <field name="name">Cierre diario</field>
+        <field name="category_id" ref="helpdesk_ticket_category_pdv_problema_pos" />
+        <field name="sequence">20</field>
+        <field name="active">True</field>
+        <field name="code">cierre_diario</field>
+    </record>
+
+    <record id="helpdesk_ticket_subcategory_pdv_pos_recepcion_bolsa"
+        model="helpdesk.ticket.subcategory">
+        <field name="name">No se puede recepcionar bolsa</field>
+        <field name="category_id" ref="helpdesk_ticket_category_pdv_problema_pos" />
+        <field name="sequence">30</field>
+        <field name="active">True</field>
+        <field name="code">no_recepcionar_bolsa</field>
+    </record>
+
+    <record id="helpdesk_ticket_subcategory_pdv_pos_pedido_embalaje"
+        model="helpdesk.ticket.subcategory">
+        <field name="name">Pedido sin embalaje</field>
+        <field name="category_id" ref="helpdesk_ticket_category_pdv_problema_pos" />
+        <field name="sequence">40</field>
+        <field name="active">True</field>
+        <field name="code">pedido_sin_embalaje</field>
+    </record>
+
+    <record id="helpdesk_ticket_subcategory_pdv_pos_captura_devolucion"
+        model="helpdesk.ticket.subcategory">
+        <field name="name">Problema para capturar devolución, retallado o satisfacción total</field>
+        <field name="category_id" ref="helpdesk_ticket_category_pdv_problema_pos" />
+        <field name="sequence">50</field>
+        <field name="active">True</field>
+        <field name="code">problema_captura_devolucion</field>
+    </record>
+    <record id="helpdesk_ticket_subcategory_rescate_cancelaciones_select"
+        model="helpdesk.ticket.subcategory">
+        <field name="name">-- seleccionar --</field>
+        <field name="category_id"
+            ref="helpdesk_ticket_category_rescate_cancelaciones_clientes_devolucion" />
+        <field name="sequence">1</field>
+        <field name="active">True</field>
+        <field name="code">select</field>
+    </record>
+
+    <record id="helpdesk_ticket_subcategory_rescate_cancelaciones_clientes_molestos"
+        model="helpdesk.ticket.subcategory">
+        <field name="name">Rescate de cancelaciones Clientes molestos</field>
+        <field name="category_id"
+            ref="helpdesk_ticket_category_rescate_cancelaciones_clientes_devolucion" />
+        <field name="sequence">10</field>
+        <field name="active">True</field>
+        <field name="code">rescate_cancelaciones_clientes_molestos</field>
+    </record>
+
+    <record id="helpdesk_ticket_subcategory_online_entregados_select"
+        model="helpdesk.ticket.subcategory">
+        <field name="name">-- seleccionar --</field>
+        <field name="category_id"
+            ref="helpdesk_ticket_category_fullfilment_online_entregados" />
+        <field name="sequence">1</field>
+        <field name="active">True</field>
+        <field name="code">select</field>
+    </record>
+
+    <record id="helpdesk_ticket_subcategory_online_entregados_incompletos"
+        model="helpdesk.ticket.subcategory">
+        <field name="name">Pedidos incompletos</field>
+        <field name="category_id"
+            ref="helpdesk_ticket_category_fullfilment_online_entregados" />
+        <field name="sequence">10</field>
+        <field name="active">True</field>
+        <field name="code">pedidos_incompletos</field>
+    </record>
+
+    <record id="helpdesk_ticket_subcategory_online_entregados_graduacion_incorrecta"
+        model="helpdesk.ticket.subcategory">
+        <field name="name">Pedidos con graduación incorrecta</field>
+        <field name="category_id"
+            ref="helpdesk_ticket_category_fullfilment_online_entregados" />
+        <field name="sequence">20</field>
+        <field name="active">True</field>
+        <field name="code">graduacion_incorrecta</field>
+    </record>
+
+    <record id="helpdesk_ticket_subcategory_online_entregados_otro_cliente"
+        model="helpdesk.ticket.subcategory">
+        <field name="name">Pedido que es de otro cliente</field>
+        <field name="category_id"
+            ref="helpdesk_ticket_category_fullfilment_online_entregados" />
+        <field name="sequence">30</field>
+        <field name="active">True</field>
+        <field name="code">pedido_otro_cliente</field>
+    </record>
+
+    <record id="helpdesk_ticket_subcategory_online_entregados_devolucion"
+        model="helpdesk.ticket.subcategory">
+        <field name="name">Devolución de pedidos</field>
+        <field name="category_id"
+            ref="helpdesk_ticket_category_fullfilment_online_entregados" />
+        <field name="sequence">40</field>
+        <field name="active">True</field>
+        <field name="code">devolucion_pedidos</field>
+    </record>
+
+    <record id="helpdesk_ticket_subcategory_online_entregados_error_captura"
+        model="helpdesk.ticket.subcategory">
+        <field name="name">Pedidos con graduación incorrecta por captura errónea del cliente</field>
+        <field name="category_id"
+            ref="helpdesk_ticket_category_fullfilment_online_entregados" />
+        <field name="sequence">50</field>
+        <field name="active">True</field>
+        <field name="code">graduacion_error_cliente</field>
+    </record>
+
+    <record id="helpdesk_ticket_subcategory_online_sin_entregar_select"
+        model="helpdesk.ticket.subcategory">
+        <field name="name">-- seleccionar --</field>
+        <field name="category_id"
+            ref="helpdesk_ticket_category_fullfilment_online_sin_entregar" />
+        <field name="sequence">1</field>
+        <field name="active">True</field>
+        <field name="code">select</field>
+    </record>
+
+    <record id="helpdesk_ticket_subcategory_online_sin_entregar_sin_estatus"
+        model="helpdesk.ticket.subcategory">
+        <field name="name">Pedidos sin estatus</field>
+        <field name="category_id"
+            ref="helpdesk_ticket_category_fullfilment_online_sin_entregar" />
+        <field name="sequence">10</field>
+        <field name="active">True</field>
+        <field name="code">pedidos_sin_estatus</field>
+    </record>
+
+    <record id="helpdesk_ticket_subcategory_online_sin_entregar_paquete_retornado"
+        model="helpdesk.ticket.subcategory">
+        <field name="name">Paquete retornado por mensajería externa</field>
+        <field name="category_id"
+            ref="helpdesk_ticket_category_fullfilment_online_sin_entregar" />
+        <field name="sequence">20</field>
+        <field name="active">True</field>
+        <field name="code">paquete_retornado</field>
+    </record>
+
+    <record id="helpdesk_ticket_subcategory_online_sin_entregar_cambio_domicilio"
+        model="helpdesk.ticket.subcategory">
+        <field name="name">Cambio de domicilio de entrega</field>
+        <field name="category_id"
+            ref="helpdesk_ticket_category_fullfilment_online_sin_entregar" />
+        <field name="sequence">30</field>
+        <field name="active">True</field>
+        <field name="code">cambio_domicilio</field>
+    </record>
+
+    <record id="helpdesk_ticket_subcategory_online_sin_entregar_sin_capturar"
+        model="helpdesk.ticket.subcategory">
+        <field name="name">Pedido sin capturar</field>
+        <field name="category_id"
+            ref="helpdesk_ticket_category_fullfilment_online_sin_entregar" />
+        <field name="sequence">40</field>
+        <field name="active">True</field>
+        <field name="code">pedido_sin_capturar</field>
+    </record>
+
+    <record id="helpdesk_ticket_subcategory_online_sin_entregar_graduacion_sucursal"
+        model="helpdesk.ticket.subcategory">
+        <field name="name">Captura de graduación examen de la vista realizado en sucursal</field>
+        <field name="category_id"
+            ref="helpdesk_ticket_category_fullfilment_online_sin_entregar" />
+        <field name="sequence">50</field>
+        <field name="active">True</field>
+        <field name="code">graduacion_sucursal</field>
+    </record>
+
+    <record id="helpdesk_ticket_subcategory_online_sin_entregar_devolucion"
+        model="helpdesk.ticket.subcategory">
+        <field name="name">Devolución de pedidos sin entregar</field>
+        <field name="category_id"
+            ref="helpdesk_ticket_category_fullfilment_online_sin_entregar" />
+        <field name="sequence">60</field>
+        <field name="active">True</field>
+        <field name="code">devolucion_sin_entregar</field>
+    </record>
+
+    <record id="helpdesk_ticket_subcategory_online_sin_entregar_sin_envio"
+        model="helpdesk.ticket.subcategory">
+        <field name="name">Pedidos sin envío</field>
+        <field name="category_id"
+            ref="helpdesk_ticket_category_fullfilment_online_sin_entregar" />
+        <field name="sequence">70</field>
+        <field name="active">True</field>
+        <field name="code">pedido_sin_envio</field>
+    </record>
+
+    <record id="helpdesk_ticket_subcategory_online_sin_entregar_atraso_lente_contacto"
+        model="helpdesk.ticket.subcategory">
+        <field name="name">Atraso lente de contacto</field>
+        <field name="category_id"
+            ref="helpdesk_ticket_category_fullfilment_online_sin_entregar" />
+        <field name="sequence">80</field>
+        <field name="active">True</field>
+        <field name="code">atraso_lente_contacto</field>
+    </record>
+
+    <record id="helpdesk_ticket_subcategory_traspasos_doms_select"
+        model="helpdesk.ticket.subcategory">
+        <field name="name">-- seleccionar --</field>
+        <field name="category_id"
+            ref="helpdesk_ticket_category_fullfilment_traspasos_doms" />
+        <field name="sequence">1</field>
+        <field name="active">True</field>
+        <field name="code">select</field>
+    </record>
+
+    <record id="helpdesk_ticket_subcategory_traspasos_doms_busqueda_armazon"
+        model="helpdesk.ticket.subcategory">
+        <field name="name">Búsqueda de armazón</field>
+        <field name="category_id"
+            ref="helpdesk_ticket_category_fullfilment_traspasos_doms" />
+        <field name="sequence">10</field>
+        <field name="active">True</field>
+        <field name="code">busqueda_armazon</field>
+    </record>
+
+    <record id="helpdesk_ticket_subcategory_receta_lc_lente_contacto_select"
+        model="helpdesk.ticket.subcategory">
+        <field name="name">-- seleccionar --</field>
+        <field name="category_id"
+            ref="helpdesk_ticket_category_receta_lc_lente_contacto" />
+        <field name="sequence">1</field>
+        <field name="active">True</field>
+        <field name="code">select</field>
+    </record>
+
+    <record id="helpdesk_ticket_subcategory_receta_lc_atraso_lente_contacto"
+        model="helpdesk.ticket.subcategory">
+        <field name="name">Atraso lente de contacto</field>
+        <field name="category_id"
+            ref="helpdesk_ticket_category_receta_lc_lente_contacto" />
+        <field name="sequence">10</field>
+        <field name="active">True</field>
+        <field name="code">atraso_lente_contacto</field>
+    </record>
+
+    <record id="helpdesk_ticket_subcategory_garantia_calidad_select"
+        model="helpdesk.ticket.subcategory">
+        <field name="name">-- seleccionar --</field>
+        <field name="category_id"
+            ref="helpdesk_ticket_category_garantia_calidad_unica" />
+        <field name="sequence">1</field>
+        <field name="active">True</field>
+        <field name="code">select</field>
+    </record>
+
+    <record id="helpdesk_ticket_subcategory_garantia_calidad_micas"
+        model="helpdesk.ticket.subcategory">
+        <field name="name">Calidad - Micas</field>
+        <field name="category_id"
+            ref="helpdesk_ticket_category_garantia_calidad_unica" />
+        <field name="sequence">10</field>
+        <field name="active">True</field>
+        <field name="code">calidad_micas</field>
+    </record>
+
+    <record id="helpdesk_ticket_subcategory_garantia_calidad_armazon"
+        model="helpdesk.ticket.subcategory">
+        <field name="name">Calidad - Armazón</field>
+        <field name="category_id"
+            ref="helpdesk_ticket_category_garantia_calidad_unica" />
+        <field name="sequence">20</field>
+        <field name="active">True</field>
+        <field name="code">calidad_armazon</field>
+    </record>
+    <record id="helpdesk_ticket_subcategory_medallia_select"
+        model="helpdesk.ticket.subcategory">
+        <field name="name">-- seleccionar --</field>
+        <field name="category_id"
+            ref="helpdesk_ticket_category_medallia_unica" />
+        <field name="sequence">1</field>
+        <field name="active">True</field>
+        <field name="code">select</field>
+    </record>
+
+    <record id="helpdesk_ticket_subcategory_medallia_acceso_plataforma"
+        model="helpdesk.ticket.subcategory">
+        <field name="name">Acceso a plataforma</field>
+        <field name="category_id"
+            ref="helpdesk_ticket_category_medallia_unica" />
+        <field name="sequence">10</field>
+        <field name="active">True</field>
+        <field name="code">acceso_plataforma</field>
+    </record>
+    <record id="helpdesk_ticket_subcategory_paqueteria_bolsas_select"
+        model="helpdesk.ticket.subcategory">
+        <field name="name">-- seleccionar --</field>
+        <field name="category_id"
+            ref="helpdesk_ticket_category_paqueteria_bolsas_no_implantadas" />
+        <field name="sequence">1</field>
+        <field name="active">True</field>
+        <field name="code">select</field>
+    </record>
+
+    <record id="helpdesk_ticket_subcategory_paqueteria_implantar_bolsa"
+        model="helpdesk.ticket.subcategory">
+        <field name="name">Implantar bolsa de: trabajo | Micas sin cortar | Lente de contacto</field>
+        <field name="category_id"
+            ref="helpdesk_ticket_category_paqueteria_bolsas_no_implantadas" />
+        <field name="sequence">10</field>
+        <field name="active">True</field>
+        <field name="code">implantar_bolsa</field>
+    </record>
+
+    <record id="helpdesk_ticket_subcategory_paqueteria_abasto_no_implantada"
+        model="helpdesk.ticket.subcategory">
+        <field name="name">Bolsa de abasto no implantada</field>
+        <field name="category_id"
+            ref="helpdesk_ticket_category_paqueteria_bolsas_no_implantadas" />
+        <field name="sequence">20</field>
+        <field name="active">True</field>
+        <field name="code">bolsa_abasto_no_implantada</field>
+    </record>
+    <record id="helpdesk_ticket_subcategory_paqueteria_seguimiento_select"
+        model="helpdesk.ticket.subcategory">
+        <field name="name">-- seleccionar --</field>
+        <field name="category_id"
+            ref="helpdesk_ticket_category_paqueteria_seguimiento_envio" />
+        <field name="sequence">1</field>
+        <field name="active">True</field>
+        <field name="code">select</field>
+    </record>
+
+    <record id="helpdesk_ticket_subcategory_paqueteria_incumplimiento_visita"
+        model="helpdesk.ticket.subcategory">
+        <field name="name">Incumplimiento de visita y/o recolección</field>
+        <field name="category_id"
+            ref="helpdesk_ticket_category_paqueteria_seguimiento_envio" />
+        <field name="sequence">10</field>
+        <field name="active">True</field>
+        <field name="code">incumplimiento_visita</field>
+    </record>
+
+    <record id="helpdesk_ticket_subcategory_paqueteria_paquetes_alterados"
+        model="helpdesk.ticket.subcategory">
+        <field name="name">Paquetes alterados</field>
+        <field name="category_id"
+            ref="helpdesk_ticket_category_paqueteria_seguimiento_envio" />
+        <field name="sequence">20</field>
+        <field name="active">True</field>
+        <field name="code">paquetes_alterados</field>
+    </record>
+
+    <record id="helpdesk_ticket_subcategory_paqueteria_no_recibidos_trabajo"
+        model="helpdesk.ticket.subcategory">
+        <field name="name">Paquetes no recibidos trabajos</field>
+        <field name="category_id"
+            ref="helpdesk_ticket_category_paqueteria_seguimiento_envio" />
+        <field name="sequence">30</field>
+        <field name="active">True</field>
+        <field name="code">paquetes_no_recibidos_trabajo</field>
+    </record>
+
+    <record id="helpdesk_ticket_subcategory_paqueteria_no_recibidos_abasto"
+        model="helpdesk.ticket.subcategory">
+        <field name="name">Paquetes no recibidos abasto</field>
+        <field name="category_id"
+            ref="helpdesk_ticket_category_paqueteria_seguimiento_envio" />
+        <field name="sequence">40</field>
+        <field name="active">True</field>
+        <field name="code">paquetes_no_recibidos_abasto</field>
+    </record>
+
+    <record id="helpdesk_ticket_subcategory_paqueteria_seguimiento_laboratorio"
+        model="helpdesk.ticket.subcategory">
+        <field name="name">Seguimiento a: Trabajo elaborados en Laboratorio Essilor | Micas sin
+            cortar procesadas</field>
+        <field name="category_id"
+            ref="helpdesk_ticket_category_paqueteria_seguimiento_envio" />
+        <field name="sequence">50</field>
+        <field name="active">True</field>
+        <field name="code">seguimiento_laboratorio</field>
+    </record>
+
+    <record id="helpdesk_ticket_subcategory_paqueteria_envio_extraordinario"
+        model="helpdesk.ticket.subcategory">
+        <field name="name">Envío extraordinario de: Trabajo elaborados en Laboratorio Essilor |
+            Micas sin cortar procesadas</field>
+        <field name="category_id"
+            ref="helpdesk_ticket_category_paqueteria_seguimiento_envio" />
+        <field name="sequence">60</field>
+        <field name="active">True</field>
+        <field name="code">envio_extraordinario</field>
+    </record>
+
+    <record id="helpdesk_ticket_subcategory_paqueteria_faltante_accesorios_pedido"
+        model="helpdesk.ticket.subcategory">
+        <field name="name">Faltante accesorios en armazón de pedido</field>
+        <field name="category_id"
+            ref="helpdesk_ticket_category_paqueteria_seguimiento_envio" />
+        <field name="sequence">70</field>
+        <field name="active">True</field>
+        <field name="code">faltante_accesorios_pedido</field>
+    </record>
+
+    <record id="helpdesk_ticket_subcategory_paqueteria_faltante_accesorios_surtido"
+        model="helpdesk.ticket.subcategory">
+        <field name="name">Faltante accesorios en armazón de surtido</field>
+        <field name="category_id"
+            ref="helpdesk_ticket_category_paqueteria_seguimiento_envio" />
+        <field name="sequence">80</field>
+        <field name="active">True</field>
+        <field name="code">faltante_accesorios_surtido</field>
+    </record>
+    <record id="helpdesk_ticket_subcategory_prevencion_diferencia_select"
+        model="helpdesk.ticket.subcategory">
+        <field name="name">-- seleccionar --</field>
+        <field name="category_id"
+            ref="helpdesk_ticket_category_prevencion_perdidas_diferencia_bolsa" />
+        <field name="sequence">1</field>
+        <field name="active">True</field>
+        <field name="code">select</field>
+    </record>
+
+    <record id="helpdesk_ticket_subcategory_prevencion_faltante"
+        model="helpdesk.ticket.subcategory">
+        <field name="name">Faltante de mercancía en bolsa</field>
+        <field name="category_id"
+            ref="helpdesk_ticket_category_prevencion_perdidas_diferencia_bolsa" />
+        <field name="sequence">10</field>
+        <field name="active">True</field>
+        <field name="code">faltante_mercancia</field>
+    </record>
+
+    <record id="helpdesk_ticket_subcategory_prevencion_sobrante"
+        model="helpdesk.ticket.subcategory">
+        <field name="name">Sobrante de mercancía en bolsa</field>
+        <field name="category_id"
+            ref="helpdesk_ticket_category_prevencion_perdidas_diferencia_bolsa" />
+        <field name="sequence">20</field>
+        <field name="active">True</field>
+        <field name="code">sobrante_mercancia</field>
+    </record>
+
+    <record id="helpdesk_ticket_subcategory_prevencion_danada"
+        model="helpdesk.ticket.subcategory">
+        <field name="name">Mercancía dañada en bolsa</field>
+        <field name="category_id"
+            ref="helpdesk_ticket_category_prevencion_perdidas_diferencia_bolsa" />
+        <field name="sequence">30</field>
+        <field name="active">True</field>
+        <field name="code">mercancia_danada</field>
+    </record>
+    <record id="helpdesk_ticket_subcategory_prevencion_extravio_select"
+        model="helpdesk.ticket.subcategory">
+        <field name="name">-- seleccionar --</field>
+        <field name="category_id"
+            ref="helpdesk_ticket_category_prevencion_perdidas_bolsa_extraviada" />
+        <field name="sequence">1</field>
+        <field name="active">True</field>
+        <field name="code">select</field>
+    </record>
+
+    <record id="helpdesk_ticket_subcategory_prevencion_extravio_mensajeria"
+        model="helpdesk.ticket.subcategory">
+        <field name="name">Extravío por mensajería</field>
+        <field name="category_id"
+            ref="helpdesk_ticket_category_prevencion_perdidas_bolsa_extraviada" />
+        <field name="sequence">10</field>
+        <field name="active">True</field>
+        <field name="code">extravio_mensajeria</field>
+    </record>
+
+    <record id="helpdesk_ticket_subcategory_prevencion_extravio_sucursal"
+        model="helpdesk.ticket.subcategory">
+        <field name="name">Extravío en sucursal</field>
+        <field name="category_id"
+            ref="helpdesk_ticket_category_prevencion_perdidas_bolsa_extraviada" />
+        <field name="sequence">20</field>
+        <field name="active">True</field>
+        <field name="code">extravio_sucursal</field>
+    </record>
 </odoo>

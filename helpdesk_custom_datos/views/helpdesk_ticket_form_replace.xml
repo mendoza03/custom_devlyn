@@ -288,6 +288,47 @@
                                 <strong>Adjuntar fotografía de área a limpiar</strong>
                             </div>
                         </div>
+
+                        <div class="mt16"
+                            invisible="x_subcategory_code not in ('error_captura_datos_fiscales','error_captura_uso_cfdi','error_captura_forma_pago','unificar_pedidos','dividir_pedido','unificar_conceptos','diferencia_convenio_credito','facturar_monto_especifico','periodo_facturacion_portal')">
+
+                            <div class="o_form_sheet bg-success text-white p-2 rounded-2 mb-3">
+                                <strong>Refacturación</strong>
+                            </div>
+
+                            <group col="6">
+                                <field name="x_refac_order_number" required="1" />
+                                <field name="x_refac_sale_order" required="1" />
+                                <field name="x_refac_legal_name" required="1" />
+                                <field name="x_refac_rfc" required="1" />
+                            </group>
+
+                            <div class="mt8">
+                                <strong>Es necesario adjuntar la pantalla del SAT de validación de
+                                    RFC, nombre y código postal.</strong>
+                            </div>
+
+                            <group col="6" class="mt8">
+                                <field name="x_refac_sat_screen_attached" required="1" />
+                            </group>
+
+                            <group col="6" class="mt16">
+                                <field name="x_refac_payment_method" required="1" />
+                                <field name="x_refac_person_type" required="1" />
+                                <field name="x_refac_cfdi_use" required="1" />
+                                <field name="x_refac_fiscal_regime" required="1" />
+                            </group>
+
+                            <div class="mt16">
+                                <strong>Dirección fiscal</strong>
+                            </div>
+
+                            <group col="6">
+                                <field name="x_refac_fiscal_address" required="1" />
+                                <field name="x_refac_cp" required="1" />
+                            </group>
+
+                        </div>
                         <div class="mt16">
                             <h3>Anexos</h3>
 
