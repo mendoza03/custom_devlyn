@@ -41,7 +41,7 @@
                             </group>
                             <group>
                                 <field name="x_subcategory_id"
-                                    attrs="{'required': [('x_is_facturacion_reenvio','=',False)]}" />
+                                    required="not x_is_facturacion_reenvio" />
                                 <field name="x_subcategory_code" invisible="1" />
                             </group>
                         </group>
