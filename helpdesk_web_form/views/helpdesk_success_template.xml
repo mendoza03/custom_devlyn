@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <template id="helpdesk_success_template" name="Helpdesk - Ticket Enviado">
+        <t t-call="website.layout">
+            <div class="container py-5 text-center" style="max-width: 580px; margin: 80px auto;">
+
+                <!-- Ícono de éxito -->
+                <div style="
+                    width: 80px; height: 80px;
+                    background: #e6f9f0;
+                    border-radius: 50%;
+                    display: flex; align-items: center; justify-content: center;
+                    margin: 0 auto 24px;
+                    font-size: 36px;
+                ">✅</div>
+
+                <!-- Título -->
+                <h1 style="font-size: 1.8rem; font-weight: 700; color: #1a1a2e; margin-bottom: 12px;">
+                    ¡Tu ticket ha sido enviado!
+                </h1>
+
+                <!-- Número de ticket -->
+                <t t-if="ticket_id">
+                    <p style="font-size: 1rem; color: #6b7280; margin-bottom: 6px;">
+                        Número de referencia:
+                    </p>
+                    <p style="
+                        font-size: 1.4rem; font-weight: 700;
+                        color: #2563eb; margin-bottom: 24px;
+                        letter-spacing: 0.05em;
+                    ">
+                        #<t t-esc="ticket_id"/>
+                    </p>
+                </t>
+
+                <!-- Mensaje -->
+                <p style="font-size: 0.95rem; color: #6b7280; line-height: 1.7; margin-bottom: 32px;">
+                    Hemos recibido tu solicitud. Nuestro equipo de soporte la revisará
+                    y te contactará a la brevedad posible.
+                </p>
+
+                <!-- Botón volver -->
+                <a href="/helpdesk" style="
+                    display: inline-block;
+                    background: #2563eb;
+                    color: #fff;
+                    padding: 12px 32px;
+                    border-radius: 8px;
+                    text-decoration: none;
+                    font-weight: 600;
+                    font-size: 0.95rem;
+                    transition: background 0.2s;
+                ">
+                    Enviar otro ticket
+                </a>
+
+            </div>
+        </t>
+    </template>
+</odoo>

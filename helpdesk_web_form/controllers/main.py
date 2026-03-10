@@ -1,3 +1,5 @@
+import base64
+
 from odoo import http
 from odoo.http import request
 
@@ -43,16 +45,31 @@ class HelpdeskController(http.Controller):
             'x_subcategory_id': int(post.get('x_subcategory_id')) if post.get('x_subcategory_id') else False,
             'x_detailed_description': post.get('x_detailed_description'),
             'partner_email': post.get('email'),
+            # Campos del bloque "Micas sin cortar"
+            'x_order_number': post.get('x_order_number'),
+            'x_bag': post.get('x_bag'),
+            'x_customer_warehouse': post.get('x_customer_warehouse') or 'select',
+            'x_order_type': post.get('x_order_type') or 'select',
+            'x_authorized_by': post.get('x_authorized_by'),
+            'x_lab_indicated': post.get('x_lab_indicated'),
         })
 
-        import base64
         files = request.httprequest.files.getlist('attachments')
         for f in files:
-            if f:
+            if f and f.filename:
                 request.env['helpdesk.ticket.attachment.line'].sudo().create({
                     'ticket_id': ticket.id,
                     'file': base64.b64encode(f.read()),
                     'filename': f.filename,
                 })
 
-        return request.redirect(request.httprequest.referrer or '/helpdesk')
+        return request.redirect(f'/helpdesk/success?ticket_id={ticket.id}')
+
+    @http.route(
+        ['/helpdesk/success', '/<string:lang>/helpdesk/success'],
+        type='http', auth='public', website=True
+    )
+    def helpdesk_success(self, ticket_id=None, **kwargs):
+        return request.render('helpdesk_web_form.helpdesk_success_template', {
+            'ticket_id': ticket_id,
+        })

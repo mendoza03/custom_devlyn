@@ -4,6 +4,7 @@
     'depends': ['website', 'helpdesk', 'helpdesk_custom_datos'],
     'data': [
         'views/helpdesk_form_view.xml',
+        'views/helpdesk_success_template.xml',
     ],
     'installable': True,
 

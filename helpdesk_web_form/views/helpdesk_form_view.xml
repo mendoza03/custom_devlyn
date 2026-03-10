@@ -1,3 +1,4 @@
+<?xml version="1.0" encoding="utf-8"?>
 <odoo>
     <template id="helpdesk_form_template">
         <t t-call="website.layout">
@@ -28,7 +29,7 @@
                     <div class="col-md-6">
                         <label>Categoría (*)</label>
                         <select name="x_category_id" id="category" class="form-select">
-
+                            <option value="">-- seleccionar --</option>
                         </select>
                     </div>
 
@@ -36,7 +37,7 @@
                     <div class="col-md-6">
                         <label>Subcategoría (*)</label>
                         <select name="x_subcategory_id" id="subcategory" class="form-select">
-
+                            <option value="">-- seleccionar --</option>
                         </select>
                     </div>
 
@@ -46,8 +47,62 @@
                         <textarea name="x_detailed_description" class="form-control o_wysiwyg"/>
                     </div>
 
+                    <!-- ===== BLOQUE: Micas sin cortar ===== -->
+                    <div id="micas-sin-cortar-block" class="col-12 row g-3" style="display:none;">
+                    <div class="col-12 mt-4">
+                        <h5 class="border-bottom pb-2">Micas sin cortar</h5>
+                    </div>
+
+                    <!-- Pedido -->
+                    <div class="col-md-6">
+                        <label>Pedido</label>
+                        <input type="text" name="x_order_number" class="form-control"/>
+                    </div>
+
+                    <!-- Bolsa -->
+                    <div class="col-md-6">
+                        <label>Bolsa</label>
+                        <input type="text" name="x_bag" class="form-control"/>
+                    </div>
+
+                    <!-- Armazón del cliente -->
+                    <div class="col-md-6">
+                        <label>Armazón del cliente?</label>
+                        <select name="x_customer_warehouse" class="form-select">
+                            <option value="select">-- seleccionar --</option>
+                            <option value="si">Sí</option>
+                            <option value="no">No</option>
+                        </select>
+                    </div>
+
+                    <!-- Tipo de pedido -->
+                    <div class="col-md-6">
+                        <label>Tipo de pedido</label>
+                        <select name="x_order_type" class="form-select">
+                            <option value="select">-- seleccionar --</option>
+                            <option value="retallado">Retallado</option>
+                            <option value="garantia_calidad">Garantía de calidad</option>
+                            <option value="satisfaccion_adaptacion">Satisfacción total de adaptación</option>
+                            <option value="satisfaccion_imagen">Satisfacción total de imagen</option>
+                            <option value="captura_primera_vez">Captura primera vez</option>
+                        </select>
+                    </div>
+
+                    <!-- Persona que Autoriza -->
+                    <div class="col-md-6">
+                        <label>Persona que Autoriza</label>
+                        <input type="text" name="x_authorized_by" class="form-control"/>
+                    </div>
+
+                    <!-- LAB indicado -->
+                    <div class="col-md-6">
+                        <label>LAB indicado en portal de seguimiento de trabajos</label>
+                        <input type="text" name="x_lab_indicated" class="form-control"/>
+                    </div>
+                    </div><!-- ===== FIN BLOQUE Micas sin cortar ===== -->
+
                     <!-- Adjuntos -->
-                    <div class="col-12">
+                    <div class="col-12 mt-2">
                         <label>Adjuntar archivos</label>
                         <input type="file" name="attachments" multiple="multiple" class="form-control"/>
                     </div>
@@ -62,7 +117,7 @@
 
                 </form>
             </div>
-                        <script type="text/javascript" src="/helpdesk_web_form/static/src/js/index.js"></script>
+            <script type="text/javascript" src="/helpdesk_web_form/static/src/js/index.js"></script>
         </t>
     </template>
 </odoo>
