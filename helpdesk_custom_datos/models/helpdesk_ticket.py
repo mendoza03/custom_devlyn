@@ -277,16 +277,6 @@ class HelpdeskTicket(models.Model):
 
     x_refac_cp = fields.Char(string="CP (*)", copy=False)
 
-    x_employee_number = fields.Char(string="Número de empleado", copy=False)
-    x_employee_name = fields.Char(string="Nombre del empleado", copy=False)
-    x_tracking_number = fields.Char(string="Número de guía / rastreo", copy=False)
-    x_package_number = fields.Char(string="Número de paquete / bolsa", copy=False)
-    x_branch_number = fields.Char(string="Número de sucursal", copy=False)
-    x_customer_name = fields.Char(string="Nombre del cliente", copy=False)
-    x_incident_date = fields.Date(string="Fecha de incidencia", copy=False)
-    x_incident_type = fields.Char(string="Tipo de incidencia", copy=False)
-    x_requested_action = fields.Char(string="Acción solicitada", copy=False)
-
     @api.depends("x_category_id")
     def _compute_x_is_facturacion_reenvio(self):
         target = self.env.ref(
