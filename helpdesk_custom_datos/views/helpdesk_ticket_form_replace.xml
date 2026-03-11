@@ -1,0 +1,909 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+
+    <record id="helpdesk_ticket_view_form_custom_replace" model="ir.ui.view">
+        <field name="name">helpdesk.ticket.form.custom.replace</field>
+        <field name="model">helpdesk.ticket</field>
+        <field name="inherit_id" ref="helpdesk.helpdesk_ticket_view_form" />
+        <field name="priority">99</field>
+        <field name="arch" type="xml">
+
+
+            <xpath expr="//form" position="replace">
+                <form string="Ticket">
+
+                    <header>
+                        <field name="stage_id" widget="statusbar" options="{'clickable': True}" />
+                    </header>
+
+                    <sheet>
+                        <div class="oe_title">
+
+                            <label for="x_general_description" string="Descripción General (*)" />
+                            <h1>
+                                <field name="x_general_description"
+                                    placeholder=""
+                                    required="1"
+                                    class="oe_inline"
+                                />
+                            </h1>
+                        </div>
+
+                        <group string="Datos generales">
+                            <group>
+                                <field name="x_section_id" required="1" />
+                            </group>
+                        </group>
+
+                        <group>
+                            <group>
+                                <field name="x_category_id" required="1" />
+                            </group>
+                            <group>
+                                <field name="x_subcategory_id"
+                                    required="not x_is_facturacion_reenvio" />
+                                <field name="x_subcategory_code" invisible="1" />
+                            </group>
+                        </group>
+
+                        <group string="Descripción Detallada">
+                            <field name="x_detailed_description"
+                                widget="html"
+                                placeholder=""
+                            />
+                        </group>
+
+                        <div class="mt16">
+                            <strong>POR FAVOR, REVISAR QUE TODOS LOS DATOS SEAN CORRECTOS ANTES DE
+                                ENVIAR TICKET. GRACIAS</strong>
+                        </div>
+
+                        <div class="mt16" invisible="x_subcategory_code != 'micas_sin_cortar'">
+                            <div class="o_alert o_alert_info mb-2">
+                                <strong>Antes de levantar el ticket por favor revisa el comunicado
+                                    ENVIO MICAS SIN CORTAR</strong>
+                            </div>
+
+                            <group string="Micas sin cortar" col="6">
+                                <field name="x_order_number" required="1" />
+                                <field name="x_bag" required="1" />
+                                <field name="x_customer_warehouse" required="1" />
+
+                                <field name="x_authorized_by" required="1" />
+                                <field name="x_lab_indicated" required="1" />
+                                <field name="x_order_type" required="1" />
+                            </group>
+                        </div>
+
+
+                        <div class="mt16" invisible="x_subcategory_code != 'trabajos_atrasados'">
+
+                            <div class="o_form_sheet bg-success text-white p-2 rounded-2 mb-3">
+                                <strong>Trabajos atrasados</strong>
+                            </div>
+
+                            <group col="6">
+                                <field name="x_job_type" required="1" />
+                            </group>
+
+                            <div class="mt8">
+                                <strong>POR FAVOR, VALIDAR EL NÚMERO DE PEDIDO EN EL ICONO DE LA
+                                    LUPA. GRACIAS</strong>
+                            </div>
+
+                            <group col="6">
+                                <field name="x_original_order_number" required="1" />
+                                <field name="x_order_number" required="1" />
+
+                                <field name="x_customer_warehouse" required="1" />
+                                <field name="x_lab_indicated" required="1" />
+
+                                <field name="x_shipping_guide_number" required="1" />
+                                <field name="x_frame_bag_number" required="1" />
+
+                                <field name="x_order_type" required="1" />
+                            </group>
+
+                        </div>
+
+                        <div class="mt16"
+                            invisible="x_order_type != 'satisfaccion_adaptacion'">
+
+                            <div class="o_form_sheet bg-success text-white p-2 rounded-2 mb-3">
+                                <strong>Satisfacción total de adaptación</strong>
+                            </div>
+
+                            <group col="6">
+                                <field name="x_order_type_adaptation" required="1" />
+                            </group>
+                        </div>
+
+                        <div class="mt16"
+                            invisible="x_order_type != 'satisfaccion_imagen'">
+
+                            <div class="o_form_sheet bg-success text-white p-2 rounded-2 mb-3">
+                                <strong>Satisfacción total de Imagen</strong>
+                            </div>
+
+                            <group col="6">
+                                <field name="x_order_type_adaptation" required="1" />
+                            </group>
+                        </div>
+
+                        <div class="mt16" invisible="x_subcategory_code != 'correo_electronico'">
+                            <div class="o_form_sheet bg-success text-white p-2 rounded-2 mb-3">
+                                <strong>Correo electrónico</strong>
+                            </div>
+
+                            <group col="6">
+                                <field name="x_branch_email" required="1" />
+                                <field name="x_email_issue_type_2" required="1" />
+                                <field name="x_contact_number" required="1" />
+                            </group>
+                        </div>
+                        <div class="mt16" invisible="x_subcategory_code != 'equipo_computo'">
+                            <div class="o_form_sheet bg-success text-white p-2 rounded-2 mb-3">
+                                <strong>Equipo de cómputo</strong>
+                            </div>
+
+                            <group col="6">
+                                <field name="x_internal_folio_number" required="1" />
+                            </group>
+
+                            <div class="mt8">
+                                <strong>Es obligatorio enviar a Centro de Servicios el equipo
+                                    dañado.</strong>
+                            </div>
+
+                            <group col="6">
+                                <field name="x_equipment_type" required="1" />
+                                <field name="x_model_or_brand" required="1" />
+                                <field name="x_serial_number" required="1" />
+                                <field name="x_fixed_asset_number" required="1" />
+
+                                <field name="x_shipping_guide" required="1" />
+                                <field name="x_courier" required="1" />
+                            </group>
+                        </div>
+                        <div class="mt16" invisible="x_subcategory_code != 'interredes'">
+                            <div class="o_form_sheet bg-success text-white p-2 rounded-2 mb-3">
+                                <strong>Interredes</strong>
+                            </div>
+
+                            <group col="6">
+                                <field name="x_store_number" required="1" />
+                                <field name="x_interredes_user" required="1" />
+                                <field name="x_contact_number" required="1" />
+                            </group>
+                        </div>
+
+                        <div class="mt16" invisible="x_subcategory_code != 'problemas_impresora'">
+
+                            <div class="o_form_sheet bg-success text-white p-2 rounded-2 mb-3">
+                                <strong>Problemas con impresora</strong>
+                            </div>
+
+                            <group col="6">
+                                <field name="x_printer_model" required="1" />
+                                <field name="x_contact_number" required="1" />
+                                <field name="x_serial_number" required="1" />
+                                <field name="x_contact_person_name" required="1" />
+                            </group>
+
+                        </div>
+                        <div class="mt16" invisible="x_subcategory_code != 'surtido_toner'">
+
+                            <div class="o_form_sheet bg-success text-white p-2 rounded-2 mb-3">
+                                <strong>Surtido de tóner</strong>
+                            </div>
+
+                            <group col="6">
+                                <field name="x_printer_model" required="1" />
+                                <field name="x_contact_number" required="1" />
+                                <field name="x_serial_number"
+                                    string="Número de serie de la impresora (empieza ZD7)"
+                                    required="1" />
+                            </group>
+
+                            <div class="mt8 o_alert o_alert_info">
+                                <strong>
+                                    Antes de levantar el ticket favor de leer el Manual para obtener
+                                el
+                                    contador de impresiones y porcentaje de tóner de la impresora
+                                SAMSUNG M4020.
+                                </strong>
+        <br />
+                                Recuerda que si se tiene más del 15% de tóner no procederá el envío
+                                del mismo. </div>
+
+                            <group col="6" class="mt8">
+                                <field name="x_toner_below_15" required="1" />
+                            </group>
+
+                            <div class="mt8"
+                                invisible="x_toner_below_15 != 'no'">
+                                <div class="o_alert o_alert_danger">
+                                    <strong>
+                                        El envío de tóner NO procede si el porcentaje es mayor al
+                                        15%.
+                                    </strong>
+                                </div>
+                            </div>
+
+                        </div>
+                        <div class="mt16" invisible="x_subcategory_code != 'iluminacion'">
+                            <div class="o_form_sheet bg-success text-white p-2 rounded-2 mb-3">
+                                <strong>Iluminación</strong>
+                            </div>
+                            <div class="mt8">
+                                <strong>Adjuntar fotografía de lámparas</strong>
+                            </div>
+                        </div>
+
+                        <div class="mt16" invisible="x_subcategory_code != 'sanitarios'">
+                            <div class="o_form_sheet bg-success text-white p-2 rounded-2 mb-3">
+                                <strong>Sanitarios</strong>
+                            </div>
+                            <div class="mt8">
+                                <strong>Adjuntar fotografía de sanitarios</strong>
+                            </div>
+                        </div>
+
+                        <div class="mt16" invisible="x_subcategory_code != 'mobiliario'">
+                            <div class="o_form_sheet bg-success text-white p-2 rounded-2 mb-3">
+                                <strong>Mobiliario</strong>
+                            </div>
+                            <div class="mt8">
+                                <strong>Adjuntar fotografía de mobiliario</strong>
+                            </div>
+                        </div>
+
+                        <div class="mt16" invisible="x_subcategory_code != 'aparadores'">
+                            <div class="o_form_sheet bg-success text-white p-2 rounded-2 mb-3">
+                                <strong>Aparadores</strong>
+                            </div>
+                            <div class="mt8">
+                                <strong>Adjuntar fotografía de aparadores</strong>
+                            </div>
+                        </div>
+
+                        <div class="mt16" invisible="x_subcategory_code != 'fletes'">
+                            <div class="o_form_sheet bg-success text-white p-2 rounded-2 mb-3">
+                                <strong>Fletes</strong>
+                            </div>
+                            <div class="mt8">
+                                <strong>Adjuntar fotografía de fletes</strong>
+                            </div>
+                        </div>
+                        <div class="mt16" invisible="x_subcategory_code != 'limpieza_profunda'">
+                            <div class="o_form_sheet bg-success text-white p-2 rounded-2 mb-3">
+                                <strong>Limpieza profunda</strong>
+                            </div>
+
+                            <group col="6">
+                                <field name="x_cleaning_area" required="1" />
+                            </group>
+
+                            <div class="mt8">
+                                <strong>Adjuntar fotografía de área a limpiar</strong>
+                            </div>
+                        </div>
+
+                        <div class="mt16"
+                            invisible="x_subcategory_code not in ('error_captura_datos_fiscales','error_captura_uso_cfdi','error_captura_forma_pago','unificar_pedidos','dividir_pedido','unificar_conceptos','diferencia_convenio_credito','facturar_monto_especifico','periodo_facturacion_portal')">
+
+                            <div class="o_form_sheet bg-success text-white p-2 rounded-2 mb-3">
+                                <strong>Refacturación</strong>
+                            </div>
+
+                            <group col="6">
+                                <field name="x_refac_order_number" required="1" />
+                                <field name="x_refac_sale_order" required="1" />
+                                <field name="x_refac_legal_name" required="1" />
+                                <field name="x_refac_rfc" required="1" />
+                            </group>
+
+                            <div class="mt8">
+                                <strong>Es necesario adjuntar la pantalla del SAT de validación de
+                                    RFC, nombre y código postal.</strong>
+                            </div>
+
+                            <group col="6" class="mt8">
+                                <field name="x_refac_sat_screen_attached" required="1" />
+                            </group>
+
+                            <group col="6" class="mt16">
+                                <field name="x_refac_payment_method" required="1" />
+                                <field name="x_refac_person_type" required="1" />
+                                <field name="x_refac_cfdi_use" required="1" />
+                                <field name="x_refac_fiscal_regime" required="1" />
+                            </group>
+
+                            <div class="mt16">
+                                <strong>Dirección fiscal</strong>
+                            </div>
+
+                            <group col="6">
+                                <field name="x_refac_fiscal_address" required="1" />
+                                <field name="x_refac_cp" required="1" />
+                            </group>
+
+                        </div>
+
+                        <div class="mt16" invisible="x_subcategory_code != 'optica_digital'">
+                            <div class="o_form_sheet bg-success text-white p-2 rounded-2 mb-3">
+                                <strong>Óptica digital (checklist app sucursal)</strong>
+                            </div>
+
+                            <group col="6">
+                                <field name="x_store_number" required="1" />
+                                <field name="x_contact_number" required="1" />
+                            </group>
+
+                            <div class="mt8">
+                                <strong>Describe el problema presentado en la aplicación checklist
+                                    app sucursal.</strong>
+                            </div>
+                        </div>
+
+                        <div class="mt16"
+                            invisible="x_subcategory_code != 'no_recibidos_facturacion'">
+                            <div class="o_form_sheet bg-success text-white p-2 rounded-2 mb-3">
+                                <strong>No se recibieron archivos de facturación (XML y PDF)</strong>
+                            </div>
+
+                            <group col="6">
+                                <field name="x_fact_busco_portal" string="¿Buscó en portal?"
+                                    required="1" />
+                                <field name="x_fact_encontraste" string="¿Encontró la factura?"
+                                    required="1" />
+                                <field name="x_fact_pdf_xml_incorrectos"
+                                    string="¿Los archivos PDF/XML son incorrectos?"
+                                    required="1" />
+                            </group>
+
+                            <div class="mt8">
+                                <strong>Adjuntar evidencia del caso y describir el problema
+                                    detectado.</strong>
+                            </div>
+                        </div>
+
+                        <div class="mt16" invisible="x_subcategory_code != 'acceso_plataforma'">
+                            <div class="o_form_sheet bg-success text-white p-2 rounded-2 mb-3">
+                                <strong>Acceso a plataforma</strong>
+                            </div>
+
+                            <group col="6">
+                                <field name="x_contact_number" required="1" />
+                            </group>
+
+                            <div class="mt8">
+                                <strong>Describe el inconveniente de acceso y adjunta evidencia.</strong>
+                            </div>
+                        </div>
+
+                        <div class="mt16"
+                            invisible="x_subcategory_code != 'desbloqueo_usuario_contrasena'">
+                            <div class="o_form_sheet bg-success text-white p-2 rounded-2 mb-3">
+                                <strong>Desbloqueo usuario y contraseña</strong>
+                            </div>
+
+                            <group col="6">
+                                <field name="x_contact_number" required="1" />
+                            </group>
+
+                            <div class="mt8">
+                                <strong>Indica el problema de acceso y adjunta evidencia si aplica.</strong>
+                            </div>
+                        </div>
+
+                        <div class="mt16"
+                            invisible="x_subcategory_code != 'aclaracion_saldo_vacaciones'">
+                            <div class="o_form_sheet bg-success text-white p-2 rounded-2 mb-3">
+                                <strong>Aclaración de saldo de vacaciones</strong>
+                            </div>
+
+                            <group col="6">
+                                <field name="x_contact_number" required="1" />
+                            </group>
+
+                            <div class="mt8">
+                                <strong>Describe el detalle de la aclaración solicitada.</strong>
+                            </div>
+                        </div>
+
+                        <div class="mt16" invisible="x_subcategory_code != 'error_plataforma'">
+                            <div class="o_form_sheet bg-success text-white p-2 rounded-2 mb-3">
+                                <strong>Error en la plataforma</strong>
+                            </div>
+
+                            <group col="6">
+                                <field name="x_contact_number" required="1" />
+                            </group>
+
+                            <div class="mt8">
+                                <strong>Describe el error presentado y adjunta captura de pantalla.</strong>
+                            </div>
+                        </div>
+
+                        <div class="mt16"
+                            invisible="x_subcategory_code != 'display_campanas_aperturas'">
+                            <div class="o_form_sheet bg-success text-white p-2 rounded-2 mb-3">
+                                <strong>Display campañas y aperturas</strong>
+                            </div>
+
+                            <div class="mt8">
+                                <strong>Adjuntar evidencia y describir el requerimiento.</strong>
+                            </div>
+                        </div>
+
+                        <div class="mt16"
+                            invisible="x_subcategory_code != 'reposicion_elemento_danado'">
+                            <div class="o_form_sheet bg-success text-white p-2 rounded-2 mb-3">
+                                <strong>Reposición elemento dañado</strong>
+                            </div>
+
+                            <div class="mt8">
+                                <strong>Adjuntar fotografía del material dañado y describir el
+                                    requerimiento.</strong>
+                            </div>
+                        </div>
+
+                        <div class="mt16" invisible="x_subcategory_code != 'apoyo_aplicar_convenio'">
+                            <div class="o_form_sheet bg-success text-white p-2 rounded-2 mb-3">
+                                <strong>Apoyo para aplicar un convenio</strong>
+                            </div>
+
+                            <div class="mt8">
+                                <strong>Describe el convenio y el apoyo requerido.</strong>
+                            </div>
+                        </div>
+
+                        <div class="mt16"
+                            invisible="x_subcategory_code != 'convenios_institucionales'">
+                            <div class="o_form_sheet bg-success text-white p-2 rounded-2 mb-3">
+                                <strong>Convenios institucionales</strong>
+                            </div>
+
+                            <div class="mt8">
+                                <strong>Describe la duda o incidencia relacionada con convenios
+                                    institucionales.</strong>
+                            </div>
+                        </div>
+
+                        <div class="mt16" invisible="x_subcategory_code != 'no_entran_manuales'">
+                            <div class="o_form_sheet bg-success text-white p-2 rounded-2 mb-3">
+                                <strong>Cuando no pueden entrar a la página de manuales</strong>
+                            </div>
+
+                            <div class="mt8">
+                                <strong>Describe el problema de acceso y adjunta evidencia.</strong>
+                            </div>
+                        </div>
+
+                        <div class="mt16" invisible="x_subcategory_code != 'dudas_promociones'">
+                            <div class="o_form_sheet bg-success text-white p-2 rounded-2 mb-3">
+                                <strong>Dudas de promociones en general</strong>
+                            </div>
+
+                            <div class="mt8">
+                                <strong>Describe la promoción y la duda presentada.</strong>
+                            </div>
+                        </div>
+
+                        <div class="mt16"
+                            invisible="x_subcategory_code != 'problema_pagos_anticipos'">
+                            <div class="o_form_sheet bg-success text-white p-2 rounded-2 mb-3">
+                                <strong>Problema de pagos (anticipos)</strong>
+                            </div>
+
+                            <div class="mt8">
+                                <strong>Describe el problema con el anticipo y adjunta evidencia.</strong>
+                            </div>
+                        </div>
+
+                        <div class="mt16" invisible="x_subcategory_code != 'captura_ov'">
+                            <div class="o_form_sheet bg-success text-white p-2 rounded-2 mb-3">
+                                <strong>Captura OV</strong>
+                            </div>
+
+                            <div class="mt8">
+                                <strong>Describe el inconveniente presentado en la captura OV.</strong>
+                            </div>
+                        </div>
+
+                        <div class="mt16" invisible="x_subcategory_code != 'cierre_diario'">
+                            <div class="o_form_sheet bg-success text-white p-2 rounded-2 mb-3">
+                                <strong>Cierre diario</strong>
+                            </div>
+
+                            <div class="mt8">
+                                <strong>Describe el problema presentado durante el cierre diario.</strong>
+                            </div>
+                        </div>
+
+                        <div class="mt16" invisible="x_subcategory_code != 'no_recepcionar_bolsa'">
+                            <div class="o_form_sheet bg-success text-white p-2 rounded-2 mb-3">
+                                <strong>No se puede recepcionar bolsa</strong>
+                            </div>
+
+                            <div class="mt8">
+                                <strong>Describe el problema y adjunta evidencia si aplica.</strong>
+                            </div>
+                        </div>
+
+                        <div class="mt16" invisible="x_subcategory_code != 'pedido_sin_embalaje'">
+                            <div class="o_form_sheet bg-success text-white p-2 rounded-2 mb-3">
+                                <strong>Pedido sin embalaje</strong>
+                            </div>
+
+                            <div class="mt8">
+                                <strong>Describe el caso y adjunta evidencia.</strong>
+                            </div>
+                        </div>
+
+                        <div class="mt16"
+                            invisible="x_subcategory_code != 'problema_captura_devolucion'">
+                            <div class="o_form_sheet bg-success text-white p-2 rounded-2 mb-3">
+                                <strong>Problema para capturar devolución, retallado o satisfacción
+                                    total</strong>
+                            </div>
+
+                            <div class="mt8">
+                                <strong>Describe el problema presentado durante la captura.</strong>
+                            </div>
+                        </div>
+
+                        <div class="mt16"
+                            invisible="x_subcategory_code != 'rescate_cancelaciones_clientes_molestos'">
+                            <div class="o_form_sheet bg-success text-white p-2 rounded-2 mb-3">
+                                <strong>Rescate de cancelaciones Clientes molestos</strong>
+                            </div>
+
+                            <div class="mt8">
+                                <strong>Describe el caso del cliente y la situación presentada.</strong>
+                            </div>
+                        </div>
+
+                        <div class="mt16" invisible="x_subcategory_code != 'pedidos_incompletos'">
+                            <div class="o_form_sheet bg-success text-white p-2 rounded-2 mb-3">
+                                <strong>Pedidos incompletos</strong>
+                            </div>
+
+                            <div class="mt8">
+                                <strong>Describe el faltante e incluye evidencia.</strong>
+                            </div>
+                        </div>
+
+                        <div class="mt16" invisible="x_subcategory_code != 'graduacion_incorrecta'">
+                            <div class="o_form_sheet bg-success text-white p-2 rounded-2 mb-3">
+                                <strong>Pedidos con graduación incorrecta</strong>
+                            </div>
+
+                            <div class="mt8">
+                                <strong>Describe la incidencia e incluye evidencia.</strong>
+                            </div>
+                        </div>
+
+                        <div class="mt16" invisible="x_subcategory_code != 'pedido_otro_cliente'">
+                            <div class="o_form_sheet bg-success text-white p-2 rounded-2 mb-3">
+                                <strong>Pedido que es de otro cliente</strong>
+                            </div>
+
+                            <div class="mt8">
+                                <strong>Describe el caso y adjunta evidencia.</strong>
+                            </div>
+                        </div>
+
+                        <div class="mt16" invisible="x_subcategory_code != 'devolucion_pedidos'">
+                            <div class="o_form_sheet bg-success text-white p-2 rounded-2 mb-3">
+                                <strong>Devolución de pedidos</strong>
+                            </div>
+
+                            <div class="mt8">
+                                <strong>Describe el motivo de devolución y adjunta evidencia.</strong>
+                            </div>
+                        </div>
+
+                        <div class="mt16"
+                            invisible="x_subcategory_code != 'graduacion_error_cliente'">
+                            <div class="o_form_sheet bg-success text-white p-2 rounded-2 mb-3">
+                                <strong>Pedidos con graduación incorrecta por captura errónea del
+                                    cliente</strong>
+                            </div>
+
+                            <div class="mt8">
+                                <strong>Describe el caso e incluye evidencia.</strong>
+                            </div>
+                        </div>
+
+                        <div class="mt16" invisible="x_subcategory_code != 'pedidos_sin_estatus'">
+                            <div class="o_form_sheet bg-success text-white p-2 rounded-2 mb-3">
+                                <strong>Pedidos sin estatus</strong>
+                            </div>
+
+                            <div class="mt8">
+                                <strong>Describe el inconveniente e incluye evidencia.</strong>
+                            </div>
+                        </div>
+
+                        <div class="mt16" invisible="x_subcategory_code != 'paquete_retornado'">
+                            <div class="o_form_sheet bg-success text-white p-2 rounded-2 mb-3">
+                                <strong>Paquete retornado por mensajería externa</strong>
+                            </div>
+
+                            <div class="mt8">
+                                <strong>Describe el caso y adjunta evidencia del retorno.</strong>
+                            </div>
+                        </div>
+
+                        <div class="mt16" invisible="x_subcategory_code != 'cambio_domicilio'">
+                            <div class="o_form_sheet bg-success text-white p-2 rounded-2 mb-3">
+                                <strong>Cambio de domicilio de entrega</strong>
+                            </div>
+
+                            <div class="mt8">
+                                <strong>Describe el cambio solicitado y adjunta evidencia si aplica.</strong>
+                            </div>
+                        </div>
+
+                        <div class="mt16" invisible="x_subcategory_code != 'pedido_sin_capturar'">
+                            <div class="o_form_sheet bg-success text-white p-2 rounded-2 mb-3">
+                                <strong>Pedido sin capturar</strong>
+                            </div>
+
+                            <div class="mt8">
+                                <strong>Describe la incidencia y adjunta evidencia.</strong>
+                            </div>
+                        </div>
+
+                        <div class="mt16" invisible="x_subcategory_code != 'graduacion_sucursal'">
+                            <div class="o_form_sheet bg-success text-white p-2 rounded-2 mb-3">
+                                <strong>Captura de graduación examen de la vista realizado en
+                                    sucursal</strong>
+                            </div>
+
+                            <div class="mt8">
+                                <strong>Describe la graduación o el problema presentado.</strong>
+                            </div>
+                        </div>
+
+                        <div class="mt16"
+                            invisible="x_subcategory_code != 'devolucion_sin_entregar'">
+                            <div class="o_form_sheet bg-success text-white p-2 rounded-2 mb-3">
+                                <strong>Devolución de pedidos sin entregar</strong>
+                            </div>
+
+                            <div class="mt8">
+                                <strong>Describe el motivo de la devolución y adjunta evidencia.</strong>
+                            </div>
+                        </div>
+
+                        <div class="mt16" invisible="x_subcategory_code != 'pedido_sin_envio'">
+                            <div class="o_form_sheet bg-success text-white p-2 rounded-2 mb-3">
+                                <strong>Pedidos sin envío</strong>
+                            </div>
+
+                            <div class="mt8">
+                                <strong>Describe el caso y adjunta evidencia.</strong>
+                            </div>
+                        </div>
+
+                        <div class="mt16" invisible="x_subcategory_code != 'atraso_lente_contacto'">
+                            <div class="o_form_sheet bg-success text-white p-2 rounded-2 mb-3">
+                                <strong>Atraso lente de contacto</strong>
+                            </div>
+
+                            <div class="mt8">
+                                <strong>Describe el atraso y adjunta evidencia del caso.</strong>
+                            </div>
+                        </div>
+
+                        <div class="mt16" invisible="x_subcategory_code != 'busqueda_armazon'">
+                            <div class="o_form_sheet bg-success text-white p-2 rounded-2 mb-3">
+                                <strong>Búsqueda de armazón</strong>
+                            </div>
+
+                            <div class="mt8">
+                                <strong>Describe el armazón requerido y adjunta evidencia si aplica.</strong>
+                            </div>
+                        </div>
+
+                        <div class="mt16" invisible="x_subcategory_code != 'calidad_micas'">
+                            <div class="o_form_sheet bg-success text-white p-2 rounded-2 mb-3">
+                                <strong>Calidad - Micas</strong>
+                            </div>
+
+                            <div class="mt8">
+                                <strong>Adjuntar evidencia fotográfica y describir la incidencia.</strong>
+                            </div>
+                        </div>
+
+                        <div class="mt16" invisible="x_subcategory_code != 'calidad_armazon'">
+                            <div class="o_form_sheet bg-success text-white p-2 rounded-2 mb-3">
+                                <strong>Calidad - Armazón</strong>
+                            </div>
+
+                            <div class="mt8">
+                                <strong>Adjuntar evidencia fotográfica y describir la incidencia.</strong>
+                            </div>
+                        </div>
+
+                        <div class="mt16" invisible="x_subcategory_code != 'implantar_bolsa'">
+                            <div class="o_form_sheet bg-success text-white p-2 rounded-2 mb-3">
+                                <strong>Implantar bolsa de: trabajo | Micas sin cortar | Lente de
+                                    contacto</strong>
+                            </div>
+
+                            <div class="mt8">
+                                <strong>Describe la solicitud y adjunta evidencia si aplica.</strong>
+                            </div>
+                        </div>
+
+                        <div class="mt16"
+                            invisible="x_subcategory_code != 'bolsa_abasto_no_implantada'">
+                            <div class="o_form_sheet bg-success text-white p-2 rounded-2 mb-3">
+                                <strong>Bolsa de abasto no implantada</strong>
+                            </div>
+
+                            <div class="mt8">
+                                <strong>Describe el caso y adjunta evidencia.</strong>
+                            </div>
+                        </div>
+
+                        <div class="mt16" invisible="x_subcategory_code != 'incumplimiento_visita'">
+                            <div class="o_form_sheet bg-success text-white p-2 rounded-2 mb-3">
+                                <strong>Incumplimiento de visita y/o recolección</strong>
+                            </div>
+
+                            <div class="mt8">
+                                <strong>Describe el incumplimiento y adjunta evidencia.</strong>
+                            </div>
+                        </div>
+
+                        <div class="mt16" invisible="x_subcategory_code != 'paquetes_alterados'">
+                            <div class="o_form_sheet bg-success text-white p-2 rounded-2 mb-3">
+                                <strong>Paquetes alterados</strong>
+                            </div>
+
+                            <div class="mt8">
+                                <strong>Adjuntar evidencia del paquete alterado.</strong>
+                            </div>
+                        </div>
+
+                        <div class="mt16"
+                            invisible="x_subcategory_code != 'paquetes_no_recibidos_trabajo'">
+                            <div class="o_form_sheet bg-success text-white p-2 rounded-2 mb-3">
+                                <strong>Paquetes no recibidos trabajos</strong>
+                            </div>
+
+                            <div class="mt8">
+                                <strong>Describe el caso y adjunta evidencia.</strong>
+                            </div>
+                        </div>
+
+                        <div class="mt16"
+                            invisible="x_subcategory_code != 'paquetes_no_recibidos_abasto'">
+                            <div class="o_form_sheet bg-success text-white p-2 rounded-2 mb-3">
+                                <strong>Paquetes no recibidos abasto</strong>
+                            </div>
+
+                            <div class="mt8">
+                                <strong>Describe el caso y adjunta evidencia.</strong>
+                            </div>
+                        </div>
+
+                        <div class="mt16"
+                            invisible="x_subcategory_code != 'seguimiento_laboratorio'">
+                            <div class="o_form_sheet bg-success text-white p-2 rounded-2 mb-3">
+                                <strong>Seguimiento a: Trabajo elaborados en Laboratorio Essilor |
+                                    Micas sin cortar procesadas</strong>
+                            </div>
+
+                            <div class="mt8">
+                                <strong>Describe el seguimiento requerido y adjunta evidencia.</strong>
+                            </div>
+                        </div>
+
+                        <div class="mt16" invisible="x_subcategory_code != 'envio_extraordinario'">
+                            <div class="o_form_sheet bg-success text-white p-2 rounded-2 mb-3">
+                                <strong>Envío extraordinario de: Trabajo elaborados en Laboratorio
+                                    Essilor | Micas sin cortar procesadas</strong>
+                            </div>
+
+                            <div class="mt8">
+                                <strong>Describe el motivo del envío extraordinario.</strong>
+                            </div>
+                        </div>
+
+                        <div class="mt16"
+                            invisible="x_subcategory_code != 'faltante_accesorios_pedido'">
+                            <div class="o_form_sheet bg-success text-white p-2 rounded-2 mb-3">
+                                <strong>Faltante accesorios en armazón de pedido</strong>
+                            </div>
+
+                            <div class="mt8">
+                                <strong>Describe el faltante y adjunta evidencia.</strong>
+                            </div>
+                        </div>
+
+                        <div class="mt16"
+                            invisible="x_subcategory_code != 'faltante_accesorios_surtido'">
+                            <div class="o_form_sheet bg-success text-white p-2 rounded-2 mb-3">
+                                <strong>Faltante accesorios en armazón de surtido</strong>
+                            </div>
+
+                            <div class="mt8">
+                                <strong>Describe el faltante y adjunta evidencia.</strong>
+                            </div>
+                        </div>
+
+                        <div class="mt16" invisible="x_subcategory_code != 'faltante_mercancia'">
+                            <div class="o_form_sheet bg-success text-white p-2 rounded-2 mb-3">
+                                <strong>Faltante de mercancía en bolsa</strong>
+                            </div>
+
+                            <div class="mt8">
+                                <strong>Describe el faltante y adjunta evidencia.</strong>
+                            </div>
+                        </div>
+
+                        <div class="mt16" invisible="x_subcategory_code != 'sobrante_mercancia'">
+                            <div class="o_form_sheet bg-success text-white p-2 rounded-2 mb-3">
+                                <strong>Sobrante de mercancía en bolsa</strong>
+                            </div>
+
+                            <div class="mt8">
+                                <strong>Describe el sobrante y adjunta evidencia.</strong>
+                            </div>
+                        </div>
+
+                        <div class="mt16" invisible="x_subcategory_code != 'mercancia_danada'">
+                            <div class="o_form_sheet bg-success text-white p-2 rounded-2 mb-3">
+                                <strong>Mercancía dañada en bolsa</strong>
+                            </div>
+
+                            <div class="mt8">
+                                <strong>Adjuntar evidencia de la mercancía dañada.</strong>
+                            </div>
+                        </div>
+
+                        <div class="mt16" invisible="x_subcategory_code != 'extravio_mensajeria'">
+                            <div class="o_form_sheet bg-success text-white p-2 rounded-2 mb-3">
+                                <strong>Extravío por mensajería</strong>
+                            </div>
+
+                            <div class="mt8">
+                                <strong>Describe el extravío y adjunta evidencia disponible.</strong>
+                            </div>
+                        </div>
+
+                        <div class="mt16" invisible="x_subcategory_code != 'extravio_sucursal'">
+                            <div class="o_form_sheet bg-success text-white p-2 rounded-2 mb-3">
+                                <strong>Extravío en sucursal</strong>
+                            </div>
+
+                            <div class="mt8">
+                                <strong>Describe el extravío y adjunta evidencia disponible.</strong>
+                            </div>
+                        </div>
+                        <div class="mt16">
+                            <h3>Anexos</h3>
+
+                            <field name="x_attachment_line_ids" nolabel="1">
+                                <list editable="bottom" create="1" delete="0">
+
+                                    <field name="file" string="Fichero" filename="filename" />
+
+                                </list>
+                            </field>
+                        </div>
+                    </sheet>
+                </form>
+            </xpath>
+
+        </field>
+    </record>
+
+
+</odoo>

@@ -1,0 +1,470 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+
+    <!-- Categorías para la sección CAS -->
+    <record id="helpdesk_ticket_category_cas_coppel" model="helpdesk.ticket.category">
+        <field name="name">Coppel</field>
+        <field name="section_id" ref="helpdesk_section_cas" />
+        <field name="sequence">10</field>
+    </record>
+
+    <record id="helpdesk_ticket_category_cas_devlyn" model="helpdesk.ticket.category">
+        <field name="name">Devlyn</field>
+        <field name="section_id" ref="helpdesk_section_cas" />
+        <field name="sequence">20</field>
+    </record>
+
+    <record id="helpdesk_ticket_category_cas_franquicia" model="helpdesk.ticket.category">
+        <field name="name">Franquicia</field>
+        <field name="section_id" ref="helpdesk_section_cas" />
+        <field name="sequence">30</field>
+    </record>
+
+    <record id="helpdesk_ticket_category_cas_hospitales" model="helpdesk.ticket.category">
+        <field name="name">Hospitales</field>
+        <field name="section_id" ref="helpdesk_section_cas" />
+        <field name="sequence">40</field>
+    </record>
+
+    <record id="helpdesk_ticket_category_cas_sears" model="helpdesk.ticket.category">
+        <field name="name">Sears</field>
+        <field name="section_id" ref="helpdesk_section_cas" />
+        <field name="sequence">50</field>
+    </record>
+
+    <record id="helpdesk_ticket_category_cas_chapur" model="helpdesk.ticket.category">
+        <field name="name">Chapur</field>
+        <field name="section_id" ref="helpdesk_section_cas" />
+        <field name="sequence">60</field>
+    </record>
+
+    <record id="helpdesk_ticket_category_cas_cimaco" model="helpdesk.ticket.category">
+        <field name="name">Cimaco</field>
+        <field name="section_id" ref="helpdesk_section_cas" />
+        <field name="sequence">70</field>
+    </record>
+
+    <record id="helpdesk_ticket_category_cas_ecommerce_devlyn" model="helpdesk.ticket.category">
+        <field name="name">E-Commerce Devlyn</field>
+        <field name="section_id" ref="helpdesk_section_cas" />
+        <field name="sequence">80</field>
+    </record>
+
+    <record id="helpdesk_ticket_category_cas_mercado_libre" model="helpdesk.ticket.category">
+        <field name="name">Mercado libre</field>
+        <field name="section_id" ref="helpdesk_section_cas" />
+        <field name="sequence">90</field>
+    </record>
+
+    <record id="helpdesk_ticket_category_cas_outlet" model="helpdesk.ticket.category">
+        <field name="name">Outlet</field>
+        <field name="section_id" ref="helpdesk_section_cas" />
+        <field name="sequence">100</field>
+    </record>
+
+    <record id="helpdesk_ticket_category_cas_virtual" model="helpdesk.ticket.category">
+        <field name="name">Virtual</field>
+        <field name="section_id" ref="helpdesk_section_cas" />
+        <field name="sequence">110</field>
+    </record>
+    <record id="helpdesk_ticket_category_facturacion_select" model="helpdesk.ticket.category">
+        <field name="name">-- seleccionar --</field>
+        <field name="section_id" ref="helpdesk_section_facturacion" />
+        <field name="sequence">1</field>
+    </record>
+
+    <record id="helpdesk_ticket_category_facturacion_reenvio_pdf_xml"
+        model="helpdesk.ticket.category">
+        <field name="name">Reenvío de archivo PDF y XML</field>
+        <field name="section_id" ref="helpdesk_section_facturacion" />
+        <field name="sequence">10</field>
+    </record>
+
+    <record id="helpdesk_ticket_category_facturacion_refacturacion" model="helpdesk.ticket.category">
+        <field name="name">Refacturación</field>
+        <field name="section_id" ref="helpdesk_section_facturacion" />
+        <field name="sequence">20</field>
+    </record>
+
+    <record id="helpdesk_ticket_category_soporte_tecnico_select" model="helpdesk.ticket.category">
+        <field name="name">-- seleccionar --</field>
+        <field name="section_id" ref="helpdesk_section_soporte_tecnico" />
+        <field name="sequence">1</field>
+    </record>
+
+    <record id="helpdesk_ticket_category_soporte_tecnico_equipo_comunicaciones"
+        model="helpdesk.ticket.category">
+        <field name="name">Equipo y comunicaciones</field>
+        <field name="section_id" ref="helpdesk_section_soporte_tecnico" />
+        <field name="sequence">10</field>
+    </record>
+
+    <record id="helpdesk_ticket_category_soporte_tecnico_impresoras"
+        model="helpdesk.ticket.category">
+        <field name="name">Impresoras</field>
+        <field name="section_id" ref="helpdesk_section_soporte_tecnico" />
+        <field name="sequence">20</field>
+    </record>
+    <record id="helpdesk_ticket_category_devoluciones_reales_select"
+        model="helpdesk.ticket.category">
+        <field name="name">-- seleccionar --</field>
+        <field name="section_id" ref="helpdesk_section_devoluciones_reales" />
+        <field name="sequence">1</field>
+    </record>
+
+    <record id="helpdesk_ticket_category_devoluciones_reales_tarjeta_credito_debito"
+        model="helpdesk.ticket.category">
+        <field name="name">Tarjeta de crédito | débito</field>
+        <field name="section_id" ref="helpdesk_section_devoluciones_reales" />
+        <field name="sequence">10</field>
+    </record>
+
+    <record id="helpdesk_ticket_category_devoluciones_reales_efectivo_orden_pago"
+        model="helpdesk.ticket.category">
+        <field name="name">Efectivo Orden de Pago</field>
+        <field name="section_id" ref="helpdesk_section_devoluciones_reales" />
+        <field name="sequence">20</field>
+    </record>
+
+    <record id="helpdesk_ticket_category_devoluciones_reales_efectivo_transferencia"
+        model="helpdesk.ticket.category">
+        <field name="name">Efectivo Transferencia</field>
+        <field name="section_id" ref="helpdesk_section_devoluciones_reales" />
+        <field name="sequence">30</field>
+    </record>
+
+
+    <record id="helpdesk_ticket_category_rrhh_select" model="helpdesk.ticket.category">
+        <field name="name">-- seleccionar --</field>
+        <field name="section_id" ref="helpdesk_section_rrhh" />
+        <field name="sequence">1</field>
+    </record>
+
+    <record id="helpdesk_ticket_category_rrhh_capacitacion" model="helpdesk.ticket.category">
+        <field name="name">Capacitación</field>
+        <field name="section_id" ref="helpdesk_section_rrhh" />
+        <field name="sequence">10</field>
+    </record>
+
+    <record id="helpdesk_ticket_category_rrhh_compensaciones_retail"
+        model="helpdesk.ticket.category">
+        <field name="name">Compensaciones Retail</field>
+        <field name="section_id" ref="helpdesk_section_rrhh" />
+        <field name="sequence">20</field>
+    </record>
+
+    <record id="helpdesk_ticket_category_rrhh_nominas" model="helpdesk.ticket.category">
+        <field name="name">Nóminas</field>
+        <field name="section_id" ref="helpdesk_section_rrhh" />
+        <field name="sequence">30</field>
+    </record>
+
+    <record id="helpdesk_ticket_category_rrhh_plataforma_siconsulta"
+        model="helpdesk.ticket.category">
+        <field name="name">Plataforma Siconsulta</field>
+        <field name="section_id" ref="helpdesk_section_rrhh" />
+        <field name="sequence">40</field>
+    </record>
+
+    <record id="helpdesk_ticket_category_mantenimiento_select" model="helpdesk.ticket.category">
+        <field name="name">-- seleccionar --</field>
+        <field name="section_id" ref="helpdesk_section_mantenimiento" />
+        <field name="sequence">1</field>
+    </record>
+
+    <record id="helpdesk_ticket_category_mantenimiento_optica" model="helpdesk.ticket.category">
+        <field name="name">Mantenimiento óptica</field>
+        <field name="section_id" ref="helpdesk_section_mantenimiento" />
+        <field name="sequence">10</field>
+    </record>
+
+    <record id="helpdesk_ticket_category_publicidad_select" model="helpdesk.ticket.category">
+        <field name="name">-- seleccionar --</field>
+        <field name="section_id" ref="helpdesk_section_publicidad" />
+        <field name="sequence">1</field>
+    </record>
+
+    <record id="helpdesk_ticket_category_publicidad_display" model="helpdesk.ticket.category">
+        <field name="name">Display</field>
+        <field name="section_id" ref="helpdesk_section_publicidad" />
+        <field name="sequence">10</field>
+    </record>
+
+    <record id="helpdesk_ticket_category_publicidad_material_danado"
+        model="helpdesk.ticket.category">
+        <field name="name">Material dañado</field>
+        <field name="section_id" ref="helpdesk_section_publicidad" />
+        <field name="sequence">20</field>
+    </record>
+
+    <record id="helpdesk_ticket_category_pdv_select" model="helpdesk.ticket.category">
+        <field name="name">-- seleccionar --</field>
+        <field name="section_id" ref="helpdesk_section_pdv" />
+        <field name="sequence">1</field>
+    </record>
+
+    <record id="helpdesk_ticket_category_pdv_convenios" model="helpdesk.ticket.category">
+        <field name="name">Convenios Institucionales</field>
+        <field name="section_id" ref="helpdesk_section_pdv" />
+        <field name="sequence">10</field>
+    </record>
+
+    <record id="helpdesk_ticket_category_pdv_problema_pagos" model="helpdesk.ticket.category">
+        <field name="name">Problema con aplicación de pagos</field>
+        <field name="section_id" ref="helpdesk_section_pdv" />
+        <field name="sequence">20</field>
+    </record>
+
+    <record id="helpdesk_ticket_category_pdv_problema_pos" model="helpdesk.ticket.category">
+        <field name="name">Problemas con aplicación POS</field>
+        <field name="section_id" ref="helpdesk_section_pdv" />
+        <field name="sequence">30</field>
+    </record>
+    <record id="helpdesk_ticket_category_rescate_cancelaciones_select"
+        model="helpdesk.ticket.category">
+        <field name="name">-- seleccionar --</field>
+        <field name="section_id" ref="helpdesk_section_rescate_cancelaciones" />
+        <field name="sequence">1</field>
+    </record>
+
+    <record id="helpdesk_ticket_category_rescate_cancelaciones_clientes_devolucion"
+        model="helpdesk.ticket.category">
+        <field name="name">Rescate de cancelaciones (Clientes que han solicitado devolución)</field>
+        <field name="section_id" ref="helpdesk_section_rescate_cancelaciones" />
+        <field name="sequence">10</field>
+    </record>
+
+    <record id="helpdesk_ticket_category_fullfilment_select" model="helpdesk.ticket.category">
+        <field name="name">-- seleccionar --</field>
+        <field name="section_id" ref="helpdesk_section_fullfilment" />
+        <field name="sequence">1</field>
+    </record>
+
+    <record id="helpdesk_ticket_category_fullfilment_online_entregados"
+        model="helpdesk.ticket.category">
+        <field name="name">Pedidos online entregados</field>
+        <field name="section_id" ref="helpdesk_section_fullfilment" />
+        <field name="sequence">10</field>
+    </record>
+
+    <record id="helpdesk_ticket_category_fullfilment_online_sin_entregar"
+        model="helpdesk.ticket.category">
+        <field name="name">Pedidos online sin entregar</field>
+        <field name="section_id" ref="helpdesk_section_fullfilment" />
+        <field name="sequence">20</field>
+    </record>
+
+    <record id="helpdesk_ticket_category_fullfilment_traspasos_doms"
+        model="helpdesk.ticket.category">
+        <field name="name">Traspasos DOMS</field>
+        <field name="section_id" ref="helpdesk_section_fullfilment" />
+        <field name="sequence">30</field>
+    </record>
+
+    <record id="helpdesk_ticket_category_receta_lc_select" model="helpdesk.ticket.category">
+        <field name="name">-- seleccionar --</field>
+        <field name="section_id" ref="helpdesk_section_receta_lc" />
+        <field name="sequence">1</field>
+    </record>
+
+    <record id="helpdesk_ticket_category_receta_lc_lente_contacto" model="helpdesk.ticket.category">
+        <field name="name">Lente de contacto</field>
+        <field name="section_id" ref="helpdesk_section_receta_lc" />
+        <field name="sequence">10</field>
+    </record>
+
+    <record id="helpdesk_ticket_category_garantia_calidad_select" model="helpdesk.ticket.category">
+        <field name="name">-- seleccionar --</field>
+        <field name="section_id" ref="helpdesk_section_garantia_calidad" />
+        <field name="sequence">1</field>
+    </record>
+
+    <record id="helpdesk_ticket_category_garantia_calidad_unica" model="helpdesk.ticket.category">
+        <field name="name">Garantía de calidad</field>
+        <field name="section_id" ref="helpdesk_section_garantia_calidad" />
+        <field name="sequence">10</field>
+    </record>
+
+    <record id="helpdesk_ticket_category_medallia_select" model="helpdesk.ticket.category">
+        <field name="name">-- seleccionar --</field>
+        <field name="section_id" ref="helpdesk_section_medallia" />
+        <field name="sequence">1</field>
+    </record>
+
+    <record id="helpdesk_ticket_category_medallia_unica" model="helpdesk.ticket.category">
+        <field name="name">Medallia</field>
+        <field name="section_id" ref="helpdesk_section_medallia" />
+        <field name="sequence">10</field>
+    </record>
+
+    <record id="helpdesk_ticket_category_paqueteria_select" model="helpdesk.ticket.category">
+        <field name="name">-- seleccionar --</field>
+        <field name="section_id" ref="helpdesk_section_paqueteria" />
+        <field name="sequence">1</field>
+    </record>
+
+    <record id="helpdesk_ticket_category_paqueteria_bolsas_no_implantadas"
+        model="helpdesk.ticket.category">
+        <field name="name">Bolsas no implantadas</field>
+        <field name="section_id" ref="helpdesk_section_paqueteria" />
+        <field name="sequence">10</field>
+    </record>
+
+    <record id="helpdesk_ticket_category_paqueteria_seguimiento_envio"
+        model="helpdesk.ticket.category">
+        <field name="name">Seguimiento de envío</field>
+        <field name="section_id" ref="helpdesk_section_paqueteria" />
+        <field name="sequence">20</field>
+    </record>
+
+    <record id="helpdesk_ticket_category_prevencion_perdidas_select"
+        model="helpdesk.ticket.category">
+        <field name="name">-- seleccionar --</field>
+        <field name="section_id" ref="helpdesk_section_prevencion_perdidas" />
+        <field name="sequence">1</field>
+    </record>
+
+    <record id="helpdesk_ticket_category_prevencion_perdidas_diferencia_bolsa"
+        model="helpdesk.ticket.category">
+        <field name="name">Diferencia de mercancía en bolsa</field>
+        <field name="section_id" ref="helpdesk_section_prevencion_perdidas" />
+        <field name="sequence">10</field>
+    </record>
+
+    <record id="helpdesk_ticket_category_prevencion_perdidas_bolsa_extraviada"
+        model="helpdesk.ticket.category">
+        <field name="name">Bolsa extraviada</field>
+        <field name="section_id" ref="helpdesk_section_prevencion_perdidas" />
+        <field name="sequence">20</field>
+    </record>
+
+    <record id="helpdesk_ticket_category_herramientas_essilor_select"
+        model="helpdesk.ticket.category">
+        <field name="name">-- seleccionar --</field>
+        <field name="section_id" ref="helpdesk_section_herramientas_essilor" />
+        <field name="sequence">1</field>
+    </record>
+
+    <record id="helpdesk_ticket_category_herramientas_essilor_falta_seguimiento"
+        model="helpdesk.ticket.category">
+        <field name="name">Falta de seguimiento</field>
+        <field name="section_id" ref="helpdesk_section_herramientas_essilor" />
+        <field name="sequence">10</field>
+    </record>
+
+    <record id="helpdesk_ticket_category_micas_cortesia_select" model="helpdesk.ticket.category">
+        <field name="name">-- seleccionar --</field>
+        <field name="section_id" ref="helpdesk_section_micas_cortesia" />
+        <field name="sequence">1</field>
+    </record>
+
+    <record id="helpdesk_ticket_category_micas_cortesia_solicitud_folio"
+        model="helpdesk.ticket.category">
+        <field name="name">Solicitud folio micas de cortesía</field>
+        <field name="section_id" ref="helpdesk_section_micas_cortesia" />
+        <field name="sequence">10</field>
+    </record>
+
+    <record id="helpdesk_ticket_category_resurtido_consumibles_select"
+        model="helpdesk.ticket.category">
+        <field name="name">-- seleccionar --</field>
+        <field name="section_id" ref="helpdesk_section_resurtido_consumibles" />
+        <field name="sequence">1</field>
+    </record>
+
+    <record id="helpdesk_ticket_category_resurtido_consumibles_seguimiento"
+        model="helpdesk.ticket.category">
+        <field name="name">Seguimiento de solicitud</field>
+        <field name="section_id" ref="helpdesk_section_resurtido_consumibles" />
+        <field name="sequence">10</field>
+    </record>
+
+    <record id="helpdesk_ticket_category_plataforma_citas_select" model="helpdesk.ticket.category">
+        <field name="name">-- seleccionar --</field>
+        <field name="section_id" ref="helpdesk_section_plataforma_citas" />
+        <field name="sequence">1</field>
+    </record>
+
+    <record id="helpdesk_ticket_category_plataforma_citas_categoria"
+        model="helpdesk.ticket.category">
+        <field name="name">Plataforma citas</field>
+        <field name="section_id" ref="helpdesk_section_plataforma_citas" />
+        <field name="sequence">10</field>
+    </record>
+
+    <record id="helpdesk_ticket_category_internet_select" model="helpdesk.ticket.category">
+        <field name="name">-- seleccionar --</field>
+        <field name="section_id" ref="helpdesk_section_internet" />
+        <field name="sequence">1</field>
+    </record>
+
+    <record id="helpdesk_ticket_category_internet_sin_conexion" model="helpdesk.ticket.category">
+        <field name="name">Sin conexión a internet</field>
+        <field name="section_id" ref="helpdesk_section_internet" />
+        <field name="sequence">10</field>
+    </record>
+
+    <record id="helpdesk_ticket_category_usuario_contrasena_select" model="helpdesk.ticket.category">
+        <field name="name">-- seleccionar --</field>
+        <field name="section_id" ref="helpdesk_section_usuario_contrasena" />
+        <field name="sequence">1</field>
+    </record>
+
+    <record id="helpdesk_ticket_category_usuario_contrasena_categoria"
+        model="helpdesk.ticket.category">
+        <field name="name">Usuario y contraseña</field>
+        <field name="section_id" ref="helpdesk_section_usuario_contrasena" />
+        <field name="sequence">10</field>
+    </record>
+
+    <record id="helpdesk_ticket_category_labs_locales_select" model="helpdesk.ticket.category">
+        <field name="name">-- seleccionar --</field>
+        <field name="section_id" ref="helpdesk_section_labs_locales" />
+        <field name="sequence">1</field>
+    </record>
+
+    <record id="helpdesk_ticket_category_labs_locales_categoria" model="helpdesk.ticket.category">
+        <field name="name">Laboratorios locales</field>
+        <field name="section_id" ref="helpdesk_section_labs_locales" />
+        <field name="sequence">10</field>
+    </record>
+
+    <record id="helpdesk_ticket_category_papeleria_select" model="helpdesk.ticket.category">
+        <field name="name">-- seleccionar --</field>
+        <field name="section_id" ref="helpdesk_section_papeleria" />
+        <field name="sequence">1</field>
+    </record>
+
+    <record id="helpdesk_ticket_category_papeleria_seguimiento" model="helpdesk.ticket.category">
+        <field name="name">Seguimiento de solicitud</field>
+        <field name="section_id" ref="helpdesk_section_papeleria" />
+        <field name="sequence">10</field>
+    </record>
+
+    <record id="helpdesk_ticket_category_abasto_cuadro_basico_select"
+        model="helpdesk.ticket.category">
+        <field name="name">-- seleccionar --</field>
+        <field name="section_id" ref="helpdesk_section_abasto_cuadro_basico" />
+        <field name="sequence">1</field>
+    </record>
+
+    <record id="helpdesk_ticket_category_abasto_cuadro_basico_planeacion"
+        model="helpdesk.ticket.category">
+        <field name="name">Planeación y abasto</field>
+        <field name="section_id" ref="helpdesk_section_abasto_cuadro_basico" />
+        <field name="sequence">10</field>
+    </record>
+    <record id="helpdesk_ticket_category_equipo_optico_select"
+        model="helpdesk.ticket.category">
+        <field name="name">-- seleccionar --</field>
+        <field name="section_id" ref="helpdesk_section_equipo_optico" />
+        <field name="sequence">1</field>
+    </record>
+
+    <record id="helpdesk_ticket_category_equipo_optico_mantenimiento_equipo_optico"
+        model="helpdesk.ticket.category">
+        <field name="name">Mantenimiento equipo óptico</field>
+        <field name="section_id" ref="helpdesk_section_equipo_optico" />
+        <field name="sequence">10</field>
+    </record>
+</odoo>

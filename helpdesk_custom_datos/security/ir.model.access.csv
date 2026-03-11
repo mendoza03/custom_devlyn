@@ -1,0 +1,5 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_helpdesk_section_user,access.helpdesk.section.user,model_helpdesk_section,base.group_user,1,1,1,1
+access_helpdesk_ticket_category_user,access.helpdesk.ticket.category.user,model_helpdesk_ticket_category,base.group_user,1,1,1,1
+access_helpdesk_ticket_subcategory_user,access.helpdesk.ticket.subcategory.user,model_helpdesk_ticket_subcategory,base.group_user,1,1,1,1
+access_helpdesk_ticket_attachment_line_user,access.helpdesk.ticket.attachment.line.user,model_helpdesk_ticket_attachment_line,base.group_user,1,1,1,1

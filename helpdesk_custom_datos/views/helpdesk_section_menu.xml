@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <menuitem
+        id="helpdesk_menu_config_section"
+        name="Secciones"
+        parent="helpdesk.helpdesk_menu_config"
+        action="action_helpdesk_section"
+        sequence="120"
+    />
+
+    <menuitem
+        id="helpdesk_menu_config_category"
+        name="Categorías"
+        parent="helpdesk.helpdesk_menu_config"
+        action="action_helpdesk_ticket_category"
+        sequence="130"
+    />
+
+    <menuitem
+        id="helpdesk_menu_config_subcategory"
+        name="Subcategorías"
+        parent="helpdesk.helpdesk_menu_config"
+        action="action_helpdesk_ticket_subcategory"
+        sequence="140"
+    />
+
+</odoo>
