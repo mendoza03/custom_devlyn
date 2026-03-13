@@ -170,7 +170,19 @@ class HelpdeskTicket(models.Model):
 
 
     x_is_facturacion_reenvio = fields.Boolean(compute="_compute_x_is_facturacion_reenvio", store=False)
+    x_is_dev_real_tc_db = fields.Boolean(
+        compute="_compute_x_devolucion_category_flags",
+        store=False,
+    )
+    x_is_dev_real_cash_order = fields.Boolean(
+        compute="_compute_x_devolucion_category_flags",
+        store=False,
+    )
 
+    x_is_dev_real_cash_transfer = fields.Boolean(
+        compute="_compute_x_devolucion_category_flags",
+        store=False,
+    )
     x_refac_order_number = fields.Char(string="Pedido (*)", copy=False)
     x_refac_sale_order = fields.Char(string="Orden de Venta (*)", copy=False)
     x_refac_legal_name = fields.Char(string="Nombre o denominación social (*)", copy=False)
@@ -276,6 +288,218 @@ class HelpdeskTicket(models.Model):
     )
 
     x_refac_cp = fields.Char(string="CP (*)", copy=False)
+
+    x_card_client_name = fields.Char(string="Nombre del Cliente (*)", copy=False)
+    x_card_sap_center = fields.Char(string="Centro SAP (*)", copy=False)
+    x_card_sale_order = fields.Char(string="Orden de Venta (*)", copy=False)
+    x_card_order_number = fields.Char(string="Pedido (*)", copy=False)
+
+    x_card_sale_date = fields.Date(string="Fecha de Venta (*)", copy=False)
+    x_card_sale_amount = fields.Float(string="Monto de la venta (*)", copy=False)
+    x_card_refund_amount = fields.Float(string="Monto a devolver (*)", copy=False)
+    x_card_refund_reason = fields.Char(string="Motivo de devolución (*)", copy=False)
+
+    x_card_number_16_digits = fields.Char(string="N° completo de la tarjeta 16 dígitos (*)", copy=False)
+    x_card_expiration_mmaa = fields.Char(string="Fecha de Vencimiento MMAA (*)", copy=False)
+    x_card_authorization_number = fields.Char(string="Número de Autorización (*)", copy=False)
+    x_card_holder_relationship = fields.Char(string="Parentesco Titular de la tarjeta con nombre r (*)", copy=False)
+
+    x_card_client_received_product = fields.Selection(
+        [
+            ("select", "-- seleccionar --"),
+            ("si", "Sí"),
+            ("no", "No"),
+        ],
+        string="¿El cliente recibió su producto? (*)",
+        default="select",
+        copy=False,
+    )
+
+    x_duplicate_affiliation = fields.Char(string="Afiliación (Tarjeta y duplicados)", copy=False)
+    x_duplicate_tracking_id = fields.Char(string="No. de seguimiento o ID (Tarjeta y duplicados)", copy=False)
+    x_duplicate_internal_terminal = fields.Char(string="Terminal Interna (Tarjeta y duplicados)", copy=False)
+
+    x_duplicate_refund_request_attached = fields.Selection(
+        [
+            ("si", "Sí"),
+            ("no", "No"),
+        ],
+        string="¿Solicitud de devolución adjunta?",
+        copy=False,
+    )
+
+    x_exam_ov_cancelled = fields.Selection(
+        [
+            ("si", "Sí"),
+            ("no", "No"),
+        ],
+        string="OV Cancelada",
+        copy=False,
+    )
+
+    x_exam_refund_request_attached = fields.Selection(
+        [
+            ("si", "Sí"),
+            ("no", "No"),
+        ],
+        string="Solicitud de devolución adjunta?",
+        copy=False,
+    )
+    x_cash_society = fields.Char(string="Sociedad (*)", copy=False)
+    x_cash_banamex_branch_number = fields.Char(string="Número de sucursal Banamex (*)", copy=False)
+    x_cash_beneficiary_name = fields.Char(string="Nombre del beneficiario (*)", copy=False)
+    x_transfer_clabe_18 = fields.Char(string="Cuenta Clabe 18 dígitos (*)", copy=False)
+    x_transfer_account_holder = fields.Char(string="Titular de la cuenta (*)", copy=False)
+    x_transfer_bank = fields.Char(string="Banco (*)", copy=False)
+    x_ale_incident_type = fields.Selection(
+        [
+            ("select", "-- seleccionar --"),
+            ("alta_sucursal", "Alta de Sucursal"),
+            ("captura_minimo", "Captura de Mínimo"),
+            ("reinicio_contrasena", "Reinicio de Contraseña"),
+            ("otros", "Otros"),
+        ],
+        string="¿Que incidente tienes con la página ALE? (*)",
+        default="select",
+        copy=False,
+    )
+
+    x_ale_employee_name = fields.Char(string="Nombre del empleado (*)", copy=False)
+    x_ale_branch = fields.Char(string="Sucursal (*)", copy=False)
+    x_ale_region = fields.Char(string="Región (*)", copy=False)
+    x_ale_district = fields.Char(string="Distrito (*)", copy=False)
+
+    x_university_incident_type = fields.Selection(
+        [
+            ("select", "-- seleccionar --"),
+            ("alta_usuario", "Alta de usuario"),
+            ("nuevo_intento", "Nuevo intento"),
+            ("validacion_curso", "Validación de curso"),
+            ("no_cambia_estatus_curso_completo", "No cambia estatus de curso completo"),
+            ("no_habilita_siguiente_puesto", "No me habilita el siguiente puesto"),
+            ("otros", "Otros"),
+        ],
+        string="¿Qué incidente tuviste con el curso Online? (*)",
+        default="select",
+        copy=False,
+    )
+
+    x_university_employee_name = fields.Char(
+        string="Nombre del empleado a consultar (*)",
+        copy=False,
+    )
+    x_university_employee_number = fields.Char(
+        string="N° de empleado (*)",
+        copy=False,
+    )
+    x_university_branch = fields.Char(string="Sucursal (*)", copy=False)
+    x_university_zone = fields.Char(string="Zona. (*)", copy=False)
+    x_university_district = fields.Char(string="Distrito (*)", copy=False)
+    x_university_course_name = fields.Char(
+        string="Nombre del curso en línea (*)",
+        copy=False,
+    )
+    x_university_real_position = fields.Char(string="Puesto real (*)", copy=False)
+
+    x_eval_request_type = fields.Selection(
+        [
+            ("select", "-- seleccionar --"),
+            ("carpeta_producto", "Carpeta de Producto"),
+            ("credito_devlyn", "Credito Devlyn"),
+            ("garantias_10", "Garantias de 10"),
+        ],
+        string="Tipo de Solicitud (*)",
+        default="select",
+        copy=False,
+    )
+
+    x_eval_ale_incident = fields.Selection(
+        [
+            ("select", "-- seleccionar --"),
+            ("alta_sucursal", "Alta de Sucursal"),
+            ("captura_minimo", "Captura de Mínimo"),
+            ("reinicio_contrasena", "Reinicio de Contraseña"),
+            ("otros", "Otros"),
+        ],
+        string="¿Que incidente tienes con la página ALE? (*)",
+        default="select",
+        copy=False,
+    )
+
+    x_eval_employee_name = fields.Char(string="Nombre del empleado (*)", copy=False)
+    x_eval_employee_number = fields.Char(string="N° de empleado (*)", copy=False)
+    x_eval_branch = fields.Char(string="Sucursal (*)", copy=False)
+    x_eval_policies_type = fields.Selection(
+        [
+            ("select", "-- seleccionar --"),
+            ("activar_cuestionario_no_aprobado", "Activar nuevamente el cuestionario no aprobado"),
+            ("atencion_personalizada_ext_4271", "Atención personalizada marca Ext.:4271"),
+            ("no_estoy_registrado", "No estoy registrado"),
+            ("no_recuerdo_contrasena", "No recuerdo mi contraseña"),
+            ("no_considero_plan_carrera", "Por que no se considero en plan de carrera"),
+        ],
+        string="Página de Evaluaciones (*)",
+        default="select",
+        copy=False,
+    )
+
+    x_eval_policies_employee_name = fields.Char(string="Nombre del empleado (*)", copy=False)
+    x_eval_policies_employee_number = fields.Char(string="N° de empleado (*)", copy=False)
+    x_eval_policies_branch = fields.Char(string="Sucursal (*)", copy=False)
+    x_promotion_is_responsible = fields.Selection(
+        [
+            ("select", "-- seleccionar --"),
+            ("si", "Sí"),
+            ("no", "No"),
+        ],
+        string="Soy Responsable (*)",
+        default="select",
+        copy=False,
+    )
+
+    x_promotion_interested_name = fields.Char(
+        string="Nombre del interesado (*)",
+        copy=False,
+    )
+
+    x_promotion_employee_numbers = fields.Char(
+        string="Numero(s) de empleados (*)",
+        copy=False,
+    )
+
+    @api.depends("x_category_id")
+    def _compute_x_is_facturacion_reenvio(self):
+        target = self.env.ref(
+            "helpdesk_custom_datos.helpdesk_ticket_category_facturacion_reenvio_pdf_xml",
+            raise_if_not_found=False,
+        )
+        target_id = target.id if target else False
+        for rec in self:
+            rec.x_is_facturacion_reenvio = bool(
+                target_id and rec.x_category_id.id == target_id
+            )
+            
+    @api.depends("x_category_id")
+    def _compute_x_devolucion_category_flags(self):
+        tc_db_category = self.env.ref(
+            "helpdesk_custom_datos.helpdesk_ticket_category_devoluciones_reales_tarjeta_credito_debito",
+            raise_if_not_found=False,
+        )
+        cash_order_category = self.env.ref(
+            "helpdesk_custom_datos.helpdesk_ticket_category_devoluciones_reales_efectivo_orden_pago",
+            raise_if_not_found=False,
+        )
+        cash_transfer_category = self.env.ref(
+            "helpdesk_custom_datos.helpdesk_ticket_category_devoluciones_reales_efectivo_transferencia",
+            raise_if_not_found=False,
+        )
+        tc_db_id = tc_db_category.id if tc_db_category else False
+        cash_order_id = cash_order_category.id if cash_order_category else False
+        cash_transfer_id = cash_transfer_category.id if cash_transfer_category else False
+        for rec in self:
+            rec.x_is_dev_real_tc_db = bool(tc_db_id and rec.x_category_id.id == tc_db_id)
+            rec.x_is_dev_real_cash_order = bool(cash_order_id and rec.x_category_id.id == cash_order_id)
+            rec.x_is_dev_real_cash_transfer = bool(cash_transfer_id and rec.x_category_id.id == cash_transfer_id)
 
     @api.depends("x_category_id")
     def _compute_x_is_facturacion_reenvio(self):

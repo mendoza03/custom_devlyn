@@ -329,6 +329,323 @@
                             </group>
 
                         </div>
+                        <div class="mt16"
+                            invisible="not (x_is_dev_real_tc_db and x_subcategory_code in ('cargos_duplicados', 'error_examen', 'fecha_entrega', 'mal_servicio'))">
+
+                            <div class="o_form_sheet bg-success text-white p-2 rounded-2 mb-3">
+                                <strong>Tarjeta de crédito | débito</strong>
+                            </div>
+
+                            <group col="4">
+                                <field name="x_card_client_name" required="1" />
+                                <field name="x_card_sap_center" required="1" />
+                                <field name="x_card_sale_order" required="1" />
+                                <field name="x_card_order_number" required="1" />
+
+                                <field name="x_card_sale_date" required="1" />
+                                <field name="x_card_sale_amount" required="1" />
+                                <field name="x_card_refund_amount" required="1" />
+                                <field name="x_card_refund_reason" required="1" />
+
+                                <field name="x_card_number_16_digits" required="1" />
+                                <field name="x_card_expiration_mmaa" required="1" />
+                                <field name="x_card_authorization_number" required="1" />
+                                <field name="x_card_holder_relationship" required="1" />
+                            </group>
+
+                            <group col="4" class="mt8">
+                                <field name="x_card_client_received_product" required="1" />
+                            </group>
+
+                        </div>
+
+                        <div class="mt16"
+                            invisible="not (x_is_dev_real_tc_db and x_subcategory_code == 'cargos_duplicados')">
+
+                            <div class="o_form_sheet bg-success text-white p-2 rounded-2 mb-3">
+                                <strong>Cargos duplicados</strong>
+                            </div>
+
+                            <group col="4">
+                                <field name="x_duplicate_affiliation" required="1" />
+                                <field name="x_duplicate_tracking_id" required="1" />
+                                <field name="x_duplicate_internal_terminal" required="1" />
+                                <field name="x_duplicate_refund_request_attached" widget="radio"
+                                    options="{'horizontal': true}" required="1" />
+                            </group>
+
+                        </div>
+                        <div class="mt16"
+                            invisible="not (x_is_dev_real_tc_db and x_subcategory_code == 'error_examen')">
+
+                            <div class="o_form_sheet bg-success text-white p-2 rounded-2 mb-3">
+                                <strong>Error de examen</strong>
+                            </div>
+
+                            <group col="4">
+                                <field name="x_exam_ov_cancelled"
+                                    widget="radio"
+                                    options="{'horizontal': true}"
+                                    required="1" />
+
+                                <field name="x_exam_refund_request_attached"
+                                    widget="radio"
+                                    options="{'horizontal': true}"
+                                    required="1" />
+                            </group>
+
+                        </div>
+                        <div class="mt16"
+                            invisible="not (x_is_dev_real_tc_db and x_subcategory_code == 'fecha_entrega')">
+
+                            <div class="o_form_sheet bg-success text-white p-2 rounded-2 mb-3">
+                                <strong>Fecha de entrega</strong>
+                            </div>
+
+                            <group col="4">
+                                <field name="x_exam_ov_cancelled"
+                                    widget="radio"
+                                    options="{'horizontal': true}"
+                                    required="1" />
+
+                                <field name="x_exam_refund_request_attached"
+                                    widget="radio"
+                                    options="{'horizontal': true}"
+                                    required="1" />
+                            </group>
+
+                        </div>
+                        <div class="mt16"
+                            invisible="not (x_is_dev_real_cash_order and x_subcategory_code in ('error_examen', 'fecha_entrega', 'mal_servicio'))">
+
+                            <div class="o_form_sheet bg-success text-white p-2 rounded-2 mb-3">
+                                <strong>Efectivo Orden de Pago</strong>
+                            </div>
+
+                            <group col="4">
+                                <field name="x_card_client_name" required="1" />
+                                <field name="x_card_sap_center" required="1" />
+                                <field name="x_cash_society" required="1" />
+                                <field name="x_card_sale_order" required="1" />
+
+                                <field name="x_card_order_number" required="1" />
+                                <field name="x_card_sale_date" required="1" />
+                                <field name="x_card_sale_amount" required="1" />
+                                <field name="x_card_refund_amount" required="1" />
+
+                                <field name="x_card_refund_reason" required="1" />
+                                <field name="x_cash_banamex_branch_number" required="1" />
+                                <field name="x_cash_beneficiary_name" required="1" />
+                            </group>
+
+                            <div class="mt8">
+                                <strong>Adjuntar Vo. Bo. Gerente Distrital o de Zona.</strong>
+                            </div>
+
+                            <div class="mt8">
+                                <strong>Adjuntar INE Beneficiario</strong>
+                            </div>
+
+                            <group col="4" class="mt16">
+                                <field name="x_card_holder_relationship" required="1" />
+                                <field name="x_card_client_received_product" required="1" />
+                            </group>
+
+                        </div>
+
+                        <div class="mt16"
+                            invisible="not (x_is_dev_real_cash_order and x_subcategory_code == 'error_examen')">
+
+                            <div class="o_form_sheet bg-success text-white p-2 rounded-2 mb-3">
+                                <strong>Error de examen</strong>
+                            </div>
+
+                            <group col="4">
+                                <field name="x_exam_ov_cancelled"
+                                    widget="radio"
+                                    options="{'horizontal': true}"
+                                    required="1" />
+
+                                <field name="x_exam_refund_request_attached"
+                                    widget="radio"
+                                    options="{'horizontal': true}"
+                                    required="1" />
+                            </group>
+
+                        </div>
+                        <div class="mt16"
+                            invisible="not (x_is_dev_real_cash_order and x_subcategory_code == 'fecha_entrega')">
+
+                            <div class="o_form_sheet bg-success text-white p-2 rounded-2 mb-3">
+                                <strong>Fecha de entrega</strong>
+                            </div>
+
+                            <group col="4">
+                                <field name="x_exam_ov_cancelled"
+                                    widget="radio"
+                                    options="{'horizontal': true}"
+                                    required="1" />
+
+                                <field name="x_exam_refund_request_attached"
+                                    widget="radio"
+                                    options="{'horizontal': true}"
+                                    required="1" />
+                            </group>
+
+                        </div>
+                        <div class="mt16"
+                            invisible="not (x_is_dev_real_cash_transfer and x_subcategory_code in ('error_examen', 'fecha_entrega', 'mal_servicio'))">
+
+                            <div class="o_form_sheet bg-success text-white p-2 rounded-2 mb-3">
+                                <strong>Efectivo Transferencia</strong>
+                            </div>
+
+                            <group col="4">
+                                <field name="x_card_client_name" required="1" />
+                                <field name="x_card_sap_center" required="1" />
+                                <field name="x_cash_society" required="1" />
+                                <field name="x_card_sale_order" required="1" />
+
+                                <field name="x_card_order_number" required="1" />
+                                <field name="x_card_sale_date" required="1" />
+                                <field name="x_card_sale_amount" required="1" />
+                                <field name="x_card_refund_amount" required="1" />
+
+                                <field name="x_card_refund_reason" required="1" />
+                                <field name="x_transfer_clabe_18" required="1" />
+                                <field name="x_transfer_account_holder" required="1" />
+                                <field name="x_transfer_bank" required="1" />
+                            </group>
+
+                            <group col="4" class="mt16">
+                                <field name="x_card_holder_relationship" required="1" />
+                                <field name="x_card_client_received_product" required="1" />
+                            </group>
+
+                        </div>
+
+                        <div class="mt16"
+                            invisible="not (x_is_dev_real_cash_transfer and x_subcategory_code == 'error_examen')">
+
+                            <div class="o_form_sheet bg-success text-white p-2 rounded-2 mb-3">
+                                <strong>Error de examen</strong>
+                            </div>
+
+                            <group col="4">
+                                <field name="x_exam_ov_cancelled"
+                                    widget="radio"
+                                    options="{'horizontal': true}"
+                                    required="1" />
+
+                                <field name="x_exam_refund_request_attached"
+                                    widget="radio"
+                                    options="{'horizontal': true}"
+                                    required="1" />
+                            </group>
+
+                        </div>
+                        <div class="mt16"
+                            invisible="not (x_is_dev_real_cash_transfer and x_subcategory_code == 'fecha_entrega')">
+
+                            <div class="o_form_sheet bg-success text-white p-2 rounded-2 mb-3">
+                                <strong>Fecha de entrega</strong>
+                            </div>
+
+                            <group col="4">
+                                <field name="x_exam_ov_cancelled"
+                                    widget="radio"
+                                    options="{'horizontal': true}"
+                                    required="1" />
+
+                                <field name="x_exam_refund_request_attached"
+                                    widget="radio"
+                                    options="{'horizontal': true}"
+                                    required="1" />
+                            </group>
+
+                        </div>
+                        <div class="mt16" invisible="x_subcategory_code != 'ale_pagina_web'">
+
+                            <div class="o_form_sheet bg-success text-white p-2 rounded-2 mb-3">
+                                <strong>ALE (página web)</strong>
+                            </div>
+
+                            <group col="4">
+                                <field name="x_ale_incident_type" required="1" />
+                                <field name="x_ale_employee_name" required="1" />
+                                <field name="x_ale_branch" required="1" />
+                                <field name="x_ale_region" required="1" />
+                                <field name="x_ale_district" required="1" />
+                            </group>
+
+                        </div>
+                        <div class="mt16" invisible="x_subcategory_code != 'universidad_devlyn'">
+
+                            <div class="o_form_sheet bg-success text-white p-2 rounded-2 mb-3">
+                                <strong>Universidad Devlyn</strong>
+                            </div>
+
+                            <group col="4">
+                                <field name="x_university_incident_type" required="1" />
+                                <field name="x_university_employee_name" required="1" />
+                                <field name="x_university_employee_number" required="1" />
+                                <field name="x_university_branch" required="1" />
+
+                                <field name="x_university_zone" required="1" />
+                                <field name="x_university_district" required="1" />
+                                <field name="x_university_course_name" required="1" />
+                                <field name="x_university_real_position" required="1" />
+                            </group>
+
+                        </div>
+                        <div class="mt16"
+                            invisible="x_subcategory_code != 'pagina_evaluaciones_productos'">
+
+                            <div class="o_form_sheet bg-success text-white p-2 rounded-2 mb-3">
+                                <strong>Página de evaluaciones | Carpeta de productos</strong>
+                            </div>
+
+                            <group col="4">
+
+                                <field name="x_eval_request_type" required="1" />
+                                <field name="x_eval_ale_incident" required="1" />
+                                <field name="x_eval_employee_name" required="1" />
+                                <field name="x_eval_employee_number" required="1" />
+
+                                <field name="x_eval_branch" required="1" />
+
+                            </group>
+
+                        </div>
+                        <div class="mt16"
+                            invisible="x_subcategory_code != 'pagina_evaluaciones_politicas'">
+
+                            <div class="o_form_sheet bg-success text-white p-2 rounded-2 mb-3">
+                                <strong>Página de evaluaciones (manual de políticas y
+                                    procedimientos)</strong>
+                            </div>
+
+                            <group col="4">
+                                <field name="x_eval_policies_type" required="1" />
+                                <field name="x_eval_policies_employee_name" required="1" />
+                                <field name="x_eval_policies_employee_number" required="1" />
+                                <field name="x_eval_policies_branch" required="1" />
+                            </group>
+
+                        </div>
+                        <div class="mt16" invisible="x_subcategory_code != 'promocion_puesto'">
+
+                            <div class="o_form_sheet bg-success text-white p-2 rounded-2 mb-3">
+                                <strong>Promoción de puesto</strong>
+                            </div>
+
+                            <group col="4">
+                                <field name="x_promotion_is_responsible" required="1" />
+                                <field name="x_promotion_interested_name" required="1" />
+                                <field name="x_promotion_employee_numbers" required="1" />
+                            </group>
+
+                        </div>
                         <div class="mt16">
                             <h3>Anexos</h3>
 
