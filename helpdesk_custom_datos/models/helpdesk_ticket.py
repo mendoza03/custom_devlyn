@@ -183,6 +183,12 @@ class HelpdeskTicket(models.Model):
         compute="_compute_x_devolucion_category_flags",
         store=False,
     )
+
+    x_is_receta_lc = fields.Boolean(
+        compute="_compute_x_category_flags_extra",
+        store=False,
+    )
+
     x_refac_order_number = fields.Char(string="Pedido (*)", copy=False)
     x_refac_sale_order = fields.Char(string="Orden de Venta (*)", copy=False)
     x_refac_legal_name = fields.Char(string="Nombre o denominación social (*)", copy=False)
@@ -466,7 +472,563 @@ class HelpdeskTicket(models.Model):
         string="Numero(s) de empleados (*)",
         copy=False,
     )
+    x_display_missing_promo_campaign = fields.Selection(
+        [
+            ("select", "-- seleccionar --"),
+            ("barnner_50x150", "Barnner de .50x1.50"),
+            ("barnner_75x175", "Barnner de .75x1.75"),
+            ("paquete_no_llego", "El paquete no llego"),
+            ("identificador_30x30", "Identificador de 30cm x 30cm"),
+            ("identificador_35x17", "Identificador de 35cm x 17cm"),
+            ("poster_sin_ojillos", "Poster sin Ojillos (Porta Promociones)"),
+            ("poster_con_ojillos", "Poster con ojillos (Aparador)"),
+            ("regleta_promocion_secundaria", "Regleta promoción secundaria"),
+            ("solicitud_adicional", "Solicitud Adicional"),
+            ("ten_card", "Ten Card"),
+            ("vinil_jitomatazo", "Vinil Jitomatazo"),
+        ],
+        string="Faltante de Campaña Promociones",
+        default="select",
+        copy=False,
+    )
 
+    x_display_manual_read = fields.Selection(
+        [
+            ("select", "-- seleccionar --"),
+            ("si", "Sí"),
+            ("no", "No"),
+        ],
+        string="Lei el manual (*)",
+        default="select",
+        copy=False,
+    )
+
+    x_display_aparador_type = fields.Char(string="Tipo de Aparador (*)", copy=False)
+
+    x_display_checklist_review = fields.Selection(
+        [
+            ("select", "-- seleccionar --"),
+            ("si", "Sí"),
+            ("no", "No"),
+        ],
+        string="Revise Check List (*)",
+        default="select",
+        copy=False,
+    )
+
+    x_display_missing_campaign_aparador = fields.Selection(
+        [
+            ("select", "-- seleccionar --"),
+            ("cenefa_repisa", "Cenefa de repisa"),
+            ("colgante", "Colgante"),
+            ("paquete_no_llego", "El paquete no llego"),
+            ("lona_aparador", "Lona de Aparador"),
+            ("solicitud_adicional", "Solicitud Adicional"),
+            ("vinil_aparador", "Vinil de Aparador"),
+        ],
+        string="Faltante de Campaña en Aparador",
+        default="select",
+        copy=False,
+    )
+
+    x_display_other = fields.Selection(
+        [
+            ("si", "Sí"),
+            ("no", "No"),
+        ],
+        string="Otro",
+        copy=False,
+    )
+
+    x_display_checklist_attached = fields.Selection(
+        [
+            ("si", "Sí"),
+            ("no", "No"),
+        ],
+        string="Es obligatorio añadir el check list donde se señale el elemento faltante.",
+        copy=False,
+    )
+
+    x_display_manual_read = fields.Selection(
+        [
+            ("select", "-- seleccionar --"),
+            ("si", "Sí"),
+            ("no", "No"),
+        ],
+        string="Lei el manual (*)",
+        default="select",
+        copy=False,
+    )
+
+    x_display_aparador_type = fields.Char(string="Tipo de Aparador (*)", copy=False)
+
+    x_display_checklist_review = fields.Selection(
+        [
+            ("select", "-- seleccionar --"),
+            ("si", "Sí"),
+            ("no", "No"),
+        ],
+        string="Revise Check List (*)",
+        default="select",
+        copy=False,
+    )
+
+    x_display_missing_campaign_aparador = fields.Selection(
+        [
+            ("select", "-- seleccionar --"),
+            ("cenefa_repisa", "Cenefa de repisa"),
+            ("colgante", "Colgante"),
+            ("paquete_no_llego", "El paquete no llego"),
+            ("lona_aparador", "Lona de Aparador"),
+            ("solicitud_adicional", "Solicitud Adicional"),
+            ("vinil_aparador", "Vinil de Aparador"),
+        ],
+        string="Faltante de Campaña en Aparador",
+        default="select",
+        copy=False,
+    )
+
+    x_display_other = fields.Selection(
+        [
+            ("si", "Sí"),
+            ("no", "No"),
+        ],
+        string="Otro",
+        copy=False,
+    )
+
+    x_display_checklist_attached = fields.Selection(
+        [
+            ("si", "Sí"),
+            ("no", "No"),
+        ],
+        string="Es obligatorio añadir el check list donde se señale el elemento faltante.",
+        copy=False,
+    )
+
+    x_damaged_element_to_replace = fields.Char(
+        string="Elemento dañado a reponer (*)",
+        copy=False,
+    )
+
+    x_damaged_brief_description = fields.Char(
+        string="Breve Descripción (*)",
+        copy=False,
+    )
+
+    x_damaged_quantity = fields.Char(
+        string="Cantidad (*)",
+        copy=False,
+    )
+
+    x_damaged_measurements = fields.Char(
+        string="Medidas (*)",
+        copy=False,
+    )
+
+    x_damaged_photo_attached = fields.Selection(
+        [
+            ("si", "Sí"),
+            ("no", "No"),
+        ],
+        string="Agregar en anexos la foto de material dañado (*)",
+        copy=False,
+    )
+
+    x_agreement_support_type = fields.Selection(
+        [
+            ("select", "-- seleccionar --"),
+            ("001_999_zona_metro", "001_999 Zona Metro"),
+            ("6000_6499_zona_metro", "6000_6499 Zona Metro"),
+            ("3000_3999_zona_foranea", "3000_3999 Zona Foranea"),
+        ],
+        string="Convenios (*)",
+        default="select",
+        copy=False,
+    )
+
+    x_agreement_number = fields.Char(
+        string="N° de Convenio (*)",
+        copy=False,
+    )
+
+    x_agreement_social_name = fields.Char(
+        string="Nombre o denominación social (*)",
+        copy=False,
+    )
+
+    x_payment_center = fields.Char(
+        string="Centro (*)",
+        copy=False,
+    )
+
+    x_payment_pos_order = fields.Char(
+        string="Pedido POS. (*)",
+        copy=False,
+    )
+
+    x_payment_sale_date = fields.Date(
+        string="Fecha de Venta (*)",
+        copy=False,
+    )
+
+    x_payment_sale_total = fields.Float(
+        string="Total de Venta (*)",
+        copy=False,
+    )
+
+    x_payment_number_1 = fields.Char(
+        string="Pago N°1 (*)",
+        copy=False,
+    )
+
+    x_payment_receipt_1 = fields.Char(
+        string="Recibo N°1 (*)",
+        copy=False,
+    )
+
+    x_payment_date_1 = fields.Date(
+        string="Fecha de pago N°1 (*)",
+        copy=False,
+    )
+
+
+    x_capture_ov_error_type = fields.Selection(
+        [
+            ("select", "-- seleccionar --"),
+            ("error_precio_ceros", "Error en precio $0.0 (Ceros)"),
+            ("error_recuperacion_medidas", "Error de recuperación en medidas"),
+            ("error_cierre_venta", "Error de cierre de Venta"),
+            ("otros", "Otros"),
+        ],
+        string="Tipo de Error (*)",
+        default="select",
+        copy=False,
+    )
+
+    x_capture_ov_sphere_od = fields.Char(string="Esfera OD (*)", copy=False)
+    x_capture_ov_sphere_oi = fields.Char(string="Esfera OI (*)", copy=False)
+    x_capture_ov_material_type = fields.Char(string="Tipo de Material (*)", copy=False)
+    x_capture_ov_work_type = fields.Char(string="Tipo de Trabajo (*)", copy=False)
+    x_capture_ov_discount_type = fields.Char(string="Tipo de Descuento (*)", copy=False)
+    x_capture_ov_payment_type = fields.Char(string="Tipo de Pago (*)", copy=False)
+    x_capture_ov_employee_number = fields.Char(string="N° de empleado (*)", copy=False)
+
+    x_bag_number = fields.Char(
+        string="Bolsa (*)",
+        copy=False,
+    )
+
+    x_bag_key = fields.Char(
+        string="Clave de la bolsa (*)",
+        copy=False,
+    )
+
+    x_sap_branch_send = fields.Char(
+        string="N° de sucursal SAP que envía traspaso (Ejem.: A303) (*)",
+        copy=False,
+    )
+
+    x_sap_branch_receive = fields.Char(
+        string="N° de sucursal SAP que recibe traspaso (Ejem.: A304) (*)",
+        copy=False,
+    )
+
+    x_transport_number = fields.Char(
+        string="N° de Transporte (*)",
+        copy=False,
+    )
+
+    x_transfer = fields.Selection(
+        [
+            ("select", "-- seleccionar --"),
+            ("si", "Sí"),
+            ("no", "No"),
+        ],
+        string="Traspaso (*)",
+        default="select",
+        copy=False,
+    )
+
+
+    x_order_without_packaging_pos_order = fields.Char(
+        string="Pedido POS. (*)",
+        copy=False,
+    )
+
+    x_order_without_packaging_date = fields.Date(
+        string="Fecha (*)",
+        copy=False,
+    )
+
+    x_order_without_packaging_branch = fields.Char(
+        string="Centro o Sucursal (*)",
+        copy=False,
+    )
+    x_return_capture_error_type = fields.Selection(
+        [
+            ("select", "-- seleccionar --"),
+            ("error_precio_ceros", "Error en precio $0.0 (Ceros)"),
+            ("error_recuperacion_medidas", "Error de recuperación en medidas"),
+            ("error_cierre_venta", "Error de cierre de Venta"),
+            ("otros", "Otros"),
+        ],
+        string="Tipo de Error (*)",
+        default="select",
+        copy=False,
+    )
+
+    x_return_capture_type = fields.Selection(
+        [
+            ("select", "-- seleccionar --"),
+            ("devolucion", "Devolucion"),
+            ("garantia_10", "Garantia de 10"),
+            ("retallado", "Retallado"),
+        ],
+        string="Tipo de Devolución (*)",
+        default="select",
+        copy=False,
+    )
+
+    x_return_capture_sale_order = fields.Char(
+        string="Orden de Venta (*)",
+        copy=False,
+    )
+
+    x_return_capture_order = fields.Char(
+        string="Pedido (*)",
+        copy=False,
+    )
+
+    x_return_capture_cause_number = fields.Char(
+        string="Causa Número (*)",
+        copy=False,
+    )
+
+    x_rescue_client_name = fields.Char(
+        string="Nombre del cliente (*)",
+        copy=False,
+    )
+
+    x_rescue_client_phone = fields.Char(
+        string="Teléfono del cliente. (*)",
+        copy=False,
+    )
+
+    x_rescue_sale_order = fields.Char(
+        string="Orden de Venta (*)",
+        copy=False,
+    )
+
+    x_rescue_order_number = fields.Char(
+        string="Pedido (*)",
+        copy=False,
+    )
+
+    x_rescue_client_email = fields.Char(
+        string="Correo electronico del cliente (*)",
+        copy=False,
+    )
+
+    x_online_fulfillment = fields.Char(string="Fullfilment (*)", copy=False)
+    x_online_sale_date = fields.Date(string="Fecha de Venta (*)", copy=False)
+    x_online_customer_email = fields.Char(string="Correo Electronico del Cliente", copy=False)
+    x_online_pos_order = fields.Char(string="Pedido POS. (*)", copy=False)
+    x_online_customer_name = fields.Char(string="Nombre del Cliente (*)", copy=False)
+
+    x_online_attachment_capture = fields.Selection(
+        [
+            ("si", "Sí"),
+            ("no", "No"),
+        ],
+        string="Adjuntar Captura cliente, producto recibido y Captura POS (*)",
+        copy=False,
+    )
+
+    x_online_missing_product = fields.Char(string="Producto faltante (*)", copy=False)
+
+    x_online_requested_graduation = fields.Char(string="Graduación solicitada (*)", copy=False)
+    x_online_received_graduation = fields.Char(string="Graduación recibida (*)", copy=False)
+    x_online_return_sap_center = fields.Char(string="Centro SAP en el que el cliente devolverá (*)", copy=False)
+    x_online_return_bag_cedis = fields.Char(string="Bolsa en la que se retorna el pedido a CeDIs (*)", copy=False)
+
+    x_online_reported_customer_vtex = fields.Char(string="Vtex de cliente que reporta (*)", copy=False)
+    x_online_arrived_order_vtex = fields.Char(string="Vtex de pedido que le llegó al cliente (*)", copy=False)
+    x_online_received_order_name = fields.Char(string="A nombre de quién está el pedido recibido: (*)", copy=False)
+    x_online_received_product = fields.Char(string="Producto recibido (*)", copy=False)
+
+    x_online_return_reason = fields.Char(string="Razón por la que solicita devolución (*)", copy=False)
+    x_online_payment_reference = fields.Char(string="Referencia de pago (*)", copy=False)
+
+    x_online_payment_platform = fields.Selection(
+        [
+            ("select", "-- seleccionar --"),
+            ("mercado_pago", "Mercado pago"),
+            ("kueskipay", "Kueskipay"),
+            ("paypal", "Paypal"),
+        ],
+        string="Plataforma de pago (*)",
+        default="select",
+        copy=False,
+    )
+    x_online_correct_graduation = fields.Char(string="Graduación correcta (*)", copy=False)
+
+    x_online_promised_date = fields.Date(string="Fecha Promesa", copy=False)
+
+    x_online_guide_number = fields.Char(string="N° de guía (*)", copy=False)
+    x_online_receiver_name = fields.Char(
+        string="Nombre de persona que puede recibir el paquete además del titular.",
+        copy=False,
+    )
+    x_online_contact_phone = fields.Char(string="Teléfono de contacto", copy=False)
+
+    x_online_client_phone = fields.Char(string="Teléfono del cliente. (*)", copy=False)
+    x_online_new_address = fields.Char(string="Nuevo domicilio completo.", copy=False)
+    x_online_additional_references = fields.Char(string="Referencias adicionales (*)", copy=False)
+
+    x_online_exam_sap_center = fields.Char(
+        string="CentroSAP donde se realizó examen de la vista",
+        copy=False,
+    )
+    x_online_exam_date = fields.Date(
+        string="Fecha en que se realizó el examen de la vista",
+        copy=False,
+    )
+    x_online_exam_employee_number = fields.Char(
+        string="Número de empleado de quien realiza el examen de la vista",
+        copy=False,
+    )
+    x_online_exam_employee_name = fields.Char(
+        string="Nombre de quien realiza el examen de la vista",
+        copy=False,
+    )
+    x_online_payment_method = fields.Char(string="Método de pago", copy=False)
+
+    x_online_sphere_od = fields.Char(string="Esfera OD (*)", copy=False)
+    x_online_sphere_oi = fields.Char(string="Esfera OI (*)", copy=False)
+
+    x_online_cylinder_od = fields.Char(string="Cilindro OD", copy=False)
+    x_online_cylinder_oi = fields.Char(string="Cilindro OI", copy=False)
+
+    x_online_axis_od = fields.Char(string="Eje OD", copy=False)
+    x_online_axis_oi = fields.Char(string="Eje OI", copy=False)
+
+    x_online_ipd_od = fields.Char(string="Distancia interpupilar OD", copy=False)
+    x_online_ipd_oi = fields.Char(string="Distancia interpupilar OI", copy=False)
+
+    x_online_unshipped_order = fields.Char(string="Pedido (*)", copy=False)
+
+    x_online_work_order_number = fields.Char(
+        string="N° de Orden de Trabajo (*)",
+        copy=False,
+    )
+
+    x_frame_search_sale_order = fields.Char(
+        string="Orden de Venta (*)",
+        copy=False,
+    )
+
+    x_frame_search_frame_code = fields.Char(
+        string="Código de Armazón",
+        copy=False,
+    )
+
+    x_frame_search_packaging_bag = fields.Char(
+        string="Bolsa de embalaje",
+        copy=False,
+    )
+
+    x_frame_search_shipping_date = fields.Date(
+        string="Fecha de envío",
+        copy=False,
+    )
+
+    x_frame_search_courier = fields.Char(
+        string="Mensajería. (*)",
+        copy=False,
+    )
+
+    x_frame_search_cause = fields.Selection(
+        [
+            ("select", "-- seleccionar --"),
+            ("perdida_laboratorio_essilor", "Pédida laboratorio Essilor"),
+            ("perdida_laboratorio_local", "Pérdida laboratorio local"),
+            ("perdida_mensajeria", "Pérdida mensajería"),
+            ("dano_laboratorio_essilor", "Daño laboratorio Essilor"),
+            ("dano_laboratorio_local", "Daño laboratorio local"),
+            ("dano_mensajeria", "Daño mensajería"),
+        ],
+        string="Causa (*)",
+        default="select",
+        copy=False,
+    )
+
+    x_frame_search_other_specify = fields.Char(
+        string="Otro (especificar) (*)",
+        copy=False,
+    )
+
+    x_lc_recipe_name = fields.Char(
+        string="Receta lente de Contacto",
+        copy=False,
+    )
+
+    x_lc_ot_number = fields.Char(
+        string="OT (*)",
+        copy=False,
+    )
+
+    x_lc_order_number = fields.Char(
+        string="Pedido (*)",
+        copy=False,
+    )
+
+    x_lc_provider = fields.Selection(
+        [
+            ("select", "-- seleccionar --"),
+            ("alcon", "Alcon"),
+            ("ciba", "Ciba"),
+            ("novartis", "Novartis"),
+            ("otro", "Otro"),
+        ],
+        string="Proveedor (*)",
+        default="select",
+        copy=False,
+    )
+
+    x_quality_order_number = fields.Char(
+        string="Pedido (*)",
+        copy=False,
+    )
+
+    x_quality_customer_name = fields.Char(
+        string="Nombre del Cliente (*)",
+        copy=False,
+    )
+
+    x_quality_customer_phone = fields.Char(
+        string="Teléfono del cliente. (*)",
+        copy=False,
+    )
+
+    x_quality_shipping_bag = fields.Char(
+        string="Bolsa de envío (*)",
+        copy=False,
+    )
+
+    x_quality_courier_guide = fields.Char(
+        string="Guia de Paquetería (*)",
+        copy=False,
+    )
+
+    x_quality_evidence_attached = fields.Selection(
+        [
+            ("si", "Sí"),
+            ("no", "No"),
+        ],
+        string="Es necesario adjuntar imagen como evidencia. (*)",
+        copy=False,
+    )
     @api.depends("x_category_id")
     def _compute_x_is_facturacion_reenvio(self):
         target = self.env.ref(
@@ -475,9 +1037,7 @@ class HelpdeskTicket(models.Model):
         )
         target_id = target.id if target else False
         for rec in self:
-            rec.x_is_facturacion_reenvio = bool(
-                target_id and rec.x_category_id.id == target_id
-            )
+            rec.x_is_facturacion_reenvio = bool(target_id and rec.x_category_id.id == target_id)
             
     @api.depends("x_category_id")
     def _compute_x_devolucion_category_flags(self):
@@ -502,11 +1062,14 @@ class HelpdeskTicket(models.Model):
             rec.x_is_dev_real_cash_transfer = bool(cash_transfer_id and rec.x_category_id.id == cash_transfer_id)
 
     @api.depends("x_category_id")
-    def _compute_x_is_facturacion_reenvio(self):
-        target = self.env.ref(
-            "helpdesk_custom_datos.helpdesk_ticket_category_facturacion_reenvio_pdf_xml",
+    def _compute_x_category_flags_extra(self):
+        receta_lc_category = self.env.ref(
+            "helpdesk_custom_datos.helpdesk_ticket_category_receta_lc_lente_contacto",
             raise_if_not_found=False,
         )
-        target_id = target.id if target else False
+        receta_lc_id = receta_lc_category.id if receta_lc_category else False
+
         for rec in self:
-            rec.x_is_facturacion_reenvio = bool(target_id and rec.x_category_id.id == target_id)
+            rec.x_is_receta_lc = bool(
+                receta_lc_id and rec.x_category_id.id == receta_lc_id
+            )
