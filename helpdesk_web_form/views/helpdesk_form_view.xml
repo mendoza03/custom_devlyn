@@ -2,7 +2,7 @@
 <odoo>
     <template id="helpdesk_form_template">
         <t t-call="website.layout">
-            <div class="container mt-5">
+            <div class="container mt-5 mb-5">
 
                 <h3>Datos generales</h3>
 
@@ -35,7 +35,7 @@
 
                     <!-- Subcategoría -->
                     <div class="col-md-6">
-                        <label>Subcategoría (*)</label>
+                        <label>Subcategoría</label>
                         <select name="x_subcategory_id" id="subcategory" class="form-select">
                             <option value="">-- seleccionar --</option>
                         </select>
@@ -44,73 +44,782 @@
                     <!-- Descripción Detallada -->
                     <div class="col-12">
                         <label>Descripción Detallada</label>
-                        <textarea name="x_detailed_description" class="form-control o_wysiwyg"/>
+                        <textarea name="x_detailed_description" class="form-control" rows="4"/>
+                    </div>
+
+                    <div class="col-12">
+                        <div class="alert alert-warning">
+                            <strong>POR FAVOR, REVISAR QUE TODOS LOS DATOS SEAN CORRECTOS ANTES DE ENVIAR TICKET. GRACIAS</strong>
+                        </div>
                     </div>
 
                     <!-- ===== BLOQUE: Micas sin cortar ===== -->
-                    <div id="micas-sin-cortar-block" class="col-12 row g-3" style="display:none;">
-                    <div class="col-12 mt-4">
+                    <div id="block-micas_sin_cortar" class="col-12 subcategory-block" style="display:none;">
+                        <div class="alert alert-info">
+                            <strong>Antes de levantar el ticket por favor revisa el comunicado ENVIO MICAS SIN CORTAR</strong>
+                        </div>
                         <h5 class="border-bottom pb-2">Micas sin cortar</h5>
+                        <div class="row g-3">
+                            <div class="col-md-6">
+                                <label>Pedido (*)</label>
+                                <input type="text" name="x_order_number" class="form-control"/>
+                            </div>
+                            <div class="col-md-6">
+                                <label>Bolsa (*)</label>
+                                <input type="text" name="x_bag" class="form-control"/>
+                            </div>
+                            <div class="col-md-6">
+                                <label>Armazón del cliente? (*)</label>
+                                <select name="x_customer_warehouse" class="form-select">
+                                    <option value="select">-- seleccionar --</option>
+                                    <option value="si">Sí</option>
+                                    <option value="no">No</option>
+                                </select>
+                            </div>
+                            <div class="col-md-6">
+                                <label>Persona que Autoriza (*)</label>
+                                <input type="text" name="x_authorized_by" class="form-control"/>
+                            </div>
+                            <div class="col-md-6">
+                                <label>LAB indicado en portal de seguimiento de trabajos (*)</label>
+                                <input type="text" name="x_lab_indicated" class="form-control"/>
+                            </div>
+                            <div class="col-md-6">
+                                <label>Tipo de pedido (*)</label>
+                                <select name="x_order_type" id="x_order_type_micas" class="form-select order-type-select">
+                                    <option value="select">-- seleccionar --</option>
+                                    <option value="retallado">Retallado</option>
+                                    <option value="garantia_calidad">Garantía de calidad</option>
+                                    <option value="satisfaccion_adaptacion">Satisfacción total de adaptación</option>
+                                    <option value="satisfaccion_imagen">Satisfacción total de imagen</option>
+                                    <option value="captura_primera_vez">Captura primera vez</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div><!-- FIN BLOQUE Micas sin cortar -->
+
+                    <!-- Sub-bloque: Satisfacción total de adaptación (depende de x_order_type) -->
+                    <div id="block-satisfaccion_adaptacion" class="col-12" style="display:none;">
+                        <div class="card border-success">
+                            <div class="card-header bg-success text-white"><strong>Satisfacción total de adaptación</strong></div>
+                            <div class="card-body row g-3">
+                                <div class="col-md-6">
+                                    <label>Tipo de pedido (*)</label>
+                                    <select name="x_order_type_adaptation" class="form-select">
+                                        <option value="select">-- seleccionar --</option>
+                                        <option value="lab_indicated">LAB indicado en portal de seguimiento de trabajo</option>
+                                        <option value="shipping_guide_number">Número de guía de envío de armazón</option>
+                                        <option value="frame_bag_number">Número de bolsa de envío de armazón</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
                     </div>
 
-                    <!-- Pedido -->
-                    <div class="col-md-6">
-                        <label>Pedido</label>
-                        <input type="text" name="x_order_number" class="form-control"/>
+                    <!-- Sub-bloque: Satisfacción total de imagen (depende de x_order_type) -->
+                    <div id="block-satisfaccion_imagen" class="col-12" style="display:none;">
+                        <div class="card border-success">
+                            <div class="card-header bg-success text-white"><strong>Satisfacción total de Imagen</strong></div>
+                            <div class="card-body row g-3">
+                                <div class="col-md-6">
+                                    <label>Tipo de pedido (*)</label>
+                                    <select name="x_order_type_imagen" class="form-select">
+                                        <option value="select">-- seleccionar --</option>
+                                        <option value="lab_indicated">LAB indicado en portal de seguimiento de trabajo</option>
+                                        <option value="shipping_guide_number">Número de guía de envío de armazón</option>
+                                        <option value="frame_bag_number">Número de bolsa de envío de armazón</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
                     </div>
 
-                    <!-- Bolsa -->
-                    <div class="col-md-6">
-                        <label>Bolsa</label>
-                        <input type="text" name="x_bag" class="form-control"/>
+                    <!-- ===== BLOQUE: Trabajos atrasados ===== -->
+                    <div id="block-trabajos_atrasados" class="col-12 subcategory-block" style="display:none;">
+                        <div class="card border-success">
+                            <div class="card-header bg-success text-white"><strong>Trabajos atrasados</strong></div>
+                            <br/>
+                            <br/>
+                            <div class="card-body row g-3">
+                                <div class="col-md-6">
+                                    <label>Tipo de Trabajo (*)</label>
+                                    <input type="text" name="x_job_type" class="form-control"/>
+                                </div>
+                                <div class="col-12">
+                                    <strong>POR FAVOR, VALIDAR EL NÚMERO DE PEDIDO EN EL ICONO DE LA LUPA. GRACIAS</strong>
+                                </div>
+                                <div class="col-md-6">
+                                    <label>N° de pedido original (*)</label>
+                                    <input type="text" name="x_original_order_number" class="form-control"/>
+                                </div>
+                                <div class="col-md-6">
+                                    <label>Pedido (*)</label>
+                                    <input type="text" name="x_order_number" class="form-control"/>
+                                </div>
+                                <div class="col-md-6">
+                                    <label>Armazón del cliente? (*)</label>
+                                    <select name="x_customer_warehouse" class="form-select">
+                                        <option value="select">-- seleccionar --</option>
+                                        <option value="si">Sí</option>
+                                        <option value="no">No</option>
+                                    </select>
+                                </div>
+                                <div class="col-md-6">
+                                    <label>LAB indicado en portal de seguimiento de trabajos (*)</label>
+                                    <input type="text" name="x_lab_indicated" class="form-control"/>
+                                </div>
+                                <div class="col-md-6">
+                                    <label>Número de guía de envío de armazón (*)</label>
+                                    <input type="text" name="x_shipping_guide_number" class="form-control"/>
+                                </div>
+                                <div class="col-md-6">
+                                    <label>Número de bolsa de envío de armazón (*)</label>
+                                    <input type="text" name="x_frame_bag_number" class="form-control"/>
+                                </div>
+                                <div class="col-md-6">
+                                    <label>Tipo de pedido (*)</label>
+                                    <select name="x_order_type" class="form-select order-type-select">
+                                        <option value="select">-- seleccionar --</option>
+                                        <option value="retallado">Retallado</option>
+                                        <option value="garantia_calidad">Garantía de calidad</option>
+                                        <option value="satisfaccion_adaptacion">Satisfacción total de adaptación</option>
+                                        <option value="satisfaccion_imagen">Satisfacción total de imagen</option>
+                                        <option value="captura_primera_vez">Captura primera vez</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                    </div><!-- FIN BLOQUE Trabajos atrasados -->
+
+                    <!-- ===== BLOQUE: Correo electrónico ===== -->
+                    <div id="block-correo_electronico" class="col-12 subcategory-block" style="display:none;">
+                        <div class="card border-success">
+                            <div class="card-header bg-success text-white"><strong>Correo electrónico</strong></div>
+                            <div class="card-body row g-3">
+                                <div class="col-md-6">
+                                    <label>Correo electrónico de Sucursal (*)</label>
+                                    <input type="text" name="x_branch_email" class="form-control"/>
+                                </div>
+                                <div class="col-md-6">
+                                    <label>Tipo de Error, Envío o Recepción (*)</label>
+                                    <input type="text" name="x_email_issue_type_2" class="form-control"/>
+                                </div>
+                                <div class="col-md-6">
+                                    <label>Número de contacto (*)</label>
+                                    <input type="text" name="x_contact_number" class="form-control"/>
+                                </div>
+                            </div>
+                        </div>
                     </div>
 
-                    <!-- Armazón del cliente -->
-                    <div class="col-md-6">
-                        <label>Armazón del cliente?</label>
-                        <select name="x_customer_warehouse" class="form-select">
-                            <option value="select">-- seleccionar --</option>
-                            <option value="si">Sí</option>
-                            <option value="no">No</option>
-                        </select>
+                    <!-- ===== BLOQUE: Equipo de cómputo ===== -->
+                    <div id="block-equipo_computo" class="col-12 subcategory-block" style="display:none;">
+                        <div class="card border-success">
+                            <div class="card-header bg-success text-white"><strong>Equipo de cómputo</strong></div>
+                            <div class="card-body row g-3">
+                                <div class="col-md-6">
+                                    <label>Número de folio interno (*)</label>
+                                    <input type="text" name="x_internal_folio_number" class="form-control"/>
+                                </div>
+                                <div class="col-12">
+                                    <strong>Es obligatorio enviar a Centro de Servicios el equipo dañado.</strong>
+                                </div>
+                                <div class="col-md-6">
+                                    <label>Tipo de equipo (*)</label>
+                                    <select name="x_equipment_type" class="form-select">
+                                        <option value="select">-- seleccionar --</option>
+                                        <option value="scanner">Scanner</option>
+                                        <option value="impresora">Impresora</option>
+                                        <option value="cpu">CPU</option>
+                                        <option value="transfer">Transfer</option>
+                                        <option value="no_break">No break</option>
+                                        <option value="monitor">Monitor</option>
+                                        <option value="otro">Otro</option>
+                                    </select>
+                                </div>
+                                <div class="col-md-6">
+                                    <label>Modelo y/o marca (*)</label>
+                                    <input type="text" name="x_model_or_brand" class="form-control"/>
+                                </div>
+                                <div class="col-md-6">
+                                    <label>Número de Serie (*)</label>
+                                    <input type="text" name="x_serial_number" class="form-control"/>
+                                </div>
+                                <div class="col-md-6">
+                                    <label>N° de activo fijo (*)</label>
+                                    <input type="text" name="x_fixed_asset_number" class="form-control"/>
+                                </div>
+                                <div class="col-md-6">
+                                    <label>N° de guía (*)</label>
+                                    <input type="text" name="x_shipping_guide" class="form-control"/>
+                                </div>
+                                <div class="col-md-6">
+                                    <label>Mensajería (*)</label>
+                                    <input type="text" name="x_courier" class="form-control"/>
+                                </div>
+                            </div>
+                        </div>
                     </div>
 
-                    <!-- Tipo de pedido -->
-                    <div class="col-md-6">
-                        <label>Tipo de pedido</label>
-                        <select name="x_order_type" class="form-select">
-                            <option value="select">-- seleccionar --</option>
-                            <option value="retallado">Retallado</option>
-                            <option value="garantia_calidad">Garantía de calidad</option>
-                            <option value="satisfaccion_adaptacion">Satisfacción total de adaptación</option>
-                            <option value="satisfaccion_imagen">Satisfacción total de imagen</option>
-                            <option value="captura_primera_vez">Captura primera vez</option>
-                        </select>
+                    <!-- ===== BLOQUE: Interredes ===== -->
+                    <div id="block-interredes" class="col-12 subcategory-block" style="display:none;">
+                        <div class="card border-success">
+                            <div class="card-header bg-success text-white"><strong>Interredes</strong></div>
+                            <div class="card-body row g-3">
+                                <div class="col-md-6">
+                                    <label>N° de comercio (*)</label>
+                                    <input type="text" name="x_store_number" class="form-control"/>
+                                </div>
+                                <div class="col-md-6">
+                                    <label>Usuario de Interredes (*)</label>
+                                    <input type="text" name="x_interredes_user" class="form-control"/>
+                                </div>
+                                <div class="col-md-6">
+                                    <label>Número de contacto (*)</label>
+                                    <input type="text" name="x_contact_number" class="form-control"/>
+                                </div>
+                            </div>
+                        </div>
                     </div>
 
-                    <!-- Persona que Autoriza -->
-                    <div class="col-md-6">
-                        <label>Persona que Autoriza</label>
-                        <input type="text" name="x_authorized_by" class="form-control"/>
+                    <!-- ===== BLOQUE: Problemas con impresora ===== -->
+                    <div id="block-problemas_impresora" class="col-12 subcategory-block" style="display:none;">
+                        <div class="card border-success">
+                            <div class="card-header bg-success text-white"><strong>Problemas con impresora</strong></div>
+                            <div class="card-body row g-3">
+                                <div class="col-md-6">
+                                    <label>Modelo de impresora (*)</label>
+                                    <input type="text" name="x_printer_model" class="form-control"/>
+                                </div>
+                                <div class="col-md-6">
+                                    <label>Número de contacto (*)</label>
+                                    <input type="text" name="x_contact_number" class="form-control"/>
+                                </div>
+                                <div class="col-md-6">
+                                    <label>Número de Serie (*)</label>
+                                    <input type="text" name="x_serial_number" class="form-control"/>
+                                </div>
+                                <div class="col-md-6">
+                                    <label>Nombre de la persona que nos contactó (*)</label>
+                                    <input type="text" name="x_contact_person_name" class="form-control"/>
+                                </div>
+                            </div>
+                        </div>
                     </div>
 
-                    <!-- LAB indicado -->
-                    <div class="col-md-6">
-                        <label>LAB indicado en portal de seguimiento de trabajos</label>
-                        <input type="text" name="x_lab_indicated" class="form-control"/>
+                    <!-- ===== BLOQUE: Surtido de tóner ===== -->
+                    <div id="block-surtido_toner" class="col-12 subcategory-block" style="display:none;">
+                        <div class="card border-success">
+                            <div class="card-header bg-success text-white"><strong>Surtido de tóner</strong></div>
+                            <div class="card-body row g-3">
+                                <div class="col-md-6">
+                                    <label>Modelo de impresora (*)</label>
+                                    <input type="text" name="x_printer_model" class="form-control"/>
+                                </div>
+                                <div class="col-md-6">
+                                    <label>Número de contacto (*)</label>
+                                    <input type="text" name="x_contact_number" class="form-control"/>
+                                </div>
+                                <div class="col-md-6">
+                                    <label>Número de serie de la impresora (empieza ZD7) (*)</label>
+                                    <input type="text" name="x_serial_number" class="form-control"/>
+                                </div>
+                                <div class="col-12">
+                                    <div class="alert alert-info">
+                                        <strong>Antes de levantar el ticket favor de leer el Manual para obtener el contador de impresiones y porcentaje de tóner de la impresora SAMSUNG M4020.</strong><br/>
+                                        Recuerda que si se tiene más del 15% de tóner no procederá el envío del mismo.
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <label>¿El tóner es menor o igual al 15%? (*)</label>
+                                    <select name="x_toner_below_15" id="x_toner_below_15" class="form-select">
+                                        <option value="select">-- seleccionar --</option>
+                                        <option value="si">Sí</option>
+                                        <option value="no">No</option>
+                                    </select>
+                                </div>
+                                <div id="block-toner-warning" class="col-12" style="display:none;">
+                                    <div class="alert alert-danger">
+                                        <strong>El envío de tóner NO procede si el porcentaje es mayor al 15%.</strong>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                     </div>
-                    </div><!-- ===== FIN BLOQUE Micas sin cortar ===== -->
 
-                    <!-- Adjuntos -->
+                    <!-- ===== BLOQUE: Iluminación ===== -->
+                    <div id="block-iluminacion" class="col-12 subcategory-block" style="display:none;">
+                        <div class="card border-success">
+                            <div class="card-header bg-success text-white"><strong>Iluminación</strong></div>
+                            <div class="card-body"><strong>Adjuntar fotografía de lámparas</strong></div>
+                        </div>
+                    </div>
+
+                    <!-- ===== BLOQUE: Sanitarios ===== -->
+                    <div id="block-sanitarios" class="col-12 subcategory-block" style="display:none;">
+                        <div class="card border-success">
+                            <div class="card-header bg-success text-white"><strong>Sanitarios</strong></div>
+                            <div class="card-body"><strong>Adjuntar fotografía de sanitarios</strong></div>
+                        </div>
+                    </div>
+
+                    <!-- ===== BLOQUE: Mobiliario ===== -->
+                    <div id="block-mobiliario" class="col-12 subcategory-block" style="display:none;">
+                        <div class="card border-success">
+                            <div class="card-header bg-success text-white"><strong>Mobiliario</strong></div>
+                            <div class="card-body"><strong>Adjuntar fotografía de mobiliario</strong></div>
+                        </div>
+                    </div>
+
+                    <!-- ===== BLOQUE: Aparadores ===== -->
+                    <div id="block-aparadores" class="col-12 subcategory-block" style="display:none;">
+                        <div class="card border-success">
+                            <div class="card-header bg-success text-white"><strong>Aparadores</strong></div>
+                            <div class="card-body"><strong>Adjuntar fotografía de aparadores</strong></div>
+                        </div>
+                    </div>
+
+                    <!-- ===== BLOQUE: Fletes ===== -->
+                    <div id="block-fletes" class="col-12 subcategory-block" style="display:none;">
+                        <div class="card border-success">
+                            <div class="card-header bg-success text-white"><strong>Fletes</strong></div>
+                            <div class="card-body"><strong>Adjuntar fotografía de fletes</strong></div>
+                        </div>
+                    </div>
+
+                    <!-- ===== BLOQUE: Limpieza profunda ===== -->
+                    <div id="block-limpieza_profunda" class="col-12 subcategory-block" style="display:none;">
+                        <div class="card border-success">
+                            <div class="card-header bg-success text-white"><strong>Limpieza profunda</strong></div>
+                            <div class="card-body row g-3">
+                                <div class="col-md-6">
+                                    <label>Área (*)</label>
+                                    <select name="x_cleaning_area" class="form-select">
+                                        <option value="select">-- seleccionar --</option>
+                                        <option value="aparadores">Aparadores</option>
+                                        <option value="piso">Piso</option>
+                                        <option value="bano">Baño</option>
+                                        <option value="anuncios">Anuncios</option>
+                                    </select>
+                                </div>
+                                <div class="col-12"><strong>Adjuntar fotografía de área a limpiar</strong></div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- ===== BLOQUE: Refacturación ===== -->
+                    <!-- Aplica a: error_captura_datos_fiscales, error_captura_uso_cfdi, error_captura_forma_pago,
+                         unificar_pedidos, dividir_pedido, unificar_conceptos, diferencia_convenio_credito,
+                         facturar_monto_especifico, periodo_facturacion_portal -->
+                    <div id="block-refacturacion" class="col-12 subcategory-block" style="display:none;">
+                        <div class="card border-success">
+                            <div class="card-header bg-success text-white"><strong>Refacturación</strong></div>
+                            <div class="card-body row g-3">
+                                <div class="col-md-6">
+                                    <label>Pedido (*)</label>
+                                    <input type="text" name="x_refac_order_number" class="form-control"/>
+                                </div>
+                                <div class="col-md-6">
+                                    <label>Orden de Venta (*)</label>
+                                    <input type="text" name="x_refac_sale_order" class="form-control"/>
+                                </div>
+                                <div class="col-md-6">
+                                    <label>Nombre o denominación social (*)</label>
+                                    <input type="text" name="x_refac_legal_name" class="form-control"/>
+                                </div>
+                                <div class="col-md-6">
+                                    <label>RFC (*)</label>
+                                    <input type="text" name="x_refac_rfc" class="form-control"/>
+                                </div>
+                                <div class="col-12">
+                                    <strong>Es necesario adjuntar la pantalla del SAT de validación de RFC, nombre y código postal.</strong>
+                                </div>
+                                <div class="col-md-6">
+                                    <label>Dar click una vez que se adjunte la pantalla (*)</label>
+                                    <select name="x_refac_sat_screen_attached" class="form-select">
+                                        <option value="select">-- seleccionar --</option>
+                                        <option value="si">Sí</option>
+                                        <option value="no">No</option>
+                                    </select>
+                                </div>
+                                <div class="col-md-6">
+                                    <label>Forma de Pago (*)</label>
+                                    <select name="x_refac_payment_method" class="form-select">
+                                        <option value="select">-- seleccionar --</option>
+                                        <option value="efectivo">Efectivo</option>
+                                        <option value="tarjeta_debito">Tarjeta de Débito</option>
+                                        <option value="tarjeta_credito">Tarjeta de crédito</option>
+                                        <option value="cheque_nominativo">Cheque nominativo</option>
+                                        <option value="monedero_electronico">Monedero electrónico</option>
+                                    </select>
+                                </div>
+                                <div class="col-md-6">
+                                    <label>Tipo persona (*)</label>
+                                    <select name="x_refac_person_type" class="form-select">
+                                        <option value="select">-- seleccionar --</option>
+                                        <option value="fisica">Fisica</option>
+                                        <option value="moral">Moral</option>
+                                    </select>
+                                </div>
+                                <div class="col-md-6">
+                                    <label>Uso CFDI (*)</label>
+                                    <select name="x_refac_cfdi_use" class="form-select">
+                                        <option value="select">-- seleccionar --</option>
+                                        <option value="g01">G01 Adquisición de mercancías.</option>
+                                        <option value="g02">G02 Devoluciones, descuentos o bonificaciones.</option>
+                                        <option value="g03">G03 Gastos en general.</option>
+                                        <option value="i01">I01 Construcciones.</option>
+                                        <option value="i02">I02 Mobiliario y equipo de oficina por inversiones.</option>
+                                        <option value="i03">I03 Equipo de transporte.</option>
+                                        <option value="i04">I04 Equipo de computo y accesorios.</option>
+                                        <option value="i05">I05 Dados, troqueles, moldes, matrices y herramental.</option>
+                                        <option value="i06">I06 Comunicaciones telefónicas.</option>
+                                        <option value="i07">I07 Comunicaciones satelitales.</option>
+                                        <option value="i08">I08 Otra maquinaria y equipo.</option>
+                                        <option value="d01">D01 Honorarios médicos, dentales y gastos hospitalarios.</option>
+                                        <option value="d02">D02 Gastos médicos por incapacidad o discapacidad.</option>
+                                        <option value="d03">D03 Gastos funerales.</option>
+                                        <option value="d04">D04 Donativos.</option>
+                                        <option value="d05">D05 Intereses reales efectivamente pagados por créditos hipotecarios.</option>
+                                        <option value="d06">D06 Aportaciones voluntarias al SAR.</option>
+                                        <option value="d07">D07 Primas por seguros de gastos médicos.</option>
+                                        <option value="d08">D08 Gastos de transportación escolar obligatoria.</option>
+                                        <option value="d09">D09 Depósitos en cuentas para el ahorro, primas que tengan como base planes de pensiones.</option>
+                                        <option value="d10">D10 Pagos por servicios educativos (colegiaturas).</option>
+                                        <option value="s01">S01 Sin efectos fiscales.</option>
+                                        <option value="cp01">CP01 Pagos</option>
+                                        <option value="cn01">CN01 Nómina</option>
+                                    </select>
+                                </div>
+                                <div class="col-md-6">
+                                    <label>Régimen Fiscal (*)</label>
+                                    <select name="x_refac_fiscal_regime" class="form-select">
+                                        <option value="select">-- seleccionar --</option>
+                                        <option value="601">601 General de Ley Personas Morales</option>
+                                        <option value="603">603 Personas Morales con Fines no Lucrativos</option>
+                                        <option value="606">606 Arrendamiento</option>
+                                        <option value="612">612 Personas Físicas con Actividades Empresariales y Profesionales</option>
+                                        <option value="620">620 Sociedades Cooperativas de Producción que optan por Diferir sus Ingresos</option>
+                                        <option value="621">621 Incorporación Fiscal</option>
+                                        <option value="622">622 Actividades Agrícolas, Ganaderas, Silvícolas y Pesqueras</option>
+                                        <option value="623">623 Opcional para Grupos de Sociedades</option>
+                                        <option value="624">624 Coordinados</option>
+                                        <option value="625">625 Régimen de las Actividades Empresariales con ingresos a través de Plataformas Tecnológicas</option>
+                                        <option value="626">626 Régimen Simplificado de Confianza (RESICO)</option>
+                                    </select>
+                                </div>
+                                <div class="col-12"><strong>Dirección fiscal</strong></div>
+                                <div class="col-md-6">
+                                    <label>Dirección fiscal (*)</label>
+                                    <select name="x_refac_fiscal_address" class="form-select">
+                                        <option value="select">-- seleccionar --</option>
+                                        <option value="solo_cp">Solo CP</option>
+                                    </select>
+                                </div>
+                                <div class="col-md-6">
+                                    <label>CP (*)</label>
+                                    <input type="text" name="x_refac_cp" class="form-control"/>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- ===== BLOQUE: No se recibieron archivos de facturación ===== -->
+                    <div id="block-no_recibidos_facturacion" class="col-12 subcategory-block" style="display:none;">
+                        <div class="card border-success">
+                            <div class="card-header bg-success text-white"><strong>No se recibieron archivos de facturación (XML y PDF)</strong></div>
+                            <div class="card-body row g-3">
+                                <div class="col-md-6">
+                                    <label>¿Buscó en portal? (*)</label>
+                                    <select name="x_fact_busco_portal" class="form-select">
+                                        <option value="select">-- seleccionar --</option>
+                                        <option value="si">Si</option>
+                                        <option value="no">No</option>
+                                    </select>
+                                </div>
+                                <div class="col-md-6">
+                                    <label>¿Encontró la factura? (*)</label>
+                                    <select name="x_fact_encontraste" class="form-select">
+                                        <option value="select">-- seleccionar --</option>
+                                        <option value="si">Si</option>
+                                        <option value="no">No</option>
+                                    </select>
+                                </div>
+                                <div class="col-md-6">
+                                    <label>¿Los archivos PDF/XML son incorrectos? (*)</label>
+                                    <select name="x_fact_pdf_xml_incorrectos" class="form-select">
+                                        <option value="select">-- seleccionar --</option>
+                                        <option value="si">Si</option>
+                                        <option value="no">No</option>
+                                    </select>
+                                </div>
+                                <div class="col-12">
+                                    <strong>Adjuntar evidencia del caso y describir el problema detectado.</strong>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- ===== BLOQUE: Óptica digital ===== -->
+                    <div id="block-optica_digital" class="col-12 subcategory-block" style="display:none;">
+                        <div class="card border-success">
+                            <div class="card-header bg-success text-white"><strong>Óptica digital (checklist app sucursal)</strong></div>
+                            <div class="card-body row g-3">
+                                <div class="col-md-6">
+                                    <label>N° de comercio (*)</label>
+                                    <input type="text" name="x_store_number" class="form-control"/>
+                                </div>
+                                <div class="col-md-6">
+                                    <label>Número de contacto (*)</label>
+                                    <input type="text" name="x_contact_number" class="form-control"/>
+                                </div>
+                                <div class="col-12"><strong>Describe el problema presentado en la aplicación checklist app sucursal.</strong></div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- ===== BLOQUE: Acceso a plataforma ===== -->
+                    <div id="block-acceso_plataforma" class="col-12 subcategory-block" style="display:none;">
+                        <div class="card border-success">
+                            <div class="card-header bg-success text-white"><strong>Acceso a plataforma</strong></div>
+                            <div class="card-body row g-3">
+                                <div class="col-md-6">
+                                    <label>Número de contacto (*)</label>
+                                    <input type="text" name="x_contact_number" class="form-control"/>
+                                </div>
+                                <div class="col-12"><strong>Describe el inconveniente de acceso y adjunta evidencia.</strong></div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- ===== BLOQUE: Desbloqueo usuario y contraseña ===== -->
+                    <div id="block-desbloqueo_usuario_contrasena" class="col-12 subcategory-block" style="display:none;">
+                        <div class="card border-success">
+                            <div class="card-header bg-success text-white"><strong>Desbloqueo usuario y contraseña</strong></div>
+                            <div class="card-body row g-3">
+                                <div class="col-md-6">
+                                    <label>Número de contacto (*)</label>
+                                    <input type="text" name="x_contact_number" class="form-control"/>
+                                </div>
+                                <div class="col-12"><strong>Indica el problema de acceso y adjunta evidencia si aplica.</strong></div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- ===== BLOQUE: Aclaración de saldo de vacaciones ===== -->
+                    <div id="block-aclaracion_saldo_vacaciones" class="col-12 subcategory-block" style="display:none;">
+                        <div class="card border-success">
+                            <div class="card-header bg-success text-white"><strong>Aclaración de saldo de vacaciones</strong></div>
+                            <div class="card-body row g-3">
+                                <div class="col-md-6">
+                                    <label>Número de contacto (*)</label>
+                                    <input type="text" name="x_contact_number" class="form-control"/>
+                                </div>
+                                <div class="col-12"><strong>Describe el detalle de la aclaración solicitada.</strong></div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- ===== BLOQUE: Error en la plataforma ===== -->
+                    <div id="block-error_plataforma" class="col-12 subcategory-block" style="display:none;">
+                        <div class="card border-success">
+                            <div class="card-header bg-success text-white"><strong>Error en la plataforma</strong></div>
+                            <div class="card-body row g-3">
+                                <div class="col-md-6">
+                                    <label>Número de contacto (*)</label>
+                                    <input type="text" name="x_contact_number" class="form-control"/>
+                                </div>
+                                <div class="col-12"><strong>Describe el error presentado y adjunta captura de pantalla.</strong></div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- ===== BLOQUES SOLO-TEXTO (sin campos extra) ===== -->
+                    <div id="block-display_campanas_aperturas" class="col-12 subcategory-block" style="display:none;">
+                        <div class="card border-success"><div class="card-header bg-success text-white"><strong>Display campañas y aperturas</strong></div>
+                        <div class="card-body"><strong>Adjuntar evidencia y describir el requerimiento.</strong></div></div>
+                    </div>
+                    <div id="block-reposicion_elemento_danado" class="col-12 subcategory-block" style="display:none;">
+                        <div class="card border-success"><div class="card-header bg-success text-white"><strong>Reposición elemento dañado</strong></div>
+                        <div class="card-body"><strong>Adjuntar fotografía del material dañado y describir el requerimiento.</strong></div></div>
+                    </div>
+                    <div id="block-apoyo_aplicar_convenio" class="col-12 subcategory-block" style="display:none;">
+                        <div class="card border-success"><div class="card-header bg-success text-white"><strong>Apoyo para aplicar un convenio</strong></div>
+                        <div class="card-body"><strong>Describe el convenio y el apoyo requerido.</strong></div></div>
+                    </div>
+                    <div id="block-convenios_institucionales" class="col-12 subcategory-block" style="display:none;">
+                        <div class="card border-success"><div class="card-header bg-success text-white"><strong>Convenios institucionales</strong></div>
+                        <div class="card-body"><strong>Describe la duda o incidencia relacionada con convenios institucionales.</strong></div></div>
+                    </div>
+                    <div id="block-no_entran_manuales" class="col-12 subcategory-block" style="display:none;">
+                        <div class="card border-success"><div class="card-header bg-success text-white"><strong>Cuando no pueden entrar a la página de manuales</strong></div>
+                        <div class="card-body"><strong>Describe el problema de acceso y adjunta evidencia.</strong></div></div>
+                    </div>
+                    <div id="block-dudas_promociones" class="col-12 subcategory-block" style="display:none;">
+                        <div class="card border-success"><div class="card-header bg-success text-white"><strong>Dudas de promociones en general</strong></div>
+                        <div class="card-body"><strong>Describe la promoción y la duda presentada.</strong></div></div>
+                    </div>
+                    <div id="block-problema_pagos_anticipos" class="col-12 subcategory-block" style="display:none;">
+                        <div class="card border-success"><div class="card-header bg-success text-white"><strong>Problema de pagos (anticipos)</strong></div>
+                        <div class="card-body"><strong>Describe el problema con el anticipo y adjunta evidencia.</strong></div></div>
+                    </div>
+                    <div id="block-captura_ov" class="col-12 subcategory-block" style="display:none;">
+                        <div class="card border-success"><div class="card-header bg-success text-white"><strong>Captura OV</strong></div>
+                        <div class="card-body"><strong>Describe el inconveniente presentado en la captura OV.</strong></div></div>
+                    </div>
+                    <div id="block-cierre_diario" class="col-12 subcategory-block" style="display:none;">
+                        <div class="card border-success"><div class="card-header bg-success text-white"><strong>Cierre diario</strong></div>
+                        <div class="card-body"><strong>Describe el problema presentado durante el cierre diario.</strong></div></div>
+                    </div>
+                    <div id="block-no_recepcionar_bolsa" class="col-12 subcategory-block" style="display:none;">
+                        <div class="card border-success"><div class="card-header bg-success text-white"><strong>No se puede recepcionar bolsa</strong></div>
+                        <div class="card-body"><strong>Describe el problema y adjunta evidencia si aplica.</strong></div></div>
+                    </div>
+                    <div id="block-pedido_sin_embalaje" class="col-12 subcategory-block" style="display:none;">
+                        <div class="card border-success"><div class="card-header bg-success text-white"><strong>Pedido sin embalaje</strong></div>
+                        <div class="card-body"><strong>Describe el caso y adjunta evidencia.</strong></div></div>
+                    </div>
+                    <div id="block-problema_captura_devolucion" class="col-12 subcategory-block" style="display:none;">
+                        <div class="card border-success"><div class="card-header bg-success text-white"><strong>Problema para capturar devolución, retallado o satisfacción total</strong></div>
+                        <div class="card-body"><strong>Describe el problema presentado durante la captura.</strong></div></div>
+                    </div>
+                    <div id="block-rescate_cancelaciones_clientes_molestos" class="col-12 subcategory-block" style="display:none;">
+                        <div class="card border-success"><div class="card-header bg-success text-white"><strong>Rescate de cancelaciones Clientes molestos</strong></div>
+                        <div class="card-body"><strong>Describe el caso del cliente y la situación presentada.</strong></div></div>
+                    </div>
+                    <div id="block-pedidos_incompletos" class="col-12 subcategory-block" style="display:none;">
+                        <div class="card border-success"><div class="card-header bg-success text-white"><strong>Pedidos incompletos</strong></div>
+                        <div class="card-body"><strong>Describe el faltante e incluye evidencia.</strong></div></div>
+                    </div>
+                    <div id="block-graduacion_incorrecta" class="col-12 subcategory-block" style="display:none;">
+                        <div class="card border-success"><div class="card-header bg-success text-white"><strong>Pedidos con graduación incorrecta</strong></div>
+                        <div class="card-body"><strong>Describe la incidencia e incluye evidencia.</strong></div></div>
+                    </div>
+                    <div id="block-pedido_otro_cliente" class="col-12 subcategory-block" style="display:none;">
+                        <div class="card border-success"><div class="card-header bg-success text-white"><strong>Pedido que es de otro cliente</strong></div>
+                        <div class="card-body"><strong>Describe el caso y adjunta evidencia.</strong></div></div>
+                    </div>
+                    <div id="block-devolucion_pedidos" class="col-12 subcategory-block" style="display:none;">
+                        <div class="card border-success"><div class="card-header bg-success text-white"><strong>Devolución de pedidos</strong></div>
+                        <div class="card-body"><strong>Describe el motivo de devolución y adjunta evidencia.</strong></div></div>
+                    </div>
+                    <div id="block-graduacion_error_cliente" class="col-12 subcategory-block" style="display:none;">
+                        <div class="card border-success"><div class="card-header bg-success text-white"><strong>Pedidos con graduación incorrecta por captura errónea del cliente</strong></div>
+                        <div class="card-body"><strong>Describe el caso e incluye evidencia.</strong></div></div>
+                    </div>
+                    <div id="block-pedidos_sin_estatus" class="col-12 subcategory-block" style="display:none;">
+                        <div class="card border-success"><div class="card-header bg-success text-white"><strong>Pedidos sin estatus</strong></div>
+                        <div class="card-body"><strong>Describe el inconveniente e incluye evidencia.</strong></div></div>
+                    </div>
+                    <div id="block-paquete_retornado" class="col-12 subcategory-block" style="display:none;">
+                        <div class="card border-success"><div class="card-header bg-success text-white"><strong>Paquete retornado por mensajería externa</strong></div>
+                        <div class="card-body"><strong>Describe el caso y adjunta evidencia del retorno.</strong></div></div>
+                    </div>
+                    <div id="block-cambio_domicilio" class="col-12 subcategory-block" style="display:none;">
+                        <div class="card border-success"><div class="card-header bg-success text-white"><strong>Cambio de domicilio de entrega</strong></div>
+                        <div class="card-body"><strong>Describe el cambio solicitado y adjunta evidencia si aplica.</strong></div></div>
+                    </div>
+                    <div id="block-pedido_sin_capturar" class="col-12 subcategory-block" style="display:none;">
+                        <div class="card border-success"><div class="card-header bg-success text-white"><strong>Pedido sin capturar</strong></div>
+                        <div class="card-body"><strong>Describe la incidencia y adjunta evidencia.</strong></div></div>
+                    </div>
+                    <div id="block-graduacion_sucursal" class="col-12 subcategory-block" style="display:none;">
+                        <div class="card border-success"><div class="card-header bg-success text-white"><strong>Captura de graduación examen de la vista realizado en sucursal</strong></div>
+                        <div class="card-body"><strong>Describe la graduación o el problema presentado.</strong></div></div>
+                    </div>
+                    <div id="block-devolucion_sin_entregar" class="col-12 subcategory-block" style="display:none;">
+                        <div class="card border-success"><div class="card-header bg-success text-white"><strong>Devolución de pedidos sin entregar</strong></div>
+                        <div class="card-body"><strong>Describe el motivo de la devolución y adjunta evidencia.</strong></div></div>
+                    </div>
+                    <div id="block-pedido_sin_envio" class="col-12 subcategory-block" style="display:none;">
+                        <div class="card border-success"><div class="card-header bg-success text-white"><strong>Pedidos sin envío</strong></div>
+                        <div class="card-body"><strong>Describe el caso y adjunta evidencia.</strong></div></div>
+                    </div>
+                    <div id="block-atraso_lente_contacto" class="col-12 subcategory-block" style="display:none;">
+                        <div class="card border-success"><div class="card-header bg-success text-white"><strong>Atraso lente de contacto</strong></div>
+                        <div class="card-body"><strong>Describe el atraso y adjunta evidencia del caso.</strong></div></div>
+                    </div>
+                    <div id="block-busqueda_armazon" class="col-12 subcategory-block" style="display:none;">
+                        <div class="card border-success"><div class="card-header bg-success text-white"><strong>Búsqueda de armazón</strong></div>
+                        <div class="card-body"><strong>Describe el armazón requerido y adjunta evidencia si aplica.</strong></div></div>
+                    </div>
+                    <div id="block-calidad_micas" class="col-12 subcategory-block" style="display:none;">
+                        <div class="card border-success"><div class="card-header bg-success text-white"><strong>Calidad - Micas</strong></div>
+                        <div class="card-body"><strong>Adjuntar evidencia fotográfica y describir la incidencia.</strong></div></div>
+                    </div>
+                    <div id="block-calidad_armazon" class="col-12 subcategory-block" style="display:none;">
+                        <div class="card border-success"><div class="card-header bg-success text-white"><strong>Calidad - Armazón</strong></div>
+                        <div class="card-body"><strong>Adjuntar evidencia fotográfica y describir la incidencia.</strong></div></div>
+                    </div>
+                    <div id="block-implantar_bolsa" class="col-12 subcategory-block" style="display:none;">
+                        <div class="card border-success"><div class="card-header bg-success text-white"><strong>Implantar bolsa de: trabajo | Micas sin cortar | Lente de contacto</strong></div>
+                        <div class="card-body"><strong>Describe la solicitud y adjunta evidencia si aplica.</strong></div></div>
+                    </div>
+                    <div id="block-bolsa_abasto_no_implantada" class="col-12 subcategory-block" style="display:none;">
+                        <div class="card border-success"><div class="card-header bg-success text-white"><strong>Bolsa de abasto no implantada</strong></div>
+                        <div class="card-body"><strong>Describe el caso y adjunta evidencia.</strong></div></div>
+                    </div>
+                    <div id="block-incumplimiento_visita" class="col-12 subcategory-block" style="display:none;">
+                        <div class="card border-success"><div class="card-header bg-success text-white"><strong>Incumplimiento de visita y/o recolección</strong></div>
+                        <div class="card-body"><strong>Describe el incumplimiento y adjunta evidencia.</strong></div></div>
+                    </div>
+                    <div id="block-paquetes_alterados" class="col-12 subcategory-block" style="display:none;">
+                        <div class="card border-success"><div class="card-header bg-success text-white"><strong>Paquetes alterados</strong></div>
+                        <div class="card-body"><strong>Adjuntar evidencia del paquete alterado.</strong></div></div>
+                    </div>
+                    <div id="block-paquetes_no_recibidos_trabajo" class="col-12 subcategory-block" style="display:none;">
+                        <div class="card border-success"><div class="card-header bg-success text-white"><strong>Paquetes no recibidos trabajos</strong></div>
+                        <div class="card-body"><strong>Describe el caso y adjunta evidencia.</strong></div></div>
+                    </div>
+                    <div id="block-paquetes_no_recibidos_abasto" class="col-12 subcategory-block" style="display:none;">
+                        <div class="card border-success"><div class="card-header bg-success text-white"><strong>Paquetes no recibidos abasto</strong></div>
+                        <div class="card-body"><strong>Describe el caso y adjunta evidencia.</strong></div></div>
+                    </div>
+                    <div id="block-seguimiento_laboratorio" class="col-12 subcategory-block" style="display:none;">
+                        <div class="card border-success"><div class="card-header bg-success text-white"><strong>Seguimiento a: Trabajo elaborados en Laboratorio Essilor | Micas sin cortar procesadas</strong></div>
+                        <div class="card-body"><strong>Describe el seguimiento requerido y adjunta evidencia.</strong></div></div>
+                    </div>
+                    <div id="block-envio_extraordinario" class="col-12 subcategory-block" style="display:none;">
+                        <div class="card border-success"><div class="card-header bg-success text-white"><strong>Envío extraordinario de: Trabajo elaborados en Laboratorio Essilor | Micas sin cortar procesadas</strong></div>
+                        <div class="card-body"><strong>Describe el motivo del envío extraordinario.</strong></div></div>
+                    </div>
+                    <div id="block-faltante_accesorios_pedido" class="col-12 subcategory-block" style="display:none;">
+                        <div class="card border-success"><div class="card-header bg-success text-white"><strong>Faltante accesorios en armazón de pedido</strong></div>
+                        <div class="card-body"><strong>Describe el faltante y adjunta evidencia.</strong></div></div>
+                    </div>
+                    <div id="block-faltante_accesorios_surtido" class="col-12 subcategory-block" style="display:none;">
+                        <div class="card border-success"><div class="card-header bg-success text-white"><strong>Faltante accesorios en armazón de surtido</strong></div>
+                        <div class="card-body"><strong>Describe el faltante y adjunta evidencia.</strong></div></div>
+                    </div>
+                    <div id="block-faltante_mercancia" class="col-12 subcategory-block" style="display:none;">
+                        <div class="card border-success"><div class="card-header bg-success text-white"><strong>Faltante de mercancía en bolsa</strong></div>
+                        <div class="card-body"><strong>Describe el faltante y adjunta evidencia.</strong></div></div>
+                    </div>
+                    <div id="block-sobrante_mercancia" class="col-12 subcategory-block" style="display:none;">
+                        <div class="card border-success"><div class="card-header bg-success text-white"><strong>Sobrante de mercancía en bolsa</strong></div>
+                        <div class="card-body"><strong>Describe el sobrante y adjunta evidencia.</strong></div></div>
+                    </div>
+                    <div id="block-mercancia_danada" class="col-12 subcategory-block" style="display:none;">
+                        <div class="card border-success"><div class="card-header bg-success text-white"><strong>Mercancía dañada en bolsa</strong></div>
+                        <div class="card-body"><strong>Adjuntar evidencia de la mercancía dañada.</strong></div></div>
+                    </div>
+                    <div id="block-extravio_mensajeria" class="col-12 subcategory-block" style="display:none;">
+                        <div class="card border-success"><div class="card-header bg-success text-white"><strong>Extravío por mensajería</strong></div>
+                        <div class="card-body"><strong>Describe el extravío y adjunta evidencia disponible.</strong></div></div>
+                    </div>
+                    <div id="block-extravio_sucursal" class="col-12 subcategory-block" style="display:none;">
+                        <div class="card border-success"><div class="card-header bg-success text-white"><strong>Extravío en sucursal</strong></div>
+                        <div class="card-body"><strong>Describe el extravío y adjunta evidencia disponible.</strong></div></div>
+                    </div>
+
+                    <!-- ===== Adjuntos ===== -->
                     <div class="col-12 mt-2">
-                        <label>Adjuntar archivos</label>
+                        <h5>Anexos</h5>
                         <input type="file" name="attachments" multiple="multiple" class="form-control"/>
                     </div>
 
                     <div class="col-12 mt-3 mb-3">
-                        <button type="submit" class="btn btn-primary">
-                            Enviar Ticket
-                        </button>
+                        <button type="submit" class="btn btn-primary">Enviar Ticket</button>
                     </div>
 
                     <input type="hidden" name="csrf_token" t-att-value="request.csrf_token()"/>
