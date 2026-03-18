@@ -329,563 +329,859 @@
                             </group>
 
                         </div>
+                        <div class="mt16"
+                            invisible="not (x_is_dev_real_tc_db and x_subcategory_code in ('cargos_duplicados', 'error_examen', 'fecha_entrega', 'mal_servicio'))">
 
-                        <div class="mt16" invisible="x_subcategory_code != 'optica_digital'">
                             <div class="o_form_sheet bg-success text-white p-2 rounded-2 mb-3">
-                                <strong>Óptica digital (checklist app sucursal)</strong>
+                                <strong>Tarjeta de crédito | débito</strong>
                             </div>
 
-                            <group col="6">
-                                <field name="x_store_number" required="1" />
-                                <field name="x_contact_number" required="1" />
+                            <group col="4">
+                                <field name="x_card_client_name" required="1" />
+                                <field name="x_card_sap_center" required="1" />
+                                <field name="x_card_sale_order" required="1" />
+                                <field name="x_card_order_number" required="1" />
+
+                                <field name="x_card_sale_date" required="1" />
+                                <field name="x_card_sale_amount" required="1" />
+                                <field name="x_card_refund_amount" required="1" />
+                                <field name="x_card_refund_reason" required="1" />
+
+                                <field name="x_card_number_16_digits" required="1" />
+                                <field name="x_card_expiration_mmaa" required="1" />
+                                <field name="x_card_authorization_number" required="1" />
+                                <field name="x_card_holder_relationship" required="1" />
                             </group>
 
-                            <div class="mt8">
-                                <strong>Describe el problema presentado en la aplicación checklist
-                                    app sucursal.</strong>
-                            </div>
+                            <group col="4" class="mt8">
+                                <field name="x_card_client_received_product" required="1" />
+                            </group>
+
                         </div>
 
                         <div class="mt16"
-                            invisible="x_subcategory_code != 'no_recibidos_facturacion'">
+                            invisible="not (x_is_dev_real_tc_db and x_subcategory_code == 'cargos_duplicados')">
+
                             <div class="o_form_sheet bg-success text-white p-2 rounded-2 mb-3">
-                                <strong>No se recibieron archivos de facturación (XML y PDF)</strong>
+                                <strong>Cargos duplicados</strong>
                             </div>
 
-                            <group col="6">
-                                <field name="x_fact_busco_portal" string="¿Buscó en portal?"
-                                    required="1" />
-                                <field name="x_fact_encontraste" string="¿Encontró la factura?"
-                                    required="1" />
-                                <field name="x_fact_pdf_xml_incorrectos"
-                                    string="¿Los archivos PDF/XML son incorrectos?"
-                                    required="1" />
+                            <group col="4">
+                                <field name="x_duplicate_affiliation" required="1" />
+                                <field name="x_duplicate_tracking_id" required="1" />
+                                <field name="x_duplicate_internal_terminal" required="1" />
+                                <field name="x_duplicate_refund_request_attached" widget="radio"
+                                    options="{'horizontal': true}" required="1" />
                             </group>
 
-                            <div class="mt8">
-                                <strong>Adjuntar evidencia del caso y describir el problema
-                                    detectado.</strong>
-                            </div>
                         </div>
+                        <div class="mt16"
+                            invisible="not (x_is_dev_real_tc_db and x_subcategory_code == 'error_examen')">
 
-                        <div class="mt16" invisible="x_subcategory_code != 'acceso_plataforma'">
                             <div class="o_form_sheet bg-success text-white p-2 rounded-2 mb-3">
-                                <strong>Acceso a plataforma</strong>
+                                <strong>Error de examen</strong>
                             </div>
 
-                            <group col="6">
-                                <field name="x_contact_number" required="1" />
+                            <group col="4">
+                                <field name="x_exam_ov_cancelled"
+                                    widget="radio"
+                                    options="{'horizontal': true}"
+                                    required="1" />
+
+                                <field name="x_exam_refund_request_attached"
+                                    widget="radio"
+                                    options="{'horizontal': true}"
+                                    required="1" />
+                            </group>
+
+                        </div>
+                        <div class="mt16"
+                            invisible="not (x_is_dev_real_tc_db and x_subcategory_code == 'fecha_entrega')">
+
+                            <div class="o_form_sheet bg-success text-white p-2 rounded-2 mb-3">
+                                <strong>Fecha de entrega</strong>
+                            </div>
+
+                            <group col="4">
+                                <field name="x_exam_ov_cancelled"
+                                    widget="radio"
+                                    options="{'horizontal': true}"
+                                    required="1" />
+
+                                <field name="x_exam_refund_request_attached"
+                                    widget="radio"
+                                    options="{'horizontal': true}"
+                                    required="1" />
+                            </group>
+
+                        </div>
+                        <div class="mt16"
+                            invisible="not (x_is_dev_real_cash_order and x_subcategory_code in ('error_examen', 'fecha_entrega', 'mal_servicio'))">
+
+                            <div class="o_form_sheet bg-success text-white p-2 rounded-2 mb-3">
+                                <strong>Efectivo Orden de Pago</strong>
+                            </div>
+
+                            <group col="4">
+                                <field name="x_card_client_name" required="1" />
+                                <field name="x_card_sap_center" required="1" />
+                                <field name="x_cash_society" required="1" />
+                                <field name="x_card_sale_order" required="1" />
+
+                                <field name="x_card_order_number" required="1" />
+                                <field name="x_card_sale_date" required="1" />
+                                <field name="x_card_sale_amount" required="1" />
+                                <field name="x_card_refund_amount" required="1" />
+
+                                <field name="x_card_refund_reason" required="1" />
+                                <field name="x_cash_banamex_branch_number" required="1" />
+                                <field name="x_cash_beneficiary_name" required="1" />
                             </group>
 
                             <div class="mt8">
-                                <strong>Describe el inconveniente de acceso y adjunta evidencia.</strong>
+                                <strong>Adjuntar Vo. Bo. Gerente Distrital o de Zona.</strong>
                             </div>
+
+                            <div class="mt8">
+                                <strong>Adjuntar INE Beneficiario</strong>
+                            </div>
+
+                            <group col="4" class="mt16">
+                                <field name="x_card_holder_relationship" required="1" />
+                                <field name="x_card_client_received_product" required="1" />
+                            </group>
+
                         </div>
 
                         <div class="mt16"
-                            invisible="x_subcategory_code != 'desbloqueo_usuario_contrasena'">
+                            invisible="not (x_is_dev_real_cash_order and x_subcategory_code == 'error_examen')">
+
                             <div class="o_form_sheet bg-success text-white p-2 rounded-2 mb-3">
-                                <strong>Desbloqueo usuario y contraseña</strong>
+                                <strong>Error de examen</strong>
                             </div>
 
-                            <group col="6">
-                                <field name="x_contact_number" required="1" />
+                            <group col="4">
+                                <field name="x_exam_ov_cancelled"
+                                    widget="radio"
+                                    options="{'horizontal': true}"
+                                    required="1" />
+
+                                <field name="x_exam_refund_request_attached"
+                                    widget="radio"
+                                    options="{'horizontal': true}"
+                                    required="1" />
                             </group>
 
-                            <div class="mt8">
-                                <strong>Indica el problema de acceso y adjunta evidencia si aplica.</strong>
+                        </div>
+                        <div class="mt16"
+                            invisible="not (x_is_dev_real_cash_order and x_subcategory_code == 'fecha_entrega')">
+
+                            <div class="o_form_sheet bg-success text-white p-2 rounded-2 mb-3">
+                                <strong>Fecha de entrega</strong>
                             </div>
+
+                            <group col="4">
+                                <field name="x_exam_ov_cancelled"
+                                    widget="radio"
+                                    options="{'horizontal': true}"
+                                    required="1" />
+
+                                <field name="x_exam_refund_request_attached"
+                                    widget="radio"
+                                    options="{'horizontal': true}"
+                                    required="1" />
+                            </group>
+
+                        </div>
+                        <div class="mt16"
+                            invisible="not (x_is_dev_real_cash_transfer and x_subcategory_code in ('error_examen', 'fecha_entrega', 'mal_servicio'))">
+
+                            <div class="o_form_sheet bg-success text-white p-2 rounded-2 mb-3">
+                                <strong>Efectivo Transferencia</strong>
+                            </div>
+
+                            <group col="4">
+                                <field name="x_card_client_name" required="1" />
+                                <field name="x_card_sap_center" required="1" />
+                                <field name="x_cash_society" required="1" />
+                                <field name="x_card_sale_order" required="1" />
+
+                                <field name="x_card_order_number" required="1" />
+                                <field name="x_card_sale_date" required="1" />
+                                <field name="x_card_sale_amount" required="1" />
+                                <field name="x_card_refund_amount" required="1" />
+
+                                <field name="x_card_refund_reason" required="1" />
+                                <field name="x_transfer_clabe_18" required="1" />
+                                <field name="x_transfer_account_holder" required="1" />
+                                <field name="x_transfer_bank" required="1" />
+                            </group>
+
+                            <group col="4" class="mt16">
+                                <field name="x_card_holder_relationship" required="1" />
+                                <field name="x_card_client_received_product" required="1" />
+                            </group>
+
                         </div>
 
                         <div class="mt16"
-                            invisible="x_subcategory_code != 'aclaracion_saldo_vacaciones'">
+                            invisible="not (x_is_dev_real_cash_transfer and x_subcategory_code == 'error_examen')">
+
                             <div class="o_form_sheet bg-success text-white p-2 rounded-2 mb-3">
-                                <strong>Aclaración de saldo de vacaciones</strong>
+                                <strong>Error de examen</strong>
                             </div>
 
-                            <group col="6">
-                                <field name="x_contact_number" required="1" />
+                            <group col="4">
+                                <field name="x_exam_ov_cancelled"
+                                    widget="radio"
+                                    options="{'horizontal': true}"
+                                    required="1" />
+
+                                <field name="x_exam_refund_request_attached"
+                                    widget="radio"
+                                    options="{'horizontal': true}"
+                                    required="1" />
                             </group>
 
-                            <div class="mt8">
-                                <strong>Describe el detalle de la aclaración solicitada.</strong>
-                            </div>
                         </div>
+                        <div class="mt16"
+                            invisible="not (x_is_dev_real_cash_transfer and x_subcategory_code == 'fecha_entrega')">
 
-                        <div class="mt16" invisible="x_subcategory_code != 'error_plataforma'">
                             <div class="o_form_sheet bg-success text-white p-2 rounded-2 mb-3">
-                                <strong>Error en la plataforma</strong>
+                                <strong>Fecha de entrega</strong>
                             </div>
 
-                            <group col="6">
-                                <field name="x_contact_number" required="1" />
+                            <group col="4">
+                                <field name="x_exam_ov_cancelled"
+                                    widget="radio"
+                                    options="{'horizontal': true}"
+                                    required="1" />
+
+                                <field name="x_exam_refund_request_attached"
+                                    widget="radio"
+                                    options="{'horizontal': true}"
+                                    required="1" />
                             </group>
 
-                            <div class="mt8">
-                                <strong>Describe el error presentado y adjunta captura de pantalla.</strong>
-                            </div>
                         </div>
+                        <div class="mt16" invisible="x_subcategory_code != 'ale_pagina_web'">
 
+                            <div class="o_form_sheet bg-success text-white p-2 rounded-2 mb-3">
+                                <strong>ALE (página web)</strong>
+                            </div>
+
+                            <group col="4">
+                                <field name="x_ale_incident_type" required="1" />
+                                <field name="x_ale_employee_name" required="1" />
+                                <field name="x_ale_branch" required="1" />
+                                <field name="x_ale_region" required="1" />
+                                <field name="x_ale_district" required="1" />
+                            </group>
+
+                        </div>
+                        <div class="mt16" invisible="x_subcategory_code != 'universidad_devlyn'">
+
+                            <div class="o_form_sheet bg-success text-white p-2 rounded-2 mb-3">
+                                <strong>Universidad Devlyn</strong>
+                            </div>
+
+                            <group col="4">
+                                <field name="x_university_incident_type" required="1" />
+                                <field name="x_university_employee_name" required="1" />
+                                <field name="x_university_employee_number" required="1" />
+                                <field name="x_university_branch" required="1" />
+
+                                <field name="x_university_zone" required="1" />
+                                <field name="x_university_district" required="1" />
+                                <field name="x_university_course_name" required="1" />
+                                <field name="x_university_real_position" required="1" />
+                            </group>
+
+                        </div>
+                        <div class="mt16"
+                            invisible="x_subcategory_code != 'pagina_evaluaciones_productos'">
+
+                            <div class="o_form_sheet bg-success text-white p-2 rounded-2 mb-3">
+                                <strong>Página de evaluaciones | Carpeta de productos</strong>
+                            </div>
+
+                            <group col="4">
+
+                                <field name="x_eval_request_type" required="1" />
+                                <field name="x_eval_ale_incident" required="1" />
+                                <field name="x_eval_employee_name" required="1" />
+                                <field name="x_eval_employee_number" required="1" />
+
+                                <field name="x_eval_branch" required="1" />
+
+                            </group>
+
+                        </div>
+                        <div class="mt16"
+                            invisible="x_subcategory_code != 'pagina_evaluaciones_politicas'">
+
+                            <div class="o_form_sheet bg-success text-white p-2 rounded-2 mb-3">
+                                <strong>Página de evaluaciones (manual de políticas y
+                                    procedimientos)</strong>
+                            </div>
+
+                            <group col="4">
+                                <field name="x_eval_policies_type" required="1" />
+                                <field name="x_eval_policies_employee_name" required="1" />
+                                <field name="x_eval_policies_employee_number" required="1" />
+                                <field name="x_eval_policies_branch" required="1" />
+                            </group>
+
+                        </div>
+                        <div class="mt16" invisible="x_subcategory_code != 'promocion_puesto'">
+
+                            <div class="o_form_sheet bg-success text-white p-2 rounded-2 mb-3">
+                                <strong>Promoción de puesto</strong>
+                            </div>
+
+                            <group col="4">
+                                <field name="x_promotion_is_responsible" required="1" />
+                                <field name="x_promotion_interested_name" required="1" />
+                                <field name="x_promotion_employee_numbers" required="1" />
+                            </group>
+
+                        </div>
                         <div class="mt16"
                             invisible="x_subcategory_code != 'display_campanas_aperturas'">
+
                             <div class="o_form_sheet bg-success text-white p-2 rounded-2 mb-3">
                                 <strong>Display campañas y aperturas</strong>
                             </div>
 
-                            <div class="mt8">
-                                <strong>Adjuntar evidencia y describir el requerimiento.</strong>
-                            </div>
-                        </div>
+                            <group col="4">
+                                <field name="x_display_manual_read" required="1" />
+                                <field name="x_display_aparador_type" required="1" />
+                                <field name="x_display_checklist_review" required="1" />
+                                <field name="x_display_missing_campaign_aparador" required="1" />
 
+                                <field name="x_display_missing_promo_campaign" required="1" />
+                                <field name="x_display_other" widget="radio"
+                                    options="{'horizontal': true}" required="1" />
+                                <field name="x_display_checklist_attached" widget="radio"
+                                    options="{'horizontal': true}" required="1" />
+                            </group>
+
+                        </div>
                         <div class="mt16"
                             invisible="x_subcategory_code != 'reposicion_elemento_danado'">
+
                             <div class="o_form_sheet bg-success text-white p-2 rounded-2 mb-3">
                                 <strong>Reposición elemento dañado</strong>
                             </div>
 
-                            <div class="mt8">
-                                <strong>Adjuntar fotografía del material dañado y describir el
-                                    requerimiento.</strong>
-                            </div>
+                            <group col="4">
+                                <field name="x_damaged_element_to_replace" required="1" />
+                                <field name="x_damaged_brief_description" required="1" />
+                                <field name="x_damaged_quantity" required="1" />
+                                <field name="x_damaged_measurements" required="1" />
+                            </group>
+
+                            <group col="4" class="mt8">
+                                <field name="x_damaged_photo_attached"
+                                    widget="radio"
+                                    options="{'horizontal': true}"
+                                    required="1" />
+                            </group>
+
                         </div>
-
-                        <div class="mt16" invisible="x_subcategory_code != 'apoyo_aplicar_convenio'">
-                            <div class="o_form_sheet bg-success text-white p-2 rounded-2 mb-3">
-                                <strong>Apoyo para aplicar un convenio</strong>
-                            </div>
-
-                            <div class="mt8">
-                                <strong>Describe el convenio y el apoyo requerido.</strong>
-                            </div>
-                        </div>
-
                         <div class="mt16"
-                            invisible="x_subcategory_code != 'convenios_institucionales'">
+                            invisible="x_subcategory_code not in ('apoyo_aplicar_convenio','convenios_institucionales','no_entran_manuales','dudas_promociones')">
+
                             <div class="o_form_sheet bg-success text-white p-2 rounded-2 mb-3">
-                                <strong>Convenios institucionales</strong>
+                                <strong>
+                                    <field name="x_subcategory_id" readonly="1" />
+                                </strong>
                             </div>
 
-                            <div class="mt8">
-                                <strong>Describe la duda o incidencia relacionada con convenios
-                                    institucionales.</strong>
-                            </div>
+                            <group col="4">
+                                <field name="x_agreement_support_type" required="1" />
+                                <field name="x_agreement_number" required="1" />
+                                <field name="x_agreement_social_name" required="1" />
+                            </group>
+
                         </div>
-
-                        <div class="mt16" invisible="x_subcategory_code != 'no_entran_manuales'">
-                            <div class="o_form_sheet bg-success text-white p-2 rounded-2 mb-3">
-                                <strong>Cuando no pueden entrar a la página de manuales</strong>
-                            </div>
-
-                            <div class="mt8">
-                                <strong>Describe el problema de acceso y adjunta evidencia.</strong>
-                            </div>
-                        </div>
-
-                        <div class="mt16" invisible="x_subcategory_code != 'dudas_promociones'">
-                            <div class="o_form_sheet bg-success text-white p-2 rounded-2 mb-3">
-                                <strong>Dudas de promociones en general</strong>
-                            </div>
-
-                            <div class="mt8">
-                                <strong>Describe la promoción y la duda presentada.</strong>
-                            </div>
-                        </div>
-
                         <div class="mt16"
                             invisible="x_subcategory_code != 'problema_pagos_anticipos'">
+
                             <div class="o_form_sheet bg-success text-white p-2 rounded-2 mb-3">
                                 <strong>Problema de pagos (anticipos)</strong>
                             </div>
 
-                            <div class="mt8">
-                                <strong>Describe el problema con el anticipo y adjunta evidencia.</strong>
-                            </div>
-                        </div>
+                            <group col="4">
+                                <field name="x_payment_center" required="1" />
+                                <field name="x_payment_pos_order" required="1" />
+                                <field name="x_payment_sale_date" required="1" />
+                                <field name="x_payment_sale_total" required="1" />
+                            </group>
 
+                            <group col="3">
+                                <field name="x_payment_number_1" required="1" />
+                                <field name="x_payment_receipt_1" required="1" />
+                                <field name="x_payment_date_1" required="1" />
+                            </group>
+
+                        </div>
                         <div class="mt16" invisible="x_subcategory_code != 'captura_ov'">
+
                             <div class="o_form_sheet bg-success text-white p-2 rounded-2 mb-3">
                                 <strong>Captura OV</strong>
                             </div>
 
-                            <div class="mt8">
-                                <strong>Describe el inconveniente presentado en la captura OV.</strong>
+                            <div class="mt8 mb-3">
+                                <strong>
+                                    “Por favor, antes de crear un SOS para reportar que no puedes
+                                    capturar un convenio o promoción, asegúrate que los materiales y
+                                    armazones cumplen los criterios del convenio o promoción
+                                    revisando la circular correspondiente al convenio o promoción”
+                                </strong>
                             </div>
+
+                            <group col="4">
+                                <field name="x_capture_ov_error_type" required="1" />
+                                <field name="x_capture_ov_sphere_od" required="1" />
+                                <field name="x_capture_ov_sphere_oi" required="1" />
+                                <field name="x_capture_ov_material_type" required="1" />
+
+                                <field name="x_capture_ov_work_type" required="1" />
+                                <field name="x_capture_ov_discount_type" required="1" />
+                                <field name="x_capture_ov_payment_type" required="1" />
+                                <field name="x_capture_ov_employee_number" required="1" />
+                            </group>
+
                         </div>
+                        <div class="mt16"
+                            invisible="x_subcategory_code != 'no_recepcionar_bolsa'">
 
-                        <div class="mt16" invisible="x_subcategory_code != 'cierre_diario'">
-                            <div class="o_form_sheet bg-success text-white p-2 rounded-2 mb-3">
-                                <strong>Cierre diario</strong>
-                            </div>
-
-                            <div class="mt8">
-                                <strong>Describe el problema presentado durante el cierre diario.</strong>
-                            </div>
-                        </div>
-
-                        <div class="mt16" invisible="x_subcategory_code != 'no_recepcionar_bolsa'">
                             <div class="o_form_sheet bg-success text-white p-2 rounded-2 mb-3">
                                 <strong>No se puede recepcionar bolsa</strong>
                             </div>
 
-                            <div class="mt8">
-                                <strong>Describe el problema y adjunta evidencia si aplica.</strong>
-                            </div>
+                            <group col="4">
+                                <field name="x_bag_number" required="1" />
+                                <field name="x_bag_key" required="1" />
+                                <field name="x_sap_branch_send" required="1" />
+                                <field name="x_sap_branch_receive" required="1" />
+                            </group>
+
+                            <group col="2">
+                                <field name="x_transport_number" required="1" />
+                                <field name="x_transfer" required="1" />
+                            </group>
+
                         </div>
 
                         <div class="mt16" invisible="x_subcategory_code != 'pedido_sin_embalaje'">
+
                             <div class="o_form_sheet bg-success text-white p-2 rounded-2 mb-3">
                                 <strong>Pedido sin embalaje</strong>
                             </div>
 
-                            <div class="mt8">
-                                <strong>Describe el caso y adjunta evidencia.</strong>
-                            </div>
-                        </div>
+                            <group col="4">
+                                <field name="x_order_without_packaging_pos_order" required="1" />
+                                <field name="x_order_without_packaging_date" required="1" />
+                                <field name="x_order_without_packaging_branch" required="1" />
+                            </group>
 
+                        </div>
                         <div class="mt16"
                             invisible="x_subcategory_code != 'problema_captura_devolucion'">
+
                             <div class="o_form_sheet bg-success text-white p-2 rounded-2 mb-3">
                                 <strong>Problema para capturar devolución, retallado o satisfacción
                                     total</strong>
                             </div>
 
-                            <div class="mt8">
-                                <strong>Describe el problema presentado durante la captura.</strong>
-                            </div>
-                        </div>
+                            <group col="4">
+                                <field name="x_return_capture_error_type" required="1" />
+                                <field name="x_return_capture_type" required="1" />
+                                <field name="x_return_capture_sale_order" required="1" />
+                                <field name="x_return_capture_order" required="1" />
 
+                                <field name="x_return_capture_cause_number" required="1" />
+                            </group>
+
+                        </div>
                         <div class="mt16"
                             invisible="x_subcategory_code != 'rescate_cancelaciones_clientes_molestos'">
+
                             <div class="o_form_sheet bg-success text-white p-2 rounded-2 mb-3">
                                 <strong>Rescate de cancelaciones Clientes molestos</strong>
                             </div>
 
-                            <div class="mt8">
-                                <strong>Describe el caso del cliente y la situación presentada.</strong>
-                            </div>
+                            <group col="4">
+                                <field name="x_rescue_client_name" required="1" />
+                                <field name="x_rescue_client_phone" required="1" />
+                                <field name="x_rescue_sale_order" required="1" />
+                                <field name="x_rescue_order_number" required="1" />
+
+                                <field name="x_rescue_client_email" required="1" />
+                            </group>
+
                         </div>
 
                         <div class="mt16" invisible="x_subcategory_code != 'pedidos_incompletos'">
+
                             <div class="o_form_sheet bg-success text-white p-2 rounded-2 mb-3">
                                 <strong>Pedidos incompletos</strong>
                             </div>
 
-                            <div class="mt8">
-                                <strong>Describe el faltante e incluye evidencia.</strong>
-                            </div>
+                            <group col="4">
+                                <field name="x_online_fulfillment" required="1" />
+                                <field name="x_online_sale_date" required="1" />
+                                <field name="x_online_customer_email" required="1" />
+                                <field name="x_online_pos_order" required="1" />
+
+                                <field name="x_online_customer_name" required="1" />
+                                <field name="x_online_missing_product" required="1" />
+                                <field name="x_online_attachment_capture"
+                                    widget="radio"
+                                    options="{'horizontal': true}"
+                                    required="1" />
+                            </group>
+
                         </div>
 
+
                         <div class="mt16" invisible="x_subcategory_code != 'graduacion_incorrecta'">
+
                             <div class="o_form_sheet bg-success text-white p-2 rounded-2 mb-3">
                                 <strong>Pedidos con graduación incorrecta</strong>
                             </div>
 
-                            <div class="mt8">
-                                <strong>Describe la incidencia e incluye evidencia.</strong>
-                            </div>
+                            <group col="4">
+                                <field name="x_online_fulfillment" required="1" />
+                                <field name="x_online_sale_date" required="1" />
+                                <field name="x_online_customer_email" required="1" />
+                                <field name="x_online_pos_order" required="1" />
+
+                                <field name="x_online_customer_name" required="1" />
+                                <field name="x_online_requested_graduation" required="1" />
+                                <field name="x_online_received_graduation" required="1" />
+                                <field name="x_online_attachment_capture"
+                                    widget="radio"
+                                    options="{'horizontal': true}"
+                                    required="1" />
+
+                                <field name="x_online_return_sap_center" required="1" />
+                                <field name="x_online_return_bag_cedis" required="1" />
+                            </group>
+
                         </div>
 
+
                         <div class="mt16" invisible="x_subcategory_code != 'pedido_otro_cliente'">
+
                             <div class="o_form_sheet bg-success text-white p-2 rounded-2 mb-3">
                                 <strong>Pedido que es de otro cliente</strong>
                             </div>
 
-                            <div class="mt8">
-                                <strong>Describe el caso y adjunta evidencia.</strong>
-                            </div>
+                            <group col="4">
+                                <field name="x_online_fulfillment" required="1" />
+                                <field name="x_online_sale_date" required="1" />
+                                <field name="x_online_customer_email" required="1" />
+                                <field name="x_online_reported_customer_vtex" required="1" />
+
+                                <field name="x_online_pos_order" required="1" />
+                                <field name="x_online_arrived_order_vtex" required="1" />
+                                <field name="x_online_received_order_name" required="1" />
+                                <field name="x_online_received_product" required="1" />
+
+                                <field name="x_online_attachment_capture"
+                                    widget="radio"
+                                    options="{'horizontal': true}"
+                                    required="1" />
+                            </group>
+
                         </div>
 
                         <div class="mt16" invisible="x_subcategory_code != 'devolucion_pedidos'">
+
                             <div class="o_form_sheet bg-success text-white p-2 rounded-2 mb-3">
                                 <strong>Devolución de pedidos</strong>
                             </div>
 
-                            <div class="mt8">
-                                <strong>Describe el motivo de devolución y adjunta evidencia.</strong>
-                            </div>
+                            <group col="4">
+                                <field name="x_online_fulfillment" required="1" />
+                                <field name="x_online_sale_date" required="1" />
+                                <field name="x_online_customer_email" required="1" />
+                                <field name="x_online_pos_order" required="1" />
+
+                                <field name="x_online_customer_name" required="1" />
+                                <field name="x_online_return_reason" required="1" />
+                                <field name="x_online_return_bag_cedis" required="1" />
+                                <field name="x_online_payment_platform" required="1" />
+
+                                <field name="x_online_payment_reference" required="1" />
+                            </group>
+
                         </div>
 
                         <div class="mt16"
                             invisible="x_subcategory_code != 'graduacion_error_cliente'">
+
                             <div class="o_form_sheet bg-success text-white p-2 rounded-2 mb-3">
                                 <strong>Pedidos con graduación incorrecta por captura errónea del
                                     cliente</strong>
                             </div>
 
-                            <div class="mt8">
-                                <strong>Describe el caso e incluye evidencia.</strong>
-                            </div>
-                        </div>
+                            <group col="4">
+                                <field name="x_online_fulfillment" required="1" />
+                                <field name="x_online_sale_date" required="1" />
+                                <field name="x_online_customer_email" required="1" />
+                                <field name="x_online_pos_order" required="1" />
 
+                                <field name="x_online_customer_name" required="1" />
+                                <field name="x_online_correct_graduation" required="1" />
+                            </group>
+
+                        </div>
                         <div class="mt16" invisible="x_subcategory_code != 'pedidos_sin_estatus'">
+
                             <div class="o_form_sheet bg-success text-white p-2 rounded-2 mb-3">
                                 <strong>Pedidos sin estatus</strong>
                             </div>
 
-                            <div class="mt8">
-                                <strong>Describe el inconveniente e incluye evidencia.</strong>
-                            </div>
-                        </div>
+                            <group col="4">
+                                <field name="x_online_fulfillment" required="1" />
+                                <field name="x_online_sale_date" required="1" />
+                                <field name="x_online_customer_email" required="1" />
+                                <field name="x_online_pos_order" required="1" />
 
+                                <field name="x_online_customer_name" required="1" />
+                                <field name="x_online_promised_date" required="1" />
+                            </group>
+
+                        </div>
                         <div class="mt16" invisible="x_subcategory_code != 'paquete_retornado'">
+
                             <div class="o_form_sheet bg-success text-white p-2 rounded-2 mb-3">
                                 <strong>Paquete retornado por mensajería externa</strong>
                             </div>
 
-                            <div class="mt8">
-                                <strong>Describe el caso y adjunta evidencia del retorno.</strong>
-                            </div>
-                        </div>
+                            <group col="4">
+                                <field name="x_online_fulfillment" required="1" />
+                                <field name="x_online_sale_date" required="1" />
+                                <field name="x_online_customer_email" required="1" />
+                                <field name="x_online_pos_order" required="1" />
 
+                                <field name="x_online_customer_name" required="1" />
+                                <field name="x_online_guide_number" required="1" />
+                                <field name="x_online_receiver_name" required="1" />
+                                <field name="x_online_contact_phone" required="1" />
+                            </group>
+
+                        </div>
                         <div class="mt16" invisible="x_subcategory_code != 'cambio_domicilio'">
+
                             <div class="o_form_sheet bg-success text-white p-2 rounded-2 mb-3">
                                 <strong>Cambio de domicilio de entrega</strong>
                             </div>
 
-                            <div class="mt8">
-                                <strong>Describe el cambio solicitado y adjunta evidencia si aplica.</strong>
-                            </div>
-                        </div>
+                            <group col="4">
+                                <field name="x_online_fulfillment" required="1" />
+                                <field name="x_online_sale_date" required="1" />
+                                <field name="x_online_customer_email" required="1" />
+                                <field name="x_online_client_phone" required="1" />
 
+                                <field name="x_online_pos_order" required="1" />
+                                <field name="x_online_customer_name" required="1" />
+                                <field name="x_online_new_address" required="1" />
+                                <field name="x_online_receiver_name" required="1" />
+
+                                <field name="x_online_contact_phone" required="1" />
+                                <field name="x_online_additional_references" required="1" />
+                            </group>
+
+                        </div>
                         <div class="mt16" invisible="x_subcategory_code != 'pedido_sin_capturar'">
+
                             <div class="o_form_sheet bg-success text-white p-2 rounded-2 mb-3">
                                 <strong>Pedido sin capturar</strong>
                             </div>
 
-                            <div class="mt8">
-                                <strong>Describe la incidencia y adjunta evidencia.</strong>
-                            </div>
-                        </div>
+                            <group col="4">
+                                <field name="x_online_fulfillment" required="1" />
+                                <field name="x_online_sale_date" required="1" />
+                                <field name="x_online_customer_email" required="1" />
+                                <field name="x_online_client_phone" required="1" />
 
+                                <field name="x_online_pos_order" required="1" />
+                                <field name="x_online_customer_name" required="1" />
+                            </group>
+
+                        </div>
                         <div class="mt16" invisible="x_subcategory_code != 'graduacion_sucursal'">
+
                             <div class="o_form_sheet bg-success text-white p-2 rounded-2 mb-3">
                                 <strong>Captura de graduación examen de la vista realizado en
                                     sucursal</strong>
                             </div>
 
-                            <div class="mt8">
-                                <strong>Describe la graduación o el problema presentado.</strong>
-                            </div>
-                        </div>
+                            <group col="4">
+                                <field name="x_online_exam_sap_center" required="1" />
+                                <field name="x_online_exam_date" required="1" />
+                                <field name="x_online_exam_employee_number" required="1" />
+                                <field name="x_online_exam_employee_name" required="1" />
 
+                                <field name="x_online_fulfillment" required="1" />
+                                <field name="x_online_sale_date" required="1" />
+                                <field name="x_online_customer_email" required="1" />
+                                <field name="x_online_payment_method" required="1" />
+
+                                <field name="x_online_client_phone" required="1" />
+                            </group>
+
+                            <div class="mt16">
+                                <strong>Esfera</strong>
+                            </div>
+                            <group col="2">
+                                <field name="x_online_sphere_od" required="1" />
+                                <field name="x_online_sphere_oi" required="1" />
+                            </group>
+
+                            <div class="mt16">
+                                <strong>Cilindro</strong>
+                            </div>
+                            <group col="2">
+                                <field name="x_online_cylinder_od" required="1" />
+                                <field name="x_online_cylinder_oi" required="1" />
+                            </group>
+
+                            <div class="mt16">
+                                <strong>Eje</strong>
+                            </div>
+                            <group col="2">
+                                <field name="x_online_axis_od" required="1" />
+                                <field name="x_online_axis_oi" required="1" />
+                            </group>
+
+                            <div class="mt16">
+                                <strong>Distancia interpupilar</strong>
+                            </div>
+                            <group col="2">
+                                <field name="x_online_ipd_od" required="1" />
+                                <field name="x_online_ipd_oi" required="1" />
+                            </group>
+
+                        </div>
                         <div class="mt16"
                             invisible="x_subcategory_code != 'devolucion_sin_entregar'">
+
                             <div class="o_form_sheet bg-success text-white p-2 rounded-2 mb-3">
                                 <strong>Devolución de pedidos sin entregar</strong>
                             </div>
 
-                            <div class="mt8">
-                                <strong>Describe el motivo de la devolución y adjunta evidencia.</strong>
-                            </div>
-                        </div>
+                            <group col="4">
+                                <field name="x_online_fulfillment" required="1" />
+                                <field name="x_online_sale_date" required="1" />
+                                <field name="x_online_payment_method" required="1" />
+                                <field name="x_online_customer_email" required="1" />
 
+                                <field name="x_online_client_phone" required="1" />
+                                <field name="x_online_unshipped_order" required="1" />
+                                <field name="x_online_payment_reference" required="1" />
+                            </group>
+
+                        </div>
                         <div class="mt16" invisible="x_subcategory_code != 'pedido_sin_envio'">
+
                             <div class="o_form_sheet bg-success text-white p-2 rounded-2 mb-3">
                                 <strong>Pedidos sin envío</strong>
                             </div>
 
-                            <div class="mt8">
-                                <strong>Describe el caso y adjunta evidencia.</strong>
-                            </div>
-                        </div>
+                            <group col="4">
+                                <field name="x_online_fulfillment" required="1" />
+                                <field name="x_online_sale_date" required="1" />
+                                <field name="x_online_customer_email" required="1" />
+                                <field name="x_online_pos_order" required="1" />
 
+                                <field name="x_online_customer_name" required="1" />
+                            </group>
+
+                        </div>
                         <div class="mt16" invisible="x_subcategory_code != 'atraso_lente_contacto'">
+
                             <div class="o_form_sheet bg-success text-white p-2 rounded-2 mb-3">
-                                <strong>Atraso lente de contacto</strong>
+                                <strong>Atraso lente de contacto.</strong>
                             </div>
 
-                            <div class="mt8">
-                                <strong>Describe el atraso y adjunta evidencia del caso.</strong>
-                            </div>
+                            <group col="2">
+                                <field name="x_online_pos_order" required="1" />
+                                <field name="x_online_work_order_number" required="1" />
+                            </group>
+
                         </div>
-
                         <div class="mt16" invisible="x_subcategory_code != 'busqueda_armazon'">
+
                             <div class="o_form_sheet bg-success text-white p-2 rounded-2 mb-3">
                                 <strong>Búsqueda de armazón</strong>
                             </div>
 
-                            <div class="mt8">
-                                <strong>Describe el armazón requerido y adjunta evidencia si aplica.</strong>
-                            </div>
-                        </div>
+                            <group col="4">
+                                <field name="x_frame_search_sale_order" required="1" />
+                                <field name="x_frame_search_frame_code" required="1" />
+                                <field name="x_frame_search_packaging_bag" required="1" />
+                                <field name="x_frame_search_shipping_date" required="1" />
 
-                        <div class="mt16" invisible="x_subcategory_code != 'calidad_micas'">
-                            <div class="o_form_sheet bg-success text-white p-2 rounded-2 mb-3">
-                                <strong>Calidad - Micas</strong>
-                            </div>
-
-                            <div class="mt8">
-                                <strong>Adjuntar evidencia fotográfica y describir la incidencia.</strong>
-                            </div>
-                        </div>
-
-                        <div class="mt16" invisible="x_subcategory_code != 'calidad_armazon'">
-                            <div class="o_form_sheet bg-success text-white p-2 rounded-2 mb-3">
-                                <strong>Calidad - Armazón</strong>
-                            </div>
+                                <field name="x_frame_search_courier" required="1" />
+                                <field name="x_frame_search_cause" required="1" />
+                                <field name="x_frame_search_other_specify" required="1" />
+                            </group>
 
                             <div class="mt8">
-                                <strong>Adjuntar evidencia fotográfica y describir la incidencia.</strong>
+                                <strong>Adjuntar foto o pantallazo de recibido en CeDis</strong>
                             </div>
+
                         </div>
-
-                        <div class="mt16" invisible="x_subcategory_code != 'implantar_bolsa'">
-                            <div class="o_form_sheet bg-success text-white p-2 rounded-2 mb-3">
-                                <strong>Implantar bolsa de: trabajo | Micas sin cortar | Lente de
-                                    contacto</strong>
-                            </div>
-
-                            <div class="mt8">
-                                <strong>Describe la solicitud y adjunta evidencia si aplica.</strong>
-                            </div>
-                        </div>
-
                         <div class="mt16"
-                            invisible="x_subcategory_code != 'bolsa_abasto_no_implantada'">
+                            invisible="not (x_is_receta_lc and x_subcategory_code == 'atraso_lente_contacto')">
+
                             <div class="o_form_sheet bg-success text-white p-2 rounded-2 mb-3">
-                                <strong>Bolsa de abasto no implantada</strong>
+                                <strong>Atraso lente de contacto</strong>
                             </div>
+
+                            <group col="4">
+                                <field name="x_lc_recipe_name" required="1" />
+                            </group>
 
                             <div class="mt8">
-                                <strong>Describe el caso y adjunta evidencia.</strong>
+                                <strong>*</strong>
                             </div>
+
+                            <group col="4">
+                                <field name="x_lc_ot_number" required="1" />
+                                <field name="x_lc_order_number" required="1" />
+                                <field name="x_lc_provider" required="1" />
+                            </group>
+
                         </div>
-
-                        <div class="mt16" invisible="x_subcategory_code != 'incumplimiento_visita'">
-                            <div class="o_form_sheet bg-success text-white p-2 rounded-2 mb-3">
-                                <strong>Incumplimiento de visita y/o recolección</strong>
-                            </div>
-
-                            <div class="mt8">
-                                <strong>Describe el incumplimiento y adjunta evidencia.</strong>
-                            </div>
-                        </div>
-
-                        <div class="mt16" invisible="x_subcategory_code != 'paquetes_alterados'">
-                            <div class="o_form_sheet bg-success text-white p-2 rounded-2 mb-3">
-                                <strong>Paquetes alterados</strong>
-                            </div>
-
-                            <div class="mt8">
-                                <strong>Adjuntar evidencia del paquete alterado.</strong>
-                            </div>
-                        </div>
-
                         <div class="mt16"
-                            invisible="x_subcategory_code != 'paquetes_no_recibidos_trabajo'">
+                            invisible="x_subcategory_code not in ('calidad_micas', 'calidad_armazon')">
+
                             <div class="o_form_sheet bg-success text-white p-2 rounded-2 mb-3">
-                                <strong>Paquetes no recibidos trabajos</strong>
+                                <strong>
+                                    <field name="x_subcategory_id" readonly="1" />
+                                </strong>
                             </div>
 
-                            <div class="mt8">
-                                <strong>Describe el caso y adjunta evidencia.</strong>
-                            </div>
-                        </div>
+                            <group col="4">
+                                <field name="x_quality_order_number" required="1" />
+                                <field name="x_quality_customer_name" required="1" />
+                                <field name="x_quality_customer_phone" required="1" />
+                                <field name="x_quality_shipping_bag" required="1" />
 
-                        <div class="mt16"
-                            invisible="x_subcategory_code != 'paquetes_no_recibidos_abasto'">
-                            <div class="o_form_sheet bg-success text-white p-2 rounded-2 mb-3">
-                                <strong>Paquetes no recibidos abasto</strong>
-                            </div>
+                                <field name="x_quality_courier_guide" required="1" />
+                                <field name="x_quality_evidence_attached"
+                                    widget="radio"
+                                    options="{'horizontal': true}"
+                                    required="1" />
+                            </group>
 
-                            <div class="mt8">
-                                <strong>Describe el caso y adjunta evidencia.</strong>
-                            </div>
-                        </div>
-
-                        <div class="mt16"
-                            invisible="x_subcategory_code != 'seguimiento_laboratorio'">
-                            <div class="o_form_sheet bg-success text-white p-2 rounded-2 mb-3">
-                                <strong>Seguimiento a: Trabajo elaborados en Laboratorio Essilor |
-                                    Micas sin cortar procesadas</strong>
-                            </div>
-
-                            <div class="mt8">
-                                <strong>Describe el seguimiento requerido y adjunta evidencia.</strong>
-                            </div>
-                        </div>
-
-                        <div class="mt16" invisible="x_subcategory_code != 'envio_extraordinario'">
-                            <div class="o_form_sheet bg-success text-white p-2 rounded-2 mb-3">
-                                <strong>Envío extraordinario de: Trabajo elaborados en Laboratorio
-                                    Essilor | Micas sin cortar procesadas</strong>
-                            </div>
-
-                            <div class="mt8">
-                                <strong>Describe el motivo del envío extraordinario.</strong>
-                            </div>
-                        </div>
-
-                        <div class="mt16"
-                            invisible="x_subcategory_code != 'faltante_accesorios_pedido'">
-                            <div class="o_form_sheet bg-success text-white p-2 rounded-2 mb-3">
-                                <strong>Faltante accesorios en armazón de pedido</strong>
-                            </div>
-
-                            <div class="mt8">
-                                <strong>Describe el faltante y adjunta evidencia.</strong>
-                            </div>
-                        </div>
-
-                        <div class="mt16"
-                            invisible="x_subcategory_code != 'faltante_accesorios_surtido'">
-                            <div class="o_form_sheet bg-success text-white p-2 rounded-2 mb-3">
-                                <strong>Faltante accesorios en armazón de surtido</strong>
-                            </div>
-
-                            <div class="mt8">
-                                <strong>Describe el faltante y adjunta evidencia.</strong>
-                            </div>
-                        </div>
-
-                        <div class="mt16" invisible="x_subcategory_code != 'faltante_mercancia'">
-                            <div class="o_form_sheet bg-success text-white p-2 rounded-2 mb-3">
-                                <strong>Faltante de mercancía en bolsa</strong>
-                            </div>
-
-                            <div class="mt8">
-                                <strong>Describe el faltante y adjunta evidencia.</strong>
-                            </div>
-                        </div>
-
-                        <div class="mt16" invisible="x_subcategory_code != 'sobrante_mercancia'">
-                            <div class="o_form_sheet bg-success text-white p-2 rounded-2 mb-3">
-                                <strong>Sobrante de mercancía en bolsa</strong>
-                            </div>
-
-                            <div class="mt8">
-                                <strong>Describe el sobrante y adjunta evidencia.</strong>
-                            </div>
-                        </div>
-
-                        <div class="mt16" invisible="x_subcategory_code != 'mercancia_danada'">
-                            <div class="o_form_sheet bg-success text-white p-2 rounded-2 mb-3">
-                                <strong>Mercancía dañada en bolsa</strong>
-                            </div>
-
-                            <div class="mt8">
-                                <strong>Adjuntar evidencia de la mercancía dañada.</strong>
-                            </div>
-                        </div>
-
-                        <div class="mt16" invisible="x_subcategory_code != 'extravio_mensajeria'">
-                            <div class="o_form_sheet bg-success text-white p-2 rounded-2 mb-3">
-                                <strong>Extravío por mensajería</strong>
-                            </div>
-
-                            <div class="mt8">
-                                <strong>Describe el extravío y adjunta evidencia disponible.</strong>
-                            </div>
-                        </div>
-
-                        <div class="mt16" invisible="x_subcategory_code != 'extravio_sucursal'">
-                            <div class="o_form_sheet bg-success text-white p-2 rounded-2 mb-3">
-                                <strong>Extravío en sucursal</strong>
-                            </div>
-
-                            <div class="mt8">
-                                <strong>Describe el extravío y adjunta evidencia disponible.</strong>
-                            </div>
                         </div>
                         <div class="mt16">
                             <h3>Anexos</h3>

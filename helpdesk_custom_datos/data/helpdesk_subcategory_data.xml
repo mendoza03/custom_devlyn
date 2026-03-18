@@ -1489,4 +1489,248 @@
         <field name="active">True</field>
         <field name="code">extravio_sucursal</field>
     </record>
+    <record id="helpdesk_ticket_subcategory_herramientas_essilor_falta_seguimiento_select"
+        model="helpdesk.ticket.subcategory">
+        <field name="name">-- seleccionar --</field>
+        <field name="category_id"
+            ref="helpdesk_ticket_category_herramientas_essilor_falta_seguimiento" />
+        <field name="sequence">1</field>
+        <field name="active">True</field>
+        <field name="code">select</field>
+    </record>
+
+    <record id="helpdesk_ticket_subcategory_herramientas_essilor_reporte_dispositivos"
+        model="helpdesk.ticket.subcategory">
+        <field name="name">Reporte dispositivos</field>
+        <field name="category_id"
+            ref="helpdesk_ticket_category_herramientas_essilor_falta_seguimiento" />
+        <field name="sequence">10</field>
+        <field name="active">True</field>
+        <field name="code">reporte_dispositivos</field>
+    </record>
+
+    <record id="helpdesk_ticket_subcategory_herramientas_essilor_reporte_aplicaciones"
+        model="helpdesk.ticket.subcategory">
+        <field name="name">Reporte aplicaciones</field>
+        <field name="category_id"
+            ref="helpdesk_ticket_category_herramientas_essilor_falta_seguimiento" />
+        <field name="sequence">20</field>
+        <field name="active">True</field>
+        <field name="code">reporte_aplicaciones</field>
+    </record>
+
+    <record id="helpdesk_ticket_subcategory_micas_cortesia_select"
+        model="helpdesk.ticket.subcategory">
+        <field name="name">-- seleccionar --</field>
+        <field name="category_id"
+            ref="helpdesk_ticket_category_micas_cortesia_solicitud_folio" />
+        <field name="sequence">1</field>
+        <field name="active">True</field>
+        <field name="code">select</field>
+    </record>
+
+    <record id="helpdesk_ticket_subcategory_micas_cortesia_atraso_6_dias"
+        model="helpdesk.ticket.subcategory">
+        <field name="name">Atraso 6 días o más</field>
+        <field name="category_id"
+            ref="helpdesk_ticket_category_micas_cortesia_solicitud_folio" />
+        <field name="sequence">10</field>
+        <field name="active">True</field>
+        <field name="code">atraso_6_dias</field>
+    </record>
+    <record id="helpdesk_ticket_subcategory_resurtido_consumibles_select"
+        model="helpdesk.ticket.subcategory">
+        <field name="name">-- seleccionar --</field>
+        <field name="category_id"
+            ref="helpdesk_ticket_category_resurtido_consumibles_seguimiento" />
+        <field name="sequence">1</field>
+        <field name="active">True</field>
+        <field name="code">select</field>
+    </record>
+
+    <record id="helpdesk_ticket_subcategory_resurtido_consumibles_seguimiento"
+        model="helpdesk.ticket.subcategory">
+        <field name="name">Seguimiento de solicitud</field>
+        <field name="category_id"
+            ref="helpdesk_ticket_category_resurtido_consumibles_seguimiento" />
+        <field name="sequence">10</field>
+        <field name="active">True</field>
+        <field name="code">seguimiento_solicitud</field>
+    </record>
+    <record id="helpdesk_ticket_subcategory_plataforma_citas_select"
+        model="helpdesk.ticket.subcategory">
+        <field name="name">-- seleccionar --</field>
+        <field name="category_id"
+            ref="helpdesk_ticket_category_plataforma_citas" />
+        <field name="sequence">1</field>
+        <field name="active">True</field>
+        <field name="code">select</field>
+    </record>
+
+    <record id="helpdesk_ticket_subcategory_plataforma_citas_no_agregar"
+        model="helpdesk.ticket.subcategory">
+        <field name="name">No puedo agregar cita</field>
+        <field name="category_id"
+            ref="helpdesk_ticket_category_plataforma_citas" />
+        <field name="sequence">10</field>
+        <field name="active">True</field>
+        <field name="code">no_puedo_agregar_cita</field>
+    </record>
+    <record id="helpdesk_ticket_subcategory_internet_select"
+        model="helpdesk.ticket.subcategory">
+        <field name="name">-- seleccionar --</field>
+        <field name="category_id"
+            ref="helpdesk_ticket_category_internet_sin_conexion" />
+        <field name="sequence">1</field>
+        <field name="active">True</field>
+        <field name="code">select</field>
+    </record>
+
+    <record id="helpdesk_ticket_subcategory_internet_sin_conexion"
+        model="helpdesk.ticket.subcategory">
+        <field name="name">Sin conexión a internet</field>
+        <field name="category_id"
+            ref="helpdesk_ticket_category_internet_sin_conexion" />
+        <field name="sequence">10</field>
+        <field name="active">True</field>
+        <field name="code">sin_conexion_internet</field>
+    </record>
+    <record id="helpdesk_ticket_subcategory_usuario_contrasena_select"
+        model="helpdesk.ticket.subcategory">
+        <field name="name">-- seleccionar --</field>
+        <field name="category_id"
+            ref="helpdesk_ticket_category_usuario_contrasena" />
+        <field name="sequence">1</field>
+        <field name="active">True</field>
+        <field name="code">select</field>
+    </record>
+
+    <record id="helpdesk_ticket_subcategory_usuario_contrasena_citas_pos"
+        model="helpdesk.ticket.subcategory">
+        <field name="name">Citas, POS | POS Móvil</field>
+        <field name="category_id"
+            ref="helpdesk_ticket_category_usuario_contrasena" />
+        <field name="sequence">10</field>
+        <field name="active">True</field>
+        <field name="code">citas_pos</field>
+    </record>
+
+    <record id="helpdesk_ticket_subcategory_usuario_contrasena_equipo_computo"
+        model="helpdesk.ticket.subcategory">
+        <field name="name">Equipo de cómputo</field>
+        <field name="category_id"
+            ref="helpdesk_ticket_category_usuario_contrasena" />
+        <field name="sequence">20</field>
+        <field name="active">True</field>
+        <field name="code">equipo_computo</field>
+    </record>
+
+    <record id="helpdesk_ticket_subcategory_usuario_contrasena_optica_digital"
+        model="helpdesk.ticket.subcategory">
+        <field name="name">Óptica digital</field>
+        <field name="category_id"
+            ref="helpdesk_ticket_category_usuario_contrasena" />
+        <field name="sequence">30</field>
+        <field name="active">True</field>
+        <field name="code">optica_digital</field>
+    </record>
+
+    <record id="helpdesk_ticket_subcategory_labs_locales_select"
+        model="helpdesk.ticket.subcategory">
+        <field name="name">-- seleccionar --</field>
+        <field name="category_id"
+            ref="helpdesk_ticket_category_labs_locales_categoria" />
+        <field name="sequence">1</field>
+        <field name="active">True</field>
+        <field name="code">select</field>
+    </record>
+
+    <record id="helpdesk_ticket_subcategory_labs_locales_trabajos_atrasados"
+        model="helpdesk.ticket.subcategory">
+        <field name="name">Trabajos atrasados laboratorio local.</field>
+        <field name="category_id"
+            ref="helpdesk_ticket_category_labs_locales_categoria" />
+        <field name="sequence">10</field>
+        <field name="active">True</field>
+        <field name="code">trabajos_atrasados_laboratorio_local</field>
+    </record>
+
+    <record id="helpdesk_ticket_subcategory_papeleria_select"
+        model="helpdesk.ticket.subcategory">
+        <field name="name">-- seleccionar --</field>
+        <field name="category_id"
+            ref="helpdesk_ticket_category_papeleria_seguimiento" />
+        <field name="sequence">1</field>
+        <field name="active">True</field>
+        <field name="code">select</field>
+    </record>
+
+    <record id="helpdesk_ticket_subcategory_papeleria_seguimiento"
+        model="helpdesk.ticket.subcategory">
+        <field name="name">Seguimiento de solicitud</field>
+        <field name="category_id"
+            ref="helpdesk_ticket_category_papeleria_seguimiento" />
+        <field name="sequence">10</field>
+        <field name="active">True</field>
+        <field name="code">seguimiento_solicitud</field>
+    </record>
+    <record id="helpdesk_ticket_subcategory_abasto_cuadro_basico_select"
+        model="helpdesk.ticket.subcategory">
+        <field name="name">-- seleccionar --</field>
+        <field name="category_id"
+            ref="helpdesk_ticket_category_abasto_cuadro_basico_planeacion" />
+        <field name="sequence">1</field>
+        <field name="active">True</field>
+        <field name="code">select</field>
+    </record>
+
+    <record id="helpdesk_ticket_subcategory_abasto_cuadro_basico_accesorios_soluciones"
+        model="helpdesk.ticket.subcategory">
+        <field name="name">Abasto de accesorios y soluciones</field>
+        <field name="category_id"
+            ref="helpdesk_ticket_category_abasto_cuadro_basico_planeacion" />
+        <field name="sequence">10</field>
+        <field name="active">True</field>
+        <field name="code">abasto_accesorios_soluciones</field>
+    </record>
+
+    <record id="helpdesk_ticket_subcategory_abasto_cuadro_basico_armazones"
+        model="helpdesk.ticket.subcategory">
+        <field name="name">Abasto de armazones</field>
+        <field name="category_id"
+            ref="helpdesk_ticket_category_abasto_cuadro_basico_planeacion" />
+        <field name="sequence">20</field>
+        <field name="active">True</field>
+        <field name="code">abasto_armazones</field>
+    </record>
+
+    <record id="helpdesk_ticket_subcategory_abasto_cuadro_basico_lente_contacto"
+        model="helpdesk.ticket.subcategory">
+        <field name="name">Abasto de lente de contacto</field>
+        <field name="category_id"
+            ref="helpdesk_ticket_category_abasto_cuadro_basico_planeacion" />
+        <field name="sequence">30</field>
+        <field name="active">True</field>
+        <field name="code">abasto_lente_contacto</field>
+    </record>
+
+    <record id="helpdesk_ticket_subcategory_abasto_cuadro_basico_devoluciones_aplicadas"
+        model="helpdesk.ticket.subcategory">
+        <field name="name">Devoluciones Aplicadas</field>
+        <field name="category_id"
+            ref="helpdesk_ticket_category_abasto_cuadro_basico_planeacion" />
+        <field name="sequence">40</field>
+        <field name="active">True</field>
+        <field name="code">devoluciones_aplicadas</field>
+    </record>
+
+    <record id="helpdesk_ticket_subcategory_abasto_cuadro_basico_gotas_soluciones_alcon"
+        model="helpdesk.ticket.subcategory">
+        <field name="name">Gotas y soluciones Alcon</field>
+        <field name="category_id"
+            ref="helpdesk_ticket_category_abasto_cuadro_basico_planeacion" />
+        <field name="sequence">50</field>
+        <field name="active">True</field>
+        <field name="code">gotas_soluciones_alcon</field>
+    </record>
 </odoo>
