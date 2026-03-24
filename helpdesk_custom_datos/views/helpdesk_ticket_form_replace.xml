@@ -1183,6 +1183,155 @@
                             </group>
 
                         </div>
+                        <div class="mt16" invisible="x_subcategory_code != 'acceso_plataforma'">
+
+                            <div class="o_form_sheet bg-success text-white p-2 rounded-2 mb-3">
+                                <strong>Acceso a plataforma</strong>
+                            </div>
+
+                            <group col="4">
+                                <field name="x_medallia_employee_number" required="1" />
+                                <field name="x_medallia_employee_name" required="1" />
+                            </group>
+
+                            <div class="mt16 mb-2">
+                                <strong>Antes de enviar este SOS valida lo siguiente:</strong>
+                            </div>
+
+                            <div class="mt16">
+                                <strong style="color:#8e44ad;">Valida en el siguiente link que el
+                                    acceso sea correcto</strong>
+                            </div>
+
+                            <div class="mt16">
+                                <strong style="color:#009688;">(Dar click aquí) DEVLYN FS</strong>
+                            </div>
+
+                            <div class="mt16">
+                                <strong style="color:#009688;">Sigue los siguientes pasos (Dar click
+                                    aquí)</strong>
+                            </div>
+
+                            <div class="mt16">
+                                <strong>(De preferencia copia la siguiente liga de acceso en el
+                                    navegador con el que ya entrabas en Medallia)</strong>
+                            </div>
+
+                            <div class="mt16">
+                                <strong>
+                                    En el primer campo donde te pide un correo deberás capturar tu
+                                    usuario,
+                                    el cual se compone de los siguientes elementos: devlyn + \ +
+                                    número de
+                                    empleado Ejemplo: devlyn\11111
+                                    Si no sabes donde sacar la diagonal copiala de aquí \
+                                </strong>
+                            </div>
+
+                            <div class="mt16">
+                                <strong>
+                                    En el siguiente campo donde dice contraseña colocar la tu
+                                    contraseña
+                                    la cual está compuesta de los siguientes elementos: Tú RFC a 10
+                                    Dígitos
+                                    (sin homoclave) en mayúsculas + ! + 18
+                                    a Ejemplo: GUBJ871020!18a
+                                </strong>
+                            </div>
+
+                            <div class="mt16">
+                                <strong>Si no sabes donde sacar el signo copialo de aquí !</strong>
+                            </div>
+
+                            <div class="mt16">
+                                <strong>Si tienes dudas en la liga anexa encontrarás el comunicado
+                                    con más detalles.</strong>
+                            </div>
+
+                            <div class="mt16">
+                                <strong>
+                                    Si ya realizaste todos los pasos anteriores y no logras acceder
+                                    levanta tu SOS en la sección de Medallia para que te ayuden
+                                    a resolver el problema que tengas.
+                                </strong>
+                            </div>
+
+                        </div>
+
+                        <div class="mt16"
+                            invisible="x_subcategory_code != 'implantar_bolsa'">
+
+                            <div class="o_form_sheet bg-success text-white p-2 rounded-2 mb-3">
+                                <strong>Implantar bolsa de: trabajo | Micas sin cortar | Lente de
+                                    contacto</strong>
+                            </div>
+
+                            <group col="2">
+                                <field name="x_paq_pos_order" required="1" />
+                                <field name="x_bag_arrival" required="1" />
+                            </group>
+
+                        </div>
+                        <div class="mt16"
+                            invisible="x_subcategory_code != 'bolsa_abasto_no_implantada'">
+
+                            <div class="o_form_sheet bg-success text-white p-2 rounded-2 mb-3">
+                                <strong>Bolsa de abasto no implantada</strong>
+                            </div>
+
+                            <group col="2">
+                                <field name="x_delivery_oc" required="1" />
+                                <field name="x_bag_arrival" required="1" />
+                            </group>
+
+                        </div>
+                        <div class="mt16"
+                            invisible="x_subcategory_code != 'incumplimiento_visita'">
+
+                            <div class="o_form_sheet bg-success text-white p-2 rounded-2 mb-3">
+                                <strong>Incumplimiento de visita y/o recolección</strong>
+                            </div>
+
+                            <group col="2">
+                                <field name="x_shipping_noncompliance_type" required="1" />
+                                <field name="x_shipping_assigned_courier" required="1" />
+                            </group>
+
+                        </div>
+
+                        <div class="mt16"
+                            invisible="x_subcategory_code != 'paquetes_alterados'">
+
+                            <div class="o_form_sheet bg-success text-white p-2 rounded-2 mb-3">
+                                <strong>Paquetes alterados</strong>
+                            </div>
+
+                            <group col="4">
+                                <field name="x_shipping_arrival_bag" required="1" />
+                                <field name="x_shipping_guide_number_detail" required="1" />
+                                <field name="x_shipping_content_detail" required="1" />
+                                <field name="x_shipping_photo_evidence_confirmed"
+                                    widget="radio"
+                                    options="{'horizontal': true}"
+                                    required="1" />
+                            </group>
+
+                        </div>
+                        <div class="mt16"
+                            invisible="x_subcategory_code != 'paquetes_no_recibidos_trabajo'">
+
+                            <div class="o_form_sheet bg-success text-white p-2 rounded-2 mb-3">
+                                <strong>Paquetes no recibidos</strong>
+                            </div>
+
+                            <group col="4">
+                                <field name="x_shipping_unreceived_pos_order" required="1" />
+                                <field name="x_shipping_unreceived_arrival_bag" required="1" />
+                                <field name="x_shipping_unreceived_transport" required="1" />
+                            </group>
+
+                        </div>
+
                         <div class="mt16">
                             <h3>Anexos</h3>
 

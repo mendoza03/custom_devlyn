@@ -1029,6 +1029,82 @@ class HelpdeskTicket(models.Model):
         string="Es necesario adjuntar imagen como evidencia. (*)",
         copy=False,
     )
+
+    x_medallia_employee_number = fields.Char(
+        string="N° de empleado (*)",
+        copy=False,
+    )
+
+    x_medallia_employee_name = fields.Char(
+        string="Nombre del empleado (*)",
+        copy=False,
+    )
+
+    x_bag_arrival = fields.Char(
+        string="Bolsa de arribo (*)",
+        copy=False,
+    )
+
+    x_delivery_oc = fields.Char(
+        string="Entrega | OC",
+        copy=False,
+    )
+
+    x_paq_pos_order = fields.Char(
+        string="Pedido POS. (*)",
+        copy=False,
+    )
+
+
+    x_shipping_noncompliance_type = fields.Selection(
+        [
+            ("select", "-- seleccionar --"),
+            ("visita", "Visita"),
+            ("recoleccion", "Recolección"),
+        ],
+        string="Tipo (*)",
+        default="select",
+        copy=False,
+    )
+
+    x_shipping_assigned_courier = fields.Char(
+        string="Mensajería asignada (*)",
+        copy=False,
+    )
+
+    x_shipping_arrival_bag = fields.Char(
+        string="Bolsa de arribo (*)",
+        copy=False,
+    )
+
+    x_shipping_guide_number_detail = fields.Char(
+        string="N° de guía (*)",
+        copy=False,
+    )
+
+    x_shipping_content_detail = fields.Char(
+        string="Detalle de contenido (*)",
+        copy=False,
+    )
+
+    x_shipping_photo_evidence_confirmed = fields.Selection(
+        [
+            ("si", "Sí"),
+            ("no", "No"),
+        ],
+        string="Evidencia fotográfica (Confirmar) (*)",
+        copy=False,
+    )
+
+    x_shipping_unreceived_pos_order = fields.Char(
+        string="Pedido POS. (*)", copy=False)
+    
+    x_shipping_unreceived_arrival_bag = fields.Char(
+        string="Bolsa de arribo (*)", copy=False)
+    
+    x_shipping_unreceived_transport= fields.Char(
+        string="Transporte (*)", copy=False)
+        
     @api.depends("x_category_id")
     def _compute_x_is_facturacion_reenvio(self):
         target = self.env.ref(
