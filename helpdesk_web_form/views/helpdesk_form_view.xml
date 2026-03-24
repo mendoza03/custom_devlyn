@@ -14,10 +14,15 @@
                         <input type="text" name="x_general_description" class="form-control" required="1"/>
                     </div>
 
+                    <div class="col-md-6">
+                        <label>Correo electrónico (*)</label>
+                        <input type="email" name="email" class="form-control" required="1"/>
+                    </div>
+
                     <!-- Sección -->
                     <div class="col-12">
                         <label>Sección (*)</label>
-                        <select name="x_section_id" id="section" class="form-select">
+                        <select name="x_section_id" id="section" class="form-select" required="1">
                             <option value="">-- seleccionar --</option>
                             <t t-foreach="sections" t-as="s">
                                 <option t-att-value="s.id"><t t-esc="s.name"/></option>
@@ -28,7 +33,7 @@
                     <!-- Categoría -->
                     <div class="col-md-6">
                         <label>Categoría (*)</label>
-                        <select name="x_category_id" id="category" class="form-select">
+                        <select name="x_category_id" id="category" class="form-select" required="1">
                             <option value="">-- seleccionar --</option>
                         </select>
                     </div>
@@ -36,7 +41,7 @@
                     <!-- Subcategoría -->
                     <div class="col-md-6">
                         <label>Subcategoría</label>
-                        <select name="x_subcategory_id" id="subcategory" class="form-select">
+                        <select name="x_subcategory_id" id="subcategory" class="form-select" required="1">
                             <option value="">-- seleccionar --</option>
                         </select>
                     </div>
@@ -96,9 +101,9 @@
                                 </select>
                             </div>
                         </div>
-                    </div><!-- FIN BLOQUE Micas sin cortar -->
+                    </div>
 
-                    <!-- Sub-bloque: Satisfacción total de adaptación (depende de x_order_type) -->
+                    <!-- Sub-bloque: Satisfacción total de adaptación -->
                     <div id="block-satisfaccion_adaptacion" class="col-12" style="display:none;">
                         <div class="card border-success">
                             <div class="card-header bg-success text-white"><strong>Satisfacción total de adaptación</strong></div>
@@ -116,7 +121,7 @@
                         </div>
                     </div>
 
-                    <!-- Sub-bloque: Satisfacción total de imagen (depende de x_order_type) -->
+                    <!-- Sub-bloque: Satisfacción total de imagen -->
                     <div id="block-satisfaccion_imagen" class="col-12" style="display:none;">
                         <div class="card border-success">
                             <div class="card-header bg-success text-white"><strong>Satisfacción total de Imagen</strong></div>
@@ -138,8 +143,6 @@
                     <div id="block-trabajos_atrasados" class="col-12 subcategory-block" style="display:none;">
                         <div class="card border-success">
                             <div class="card-header bg-success text-white"><strong>Trabajos atrasados</strong></div>
-                            <br/>
-                            <br/>
                             <div class="card-body row g-3">
                                 <div class="col-md-6">
                                     <label>Tipo de Trabajo (*)</label>
@@ -189,7 +192,7 @@
                                 </div>
                             </div>
                         </div>
-                    </div><!-- FIN BLOQUE Trabajos atrasados -->
+                    </div>
 
                     <!-- ===== BLOQUE: Correo electrónico ===== -->
                     <div id="block-correo_electronico" class="col-12 subcategory-block" style="display:none;">
@@ -347,39 +350,31 @@
                         </div>
                     </div>
 
-                    <!-- ===== BLOQUE: Iluminación ===== -->
+                    <!-- ===== BLOQUES SOLO TEXTO: Instalaciones ===== -->
                     <div id="block-iluminacion" class="col-12 subcategory-block" style="display:none;">
                         <div class="card border-success">
                             <div class="card-header bg-success text-white"><strong>Iluminación</strong></div>
                             <div class="card-body"><strong>Adjuntar fotografía de lámparas</strong></div>
                         </div>
                     </div>
-
-                    <!-- ===== BLOQUE: Sanitarios ===== -->
                     <div id="block-sanitarios" class="col-12 subcategory-block" style="display:none;">
                         <div class="card border-success">
                             <div class="card-header bg-success text-white"><strong>Sanitarios</strong></div>
                             <div class="card-body"><strong>Adjuntar fotografía de sanitarios</strong></div>
                         </div>
                     </div>
-
-                    <!-- ===== BLOQUE: Mobiliario ===== -->
                     <div id="block-mobiliario" class="col-12 subcategory-block" style="display:none;">
                         <div class="card border-success">
                             <div class="card-header bg-success text-white"><strong>Mobiliario</strong></div>
                             <div class="card-body"><strong>Adjuntar fotografía de mobiliario</strong></div>
                         </div>
                     </div>
-
-                    <!-- ===== BLOQUE: Aparadores ===== -->
                     <div id="block-aparadores" class="col-12 subcategory-block" style="display:none;">
                         <div class="card border-success">
                             <div class="card-header bg-success text-white"><strong>Aparadores</strong></div>
                             <div class="card-body"><strong>Adjuntar fotografía de aparadores</strong></div>
                         </div>
                     </div>
-
-                    <!-- ===== BLOQUE: Fletes ===== -->
                     <div id="block-fletes" class="col-12 subcategory-block" style="display:none;">
                         <div class="card border-success">
                             <div class="card-header bg-success text-white"><strong>Fletes</strong></div>
@@ -408,9 +403,6 @@
                     </div>
 
                     <!-- ===== BLOQUE: Refacturación ===== -->
-                    <!-- Aplica a: error_captura_datos_fiscales, error_captura_uso_cfdi, error_captura_forma_pago,
-                         unificar_pedidos, dividir_pedido, unificar_conceptos, diferencia_convenio_credito,
-                         facturar_monto_especifico, periodo_facturacion_portal -->
                     <div id="block-refacturacion" class="col-12 subcategory-block" style="display:none;">
                         <div class="card border-success">
                             <div class="card-header bg-success text-white"><strong>Refacturación</strong></div>
@@ -634,123 +626,1736 @@
                         </div>
                     </div>
 
-                    <!-- ===== BLOQUES SOLO-TEXTO (sin campos extra) ===== -->
+                    <!-- ===== BLOQUE: Devoluciones Reales - Tarjeta Crédito / Débito ===== -->
+                    <div id="block-dev-real-tc-db" class="col-12 subcategory-block" style="display:none;">
+                        <div class="card border-success">
+                            <div class="card-header bg-success text-white"><strong>Tarjeta de crédito | débito</strong></div>
+                            <div class="card-body row g-3">
+                                <div class="col-md-6">
+                                    <label>Nombre del Cliente (*)</label>
+                                    <input type="text" name="x_card_client_name" class="form-control"/>
+                                </div>
+                                <div class="col-md-6">
+                                    <label>Centro SAP (*)</label>
+                                    <input type="text" name="x_card_sap_center" class="form-control"/>
+                                </div>
+                                <div class="col-md-6">
+                                    <label>Orden de Venta (*)</label>
+                                    <input type="text" name="x_card_sale_order" class="form-control"/>
+                                </div>
+                                <div class="col-md-6">
+                                    <label>Pedido (*)</label>
+                                    <input type="text" name="x_card_order_number" class="form-control"/>
+                                </div>
+                                <div class="col-md-6">
+                                    <label>Fecha de Venta (*)</label>
+                                    <input type="date" name="x_card_sale_date" class="form-control"/>
+                                </div>
+                                <div class="col-md-6">
+                                    <label>Monto de la venta (*)</label>
+                                    <input type="number" step="0.01" name="x_card_sale_amount" class="form-control"/>
+                                </div>
+                                <div class="col-md-6">
+                                    <label>Monto a devolver (*)</label>
+                                    <input type="number" step="0.01" name="x_card_refund_amount" class="form-control"/>
+                                </div>
+                                <div class="col-md-6">
+                                    <label>Motivo de devolución (*)</label>
+                                    <input type="text" name="x_card_refund_reason" class="form-control"/>
+                                </div>
+                                <div class="col-md-6">
+                                    <label>N° completo de la tarjeta 16 dígitos (*)</label>
+                                    <input type="text" name="x_card_number_16_digits" class="form-control"/>
+                                </div>
+                                <div class="col-md-6">
+                                    <label>Fecha de Vencimiento MMAA (*)</label>
+                                    <input type="text" name="x_card_expiration_mmaa" class="form-control"/>
+                                </div>
+                                <div class="col-md-6">
+                                    <label>Número de Autorización (*)</label>
+                                    <input type="text" name="x_card_authorization_number" class="form-control"/>
+                                </div>
+                                <div class="col-md-6">
+                                    <label>Parentesco Titular de la tarjeta con nombre (*)</label>
+                                    <input type="text" name="x_card_holder_relationship" class="form-control"/>
+                                </div>
+                                <div class="col-md-6">
+                                    <label>¿El cliente recibió su producto? (*)</label>
+                                    <select name="x_card_client_received_product" class="form-select">
+                                        <option value="select">-- seleccionar --</option>
+                                        <option value="si">Sí</option>
+                                        <option value="no">No</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Sub-bloque TC/DB: Cargos duplicados -->
+                    <div id="block-dev-tc-cargos_duplicados" class="col-12 subcategory-block" style="display:none;">
+                        <div class="card border-success">
+                            <div class="card-header bg-success text-white"><strong>Cargos duplicados</strong></div>
+                            <div class="card-body row g-3">
+                                <div class="col-md-6">
+                                    <label>Afiliación (Tarjeta y duplicados) (*)</label>
+                                    <input type="text" name="x_duplicate_affiliation" class="form-control"/>
+                                </div>
+                                <div class="col-md-6">
+                                    <label>No. de seguimiento o ID (*)</label>
+                                    <input type="text" name="x_duplicate_tracking_id" class="form-control"/>
+                                </div>
+                                <div class="col-md-6">
+                                    <label>Terminal Interna (*)</label>
+                                    <input type="text" name="x_duplicate_internal_terminal" class="form-control"/>
+                                </div>
+                                <div class="col-md-6">
+                                    <label>¿Solicitud de devolución adjunta? (*)</label>
+                                    <div class="d-flex gap-3 mt-1">
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="radio" name="x_duplicate_refund_request_attached" value="si" id="dup_refund_si"/>
+                                            <label class="form-check-label" for="dup_refund_si">Sí</label>
+                                        </div>
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="radio" name="x_duplicate_refund_request_attached" value="no" id="dup_refund_no"/>
+                                            <label class="form-check-label" for="dup_refund_no">No</label>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Sub-bloque TC/DB: Error de examen -->
+                    <div id="block-dev-tc-error_examen" class="col-12 subcategory-block" style="display:none;">
+                        <div class="card border-success">
+                            <div class="card-header bg-success text-white"><strong>Error de examen</strong></div>
+                            <div class="card-body row g-3">
+                                <div class="col-md-6">
+                                    <label>OV Cancelada (*)</label>
+                                    <div class="d-flex gap-3 mt-1">
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="radio" name="x_exam_ov_cancelled" value="si" id="tc_ov_si"/>
+                                            <label class="form-check-label" for="tc_ov_si">Sí</label>
+                                        </div>
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="radio" name="x_exam_ov_cancelled" value="no" id="tc_ov_no"/>
+                                            <label class="form-check-label" for="tc_ov_no">No</label>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <label>Solicitud de devolución adjunta? (*)</label>
+                                    <div class="d-flex gap-3 mt-1">
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="radio" name="x_exam_refund_request_attached" value="si" id="tc_refund_si"/>
+                                            <label class="form-check-label" for="tc_refund_si">Sí</label>
+                                        </div>
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="radio" name="x_exam_refund_request_attached" value="no" id="tc_refund_no"/>
+                                            <label class="form-check-label" for="tc_refund_no">No</label>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Sub-bloque TC/DB: Fecha de entrega -->
+                    <div id="block-dev-tc-fecha_entrega" class="col-12 subcategory-block" style="display:none;">
+                        <div class="card border-success">
+                            <div class="card-header bg-success text-white"><strong>Fecha de entrega</strong></div>
+                            <div class="card-body row g-3">
+                                <div class="col-md-6">
+                                    <label>OV Cancelada (*)</label>
+                                    <div class="d-flex gap-3 mt-1">
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="radio" name="x_exam_ov_cancelled" value="si" id="tc_fe_ov_si"/>
+                                            <label class="form-check-label" for="tc_fe_ov_si">Sí</label>
+                                        </div>
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="radio" name="x_exam_ov_cancelled" value="no" id="tc_fe_ov_no"/>
+                                            <label class="form-check-label" for="tc_fe_ov_no">No</label>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <label>Solicitud de devolución adjunta? (*)</label>
+                                    <div class="d-flex gap-3 mt-1">
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="radio" name="x_exam_refund_request_attached" value="si" id="tc_fe_refund_si"/>
+                                            <label class="form-check-label" for="tc_fe_refund_si">Sí</label>
+                                        </div>
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="radio" name="x_exam_refund_request_attached" value="no" id="tc_fe_refund_no"/>
+                                            <label class="form-check-label" for="tc_fe_refund_no">No</label>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- ===== BLOQUE: Devoluciones Reales - Efectivo Orden de Pago ===== -->
+                    <div id="block-dev-real-cash-order" class="col-12 subcategory-block" style="display:none;">
+                        <div class="card border-success">
+                            <div class="card-header bg-success text-white"><strong>Efectivo Orden de Pago</strong></div>
+                            <div class="card-body row g-3">
+                                <div class="col-md-6">
+                                    <label>Nombre del Cliente (*)</label>
+                                    <input type="text" name="x_card_client_name" class="form-control"/>
+                                </div>
+                                <div class="col-md-6">
+                                    <label>Centro SAP (*)</label>
+                                    <input type="text" name="x_card_sap_center" class="form-control"/>
+                                </div>
+                                <div class="col-md-6">
+                                    <label>Sociedad (*)</label>
+                                    <input type="text" name="x_cash_society" class="form-control"/>
+                                </div>
+                                <div class="col-md-6">
+                                    <label>Orden de Venta (*)</label>
+                                    <input type="text" name="x_card_sale_order" class="form-control"/>
+                                </div>
+                                <div class="col-md-6">
+                                    <label>Pedido (*)</label>
+                                    <input type="text" name="x_card_order_number" class="form-control"/>
+                                </div>
+                                <div class="col-md-6">
+                                    <label>Fecha de Venta (*)</label>
+                                    <input type="date" name="x_card_sale_date" class="form-control"/>
+                                </div>
+                                <div class="col-md-6">
+                                    <label>Monto de la venta (*)</label>
+                                    <input type="number" step="0.01" name="x_card_sale_amount" class="form-control"/>
+                                </div>
+                                <div class="col-md-6">
+                                    <label>Monto a devolver (*)</label>
+                                    <input type="number" step="0.01" name="x_card_refund_amount" class="form-control"/>
+                                </div>
+                                <div class="col-md-6">
+                                    <label>Motivo de devolución (*)</label>
+                                    <input type="text" name="x_card_refund_reason" class="form-control"/>
+                                </div>
+                                <div class="col-md-6">
+                                    <label>Número de sucursal Banamex (*)</label>
+                                    <input type="text" name="x_cash_banamex_branch_number" class="form-control"/>
+                                </div>
+                                <div class="col-md-6">
+                                    <label>Nombre del beneficiario (*)</label>
+                                    <input type="text" name="x_cash_beneficiary_name" class="form-control"/>
+                                </div>
+                                <div class="col-12">
+                                    <strong>Adjuntar Vo. Bo. Gerente Distrital o de Zona.</strong>
+                                </div>
+                                <div class="col-12">
+                                    <strong>Adjuntar INE Beneficiario</strong>
+                                </div>
+                                <div class="col-md-6">
+                                    <label>Parentesco Titular de la tarjeta con nombre (*)</label>
+                                    <input type="text" name="x_card_holder_relationship" class="form-control"/>
+                                </div>
+                                <div class="col-md-6">
+                                    <label>¿El cliente recibió su producto? (*)</label>
+                                    <select name="x_card_client_received_product" class="form-select">
+                                        <option value="select">-- seleccionar --</option>
+                                        <option value="si">Sí</option>
+                                        <option value="no">No</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Sub-bloque Cash Order: Error de examen -->
+                    <div id="block-dev-cash-order-error_examen" class="col-12 subcategory-block" style="display:none;">
+                        <div class="card border-success">
+                            <div class="card-header bg-success text-white"><strong>Error de examen</strong></div>
+                            <div class="card-body row g-3">
+                                <div class="col-md-6">
+                                    <label>OV Cancelada (*)</label>
+                                    <div class="d-flex gap-3 mt-1">
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="radio" name="x_exam_ov_cancelled" value="si" id="co_ee_ov_si"/>
+                                            <label class="form-check-label" for="co_ee_ov_si">Sí</label>
+                                        </div>
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="radio" name="x_exam_ov_cancelled" value="no" id="co_ee_ov_no"/>
+                                            <label class="form-check-label" for="co_ee_ov_no">No</label>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <label>Solicitud de devolución adjunta? (*)</label>
+                                    <div class="d-flex gap-3 mt-1">
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="radio" name="x_exam_refund_request_attached" value="si" id="co_ee_refund_si"/>
+                                            <label class="form-check-label" for="co_ee_refund_si">Sí</label>
+                                        </div>
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="radio" name="x_exam_refund_request_attached" value="no" id="co_ee_refund_no"/>
+                                            <label class="form-check-label" for="co_ee_refund_no">No</label>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Sub-bloque Cash Order: Fecha de entrega -->
+                    <div id="block-dev-cash-order-fecha_entrega" class="col-12 subcategory-block" style="display:none;">
+                        <div class="card border-success">
+                            <div class="card-header bg-success text-white"><strong>Fecha de entrega</strong></div>
+                            <div class="card-body row g-3">
+                                <div class="col-md-6">
+                                    <label>OV Cancelada (*)</label>
+                                    <div class="d-flex gap-3 mt-1">
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="radio" name="x_exam_ov_cancelled" value="si" id="co_fe_ov_si"/>
+                                            <label class="form-check-label" for="co_fe_ov_si">Sí</label>
+                                        </div>
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="radio" name="x_exam_ov_cancelled" value="no" id="co_fe_ov_no"/>
+                                            <label class="form-check-label" for="co_fe_ov_no">No</label>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <label>Solicitud de devolución adjunta? (*)</label>
+                                    <div class="d-flex gap-3 mt-1">
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="radio" name="x_exam_refund_request_attached" value="si" id="co_fe_refund_si"/>
+                                            <label class="form-check-label" for="co_fe_refund_si">Sí</label>
+                                        </div>
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="radio" name="x_exam_refund_request_attached" value="no" id="co_fe_refund_no"/>
+                                            <label class="form-check-label" for="co_fe_refund_no">No</label>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- ===== BLOQUE: Devoluciones Reales - Efectivo Transferencia ===== -->
+                    <div id="block-dev-real-cash-transfer" class="col-12 subcategory-block" style="display:none;">
+                        <div class="card border-success">
+                            <div class="card-header bg-success text-white"><strong>Efectivo Transferencia</strong></div>
+                            <div class="card-body row g-3">
+                                <div class="col-md-6">
+                                    <label>Nombre del Cliente (*)</label>
+                                    <input type="text" name="x_card_client_name" class="form-control"/>
+                                </div>
+                                <div class="col-md-6">
+                                    <label>Centro SAP (*)</label>
+                                    <input type="text" name="x_card_sap_center" class="form-control"/>
+                                </div>
+                                <div class="col-md-6">
+                                    <label>Sociedad (*)</label>
+                                    <input type="text" name="x_cash_society" class="form-control"/>
+                                </div>
+                                <div class="col-md-6">
+                                    <label>Orden de Venta (*)</label>
+                                    <input type="text" name="x_card_sale_order" class="form-control"/>
+                                </div>
+                                <div class="col-md-6">
+                                    <label>Pedido (*)</label>
+                                    <input type="text" name="x_card_order_number" class="form-control"/>
+                                </div>
+                                <div class="col-md-6">
+                                    <label>Fecha de Venta (*)</label>
+                                    <input type="date" name="x_card_sale_date" class="form-control"/>
+                                </div>
+                                <div class="col-md-6">
+                                    <label>Monto de la venta (*)</label>
+                                    <input type="number" step="0.01" name="x_card_sale_amount" class="form-control"/>
+                                </div>
+                                <div class="col-md-6">
+                                    <label>Monto a devolver (*)</label>
+                                    <input type="number" step="0.01" name="x_card_refund_amount" class="form-control"/>
+                                </div>
+                                <div class="col-md-6">
+                                    <label>Motivo de devolución (*)</label>
+                                    <input type="text" name="x_card_refund_reason" class="form-control"/>
+                                </div>
+                                <div class="col-md-6">
+                                    <label>Cuenta Clabe 18 dígitos (*)</label>
+                                    <input type="text" name="x_transfer_clabe_18" class="form-control"/>
+                                </div>
+                                <div class="col-md-6">
+                                    <label>Titular de la cuenta (*)</label>
+                                    <input type="text" name="x_transfer_account_holder" class="form-control"/>
+                                </div>
+                                <div class="col-md-6">
+                                    <label>Banco (*)</label>
+                                    <input type="text" name="x_transfer_bank" class="form-control"/>
+                                </div>
+                                <div class="col-md-6">
+                                    <label>Parentesco Titular de la tarjeta con nombre (*)</label>
+                                    <input type="text" name="x_card_holder_relationship" class="form-control"/>
+                                </div>
+                                <div class="col-md-6">
+                                    <label>¿El cliente recibió su producto? (*)</label>
+                                    <select name="x_card_client_received_product" class="form-select">
+                                        <option value="select">-- seleccionar --</option>
+                                        <option value="si">Sí</option>
+                                        <option value="no">No</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Sub-bloque Cash Transfer: Error de examen -->
+                    <div id="block-dev-cash-transfer-error_examen" class="col-12 subcategory-block" style="display:none;">
+                        <div class="card border-success">
+                            <div class="card-header bg-success text-white"><strong>Error de examen</strong></div>
+                            <div class="card-body row g-3">
+                                <div class="col-md-6">
+                                    <label>OV Cancelada (*)</label>
+                                    <div class="d-flex gap-3 mt-1">
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="radio" name="x_exam_ov_cancelled" value="si" id="ct_ee_ov_si"/>
+                                            <label class="form-check-label" for="ct_ee_ov_si">Sí</label>
+                                        </div>
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="radio" name="x_exam_ov_cancelled" value="no" id="ct_ee_ov_no"/>
+                                            <label class="form-check-label" for="ct_ee_ov_no">No</label>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <label>Solicitud de devolución adjunta? (*)</label>
+                                    <div class="d-flex gap-3 mt-1">
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="radio" name="x_exam_refund_request_attached" value="si" id="ct_ee_refund_si"/>
+                                            <label class="form-check-label" for="ct_ee_refund_si">Sí</label>
+                                        </div>
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="radio" name="x_exam_refund_request_attached" value="no" id="ct_ee_refund_no"/>
+                                            <label class="form-check-label" for="ct_ee_refund_no">No</label>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Sub-bloque Cash Transfer: Fecha de entrega -->
+                    <div id="block-dev-cash-transfer-fecha_entrega" class="col-12 subcategory-block" style="display:none;">
+                        <div class="card border-success">
+                            <div class="card-header bg-success text-white"><strong>Fecha de entrega</strong></div>
+                            <div class="card-body row g-3">
+                                <div class="col-md-6">
+                                    <label>OV Cancelada (*)</label>
+                                    <div class="d-flex gap-3 mt-1">
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="radio" name="x_exam_ov_cancelled" value="si" id="ct_fe_ov_si"/>
+                                            <label class="form-check-label" for="ct_fe_ov_si">Sí</label>
+                                        </div>
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="radio" name="x_exam_ov_cancelled" value="no" id="ct_fe_ov_no"/>
+                                            <label class="form-check-label" for="ct_fe_ov_no">No</label>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <label>Solicitud de devolución adjunta? (*)</label>
+                                    <div class="d-flex gap-3 mt-1">
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="radio" name="x_exam_refund_request_attached" value="si" id="ct_fe_refund_si"/>
+                                            <label class="form-check-label" for="ct_fe_refund_si">Sí</label>
+                                        </div>
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="radio" name="x_exam_refund_request_attached" value="no" id="ct_fe_refund_no"/>
+                                            <label class="form-check-label" for="ct_fe_refund_no">No</label>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- ===== BLOQUE: ALE página web ===== -->
+                    <div id="block-ale_pagina_web" class="col-12 subcategory-block" style="display:none;">
+                        <div class="card border-success">
+                            <div class="card-header bg-success text-white"><strong>ALE (página web)</strong></div>
+                            <div class="card-body row g-3">
+                                <div class="col-md-6">
+                                    <label>¿Que incidente tienes con la página ALE? (*)</label>
+                                    <select name="x_ale_incident_type" class="form-select">
+                                        <option value="select">-- seleccionar --</option>
+                                        <option value="alta_sucursal">Alta de Sucursal</option>
+                                        <option value="captura_minimo">Captura de Mínimo</option>
+                                        <option value="reinicio_contrasena">Reinicio de Contraseña</option>
+                                        <option value="otros">Otros</option>
+                                    </select>
+                                </div>
+                                <div class="col-md-6">
+                                    <label>Nombre del empleado (*)</label>
+                                    <input type="text" name="x_ale_employee_name" class="form-control"/>
+                                </div>
+                                <div class="col-md-6">
+                                    <label>Sucursal (*)</label>
+                                    <input type="text" name="x_ale_branch" class="form-control"/>
+                                </div>
+                                <div class="col-md-6">
+                                    <label>Región (*)</label>
+                                    <input type="text" name="x_ale_region" class="form-control"/>
+                                </div>
+                                <div class="col-md-6">
+                                    <label>Distrito (*)</label>
+                                    <input type="text" name="x_ale_district" class="form-control"/>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- ===== BLOQUE: Universidad Devlyn ===== -->
+                    <div id="block-universidad_devlyn" class="col-12 subcategory-block" style="display:none;">
+                        <div class="card border-success">
+                            <div class="card-header bg-success text-white"><strong>Universidad Devlyn</strong></div>
+                            <div class="card-body row g-3">
+                                <div class="col-md-6">
+                                    <label>¿Qué incidente tuviste con el curso Online? (*)</label>
+                                    <select name="x_university_incident_type" class="form-select">
+                                        <option value="select">-- seleccionar --</option>
+                                        <option value="alta_usuario">Alta de usuario</option>
+                                        <option value="nuevo_intento">Nuevo intento</option>
+                                        <option value="validacion_curso">Validación de curso</option>
+                                        <option value="no_cambia_estatus_curso_completo">No cambia estatus de curso completo</option>
+                                        <option value="no_habilita_siguiente_puesto">No me habilita el siguiente puesto</option>
+                                        <option value="otros">Otros</option>
+                                    </select>
+                                </div>
+                                <div class="col-md-6">
+                                    <label>Nombre del empleado a consultar (*)</label>
+                                    <input type="text" name="x_university_employee_name" class="form-control"/>
+                                </div>
+                                <div class="col-md-6">
+                                    <label>N° de empleado (*)</label>
+                                    <input type="text" name="x_university_employee_number" class="form-control"/>
+                                </div>
+                                <div class="col-md-6">
+                                    <label>Sucursal (*)</label>
+                                    <input type="text" name="x_university_branch" class="form-control"/>
+                                </div>
+                                <div class="col-md-6">
+                                    <label>Zona (*)</label>
+                                    <input type="text" name="x_university_zone" class="form-control"/>
+                                </div>
+                                <div class="col-md-6">
+                                    <label>Distrito (*)</label>
+                                    <input type="text" name="x_university_district" class="form-control"/>
+                                </div>
+                                <div class="col-md-6">
+                                    <label>Nombre del curso en línea (*)</label>
+                                    <input type="text" name="x_university_course_name" class="form-control"/>
+                                </div>
+                                <div class="col-md-6">
+                                    <label>Puesto real (*)</label>
+                                    <input type="text" name="x_university_real_position" class="form-control"/>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- ===== BLOQUE: Página de evaluaciones | Carpeta de productos ===== -->
+                    <div id="block-pagina_evaluaciones_productos" class="col-12 subcategory-block" style="display:none;">
+                        <div class="card border-success">
+                            <div class="card-header bg-success text-white"><strong>Página de evaluaciones | Carpeta de productos</strong></div>
+                            <div class="card-body row g-3">
+                                <div class="col-md-6">
+                                    <label>Tipo de Solicitud (*)</label>
+                                    <select name="x_eval_request_type" class="form-select">
+                                        <option value="select">-- seleccionar --</option>
+                                        <option value="carpeta_producto">Carpeta de Producto</option>
+                                        <option value="credito_devlyn">Credito Devlyn</option>
+                                        <option value="garantias_10">Garantias de 10</option>
+                                    </select>
+                                </div>
+                                <div class="col-md-6">
+                                    <label>¿Que incidente tienes con la página ALE? (*)</label>
+                                    <select name="x_eval_ale_incident" class="form-select">
+                                        <option value="select">-- seleccionar --</option>
+                                        <option value="alta_sucursal">Alta de Sucursal</option>
+                                        <option value="captura_minimo">Captura de Mínimo</option>
+                                        <option value="reinicio_contrasena">Reinicio de Contraseña</option>
+                                        <option value="otros">Otros</option>
+                                    </select>
+                                </div>
+                                <div class="col-md-6">
+                                    <label>Nombre del empleado (*)</label>
+                                    <input type="text" name="x_eval_employee_name" class="form-control"/>
+                                </div>
+                                <div class="col-md-6">
+                                    <label>N° de empleado (*)</label>
+                                    <input type="text" name="x_eval_employee_number" class="form-control"/>
+                                </div>
+                                <div class="col-md-6">
+                                    <label>Sucursal (*)</label>
+                                    <input type="text" name="x_eval_branch" class="form-control"/>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- ===== BLOQUE: Página de evaluaciones (manual de políticas) ===== -->
+                    <div id="block-pagina_evaluaciones_politicas" class="col-12 subcategory-block" style="display:none;">
+                        <div class="card border-success">
+                            <div class="card-header bg-success text-white"><strong>Página de evaluaciones (manual de políticas y procedimientos)</strong></div>
+                            <div class="card-body row g-3">
+                                <div class="col-md-6">
+                                    <label>Página de Evaluaciones (*)</label>
+                                    <select name="x_eval_policies_type" class="form-select">
+                                        <option value="select">-- seleccionar --</option>
+                                        <option value="activar_cuestionario_no_aprobado">Activar nuevamente el cuestionario no aprobado</option>
+                                        <option value="atencion_personalizada_ext_4271">Atención personalizada marca Ext.:4271</option>
+                                        <option value="no_estoy_registrado">No estoy registrado</option>
+                                        <option value="no_recuerdo_contrasena">No recuerdo mi contraseña</option>
+                                        <option value="no_considero_plan_carrera">Por que no se considero en plan de carrera</option>
+                                    </select>
+                                </div>
+                                <div class="col-md-6">
+                                    <label>Nombre del empleado (*)</label>
+                                    <input type="text" name="x_eval_policies_employee_name" class="form-control"/>
+                                </div>
+                                <div class="col-md-6">
+                                    <label>N° de empleado (*)</label>
+                                    <input type="text" name="x_eval_policies_employee_number" class="form-control"/>
+                                </div>
+                                <div class="col-md-6">
+                                    <label>Sucursal (*)</label>
+                                    <input type="text" name="x_eval_policies_branch" class="form-control"/>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- ===== BLOQUE: Promoción de puesto ===== -->
+                    <div id="block-promocion_puesto" class="col-12 subcategory-block" style="display:none;">
+                        <div class="card border-success">
+                            <div class="card-header bg-success text-white"><strong>Promoción de puesto</strong></div>
+                            <div class="card-body row g-3">
+                                <div class="col-md-6">
+                                    <label>Soy Responsable (*)</label>
+                                    <select name="x_promotion_is_responsible" class="form-select">
+                                        <option value="select">-- seleccionar --</option>
+                                        <option value="si">Sí</option>
+                                        <option value="no">No</option>
+                                    </select>
+                                </div>
+                                <div class="col-md-6">
+                                    <label>Nombre del interesado (*)</label>
+                                    <input type="text" name="x_promotion_interested_name" class="form-control"/>
+                                </div>
+                                <div class="col-md-6">
+                                    <label>Numero(s) de empleados (*)</label>
+                                    <input type="text" name="x_promotion_employee_numbers" class="form-control"/>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- ===== BLOQUE: Display campañas y aperturas ===== -->
                     <div id="block-display_campanas_aperturas" class="col-12 subcategory-block" style="display:none;">
-                        <div class="card border-success"><div class="card-header bg-success text-white"><strong>Display campañas y aperturas</strong></div>
-                        <div class="card-body"><strong>Adjuntar evidencia y describir el requerimiento.</strong></div></div>
+                        <div class="card border-success">
+                            <div class="card-header bg-success text-white"><strong>Display campañas y aperturas</strong></div>
+                            <div class="card-body row g-3">
+                                <div class="col-md-6">
+                                    <label>Lei el manual (*)</label>
+                                    <select name="x_display_manual_read" class="form-select">
+                                        <option value="select">-- seleccionar --</option>
+                                        <option value="si">Sí</option>
+                                        <option value="no">No</option>
+                                    </select>
+                                </div>
+                                <div class="col-md-6">
+                                    <label>Tipo de Aparador (*)</label>
+                                    <input type="text" name="x_display_aparador_type" class="form-control"/>
+                                </div>
+                                <div class="col-md-6">
+                                    <label>Revise Check List (*)</label>
+                                    <select name="x_display_checklist_review" class="form-select">
+                                        <option value="select">-- seleccionar --</option>
+                                        <option value="si">Sí</option>
+                                        <option value="no">No</option>
+                                    </select>
+                                </div>
+                                <div class="col-md-6">
+                                    <label>Faltante de Campaña en Aparador (*)</label>
+                                    <select name="x_display_missing_campaign_aparador" class="form-select">
+                                        <option value="select">-- seleccionar --</option>
+                                        <option value="cenefa_repisa">Cenefa de repisa</option>
+                                        <option value="colgante">Colgante</option>
+                                        <option value="paquete_no_llego">El paquete no llego</option>
+                                        <option value="lona_aparador">Lona de Aparador</option>
+                                        <option value="solicitud_adicional">Solicitud Adicional</option>
+                                        <option value="vinil_aparador">Vinil de Aparador</option>
+                                    </select>
+                                </div>
+                                <div class="col-md-6">
+                                    <label>Faltante de Campaña Promociones (*)</label>
+                                    <select name="x_display_missing_promo_campaign" class="form-select">
+                                        <option value="select">-- seleccionar --</option>
+                                        <option value="barnner_50x150">Barnner de .50x1.50</option>
+                                        <option value="barnner_75x175">Barnner de .75x1.75</option>
+                                        <option value="paquete_no_llego">El paquete no llego</option>
+                                        <option value="identificador_30x30">Identificador de 30cm x 30cm</option>
+                                        <option value="identificador_35x17">Identificador de 35cm x 17cm</option>
+                                        <option value="poster_sin_ojillos">Poster sin Ojillos (Porta Promociones)</option>
+                                        <option value="poster_con_ojillos">Poster con ojillos (Aparador)</option>
+                                        <option value="regleta_promocion_secundaria">Regleta promoción secundaria</option>
+                                        <option value="solicitud_adicional">Solicitud Adicional</option>
+                                        <option value="ten_card">Ten Card</option>
+                                        <option value="vinil_jitomatazo">Vinil Jitomatazo</option>
+                                    </select>
+                                </div>
+                                <div class="col-md-6">
+                                    <label>Otro (*)</label>
+                                    <div class="d-flex gap-3 mt-1">
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="radio" name="x_display_other" value="si" id="display_other_si"/>
+                                            <label class="form-check-label" for="display_other_si">Sí</label>
+                                        </div>
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="radio" name="x_display_other" value="no" id="display_other_no"/>
+                                            <label class="form-check-label" for="display_other_no">No</label>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-12">
+                                    <label>Es obligatorio añadir el check list donde se señale el elemento faltante (*)</label>
+                                    <div class="d-flex gap-3 mt-1">
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="radio" name="x_display_checklist_attached" value="si" id="display_checklist_si"/>
+                                            <label class="form-check-label" for="display_checklist_si">Sí</label>
+                                        </div>
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="radio" name="x_display_checklist_attached" value="no" id="display_checklist_no"/>
+                                            <label class="form-check-label" for="display_checklist_no">No</label>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                     </div>
+
+                    <!-- ===== BLOQUE: Reposición elemento dañado ===== -->
                     <div id="block-reposicion_elemento_danado" class="col-12 subcategory-block" style="display:none;">
-                        <div class="card border-success"><div class="card-header bg-success text-white"><strong>Reposición elemento dañado</strong></div>
-                        <div class="card-body"><strong>Adjuntar fotografía del material dañado y describir el requerimiento.</strong></div></div>
+                        <div class="card border-success">
+                            <div class="card-header bg-success text-white"><strong>Reposición elemento dañado</strong></div>
+                            <div class="card-body row g-3">
+                                <div class="col-md-6">
+                                    <label>Elemento dañado a reponer (*)</label>
+                                    <input type="text" name="x_damaged_element_to_replace" class="form-control"/>
+                                </div>
+                                <div class="col-md-6">
+                                    <label>Breve Descripción (*)</label>
+                                    <input type="text" name="x_damaged_brief_description" class="form-control"/>
+                                </div>
+                                <div class="col-md-6">
+                                    <label>Cantidad (*)</label>
+                                    <input type="text" name="x_damaged_quantity" class="form-control"/>
+                                </div>
+                                <div class="col-md-6">
+                                    <label>Medidas (*)</label>
+                                    <input type="text" name="x_damaged_measurements" class="form-control"/>
+                                </div>
+                                <div class="col-12">
+                                    <label>Agregar en anexos la foto de material dañado (*)</label>
+                                    <div class="d-flex gap-3 mt-1">
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="radio" name="x_damaged_photo_attached" value="si" id="damaged_photo_si"/>
+                                            <label class="form-check-label" for="damaged_photo_si">Sí</label>
+                                        </div>
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="radio" name="x_damaged_photo_attached" value="no" id="damaged_photo_no"/>
+                                            <label class="form-check-label" for="damaged_photo_no">No</label>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                     </div>
-                    <div id="block-apoyo_aplicar_convenio" class="col-12 subcategory-block" style="display:none;">
-                        <div class="card border-success"><div class="card-header bg-success text-white"><strong>Apoyo para aplicar un convenio</strong></div>
-                        <div class="card-body"><strong>Describe el convenio y el apoyo requerido.</strong></div></div>
+
+                    <!-- ===== BLOQUE: Convenios (apoyo_aplicar_convenio, convenios_institucionales, no_entran_manuales, dudas_promociones) ===== -->
+                    <div id="block-convenios" class="col-12 subcategory-block" style="display:none;">
+                        <div class="card border-success">
+                            <div class="card-header bg-success text-white"><strong>Convenios</strong></div>
+                            <div class="card-body row g-3">
+                                <div class="col-md-6">
+                                    <label>Convenios (*)</label>
+                                    <select name="x_agreement_support_type" class="form-select">
+                                        <option value="select">-- seleccionar --</option>
+                                        <option value="001_999_zona_metro">001_999 Zona Metro</option>
+                                        <option value="6000_6499_zona_metro">6000_6499 Zona Metro</option>
+                                        <option value="3000_3999_zona_foranea">3000_3999 Zona Foranea</option>
+                                    </select>
+                                </div>
+                                <div class="col-md-6">
+                                    <label>N° de Convenio (*)</label>
+                                    <input type="text" name="x_agreement_number" class="form-control"/>
+                                </div>
+                                <div class="col-md-6">
+                                    <label>Nombre o denominación social (*)</label>
+                                    <input type="text" name="x_agreement_social_name" class="form-control"/>
+                                </div>
+                            </div>
+                        </div>
                     </div>
-                    <div id="block-convenios_institucionales" class="col-12 subcategory-block" style="display:none;">
-                        <div class="card border-success"><div class="card-header bg-success text-white"><strong>Convenios institucionales</strong></div>
-                        <div class="card-body"><strong>Describe la duda o incidencia relacionada con convenios institucionales.</strong></div></div>
-                    </div>
-                    <div id="block-no_entran_manuales" class="col-12 subcategory-block" style="display:none;">
-                        <div class="card border-success"><div class="card-header bg-success text-white"><strong>Cuando no pueden entrar a la página de manuales</strong></div>
-                        <div class="card-body"><strong>Describe el problema de acceso y adjunta evidencia.</strong></div></div>
-                    </div>
-                    <div id="block-dudas_promociones" class="col-12 subcategory-block" style="display:none;">
-                        <div class="card border-success"><div class="card-header bg-success text-white"><strong>Dudas de promociones en general</strong></div>
-                        <div class="card-body"><strong>Describe la promoción y la duda presentada.</strong></div></div>
-                    </div>
+
+                    <!-- ===== BLOQUE: Problema de pagos (anticipos) ===== -->
                     <div id="block-problema_pagos_anticipos" class="col-12 subcategory-block" style="display:none;">
-                        <div class="card border-success"><div class="card-header bg-success text-white"><strong>Problema de pagos (anticipos)</strong></div>
-                        <div class="card-body"><strong>Describe el problema con el anticipo y adjunta evidencia.</strong></div></div>
+                        <div class="card border-success">
+                            <div class="card-header bg-success text-white"><strong>Problema de pagos (anticipos)</strong></div>
+                            <div class="card-body row g-3">
+                                <div class="col-md-6">
+                                    <label>Centro (*)</label>
+                                    <input type="text" name="x_payment_center" class="form-control"/>
+                                </div>
+                                <div class="col-md-6">
+                                    <label>Pedido POS (*)</label>
+                                    <input type="text" name="x_payment_pos_order" class="form-control"/>
+                                </div>
+                                <div class="col-md-6">
+                                    <label>Fecha de Venta (*)</label>
+                                    <input type="date" name="x_payment_sale_date" class="form-control"/>
+                                </div>
+                                <div class="col-md-6">
+                                    <label>Total de Venta (*)</label>
+                                    <input type="number" step="0.01" name="x_payment_sale_total" class="form-control"/>
+                                </div>
+                                <div class="col-md-4">
+                                    <label>Pago N°1 (*)</label>
+                                    <input type="text" name="x_payment_number_1" class="form-control"/>
+                                </div>
+                                <div class="col-md-4">
+                                    <label>Recibo N°1 (*)</label>
+                                    <input type="text" name="x_payment_receipt_1" class="form-control"/>
+                                </div>
+                                <div class="col-md-4">
+                                    <label>Fecha de pago N°1 (*)</label>
+                                    <input type="date" name="x_payment_date_1" class="form-control"/>
+                                </div>
+                            </div>
+                        </div>
                     </div>
+
+                    <!-- ===== BLOQUE: Captura OV ===== -->
                     <div id="block-captura_ov" class="col-12 subcategory-block" style="display:none;">
-                        <div class="card border-success"><div class="card-header bg-success text-white"><strong>Captura OV</strong></div>
-                        <div class="card-body"><strong>Describe el inconveniente presentado en la captura OV.</strong></div></div>
+                        <div class="card border-success">
+                            <div class="card-header bg-success text-white"><strong>Captura OV</strong></div>
+                            <div class="card-body row g-3">
+                                <div class="col-12">
+                                    <div class="alert alert-warning">
+                                        <strong>"Por favor, antes de crear un SOS para reportar que no puedes capturar un convenio o promoción, asegúrate que los materiales y armazones cumplen los criterios del convenio o promoción revisando la circular correspondiente al convenio o promoción"</strong>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <label>Tipo de Error (*)</label>
+                                    <select name="x_capture_ov_error_type" class="form-select">
+                                        <option value="select">-- seleccionar --</option>
+                                        <option value="error_precio_ceros">Error en precio $0.0 (Ceros)</option>
+                                        <option value="error_recuperacion_medidas">Error de recuperación en medidas</option>
+                                        <option value="error_cierre_venta">Error de cierre de Venta</option>
+                                        <option value="otros">Otros</option>
+                                    </select>
+                                </div>
+                                <div class="col-md-6">
+                                    <label>Esfera OD (*)</label>
+                                    <input type="text" name="x_capture_ov_sphere_od" class="form-control"/>
+                                </div>
+                                <div class="col-md-6">
+                                    <label>Esfera OI (*)</label>
+                                    <input type="text" name="x_capture_ov_sphere_oi" class="form-control"/>
+                                </div>
+                                <div class="col-md-6">
+                                    <label>Tipo de Material (*)</label>
+                                    <input type="text" name="x_capture_ov_material_type" class="form-control"/>
+                                </div>
+                                <div class="col-md-6">
+                                    <label>Tipo de Trabajo (*)</label>
+                                    <input type="text" name="x_capture_ov_work_type" class="form-control"/>
+                                </div>
+                                <div class="col-md-6">
+                                    <label>Tipo de Descuento (*)</label>
+                                    <input type="text" name="x_capture_ov_discount_type" class="form-control"/>
+                                </div>
+                                <div class="col-md-6">
+                                    <label>Tipo de Pago (*)</label>
+                                    <input type="text" name="x_capture_ov_payment_type" class="form-control"/>
+                                </div>
+                                <div class="col-md-6">
+                                    <label>N° de empleado (*)</label>
+                                    <input type="text" name="x_capture_ov_employee_number" class="form-control"/>
+                                </div>
+                            </div>
+                        </div>
                     </div>
+
+                    <!-- ===== BLOQUE: Cierre diario ===== -->
                     <div id="block-cierre_diario" class="col-12 subcategory-block" style="display:none;">
-                        <div class="card border-success"><div class="card-header bg-success text-white"><strong>Cierre diario</strong></div>
-                        <div class="card-body"><strong>Describe el problema presentado durante el cierre diario.</strong></div></div>
+                        <div class="card border-success">
+                            <div class="card-header bg-success text-white"><strong>Cierre diario</strong></div>
+                            <div class="card-body"><strong>Describe el problema presentado durante el cierre diario y adjunta evidencia si aplica.</strong></div>
+                        </div>
                     </div>
+
+                    <!-- ===== BLOQUE: No se puede recepcionar bolsa ===== -->
                     <div id="block-no_recepcionar_bolsa" class="col-12 subcategory-block" style="display:none;">
-                        <div class="card border-success"><div class="card-header bg-success text-white"><strong>No se puede recepcionar bolsa</strong></div>
-                        <div class="card-body"><strong>Describe el problema y adjunta evidencia si aplica.</strong></div></div>
+                        <div class="card border-success">
+                            <div class="card-header bg-success text-white"><strong>No se puede recepcionar bolsa</strong></div>
+                            <div class="card-body row g-3">
+                                <div class="col-md-6">
+                                    <label>Bolsa (*)</label>
+                                    <input type="text" name="x_bag_number" class="form-control"/>
+                                </div>
+                                <div class="col-md-6">
+                                    <label>Clave de la bolsa (*)</label>
+                                    <input type="text" name="x_bag_key" class="form-control"/>
+                                </div>
+                                <div class="col-md-6">
+                                    <label>N° de sucursal SAP que envía traspaso (Ejem.: A303) (*)</label>
+                                    <input type="text" name="x_sap_branch_send" class="form-control"/>
+                                </div>
+                                <div class="col-md-6">
+                                    <label>N° de sucursal SAP que recibe traspaso (Ejem.: A304) (*)</label>
+                                    <input type="text" name="x_sap_branch_receive" class="form-control"/>
+                                </div>
+                                <div class="col-md-6">
+                                    <label>N° de Transporte (*)</label>
+                                    <input type="text" name="x_transport_number" class="form-control"/>
+                                </div>
+                                <div class="col-md-6">
+                                    <label>Traspaso (*)</label>
+                                    <select name="x_transfer" class="form-select">
+                                        <option value="select">-- seleccionar --</option>
+                                        <option value="si">Sí</option>
+                                        <option value="no">No</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
                     </div>
+
+                    <!-- ===== BLOQUE: Pedido sin embalaje ===== -->
                     <div id="block-pedido_sin_embalaje" class="col-12 subcategory-block" style="display:none;">
-                        <div class="card border-success"><div class="card-header bg-success text-white"><strong>Pedido sin embalaje</strong></div>
-                        <div class="card-body"><strong>Describe el caso y adjunta evidencia.</strong></div></div>
+                        <div class="card border-success">
+                            <div class="card-header bg-success text-white"><strong>Pedido sin embalaje</strong></div>
+                            <div class="card-body row g-3">
+                                <div class="col-md-6">
+                                    <label>Pedido POS (*)</label>
+                                    <input type="text" name="x_order_without_packaging_pos_order" class="form-control"/>
+                                </div>
+                                <div class="col-md-6">
+                                    <label>Fecha (*)</label>
+                                    <input type="date" name="x_order_without_packaging_date" class="form-control"/>
+                                </div>
+                                <div class="col-md-6">
+                                    <label>Centro o Sucursal (*)</label>
+                                    <input type="text" name="x_order_without_packaging_branch" class="form-control"/>
+                                </div>
+                            </div>
+                        </div>
                     </div>
+
+                    <!-- ===== BLOQUE: Problema para capturar devolución ===== -->
                     <div id="block-problema_captura_devolucion" class="col-12 subcategory-block" style="display:none;">
-                        <div class="card border-success"><div class="card-header bg-success text-white"><strong>Problema para capturar devolución, retallado o satisfacción total</strong></div>
-                        <div class="card-body"><strong>Describe el problema presentado durante la captura.</strong></div></div>
+                        <div class="card border-success">
+                            <div class="card-header bg-success text-white"><strong>Problema para capturar devolución, retallado o satisfacción total</strong></div>
+                            <div class="card-body row g-3">
+                                <div class="col-md-6">
+                                    <label>Tipo de Error (*)</label>
+                                    <select name="x_return_capture_error_type" class="form-select">
+                                        <option value="select">-- seleccionar --</option>
+                                        <option value="error_precio_ceros">Error en precio $0.0 (Ceros)</option>
+                                        <option value="error_recuperacion_medidas">Error de recuperación en medidas</option>
+                                        <option value="error_cierre_venta">Error de cierre de Venta</option>
+                                        <option value="otros">Otros</option>
+                                    </select>
+                                </div>
+                                <div class="col-md-6">
+                                    <label>Tipo de Devolución (*)</label>
+                                    <select name="x_return_capture_type" class="form-select">
+                                        <option value="select">-- seleccionar --</option>
+                                        <option value="devolucion">Devolucion</option>
+                                        <option value="garantia_10">Garantia de 10</option>
+                                        <option value="retallado">Retallado</option>
+                                    </select>
+                                </div>
+                                <div class="col-md-6">
+                                    <label>Orden de Venta (*)</label>
+                                    <input type="text" name="x_return_capture_sale_order" class="form-control"/>
+                                </div>
+                                <div class="col-md-6">
+                                    <label>Pedido (*)</label>
+                                    <input type="text" name="x_return_capture_order" class="form-control"/>
+                                </div>
+                                <div class="col-md-6">
+                                    <label>Causa Número (*)</label>
+                                    <input type="text" name="x_return_capture_cause_number" class="form-control"/>
+                                </div>
+                            </div>
+                        </div>
                     </div>
+
+                    <!-- ===== BLOQUE: Rescate cancelaciones clientes molestos ===== -->
                     <div id="block-rescate_cancelaciones_clientes_molestos" class="col-12 subcategory-block" style="display:none;">
-                        <div class="card border-success"><div class="card-header bg-success text-white"><strong>Rescate de cancelaciones Clientes molestos</strong></div>
-                        <div class="card-body"><strong>Describe el caso del cliente y la situación presentada.</strong></div></div>
+                        <div class="card border-success">
+                            <div class="card-header bg-success text-white"><strong>Rescate de cancelaciones Clientes molestos</strong></div>
+                            <div class="card-body row g-3">
+                                <div class="col-md-6">
+                                    <label>Nombre del cliente (*)</label>
+                                    <input type="text" name="x_rescue_client_name" class="form-control"/>
+                                </div>
+                                <div class="col-md-6">
+                                    <label>Teléfono del cliente (*)</label>
+                                    <input type="text" name="x_rescue_client_phone" class="form-control"/>
+                                </div>
+                                <div class="col-md-6">
+                                    <label>Orden de Venta (*)</label>
+                                    <input type="text" name="x_rescue_sale_order" class="form-control"/>
+                                </div>
+                                <div class="col-md-6">
+                                    <label>Pedido (*)</label>
+                                    <input type="text" name="x_rescue_order_number" class="form-control"/>
+                                </div>
+                                <div class="col-md-6">
+                                    <label>Correo electrónico del cliente (*)</label>
+                                    <input type="text" name="x_rescue_client_email" class="form-control"/>
+                                </div>
+                            </div>
+                        </div>
                     </div>
+
+                    <!-- ===== BLOQUE: Pedidos incompletos ===== -->
                     <div id="block-pedidos_incompletos" class="col-12 subcategory-block" style="display:none;">
-                        <div class="card border-success"><div class="card-header bg-success text-white"><strong>Pedidos incompletos</strong></div>
-                        <div class="card-body"><strong>Describe el faltante e incluye evidencia.</strong></div></div>
+                        <div class="card border-success">
+                            <div class="card-header bg-success text-white"><strong>Pedidos incompletos</strong></div>
+                            <div class="card-body row g-3">
+                                <div class="col-md-6">
+                                    <label>Fullfilment (*)</label>
+                                    <input type="text" name="x_online_fulfillment" class="form-control"/>
+                                </div>
+                                <div class="col-md-6">
+                                    <label>Fecha de Venta (*)</label>
+                                    <input type="date" name="x_online_sale_date" class="form-control"/>
+                                </div>
+                                <div class="col-md-6">
+                                    <label>Correo Electrónico del Cliente (*)</label>
+                                    <input type="text" name="x_online_customer_email" class="form-control"/>
+                                </div>
+                                <div class="col-md-6">
+                                    <label>Pedido POS (*)</label>
+                                    <input type="text" name="x_online_pos_order" class="form-control"/>
+                                </div>
+                                <div class="col-md-6">
+                                    <label>Nombre del Cliente (*)</label>
+                                    <input type="text" name="x_online_customer_name" class="form-control"/>
+                                </div>
+                                <div class="col-md-6">
+                                    <label>Producto faltante (*)</label>
+                                    <input type="text" name="x_online_missing_product" class="form-control"/>
+                                </div>
+                                <div class="col-12">
+                                    <label>Adjuntar Captura cliente, producto recibido y Captura POS (*)</label>
+                                    <div class="d-flex gap-3 mt-1">
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="radio" name="x_online_attachment_capture" value="si" id="pi_attach_si"/>
+                                            <label class="form-check-label" for="pi_attach_si">Sí</label>
+                                        </div>
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="radio" name="x_online_attachment_capture" value="no" id="pi_attach_no"/>
+                                            <label class="form-check-label" for="pi_attach_no">No</label>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                     </div>
+
+                    <!-- ===== BLOQUE: Graduación incorrecta ===== -->
                     <div id="block-graduacion_incorrecta" class="col-12 subcategory-block" style="display:none;">
-                        <div class="card border-success"><div class="card-header bg-success text-white"><strong>Pedidos con graduación incorrecta</strong></div>
-                        <div class="card-body"><strong>Describe la incidencia e incluye evidencia.</strong></div></div>
+                        <div class="card border-success">
+                            <div class="card-header bg-success text-white"><strong>Pedidos con graduación incorrecta</strong></div>
+                            <div class="card-body row g-3">
+                                <div class="col-md-6">
+                                    <label>Fullfilment (*)</label>
+                                    <input type="text" name="x_online_fulfillment" class="form-control"/>
+                                </div>
+                                <div class="col-md-6">
+                                    <label>Fecha de Venta (*)</label>
+                                    <input type="date" name="x_online_sale_date" class="form-control"/>
+                                </div>
+                                <div class="col-md-6">
+                                    <label>Correo Electrónico del Cliente (*)</label>
+                                    <input type="text" name="x_online_customer_email" class="form-control"/>
+                                </div>
+                                <div class="col-md-6">
+                                    <label>Pedido POS (*)</label>
+                                    <input type="text" name="x_online_pos_order" class="form-control"/>
+                                </div>
+                                <div class="col-md-6">
+                                    <label>Nombre del Cliente (*)</label>
+                                    <input type="text" name="x_online_customer_name" class="form-control"/>
+                                </div>
+                                <div class="col-md-6">
+                                    <label>Graduación solicitada (*)</label>
+                                    <input type="text" name="x_online_requested_graduation" class="form-control"/>
+                                </div>
+                                <div class="col-md-6">
+                                    <label>Graduación recibida (*)</label>
+                                    <input type="text" name="x_online_received_graduation" class="form-control"/>
+                                </div>
+                                <div class="col-12">
+                                    <label>Adjuntar Captura cliente, producto recibido y Captura POS (*)</label>
+                                    <div class="d-flex gap-3 mt-1">
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="radio" name="x_online_attachment_capture" value="si" id="gi_attach_si"/>
+                                            <label class="form-check-label" for="gi_attach_si">Sí</label>
+                                        </div>
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="radio" name="x_online_attachment_capture" value="no" id="gi_attach_no"/>
+                                            <label class="form-check-label" for="gi_attach_no">No</label>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <label>Centro SAP en el que el cliente devolverá (*)</label>
+                                    <input type="text" name="x_online_return_sap_center" class="form-control"/>
+                                </div>
+                                <div class="col-md-6">
+                                    <label>Bolsa en la que se retorna el pedido a CeDIs (*)</label>
+                                    <input type="text" name="x_online_return_bag_cedis" class="form-control"/>
+                                </div>
+                            </div>
+                        </div>
                     </div>
+
+                    <!-- ===== BLOQUE: Pedido otro cliente ===== -->
                     <div id="block-pedido_otro_cliente" class="col-12 subcategory-block" style="display:none;">
-                        <div class="card border-success"><div class="card-header bg-success text-white"><strong>Pedido que es de otro cliente</strong></div>
-                        <div class="card-body"><strong>Describe el caso y adjunta evidencia.</strong></div></div>
+                        <div class="card border-success">
+                            <div class="card-header bg-success text-white"><strong>Pedido que es de otro cliente</strong></div>
+                            <div class="card-body row g-3">
+                                <div class="col-md-6">
+                                    <label>Fullfilment (*)</label>
+                                    <input type="text" name="x_online_fulfillment" class="form-control"/>
+                                </div>
+                                <div class="col-md-6">
+                                    <label>Fecha de Venta (*)</label>
+                                    <input type="date" name="x_online_sale_date" class="form-control"/>
+                                </div>
+                                <div class="col-md-6">
+                                    <label>Correo Electrónico del Cliente (*)</label>
+                                    <input type="text" name="x_online_customer_email" class="form-control"/>
+                                </div>
+                                <div class="col-md-6">
+                                    <label>Vtex de cliente que reporta (*)</label>
+                                    <input type="text" name="x_online_reported_customer_vtex" class="form-control"/>
+                                </div>
+                                <div class="col-md-6">
+                                    <label>Pedido POS (*)</label>
+                                    <input type="text" name="x_online_pos_order" class="form-control"/>
+                                </div>
+                                <div class="col-md-6">
+                                    <label>Vtex de pedido que le llegó al cliente (*)</label>
+                                    <input type="text" name="x_online_arrived_order_vtex" class="form-control"/>
+                                </div>
+                                <div class="col-md-6">
+                                    <label>A nombre de quién está el pedido recibido (*)</label>
+                                    <input type="text" name="x_online_received_order_name" class="form-control"/>
+                                </div>
+                                <div class="col-md-6">
+                                    <label>Producto recibido (*)</label>
+                                    <input type="text" name="x_online_received_product" class="form-control"/>
+                                </div>
+                                <div class="col-12">
+                                    <label>Adjuntar Captura cliente, producto recibido y Captura POS (*)</label>
+                                    <div class="d-flex gap-3 mt-1">
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="radio" name="x_online_attachment_capture" value="si" id="poc_attach_si"/>
+                                            <label class="form-check-label" for="poc_attach_si">Sí</label>
+                                        </div>
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="radio" name="x_online_attachment_capture" value="no" id="poc_attach_no"/>
+                                            <label class="form-check-label" for="poc_attach_no">No</label>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                     </div>
+
+                    <!-- ===== BLOQUE: Devolución de pedidos ===== -->
                     <div id="block-devolucion_pedidos" class="col-12 subcategory-block" style="display:none;">
-                        <div class="card border-success"><div class="card-header bg-success text-white"><strong>Devolución de pedidos</strong></div>
-                        <div class="card-body"><strong>Describe el motivo de devolución y adjunta evidencia.</strong></div></div>
+                        <div class="card border-success">
+                            <div class="card-header bg-success text-white"><strong>Devolución de pedidos</strong></div>
+                            <div class="card-body row g-3">
+                                <div class="col-md-6">
+                                    <label>Fullfilment (*)</label>
+                                    <input type="text" name="x_online_fulfillment" class="form-control"/>
+                                </div>
+                                <div class="col-md-6">
+                                    <label>Fecha de Venta (*)</label>
+                                    <input type="date" name="x_online_sale_date" class="form-control"/>
+                                </div>
+                                <div class="col-md-6">
+                                    <label>Correo Electrónico del Cliente (*)</label>
+                                    <input type="text" name="x_online_customer_email" class="form-control"/>
+                                </div>
+                                <div class="col-md-6">
+                                    <label>Pedido POS (*)</label>
+                                    <input type="text" name="x_online_pos_order" class="form-control"/>
+                                </div>
+                                <div class="col-md-6">
+                                    <label>Nombre del Cliente (*)</label>
+                                    <input type="text" name="x_online_customer_name" class="form-control"/>
+                                </div>
+                                <div class="col-md-6">
+                                    <label>Razón por la que solicita devolución (*)</label>
+                                    <input type="text" name="x_online_return_reason" class="form-control"/>
+                                </div>
+                                <div class="col-md-6">
+                                    <label>Bolsa en la que se retorna el pedido a CeDIs (*)</label>
+                                    <input type="text" name="x_online_return_bag_cedis" class="form-control"/>
+                                </div>
+                                <div class="col-md-6">
+                                    <label>Plataforma de pago (*)</label>
+                                    <select name="x_online_payment_platform" class="form-select">
+                                        <option value="select">-- seleccionar --</option>
+                                        <option value="mercado_pago">Mercado pago</option>
+                                        <option value="kueskipay">Kueskipay</option>
+                                        <option value="paypal">Paypal</option>
+                                    </select>
+                                </div>
+                                <div class="col-md-6">
+                                    <label>Referencia de pago (*)</label>
+                                    <input type="text" name="x_online_payment_reference" class="form-control"/>
+                                </div>
+                            </div>
+                        </div>
                     </div>
+
+                    <!-- ===== BLOQUE: Graduación error cliente ===== -->
                     <div id="block-graduacion_error_cliente" class="col-12 subcategory-block" style="display:none;">
-                        <div class="card border-success"><div class="card-header bg-success text-white"><strong>Pedidos con graduación incorrecta por captura errónea del cliente</strong></div>
-                        <div class="card-body"><strong>Describe el caso e incluye evidencia.</strong></div></div>
+                        <div class="card border-success">
+                            <div class="card-header bg-success text-white"><strong>Pedidos con graduación incorrecta por captura errónea del cliente</strong></div>
+                            <div class="card-body row g-3">
+                                <div class="col-md-6">
+                                    <label>Fullfilment (*)</label>
+                                    <input type="text" name="x_online_fulfillment" class="form-control"/>
+                                </div>
+                                <div class="col-md-6">
+                                    <label>Fecha de Venta (*)</label>
+                                    <input type="date" name="x_online_sale_date" class="form-control"/>
+                                </div>
+                                <div class="col-md-6">
+                                    <label>Correo Electrónico del Cliente (*)</label>
+                                    <input type="text" name="x_online_customer_email" class="form-control"/>
+                                </div>
+                                <div class="col-md-6">
+                                    <label>Pedido POS (*)</label>
+                                    <input type="text" name="x_online_pos_order" class="form-control"/>
+                                </div>
+                                <div class="col-md-6">
+                                    <label>Nombre del Cliente (*)</label>
+                                    <input type="text" name="x_online_customer_name" class="form-control"/>
+                                </div>
+                                <div class="col-md-6">
+                                    <label>Graduación correcta (*)</label>
+                                    <input type="text" name="x_online_correct_graduation" class="form-control"/>
+                                </div>
+                            </div>
+                        </div>
                     </div>
+
+                    <!-- ===== BLOQUE: Pedidos sin estatus ===== -->
                     <div id="block-pedidos_sin_estatus" class="col-12 subcategory-block" style="display:none;">
-                        <div class="card border-success"><div class="card-header bg-success text-white"><strong>Pedidos sin estatus</strong></div>
-                        <div class="card-body"><strong>Describe el inconveniente e incluye evidencia.</strong></div></div>
+                        <div class="card border-success">
+                            <div class="card-header bg-success text-white"><strong>Pedidos sin estatus</strong></div>
+                            <div class="card-body row g-3">
+                                <div class="col-md-6">
+                                    <label>Fullfilment (*)</label>
+                                    <input type="text" name="x_online_fulfillment" class="form-control"/>
+                                </div>
+                                <div class="col-md-6">
+                                    <label>Fecha de Venta (*)</label>
+                                    <input type="date" name="x_online_sale_date" class="form-control"/>
+                                </div>
+                                <div class="col-md-6">
+                                    <label>Correo Electrónico del Cliente (*)</label>
+                                    <input type="text" name="x_online_customer_email" class="form-control"/>
+                                </div>
+                                <div class="col-md-6">
+                                    <label>Pedido POS (*)</label>
+                                    <input type="text" name="x_online_pos_order" class="form-control"/>
+                                </div>
+                                <div class="col-md-6">
+                                    <label>Nombre del Cliente (*)</label>
+                                    <input type="text" name="x_online_customer_name" class="form-control"/>
+                                </div>
+                                <div class="col-md-6">
+                                    <label>Fecha Promesa (*)</label>
+                                    <input type="date" name="x_online_promised_date" class="form-control"/>
+                                </div>
+                            </div>
+                        </div>
                     </div>
+
+                    <!-- ===== BLOQUE: Paquete retornado ===== -->
                     <div id="block-paquete_retornado" class="col-12 subcategory-block" style="display:none;">
-                        <div class="card border-success"><div class="card-header bg-success text-white"><strong>Paquete retornado por mensajería externa</strong></div>
-                        <div class="card-body"><strong>Describe el caso y adjunta evidencia del retorno.</strong></div></div>
+                        <div class="card border-success">
+                            <div class="card-header bg-success text-white"><strong>Paquete retornado por mensajería externa</strong></div>
+                            <div class="card-body row g-3">
+                                <div class="col-md-6">
+                                    <label>Fullfilment (*)</label>
+                                    <input type="text" name="x_online_fulfillment" class="form-control"/>
+                                </div>
+                                <div class="col-md-6">
+                                    <label>Fecha de Venta (*)</label>
+                                    <input type="date" name="x_online_sale_date" class="form-control"/>
+                                </div>
+                                <div class="col-md-6">
+                                    <label>Correo Electrónico del Cliente (*)</label>
+                                    <input type="text" name="x_online_customer_email" class="form-control"/>
+                                </div>
+                                <div class="col-md-6">
+                                    <label>Pedido POS (*)</label>
+                                    <input type="text" name="x_online_pos_order" class="form-control"/>
+                                </div>
+                                <div class="col-md-6">
+                                    <label>Nombre del Cliente (*)</label>
+                                    <input type="text" name="x_online_customer_name" class="form-control"/>
+                                </div>
+                                <div class="col-md-6">
+                                    <label>N° de guía (*)</label>
+                                    <input type="text" name="x_online_guide_number" class="form-control"/>
+                                </div>
+                                <div class="col-md-6">
+                                    <label>Nombre de persona que puede recibir el paquete además del titular (*)</label>
+                                    <input type="text" name="x_online_receiver_name" class="form-control"/>
+                                </div>
+                                <div class="col-md-6">
+                                    <label>Teléfono de contacto (*)</label>
+                                    <input type="text" name="x_online_contact_phone" class="form-control"/>
+                                </div>
+                            </div>
+                        </div>
                     </div>
+
+                    <!-- ===== BLOQUE: Cambio de domicilio ===== -->
                     <div id="block-cambio_domicilio" class="col-12 subcategory-block" style="display:none;">
-                        <div class="card border-success"><div class="card-header bg-success text-white"><strong>Cambio de domicilio de entrega</strong></div>
-                        <div class="card-body"><strong>Describe el cambio solicitado y adjunta evidencia si aplica.</strong></div></div>
+                        <div class="card border-success">
+                            <div class="card-header bg-success text-white"><strong>Cambio de domicilio de entrega</strong></div>
+                            <div class="card-body row g-3">
+                                <div class="col-md-6">
+                                    <label>Fullfilment (*)</label>
+                                    <input type="text" name="x_online_fulfillment" class="form-control"/>
+                                </div>
+                                <div class="col-md-6">
+                                    <label>Fecha de Venta (*)</label>
+                                    <input type="date" name="x_online_sale_date" class="form-control"/>
+                                </div>
+                                <div class="col-md-6">
+                                    <label>Correo Electrónico del Cliente (*)</label>
+                                    <input type="text" name="x_online_customer_email" class="form-control"/>
+                                </div>
+                                <div class="col-md-6">
+                                    <label>Teléfono del cliente (*)</label>
+                                    <input type="text" name="x_online_client_phone" class="form-control"/>
+                                </div>
+                                <div class="col-md-6">
+                                    <label>Pedido POS (*)</label>
+                                    <input type="text" name="x_online_pos_order" class="form-control"/>
+                                </div>
+                                <div class="col-md-6">
+                                    <label>Nombre del Cliente (*)</label>
+                                    <input type="text" name="x_online_customer_name" class="form-control"/>
+                                </div>
+                                <div class="col-md-6">
+                                    <label>Nuevo domicilio completo (*)</label>
+                                    <input type="text" name="x_online_new_address" class="form-control"/>
+                                </div>
+                                <div class="col-md-6">
+                                    <label>Nombre de persona que puede recibir además del titular (*)</label>
+                                    <input type="text" name="x_online_receiver_name" class="form-control"/>
+                                </div>
+                                <div class="col-md-6">
+                                    <label>Teléfono de contacto (*)</label>
+                                    <input type="text" name="x_online_contact_phone" class="form-control"/>
+                                </div>
+                                <div class="col-md-6">
+                                    <label>Referencias adicionales (*)</label>
+                                    <input type="text" name="x_online_additional_references" class="form-control"/>
+                                </div>
+                            </div>
+                        </div>
                     </div>
+
+                    <!-- ===== BLOQUE: Pedido sin capturar ===== -->
                     <div id="block-pedido_sin_capturar" class="col-12 subcategory-block" style="display:none;">
-                        <div class="card border-success"><div class="card-header bg-success text-white"><strong>Pedido sin capturar</strong></div>
-                        <div class="card-body"><strong>Describe la incidencia y adjunta evidencia.</strong></div></div>
+                        <div class="card border-success">
+                            <div class="card-header bg-success text-white"><strong>Pedido sin capturar</strong></div>
+                            <div class="card-body row g-3">
+                                <div class="col-md-6">
+                                    <label>Fullfilment (*)</label>
+                                    <input type="text" name="x_online_fulfillment" class="form-control"/>
+                                </div>
+                                <div class="col-md-6">
+                                    <label>Fecha de Venta (*)</label>
+                                    <input type="date" name="x_online_sale_date" class="form-control"/>
+                                </div>
+                                <div class="col-md-6">
+                                    <label>Correo Electrónico del Cliente (*)</label>
+                                    <input type="text" name="x_online_customer_email" class="form-control"/>
+                                </div>
+                                <div class="col-md-6">
+                                    <label>Teléfono del cliente (*)</label>
+                                    <input type="text" name="x_online_client_phone" class="form-control"/>
+                                </div>
+                                <div class="col-md-6">
+                                    <label>Pedido POS (*)</label>
+                                    <input type="text" name="x_online_pos_order" class="form-control"/>
+                                </div>
+                                <div class="col-md-6">
+                                    <label>Nombre del Cliente (*)</label>
+                                    <input type="text" name="x_online_customer_name" class="form-control"/>
+                                </div>
+                            </div>
+                        </div>
                     </div>
+
+                    <!-- ===== BLOQUE: Graduación sucursal ===== -->
                     <div id="block-graduacion_sucursal" class="col-12 subcategory-block" style="display:none;">
-                        <div class="card border-success"><div class="card-header bg-success text-white"><strong>Captura de graduación examen de la vista realizado en sucursal</strong></div>
-                        <div class="card-body"><strong>Describe la graduación o el problema presentado.</strong></div></div>
+                        <div class="card border-success">
+                            <div class="card-header bg-success text-white"><strong>Captura de graduación examen de la vista realizado en sucursal</strong></div>
+                            <div class="card-body row g-3">
+                                <div class="col-md-6">
+                                    <label>CentroSAP donde se realizó examen de la vista (*)</label>
+                                    <input type="text" name="x_online_exam_sap_center" class="form-control"/>
+                                </div>
+                                <div class="col-md-6">
+                                    <label>Fecha en que se realizó el examen (*)</label>
+                                    <input type="date" name="x_online_exam_date" class="form-control"/>
+                                </div>
+                                <div class="col-md-6">
+                                    <label>N° de empleado de quien realiza el examen (*)</label>
+                                    <input type="text" name="x_online_exam_employee_number" class="form-control"/>
+                                </div>
+                                <div class="col-md-6">
+                                    <label>Nombre de quien realiza el examen (*)</label>
+                                    <input type="text" name="x_online_exam_employee_name" class="form-control"/>
+                                </div>
+                                <div class="col-md-6">
+                                    <label>Fullfilment (*)</label>
+                                    <input type="text" name="x_online_fulfillment" class="form-control"/>
+                                </div>
+                                <div class="col-md-6">
+                                    <label>Fecha de Venta (*)</label>
+                                    <input type="date" name="x_online_sale_date" class="form-control"/>
+                                </div>
+                                <div class="col-md-6">
+                                    <label>Correo Electrónico del Cliente (*)</label>
+                                    <input type="text" name="x_online_customer_email" class="form-control"/>
+                                </div>
+                                <div class="col-md-6">
+                                    <label>Método de pago (*)</label>
+                                    <input type="text" name="x_online_payment_method" class="form-control"/>
+                                </div>
+                                <div class="col-md-6">
+                                    <label>Teléfono del cliente (*)</label>
+                                    <input type="text" name="x_online_client_phone" class="form-control"/>
+                                </div>
+                                <div class="col-12"><strong>Esfera</strong></div>
+                                <div class="col-md-6">
+                                    <label>Esfera OD (*)</label>
+                                    <input type="text" name="x_online_sphere_od" class="form-control"/>
+                                </div>
+                                <div class="col-md-6">
+                                    <label>Esfera OI (*)</label>
+                                    <input type="text" name="x_online_sphere_oi" class="form-control"/>
+                                </div>
+                                <div class="col-12"><strong>Cilindro</strong></div>
+                                <div class="col-md-6">
+                                    <label>Cilindro OD (*)</label>
+                                    <input type="text" name="x_online_cylinder_od" class="form-control"/>
+                                </div>
+                                <div class="col-md-6">
+                                    <label>Cilindro OI (*)</label>
+                                    <input type="text" name="x_online_cylinder_oi" class="form-control"/>
+                                </div>
+                                <div class="col-12"><strong>Eje</strong></div>
+                                <div class="col-md-6">
+                                    <label>Eje OD (*)</label>
+                                    <input type="text" name="x_online_axis_od" class="form-control"/>
+                                </div>
+                                <div class="col-md-6">
+                                    <label>Eje OI (*)</label>
+                                    <input type="text" name="x_online_axis_oi" class="form-control"/>
+                                </div>
+                                <div class="col-12"><strong>Distancia interpupilar</strong></div>
+                                <div class="col-md-6">
+                                    <label>Distancia interpupilar OD (*)</label>
+                                    <input type="text" name="x_online_ipd_od" class="form-control"/>
+                                </div>
+                                <div class="col-md-6">
+                                    <label>Distancia interpupilar OI (*)</label>
+                                    <input type="text" name="x_online_ipd_oi" class="form-control"/>
+                                </div>
+                            </div>
+                        </div>
                     </div>
+
+                    <!-- ===== BLOQUE: Devolución sin entregar ===== -->
                     <div id="block-devolucion_sin_entregar" class="col-12 subcategory-block" style="display:none;">
-                        <div class="card border-success"><div class="card-header bg-success text-white"><strong>Devolución de pedidos sin entregar</strong></div>
-                        <div class="card-body"><strong>Describe el motivo de la devolución y adjunta evidencia.</strong></div></div>
+                        <div class="card border-success">
+                            <div class="card-header bg-success text-white"><strong>Devolución de pedidos sin entregar</strong></div>
+                            <div class="card-body row g-3">
+                                <div class="col-md-6">
+                                    <label>Fullfilment (*)</label>
+                                    <input type="text" name="x_online_fulfillment" class="form-control"/>
+                                </div>
+                                <div class="col-md-6">
+                                    <label>Fecha de Venta (*)</label>
+                                    <input type="date" name="x_online_sale_date" class="form-control"/>
+                                </div>
+                                <div class="col-md-6">
+                                    <label>Método de pago (*)</label>
+                                    <input type="text" name="x_online_payment_method" class="form-control"/>
+                                </div>
+                                <div class="col-md-6">
+                                    <label>Correo Electrónico del Cliente (*)</label>
+                                    <input type="text" name="x_online_customer_email" class="form-control"/>
+                                </div>
+                                <div class="col-md-6">
+                                    <label>Teléfono del cliente (*)</label>
+                                    <input type="text" name="x_online_client_phone" class="form-control"/>
+                                </div>
+                                <div class="col-md-6">
+                                    <label>Pedido (*)</label>
+                                    <input type="text" name="x_online_unshipped_order" class="form-control"/>
+                                </div>
+                                <div class="col-md-6">
+                                    <label>Referencia de pago (*)</label>
+                                    <input type="text" name="x_online_payment_reference" class="form-control"/>
+                                </div>
+                            </div>
+                        </div>
                     </div>
+
+                    <!-- ===== BLOQUE: Pedido sin envío ===== -->
                     <div id="block-pedido_sin_envio" class="col-12 subcategory-block" style="display:none;">
-                        <div class="card border-success"><div class="card-header bg-success text-white"><strong>Pedidos sin envío</strong></div>
-                        <div class="card-body"><strong>Describe el caso y adjunta evidencia.</strong></div></div>
+                        <div class="card border-success">
+                            <div class="card-header bg-success text-white"><strong>Pedidos sin envío</strong></div>
+                            <div class="card-body row g-3">
+                                <div class="col-md-6">
+                                    <label>Fullfilment (*)</label>
+                                    <input type="text" name="x_online_fulfillment" class="form-control"/>
+                                </div>
+                                <div class="col-md-6">
+                                    <label>Fecha de Venta (*)</label>
+                                    <input type="date" name="x_online_sale_date" class="form-control"/>
+                                </div>
+                                <div class="col-md-6">
+                                    <label>Correo Electrónico del Cliente (*)</label>
+                                    <input type="text" name="x_online_customer_email" class="form-control"/>
+                                </div>
+                                <div class="col-md-6">
+                                    <label>Pedido POS (*)</label>
+                                    <input type="text" name="x_online_pos_order" class="form-control"/>
+                                </div>
+                                <div class="col-md-6">
+                                    <label>Nombre del Cliente (*)</label>
+                                    <input type="text" name="x_online_customer_name" class="form-control"/>
+                                </div>
+                            </div>
+                        </div>
                     </div>
+
+                    <!-- ===== BLOQUE: Atraso lente de contacto ===== -->
                     <div id="block-atraso_lente_contacto" class="col-12 subcategory-block" style="display:none;">
-                        <div class="card border-success"><div class="card-header bg-success text-white"><strong>Atraso lente de contacto</strong></div>
-                        <div class="card-body"><strong>Describe el atraso y adjunta evidencia del caso.</strong></div></div>
+                        <div class="card border-success">
+                            <div class="card-header bg-success text-white"><strong>Atraso lente de contacto</strong></div>
+                            <div class="card-body row g-3">
+                                <div class="col-md-6">
+                                    <label>Pedido POS (*)</label>
+                                    <input type="text" name="x_online_pos_order" class="form-control"/>
+                                </div>
+                                <div class="col-md-6">
+                                    <label>N° de Orden de Trabajo (*)</label>
+                                    <input type="text" name="x_online_work_order_number" class="form-control"/>
+                                </div>
+                            </div>
+                        </div>
                     </div>
+
+                    <!-- ===== BLOQUE: Búsqueda de armazón ===== -->
+
+                    <div id="block-receta_lc_atraso_lente_contacto" class="col-12 subcategory-block" style="display:none;">
+                        <div class="card border-success">
+                            <div class="card-header bg-success text-white"><strong>Atraso lente de contacto</strong></div>
+                            <div class="card-body row g-3">
+                                <div class="col-md-6">
+                                    <label>Receta lente de Contacto (*)</label>
+                                    <input type="text" name="x_lc_recipe_name" class="form-control"/>
+                                </div>
+                                <div class="col-12">
+                                    <strong>*</strong>
+                                </div>
+                                <div class="col-md-4">
+                                    <label>OT (*)</label>
+                                    <input type="text" name="x_lc_ot_number" class="form-control"/>
+                                </div>
+                                <div class="col-md-4">
+                                    <label>Pedido (*)</label>
+                                    <input type="text" name="x_lc_order_number" class="form-control"/>
+                                </div>
+                                <div class="col-md-4">
+                                    <label>Proveedor (*)</label>
+                                    <select name="x_lc_provider" class="form-select">
+                                        <option value="select">-- seleccionar --</option>
+                                        <option value="alcon">Alcon</option>
+                                        <option value="ciba">Ciba</option>
+                                        <option value="novartis">Novartis</option>
+                                        <option value="otro">Otro</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
                     <div id="block-busqueda_armazon" class="col-12 subcategory-block" style="display:none;">
-                        <div class="card border-success"><div class="card-header bg-success text-white"><strong>Búsqueda de armazón</strong></div>
-                        <div class="card-body"><strong>Describe el armazón requerido y adjunta evidencia si aplica.</strong></div></div>
+                        <div class="card border-success">
+                            <div class="card-header bg-success text-white"><strong>Búsqueda de armazón</strong></div>
+                            <div class="card-body row g-3">
+                                <div class="col-md-6">
+                                    <label>Orden de Venta (*)</label>
+                                    <input type="text" name="x_frame_search_sale_order" class="form-control"/>
+                                </div>
+                                <div class="col-md-6">
+                                    <label>Código de Armazón (*)</label>
+                                    <input type="text" name="x_frame_search_frame_code" class="form-control"/>
+                                </div>
+                                <div class="col-md-6">
+                                    <label>Bolsa de embalaje (*)</label>
+                                    <input type="text" name="x_frame_search_packaging_bag" class="form-control"/>
+                                </div>
+                                <div class="col-md-6">
+                                    <label>Fecha de envío (*)</label>
+                                    <input type="date" name="x_frame_search_shipping_date" class="form-control"/>
+                                </div>
+                                <div class="col-md-6">
+                                    <label>Mensajería (*)</label>
+                                    <input type="text" name="x_frame_search_courier" class="form-control"/>
+                                </div>
+                                <div class="col-md-6">
+                                    <label>Causa (*)</label>
+                                    <select name="x_frame_search_cause" class="form-select">
+                                        <option value="select">-- seleccionar --</option>
+                                        <option value="perdida_laboratorio_essilor">Pédida laboratorio Essilor</option>
+                                        <option value="perdida_laboratorio_local">Pérdida laboratorio local</option>
+                                        <option value="perdida_mensajeria">Pérdida mensajería</option>
+                                        <option value="dano_laboratorio_essilor">Daño laboratorio Essilor</option>
+                                        <option value="dano_laboratorio_local">Daño laboratorio local</option>
+                                        <option value="dano_mensajeria">Daño mensajería</option>
+                                    </select>
+                                </div>
+                                <div class="col-md-6">
+                                    <label>Otro (especificar) (*)</label>
+                                    <input type="text" name="x_frame_search_other_specify" class="form-control"/>
+                                </div>
+                                <div class="col-12">
+                                    <strong>Adjuntar foto o pantallazo de recibido en CeDis</strong>
+                                </div>
+                            </div>
+                        </div>
                     </div>
+
+                    <!-- ===== BLOQUE: Calidad micas ===== -->
                     <div id="block-calidad_micas" class="col-12 subcategory-block" style="display:none;">
-                        <div class="card border-success"><div class="card-header bg-success text-white"><strong>Calidad - Micas</strong></div>
-                        <div class="card-body"><strong>Adjuntar evidencia fotográfica y describir la incidencia.</strong></div></div>
+                        <div class="card border-success">
+                            <div class="card-header bg-success text-white"><strong>Calidad - Micas</strong></div>
+                            <div class="card-body row g-3">
+                                <div class="col-md-6">
+                                    <label>Pedido (*)</label>
+                                    <input type="text" name="x_quality_order_number" class="form-control"/>
+                                </div>
+                                <div class="col-md-6">
+                                    <label>Nombre del Cliente (*)</label>
+                                    <input type="text" name="x_quality_customer_name" class="form-control"/>
+                                </div>
+                                <div class="col-md-6">
+                                    <label>Teléfono del cliente (*)</label>
+                                    <input type="text" name="x_quality_customer_phone" class="form-control"/>
+                                </div>
+                                <div class="col-md-6">
+                                    <label>Bolsa de envío (*)</label>
+                                    <input type="text" name="x_quality_shipping_bag" class="form-control"/>
+                                </div>
+                                <div class="col-md-6">
+                                    <label>Guia de Paquetería (*)</label>
+                                    <input type="text" name="x_quality_courier_guide" class="form-control"/>
+                                </div>
+                                <div class="col-12">
+                                    <label>Es necesario adjuntar imagen como evidencia (*)</label>
+                                    <div class="d-flex gap-3 mt-1">
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="radio" name="x_quality_evidence_attached" value="si" id="qm_ev_si"/>
+                                            <label class="form-check-label" for="qm_ev_si">Sí</label>
+                                        </div>
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="radio" name="x_quality_evidence_attached" value="no" id="qm_ev_no"/>
+                                            <label class="form-check-label" for="qm_ev_no">No</label>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                     </div>
+
+                    <!-- ===== BLOQUE: Calidad armazón ===== -->
                     <div id="block-calidad_armazon" class="col-12 subcategory-block" style="display:none;">
-                        <div class="card border-success"><div class="card-header bg-success text-white"><strong>Calidad - Armazón</strong></div>
-                        <div class="card-body"><strong>Adjuntar evidencia fotográfica y describir la incidencia.</strong></div></div>
+                        <div class="card border-success">
+                            <div class="card-header bg-success text-white"><strong>Calidad - Armazón</strong></div>
+                            <div class="card-body row g-3">
+                                <div class="col-md-6">
+                                    <label>Pedido (*)</label>
+                                    <input type="text" name="x_quality_order_number" class="form-control"/>
+                                </div>
+                                <div class="col-md-6">
+                                    <label>Nombre del Cliente (*)</label>
+                                    <input type="text" name="x_quality_customer_name" class="form-control"/>
+                                </div>
+                                <div class="col-md-6">
+                                    <label>Teléfono del cliente (*)</label>
+                                    <input type="text" name="x_quality_customer_phone" class="form-control"/>
+                                </div>
+                                <div class="col-md-6">
+                                    <label>Bolsa de envío (*)</label>
+                                    <input type="text" name="x_quality_shipping_bag" class="form-control"/>
+                                </div>
+                                <div class="col-md-6">
+                                    <label>Guia de Paquetería (*)</label>
+                                    <input type="text" name="x_quality_courier_guide" class="form-control"/>
+                                </div>
+                                <div class="col-12">
+                                    <label>Es necesario adjuntar imagen como evidencia (*)</label>
+                                    <div class="d-flex gap-3 mt-1">
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="radio" name="x_quality_evidence_attached" value="si" id="qa_ev_si"/>
+                                            <label class="form-check-label" for="qa_ev_si">Sí</label>
+                                        </div>
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="radio" name="x_quality_evidence_attached" value="no" id="qa_ev_no"/>
+                                            <label class="form-check-label" for="qa_ev_no">No</label>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                     </div>
+
+                    <!-- ===== BLOQUES SOLO TEXTO: Logística / mensajería ===== -->
                     <div id="block-implantar_bolsa" class="col-12 subcategory-block" style="display:none;">
                         <div class="card border-success"><div class="card-header bg-success text-white"><strong>Implantar bolsa de: trabajo | Micas sin cortar | Lente de contacto</strong></div>
                         <div class="card-body"><strong>Describe la solicitud y adjunta evidencia si aplica.</strong></div></div>
@@ -827,6 +2432,18 @@
                 </form>
             </div>
             <script type="text/javascript" src="/helpdesk_web_form/static/src/js/index.js"></script>
+        </t>
+    </template>
+
+    <template id="helpdesk_success_template">
+        <t t-call="website.layout">
+            <div class="container mt-5 mb-5">
+                <div class="alert alert-success">
+                    <h4 class="alert-heading">Ticket enviado correctamente</h4>
+                    <p class="mb-0">Tu ticket fue registrado con el número: <strong t-esc="ticket_id"/></p>
+                </div>
+                <a href="/helpdesk" class="btn btn-primary mt-3">Crear otro ticket</a>
+            </div>
         </t>
     </template>
 </odoo>
