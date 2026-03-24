@@ -1331,7 +1331,320 @@
                             </group>
 
                         </div>
+                        <div class="mt16"
+                            invisible="x_subcategory_code != 'seguimiento_laboratorio'">
 
+                            <div class="o_form_sheet bg-success text-white p-2 rounded-2 mb-3">
+                                <strong>Seguimiento a: Trabajo elaborados en Laboratorio Essilor |
+                                    Micas sin cortar procesadas en laboratorio Essilor | Lente de
+                                    contacto</strong>
+                            </div>
+
+                            <div class="mt8 mb-3">
+                                <strong>Seguimiento a: Trabajo elaborados en Laboratorio Essilor|
+                                    Micas sin cortar procesadas en laboratorio Essilor | Lente de
+                                    contacto</strong>
+                            </div>
+
+                            <group col="2">
+                                <field name="x_shipping_lab_followup_pos_order" required="1" />
+                            </group>
+
+                        </div>
+                        <div class="mt16"
+                            invisible="x_subcategory_code != 'envio_extraordinario'">
+
+                            <div class="o_form_sheet bg-success text-white p-2 rounded-2 mb-3">
+                                <strong>Envío extraordinario de: Trabajo elaborados en Laboratorio
+                                    Essilor | Micas sin cortar procesadas en laboratorio Essilor |
+                                    Lente de contacto</strong>
+                            </div>
+
+                            <div class="mt8 mb-3">
+                                <strong>Envío extraordinario de: Trabajo elaborados en Laboratorio
+                                    Essilor| Micas sin cortar procesadas en laboratorio Essilor |
+                                    Lente de contacto</strong>
+                            </div>
+
+                            <group col="3">
+                                <field name="x_shipping_extraordinary_pos_order" required="1" />
+                                <field name="x_shipping_extraordinary_sap_center" required="1" />
+                                <field name="x_shipping_extraordinary_manager_authorization"
+                                    widget="radio"
+                                    options="{'horizontal': true}"
+                                    required="1" />
+                            </group>
+
+                        </div>
+
+                        <div class="mt16"
+                            invisible="x_subcategory_code != 'faltante_accesorios_pedido'">
+
+                            <div class="o_form_sheet bg-success text-white p-2 rounded-2 mb-3">
+                                <strong>Faltante accesorios en armazón de pedido</strong>
+                            </div>
+
+                            <group col="4">
+                                <field name="x_shipping_missing_accessory_order" required="1" />
+                                <field name="x_shipping_missing_accessory_brand" required="1" />
+                                <field name="x_shipping_missing_accessory_arrival_date" required="1" />
+                                <field name="x_shipping_missing_accessory_supplier" required="1" />
+                            </group>
+
+                            <div class="mt16">
+                                <strong>Elemento faltante (*)</strong>
+                            </div>
+
+                            <group col="4">
+                                <field name="x_shipping_missing_accessory_cloth" />
+                                <field name="x_shipping_missing_accessory_case" />
+                                <field name="x_shipping_missing_accessory_clipon" />
+                                <field name="x_shipping_missing_accessory_certificate" />
+                            </group>
+
+                        </div>
+                        <div class="mt16"
+                            invisible="x_subcategory_code != 'faltante_accesorios_surtido'">
+
+                            <div class="o_form_sheet bg-success text-white p-2 rounded-2 mb-3">
+                                <strong>Faltante accesorios en armazón de surtido</strong>
+                            </div>
+
+                            <group col="4">
+                                <field name="x_shipping_missing_accessory_bag" required="1" />
+                                <field name="x_shipping_missing_accessory_brand" required="1" />
+                                <field name="x_shipping_missing_accessory_arrival_date" required="1" />
+                            </group>
+
+                            <div class="mt16">
+                                <strong>Elemento faltante (*)</strong>
+                            </div>
+
+                            <group col="4">
+                                <field name="x_shipping_missing_accessory_cloth" />
+                                <field name="x_shipping_missing_accessory_case" />
+                                <field name="x_shipping_missing_accessory_clipon" />
+                                <field name="x_shipping_missing_accessory_certificate" />
+                            </group>
+
+                        </div>
+                        <div class="mt16"
+                            invisible="x_subcategory_code not in ('faltante_mercancia', 'sobrante_mercancia', 'mercancia_danada')">
+
+                            <div class="o_form_sheet bg-success text-white p-2 rounded-2 mb-3">
+                                <strong>
+                                    <field name="x_subcategory_id" readonly="1" />
+                                </strong>
+                            </div>
+
+                            <group col="4">
+                                <field name="x_bag_number" required="1" />
+                                <field name="x_prev_guide_number" required="1" />
+                                <field name="x_transport_number" required="1" />
+                                <field name="x_prev_courier_type" required="1" />
+                            </group>
+
+                            <group col="4" class="mt8">
+                                <field name="x_prev_photo_evidence_confirm"
+                                    widget="radio"
+                                    options="{'horizontal': true}"
+                                    required="1" />
+                            </group>
+
+                        </div>
+
+                        <div class="mt16"
+                            invisible="x_subcategory_code not in ('extravio_mensajeria', 'extravio_sucursal')">
+
+                            <div class="o_form_sheet bg-success text-white p-2 rounded-2 mb-3">
+                                <strong>
+                                    <field name="x_subcategory_id" readonly="1" />
+                                </strong>
+                            </div>
+
+                            <group col="4">
+                                <field name="x_bag_number" required="1" />
+                                <field name="x_prev_guide_number" required="1" />
+                                <field name="x_transport_number" required="1" />
+                                <field name="x_prev_courier_type" required="1" />
+                            </group>
+
+                        </div>
+                        <div class="mt16"
+                            invisible="x_subcategory_code not in ('reporte_dispositivos', 'reporte_aplicaciones')">
+
+                            <div class="o_form_sheet bg-success text-white p-2 rounded-2 mb-3">
+                                <strong>
+                                    <field name="x_subcategory_id" readonly="1" />
+                                </strong>
+                            </div>
+
+                            <group col="3">
+                                <field name="x_report_whatsapp_date" required="1" />
+                                <field name="x_report_marketing_date" required="1" />
+                                <field name="x_report_attached" widget="radio" required="1" />
+                            </group>
+
+                        </div>
+                        <div class="mt16" invisible="x_subcategory_code != 'seguimiento_solicitud'">
+
+                            <div class="o_form_sheet bg-success text-white p-2 rounded-2 mb-3">
+                                <strong>Seguimiento de solicitud</strong>
+                            </div>
+
+                            <group col="4">
+                                <field name="x_supply_material_code" required="1" />
+                                <field name="x_supply_material_description" required="1" />
+                                <field name="x_supply_quantity" required="1" />
+                                <field name="x_supply_unit_measure" required="1" />
+
+                                <field name="x_supply_center" required="1" />
+                                <field name="x_supply_manager_approval_attached"
+                                    widget="radio"
+                                    options="{'horizontal': true}"
+                                    required="1" />
+                            </group>
+
+                        </div>
+
+                        <div class="mt16"
+                            invisible="x_subcategory_code != 'trabajos_atrasados_laboratorio_local'">
+
+                            <div class="o_form_sheet bg-success text-white p-2 rounded-2 mb-3">
+                                <strong>Trabajos atrasados laboratorio local</strong>
+                            </div>
+
+                            <group col="3">
+                                <field name="x_lab_local_pos_order" required="1" />
+                                <field name="x_lab_local_promise_date" />
+                                <field name="x_lab_local_name" />
+                            </group>
+
+                        </div>
+
+                        <div class="mt16"
+                            invisible="not (x_is_papeleria_seguimiento and x_subcategory_code == 'seguimiento_solicitud')">
+
+                            <div class="o_form_sheet bg-success text-white p-2 rounded-2 mb-3">
+                                <strong>Seguimiento de solicitud</strong>
+                            </div>
+
+                            <group col="4">
+                                <field name="x_supply_material_code" />
+                                <field name="x_supply_material_description" required="1" />
+                                <field name="x_supply_quantity" required="1" />
+                                <field name="x_supply_unit_measure" required="1" />
+
+                                <field name="x_supply_center" required="1" />
+                                <field name="x_supply_manager_approval_attached"
+                                    widget="radio"
+                                    options="{'horizontal': true}"
+                                    required="1" />
+                            </group>
+
+                        </div>
+                        <div class="mt16"
+                            invisible="x_subcategory_code != 'abasto_accesorios_soluciones'">
+
+                            <div class="o_form_sheet bg-success text-white p-2 rounded-2 mb-3">
+                                <strong>Abasto de accesorios y soluciones</strong>
+                            </div>
+
+                            <group col="4">
+                                <field name="x_supply_sku_code" required="1" />
+                                <field name="x_supply_material_description" required="1" />
+                            </group>
+
+                        </div>
+                        <div class="mt16" invisible="x_subcategory_code != 'abasto_armazones'">
+
+                            <div class="o_form_sheet bg-success text-white p-2 rounded-2 mb-3">
+                                <strong>Abasto de armazones</strong>
+                            </div>
+
+                            <div class="mt8 mb-2">
+                                <strong>
+                                    Recuerda que cada tema reportado en SOS es atendido por equipos
+                                    diferentes en Centro de Soporte y CeDis. Para que tu solicitud
+                                    sea atendida de manera oportuna, será necesario elegir la
+                                    categoría correcta.
+                                </strong>
+                            </div>
+
+                            <div class="mt8 mb-2">
+                                📌 Si lo que requieres es la búsqueda de un armazón para venta,
+                                garantía o satisfacción total, genera un SOS hacia: Fullfilment |
+                                Traspasos DOMS | Búsqueda de armazón
+                            </div>
+
+                            <div class="mt8 mb-2">
+                                📌 Si lo que requieres es el abasto de CB de armazones, será
+                                necesario adjuntar la pantalla de POS que muestre el porcentaje de
+                                cobertura de armazones, puedes generar el SOS siempre y cuando:
+                            </div>
+
+                            <div class="mt8 mb-2">
+                                El inventario sea menor al facing establecido y cuando No existan
+                                excedentes en el sistema.
+                            </div>
+
+                            <div class="mt8 mb-2">
+                                ⏳ El tiempo estimado de solución para los SOS de abasto de cuadro
+                                básico es de 3 semanas, ya que se contempla el proceso de compra,
+                                envío del proveedor a CeDis y posterior distribución a sucursales.
+                            </div>
+
+                            <div class="mt8 mb-2">
+                                ❌ Los SOS que se envíen a la sección de “Abasto de armazones” con
+                                solicitudes distintas a la mencionada, serán rechazados por el
+                                Devlyner que atiende el SOS.
+                            </div>
+
+                            <div class="mt8 mb-3">
+                                Los siguientes temas, por favor revísalos por correo electrónico con
+                                Wendy Baleón vía correo electrónico wbaleon@devlyn.com.mx, copiando
+                                a tu Gerente Distrital correspondiente:
+                            </div>
+
+                            <div class="mt8 mb-3">
+                                <strong>Revisión de nivel de tienda, Revisión de facing y cuadro
+                                    básico Inclusión de nuevas marcas</strong>
+                            </div>
+
+                            <group col="4">
+                                <field name="x_supply_frame_type" required="1" />
+                                <field name="x_supply_frame_brand_basic" required="1" />
+                                <field name="x_supply_material_description" required="1" />
+                            </group>
+
+                        </div>
+
+                        <div class="mt16" invisible="x_subcategory_code != 'devoluciones_aplicadas'">
+
+                            <div class="o_form_sheet bg-success text-white p-2 rounded-2 mb-3">
+                                <strong>Devoluciones Aplicadas</strong>
+                            </div>
+
+                            <group col="4">
+                                <field name="x_supply_return_folio" required="1" />
+                                <field name="x_supply_sku_code" required="1" />
+                                <field name="x_supply_material_description" required="1" />
+                            </group>
+
+                        </div>
+                        <div class="mt16" invisible="x_subcategory_code != 'gotas_soluciones_alcon'">
+
+                            <div class="o_form_sheet bg-success text-white p-2 rounded-2 mb-3">
+                                <strong>Gotas y soluciones Alcon</strong>
+                            </div>
+
+                            <group col="4">
+                                <field name="x_supply_sku_code" required="1" />
+                                <field name="x_supply_material_description"
+                                    string="Descripción del producto (*)" required="1" />
+                            </group>
+
+                        </div>
                         <div class="mt16">
                             <h3>Anexos</h3>
 
