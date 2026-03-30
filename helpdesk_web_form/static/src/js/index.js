@@ -6,9 +6,6 @@ window.addEventListener('load', function () {
 
     if (!section || !category || !subcategory) return;
 
-    // -------------------------------------------------------
-    // Mapa: subcategory_code -> id del bloque en el DOM
-    // -------------------------------------------------------
     const BLOCK_MAP = {
         'micas_sin_cortar':                        'block-micas_sin_cortar',
         'trabajos_atrasados':                      'block-trabajos_atrasados',
@@ -73,9 +70,13 @@ window.addEventListener('load', function () {
         'mercancia_danada':                        'block-mercancia_danada',
         'extravio_mensajeria':                     'block-extravio_mensajeria',
         'extravio_sucursal':                       'block-extravio_sucursal',
+        'ale_pagina_web':                          'block-ale_pagina_web',
+        'universidad_devlyn':                      'block-universidad_devlyn',
+        'pagina_evaluaciones_productos':           'block-pagina_evaluaciones_productos',
+        'pagina_evaluaciones_politicas':           'block-pagina_evaluaciones_politicas',
+        'promocion_puesto':                        'block-promocion_puesto',
     };
 
-    // Refacturación: varios codes apuntan al mismo bloque
     const REFACTURACION_CODES = [
         'error_captura_datos_fiscales',
         'error_captura_uso_cfdi',
@@ -88,12 +89,29 @@ window.addEventListener('load', function () {
         'periodo_facturacion_portal',
     ];
 
-    // Cache { subcategory_id: code }
-    let subcategoryCodes = {};
+    const DEV_REAL_TC_DB_CODES = ['cargos_duplicados', 'error_examen', 'fecha_entrega', 'mal_servicio'];
+    const DEV_REAL_CASH_ORDER_CODES = ['error_examen', 'fecha_entrega', 'mal_servicio'];
+    const DEV_REAL_CASH_TRANSFER_CODES = ['error_examen', 'fecha_entrega', 'mal_servicio'];
 
-    // -------------------------------------------------------
-    // Helpers
-    // -------------------------------------------------------
+    const DEV_TC_EXTRA_BLOCKS = {
+        'cargos_duplicados': 'block-dev-tc-cargos_duplicados',
+        'error_examen':      'block-dev-tc-error_examen',
+        'fecha_entrega':     'block-dev-tc-fecha_entrega',
+    };
+    const DEV_CASH_ORDER_EXTRA_BLOCKS = {
+        'error_examen':  'block-dev-cash-order-error_examen',
+        'fecha_entrega': 'block-dev-cash-order-fecha_entrega',
+    };
+    const DEV_CASH_TRANSFER_EXTRA_BLOCKS = {
+        'error_examen':  'block-dev-cash-transfer-error_examen',
+        'fecha_entrega': 'block-dev-cash-transfer-fecha_entrega',
+    };
+
+    const CONVENIOS_CODES = ['apoyo_aplicar_convenio', 'convenios_institucionales', 'no_entran_manuales', 'dudas_promociones'];
+
+    let subcategoryCodes = {};
+    let currentCategorySlug = '';
+
     function hideAllSubcategoryBlocks() {
         document.querySelectorAll('.subcategory-block').forEach(el => {
             el.style.display = 'none';
@@ -115,69 +133,120 @@ window.addEventListener('load', function () {
 
     function showBlockForCode(code) {
         if (!code) return;
+
         if (REFACTURACION_CODES.includes(code)) {
             showBlock('block-refacturacion');
             return;
         }
+
+        if (CONVENIOS_CODES.includes(code)) {
+            showBlock('block-convenios');
+            return;
+        }
+
+        if (currentCategorySlug === 'dev_real_tc_db') {
+            if (DEV_REAL_TC_DB_CODES.includes(code)) {
+                showBlock('block-dev-real-tc-db');
+                const extraId = DEV_TC_EXTRA_BLOCKS[code];
+                if (extraId) showBlock(extraId);
+                return;
+            }
+        }
+
+        if (currentCategorySlug === 'dev_real_cash_order') {
+            if (DEV_REAL_CASH_ORDER_CODES.includes(code)) {
+                showBlock('block-dev-real-cash-order');
+                const extraId = DEV_CASH_ORDER_EXTRA_BLOCKS[code];
+                if (extraId) showBlock(extraId);
+                return;
+            }
+        }
+
+        if (currentCategorySlug === 'dev_real_cash_transfer') {
+            if (DEV_REAL_CASH_TRANSFER_CODES.includes(code)) {
+                showBlock('block-dev-real-cash-transfer');
+                const extraId = DEV_CASH_TRANSFER_EXTRA_BLOCKS[code];
+                if (extraId) showBlock(extraId);
+                return;
+            }
+        }
+
         const blockId = BLOCK_MAP[code];
         if (blockId) showBlock(blockId);
     }
 
-    // -------------------------------------------------------
-    // Sección → categorías
-    // -------------------------------------------------------
     section.addEventListener('change', function () {
         const section_id = this.value;
 
         category.innerHTML = '<option value="">-- seleccionar --</option>';
         subcategory.innerHTML = '<option value="">-- seleccionar --</option>';
+        category.disabled = true;
+        subcategory.disabled = true;
+
         subcategoryCodes = {};
+        currentCategorySlug = '';
         hideAllSubcategoryBlocks();
 
-        if (!section_id) return;
-
-        category.disabled = true;
+        if (!section_id) {
+            category.disabled = false;
+            subcategory.disabled = false;
+            return;
+        }
 
         fetch('/helpdesk/categories', {
             method: 'POST',
-            headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-            body: new URLSearchParams({ section_id })
+            headers: { 'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8' },
+            body: new URLSearchParams({ section_id: section_id })
         })
-        .then(res => { if (!res.ok) throw new Error('Error'); return res.json(); })
+        .then(res => {
+            if (!res.ok) throw new Error('Error cargando categorías');
+            return res.json();
+        })
         .then(data => {
             const frag = document.createDocumentFragment();
             data.forEach(c => {
                 const opt = document.createElement('option');
                 opt.value = c.id;
                 opt.textContent = c.name;
+                opt.dataset.slug = c.slug || c.code || '';
                 frag.appendChild(opt);
             });
             category.appendChild(frag);
             category.disabled = false;
+            subcategory.disabled = false;
         })
-        .catch(err => { console.error(err); category.disabled = false; });
+        .catch(err => {
+            console.error(err);
+            category.disabled = false;
+            subcategory.disabled = false;
+        });
     });
 
-    // -------------------------------------------------------
-    // Categoría → subcategorías  (el endpoint ahora devuelve "code")
-    // -------------------------------------------------------
     category.addEventListener('change', function () {
         const category_id = this.value;
+        const selectedOpt = this.options[this.selectedIndex];
+        currentCategorySlug = selectedOpt ? (selectedOpt.dataset.slug || '') : '';
 
         subcategory.innerHTML = '<option value="">-- seleccionar --</option>';
+        subcategory.disabled = true;
+
         subcategoryCodes = {};
         hideAllSubcategoryBlocks();
 
-        if (!category_id) return;
-
-        subcategory.disabled = true;
+        if (!category_id) {
+            subcategory.disabled = false;
+            return;
+        }
 
         fetch('/helpdesk/subcategories', {
             method: 'POST',
-            headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-            body: new URLSearchParams({ category_id })
+            headers: { 'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8' },
+            body: new URLSearchParams({ category_id: category_id })
         })
-        .then(res => { if (!res.ok) throw new Error('Error'); return res.json(); })
+        .then(res => {
+            if (!res.ok) throw new Error('Error cargando subcategorías');
+            return res.json();
+        })
         .then(data => {
             const frag = document.createDocumentFragment();
             data.forEach(sc => {
@@ -185,28 +254,23 @@ window.addEventListener('load', function () {
                 opt.value = sc.id;
                 opt.textContent = sc.name;
                 frag.appendChild(opt);
-                // Guardamos el code para usarlo al seleccionar
                 subcategoryCodes[sc.id] = sc.code || '';
             });
             subcategory.appendChild(frag);
             subcategory.disabled = false;
         })
-        .catch(err => { console.error(err); subcategory.disabled = false; });
+        .catch(err => {
+            console.error(err);
+            subcategory.disabled = false;
+        });
     });
 
-    // -------------------------------------------------------
-    // Subcategoría → mostrar bloque por code
-    // -------------------------------------------------------
     subcategory.addEventListener('change', function () {
         hideAllSubcategoryBlocks();
         const code = subcategoryCodes[this.value] || '';
         showBlockForCode(code);
     });
 
-    // -------------------------------------------------------
-    // x_order_type → sub-bloques adaptación / imagen
-    // Usa delegación para capturar cualquier .order-type-select
-    // -------------------------------------------------------
     document.addEventListener('change', function (e) {
         if (!e.target.classList.contains('order-type-select')) return;
         hideOrderTypeBlocks();
@@ -217,9 +281,6 @@ window.addEventListener('load', function () {
         }
     });
 
-    // -------------------------------------------------------
-    // Tóner: advertencia cuando selecciona "no" (>15%)
-    // -------------------------------------------------------
     document.addEventListener('change', function (e) {
         if (e.target.id !== 'x_toner_below_15') return;
         const warning = document.getElementById('block-toner-warning');

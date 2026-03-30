@@ -1029,6 +1029,301 @@ class HelpdeskTicket(models.Model):
         string="Es necesario adjuntar imagen como evidencia. (*)",
         copy=False,
     )
+
+    x_medallia_employee_number = fields.Char(
+        string="N° de empleado (*)",
+        copy=False,
+    )
+
+    x_medallia_employee_name = fields.Char(
+        string="Nombre del empleado (*)",
+        copy=False,
+    )
+
+    x_bag_arrival = fields.Char(
+        string="Bolsa de arribo (*)",
+        copy=False,
+    )
+
+    x_delivery_oc = fields.Char(
+        string="Entrega | OC",
+        copy=False,
+    )
+
+    x_paq_pos_order = fields.Char(
+        string="Pedido POS. (*)",
+        copy=False,
+    )
+
+
+    x_shipping_noncompliance_type = fields.Selection(
+        [
+            ("select", "-- seleccionar --"),
+            ("visita", "Visita"),
+            ("recoleccion", "Recolección"),
+        ],
+        string="Tipo (*)",
+        default="select",
+        copy=False,
+    )
+
+    x_shipping_assigned_courier = fields.Char(
+        string="Mensajería asignada (*)",
+        copy=False,
+    )
+
+    x_shipping_arrival_bag = fields.Char(
+        string="Bolsa de arribo (*)",
+        copy=False,
+    )
+
+    x_shipping_guide_number_detail = fields.Char(
+        string="N° de guía (*)",
+        copy=False,
+    )
+
+    x_shipping_content_detail = fields.Char(
+        string="Detalle de contenido (*)",
+        copy=False,
+    )
+
+    x_shipping_photo_evidence_confirmed = fields.Selection(
+        [
+            ("si", "Sí"),
+            ("no", "No"),
+        ],
+        string="Evidencia fotográfica (Confirmar) (*)",
+        copy=False,
+    )
+
+    x_shipping_unreceived_pos_order = fields.Char(
+        string="Pedido POS. (*)", copy=False)
+    
+    x_shipping_unreceived_arrival_bag = fields.Char(
+        string="Bolsa de arribo (*)", copy=False)
+    
+    x_shipping_unreceived_transport= fields.Char(
+        string="Transporte (*)", copy=False)
+    
+    x_shipping_lab_followup_pos_order = fields.Char(
+        string="Pedido POS. (*)",
+        copy=False,
+    )
+
+    x_shipping_extraordinary_pos_order = fields.Char(
+        string="Pedido POS. (*)",
+        copy=False,
+    )
+
+    x_shipping_extraordinary_sap_center = fields.Char(
+        string="Centro SAP a donde se redirecciona la entrega (*)",
+        copy=False,
+    )
+
+    x_shipping_extraordinary_manager_authorization = fields.Selection(
+        [
+            ("si", "Sí"),
+            ("no", "No"),
+        ],
+        string="Autorización de gerente (Confirmar) (*)",
+        copy=False,
+    )
+
+    x_shipping_missing_accessory_order = fields.Char(
+        string="Pedido. (*)",
+        copy=False,
+    )
+
+    x_shipping_missing_accessory_bag = fields.Char(
+        string="Bolsa (*)",
+        copy=False,
+    )
+
+    x_shipping_missing_accessory_brand = fields.Char(
+        string="Marca del armazón (*)",
+        copy=False,
+    )
+
+    x_shipping_missing_accessory_arrival_date = fields.Date(
+        string="Fecha de llegada a sucursal (*)",
+        copy=False,
+    )
+
+    x_shipping_missing_accessory_supplier = fields.Selection(
+        [
+            ("select", "-- seleccionar --"),
+            ("fulljob", "Fulljob"),
+            ("surte_almacen", "Surte almacén"),
+            ("surte_proveedor", "Surte proveedor"),
+            ("surte_optica", "Surte óptica"),
+            ("airborn", "Airborn"),
+        ],
+        string="¿Quién surte el armazón? (*)",
+        default="select",
+        copy=False,
+    )
+
+    x_shipping_missing_accessory_cloth = fields.Boolean(
+        string="Paño",
+        copy=False,
+    )
+
+    x_shipping_missing_accessory_case = fields.Boolean(
+        string="Estuche",
+        copy=False,
+    )
+
+    x_shipping_missing_accessory_clipon = fields.Boolean(
+        string="Clip on",
+        copy=False,
+    )
+
+    x_shipping_missing_accessory_certificate = fields.Boolean(
+        string="Certificado de autenticidad",
+        copy=False,
+    )
+
+
+    x_prev_guide_number = fields.Char(
+        string="N° de guía (*)",
+        copy=False,
+    )
+
+    x_prev_courier_type = fields.Selection(
+        [
+            ("select", "-- seleccionar --"),
+            ("estafeta", "Estafeta"),
+            ("dhl", "DHL"),
+            ("mensajeria_interna", "Mensajería interna"),
+            ("otros", "Otros"),
+        ],
+        string="Mensajería (*)",
+        default="select",
+        copy=False,
+    )
+
+    x_prev_photo_evidence_confirm = fields.Selection(
+        [
+            ("si", "Sí"),
+            ("no", "No"),
+        ],
+        string="Evidencia fotográfica (Confirmar) (*)",
+        copy=False,
+    )
+
+
+    x_report_whatsapp_date = fields.Date(
+        string="Fecha de reporte por WhatsApp",
+        copy=False,
+    )
+
+    x_report_marketing_date = fields.Date(
+        string="Fecha de reporte Marketing producto",
+        copy=False,
+    )
+
+    x_report_attached = fields.Selection(
+        [
+            ("si", "Sí"),
+            ("no", "No"),
+        ],
+        string="Confirmar que se adjuntó el reporte",
+        copy=False,
+    )
+
+
+    x_supply_material_code = fields.Char(
+        string="Código del material",
+        copy=False,
+    )
+
+    x_supply_material_description = fields.Char(
+        string="Descripción del Material. (*)",
+        copy=False,
+    )
+
+    x_supply_quantity = fields.Char(
+        string="Cantidad (*)",
+        copy=False,
+    )
+
+    x_supply_unit_measure = fields.Selection(
+        [
+            ("select", "-- seleccionar --"),
+            ("pzs", "Pzs"),
+            ("lto", "Lto"),
+            ("hojas", "Hojas"),
+            ("cuadernillo", "Cuadernillo"),
+        ],
+        string="Unidad de medida",
+        default="select",
+        copy=False,
+    )
+
+    x_supply_center = fields.Char(
+        string="Centro (*)",
+        copy=False,
+    )
+
+    x_supply_manager_approval_attached = fields.Selection(
+        [
+            ("si", "Sí"),
+            ("no", "No"),
+        ],
+        string="¿Se tiene VoBo de gerente distrital? Adjuntar",
+        copy=False,
+    )
+
+
+    x_lab_local_pos_order = fields.Char(
+        string="Pedido POS. (*)",
+        copy=False,
+    )
+
+    x_lab_local_promise_date = fields.Date(
+        string="Fecha Promesa",
+        copy=False,
+    )
+
+    x_lab_local_name = fields.Char(
+        string="Laboratorio local",
+        copy=False,
+    )
+
+    x_is_papeleria_seguimiento = fields.Boolean(
+        compute="_compute_x_category_flags_extra",
+        store=False,
+    )
+
+    x_supply_sku_code = fields.Char(
+        string="Codigo SKU (*)",
+        copy=False,
+    )
+
+    x_supply_material_description = fields.Char(
+        string="Descripción del Material (*)",
+        copy=False,
+    )
+
+    x_supply_frame_type = fields.Selection(
+        [
+            ("select", "-- seleccionar --"),
+            ("abasto_armazones", "Abasto de armazones"),
+        ],
+        string="*",
+        default="select",
+        copy=False,
+    )
+
+    x_supply_frame_brand_basic = fields.Char(
+        string="Marca con Base al Cuadro Basico (*)",
+        copy=False,
+    )
+
+    x_supply_return_folio = fields.Char(
+        string="Folio de la Devolución (*)",
+        copy=False,
+    )
     @api.depends("x_category_id")
     def _compute_x_is_facturacion_reenvio(self):
         target = self.env.ref(
@@ -1038,6 +1333,8 @@ class HelpdeskTicket(models.Model):
         target_id = target.id if target else False
         for rec in self:
             rec.x_is_facturacion_reenvio = bool(target_id and rec.x_category_id.id == target_id)
+
+            
             
     @api.depends("x_category_id")
     def _compute_x_devolucion_category_flags(self):
@@ -1067,9 +1364,18 @@ class HelpdeskTicket(models.Model):
             "helpdesk_custom_datos.helpdesk_ticket_category_receta_lc_lente_contacto",
             raise_if_not_found=False,
         )
+        papeleria_category = self.env.ref(
+            "helpdesk_custom_datos.helpdesk_ticket_category_papeleria_seguimiento",
+            raise_if_not_found=False,
+        )
+
         receta_lc_id = receta_lc_category.id if receta_lc_category else False
+        papeleria_id = papeleria_category.id if papeleria_category else False
 
         for rec in self:
             rec.x_is_receta_lc = bool(
                 receta_lc_id and rec.x_category_id.id == receta_lc_id
+            )
+            rec.x_is_papeleria_seguimiento = bool(
+                papeleria_id and rec.x_category_id.id == papeleria_id
             )
