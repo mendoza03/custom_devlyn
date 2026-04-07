@@ -1,0 +1,412 @@
+:root {
+    --ui-brand-primary: #5B21B6;
+    --ui-brand-secondary: #7C3AED;
+    --ui-navbar-bg: #111827;
+    --ui-menu-bg: #1F2937;
+    --ui-menu-text: #F9FAFB;
+    --ui-body-bg: #F3F4F6;
+    --ui-text-color: #111827;
+    --ui-link-color: #2563EB;
+    --ui-button-bg: #5B21B6;
+    --ui-button-text: #FFFFFF;
+    --ui-border-radius: 10px;
+    --ui-font-family: Inter, sans-serif;
+    --ui-font-size: 14px;
+}
+
+/* GLOBAL */
+html,
+body,
+.o_web_client,
+.o_action_manager,
+.o_content,
+.o_main_content,
+.o_form_view,
+.o_list_view,
+.o_kanban_view,
+.o_calendar_view,
+.o_cohort_view,
+.o_graph_view,
+.o_pivot_view,
+.o_activity_view,
+.o-searchview,
+.o_control_panel,
+.o_cp_top,
+.o_cp_bottom,
+.o_renderer {
+    font-family: var(--ui-font-family) !important;
+    font-size: var(--ui-font-size) !important;
+    color: var(--ui-text-color) !important;
+}
+
+.o_web_client,
+.o_action_manager,
+.o_main_content,
+.o_content,
+.o_form_view,
+.o_list_view,
+.o_kanban_view,
+.o_calendar_view,
+.o_graph_view,
+.o_pivot_view,
+.o_cohort_view {
+    background-color: var(--ui-body-bg) !important;
+}
+
+/* TOP MAIN NAVBAR */
+.o_main_navbar,
+.o_navbar,
+.o_menu_systray,
+.o_menu_sections {
+    background-color: var(--ui-navbar-bg) !important;
+    color: var(--ui-menu-text) !important;
+    border-color: transparent !important;
+}
+
+.o_main_navbar a,
+.o_main_navbar .dropdown-toggle,
+.o_main_navbar .o_menu_brand,
+.o_main_navbar .btn,
+.o_main_navbar .nav-link,
+.o_navbar a,
+.o_navbar .nav-link,
+.o_navbar .dropdown-toggle,
+.o_menu_sections a,
+.o_menu_sections button,
+.o_menu_sections .nav-link,
+.o_menu_systray *,
+.o_menu_brand,
+.o_menu_sections * {
+    color: var(--ui-menu-text) !important;
+}
+
+/* top menu active / hover */
+.o_menu_sections .nav-link:hover,
+.o_main_navbar .nav-link:hover,
+.o_navbar .nav-link:hover,
+.o_menu_sections .nav-link.active,
+.o_main_navbar .nav-link.active,
+.o_navbar .nav-link.active,
+.o_menu_sections .active {
+    background-color: var(--ui-brand-primary) !important;
+    color: #fff !important;
+    border-radius: 0 !important;
+}
+
+/* LEFT ICON BAR / APP SWITCHER AREA */
+.o_app,
+.o_web_client .o_apps,
+.o_apps_menu,
+.o_navbar_apps_menu,
+.o_app_switcher,
+.o_action_manager .o_content {
+    background-color: var(--ui-body-bg) !important;
+}
+
+/* SETTINGS LEFT COLUMN / PANELS / SIDE MENUS */
+.o_setting_container,
+.settings,
+.o_settings_container,
+.o_setting_box,
+.o_settings_tab,
+.o_settings_search,
+.o_settings,
+.o_form_sheet_bg,
+.o_setting_right_pane,
+.o_setting_left_pane,
+.o_setting_panel,
+.o_setting_sections,
+.o_setting_section,
+.o_setting_box_container {
+    background-color: var(--ui-body-bg) !important;
+    color: var(--ui-text-color) !important;
+}
+
+/* generic left menus / submenus */
+.o_sub_menu,
+.o_inner_group,
+.o_notebook,
+.o_notebook_headers,
+.o_notebook .nav,
+.o_notebook .nav-tabs,
+.o_search_panel,
+.o_search_panel_section {
+    background-color: var(--ui-body-bg) !important;
+    color: var(--ui-text-color) !important;
+}
+
+/* BUTTONS */
+.btn-primary,
+.btn-fill-primary,
+.btn-odoo,
+.btn-success,
+.btn[data-hotkey] {
+    background-color: var(--ui-button-bg) !important;
+    border-color: var(--ui-button-bg) !important;
+    color: var(--ui-button-text) !important;
+    border-radius: var(--ui-border-radius) !important;
+}
+
+.btn-primary:hover,
+.btn-fill-primary:hover,
+.btn-odoo:hover,
+.btn-success:hover {
+    filter: brightness(0.95);
+}
+
+.btn-secondary,
+.btn-light,
+.btn-outline-secondary {
+    border-radius: var(--ui-border-radius) !important;
+}
+
+/* LINKS */
+a,
+.btn-link,
+.o_form_uri,
+.o_field_widget a,
+.o_control_panel a,
+.o-badge,
+.o_kanban_record a {
+    color: var(--ui-link-color) !important;
+}
+
+/* INPUTS */
+.form-control,
+.o_input,
+select,
+textarea,
+.o_searchview_input,
+.o_field_widget input,
+.o_field_widget textarea,
+.o_field_widget select {
+    border-radius: var(--ui-border-radius) !important;
+    color: var(--ui-text-color) !important;
+}
+
+/* CARDS / PANELS / FORMS / MODALS */
+.card,
+.modal-content,
+.dropdown-menu,
+.o_form_sheet,
+.o_kanban_record,
+.o_renderer,
+.o_list_renderer,
+.o_ActivityView,
+.o-mail-Discuss-content,
+.o_form_statusbar,
+.o_form_sheet_bg,
+.o_control_panel,
+.o_search_panel,
+.o_notebook,
+.o_popover {
+    border-radius: var(--ui-border-radius) !important;
+}
+
+/* TABLES */
+.table thead th,
+.o_list_renderer th,
+.o_list_table thead th {
+    background-color: color-mix(in srgb, var(--ui-brand-primary) 10%, white) !important;
+    color: var(--ui-text-color) !important;
+}
+
+.table,
+.table td,
+.table th,
+.o_list_table,
+.o_list_table td,
+.o_list_table th {
+    border-color: rgba(0, 0, 0, 0.08) !important;
+}
+
+/* NOTEBOOK / TABS */
+.nav-tabs .nav-link,
+.nav-pills .nav-link,
+.o_notebook .nav-link {
+    color: var(--ui-text-color) !important;
+}
+
+.nav-tabs .nav-link.active,
+.nav-pills .nav-link.active,
+.o_notebook .nav-link.active {
+    background-color: var(--ui-brand-primary) !important;
+    color: #fff !important;
+    border-radius: var(--ui-border-radius) !important;
+    border-color: var(--ui-brand-primary) !important;
+}
+
+/* CONTROL PANEL / SEARCH */
+.o_control_panel,
+.o_cp_top,
+.o_cp_bottom,
+.o_searchview,
+.o_searchview .o_searchview_input_container,
+.o_searchview .o_searchview_facet {
+    background-color: var(--ui-body-bg) !important;
+    color: var(--ui-text-color) !important;
+    border-radius: var(--ui-border-radius) !important;
+}
+
+/* KANBAN */
+.o_kanban_renderer .o_kanban_record,
+.o_kanban_record {
+    box-shadow: 0 1px 6px rgba(0, 0, 0, 0.04);
+    background-color: #fff !important;
+}
+
+/* FORM */
+.o_form_view .o_form_sheet_bg {
+    background-color: var(--ui-body-bg) !important;
+}
+
+/* STATUSBAR / PILLS / BADGES */
+.badge,
+.o_badge,
+.o_statusbar_status .btn,
+.o_statusbar_buttons .btn {
+    border-radius: var(--ui-border-radius) !important;
+}
+
+.badge.bg-primary,
+.o_badge.bg-primary {
+    background-color: var(--ui-brand-primary) !important;
+    color: #fff !important;
+}
+
+/* DROPDOWNS */
+.o-dropdown--menu,
+.o-dropdown.dropdown-menu,
+.dropdown-menu {
+    border-radius: var(--ui-border-radius) !important;
+    background-color: #fff !important;
+}
+
+.dropdown-item:hover,
+.o-dropdown--menu .dropdown-item:hover {
+    background-color: color-mix(in srgb, var(--ui-brand-primary) 12%, white) !important;
+}
+
+/* SIDEBAR TEXT */
+label,
+span,
+div,
+p,
+td,
+th,
+small,
+strong,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+    color: inherit;
+}
+
+/* PREVIEW BLOCK */
+.ui-branding-preview {
+    border: 1px solid #d1d5db;
+    border-radius: var(--ui-border-radius);
+    overflow: hidden;
+    background: #fff;
+    margin-top: 12px;
+    box-shadow: 0 3px 12px rgba(0, 0, 0, 0.08);
+    font-family: var(--ui-font-family);
+}
+
+.ui-preview-navbar {
+    background: var(--ui-navbar-bg);
+    color: var(--ui-menu-text);
+    padding: 12px 16px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.ui-preview-brand {
+    font-weight: 700;
+}
+
+.ui-preview-layout {
+    display: flex;
+    min-height: 280px;
+}
+
+.ui-preview-sidebar {
+    width: 220px;
+    background: var(--ui-menu-bg);
+    color: var(--ui-menu-text);
+    padding: 12px;
+}
+
+.ui-preview-menu-item {
+    padding: 10px 12px;
+    border-radius: var(--ui-border-radius);
+    margin-bottom: 8px;
+    background: transparent;
+    color: var(--ui-menu-text);
+}
+
+.ui-preview-menu-item.active {
+    background: var(--ui-brand-primary);
+    color: #fff;
+}
+
+.ui-preview-content {
+    flex: 1;
+    background: var(--ui-body-bg);
+    color: var(--ui-text-color);
+    padding: 18px;
+}
+
+.ui-preview-card {
+    background: #fff;
+    color: var(--ui-text-color);
+    border-radius: var(--ui-border-radius);
+    padding: 16px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.06);
+}
+
+.ui-preview-card a {
+    color: var(--ui-link-color) !important;
+}
+
+.ui-preview-card .btn-primary {
+    background: var(--ui-button-bg) !important;
+    border-color: var(--ui-button-bg) !important;
+    color: var(--ui-button-text) !important;
+}
+
+/* HTML5 COLOR PICKER WRAPPER */
+.ui-branding-color-wrapper {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    width: 100%;
+}
+
+.ui-branding-color-picker {
+    width: 42px;
+    height: 38px;
+    min-width: 42px;
+    padding: 2px;
+    border: 1px solid #cbd5e1;
+    border-radius: 8px;
+    background: #fff;
+    cursor: pointer;
+}
+
+.ui-branding-color-preview {
+    width: 24px;
+    height: 24px;
+    min-width: 24px;
+    border-radius: 6px;
+    border: 1px solid rgba(0, 0, 0, 0.18);
+    display: inline-block;
+}
+
+.ui-branding-hex-input {
+    flex: 1 1 auto;
+}
