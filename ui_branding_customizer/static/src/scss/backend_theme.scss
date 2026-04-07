@@ -410,3 +410,76 @@ h6 {
 .ui-branding-hex-input {
     flex: 1 1 auto;
 }
+
+/* ===== FORCE TOP SETTINGS / MODULE NAVIGATION BAR ===== */
+
+.o_main_navbar .o_menu_sections,
+.o_menu_sections.d-flex,
+.o_menu_sections {
+    background-color: var(--ui-navbar-bg) !important;
+    color: var(--ui-menu-text) !important;
+}
+
+.o_main_navbar .o_menu_sections > a,
+.o_main_navbar .o_menu_sections > button,
+.o_menu_sections > a,
+.o_menu_sections > button,
+.o_menu_sections .o_nav_entry,
+.o_menu_sections .dropdown-toggle,
+.o_menu_sections .o-dropdown-item,
+.o_menu_sections span {
+    background-color: transparent !important;
+    color: var(--ui-menu-text) !important;
+    border: none !important;
+    box-shadow: none !important;
+}
+
+.o_main_navbar .o_menu_sections > a:hover,
+.o_main_navbar .o_menu_sections > button:hover,
+.o_menu_sections > a:hover,
+.o_menu_sections > button:hover,
+.o_menu_sections .o_nav_entry:hover,
+.o_menu_sections .dropdown-toggle:hover,
+.o_menu_sections .o-dropdown-item:hover,
+.o_menu_sections .show > .dropdown-toggle,
+.o_menu_sections .active,
+.o_menu_sections .o_nav_entry.active {
+    background-color: color-mix(in srgb, var(--ui-brand-primary) 85%, black 0%) !important;
+    color: #fff !important;
+}
+
+.o_menu_sections .dropdown-toggle::after {
+    color: var(--ui-menu-text) !important;
+}
+
+/* make section area inherit correct bg */
+.o_main_navbar > div,
+.o_main_navbar > nav,
+.o_main_navbar .container-fluid,
+.o_main_navbar .o_menu_sections,
+.o_main_navbar .o_menu_systray {
+    background-color: var(--ui-navbar-bg) !important;
+}
+
+/* search on top */
+.o_main_navbar .o_searchview,
+.o_main_navbar .o_searchview_input_container,
+.o_main_navbar .o_searchview input {
+    background-color: #ffffff !important;
+    color: #111827 !important;
+    border-radius: var(--ui-border-radius) !important;
+}
+
+/* systray right side */
+.o_main_navbar .o_menu_systray,
+.o_main_navbar .o_menu_systray *,
+.o_main_navbar .dropdown,
+.o_main_navbar .dropdown-toggle {
+    color: var(--ui-menu-text) !important;
+}
+
+/* app name / brand */
+.o_main_navbar .navbar-brand,
+.o_main_navbar .o_menu_brand {
+    color: var(--ui-menu-text) !important;
+}

@@ -30,6 +30,7 @@ const COLOR_FALLBACKS = {
 
 let lastLoadedConfig = null;
 let refreshThemeTimeout = null;
+let previewModeActive = false;
 
 function setCSSVariable(name, value, fallback = "") {
     document.documentElement.style.setProperty(name, value || fallback);
@@ -74,16 +75,22 @@ async function loadSavedTheme() {
     try {
         const config = await fetchSavedTheme();
         lastLoadedConfig = config;
-        applyTheme(config);
+        if (!previewModeActive) {
+            applyTheme(config);
+        }
     } catch (error) {
         console.warn("UI Branding Customizer: could not load config", error);
     }
 }
 
 function reapplyLastTheme() {
-    if (lastLoadedConfig) {
+    if (lastLoadedConfig && !previewModeActive) {
         applyTheme(lastLoadedConfig);
     }
+}
+
+function isBrandingSettingsScreen() {
+    return Boolean(document.querySelector('[name="ui_primary_color"]'));
 }
 
 function scheduleThemeRefresh() {
@@ -95,9 +102,13 @@ function scheduleThemeRefresh() {
         try {
             const config = await fetchSavedTheme();
             lastLoadedConfig = config;
-            applyTheme(config);
+
+            if (!isBrandingSettingsScreen()) {
+                previewModeActive = false;
+                applyTheme(config);
+            }
+
             convertColorInputs();
-            updatePreviewFromSettings();
         } catch (error) {
             console.warn("UI Branding Customizer: refresh failed", error);
         }
@@ -116,8 +127,8 @@ function getFieldValueByName(name) {
     return nested ? nested.value || "" : "";
 }
 
-function updatePreviewFromSettings() {
-    const config = {
+function buildPreviewConfig() {
+    return {
         primary_color: getFieldValueByName("ui_primary_color"),
         secondary_color: getFieldValueByName("ui_secondary_color"),
         navbar_bg: getFieldValueByName("ui_navbar_bg"),
@@ -132,7 +143,14 @@ function updatePreviewFromSettings() {
         font_family: getFieldValueByName("ui_font_family") || "Inter, sans-serif",
         font_size: parseInt(getFieldValueByName("ui_font_size") || "14", 10),
     };
-    applyTheme(config);
+}
+
+function updatePreviewFromSettings() {
+    if (!isBrandingSettingsScreen()) {
+        return;
+    }
+    previewModeActive = true;
+    applyTheme(buildPreviewConfig());
 }
 
 function findRealTextInput(fieldName) {
@@ -251,9 +269,7 @@ function bindLivePreview() {
             return;
         }
 
-        if (
-            [...COLOR_FIELDS, "ui_border_radius", "ui_font_family", "ui_font_size"].includes(target.name)
-        ) {
+        if ([...COLOR_FIELDS, "ui_border_radius", "ui_font_family", "ui_font_size"].includes(target.name)) {
             updatePreviewFromSettings();
         }
     });
@@ -264,9 +280,7 @@ function bindLivePreview() {
             return;
         }
 
-        if (
-            [...COLOR_FIELDS, "ui_border_radius", "ui_font_family", "ui_font_size"].includes(target.name)
-        ) {
+        if ([...COLOR_FIELDS, "ui_border_radius", "ui_font_family", "ui_font_size"].includes(target.name)) {
             updatePreviewFromSettings();
         }
     });
@@ -282,7 +296,13 @@ function observeGlobalRerender() {
 
     const observer = new MutationObserver(() => {
         convertColorInputs();
-        reapplyLastTheme();
+
+        if (isBrandingSettingsScreen()) {
+            updatePreviewFromSettings();
+        } else {
+            previewModeActive = false;
+            reapplyLastTheme();
+        }
     });
 
     observer.observe(document.body, {
@@ -307,16 +327,38 @@ function bindNavigationRefresh() {
     });
 }
 
+function bindSaveDetection() {
+    if (window.__uiBrandingSaveBound) {
+        return;
+    }
+    window.__uiBrandingSaveBound = true;
+
+    document.addEventListener("click", () => {
+        setTimeout(async () => {
+            if (!isBrandingSettingsScreen()) {
+                previewModeActive = false;
+                await loadSavedTheme();
+            }
+        }, 1200);
+    });
+}
+
 function initThemeCustomizer() {
     loadSavedTheme();
     bindLivePreview();
     observeGlobalRerender();
     bindNavigationRefresh();
+    bindSaveDetection();
 
     const delayedInit = () => {
         convertColorInputs();
-        reapplyLastTheme();
-        updatePreviewFromSettings();
+
+        if (isBrandingSettingsScreen()) {
+            updatePreviewFromSettings();
+        } else {
+            previewModeActive = false;
+            reapplyLastTheme();
+        }
     };
 
     setTimeout(delayedInit, 400);
@@ -324,6 +366,7 @@ function initThemeCustomizer() {
     setTimeout(delayedInit, 2000);
     setTimeout(delayedInit, 3500);
 }
+
 if (document.readyState === "loading") {
     document.addEventListener("DOMContentLoaded", initThemeCustomizer);
 } else {
