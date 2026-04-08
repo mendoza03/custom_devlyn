@@ -1,0 +1,134 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="view_res_config_settings_ui_branding_customizer" model="ir.ui.view">
+        <field name="name">res.config.settings.view.form.ui.branding.customizer</field>
+        <field name="model">res.config.settings</field>
+        <field name="inherit_id" ref="base_setup.res_config_settings_view_form" />
+        <field name="arch" type="xml">
+            <xpath expr="//form" position="inside">
+                <app string="UI Branding" name="ui_branding_customizer_app">
+                    <block title="UI Branding Customizer">
+                        <setting string="Primary Color" help="Main theme color">
+                            <field name="ui_primary_color" class="ui_branding_live_input" />
+                        </setting>
+
+                        <setting string="Secondary Color" help="Secondary theme color">
+                            <field name="ui_secondary_color" class="ui_branding_live_input" />
+                        </setting>
+
+                        <setting string="Navbar Background" help="Top navigation bar color">
+                            <field name="ui_navbar_bg" class="ui_branding_live_input" />
+                        </setting>
+
+                        <setting string="Sidebar/Menu Background" help="Left menu background color">
+                            <field name="ui_menu_bg" class="ui_branding_live_input" />
+                        </setting>
+
+                        <setting string="Sidebar/Menu Text" help="Left menu text color">
+                            <field name="ui_menu_text" class="ui_branding_live_input" />
+                        </setting>
+
+                        <setting string="Body Background" help="General background color">
+                            <field name="ui_body_bg" class="ui_branding_live_input" />
+                        </setting>
+
+                        <setting string="Main Text Color" help="Main content text color">
+                            <field name="ui_text_color" class="ui_branding_live_input" />
+                        </setting>
+
+                        <setting string="Link Color" help="Links and actionable text">
+                            <field name="ui_link_color" class="ui_branding_live_input" />
+                        </setting>
+
+                        <setting string="Button Background" help="Primary buttons background">
+                            <field name="ui_button_bg" class="ui_branding_live_input" />
+                        </setting>
+
+                        <setting string="Button Text" help="Primary buttons text">
+                            <field name="ui_button_text" class="ui_branding_live_input" />
+                        </setting>
+
+                        <setting string="Border Radius" help="Rounded corners in pixels">
+                            <field name="ui_border_radius" class="ui_branding_live_input" />
+                        </setting>
+
+                        <setting string="Font Family" help="Main font family for backend">
+                            <field name="ui_font_family" class="ui_branding_live_input" />
+                        </setting>
+
+                        <setting string="Base Font Size" help="Base font size in pixels">
+                            <field name="ui_font_size" class="ui_branding_live_input" />
+                        </setting>
+
+                        <div class="mt16">
+                            <h3>Live Preview</h3>
+                            <div id="ui_branding_preview" class="ui-branding-preview">
+                                <div class="ui-preview-navbar">
+                                    <span class="ui-preview-brand">My ERP Branding</span>
+                                    <span class="ui-preview-navbar-actions">Dashboard | Sales |
+                                        Inventory</span>
+                                </div>
+
+                                <div class="ui-preview-layout">
+                                    <div class="ui-preview-sidebar">
+                                        <div class="ui-preview-menu-item active">Home</div>
+                                        <div class="ui-preview-menu-item">Contacts</div>
+                                        <div class="ui-preview-menu-item">Sales</div>
+                                        <div class="ui-preview-menu-item">Accounting</div>
+                                        <div class="ui-preview-menu-item">Settings</div>
+                                    </div>
+
+                                    <div class="ui-preview-content">
+                                        <div class="ui-preview-card">
+                                            <h4>Generic Preview Title</h4>
+                                            <p>
+                                                This is a sample text so you can preview colors,
+                                                font, buttons and general interface style.
+                                            </p>
+                                            <a href="#">Example link</a>
+                                            <div class="mt-2">
+                                                <button type="button" class="btn btn-primary">Primary
+                                                    Button</button>
+                                                <button type="button" class="btn btn-secondary ms-2">Secondary
+                                                    Button</button>
+                                            </div>
+                                        </div>
+
+                                        <div class="ui-preview-card mt-3">
+                                            <table class="table table-sm">
+                                                <thead>
+                                                    <tr>
+                                                        <th>Name</th>
+                                                        <th>Status</th>
+                                                        <th>Total</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    <tr>
+                                                        <td>Order SO001</td>
+                                                        <td>
+                                                            <span class="badge bg-success">Done</span>
+                                                        </td>
+                                                        <td>$120.00</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>Order SO002</td>
+                                                        <td>
+                                                            <span class="badge bg-warning text-dark">
+                                                                Draft</span>
+                                                        </td>
+                                                        <td>$80.00</td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </block>
+                </app>
+            </xpath>
+        </field>
+    </record>
+</odoo>

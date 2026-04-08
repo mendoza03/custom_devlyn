@@ -16,7 +16,7 @@
         "data/helpdesk_section_data.xml",
         "data/helpdesk_category_data.xml",
         "data/helpdesk_subcategory_data.xml",
-
+        "views/login_templates.xml",
     ],
     
     "assets": {

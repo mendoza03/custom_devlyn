@@ -1,0 +1,300 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <template id="login_custom" name="devlyn Login" inherit_id="web.login">
+        <xpath expr="//t[@t-call='web.login_layout']" position="replace">
+            <t t-call="web.login_layout">
+                <div class="cx-login">
+                    <style>
+                        .cx-login {
+                            min-height: 100vh;
+                            display: flex;
+                            background: #f7f7f7;
+                        }
+
+                        .cx-left,
+                        .cx-right {
+                            width: 50%;
+                            min-height: 100vh;
+                        }
+
+                        .cx-left {
+                            position: relative;
+                            width: 50%;
+                            min-height: 100vh;
+                            background-image: url('/helpdesk_custom_datos/static/src/img/devlyn_login_bg.png');
+                            background-size: cover;
+                            background-position: center;
+                            background-repeat: no-repeat;
+
+                            display: flex;
+                            align-items: flex-start;
+                            justify-content: center;
+                            padding-top: 90px;
+                        }
+
+                        .cx-left::before {
+                            content: "";
+                            position: absolute;
+                            inset: 0;
+                            background: rgba(255,255,255,0.08);
+                        }
+
+                        .cx-devlyn-title {
+                            position: relative;
+                            z-index: 2;
+                            font-size: 110px;
+                            font-weight: 800;
+                            letter-spacing: 8px;
+                            color: #3f3f3f;
+                            text-align: center;
+                            line-height: 1;
+                        }
+
+                        .cx-brand {
+                            position: relative;
+                            z-index: 1;
+                            max-width: 320px;
+                            width: 100%;
+                            height: auto;
+                            object-fit: contain;
+                        }
+
+                        .cx-right {
+                            display: flex;
+                            align-items: center;
+                            justify-content: center;
+                            padding: 40px 32px;
+                            position: relative;
+                            overflow: hidden;
+                            background:
+                                radial-gradient(circle at 22% 14%, rgba(46, 103, 255, 0.78) 0%, rgba(46, 103, 255, 0) 30%),
+                                radial-gradient(circle at 58% 10%, rgba(86, 198, 255, 0.62) 0%, rgba(86, 198, 255, 0) 24%),
+                                radial-gradient(circle at 76% 36%, rgba(12, 98, 255, 0.74) 0%, rgba(12, 98, 255, 0) 28%),
+                                radial-gradient(circle at 80% 78%, rgba(20, 33, 126, 0.88) 0%, rgba(20, 33, 126, 0) 34%),
+                                linear-gradient(135deg, #07133f 0%, #123d9f 50%, #0b6df5 75%, #050d31 100%);
+                        }
+
+                        .cx-card {
+                            width: 100%;
+                            max-width: 460px;
+
+                            background: rgba(255,255,255,0.92);
+                            padding: 40px;
+                            border-radius: 18px;
+
+                            backdrop-filter: blur(6px);
+                            -webkit-backdrop-filter: blur(6px);
+
+                            box-shadow:
+                                0 25px 60px rgba(0,0,0,0.18),
+                                0 8px 20px rgba(0,0,0,0.08);
+                        }
+
+                        .cx-card-head {
+                            margin-bottom: 28px;
+                        }
+
+                        .cx-card-head h2 {
+                            margin: 0 0 8px 0;
+                            font-size: 34px;
+                            font-weight: 700;
+                            color: #2f2f2f;
+                        }
+
+                        .cx-card-head p {
+                            margin: 0;
+                            font-size: 16px;
+                            color: #7a7a7a;
+                        }
+
+                        .cx-card label.form-label,
+                        .cx-card .col-form-label {
+                            display: block;
+                            margin-top: 14px;
+                            margin-bottom: 8px;
+                            font-size: 14px;
+                            font-weight: 600;
+                            color: #444444;
+                        }
+
+                        .cx-card .form-control {
+                            width: 100%;
+                            min-height: 48px;
+                            border: 1px solid #d7d7d7;
+                            border-radius: 10px;
+                            background: #fff;
+                            box-shadow: none;
+                            font-size: 15px;
+                            padding: 12px 14px;
+                        }
+
+                        .cx-card .form-control:focus {
+                            border-color: #999;
+                            box-shadow: none;
+                        }
+
+                        .cx-card .input-group .btn {
+                            border-radius: 10px;
+                        }
+
+                        .cx-help {
+                            margin-top: 14px;
+                            margin-bottom: 18px;
+                            text-align: right;
+                        }
+
+                        .cx-help a {
+                            color: #666666;
+                            font-size: 14px;
+                            text-decoration: none;
+                        }
+
+                        .cx-help a:hover {
+                            text-decoration: underline;
+                            color: #333333;
+                        }
+
+                        .cx-btn {
+                            width: 100%;
+                            min-height: 50px;
+                            border: none;
+                            border-radius: 10px;
+                            background: #5f5f5f;
+                            color: #ffffff;
+                            font-size: 16px;
+                            font-weight: 600;
+                            transition: 0.2s ease;
+                        }
+
+                        .cx-btn:hover,
+                        .cx-btn:focus,
+                        .cx-btn:active {
+                            background: #4f4f4f;
+                            color: #ffffff;
+                            box-shadow: none;
+                        }
+
+                        .cx-card .alert {
+                            margin-top: 14px;
+                            border-radius: 10px;
+                            font-size: 14px;
+                        }
+
+                        @media (max-width: 992px) {
+                            .cx-login {
+                                flex-direction: column;
+                            }
+
+                            .cx-left,
+                            .cx-right {
+                                width: 100%;
+                                min-height: auto;
+                            }
+
+                            .cx-left {
+                                min-height: 260px;
+                                padding: 32px 20px;
+                                align-items: center;
+                            }
+
+                            .cx-devlyn-title {
+                                font-size: 54px;
+                                letter-spacing: 4px;
+                            }
+
+                            .cx-brand {
+                                max-width: 220px;
+                            }
+
+                            .cx-right {
+                                padding: 32px 20px 48px 20px;
+                            }
+
+                            .cx-card-head h2 {
+                                font-size: 28px;
+                            }
+                        }
+                    </style>
+
+                    <div class="cx-left">
+                        <div class="cx-devlyn-title">
+                            DEVLYN
+                        </div>
+                    </div>
+
+                    <div class="cx-right">
+                        <div class="cx-card">
+                            <div class="cx-card-head">
+                                <h2>Inicia sesión</h2>
+                                <p>Bienvenido</p>
+                            </div>
+
+                            <form class="oe_login_form"
+                                  role="form"
+                                  t-attf-action="/web/login"
+                                  method="post"
+                                  onsubmit="this.action = '/web/login' + location.hash">
+
+                                <input type="hidden" name="csrf_token" t-att-value="request.csrf_token()"/>
+
+                                <div class="mb-3" t-if="databases and len(databases) &gt; 1">
+                                    <label for="db" class="col-form-label">Database</label>
+                                    <div class="input-group">
+                                        <input type="text"
+                                               name="db"
+                                               t-att-value="request.db"
+                                               id="db"
+                                               class="form-control"
+                                               required="required"
+                                               readonly="readonly"/>
+                                        <a role="button" href="/web/database/selector" class="btn btn-secondary">
+                                            Select
+                                            <i class="fa fa-database" role="img" aria-label="Database" title="Database"></i>
+                                        </a>
+                                    </div>
+                                </div>
+
+                                <label for="login" class="form-label">Correo *</label>
+                                <input id="login"
+                                       type="text"
+                                       name="login"
+                                       placeholder="juan.perez@ejemplo.com"
+                                       t-att-value="login"
+                                       class="form-control"
+                                       required="required"
+                                       autocapitalize="off"
+                                       autocomplete="username"/>
+
+                                <label for="password" class="form-label">Contraseña *</label>
+                                <input id="password"
+                                       type="password"
+                                       name="password"
+                                       class="form-control"
+                                       required="required"
+                                       autocomplete="current-password"
+                                       maxlength="4096"/>
+
+                                <p class="alert alert-danger" t-if="error" role="alert">
+                                    <t t-esc="error"/>
+                                </p>
+
+                                <p class="alert alert-success" t-if="message" role="status">
+                                    <t t-esc="message"/>
+                                </p>
+
+                                <div class="cx-help">
+                                    <a href="/web/reset_password">¿Olvidaste tu contraseña?</a>
+                                </div>
+
+                                <button type="submit" class="cx-btn">Iniciar Sesión</button>
+
+                                <input type="hidden" name="type" value="password"/>
+                                <input type="hidden" name="redirect" t-att-value="redirect"/>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </t>
+        </xpath>
+    </template>
+</odoo>
