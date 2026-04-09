@@ -14,7 +14,7 @@
     --ui-font-size: 14px;
 }
 
-/* GLOBAL */
+
 html,
 body,
 .o_web_client,
@@ -482,4 +482,116 @@ h6 {
 .o_main_navbar .navbar-brand,
 .o_main_navbar .o_menu_brand {
     color: var(--ui-menu-text) !important;
+}
+
+
+
+.o_home_menu,
+.o_apps_menu,
+.o_web_client .o_home_menu,
+.o_web_client .o_apps_menu {
+    position: relative !important;
+    overflow: hidden;
+    isolation: isolate;
+    background:
+        linear-gradient(
+            135deg,
+            #041b4d 0%,
+            #123f92 35%,
+            #1bbce3 100%
+        ) !important;
+}
+
+.o_home_menu::before,
+.o_apps_menu::before,
+.o_web_client .o_home_menu::before,
+.o_web_client .o_apps_menu::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    z-index: 0;
+    pointer-events: none;
+    background:
+        radial-gradient(
+            circle at 50% 85%,
+            rgba(0, 188, 212, 0.18) 0%,
+            rgba(0, 188, 212, 0.10) 18%,
+            rgba(0, 188, 212, 0.04) 30%,
+            rgba(0, 0, 0, 0) 48%
+        );
+}
+
+.o_home_menu::after,
+.o_apps_menu::after,
+.o_web_client .o_home_menu::after,
+.o_web_client .o_apps_menu::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    z-index: 1;
+    pointer-events: none;
+    background-image: url("/ui_branding_customizer/static/src/img/devlyn_logo_dark.png");
+    background-repeat: no-repeat;
+    background-position: center 62%;
+    background-size: 70% auto;
+    opacity: 0.20;
+}
+
+.o_home_menu > *,
+.o_apps_menu > *,
+.o_web_client .o_home_menu > *,
+.o_web_client .o_apps_menu > * {
+    position: relative;
+    z-index: 2;
+}
+
+.o_home_menu .o_app .o_caption,
+.o_apps_menu .o_app .o_caption {
+    color: #ffffff !important;
+    text-shadow: 0 1px 4px rgba(0, 0, 0, 0.45);
+}
+
+.o_home_menu .o_searchview,
+.o_home_menu .o_searchview_input_container,
+.o_home_menu .o_searchview input,
+.o_apps_menu .o_searchview,
+.o_apps_menu .o_searchview_input_container,
+.o_apps_menu .o_searchview input {
+    border-radius: var(--ui-border-radius) !important;
+}
+
+
+.o_action_manager,
+.o_main_content,
+.o_content {
+    position: relative;
+    isolation: isolate;
+}
+
+
+.o_action_manager::after,
+.o_main_content::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    z-index: 0;
+    background-image: url("/ui_branding_customizer/static/src/img/devlyn_logo_white.png");
+    background-repeat: no-repeat;
+    background-position: center center;
+    background-size: 45% auto;
+    opacity: 0.045;
+}
+
+.o_action_manager > *,
+.o_main_content > *,
+.o_content > * {
+    position: relative;
+    z-index: 1;
+}
+.o_home_menu .o_action_manager::after,
+.o_home_menu .o_main_content::after,
+.o_apps_menu .o_action_manager::after,
+.o_apps_menu .o_main_content::after {
+    display: none !important;
 }
