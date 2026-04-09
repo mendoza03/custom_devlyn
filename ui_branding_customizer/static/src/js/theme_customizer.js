@@ -13,6 +13,9 @@ const COLOR_FIELDS = [
     "ui_link_color",
     "ui_button_bg",
     "ui_button_text",
+    "ui_app_menu_bg_color_1",
+    "ui_app_menu_bg_color_2",
+    "ui_app_menu_bg_color_3",
 ];
 
 const COLOR_FALLBACKS = {
@@ -26,6 +29,9 @@ const COLOR_FALLBACKS = {
     ui_link_color: "#2563EB",
     ui_button_bg: "#5B21B6",
     ui_button_text: "#FFFFFF",
+    ui_app_menu_bg_color_1: "#041B4D",
+    ui_app_menu_bg_color_2: "#123F92",
+    ui_app_menu_bg_color_3: "#19BFE6",
 };
 
 let lastLoadedConfig = null;
@@ -47,6 +53,11 @@ function normalizeColor(value, fallback = "#5B21B6") {
     return fallback;
 }
 
+function normalizeInt(value, fallback) {
+    const parsed = parseInt(value, 10);
+    return Number.isFinite(parsed) ? parsed : fallback;
+}
+
 function applyTheme(config) {
     if (!config) {
         return;
@@ -62,9 +73,20 @@ function applyTheme(config) {
     setCSSVariable("--ui-link-color", normalizeColor(config.link_color, "#2563EB"));
     setCSSVariable("--ui-button-bg", normalizeColor(config.button_bg, "#5B21B6"));
     setCSSVariable("--ui-button-text", normalizeColor(config.button_text, "#FFFFFF"));
-    setCSSVariable("--ui-border-radius", `${config.border_radius || 10}px`);
+    setCSSVariable("--ui-border-radius", `${normalizeInt(config.border_radius, 10)}px`);
     setCSSVariable("--ui-font-family", config.font_family || "Inter, sans-serif");
-    setCSSVariable("--ui-font-size", `${config.font_size || 14}px`);
+    setCSSVariable("--ui-font-size", `${normalizeInt(config.font_size, 14)}px`);
+
+    setCSSVariable("--ui-app-menu-style", config.app_menu_style || "gradient");
+    setCSSVariable("--ui-app-menu-bg-1", normalizeColor(config.app_menu_bg_color_1, "#041B4D"));
+    setCSSVariable("--ui-app-menu-bg-2", normalizeColor(config.app_menu_bg_color_2, "#123F92"));
+    setCSSVariable("--ui-app-menu-bg-3", normalizeColor(config.app_menu_bg_color_3, "#19BFE6"));
+    setCSSVariable("--ui-app-menu-angle", `${normalizeInt(config.app_menu_gradient_angle, 135)}deg`);
+    setCSSVariable("--ui-app-menu-overlay-opacity", `${Math.max(0, Math.min(100, normalizeInt(config.app_menu_overlay_opacity, 18))) / 100}`);
+    setCSSVariable("--ui-app-menu-logo-opacity", `${Math.max(0, Math.min(100, normalizeInt(config.app_menu_logo_opacity, 18))) / 100}`);
+    setCSSVariable("--ui-app-menu-shadow", `${normalizeInt(config.app_menu_shadow, 18)}px`);
+    setCSSVariable("--ui-internal-logo-width", `${normalizeInt(config.internal_logo_width, 220)}px`);
+    setCSSVariable("--ui-internal-logo-opacity", `${Math.max(0, Math.min(100, normalizeInt(config.internal_logo_opacity, 12))) / 100}`);
 }
 
 async function fetchSavedTheme() {
@@ -139,9 +161,20 @@ function buildPreviewConfig() {
         link_color: getFieldValueByName("ui_link_color"),
         button_bg: getFieldValueByName("ui_button_bg"),
         button_text: getFieldValueByName("ui_button_text"),
-        border_radius: parseInt(getFieldValueByName("ui_border_radius") || "10", 10),
+        border_radius: normalizeInt(getFieldValueByName("ui_border_radius"), 10),
         font_family: getFieldValueByName("ui_font_family") || "Inter, sans-serif",
-        font_size: parseInt(getFieldValueByName("ui_font_size") || "14", 10),
+        font_size: normalizeInt(getFieldValueByName("ui_font_size"), 14),
+
+        app_menu_style: getFieldValueByName("ui_app_menu_style") || "gradient",
+        app_menu_bg_color_1: getFieldValueByName("ui_app_menu_bg_color_1"),
+        app_menu_bg_color_2: getFieldValueByName("ui_app_menu_bg_color_2"),
+        app_menu_bg_color_3: getFieldValueByName("ui_app_menu_bg_color_3"),
+        app_menu_gradient_angle: normalizeInt(getFieldValueByName("ui_app_menu_gradient_angle"), 135),
+        app_menu_overlay_opacity: normalizeInt(getFieldValueByName("ui_app_menu_overlay_opacity"), 18),
+        app_menu_logo_opacity: normalizeInt(getFieldValueByName("ui_app_menu_logo_opacity"), 18),
+        app_menu_shadow: normalizeInt(getFieldValueByName("ui_app_menu_shadow"), 18),
+        internal_logo_width: normalizeInt(getFieldValueByName("ui_internal_logo_width"), 220),
+        internal_logo_opacity: normalizeInt(getFieldValueByName("ui_internal_logo_opacity"), 12),
     };
 }
 
@@ -269,7 +302,21 @@ function bindLivePreview() {
             return;
         }
 
-        if ([...COLOR_FIELDS, "ui_border_radius", "ui_font_family", "ui_font_size"].includes(target.name)) {
+        if (
+            [
+                ...COLOR_FIELDS,
+                "ui_border_radius",
+                "ui_font_family",
+                "ui_font_size",
+                "ui_app_menu_style",
+                "ui_app_menu_gradient_angle",
+                "ui_app_menu_overlay_opacity",
+                "ui_app_menu_logo_opacity",
+                "ui_app_menu_shadow",
+                "ui_internal_logo_width",
+                "ui_internal_logo_opacity",
+            ].includes(target.name)
+        ) {
             updatePreviewFromSettings();
         }
     });
@@ -280,7 +327,21 @@ function bindLivePreview() {
             return;
         }
 
-        if ([...COLOR_FIELDS, "ui_border_radius", "ui_font_family", "ui_font_size"].includes(target.name)) {
+        if (
+            [
+                ...COLOR_FIELDS,
+                "ui_border_radius",
+                "ui_font_family",
+                "ui_font_size",
+                "ui_app_menu_style",
+                "ui_app_menu_gradient_angle",
+                "ui_app_menu_overlay_opacity",
+                "ui_app_menu_logo_opacity",
+                "ui_app_menu_shadow",
+                "ui_internal_logo_width",
+                "ui_internal_logo_opacity",
+            ].includes(target.name)
+        ) {
             updatePreviewFromSettings();
         }
     });
@@ -296,6 +357,7 @@ function observeGlobalRerender() {
 
     const observer = new MutationObserver(() => {
         convertColorInputs();
+        toggleHomeMenuClass();
 
         if (isBrandingSettingsScreen()) {
             updatePreviewFromSettings();
@@ -349,6 +411,7 @@ function initThemeCustomizer() {
     observeGlobalRerender();
     bindNavigationRefresh();
     bindSaveDetection();
+    toggleHomeMenuClass();
 
     const delayedInit = () => {
         convertColorInputs();
@@ -365,6 +428,16 @@ function initThemeCustomizer() {
     setTimeout(delayedInit, 1000);
     setTimeout(delayedInit, 2000);
     setTimeout(delayedInit, 3500);
+}
+
+function toggleHomeMenuClass() {
+    const body = document.body;
+    if (!body) {
+        return;
+    }
+
+    const jazzyHomeVisible = Boolean(document.querySelector(".app_components"));
+    body.classList.toggle("ui-branding-home-menu-visible", jazzyHomeVisible);
 }
 
 if (document.readyState === "loading") {

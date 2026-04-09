@@ -12,8 +12,19 @@
     --ui-border-radius: 10px;
     --ui-font-family: Inter, sans-serif;
     --ui-font-size: 14px;
-}
 
+    --ui-app-menu-style: gradient;
+    --ui-app-menu-bg-1: #041B4D;
+    --ui-app-menu-bg-2: #123F92;
+    --ui-app-menu-bg-3: #19BFE6;
+    --ui-app-menu-angle: 135deg;
+    --ui-app-menu-overlay-opacity: 0.18;
+    --ui-app-menu-logo-opacity: 0.18;
+    --ui-app-menu-shadow: 18px;
+
+    --ui-internal-logo-width: 220px;
+    --ui-internal-logo-opacity: 0.12;
+}
 
 html,
 body,
@@ -484,28 +495,29 @@ h6 {
     color: var(--ui-menu-text) !important;
 }
 
-
-
+/* ===== JAZZY MAIN MENU ===== */
 .o_home_menu,
 .o_apps_menu,
 .o_web_client .o_home_menu,
-.o_web_client .o_apps_menu {
+.o_web_client .o_apps_menu,
+.app_components {
     position: relative !important;
-    overflow: hidden;
-    isolation: isolate;
+    overflow: hidden !important;
+    isolation: isolate !important;
     background:
         linear-gradient(
-            135deg,
-            #041b4d 0%,
-            #123f92 35%,
-            #1bbce3 100%
+            var(--ui-app-menu-angle),
+            var(--ui-app-menu-bg-1) 0%,
+            var(--ui-app-menu-bg-2) 45%,
+            var(--ui-app-menu-bg-3) 100%
         ) !important;
 }
 
 .o_home_menu::before,
 .o_apps_menu::before,
 .o_web_client .o_home_menu::before,
-.o_web_client .o_apps_menu::before {
+.o_web_client .o_apps_menu::before,
+.app_components::before {
     content: "";
     position: absolute;
     inset: 0;
@@ -514,9 +526,9 @@ h6 {
     background:
         radial-gradient(
             circle at 50% 85%,
-            rgba(0, 188, 212, 0.18) 0%,
-            rgba(0, 188, 212, 0.10) 18%,
-            rgba(0, 188, 212, 0.04) 30%,
+            rgba(25, 191, 230, var(--ui-app-menu-overlay-opacity)) 0%,
+            rgba(25, 191, 230, calc(var(--ui-app-menu-overlay-opacity) * 0.55)) 18%,
+            rgba(25, 191, 230, calc(var(--ui-app-menu-overlay-opacity) * 0.20)) 30%,
             rgba(0, 0, 0, 0) 48%
         );
 }
@@ -524,29 +536,39 @@ h6 {
 .o_home_menu::after,
 .o_apps_menu::after,
 .o_web_client .o_home_menu::after,
-.o_web_client .o_apps_menu::after {
+.o_web_client .o_apps_menu::after,
+.app_components::after {
     content: "";
     position: absolute;
     inset: 0;
     z-index: 1;
     pointer-events: none;
-    background-image: url("/ui_branding_customizer/static/src/img/devlyn_logo_dark.png");
+    background-image: url("/ui_branding_customizer/static/src/img/devlyn_logo_white.png");
     background-repeat: no-repeat;
     background-position: center 62%;
     background-size: 70% auto;
-    opacity: 0.20;
+    opacity: var(--ui-app-menu-logo-opacity);
 }
 
 .o_home_menu > *,
 .o_apps_menu > *,
 .o_web_client .o_home_menu > *,
-.o_web_client .o_apps_menu > * {
+.o_web_client .o_apps_menu > *,
+.app_components > * {
     position: relative;
     z-index: 2;
 }
 
+.o_home_menu .o_app,
+.o_apps_menu .o_app,
+.app_components .o_app {
+    border-radius: calc(var(--ui-border-radius) + 4px) !important;
+    box-shadow: 0 10px var(--ui-app-menu-shadow) rgba(0, 0, 0, 0.16);
+}
+
 .o_home_menu .o_app .o_caption,
-.o_apps_menu .o_app .o_caption {
+.o_apps_menu .o_app .o_caption,
+.app_components .o_app .o_caption {
     color: #ffffff !important;
     text-shadow: 0 1px 4px rgba(0, 0, 0, 0.45);
 }
@@ -556,42 +578,31 @@ h6 {
 .o_home_menu .o_searchview input,
 .o_apps_menu .o_searchview,
 .o_apps_menu .o_searchview_input_container,
-.o_apps_menu .o_searchview input {
+.o_apps_menu .o_searchview input,
+.app_components .o_searchview,
+.app_components .o_searchview_input_container,
+.app_components .o_searchview input {
     border-radius: var(--ui-border-radius) !important;
 }
 
-
-.o_action_manager,
-.o_main_content,
-.o_content {
-    position: relative;
-    isolation: isolate;
-}
-
-
-.o_action_manager::after,
-.o_main_content::after {
+/* ===== INTERNAL LOGO ===== */
+body::after {
     content: "";
-    position: absolute;
-    inset: 0;
+    position: fixed;
+    right: 20px;
+    bottom: 20px;
+    width: 260px;
+    height: 120px;
     pointer-events: none;
-    z-index: 0;
-    background-image: url("/ui_branding_customizer/static/src/img/devlyn_logo_white.png");
+    z-index: 999;
+    background-image: url("/ui_branding_customizer/static/src/img/devlyn_logo_dark.png");
     background-repeat: no-repeat;
-    background-position: center center;
-    background-size: 45% auto;
-    opacity: 0.045;
+    background-position: right bottom;
+    background-size: contain;
+    opacity: 1;
 }
 
-.o_action_manager > *,
-.o_main_content > *,
-.o_content > * {
-    position: relative;
-    z-index: 1;
-}
-.o_home_menu .o_action_manager::after,
-.o_home_menu .o_main_content::after,
-.o_apps_menu .o_action_manager::after,
-.o_apps_menu .o_main_content::after {
+/* ocultar logo cuando el menu principal jazzy está visible */
+body.ui-branding-home-menu-visible::after {
     display: none !important;
 }

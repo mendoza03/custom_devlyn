@@ -3,70 +3,111 @@
     <record id="view_res_config_settings_ui_branding_customizer" model="ir.ui.view">
         <field name="name">res.config.settings.view.form.ui.branding.customizer</field>
         <field name="model">res.config.settings</field>
-        <field name="inherit_id" ref="base_setup.res_config_settings_view_form" />
+        <field name="inherit_id" ref="base_setup.res_config_settings_view_form"/>
         <field name="arch" type="xml">
             <xpath expr="//form" position="inside">
                 <app string="UI Branding" name="ui_branding_customizer_app">
                     <block title="UI Branding Customizer">
                         <setting string="Primary Color" help="Main theme color">
-                            <field name="ui_primary_color" class="ui_branding_live_input" />
+                            <field name="ui_primary_color" class="ui_branding_live_input"/>
                         </setting>
 
                         <setting string="Secondary Color" help="Secondary theme color">
-                            <field name="ui_secondary_color" class="ui_branding_live_input" />
+                            <field name="ui_secondary_color" class="ui_branding_live_input"/>
                         </setting>
 
                         <setting string="Navbar Background" help="Top navigation bar color">
-                            <field name="ui_navbar_bg" class="ui_branding_live_input" />
+                            <field name="ui_navbar_bg" class="ui_branding_live_input"/>
                         </setting>
 
                         <setting string="Sidebar/Menu Background" help="Left menu background color">
-                            <field name="ui_menu_bg" class="ui_branding_live_input" />
+                            <field name="ui_menu_bg" class="ui_branding_live_input"/>
                         </setting>
 
                         <setting string="Sidebar/Menu Text" help="Left menu text color">
-                            <field name="ui_menu_text" class="ui_branding_live_input" />
+                            <field name="ui_menu_text" class="ui_branding_live_input"/>
                         </setting>
 
                         <setting string="Body Background" help="General background color">
-                            <field name="ui_body_bg" class="ui_branding_live_input" />
+                            <field name="ui_body_bg" class="ui_branding_live_input"/>
                         </setting>
 
                         <setting string="Main Text Color" help="Main content text color">
-                            <field name="ui_text_color" class="ui_branding_live_input" />
+                            <field name="ui_text_color" class="ui_branding_live_input"/>
                         </setting>
 
                         <setting string="Link Color" help="Links and actionable text">
-                            <field name="ui_link_color" class="ui_branding_live_input" />
+                            <field name="ui_link_color" class="ui_branding_live_input"/>
                         </setting>
 
                         <setting string="Button Background" help="Primary buttons background">
-                            <field name="ui_button_bg" class="ui_branding_live_input" />
+                            <field name="ui_button_bg" class="ui_branding_live_input"/>
                         </setting>
 
                         <setting string="Button Text" help="Primary buttons text">
-                            <field name="ui_button_text" class="ui_branding_live_input" />
+                            <field name="ui_button_text" class="ui_branding_live_input"/>
                         </setting>
 
                         <setting string="Border Radius" help="Rounded corners in pixels">
-                            <field name="ui_border_radius" class="ui_branding_live_input" />
+                            <field name="ui_border_radius" class="ui_branding_live_input"/>
                         </setting>
 
                         <setting string="Font Family" help="Main font family for backend">
-                            <field name="ui_font_family" class="ui_branding_live_input" />
+                            <field name="ui_font_family" class="ui_branding_live_input"/>
                         </setting>
 
                         <setting string="Base Font Size" help="Base font size in pixels">
-                            <field name="ui_font_size" class="ui_branding_live_input" />
+                            <field name="ui_font_size" class="ui_branding_live_input"/>
+                        </setting>
+                    </block>
+
+                    <block title="Jazzy Main Menu Background Designer">
+                        <setting string="Main Menu Background Style" help="Choose how the Jazzy home menu background is rendered">
+                            <field name="ui_app_menu_style" class="ui_branding_live_input"/>
+                        </setting>
+
+                        <setting string="Background Color 1" help="First color of the home menu palette">
+                            <field name="ui_app_menu_bg_color_1" class="ui_branding_live_input"/>
+                        </setting>
+
+                        <setting string="Background Color 2" help="Second color of the home menu palette">
+                            <field name="ui_app_menu_bg_color_2" class="ui_branding_live_input"/>
+                        </setting>
+
+                        <setting string="Background Color 3" help="Third color of the home menu palette">
+                            <field name="ui_app_menu_bg_color_3" class="ui_branding_live_input"/>
+                        </setting>
+
+                        <setting string="Gradient Angle" help="Gradient angle for the Jazzy home menu">
+                            <field name="ui_app_menu_gradient_angle" class="ui_branding_live_input"/>
+                        </setting>
+
+                        <setting string="Overlay Opacity (%)" help="Intensity of the lower glow overlay">
+                            <field name="ui_app_menu_overlay_opacity" class="ui_branding_live_input"/>
+                        </setting>
+
+                        <setting string="Main Menu Logo Opacity (%)" help="Opacity of the Devlyn white logo in the main menu">
+                            <field name="ui_app_menu_logo_opacity" class="ui_branding_live_input"/>
+                        </setting>
+
+                        <setting string="Main Menu Shadow Strength" help="Shadow applied to app cards/items">
+                            <field name="ui_app_menu_shadow" class="ui_branding_live_input"/>
+                        </setting>
+
+                        <setting string="Internal Watermark Width" help="Width of the dark Devlyn watermark inside modules">
+                            <field name="ui_internal_logo_width" class="ui_branding_live_input"/>
+                        </setting>
+
+                        <setting string="Internal Watermark Opacity (%)" help="Opacity of the dark Devlyn watermark inside modules">
+                            <field name="ui_internal_logo_opacity" class="ui_branding_live_input"/>
                         </setting>
 
                         <div class="mt16">
                             <h3>Live Preview</h3>
                             <div id="ui_branding_preview" class="ui-branding-preview">
                                 <div class="ui-preview-navbar">
-                                    <span class="ui-preview-brand">My ERP Branding</span>
-                                    <span class="ui-preview-navbar-actions">Dashboard | Sales |
-                                        Inventory</span>
+                                    <span class="ui-preview-brand">Devlyn ERP Branding</span>
+                                    <span class="ui-preview-navbar-actions">Dashboard | Sales | Inventory</span>
                                 </div>
 
                                 <div class="ui-preview-layout">
@@ -87,10 +128,8 @@
                                             </p>
                                             <a href="#">Example link</a>
                                             <div class="mt-2">
-                                                <button type="button" class="btn btn-primary">Primary
-                                                    Button</button>
-                                                <button type="button" class="btn btn-secondary ms-2">Secondary
-                                                    Button</button>
+                                                <button type="button" class="btn btn-primary">Primary Button</button>
+                                                <button type="button" class="btn btn-secondary ms-2">Secondary Button</button>
                                             </div>
                                         </div>
 
@@ -106,17 +145,12 @@
                                                 <tbody>
                                                     <tr>
                                                         <td>Order SO001</td>
-                                                        <td>
-                                                            <span class="badge bg-success">Done</span>
-                                                        </td>
+                                                        <td><span class="badge bg-success">Done</span></td>
                                                         <td>$120.00</td>
                                                     </tr>
                                                     <tr>
                                                         <td>Order SO002</td>
-                                                        <td>
-                                                            <span class="badge bg-warning text-dark">
-                                                                Draft</span>
-                                                        </td>
+                                                        <td><span class="badge bg-warning text-dark">Draft</span></td>
                                                         <td>$80.00</td>
                                                     </tr>
                                                 </tbody>
