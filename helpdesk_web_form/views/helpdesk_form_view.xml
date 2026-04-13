@@ -2417,6 +2417,30 @@
                         <div class="card-body"><strong>Describe el extravío y adjunta evidencia disponible.</strong></div></div>
                     </div>
 
+                    <!-- ===== BLOQUE: Facturación Reenvío ===== -->
+<div id="block-facturacion_reenvio" class="col-12 subcategory-block" style="display:none;">
+    <div class="card border-success">
+        <div class="card-header m-2 bg-success text-white">
+            <strong>Reenvío de Facturación</strong>
+        </div>
+        <div class="card-body">
+            <strong>Adjuntar PDF/XML y describir el problema.</strong>
+        </div>
+    </div>
+</div>
+
+<!-- ===== BLOQUE: Papelería Seguimiento ===== -->
+<div id="block-papeleria_seguimiento" class="col-12 subcategory-block" style="display:none;">
+    <div class="card border-success">
+        <div class="card-header m-2 bg-success text-white">
+            <strong>Papelería Seguimiento</strong>
+        </div>
+        <div class="card-body">
+            <strong>Describe el seguimiento requerido.</strong>
+        </div>
+    </div>
+</div>
+
                     <!-- ===== Adjuntos ===== -->
                     <div class="col-12 mt-2">
                         <h5>Anexos</h5>

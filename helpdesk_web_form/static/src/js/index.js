@@ -75,6 +75,14 @@ window.addEventListener('load', function () {
         'pagina_evaluaciones_productos':           'block-pagina_evaluaciones_productos',
         'pagina_evaluaciones_politicas':           'block-pagina_evaluaciones_politicas',
         'promocion_puesto':                        'block-promocion_puesto',
+
+        // NUEVOS
+        'seguimiento_solicitud':                   'block-seguimiento_solicitud',
+        'trabajos_atrasados_laboratorio_local':    'block-trabajos_atrasados_laboratorio_local',
+        'abasto_accesorios_soluciones':            'block-abasto_accesorios_soluciones',
+        'abasto_armazones':                        'block-abasto_armazones',
+        'devoluciones_aplicadas':                  'block-devoluciones_aplicadas',
+        'gotas_soluciones_alcon':                  'block-gotas_soluciones_alcon',
     };
 
     const REFACTURACION_CODES = [
@@ -141,6 +149,18 @@ window.addEventListener('load', function () {
 
         if (CONVENIOS_CODES.includes(code)) {
             showBlock('block-convenios');
+            return;
+        }
+
+        // NUEVO: receta LC
+        if (currentCategorySlug === 'receta_lc_lente_contacto' && code === 'atraso_lente_contacto') {
+            showBlock('block-receta_lc_atraso_lente_contacto');
+            return;
+        }
+
+        // NUEVO: papelería seguimiento
+        if (currentCategorySlug === 'papeleria_seguimiento' && code === 'seguimiento_solicitud') {
+            showBlock('block-papeleria_seguimiento');
             return;
         }
 

@@ -10,6 +10,7 @@ CATEGORY_SLUG_XMLIDS = {
     "dev_real_cash_order": "helpdesk_custom_datos.helpdesk_ticket_category_devoluciones_reales_efectivo_orden_pago",
     "dev_real_cash_transfer": "helpdesk_custom_datos.helpdesk_ticket_category_devoluciones_reales_efectivo_transferencia",
     "receta_lc_lente_contacto": "helpdesk_custom_datos.helpdesk_ticket_category_receta_lc_lente_contacto",
+    "papeleria_seguimiento": "helpdesk_custom_datos.helpdesk_ticket_category_papeleria_seguimiento",
 }
 
 
@@ -42,7 +43,6 @@ class HelpdeskController(http.Controller):
             return False
         return True
 
-
     @http.route(['/helpdesk', '/<string:lang>/helpdesk'], type='http', auth='public', website=True)
     def helpdesk_form(self, **kwargs):
         sections = request.env['helpdesk.section'].sudo().search([('active', '=', True)], order='sequence, name, id')
@@ -58,7 +58,6 @@ class HelpdeskController(http.Controller):
             ('section_id', '=', section_id),
             ('active', '=', True),
         ])
-        # Incluimos slug/code para que el JS detecte el tipo de categoría (ej: devoluciones reales)
         return request.make_json_response([
             {'id': c.id, 'name': c.name, 'slug': self._get_category_slug(c)}
             for c in cats
@@ -105,11 +104,9 @@ class HelpdeskController(http.Controller):
             return val if val else False
 
         def _sel(key):
-            """Devuelve el valor del selection, o 'select' si no viene."""
             return post.get(key) or 'select'
 
         def _radio(key):
-            """Para campos radio sin default — devuelve False si no viene."""
             val = post.get(key, '').strip()
             return val if val else False
 
@@ -213,7 +210,7 @@ class HelpdeskController(http.Controller):
 
             # ── Devoluciones reales - Error examen / Fecha entrega ────────────
             'x_exam_ov_cancelled':                  _radio('x_exam_ov_cancelled'),
-            'x_exam_refund_request_attached':        _radio('x_exam_refund_request_attached'),
+            'x_exam_refund_request_attached':       _radio('x_exam_refund_request_attached'),
 
             # ── Devoluciones reales - Efectivo (Orden de pago / Transferencia) ─
             'x_cash_society':                   _str('x_cash_society'),
@@ -224,21 +221,21 @@ class HelpdeskController(http.Controller):
             'x_transfer_bank':                  _str('x_transfer_bank'),
 
             # ── ALE página web ────────────────────────────────────────────────
-            'x_ale_incident_type':      _sel('x_ale_incident_type'),
-            'x_ale_employee_name':      _str('x_ale_employee_name'),
-            'x_ale_branch':             _str('x_ale_branch'),
-            'x_ale_region':             _str('x_ale_region'),
-            'x_ale_district':           _str('x_ale_district'),
+            'x_ale_incident_type':          _sel('x_ale_incident_type'),
+            'x_ale_employee_name':          _str('x_ale_employee_name'),
+            'x_ale_branch':                 _str('x_ale_branch'),
+            'x_ale_region':                 _str('x_ale_region'),
+            'x_ale_district':               _str('x_ale_district'),
 
             # ── Universidad Devlyn ────────────────────────────────────────────
-            'x_university_incident_type':       _sel('x_university_incident_type'),
-            'x_university_employee_name':       _str('x_university_employee_name'),
-            'x_university_employee_number':     _str('x_university_employee_number'),
-            'x_university_branch':              _str('x_university_branch'),
-            'x_university_zone':                _str('x_university_zone'),
-            'x_university_district':            _str('x_university_district'),
-            'x_university_course_name':         _str('x_university_course_name'),
-            'x_university_real_position':       _str('x_university_real_position'),
+            'x_university_incident_type':   _sel('x_university_incident_type'),
+            'x_university_employee_name':   _str('x_university_employee_name'),
+            'x_university_employee_number': _str('x_university_employee_number'),
+            'x_university_branch':          _str('x_university_branch'),
+            'x_university_zone':            _str('x_university_zone'),
+            'x_university_district':        _str('x_university_district'),
+            'x_university_course_name':     _str('x_university_course_name'),
+            'x_university_real_position':   _str('x_university_real_position'),
 
             # ── Evaluaciones - Carpeta de productos ───────────────────────────
             'x_eval_request_type':          _sel('x_eval_request_type'),
@@ -404,9 +401,76 @@ class HelpdeskController(http.Controller):
             'x_quality_shipping_bag':           _str('x_quality_shipping_bag'),
             'x_quality_courier_guide':          _str('x_quality_courier_guide'),
             'x_quality_evidence_attached':      _radio('x_quality_evidence_attached'),
+
+            # ── Medallia ──────────────────────────────────────────────────────
+            'x_medallia_employee_number': _str('x_medallia_employee_number'),
+            'x_medallia_employee_name': _str('x_medallia_employee_name'),
+
+            # ── Logística / mensajería ────────────────────────────────────────
+            'x_bag_arrival': _str('x_bag_arrival'),
+            'x_delivery_oc': _str('x_delivery_oc'),
+            'x_paq_pos_order': _str('x_paq_pos_order'),
+
+            'x_shipping_noncompliance_type': _sel('x_shipping_noncompliance_type'),
+            'x_shipping_assigned_courier': _str('x_shipping_assigned_courier'),
+
+            'x_shipping_arrival_bag': _str('x_shipping_arrival_bag'),
+            'x_shipping_guide_number_detail': _str('x_shipping_guide_number_detail'),
+            'x_shipping_content_detail': _str('x_shipping_content_detail'),
+            'x_shipping_photo_evidence_confirmed': _radio('x_shipping_photo_evidence_confirmed'),
+
+            'x_shipping_unreceived_pos_order': _str('x_shipping_unreceived_pos_order'),
+            'x_shipping_unreceived_arrival_bag': _str('x_shipping_unreceived_arrival_bag'),
+            'x_shipping_unreceived_transport': _str('x_shipping_unreceived_transport'),
+
+            'x_shipping_lab_followup_pos_order': _str('x_shipping_lab_followup_pos_order'),
+
+            'x_shipping_extraordinary_pos_order': _str('x_shipping_extraordinary_pos_order'),
+            'x_shipping_extraordinary_sap_center': _str('x_shipping_extraordinary_sap_center'),
+            'x_shipping_extraordinary_manager_authorization': _radio('x_shipping_extraordinary_manager_authorization'),
+
+            # accesorios
+            'x_shipping_missing_accessory_order': _str('x_shipping_missing_accessory_order'),
+            'x_shipping_missing_accessory_bag': _str('x_shipping_missing_accessory_bag'),
+            'x_shipping_missing_accessory_brand': _str('x_shipping_missing_accessory_brand'),
+            'x_shipping_missing_accessory_arrival_date': _date('x_shipping_missing_accessory_arrival_date'),
+            'x_shipping_missing_accessory_supplier': _sel('x_shipping_missing_accessory_supplier'),
+
+            'x_shipping_missing_accessory_cloth': bool(post.get('x_shipping_missing_accessory_cloth')),
+            'x_shipping_missing_accessory_case': bool(post.get('x_shipping_missing_accessory_case')),
+            'x_shipping_missing_accessory_clipon': bool(post.get('x_shipping_missing_accessory_clipon')),
+            'x_shipping_missing_accessory_certificate': bool(post.get('x_shipping_missing_accessory_certificate')),
+
+            # mercancía
+            'x_prev_guide_number': _str('x_prev_guide_number'),
+            'x_prev_courier_type': _sel('x_prev_courier_type'),
+            'x_prev_photo_evidence_confirm': _radio('x_prev_photo_evidence_confirm'),
+
+            # ── Reportes ──────────────────────────────────────────────────────
+            'x_report_whatsapp_date': _date('x_report_whatsapp_date'),
+            'x_report_marketing_date': _date('x_report_marketing_date'),
+            'x_report_attached': _radio('x_report_attached'),
+
+            # ── Papelería / seguimiento ───────────────────────────────────────
+            'x_supply_material_code': _str('x_supply_material_code'),
+            'x_supply_material_description': _str('x_supply_material_description'),
+            'x_supply_quantity': _str('x_supply_quantity'),
+            'x_supply_unit_measure': _sel('x_supply_unit_measure'),
+            'x_supply_center': _str('x_supply_center'),
+            'x_supply_manager_approval_attached': _radio('x_supply_manager_approval_attached'),
+
+            # ── extras papelería ──────────────────────────────────────────────
+            'x_supply_sku_code': _str('x_supply_sku_code'),
+            'x_supply_frame_type': _sel('x_supply_frame_type'),
+            'x_supply_frame_brand_basic': _str('x_supply_frame_brand_basic'),
+            'x_supply_return_folio': _str('x_supply_return_folio'),
+
+            # ── Laboratorio local ─────────────────────────────────────────────
+            'x_lab_local_pos_order': _str('x_lab_local_pos_order'),
+            'x_lab_local_promise_date': _date('x_lab_local_promise_date'),
+            'x_lab_local_name': _str('x_lab_local_name'),
         })
 
-        # ── Adjuntos ──────────────────────────────────────────────────────────
         files = request.httprequest.files.getlist('attachments')
         for f in files:
             if f and f.filename:
