@@ -8,7 +8,8 @@
                         .cx-login {
                             min-height: 100vh;
                             display: flex;
-                            background: #f7f7f7;
+                            background: #f4f7f8;
+                            font-family: "Inter", "Segoe UI", Arial, sans-serif;
                         }
 
                         .cx-left,
@@ -19,44 +20,52 @@
 
                         .cx-left {
                             position: relative;
-                            width: 50%;
-                            min-height: 100vh;
                             background-image: url('/helpdesk_custom_datos/static/src/img/devlyn_login_bg.png');
                             background-size: cover;
                             background-position: center;
                             background-repeat: no-repeat;
-
                             display: flex;
                             align-items: flex-start;
                             justify-content: center;
                             padding-top: 90px;
+                            overflow: hidden;
                         }
 
                         .cx-left::before {
                             content: "";
                             position: absolute;
                             inset: 0;
-                            background: rgba(255,255,255,0.08);
+                            background:
+                                linear-gradient(
+                                    135deg,
+                                    rgba(255,255,255,0.78) 0%,
+                                    rgba(255,255,255,0.72) 45%,
+                                    rgba(230,245,247,0.62) 100%
+                                );
+                        }
+
+                        .cx-left::after {
+                            content: "";
+                            position: absolute;
+                            right: -80px;
+                            bottom: -80px;
+                            width: 320px;
+                            height: 320px;
+                            border-radius: 50%;
+                            background: rgba(0, 169, 188, 0.10);
+                            filter: blur(8px);
                         }
 
                         .cx-devlyn-title {
                             position: relative;
                             z-index: 2;
-                            font-size: 110px;
-                            font-weight: 800;
-                            letter-spacing: 8px;
-                            color: #3f3f3f;
+                            font-size: 108px;
+                            font-weight: 900;
+                            letter-spacing: 6px;
+                            color: #3e3e3e;
                             text-align: center;
                             line-height: 1;
-                        }
-
-                        .cx-brand {
-                            position: relative;
-                            z-index: 1;
-                            max-width: 320px;
-                            width: 100%;
-                            height: auto;
-                            object-fit: contain;
+                            text-shadow: 0 2px 8px rgba(255,255,255,0.15);
                         }
 
                         .cx-right {
@@ -67,44 +76,105 @@
                             position: relative;
                             overflow: hidden;
                             background:
-                                radial-gradient(circle at 22% 14%, rgba(46, 103, 255, 0.78) 0%, rgba(46, 103, 255, 0) 30%),
-                                radial-gradient(circle at 58% 10%, rgba(86, 198, 255, 0.62) 0%, rgba(86, 198, 255, 0) 24%),
-                                radial-gradient(circle at 76% 36%, rgba(12, 98, 255, 0.74) 0%, rgba(12, 98, 255, 0) 28%),
-                                radial-gradient(circle at 80% 78%, rgba(20, 33, 126, 0.88) 0%, rgba(20, 33, 126, 0) 34%),
-                                linear-gradient(135deg, #07133f 0%, #123d9f 50%, #0b6df5 75%, #050d31 100%);
+                                radial-gradient(circle at 18% 16%, rgba(0, 175, 196, 0.38) 0%, rgba(0, 175, 196, 0) 26%),
+                                radial-gradient(circle at 72% 18%, rgba(116, 232, 245, 0.30) 0%, rgba(116, 232, 245, 0) 24%),
+                                radial-gradient(circle at 82% 76%, rgba(0, 123, 145, 0.34) 0%, rgba(0, 123, 145, 0) 30%),
+                                linear-gradient(135deg, #08306b 0%, #0f66a8 42%, #0aa8ba 78%, #0f8898 100%);
+                        }
+
+                        .cx-right::before {
+                            content: "";
+                            position: absolute;
+                            inset: 0;
+                            background:
+                                linear-gradient(
+                                    180deg,
+                                    rgba(255,255,255,0.02) 0%,
+                                    rgba(255,255,255,0.00) 100%
+                                );
+                            pointer-events: none;
                         }
 
                         .cx-card {
                             width: 100%;
-                            max-width: 460px;
-
-                            background: rgba(255,255,255,0.92);
-                            padding: 40px;
-                            border-radius: 18px;
-
-                            backdrop-filter: blur(6px);
-                            -webkit-backdrop-filter: blur(6px);
-
+                            max-width: 470px;
+                            background: rgba(255,255,255,0.96);
+                            padding: 0;
+                            border-radius: 22px;
+                            overflow: hidden;
+                            backdrop-filter: blur(7px);
+                            -webkit-backdrop-filter: blur(7px);
                             box-shadow:
-                                0 25px 60px rgba(0,0,0,0.18),
-                                0 8px 20px rgba(0,0,0,0.08);
+                                0 28px 65px rgba(0,0,0,0.22),
+                                0 10px 24px rgba(0,0,0,0.10);
+                            border: 1px solid rgba(255,255,255,0.32);
+                            position: relative;
+                            z-index: 2;
+                        }
+
+                        .cx-card-top {
+                            position: relative;
+                            padding: 26px 32px 24px 32px;
+                            background:
+                                linear-gradient(135deg, #069eb4 0%, #13b5c8 52%, #4fd9e8 100%);
+                        }
+
+                        .cx-card-top::after {
+                            content: "";
+                            position: absolute;
+                            right: -35px;
+                            top: -35px;
+                            width: 140px;
+                            height: 140px;
+                            border-radius: 50%;
+                            background: rgba(255,255,255,0.14);
+                        }
+
+                        .cx-logo-wrap {
+                            position: relative;
+                            z-index: 2;
+                            display: flex;
+                            align-items: center;
+                            justify-content: center;
+                            margin-bottom: 14px;
+                        }
+
+                        .cx-logo {
+                            max-width: 210px;
+                            width: 100%;
+                            height: auto;
+                            object-fit: contain;
+                            filter: drop-shadow(0 4px 10px rgba(0,0,0,0.10));
                         }
 
                         .cx-card-head {
-                            margin-bottom: 28px;
+                            position: relative;
+                            z-index: 2;
+                            text-align: center;
                         }
 
                         .cx-card-head h2 {
-                            margin: 0 0 8px 0;
+                            margin: 0 0 6px 0;
                             font-size: 34px;
-                            font-weight: 700;
-                            color: #2f2f2f;
+                            font-weight: 800;
+                            color: #ffffff;
+                            letter-spacing: 0.2px;
                         }
 
                         .cx-card-head p {
                             margin: 0;
-                            font-size: 16px;
-                            color: #7a7a7a;
+                            font-size: 15px;
+                            color: rgba(255,255,255,0.92);
+                        }
+
+                        .cx-card-body {
+                            padding: 32px 40px 40px 40px;
+                            background:
+                                linear-gradient(
+                                    180deg,
+                                    #ffffff 0%,
+                                    #f9fcfd 100%
+                                );
                         }
 
                         .cx-card label.form-label,
@@ -113,71 +183,96 @@
                             margin-top: 14px;
                             margin-bottom: 8px;
                             font-size: 14px;
-                            font-weight: 600;
-                            color: #444444;
+                            font-weight: 700;
+                            color: #1c4d5a;
                         }
 
                         .cx-card .form-control {
                             width: 100%;
-                            min-height: 48px;
-                            border: 1px solid #d7d7d7;
-                            border-radius: 10px;
-                            background: #fff;
+                            min-height: 50px;
+                            border: 1px solid #cfe5ea;
+                            border-radius: 12px;
+                            background: #ffffff;
                             box-shadow: none;
                             font-size: 15px;
+                            color: #29444d;
                             padding: 12px 14px;
+                            transition: all 0.2s ease;
+                        }
+
+                        .cx-card .form-control::placeholder {
+                            color: #96aab0;
                         }
 
                         .cx-card .form-control:focus {
-                            border-color: #999;
-                            box-shadow: none;
+                            border-color: #14b2c5;
+                            box-shadow: 0 0 0 4px rgba(20,178,197,0.12);
+                            outline: none;
                         }
 
                         .cx-card .input-group .btn {
-                            border-radius: 10px;
+                            border-radius: 12px;
                         }
 
                         .cx-help {
                             margin-top: 14px;
-                            margin-bottom: 18px;
+                            margin-bottom: 20px;
                             text-align: right;
                         }
 
                         .cx-help a {
-                            color: #666666;
+                            color: #0b8ea2;
                             font-size: 14px;
+                            font-weight: 600;
                             text-decoration: none;
                         }
 
                         .cx-help a:hover {
                             text-decoration: underline;
-                            color: #333333;
+                            color: #066f80;
                         }
 
                         .cx-btn {
                             width: 100%;
-                            min-height: 50px;
+                            min-height: 52px;
                             border: none;
-                            border-radius: 10px;
-                            background: #5f5f5f;
+                            border-radius: 12px;
+                            background:
+                                linear-gradient(135deg, #079fb3 0%, #0eb4c7 55%, #43d4e3 100%);
                             color: #ffffff;
                             font-size: 16px;
-                            font-weight: 600;
-                            transition: 0.2s ease;
+                            font-weight: 800;
+                            letter-spacing: 0.2px;
+                            transition: 0.22s ease;
+                            box-shadow: 0 12px 24px rgba(6, 145, 163, 0.28);
                         }
 
                         .cx-btn:hover,
                         .cx-btn:focus,
                         .cx-btn:active {
-                            background: #4f4f4f;
+                            background:
+                                linear-gradient(135deg, #078ea0 0%, #0aa6b8 55%, #35c6d6 100%);
                             color: #ffffff;
-                            box-shadow: none;
+                            transform: translateY(-1px);
+                            box-shadow: 0 16px 28px rgba(6, 145, 163, 0.32);
                         }
 
                         .cx-card .alert {
                             margin-top: 14px;
-                            border-radius: 10px;
+                            border-radius: 12px;
                             font-size: 14px;
+                        }
+
+                        .cx-card .alert-danger {
+                            background: #fff1f3;
+                            border: 1px solid #ffd5dc;
+                            color: #a9445b;
+                        }
+
+                        .cx-card .alert-success {
+                            background: #eefcf7;
+                            border: 1px solid #c8f0df;
+                            color: #257554;
                         }
 
                         @media (max-width: 992px) {
@@ -192,105 +287,121 @@
                             }
 
                             .cx-left {
-                                min-height: 260px;
-                                padding: 32px 20px;
+                                min-height: 250px;
+                                padding: 30px 20px;
                                 align-items: center;
                             }
 
                             .cx-devlyn-title {
-                                font-size: 54px;
+                                font-size: 56px;
                                 letter-spacing: 4px;
                             }
 
-                            .cx-brand {
-                                max-width: 220px;
+                            .cx-right {
+                                padding: 28px 18px 42px 18px;
                             }
 
-                            .cx-right {
-                                padding: 32px 20px 48px 20px;
+                            .cx-card-top {
+                                padding: 22px 22px 20px 22px;
+                            }
+
+                            .cx-card-body {
+                                padding: 24px 22px 28px 22px;
                             }
 
                             .cx-card-head h2 {
                                 font-size: 28px;
                             }
+
+                            .cx-logo {
+                                max-width: 180px;
+                            }
                         }
                     </style>
 
                     <div class="cx-left">
-                        <div class="cx-devlyn-title">
-                            DEVLYN
-                        </div>
+                        <div class="cx-devlyn-title">DEVLYN</div>
                     </div>
 
                     <div class="cx-right">
                         <div class="cx-card">
-                            <div class="cx-card-head">
-                                <h2>Inicia sesión</h2>
-                                <p>Bienvenido</p>
+                            <div class="cx-card-top">
+                                <div class="cx-logo-wrap">
+                                    <img class="cx-logo"
+                                         src="/helpdesk_custom_datos/static/src/img/devlyn_logo_white.png"
+                                         alt="Devlyn Logo"/>
+                                </div>
+
+                                <div class="cx-card-head">
+                                    <h2>Inicia sesión</h2>
+                                    <p>Bienvenido</p>
+                                </div>
                             </div>
 
-                            <form class="oe_login_form"
-                                  role="form"
-                                  t-attf-action="/web/login"
-                                  method="post"
-                                  onsubmit="this.action = '/web/login' + location.hash">
+                            <div class="cx-card-body">
+                                <form class="oe_login_form"
+                                      role="form"
+                                      t-attf-action="/web/login"
+                                      method="post"
+                                      onsubmit="this.action = '/web/login' + location.hash">
 
-                                <input type="hidden" name="csrf_token" t-att-value="request.csrf_token()"/>
+                                    <input type="hidden" name="csrf_token" t-att-value="request.csrf_token()"/>
 
-                                <div class="mb-3" t-if="databases and len(databases) &gt; 1">
-                                    <label for="db" class="col-form-label">Database</label>
-                                    <div class="input-group">
-                                        <input type="text"
-                                               name="db"
-                                               t-att-value="request.db"
-                                               id="db"
-                                               class="form-control"
-                                               required="required"
-                                               readonly="readonly"/>
-                                        <a role="button" href="/web/database/selector" class="btn btn-secondary">
-                                            Select
-                                            <i class="fa fa-database" role="img" aria-label="Database" title="Database"></i>
-                                        </a>
+                                    <div class="mb-3" t-if="databases and len(databases) &gt; 1">
+                                        <label for="db" class="col-form-label">Base de datos</label>
+                                        <div class="input-group">
+                                            <input type="text"
+                                                   name="db"
+                                                   t-att-value="request.db"
+                                                   id="db"
+                                                   class="form-control"
+                                                   required="required"
+                                                   readonly="readonly"/>
+                                            <a role="button" href="/web/database/selector" class="btn btn-secondary">
+                                                Seleccionar
+                                                <i class="fa fa-database" role="img" aria-label="Base de datos" title="Base de datos"></i>
+                                            </a>
+                                        </div>
                                     </div>
-                                </div>
 
-                                <label for="login" class="form-label">Correo *</label>
-                                <input id="login"
-                                       type="text"
-                                       name="login"
-                                       placeholder="juan.perez@ejemplo.com"
-                                       t-att-value="login"
-                                       class="form-control"
-                                       required="required"
-                                       autocapitalize="off"
-                                       autocomplete="username"/>
+                                    <label for="login" class="form-label">Correo *</label>
+                                    <input id="login"
+                                           type="text"
+                                           name="login"
+                                           placeholder="juan.perez@ejemplo.com"
+                                           t-att-value="login"
+                                           class="form-control"
+                                           required="required"
+                                           autocapitalize="off"
+                                           autocomplete="username"/>
 
-                                <label for="password" class="form-label">Contraseña *</label>
-                                <input id="password"
-                                       type="password"
-                                       name="password"
-                                       class="form-control"
-                                       required="required"
-                                       autocomplete="current-password"
-                                       maxlength="4096"/>
+                                    <label for="password" class="form-label">Contraseña *</label>
+                                    <input id="password"
+                                           type="password"
+                                           name="password"
+                                           class="form-control"
+                                           required="required"
+                                           autocomplete="current-password"
+                                           maxlength="4096"/>
 
-                                <p class="alert alert-danger" t-if="error" role="alert">
-                                    <t t-esc="error"/>
-                                </p>
+                                    <p class="alert alert-danger" t-if="error" role="alert">
+                                        <t t-esc="error"/>
+                                    </p>
 
-                                <p class="alert alert-success" t-if="message" role="status">
-                                    <t t-esc="message"/>
-                                </p>
+                                    <p class="alert alert-success" t-if="message" role="status">
+                                        <t t-esc="message"/>
+                                    </p>
 
-                                <div class="cx-help">
-                                    <a href="/web/reset_password">¿Olvidaste tu contraseña?</a>
-                                </div>
+                                    <div class="cx-help">
+                                        <a href="/web/reset_password">¿Olvidaste tu contraseña?</a>
+                                    </div>
 
-                                <button type="submit" class="cx-btn">Iniciar Sesión</button>
+                                    <button type="submit" class="cx-btn">Iniciar sesión</button>
 
-                                <input type="hidden" name="type" value="password"/>
-                                <input type="hidden" name="redirect" t-att-value="redirect"/>
-                            </form>
+                                    <input type="hidden" name="type" value="password"/>
+                                    <input type="hidden" name="redirect" t-att-value="redirect"/>
+                                </form>
+                            </div>
                         </div>
                     </div>
                 </div>
