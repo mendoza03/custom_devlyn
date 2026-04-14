@@ -50,7 +50,10 @@ body,
     color: var(--ui-text-color) !important;
 }
 
-.o_web_client,
+body {
+    background-color: var(--ui-body-bg) !important;
+}
+
 .o_action_manager,
 .o_main_content,
 .o_content,
@@ -65,10 +68,11 @@ body,
 }
 
 /* TOP MAIN NAVBAR */
-.o_main_navbar,
 .o_navbar,
+.o_main_navbar,
 .o_menu_systray,
-.o_menu_sections {
+.o_menu_sections,
+.o_navbar_apps_menu {
     background-color: var(--ui-navbar-bg) !important;
     color: var(--ui-menu-text) !important;
     border-color: transparent !important;
@@ -91,7 +95,7 @@ body,
     color: var(--ui-menu-text) !important;
 }
 
-/* top menu active / hover */
+/* hover / active */
 .o_menu_sections .nav-link:hover,
 .o_main_navbar .nav-link:hover,
 .o_navbar .nav-link:hover,
@@ -107,14 +111,12 @@ body,
 /* LEFT ICON BAR / APP SWITCHER AREA */
 .o_app,
 .o_web_client .o_apps,
-.o_apps_menu,
-.o_navbar_apps_menu,
 .o_app_switcher,
 .o_action_manager .o_content {
     background-color: var(--ui-body-bg) !important;
 }
 
-/* SETTINGS LEFT COLUMN / PANELS / SIDE MENUS */
+/* SETTINGS / PANELS */
 .o_setting_container,
 .settings,
 .o_settings_container,
@@ -133,7 +135,6 @@ body,
     color: var(--ui-text-color) !important;
 }
 
-/* generic left menus / submenus */
 .o_sub_menu,
 .o_inner_group,
 .o_notebook,
@@ -195,7 +196,7 @@ textarea,
     color: var(--ui-text-color) !important;
 }
 
-/* CARDS / PANELS / FORMS / MODALS */
+/* CARDS */
 .card,
 .modal-content,
 .dropdown-menu,
@@ -247,7 +248,7 @@ textarea,
     border-color: var(--ui-brand-primary) !important;
 }
 
-/* CONTROL PANEL / SEARCH */
+/* CONTROL PANEL */
 .o_control_panel,
 .o_cp_top,
 .o_cp_bottom,
@@ -271,7 +272,7 @@ textarea,
     background-color: var(--ui-body-bg) !important;
 }
 
-/* STATUSBAR / PILLS / BADGES */
+/* BADGES */
 .badge,
 .o_badge,
 .o_statusbar_status .btn,
@@ -298,7 +299,7 @@ textarea,
     background-color: color-mix(in srgb, var(--ui-brand-primary) 12%, white) !important;
 }
 
-/* SIDEBAR TEXT */
+/* TEXT */
 label,
 span,
 div,
@@ -316,7 +317,7 @@ h6 {
     color: inherit;
 }
 
-/* PREVIEW BLOCK */
+/* PREVIEW */
 .ui-branding-preview {
     border: 1px solid #d1d5db;
     border-radius: var(--ui-border-radius);
@@ -390,7 +391,7 @@ h6 {
     color: var(--ui-button-text) !important;
 }
 
-/* HTML5 COLOR PICKER WRAPPER */
+/* COLOR PICKER */
 .ui-branding-color-wrapper {
     display: flex;
     align-items: center;
@@ -422,79 +423,6 @@ h6 {
     flex: 1 1 auto;
 }
 
-/* ===== FORCE TOP SETTINGS / MODULE NAVIGATION BAR ===== */
-
-.o_main_navbar .o_menu_sections,
-.o_menu_sections.d-flex,
-.o_menu_sections {
-    background-color: var(--ui-navbar-bg) !important;
-    color: var(--ui-menu-text) !important;
-}
-
-.o_main_navbar .o_menu_sections > a,
-.o_main_navbar .o_menu_sections > button,
-.o_menu_sections > a,
-.o_menu_sections > button,
-.o_menu_sections .o_nav_entry,
-.o_menu_sections .dropdown-toggle,
-.o_menu_sections .o-dropdown-item,
-.o_menu_sections span {
-    background-color: transparent !important;
-    color: var(--ui-menu-text) !important;
-    border: none !important;
-    box-shadow: none !important;
-}
-
-.o_main_navbar .o_menu_sections > a:hover,
-.o_main_navbar .o_menu_sections > button:hover,
-.o_menu_sections > a:hover,
-.o_menu_sections > button:hover,
-.o_menu_sections .o_nav_entry:hover,
-.o_menu_sections .dropdown-toggle:hover,
-.o_menu_sections .o-dropdown-item:hover,
-.o_menu_sections .show > .dropdown-toggle,
-.o_menu_sections .active,
-.o_menu_sections .o_nav_entry.active {
-    background-color: color-mix(in srgb, var(--ui-brand-primary) 85%, black 0%) !important;
-    color: #fff !important;
-}
-
-.o_menu_sections .dropdown-toggle::after {
-    color: var(--ui-menu-text) !important;
-}
-
-/* make section area inherit correct bg */
-.o_main_navbar > div,
-.o_main_navbar > nav,
-.o_main_navbar .container-fluid,
-.o_main_navbar .o_menu_sections,
-.o_main_navbar .o_menu_systray {
-    background-color: var(--ui-navbar-bg) !important;
-}
-
-/* search on top */
-.o_main_navbar .o_searchview,
-.o_main_navbar .o_searchview_input_container,
-.o_main_navbar .o_searchview input {
-    background-color: #ffffff !important;
-    color: #111827 !important;
-    border-radius: var(--ui-border-radius) !important;
-}
-
-/* systray right side */
-.o_main_navbar .o_menu_systray,
-.o_main_navbar .o_menu_systray *,
-.o_main_navbar .dropdown,
-.o_main_navbar .dropdown-toggle {
-    color: var(--ui-menu-text) !important;
-}
-
-/* app name / brand */
-.o_main_navbar .navbar-brand,
-.o_main_navbar .o_menu_brand {
-    color: var(--ui-menu-text) !important;
-}
-
 /* ===== JAZZY MAIN MENU ===== */
 .o_home_menu,
 .o_apps_menu,
@@ -504,13 +432,12 @@ h6 {
     position: relative !important;
     overflow: hidden !important;
     isolation: isolate !important;
-    background:
-        linear-gradient(
-            var(--ui-app-menu-angle),
-            var(--ui-app-menu-bg-1) 0%,
-            var(--ui-app-menu-bg-2) 45%,
-            var(--ui-app-menu-bg-3) 100%
-        ) !important;
+    background: linear-gradient(
+        var(--ui-app-menu-angle),
+        var(--ui-app-menu-bg-1) 0%,
+        var(--ui-app-menu-bg-2) 45%,
+        var(--ui-app-menu-bg-3) 100%
+    ) !important;
 }
 
 .o_home_menu::before,
@@ -523,14 +450,13 @@ h6 {
     inset: 0;
     z-index: 0;
     pointer-events: none;
-    background:
-        radial-gradient(
-            circle at 50% 85%,
-            rgba(25, 191, 230, var(--ui-app-menu-overlay-opacity)) 0%,
-            rgba(25, 191, 230, calc(var(--ui-app-menu-overlay-opacity) * 0.55)) 18%,
-            rgba(25, 191, 230, calc(var(--ui-app-menu-overlay-opacity) * 0.20)) 30%,
-            rgba(0, 0, 0, 0) 48%
-        );
+    background: radial-gradient(
+        circle at 50% 85%,
+        rgba(25, 191, 230, var(--ui-app-menu-overlay-opacity)) 0%,
+        rgba(25, 191, 230, calc(var(--ui-app-menu-overlay-opacity) * 0.55)) 18%,
+        rgba(25, 191, 230, calc(var(--ui-app-menu-overlay-opacity) * 0.20)) 30%,
+        rgba(0, 0, 0, 0) 48%
+    );
 }
 
 .o_home_menu::after,
@@ -585,7 +511,7 @@ h6 {
     border-radius: var(--ui-border-radius) !important;
 }
 
-/* ===== INTERNAL LOGO ===== */
+/* INTERNAL LOGO */
 body::after {
     content: "";
     position: fixed;
@@ -602,7 +528,25 @@ body::after {
     opacity: 1;
 }
 
-/* ocultar logo cuando el menu principal jazzy está visible */
+/* FIX HOME MENU SIN ROMPER NAVBAR */
+body.ui-branding-home-menu-visible .o_web_client,
+body.ui-branding-home-menu-visible .o_action_manager,
+body.ui-branding-home-menu-visible .o_main_content,
+body.ui-branding-home-menu-visible .o_content,
+body.ui-branding-home-menu-visible .o_action_manager .o_content {
+    background: transparent !important;
+    background-color: transparent !important;
+}
+
+body.ui-branding-home-menu-visible .app_components,
+body.ui-branding-home-menu-visible .o_apps_menu,
+body.ui-branding-home-menu-visible .o_home_menu {
+    margin-top: 0 !important;
+    padding-top: 0 !important;
+    min-height: calc(100vh - 48px) !important;
+}
+
+/* ocultar watermark interno cuando está el home menu */
 body.ui-branding-home-menu-visible::after {
     display: none !important;
 }
