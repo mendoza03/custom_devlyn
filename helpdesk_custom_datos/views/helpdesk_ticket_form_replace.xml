@@ -11,6 +11,7 @@
 
             <xpath expr="//form" position="replace">
                 <form string="Ticket">
+                    <field name="name" invisible="1" />
 
                     <header>
                         <field name="stage_id" widget="statusbar" options="{'clickable': True}" />
@@ -1366,7 +1367,9 @@
                             </group>
 
                         </div>
-                        <div class="mt16" invisible="x_subcategory_code != 'atraso_lente_contacto'">
+
+                        <!-- CAMBIO 1: Antes solo validaba por subcategory_code -->
+                        <div class="mt16" invisible="not x_is_atraso_lente_contacto_online">
 
                             <div class="o_form_sheet bg-success text-white p-2 rounded-2 mb-3">
                                 <strong>Atraso lente de contacto.</strong>
@@ -1374,12 +1377,13 @@
 
                             <group col="2">
                                 <field name="x_online_pos_order"
-                                    required="x_subcategory_code == 'atraso_lente_contacto'" />
+                                    required="x_is_atraso_lente_contacto_online" />
                                 <field name="x_online_work_order_number"
-                                    required="x_subcategory_code == 'atraso_lente_contacto'" />
+                                    required="x_is_atraso_lente_contacto_online" />
                             </group>
 
                         </div>
+
                         <div class="mt16" invisible="x_subcategory_code != 'busqueda_armazon'">
 
                             <div class="o_form_sheet bg-success text-white p-2 rounded-2 mb-3">
@@ -1409,8 +1413,10 @@
                             </div>
 
                         </div>
+
+                        <!-- CAMBIO 2: Antes usaba x_is_receta_lc + subcategory_code -->
                         <div class="mt16"
-                            invisible="not (x_is_receta_lc and x_subcategory_code == 'atraso_lente_contacto')">
+                            invisible="not x_is_atraso_lente_contacto_receta">
 
                             <div class="o_form_sheet bg-success text-white p-2 rounded-2 mb-3">
                                 <strong>Atraso lente de contacto</strong>
@@ -1418,7 +1424,7 @@
 
                             <group col="4">
                                 <field name="x_lc_recipe_name"
-                                    required="x_is_receta_lc and x_subcategory_code == 'atraso_lente_contacto'" />
+                                    required="x_is_atraso_lente_contacto_receta" />
                             </group>
 
                             <div class="mt8">
@@ -1427,14 +1433,15 @@
 
                             <group col="4">
                                 <field name="x_lc_ot_number"
-                                    required="x_is_receta_lc and x_subcategory_code == 'atraso_lente_contacto'" />
+                                    required="x_is_atraso_lente_contacto_receta" />
                                 <field name="x_lc_order_number"
-                                    required="x_is_receta_lc and x_subcategory_code == 'atraso_lente_contacto'" />
+                                    required="x_is_atraso_lente_contacto_receta" />
                                 <field name="x_lc_provider"
-                                    required="x_is_receta_lc and x_subcategory_code == 'atraso_lente_contacto'" />
+                                    required="x_is_atraso_lente_contacto_receta" />
                             </group>
 
                         </div>
+
                         <div class="mt16"
                             invisible="x_subcategory_code not in ('calidad_micas', 'calidad_armazon')">
 
@@ -1801,7 +1808,9 @@
                             </group>
 
                         </div>
-                        <div class="mt16" invisible="x_subcategory_code != 'seguimiento_solicitud'">
+
+                        <!-- CAMBIO 3: bloque resurtido -->
+                        <div class="mt16" invisible="not x_is_seguimiento_solicitud_resurtido">
 
                             <div class="o_form_sheet bg-success text-white p-2 rounded-2 mb-3">
                                 <strong>Seguimiento de solicitud</strong>
@@ -1809,20 +1818,20 @@
 
                             <group col="4">
                                 <field name="x_supply_material_code"
-                                    required="x_subcategory_code == 'seguimiento_solicitud'" />
+                                    required="x_is_seguimiento_solicitud_resurtido" />
                                 <field name="x_supply_material_description"
-                                    required="x_subcategory_code == 'seguimiento_solicitud'" />
+                                    required="x_is_seguimiento_solicitud_resurtido" />
                                 <field name="x_supply_quantity"
-                                    required="x_subcategory_code == 'seguimiento_solicitud'" />
+                                    required="x_is_seguimiento_solicitud_resurtido" />
                                 <field name="x_supply_unit_measure"
-                                    required="x_subcategory_code == 'seguimiento_solicitud'" />
+                                    required="x_is_seguimiento_solicitud_resurtido" />
 
                                 <field name="x_supply_center"
-                                    required="x_subcategory_code == 'seguimiento_solicitud'" />
+                                    required="x_is_seguimiento_solicitud_resurtido" />
                                 <field name="x_supply_manager_approval_attached"
                                     widget="radio"
                                     options="{'horizontal': true}"
-                                    required="x_subcategory_code == 'seguimiento_solicitud'" />
+                                    required="x_is_seguimiento_solicitud_resurtido" />
                             </group>
 
                         </div>
@@ -1843,8 +1852,9 @@
 
                         </div>
 
+                        <!-- CAMBIO 4: bloque papelería -->
                         <div class="mt16"
-                            invisible="not (x_is_papeleria_seguimiento and x_subcategory_code == 'seguimiento_solicitud')">
+                            invisible="not x_is_seguimiento_solicitud_papeleria">
 
                             <div class="o_form_sheet bg-success text-white p-2 rounded-2 mb-3">
                                 <strong>Seguimiento de solicitud</strong>
@@ -1853,18 +1863,18 @@
                             <group col="4">
                                 <field name="x_supply_material_code" />
                                 <field name="x_supply_material_description"
-                                    required="x_is_papeleria_seguimiento and x_subcategory_code == 'seguimiento_solicitud'" />
+                                    required="x_is_seguimiento_solicitud_papeleria" />
                                 <field name="x_supply_quantity"
-                                    required="x_is_papeleria_seguimiento and x_subcategory_code == 'seguimiento_solicitud'" />
+                                    required="x_is_seguimiento_solicitud_papeleria" />
                                 <field name="x_supply_unit_measure"
-                                    required="x_is_papeleria_seguimiento and x_subcategory_code == 'seguimiento_solicitud'" />
+                                    required="x_is_seguimiento_solicitud_papeleria" />
 
                                 <field name="x_supply_center"
-                                    required="x_is_papeleria_seguimiento and x_subcategory_code == 'seguimiento_solicitud'" />
+                                    required="x_is_seguimiento_solicitud_papeleria" />
                                 <field name="x_supply_manager_approval_attached"
                                     widget="radio"
                                     options="{'horizontal': true}"
-                                    required="x_is_papeleria_seguimiento and x_subcategory_code == 'seguimiento_solicitud'" />
+                                    required="x_is_seguimiento_solicitud_papeleria" />
                             </group>
 
                         </div>
