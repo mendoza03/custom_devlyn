@@ -11,6 +11,7 @@
 
             <xpath expr="//form" position="replace">
                 <form string="Ticket">
+                    <field name="name" invisible="1" />
 
                     <header>
                         <field name="stage_id" widget="statusbar" options="{'clickable': True}" />
@@ -31,13 +32,13 @@
 
                         <group string="Datos generales">
                             <group>
-                                <field name="x_section_id" required="1" />
+                                <field name="x_section_id" />
                             </group>
                         </group>
 
                         <group>
                             <group>
-                                <field name="x_category_id" required="1" />
+                                <field name="x_category_id" />
                             </group>
                             <group>
                                 <field name="x_subcategory_id"
@@ -65,13 +66,19 @@
                             </div>
 
                             <group string="Micas sin cortar" col="6">
-                                <field name="x_order_number" required="1" />
-                                <field name="x_bag" required="1" />
-                                <field name="x_customer_warehouse" required="1" />
+                                <field name="x_order_number"
+                                    required="x_subcategory_code == 'micas_sin_cortar'" />
+                                <field name="x_bag"
+                                    required="x_subcategory_code == 'micas_sin_cortar'" />
+                                <field name="x_customer_warehouse"
+                                    required="x_subcategory_code == 'micas_sin_cortar'" />
 
-                                <field name="x_authorized_by" required="1" />
-                                <field name="x_lab_indicated" required="1" />
-                                <field name="x_order_type" required="1" />
+                                <field name="x_authorized_by"
+                                    required="x_subcategory_code == 'micas_sin_cortar'" />
+                                <field name="x_lab_indicated"
+                                    required="x_subcategory_code == 'micas_sin_cortar'" />
+                                <field name="x_order_type"
+                                    required="x_subcategory_code == 'micas_sin_cortar'" />
                             </group>
                         </div>
 
@@ -83,7 +90,8 @@
                             </div>
 
                             <group col="6">
-                                <field name="x_job_type" required="1" />
+                                <field name="x_job_type"
+                                    required="x_subcategory_code == 'trabajos_atrasados'" />
                             </group>
 
                             <div class="mt8">
@@ -92,16 +100,23 @@
                             </div>
 
                             <group col="6">
-                                <field name="x_original_order_number" required="1" />
-                                <field name="x_order_number" required="1" />
+                                <field name="x_original_order_number"
+                                    required="x_subcategory_code == 'trabajos_atrasados'" />
+                                <field name="x_order_number"
+                                    required="x_subcategory_code == 'trabajos_atrasados'" />
 
-                                <field name="x_customer_warehouse" required="1" />
-                                <field name="x_lab_indicated" required="1" />
+                                <field name="x_customer_warehouse"
+                                    required="x_subcategory_code == 'trabajos_atrasados'" />
+                                <field name="x_lab_indicated"
+                                    required="x_subcategory_code == 'trabajos_atrasados'" />
 
-                                <field name="x_shipping_guide_number" required="1" />
-                                <field name="x_frame_bag_number" required="1" />
+                                <field name="x_shipping_guide_number"
+                                    required="x_subcategory_code == 'trabajos_atrasados'" />
+                                <field name="x_frame_bag_number"
+                                    required="x_subcategory_code == 'trabajos_atrasados'" />
 
-                                <field name="x_order_type" required="1" />
+                                <field name="x_order_type"
+                                    required="x_subcategory_code == 'trabajos_atrasados'" />
                             </group>
 
                         </div>
@@ -114,7 +129,8 @@
                             </div>
 
                             <group col="6">
-                                <field name="x_order_type_adaptation" required="1" />
+                                <field name="x_order_type_adaptation"
+                                    required="x_order_type == 'satisfaccion_adaptacion'" />
                             </group>
                         </div>
 
@@ -126,7 +142,8 @@
                             </div>
 
                             <group col="6">
-                                <field name="x_order_type_adaptation" required="1" />
+                                <field name="x_order_type_adaptation"
+                                    required="x_order_type == 'satisfaccion_imagen'" />
                             </group>
                         </div>
 
@@ -136,9 +153,12 @@
                             </div>
 
                             <group col="6">
-                                <field name="x_branch_email" required="1" />
-                                <field name="x_email_issue_type_2" required="1" />
-                                <field name="x_contact_number" required="1" />
+                                <field name="x_branch_email"
+                                    required="x_subcategory_code == 'correo_electronico'" />
+                                <field name="x_email_issue_type_2"
+                                    required="x_subcategory_code == 'correo_electronico'" />
+                                <field name="x_contact_number"
+                                    required="x_subcategory_code == 'correo_electronico'" />
                             </group>
                         </div>
                         <div class="mt16" invisible="x_subcategory_code != 'equipo_computo'">
@@ -147,7 +167,8 @@
                             </div>
 
                             <group col="6">
-                                <field name="x_internal_folio_number" required="1" />
+                                <field name="x_internal_folio_number"
+                                    required="x_subcategory_code == 'equipo_computo'" />
                             </group>
 
                             <div class="mt8">
@@ -156,13 +177,19 @@
                             </div>
 
                             <group col="6">
-                                <field name="x_equipment_type" required="1" />
-                                <field name="x_model_or_brand" required="1" />
-                                <field name="x_serial_number" required="1" />
-                                <field name="x_fixed_asset_number" required="1" />
+                                <field name="x_equipment_type"
+                                    required="x_subcategory_code == 'equipo_computo'" />
+                                <field name="x_model_or_brand"
+                                    required="x_subcategory_code == 'equipo_computo'" />
+                                <field name="x_serial_number"
+                                    required="x_subcategory_code == 'equipo_computo'" />
+                                <field name="x_fixed_asset_number"
+                                    required="x_subcategory_code == 'equipo_computo'" />
 
-                                <field name="x_shipping_guide" required="1" />
-                                <field name="x_courier" required="1" />
+                                <field name="x_shipping_guide"
+                                    required="x_subcategory_code == 'equipo_computo'" />
+                                <field name="x_courier"
+                                    required="x_subcategory_code == 'equipo_computo'" />
                             </group>
                         </div>
                         <div class="mt16" invisible="x_subcategory_code != 'interredes'">
@@ -171,9 +198,12 @@
                             </div>
 
                             <group col="6">
-                                <field name="x_store_number" required="1" />
-                                <field name="x_interredes_user" required="1" />
-                                <field name="x_contact_number" required="1" />
+                                <field name="x_store_number"
+                                    required="x_subcategory_code == 'interredes'" />
+                                <field name="x_interredes_user"
+                                    required="x_subcategory_code == 'interredes'" />
+                                <field name="x_contact_number"
+                                    required="x_subcategory_code == 'interredes'" />
                             </group>
                         </div>
 
@@ -184,10 +214,14 @@
                             </div>
 
                             <group col="6">
-                                <field name="x_printer_model" required="1" />
-                                <field name="x_contact_number" required="1" />
-                                <field name="x_serial_number" required="1" />
-                                <field name="x_contact_person_name" required="1" />
+                                <field name="x_printer_model"
+                                    required="x_subcategory_code == 'problemas_impresora'" />
+                                <field name="x_contact_number"
+                                    required="x_subcategory_code == 'problemas_impresora'" />
+                                <field name="x_serial_number"
+                                    required="x_subcategory_code == 'problemas_impresora'" />
+                                <field name="x_contact_person_name"
+                                    required="x_subcategory_code == 'problemas_impresora'" />
                             </group>
 
                         </div>
@@ -198,11 +232,13 @@
                             </div>
 
                             <group col="6">
-                                <field name="x_printer_model" required="1" />
-                                <field name="x_contact_number" required="1" />
+                                <field name="x_printer_model"
+                                    required="x_subcategory_code == 'surtido_toner'" />
+                                <field name="x_contact_number"
+                                    required="x_subcategory_code == 'surtido_toner'" />
                                 <field name="x_serial_number"
                                     string="Número de serie de la impresora (empieza ZD7)"
-                                    required="1" />
+                                    required="x_subcategory_code == 'surtido_toner'" />
                             </group>
 
                             <div class="mt8 o_alert o_alert_info">
@@ -217,7 +253,8 @@
                                 del mismo. </div>
 
                             <group col="6" class="mt8">
-                                <field name="x_toner_below_15" required="1" />
+                                <field name="x_toner_below_15"
+                                    required="x_subcategory_code == 'surtido_toner'" />
                             </group>
 
                             <div class="mt8"
@@ -281,7 +318,8 @@
                             </div>
 
                             <group col="6">
-                                <field name="x_cleaning_area" required="1" />
+                                <field name="x_cleaning_area"
+                                    required="x_subcategory_code == 'limpieza_profunda'" />
                             </group>
 
                             <div class="mt8">
@@ -297,10 +335,14 @@
                             </div>
 
                             <group col="6">
-                                <field name="x_refac_order_number" required="1" />
-                                <field name="x_refac_sale_order" required="1" />
-                                <field name="x_refac_legal_name" required="1" />
-                                <field name="x_refac_rfc" required="1" />
+                                <field name="x_refac_order_number"
+                                    required="x_subcategory_code in ('error_captura_datos_fiscales','error_captura_uso_cfdi','error_captura_forma_pago','unificar_pedidos','dividir_pedido','unificar_conceptos','diferencia_convenio_credito','facturar_monto_especifico','periodo_facturacion_portal')" />
+                                <field name="x_refac_sale_order"
+                                    required="x_subcategory_code in ('error_captura_datos_fiscales','error_captura_uso_cfdi','error_captura_forma_pago','unificar_pedidos','dividir_pedido','unificar_conceptos','diferencia_convenio_credito','facturar_monto_especifico','periodo_facturacion_portal')" />
+                                <field name="x_refac_legal_name"
+                                    required="x_subcategory_code in ('error_captura_datos_fiscales','error_captura_uso_cfdi','error_captura_forma_pago','unificar_pedidos','dividir_pedido','unificar_conceptos','diferencia_convenio_credito','facturar_monto_especifico','periodo_facturacion_portal')" />
+                                <field name="x_refac_rfc"
+                                    required="x_subcategory_code in ('error_captura_datos_fiscales','error_captura_uso_cfdi','error_captura_forma_pago','unificar_pedidos','dividir_pedido','unificar_conceptos','diferencia_convenio_credito','facturar_monto_especifico','periodo_facturacion_portal')" />
                             </group>
 
                             <div class="mt8">
@@ -309,14 +351,19 @@
                             </div>
 
                             <group col="6" class="mt8">
-                                <field name="x_refac_sat_screen_attached" required="1" />
+                                <field name="x_refac_sat_screen_attached"
+                                    required="x_subcategory_code in ('error_captura_datos_fiscales','error_captura_uso_cfdi','error_captura_forma_pago','unificar_pedidos','dividir_pedido','unificar_conceptos','diferencia_convenio_credito','facturar_monto_especifico','periodo_facturacion_portal')" />
                             </group>
 
                             <group col="6" class="mt16">
-                                <field name="x_refac_payment_method" required="1" />
-                                <field name="x_refac_person_type" required="1" />
-                                <field name="x_refac_cfdi_use" required="1" />
-                                <field name="x_refac_fiscal_regime" required="1" />
+                                <field name="x_refac_payment_method"
+                                    required="x_subcategory_code in ('error_captura_datos_fiscales','error_captura_uso_cfdi','error_captura_forma_pago','unificar_pedidos','dividir_pedido','unificar_conceptos','diferencia_convenio_credito','facturar_monto_especifico','periodo_facturacion_portal')" />
+                                <field name="x_refac_person_type"
+                                    required="x_subcategory_code in ('error_captura_datos_fiscales','error_captura_uso_cfdi','error_captura_forma_pago','unificar_pedidos','dividir_pedido','unificar_conceptos','diferencia_convenio_credito','facturar_monto_especifico','periodo_facturacion_portal')" />
+                                <field name="x_refac_cfdi_use"
+                                    required="x_subcategory_code in ('error_captura_datos_fiscales','error_captura_uso_cfdi','error_captura_forma_pago','unificar_pedidos','dividir_pedido','unificar_conceptos','diferencia_convenio_credito','facturar_monto_especifico','periodo_facturacion_portal')" />
+                                <field name="x_refac_fiscal_regime"
+                                    required="x_subcategory_code in ('error_captura_datos_fiscales','error_captura_uso_cfdi','error_captura_forma_pago','unificar_pedidos','dividir_pedido','unificar_conceptos','diferencia_convenio_credito','facturar_monto_especifico','periodo_facturacion_portal')" />
                             </group>
 
                             <div class="mt16">
@@ -324,8 +371,10 @@
                             </div>
 
                             <group col="6">
-                                <field name="x_refac_fiscal_address" required="1" />
-                                <field name="x_refac_cp" required="1" />
+                                <field name="x_refac_fiscal_address"
+                                    required="x_subcategory_code in ('error_captura_datos_fiscales','error_captura_uso_cfdi','error_captura_forma_pago','unificar_pedidos','dividir_pedido','unificar_conceptos','diferencia_convenio_credito','facturar_monto_especifico','periodo_facturacion_portal')" />
+                                <field name="x_refac_cp"
+                                    required="x_subcategory_code in ('error_captura_datos_fiscales','error_captura_uso_cfdi','error_captura_forma_pago','unificar_pedidos','dividir_pedido','unificar_conceptos','diferencia_convenio_credito','facturar_monto_especifico','periodo_facturacion_portal')" />
                             </group>
 
                         </div>
@@ -337,24 +386,37 @@
                             </div>
 
                             <group col="4">
-                                <field name="x_card_client_name" required="1" />
-                                <field name="x_card_sap_center" required="1" />
-                                <field name="x_card_sale_order" required="1" />
-                                <field name="x_card_order_number" required="1" />
+                                <field name="x_card_client_name"
+                                    required="x_is_dev_real_tc_db and x_subcategory_code in ('cargos_duplicados', 'error_examen', 'fecha_entrega', 'mal_servicio')" />
+                                <field name="x_card_sap_center"
+                                    required="x_is_dev_real_tc_db and x_subcategory_code in ('cargos_duplicados', 'error_examen', 'fecha_entrega', 'mal_servicio')" />
+                                <field name="x_card_sale_order"
+                                    required="x_is_dev_real_tc_db and x_subcategory_code in ('cargos_duplicados', 'error_examen', 'fecha_entrega', 'mal_servicio')" />
+                                <field name="x_card_order_number"
+                                    required="x_is_dev_real_tc_db and x_subcategory_code in ('cargos_duplicados', 'error_examen', 'fecha_entrega', 'mal_servicio')" />
 
-                                <field name="x_card_sale_date" required="1" />
-                                <field name="x_card_sale_amount" required="1" />
-                                <field name="x_card_refund_amount" required="1" />
-                                <field name="x_card_refund_reason" required="1" />
+                                <field name="x_card_sale_date"
+                                    required="x_is_dev_real_tc_db and x_subcategory_code in ('cargos_duplicados', 'error_examen', 'fecha_entrega', 'mal_servicio')" />
+                                <field name="x_card_sale_amount"
+                                    required="x_is_dev_real_tc_db and x_subcategory_code in ('cargos_duplicados', 'error_examen', 'fecha_entrega', 'mal_servicio')" />
+                                <field name="x_card_refund_amount"
+                                    required="x_is_dev_real_tc_db and x_subcategory_code in ('cargos_duplicados', 'error_examen', 'fecha_entrega', 'mal_servicio')" />
+                                <field name="x_card_refund_reason"
+                                    required="x_is_dev_real_tc_db and x_subcategory_code in ('cargos_duplicados', 'error_examen', 'fecha_entrega', 'mal_servicio')" />
 
-                                <field name="x_card_number_16_digits" required="1" />
-                                <field name="x_card_expiration_mmaa" required="1" />
-                                <field name="x_card_authorization_number" required="1" />
-                                <field name="x_card_holder_relationship" required="1" />
+                                <field name="x_card_number_16_digits"
+                                    required="x_is_dev_real_tc_db and x_subcategory_code in ('cargos_duplicados', 'error_examen', 'fecha_entrega', 'mal_servicio')" />
+                                <field name="x_card_expiration_mmaa"
+                                    required="x_is_dev_real_tc_db and x_subcategory_code in ('cargos_duplicados', 'error_examen', 'fecha_entrega', 'mal_servicio')" />
+                                <field name="x_card_authorization_number"
+                                    required="x_is_dev_real_tc_db and x_subcategory_code in ('cargos_duplicados', 'error_examen', 'fecha_entrega', 'mal_servicio')" />
+                                <field name="x_card_holder_relationship"
+                                    required="x_is_dev_real_tc_db and x_subcategory_code in ('cargos_duplicados', 'error_examen', 'fecha_entrega', 'mal_servicio')" />
                             </group>
 
                             <group col="4" class="mt8">
-                                <field name="x_card_client_received_product" required="1" />
+                                <field name="x_card_client_received_product"
+                                    required="x_is_dev_real_tc_db and x_subcategory_code in ('cargos_duplicados', 'error_examen', 'fecha_entrega', 'mal_servicio')" />
                             </group>
 
                         </div>
@@ -367,11 +429,15 @@
                             </div>
 
                             <group col="4">
-                                <field name="x_duplicate_affiliation" required="1" />
-                                <field name="x_duplicate_tracking_id" required="1" />
-                                <field name="x_duplicate_internal_terminal" required="1" />
+                                <field name="x_duplicate_affiliation"
+                                    required="x_is_dev_real_tc_db and x_subcategory_code == 'cargos_duplicados'" />
+                                <field name="x_duplicate_tracking_id"
+                                    required="x_is_dev_real_tc_db and x_subcategory_code == 'cargos_duplicados'" />
+                                <field name="x_duplicate_internal_terminal"
+                                    required="x_is_dev_real_tc_db and x_subcategory_code == 'cargos_duplicados'" />
                                 <field name="x_duplicate_refund_request_attached" widget="radio"
-                                    options="{'horizontal': true}" required="1" />
+                                    options="{'horizontal': true}"
+                                    required="x_is_dev_real_tc_db and x_subcategory_code == 'cargos_duplicados'" />
                             </group>
 
                         </div>
@@ -386,12 +452,12 @@
                                 <field name="x_exam_ov_cancelled"
                                     widget="radio"
                                     options="{'horizontal': true}"
-                                    required="1" />
+                                    required="x_is_dev_real_tc_db and x_subcategory_code == 'error_examen'" />
 
                                 <field name="x_exam_refund_request_attached"
                                     widget="radio"
                                     options="{'horizontal': true}"
-                                    required="1" />
+                                    required="x_is_dev_real_tc_db and x_subcategory_code == 'error_examen'" />
                             </group>
 
                         </div>
@@ -406,12 +472,12 @@
                                 <field name="x_exam_ov_cancelled"
                                     widget="radio"
                                     options="{'horizontal': true}"
-                                    required="1" />
+                                    required="x_is_dev_real_tc_db and x_subcategory_code == 'fecha_entrega'" />
 
                                 <field name="x_exam_refund_request_attached"
                                     widget="radio"
                                     options="{'horizontal': true}"
-                                    required="1" />
+                                    required="x_is_dev_real_tc_db and x_subcategory_code == 'fecha_entrega'" />
                             </group>
 
                         </div>
@@ -423,19 +489,30 @@
                             </div>
 
                             <group col="4">
-                                <field name="x_card_client_name" required="1" />
-                                <field name="x_card_sap_center" required="1" />
-                                <field name="x_cash_society" required="1" />
-                                <field name="x_card_sale_order" required="1" />
+                                <field name="x_card_client_name"
+                                    required="x_is_dev_real_cash_order and x_subcategory_code in ('error_examen', 'fecha_entrega', 'mal_servicio')" />
+                                <field name="x_card_sap_center"
+                                    required="x_is_dev_real_cash_order and x_subcategory_code in ('error_examen', 'fecha_entrega', 'mal_servicio')" />
+                                <field name="x_cash_society"
+                                    required="x_is_dev_real_cash_order and x_subcategory_code in ('error_examen', 'fecha_entrega', 'mal_servicio')" />
+                                <field name="x_card_sale_order"
+                                    required="x_is_dev_real_cash_order and x_subcategory_code in ('error_examen', 'fecha_entrega', 'mal_servicio')" />
 
-                                <field name="x_card_order_number" required="1" />
-                                <field name="x_card_sale_date" required="1" />
-                                <field name="x_card_sale_amount" required="1" />
-                                <field name="x_card_refund_amount" required="1" />
+                                <field name="x_card_order_number"
+                                    required="x_is_dev_real_cash_order and x_subcategory_code in ('error_examen', 'fecha_entrega', 'mal_servicio')" />
+                                <field name="x_card_sale_date"
+                                    required="x_is_dev_real_cash_order and x_subcategory_code in ('error_examen', 'fecha_entrega', 'mal_servicio')" />
+                                <field name="x_card_sale_amount"
+                                    required="x_is_dev_real_cash_order and x_subcategory_code in ('error_examen', 'fecha_entrega', 'mal_servicio')" />
+                                <field name="x_card_refund_amount"
+                                    required="x_is_dev_real_cash_order and x_subcategory_code in ('error_examen', 'fecha_entrega', 'mal_servicio')" />
 
-                                <field name="x_card_refund_reason" required="1" />
-                                <field name="x_cash_banamex_branch_number" required="1" />
-                                <field name="x_cash_beneficiary_name" required="1" />
+                                <field name="x_card_refund_reason"
+                                    required="x_is_dev_real_cash_order and x_subcategory_code in ('error_examen', 'fecha_entrega', 'mal_servicio')" />
+                                <field name="x_cash_banamex_branch_number"
+                                    required="x_is_dev_real_cash_order and x_subcategory_code in ('error_examen', 'fecha_entrega', 'mal_servicio')" />
+                                <field name="x_cash_beneficiary_name"
+                                    required="x_is_dev_real_cash_order and x_subcategory_code in ('error_examen', 'fecha_entrega', 'mal_servicio')" />
                             </group>
 
                             <div class="mt8">
@@ -447,8 +524,10 @@
                             </div>
 
                             <group col="4" class="mt16">
-                                <field name="x_card_holder_relationship" required="1" />
-                                <field name="x_card_client_received_product" required="1" />
+                                <field name="x_card_holder_relationship"
+                                    required="x_is_dev_real_cash_order and x_subcategory_code in ('error_examen', 'fecha_entrega', 'mal_servicio')" />
+                                <field name="x_card_client_received_product"
+                                    required="x_is_dev_real_cash_order and x_subcategory_code in ('error_examen', 'fecha_entrega', 'mal_servicio')" />
                             </group>
 
                         </div>
@@ -464,12 +543,12 @@
                                 <field name="x_exam_ov_cancelled"
                                     widget="radio"
                                     options="{'horizontal': true}"
-                                    required="1" />
+                                    required="x_is_dev_real_cash_order and x_subcategory_code == 'error_examen'" />
 
                                 <field name="x_exam_refund_request_attached"
                                     widget="radio"
                                     options="{'horizontal': true}"
-                                    required="1" />
+                                    required="x_is_dev_real_cash_order and x_subcategory_code == 'error_examen'" />
                             </group>
 
                         </div>
@@ -484,12 +563,12 @@
                                 <field name="x_exam_ov_cancelled"
                                     widget="radio"
                                     options="{'horizontal': true}"
-                                    required="1" />
+                                    required="x_is_dev_real_cash_order and x_subcategory_code == 'fecha_entrega'" />
 
                                 <field name="x_exam_refund_request_attached"
                                     widget="radio"
                                     options="{'horizontal': true}"
-                                    required="1" />
+                                    required="x_is_dev_real_cash_order and x_subcategory_code == 'fecha_entrega'" />
                             </group>
 
                         </div>
@@ -501,25 +580,39 @@
                             </div>
 
                             <group col="4">
-                                <field name="x_card_client_name" required="1" />
-                                <field name="x_card_sap_center" required="1" />
-                                <field name="x_cash_society" required="1" />
-                                <field name="x_card_sale_order" required="1" />
+                                <field name="x_card_client_name"
+                                    required="x_is_dev_real_cash_transfer and x_subcategory_code in ('error_examen', 'fecha_entrega', 'mal_servicio')" />
+                                <field name="x_card_sap_center"
+                                    required="x_is_dev_real_cash_transfer and x_subcategory_code in ('error_examen', 'fecha_entrega', 'mal_servicio')" />
+                                <field name="x_cash_society"
+                                    required="x_is_dev_real_cash_transfer and x_subcategory_code in ('error_examen', 'fecha_entrega', 'mal_servicio')" />
+                                <field name="x_card_sale_order"
+                                    required="x_is_dev_real_cash_transfer and x_subcategory_code in ('error_examen', 'fecha_entrega', 'mal_servicio')" />
 
-                                <field name="x_card_order_number" required="1" />
-                                <field name="x_card_sale_date" required="1" />
-                                <field name="x_card_sale_amount" required="1" />
-                                <field name="x_card_refund_amount" required="1" />
+                                <field name="x_card_order_number"
+                                    required="x_is_dev_real_cash_transfer and x_subcategory_code in ('error_examen', 'fecha_entrega', 'mal_servicio')" />
+                                <field name="x_card_sale_date"
+                                    required="x_is_dev_real_cash_transfer and x_subcategory_code in ('error_examen', 'fecha_entrega', 'mal_servicio')" />
+                                <field name="x_card_sale_amount"
+                                    required="x_is_dev_real_cash_transfer and x_subcategory_code in ('error_examen', 'fecha_entrega', 'mal_servicio')" />
+                                <field name="x_card_refund_amount"
+                                    required="x_is_dev_real_cash_transfer and x_subcategory_code in ('error_examen', 'fecha_entrega', 'mal_servicio')" />
 
-                                <field name="x_card_refund_reason" required="1" />
-                                <field name="x_transfer_clabe_18" required="1" />
-                                <field name="x_transfer_account_holder" required="1" />
-                                <field name="x_transfer_bank" required="1" />
+                                <field name="x_card_refund_reason"
+                                    required="x_is_dev_real_cash_transfer and x_subcategory_code in ('error_examen', 'fecha_entrega', 'mal_servicio')" />
+                                <field name="x_transfer_clabe_18"
+                                    required="x_is_dev_real_cash_transfer and x_subcategory_code in ('error_examen', 'fecha_entrega', 'mal_servicio')" />
+                                <field name="x_transfer_account_holder"
+                                    required="x_is_dev_real_cash_transfer and x_subcategory_code in ('error_examen', 'fecha_entrega', 'mal_servicio')" />
+                                <field name="x_transfer_bank"
+                                    required="x_is_dev_real_cash_transfer and x_subcategory_code in ('error_examen', 'fecha_entrega', 'mal_servicio')" />
                             </group>
 
                             <group col="4" class="mt16">
-                                <field name="x_card_holder_relationship" required="1" />
-                                <field name="x_card_client_received_product" required="1" />
+                                <field name="x_card_holder_relationship"
+                                    required="x_is_dev_real_cash_transfer and x_subcategory_code in ('error_examen', 'fecha_entrega', 'mal_servicio')" />
+                                <field name="x_card_client_received_product"
+                                    required="x_is_dev_real_cash_transfer and x_subcategory_code in ('error_examen', 'fecha_entrega', 'mal_servicio')" />
                             </group>
 
                         </div>
@@ -535,12 +628,12 @@
                                 <field name="x_exam_ov_cancelled"
                                     widget="radio"
                                     options="{'horizontal': true}"
-                                    required="1" />
+                                    required="x_is_dev_real_cash_transfer and x_subcategory_code == 'error_examen'" />
 
                                 <field name="x_exam_refund_request_attached"
                                     widget="radio"
                                     options="{'horizontal': true}"
-                                    required="1" />
+                                    required="x_is_dev_real_cash_transfer and x_subcategory_code == 'error_examen'" />
                             </group>
 
                         </div>
@@ -555,12 +648,12 @@
                                 <field name="x_exam_ov_cancelled"
                                     widget="radio"
                                     options="{'horizontal': true}"
-                                    required="1" />
+                                    required="x_is_dev_real_cash_transfer and x_subcategory_code == 'fecha_entrega'" />
 
                                 <field name="x_exam_refund_request_attached"
                                     widget="radio"
                                     options="{'horizontal': true}"
-                                    required="1" />
+                                    required="x_is_dev_real_cash_transfer and x_subcategory_code == 'fecha_entrega'" />
                             </group>
 
                         </div>
@@ -571,11 +664,16 @@
                             </div>
 
                             <group col="4">
-                                <field name="x_ale_incident_type" required="1" />
-                                <field name="x_ale_employee_name" required="1" />
-                                <field name="x_ale_branch" required="1" />
-                                <field name="x_ale_region" required="1" />
-                                <field name="x_ale_district" required="1" />
+                                <field name="x_ale_incident_type"
+                                    required="x_subcategory_code == 'ale_pagina_web'" />
+                                <field name="x_ale_employee_name"
+                                    required="x_subcategory_code == 'ale_pagina_web'" />
+                                <field name="x_ale_branch"
+                                    required="x_subcategory_code == 'ale_pagina_web'" />
+                                <field name="x_ale_region"
+                                    required="x_subcategory_code == 'ale_pagina_web'" />
+                                <field name="x_ale_district"
+                                    required="x_subcategory_code == 'ale_pagina_web'" />
                             </group>
 
                         </div>
@@ -586,15 +684,23 @@
                             </div>
 
                             <group col="4">
-                                <field name="x_university_incident_type" required="1" />
-                                <field name="x_university_employee_name" required="1" />
-                                <field name="x_university_employee_number" required="1" />
-                                <field name="x_university_branch" required="1" />
+                                <field name="x_university_incident_type"
+                                    required="x_subcategory_code == 'universidad_devlyn'" />
+                                <field name="x_university_employee_name"
+                                    required="x_subcategory_code == 'universidad_devlyn'" />
+                                <field name="x_university_employee_number"
+                                    required="x_subcategory_code == 'universidad_devlyn'" />
+                                <field name="x_university_branch"
+                                    required="x_subcategory_code == 'universidad_devlyn'" />
 
-                                <field name="x_university_zone" required="1" />
-                                <field name="x_university_district" required="1" />
-                                <field name="x_university_course_name" required="1" />
-                                <field name="x_university_real_position" required="1" />
+                                <field name="x_university_zone"
+                                    required="x_subcategory_code == 'universidad_devlyn'" />
+                                <field name="x_university_district"
+                                    required="x_subcategory_code == 'universidad_devlyn'" />
+                                <field name="x_university_course_name"
+                                    required="x_subcategory_code == 'universidad_devlyn'" />
+                                <field name="x_university_real_position"
+                                    required="x_subcategory_code == 'universidad_devlyn'" />
                             </group>
 
                         </div>
@@ -607,12 +713,17 @@
 
                             <group col="4">
 
-                                <field name="x_eval_request_type" required="1" />
-                                <field name="x_eval_ale_incident" required="1" />
-                                <field name="x_eval_employee_name" required="1" />
-                                <field name="x_eval_employee_number" required="1" />
+                                <field name="x_eval_request_type"
+                                    required="x_subcategory_code == 'pagina_evaluaciones_productos'" />
+                                <field name="x_eval_ale_incident"
+                                    required="x_subcategory_code == 'pagina_evaluaciones_productos'" />
+                                <field name="x_eval_employee_name"
+                                    required="x_subcategory_code == 'pagina_evaluaciones_productos'" />
+                                <field name="x_eval_employee_number"
+                                    required="x_subcategory_code == 'pagina_evaluaciones_productos'" />
 
-                                <field name="x_eval_branch" required="1" />
+                                <field name="x_eval_branch"
+                                    required="x_subcategory_code == 'pagina_evaluaciones_productos'" />
 
                             </group>
 
@@ -626,10 +737,14 @@
                             </div>
 
                             <group col="4">
-                                <field name="x_eval_policies_type" required="1" />
-                                <field name="x_eval_policies_employee_name" required="1" />
-                                <field name="x_eval_policies_employee_number" required="1" />
-                                <field name="x_eval_policies_branch" required="1" />
+                                <field name="x_eval_policies_type"
+                                    required="x_subcategory_code == 'pagina_evaluaciones_politicas'" />
+                                <field name="x_eval_policies_employee_name"
+                                    required="x_subcategory_code == 'pagina_evaluaciones_politicas'" />
+                                <field name="x_eval_policies_employee_number"
+                                    required="x_subcategory_code == 'pagina_evaluaciones_politicas'" />
+                                <field name="x_eval_policies_branch"
+                                    required="x_subcategory_code == 'pagina_evaluaciones_politicas'" />
                             </group>
 
                         </div>
@@ -640,9 +755,12 @@
                             </div>
 
                             <group col="4">
-                                <field name="x_promotion_is_responsible" required="1" />
-                                <field name="x_promotion_interested_name" required="1" />
-                                <field name="x_promotion_employee_numbers" required="1" />
+                                <field name="x_promotion_is_responsible"
+                                    required="x_subcategory_code == 'promocion_puesto'" />
+                                <field name="x_promotion_interested_name"
+                                    required="x_subcategory_code == 'promocion_puesto'" />
+                                <field name="x_promotion_employee_numbers"
+                                    required="x_subcategory_code == 'promocion_puesto'" />
                             </group>
 
                         </div>
@@ -654,16 +772,23 @@
                             </div>
 
                             <group col="4">
-                                <field name="x_display_manual_read" required="1" />
-                                <field name="x_display_aparador_type" required="1" />
-                                <field name="x_display_checklist_review" required="1" />
-                                <field name="x_display_missing_campaign_aparador" required="1" />
+                                <field name="x_display_manual_read"
+                                    required="x_subcategory_code == 'display_campanas_aperturas'" />
+                                <field name="x_display_aparador_type"
+                                    required="x_subcategory_code == 'display_campanas_aperturas'" />
+                                <field name="x_display_checklist_review"
+                                    required="x_subcategory_code == 'display_campanas_aperturas'" />
+                                <field name="x_display_missing_campaign_aparador"
+                                    required="x_subcategory_code == 'display_campanas_aperturas'" />
 
-                                <field name="x_display_missing_promo_campaign" required="1" />
+                                <field name="x_display_missing_promo_campaign"
+                                    required="x_subcategory_code == 'display_campanas_aperturas'" />
                                 <field name="x_display_other" widget="radio"
-                                    options="{'horizontal': true}" required="1" />
+                                    options="{'horizontal': true}"
+                                    required="x_subcategory_code == 'display_campanas_aperturas'" />
                                 <field name="x_display_checklist_attached" widget="radio"
-                                    options="{'horizontal': true}" required="1" />
+                                    options="{'horizontal': true}"
+                                    required="x_subcategory_code == 'display_campanas_aperturas'" />
                             </group>
 
                         </div>
@@ -675,17 +800,21 @@
                             </div>
 
                             <group col="4">
-                                <field name="x_damaged_element_to_replace" required="1" />
-                                <field name="x_damaged_brief_description" required="1" />
-                                <field name="x_damaged_quantity" required="1" />
-                                <field name="x_damaged_measurements" required="1" />
+                                <field name="x_damaged_element_to_replace"
+                                    required="x_subcategory_code == 'reposicion_elemento_danado'" />
+                                <field name="x_damaged_brief_description"
+                                    required="x_subcategory_code == 'reposicion_elemento_danado'" />
+                                <field name="x_damaged_quantity"
+                                    required="x_subcategory_code == 'reposicion_elemento_danado'" />
+                                <field name="x_damaged_measurements"
+                                    required="x_subcategory_code == 'reposicion_elemento_danado'" />
                             </group>
 
                             <group col="4" class="mt8">
                                 <field name="x_damaged_photo_attached"
                                     widget="radio"
                                     options="{'horizontal': true}"
-                                    required="1" />
+                                    required="x_subcategory_code == 'reposicion_elemento_danado'" />
                             </group>
 
                         </div>
@@ -699,9 +828,12 @@
                             </div>
 
                             <group col="4">
-                                <field name="x_agreement_support_type" required="1" />
-                                <field name="x_agreement_number" required="1" />
-                                <field name="x_agreement_social_name" required="1" />
+                                <field name="x_agreement_support_type"
+                                    required="x_subcategory_code in ('apoyo_aplicar_convenio','convenios_institucionales','no_entran_manuales','dudas_promociones')" />
+                                <field name="x_agreement_number"
+                                    required="x_subcategory_code in ('apoyo_aplicar_convenio','convenios_institucionales','no_entran_manuales','dudas_promociones')" />
+                                <field name="x_agreement_social_name"
+                                    required="x_subcategory_code in ('apoyo_aplicar_convenio','convenios_institucionales','no_entran_manuales','dudas_promociones')" />
                             </group>
 
                         </div>
@@ -713,16 +845,23 @@
                             </div>
 
                             <group col="4">
-                                <field name="x_payment_center" required="1" />
-                                <field name="x_payment_pos_order" required="1" />
-                                <field name="x_payment_sale_date" required="1" />
-                                <field name="x_payment_sale_total" required="1" />
+                                <field name="x_payment_center"
+                                    required="x_subcategory_code == 'problema_pagos_anticipos'" />
+                                <field name="x_payment_pos_order"
+                                    required="x_subcategory_code == 'problema_pagos_anticipos'" />
+                                <field name="x_payment_sale_date"
+                                    required="x_subcategory_code == 'problema_pagos_anticipos'" />
+                                <field name="x_payment_sale_total"
+                                    required="x_subcategory_code == 'problema_pagos_anticipos'" />
                             </group>
 
                             <group col="3">
-                                <field name="x_payment_number_1" required="1" />
-                                <field name="x_payment_receipt_1" required="1" />
-                                <field name="x_payment_date_1" required="1" />
+                                <field name="x_payment_number_1"
+                                    required="x_subcategory_code == 'problema_pagos_anticipos'" />
+                                <field name="x_payment_receipt_1"
+                                    required="x_subcategory_code == 'problema_pagos_anticipos'" />
+                                <field name="x_payment_date_1"
+                                    required="x_subcategory_code == 'problema_pagos_anticipos'" />
                             </group>
 
                         </div>
@@ -742,15 +881,23 @@
                             </div>
 
                             <group col="4">
-                                <field name="x_capture_ov_error_type" required="1" />
-                                <field name="x_capture_ov_sphere_od" required="1" />
-                                <field name="x_capture_ov_sphere_oi" required="1" />
-                                <field name="x_capture_ov_material_type" required="1" />
+                                <field name="x_capture_ov_error_type"
+                                    required="x_subcategory_code == 'captura_ov'" />
+                                <field name="x_capture_ov_sphere_od"
+                                    required="x_subcategory_code == 'captura_ov'" />
+                                <field name="x_capture_ov_sphere_oi"
+                                    required="x_subcategory_code == 'captura_ov'" />
+                                <field name="x_capture_ov_material_type"
+                                    required="x_subcategory_code == 'captura_ov'" />
 
-                                <field name="x_capture_ov_work_type" required="1" />
-                                <field name="x_capture_ov_discount_type" required="1" />
-                                <field name="x_capture_ov_payment_type" required="1" />
-                                <field name="x_capture_ov_employee_number" required="1" />
+                                <field name="x_capture_ov_work_type"
+                                    required="x_subcategory_code == 'captura_ov'" />
+                                <field name="x_capture_ov_discount_type"
+                                    required="x_subcategory_code == 'captura_ov'" />
+                                <field name="x_capture_ov_payment_type"
+                                    required="x_subcategory_code == 'captura_ov'" />
+                                <field name="x_capture_ov_employee_number"
+                                    required="x_subcategory_code == 'captura_ov'" />
                             </group>
 
                         </div>
@@ -762,15 +909,21 @@
                             </div>
 
                             <group col="4">
-                                <field name="x_bag_number" required="1" />
-                                <field name="x_bag_key" required="1" />
-                                <field name="x_sap_branch_send" required="1" />
-                                <field name="x_sap_branch_receive" required="1" />
+                                <field name="x_bag_number"
+                                    required="x_subcategory_code == 'no_recepcionar_bolsa'" />
+                                <field name="x_bag_key"
+                                    required="x_subcategory_code == 'no_recepcionar_bolsa'" />
+                                <field name="x_sap_branch_send"
+                                    required="x_subcategory_code == 'no_recepcionar_bolsa'" />
+                                <field name="x_sap_branch_receive"
+                                    required="x_subcategory_code == 'no_recepcionar_bolsa'" />
                             </group>
 
                             <group col="2">
-                                <field name="x_transport_number" required="1" />
-                                <field name="x_transfer" required="1" />
+                                <field name="x_transport_number"
+                                    required="x_subcategory_code == 'no_recepcionar_bolsa'" />
+                                <field name="x_transfer"
+                                    required="x_subcategory_code == 'no_recepcionar_bolsa'" />
                             </group>
 
                         </div>
@@ -782,9 +935,12 @@
                             </div>
 
                             <group col="4">
-                                <field name="x_order_without_packaging_pos_order" required="1" />
-                                <field name="x_order_without_packaging_date" required="1" />
-                                <field name="x_order_without_packaging_branch" required="1" />
+                                <field name="x_order_without_packaging_pos_order"
+                                    required="x_subcategory_code == 'pedido_sin_embalaje'" />
+                                <field name="x_order_without_packaging_date"
+                                    required="x_subcategory_code == 'pedido_sin_embalaje'" />
+                                <field name="x_order_without_packaging_branch"
+                                    required="x_subcategory_code == 'pedido_sin_embalaje'" />
                             </group>
 
                         </div>
@@ -797,12 +953,17 @@
                             </div>
 
                             <group col="4">
-                                <field name="x_return_capture_error_type" required="1" />
-                                <field name="x_return_capture_type" required="1" />
-                                <field name="x_return_capture_sale_order" required="1" />
-                                <field name="x_return_capture_order" required="1" />
+                                <field name="x_return_capture_error_type"
+                                    required="x_subcategory_code == 'problema_captura_devolucion'" />
+                                <field name="x_return_capture_type"
+                                    required="x_subcategory_code == 'problema_captura_devolucion'" />
+                                <field name="x_return_capture_sale_order"
+                                    required="x_subcategory_code == 'problema_captura_devolucion'" />
+                                <field name="x_return_capture_order"
+                                    required="x_subcategory_code == 'problema_captura_devolucion'" />
 
-                                <field name="x_return_capture_cause_number" required="1" />
+                                <field name="x_return_capture_cause_number"
+                                    required="x_subcategory_code == 'problema_captura_devolucion'" />
                             </group>
 
                         </div>
@@ -814,12 +975,17 @@
                             </div>
 
                             <group col="4">
-                                <field name="x_rescue_client_name" required="1" />
-                                <field name="x_rescue_client_phone" required="1" />
-                                <field name="x_rescue_sale_order" required="1" />
-                                <field name="x_rescue_order_number" required="1" />
+                                <field name="x_rescue_client_name"
+                                    required="x_subcategory_code == 'rescate_cancelaciones_clientes_molestos'" />
+                                <field name="x_rescue_client_phone"
+                                    required="x_subcategory_code == 'rescate_cancelaciones_clientes_molestos'" />
+                                <field name="x_rescue_sale_order"
+                                    required="x_subcategory_code == 'rescate_cancelaciones_clientes_molestos'" />
+                                <field name="x_rescue_order_number"
+                                    required="x_subcategory_code == 'rescate_cancelaciones_clientes_molestos'" />
 
-                                <field name="x_rescue_client_email" required="1" />
+                                <field name="x_rescue_client_email"
+                                    required="x_subcategory_code == 'rescate_cancelaciones_clientes_molestos'" />
                             </group>
 
                         </div>
@@ -831,17 +997,23 @@
                             </div>
 
                             <group col="4">
-                                <field name="x_online_fulfillment" required="1" />
-                                <field name="x_online_sale_date" required="1" />
-                                <field name="x_online_customer_email" required="1" />
-                                <field name="x_online_pos_order" required="1" />
+                                <field name="x_online_fulfillment"
+                                    required="x_subcategory_code == 'pedidos_incompletos'" />
+                                <field name="x_online_sale_date"
+                                    required="x_subcategory_code == 'pedidos_incompletos'" />
+                                <field name="x_online_customer_email"
+                                    required="x_subcategory_code == 'pedidos_incompletos'" />
+                                <field name="x_online_pos_order"
+                                    required="x_subcategory_code == 'pedidos_incompletos'" />
 
-                                <field name="x_online_customer_name" required="1" />
-                                <field name="x_online_missing_product" required="1" />
+                                <field name="x_online_customer_name"
+                                    required="x_subcategory_code == 'pedidos_incompletos'" />
+                                <field name="x_online_missing_product"
+                                    required="x_subcategory_code == 'pedidos_incompletos'" />
                                 <field name="x_online_attachment_capture"
                                     widget="radio"
                                     options="{'horizontal': true}"
-                                    required="1" />
+                                    required="x_subcategory_code == 'pedidos_incompletos'" />
                             </group>
 
                         </div>
@@ -854,21 +1026,30 @@
                             </div>
 
                             <group col="4">
-                                <field name="x_online_fulfillment" required="1" />
-                                <field name="x_online_sale_date" required="1" />
-                                <field name="x_online_customer_email" required="1" />
-                                <field name="x_online_pos_order" required="1" />
+                                <field name="x_online_fulfillment"
+                                    required="x_subcategory_code == 'graduacion_incorrecta'" />
+                                <field name="x_online_sale_date"
+                                    required="x_subcategory_code == 'graduacion_incorrecta'" />
+                                <field name="x_online_customer_email"
+                                    required="x_subcategory_code == 'graduacion_incorrecta'" />
+                                <field name="x_online_pos_order"
+                                    required="x_subcategory_code == 'graduacion_incorrecta'" />
 
-                                <field name="x_online_customer_name" required="1" />
-                                <field name="x_online_requested_graduation" required="1" />
-                                <field name="x_online_received_graduation" required="1" />
+                                <field name="x_online_customer_name"
+                                    required="x_subcategory_code == 'graduacion_incorrecta'" />
+                                <field name="x_online_requested_graduation"
+                                    required="x_subcategory_code == 'graduacion_incorrecta'" />
+                                <field name="x_online_received_graduation"
+                                    required="x_subcategory_code == 'graduacion_incorrecta'" />
                                 <field name="x_online_attachment_capture"
                                     widget="radio"
                                     options="{'horizontal': true}"
-                                    required="1" />
+                                    required="x_subcategory_code == 'graduacion_incorrecta'" />
 
-                                <field name="x_online_return_sap_center" required="1" />
-                                <field name="x_online_return_bag_cedis" required="1" />
+                                <field name="x_online_return_sap_center"
+                                    required="x_subcategory_code == 'graduacion_incorrecta'" />
+                                <field name="x_online_return_bag_cedis"
+                                    required="x_subcategory_code == 'graduacion_incorrecta'" />
                             </group>
 
                         </div>
@@ -881,20 +1062,28 @@
                             </div>
 
                             <group col="4">
-                                <field name="x_online_fulfillment" required="1" />
-                                <field name="x_online_sale_date" required="1" />
-                                <field name="x_online_customer_email" required="1" />
-                                <field name="x_online_reported_customer_vtex" required="1" />
+                                <field name="x_online_fulfillment"
+                                    required="x_subcategory_code == 'pedido_otro_cliente'" />
+                                <field name="x_online_sale_date"
+                                    required="x_subcategory_code == 'pedido_otro_cliente'" />
+                                <field name="x_online_customer_email"
+                                    required="x_subcategory_code == 'pedido_otro_cliente'" />
+                                <field name="x_online_reported_customer_vtex"
+                                    required="x_subcategory_code == 'pedido_otro_cliente'" />
 
-                                <field name="x_online_pos_order" required="1" />
-                                <field name="x_online_arrived_order_vtex" required="1" />
-                                <field name="x_online_received_order_name" required="1" />
-                                <field name="x_online_received_product" required="1" />
+                                <field name="x_online_pos_order"
+                                    required="x_subcategory_code == 'pedido_otro_cliente'" />
+                                <field name="x_online_arrived_order_vtex"
+                                    required="x_subcategory_code == 'pedido_otro_cliente'" />
+                                <field name="x_online_received_order_name"
+                                    required="x_subcategory_code == 'pedido_otro_cliente'" />
+                                <field name="x_online_received_product"
+                                    required="x_subcategory_code == 'pedido_otro_cliente'" />
 
                                 <field name="x_online_attachment_capture"
                                     widget="radio"
                                     options="{'horizontal': true}"
-                                    required="1" />
+                                    required="x_subcategory_code == 'pedido_otro_cliente'" />
                             </group>
 
                         </div>
@@ -906,17 +1095,26 @@
                             </div>
 
                             <group col="4">
-                                <field name="x_online_fulfillment" required="1" />
-                                <field name="x_online_sale_date" required="1" />
-                                <field name="x_online_customer_email" required="1" />
-                                <field name="x_online_pos_order" required="1" />
+                                <field name="x_online_fulfillment"
+                                    required="x_subcategory_code == 'devolucion_pedidos'" />
+                                <field name="x_online_sale_date"
+                                    required="x_subcategory_code == 'devolucion_pedidos'" />
+                                <field name="x_online_customer_email"
+                                    required="x_subcategory_code == 'devolucion_pedidos'" />
+                                <field name="x_online_pos_order"
+                                    required="x_subcategory_code == 'devolucion_pedidos'" />
 
-                                <field name="x_online_customer_name" required="1" />
-                                <field name="x_online_return_reason" required="1" />
-                                <field name="x_online_return_bag_cedis" required="1" />
-                                <field name="x_online_payment_platform" required="1" />
+                                <field name="x_online_customer_name"
+                                    required="x_subcategory_code == 'devolucion_pedidos'" />
+                                <field name="x_online_return_reason"
+                                    required="x_subcategory_code == 'devolucion_pedidos'" />
+                                <field name="x_online_return_bag_cedis"
+                                    required="x_subcategory_code == 'devolucion_pedidos'" />
+                                <field name="x_online_payment_platform"
+                                    required="x_subcategory_code == 'devolucion_pedidos'" />
 
-                                <field name="x_online_payment_reference" required="1" />
+                                <field name="x_online_payment_reference"
+                                    required="x_subcategory_code == 'devolucion_pedidos'" />
                             </group>
 
                         </div>
@@ -930,13 +1128,19 @@
                             </div>
 
                             <group col="4">
-                                <field name="x_online_fulfillment" required="1" />
-                                <field name="x_online_sale_date" required="1" />
-                                <field name="x_online_customer_email" required="1" />
-                                <field name="x_online_pos_order" required="1" />
+                                <field name="x_online_fulfillment"
+                                    required="x_subcategory_code == 'graduacion_error_cliente'" />
+                                <field name="x_online_sale_date"
+                                    required="x_subcategory_code == 'graduacion_error_cliente'" />
+                                <field name="x_online_customer_email"
+                                    required="x_subcategory_code == 'graduacion_error_cliente'" />
+                                <field name="x_online_pos_order"
+                                    required="x_subcategory_code == 'graduacion_error_cliente'" />
 
-                                <field name="x_online_customer_name" required="1" />
-                                <field name="x_online_correct_graduation" required="1" />
+                                <field name="x_online_customer_name"
+                                    required="x_subcategory_code == 'graduacion_error_cliente'" />
+                                <field name="x_online_correct_graduation"
+                                    required="x_subcategory_code == 'graduacion_error_cliente'" />
                             </group>
 
                         </div>
@@ -947,13 +1151,19 @@
                             </div>
 
                             <group col="4">
-                                <field name="x_online_fulfillment" required="1" />
-                                <field name="x_online_sale_date" required="1" />
-                                <field name="x_online_customer_email" required="1" />
-                                <field name="x_online_pos_order" required="1" />
+                                <field name="x_online_fulfillment"
+                                    required="x_subcategory_code == 'pedidos_sin_estatus'" />
+                                <field name="x_online_sale_date"
+                                    required="x_subcategory_code == 'pedidos_sin_estatus'" />
+                                <field name="x_online_customer_email"
+                                    required="x_subcategory_code == 'pedidos_sin_estatus'" />
+                                <field name="x_online_pos_order"
+                                    required="x_subcategory_code == 'pedidos_sin_estatus'" />
 
-                                <field name="x_online_customer_name" required="1" />
-                                <field name="x_online_promised_date" required="1" />
+                                <field name="x_online_customer_name"
+                                    required="x_subcategory_code == 'pedidos_sin_estatus'" />
+                                <field name="x_online_promised_date"
+                                    required="x_subcategory_code == 'pedidos_sin_estatus'" />
                             </group>
 
                         </div>
@@ -964,15 +1174,23 @@
                             </div>
 
                             <group col="4">
-                                <field name="x_online_fulfillment" required="1" />
-                                <field name="x_online_sale_date" required="1" />
-                                <field name="x_online_customer_email" required="1" />
-                                <field name="x_online_pos_order" required="1" />
+                                <field name="x_online_fulfillment"
+                                    required="x_subcategory_code == 'paquete_retornado'" />
+                                <field name="x_online_sale_date"
+                                    required="x_subcategory_code == 'paquete_retornado'" />
+                                <field name="x_online_customer_email"
+                                    required="x_subcategory_code == 'paquete_retornado'" />
+                                <field name="x_online_pos_order"
+                                    required="x_subcategory_code == 'paquete_retornado'" />
 
-                                <field name="x_online_customer_name" required="1" />
-                                <field name="x_online_guide_number" required="1" />
-                                <field name="x_online_receiver_name" required="1" />
-                                <field name="x_online_contact_phone" required="1" />
+                                <field name="x_online_customer_name"
+                                    required="x_subcategory_code == 'paquete_retornado'" />
+                                <field name="x_online_guide_number"
+                                    required="x_subcategory_code == 'paquete_retornado'" />
+                                <field name="x_online_receiver_name"
+                                    required="x_subcategory_code == 'paquete_retornado'" />
+                                <field name="x_online_contact_phone"
+                                    required="x_subcategory_code == 'paquete_retornado'" />
                             </group>
 
                         </div>
@@ -983,18 +1201,28 @@
                             </div>
 
                             <group col="4">
-                                <field name="x_online_fulfillment" required="1" />
-                                <field name="x_online_sale_date" required="1" />
-                                <field name="x_online_customer_email" required="1" />
-                                <field name="x_online_client_phone" required="1" />
+                                <field name="x_online_fulfillment"
+                                    required="x_subcategory_code == 'cambio_domicilio'" />
+                                <field name="x_online_sale_date"
+                                    required="x_subcategory_code == 'cambio_domicilio'" />
+                                <field name="x_online_customer_email"
+                                    required="x_subcategory_code == 'cambio_domicilio'" />
+                                <field name="x_online_client_phone"
+                                    required="x_subcategory_code == 'cambio_domicilio'" />
 
-                                <field name="x_online_pos_order" required="1" />
-                                <field name="x_online_customer_name" required="1" />
-                                <field name="x_online_new_address" required="1" />
-                                <field name="x_online_receiver_name" required="1" />
+                                <field name="x_online_pos_order"
+                                    required="x_subcategory_code == 'cambio_domicilio'" />
+                                <field name="x_online_customer_name"
+                                    required="x_subcategory_code == 'cambio_domicilio'" />
+                                <field name="x_online_new_address"
+                                    required="x_subcategory_code == 'cambio_domicilio'" />
+                                <field name="x_online_receiver_name"
+                                    required="x_subcategory_code == 'cambio_domicilio'" />
 
-                                <field name="x_online_contact_phone" required="1" />
-                                <field name="x_online_additional_references" required="1" />
+                                <field name="x_online_contact_phone"
+                                    required="x_subcategory_code == 'cambio_domicilio'" />
+                                <field name="x_online_additional_references"
+                                    required="x_subcategory_code == 'cambio_domicilio'" />
                             </group>
 
                         </div>
@@ -1005,13 +1233,19 @@
                             </div>
 
                             <group col="4">
-                                <field name="x_online_fulfillment" required="1" />
-                                <field name="x_online_sale_date" required="1" />
-                                <field name="x_online_customer_email" required="1" />
-                                <field name="x_online_client_phone" required="1" />
+                                <field name="x_online_fulfillment"
+                                    required="x_subcategory_code == 'pedido_sin_capturar'" />
+                                <field name="x_online_sale_date"
+                                    required="x_subcategory_code == 'pedido_sin_capturar'" />
+                                <field name="x_online_customer_email"
+                                    required="x_subcategory_code == 'pedido_sin_capturar'" />
+                                <field name="x_online_client_phone"
+                                    required="x_subcategory_code == 'pedido_sin_capturar'" />
 
-                                <field name="x_online_pos_order" required="1" />
-                                <field name="x_online_customer_name" required="1" />
+                                <field name="x_online_pos_order"
+                                    required="x_subcategory_code == 'pedido_sin_capturar'" />
+                                <field name="x_online_customer_name"
+                                    required="x_subcategory_code == 'pedido_sin_capturar'" />
                             </group>
 
                         </div>
@@ -1023,49 +1257,66 @@
                             </div>
 
                             <group col="4">
-                                <field name="x_online_exam_sap_center" required="1" />
-                                <field name="x_online_exam_date" required="1" />
-                                <field name="x_online_exam_employee_number" required="1" />
-                                <field name="x_online_exam_employee_name" required="1" />
+                                <field name="x_online_exam_sap_center"
+                                    required="x_subcategory_code == 'graduacion_sucursal'" />
+                                <field name="x_online_exam_date"
+                                    required="x_subcategory_code == 'graduacion_sucursal'" />
+                                <field name="x_online_exam_employee_number"
+                                    required="x_subcategory_code == 'graduacion_sucursal'" />
+                                <field name="x_online_exam_employee_name"
+                                    required="x_subcategory_code == 'graduacion_sucursal'" />
 
-                                <field name="x_online_fulfillment" required="1" />
-                                <field name="x_online_sale_date" required="1" />
-                                <field name="x_online_customer_email" required="1" />
-                                <field name="x_online_payment_method" required="1" />
+                                <field name="x_online_fulfillment"
+                                    required="x_subcategory_code == 'graduacion_sucursal'" />
+                                <field name="x_online_sale_date"
+                                    required="x_subcategory_code == 'graduacion_sucursal'" />
+                                <field name="x_online_customer_email"
+                                    required="x_subcategory_code == 'graduacion_sucursal'" />
+                                <field name="x_online_payment_method"
+                                    required="x_subcategory_code == 'graduacion_sucursal'" />
 
-                                <field name="x_online_client_phone" required="1" />
+                                <field name="x_online_client_phone"
+                                    required="x_subcategory_code == 'graduacion_sucursal'" />
                             </group>
 
                             <div class="mt16">
                                 <strong>Esfera</strong>
                             </div>
                             <group col="2">
-                                <field name="x_online_sphere_od" required="1" />
-                                <field name="x_online_sphere_oi" required="1" />
+                                <field name="x_online_sphere_od"
+                                    required="x_subcategory_code == 'graduacion_sucursal'" />
+                                <field name="x_online_sphere_oi"
+                                    required="x_subcategory_code == 'graduacion_sucursal'" />
                             </group>
 
                             <div class="mt16">
                                 <strong>Cilindro</strong>
                             </div>
                             <group col="2">
-                                <field name="x_online_cylinder_od" required="1" />
-                                <field name="x_online_cylinder_oi" required="1" />
+                                <field name="x_online_cylinder_od"
+                                    required="x_subcategory_code == 'graduacion_sucursal'" />
+                                <field name="x_online_cylinder_oi"
+                                    required="x_subcategory_code == 'graduacion_sucursal'" />
                             </group>
 
                             <div class="mt16">
                                 <strong>Eje</strong>
                             </div>
                             <group col="2">
-                                <field name="x_online_axis_od" required="1" />
-                                <field name="x_online_axis_oi" required="1" />
+                                <field name="x_online_axis_od"
+                                    required="x_subcategory_code == 'graduacion_sucursal'" />
+                                <field name="x_online_axis_oi"
+                                    required="x_subcategory_code == 'graduacion_sucursal'" />
                             </group>
 
                             <div class="mt16">
                                 <strong>Distancia interpupilar</strong>
                             </div>
                             <group col="2">
-                                <field name="x_online_ipd_od" required="1" />
-                                <field name="x_online_ipd_oi" required="1" />
+                                <field name="x_online_ipd_od"
+                                    required="x_subcategory_code == 'graduacion_sucursal'" />
+                                <field name="x_online_ipd_oi"
+                                    required="x_subcategory_code == 'graduacion_sucursal'" />
                             </group>
 
                         </div>
@@ -1077,14 +1328,21 @@
                             </div>
 
                             <group col="4">
-                                <field name="x_online_fulfillment" required="1" />
-                                <field name="x_online_sale_date" required="1" />
-                                <field name="x_online_payment_method" required="1" />
-                                <field name="x_online_customer_email" required="1" />
+                                <field name="x_online_fulfillment"
+                                    required="x_subcategory_code == 'devolucion_sin_entregar'" />
+                                <field name="x_online_sale_date"
+                                    required="x_subcategory_code == 'devolucion_sin_entregar'" />
+                                <field name="x_online_payment_method"
+                                    required="x_subcategory_code == 'devolucion_sin_entregar'" />
+                                <field name="x_online_customer_email"
+                                    required="x_subcategory_code == 'devolucion_sin_entregar'" />
 
-                                <field name="x_online_client_phone" required="1" />
-                                <field name="x_online_unshipped_order" required="1" />
-                                <field name="x_online_payment_reference" required="1" />
+                                <field name="x_online_client_phone"
+                                    required="x_subcategory_code == 'devolucion_sin_entregar'" />
+                                <field name="x_online_unshipped_order"
+                                    required="x_subcategory_code == 'devolucion_sin_entregar'" />
+                                <field name="x_online_payment_reference"
+                                    required="x_subcategory_code == 'devolucion_sin_entregar'" />
                             </group>
 
                         </div>
@@ -1095,27 +1353,37 @@
                             </div>
 
                             <group col="4">
-                                <field name="x_online_fulfillment" required="1" />
-                                <field name="x_online_sale_date" required="1" />
-                                <field name="x_online_customer_email" required="1" />
-                                <field name="x_online_pos_order" required="1" />
+                                <field name="x_online_fulfillment"
+                                    required="x_subcategory_code == 'pedido_sin_envio'" />
+                                <field name="x_online_sale_date"
+                                    required="x_subcategory_code == 'pedido_sin_envio'" />
+                                <field name="x_online_customer_email"
+                                    required="x_subcategory_code == 'pedido_sin_envio'" />
+                                <field name="x_online_pos_order"
+                                    required="x_subcategory_code == 'pedido_sin_envio'" />
 
-                                <field name="x_online_customer_name" required="1" />
+                                <field name="x_online_customer_name"
+                                    required="x_subcategory_code == 'pedido_sin_envio'" />
                             </group>
 
                         </div>
-                        <div class="mt16" invisible="x_subcategory_code != 'atraso_lente_contacto'">
+
+                        <!-- CAMBIO 1: Antes solo validaba por subcategory_code -->
+                        <div class="mt16" invisible="not x_is_atraso_lente_contacto_online">
 
                             <div class="o_form_sheet bg-success text-white p-2 rounded-2 mb-3">
                                 <strong>Atraso lente de contacto.</strong>
                             </div>
 
                             <group col="2">
-                                <field name="x_online_pos_order" required="1" />
-                                <field name="x_online_work_order_number" required="1" />
+                                <field name="x_online_pos_order"
+                                    required="x_is_atraso_lente_contacto_online" />
+                                <field name="x_online_work_order_number"
+                                    required="x_is_atraso_lente_contacto_online" />
                             </group>
 
                         </div>
+
                         <div class="mt16" invisible="x_subcategory_code != 'busqueda_armazon'">
 
                             <div class="o_form_sheet bg-success text-white p-2 rounded-2 mb-3">
@@ -1123,14 +1391,21 @@
                             </div>
 
                             <group col="4">
-                                <field name="x_frame_search_sale_order" required="1" />
-                                <field name="x_frame_search_frame_code" required="1" />
-                                <field name="x_frame_search_packaging_bag" required="1" />
-                                <field name="x_frame_search_shipping_date" required="1" />
+                                <field name="x_frame_search_sale_order"
+                                    required="x_subcategory_code == 'busqueda_armazon'" />
+                                <field name="x_frame_search_frame_code"
+                                    required="x_subcategory_code == 'busqueda_armazon'" />
+                                <field name="x_frame_search_packaging_bag"
+                                    required="x_subcategory_code == 'busqueda_armazon'" />
+                                <field name="x_frame_search_shipping_date"
+                                    required="x_subcategory_code == 'busqueda_armazon'" />
 
-                                <field name="x_frame_search_courier" required="1" />
-                                <field name="x_frame_search_cause" required="1" />
-                                <field name="x_frame_search_other_specify" required="1" />
+                                <field name="x_frame_search_courier"
+                                    required="x_subcategory_code == 'busqueda_armazon'" />
+                                <field name="x_frame_search_cause"
+                                    required="x_subcategory_code == 'busqueda_armazon'" />
+                                <field name="x_frame_search_other_specify"
+                                    required="x_subcategory_code == 'busqueda_armazon'" />
                             </group>
 
                             <div class="mt8">
@@ -1138,15 +1413,18 @@
                             </div>
 
                         </div>
+
+                        <!-- CAMBIO 2: Antes usaba x_is_receta_lc + subcategory_code -->
                         <div class="mt16"
-                            invisible="not (x_is_receta_lc and x_subcategory_code == 'atraso_lente_contacto')">
+                            invisible="not x_is_atraso_lente_contacto_receta">
 
                             <div class="o_form_sheet bg-success text-white p-2 rounded-2 mb-3">
                                 <strong>Atraso lente de contacto</strong>
                             </div>
 
                             <group col="4">
-                                <field name="x_lc_recipe_name" required="1" />
+                                <field name="x_lc_recipe_name"
+                                    required="x_is_atraso_lente_contacto_receta" />
                             </group>
 
                             <div class="mt8">
@@ -1154,12 +1432,16 @@
                             </div>
 
                             <group col="4">
-                                <field name="x_lc_ot_number" required="1" />
-                                <field name="x_lc_order_number" required="1" />
-                                <field name="x_lc_provider" required="1" />
+                                <field name="x_lc_ot_number"
+                                    required="x_is_atraso_lente_contacto_receta" />
+                                <field name="x_lc_order_number"
+                                    required="x_is_atraso_lente_contacto_receta" />
+                                <field name="x_lc_provider"
+                                    required="x_is_atraso_lente_contacto_receta" />
                             </group>
 
                         </div>
+
                         <div class="mt16"
                             invisible="x_subcategory_code not in ('calidad_micas', 'calidad_armazon')">
 
@@ -1170,16 +1452,21 @@
                             </div>
 
                             <group col="4">
-                                <field name="x_quality_order_number" required="1" />
-                                <field name="x_quality_customer_name" required="1" />
-                                <field name="x_quality_customer_phone" required="1" />
-                                <field name="x_quality_shipping_bag" required="1" />
+                                <field name="x_quality_order_number"
+                                    required="x_subcategory_code in ('calidad_micas', 'calidad_armazon')" />
+                                <field name="x_quality_customer_name"
+                                    required="x_subcategory_code in ('calidad_micas', 'calidad_armazon')" />
+                                <field name="x_quality_customer_phone"
+                                    required="x_subcategory_code in ('calidad_micas', 'calidad_armazon')" />
+                                <field name="x_quality_shipping_bag"
+                                    required="x_subcategory_code in ('calidad_micas', 'calidad_armazon')" />
 
-                                <field name="x_quality_courier_guide" required="1" />
+                                <field name="x_quality_courier_guide"
+                                    required="x_subcategory_code in ('calidad_micas', 'calidad_armazon')" />
                                 <field name="x_quality_evidence_attached"
                                     widget="radio"
                                     options="{'horizontal': true}"
-                                    required="1" />
+                                    required="x_subcategory_code in ('calidad_micas', 'calidad_armazon')" />
                             </group>
 
                         </div>
@@ -1190,8 +1477,10 @@
                             </div>
 
                             <group col="4">
-                                <field name="x_medallia_employee_number" required="1" />
-                                <field name="x_medallia_employee_name" required="1" />
+                                <field name="x_medallia_employee_number"
+                                    required="x_subcategory_code == 'acceso_plataforma'" />
+                                <field name="x_medallia_employee_name"
+                                    required="x_subcategory_code == 'acceso_plataforma'" />
                             </group>
 
                             <div class="mt16 mb-2">
@@ -1267,8 +1556,10 @@
                             </div>
 
                             <group col="2">
-                                <field name="x_paq_pos_order" required="1" />
-                                <field name="x_bag_arrival" required="1" />
+                                <field name="x_paq_pos_order"
+                                    required="x_subcategory_code == 'implantar_bolsa'" />
+                                <field name="x_bag_arrival"
+                                    required="x_subcategory_code == 'implantar_bolsa'" />
                             </group>
 
                         </div>
@@ -1280,8 +1571,10 @@
                             </div>
 
                             <group col="2">
-                                <field name="x_delivery_oc" required="1" />
-                                <field name="x_bag_arrival" required="1" />
+                                <field name="x_delivery_oc"
+                                    required="x_subcategory_code == 'bolsa_abasto_no_implantada'" />
+                                <field name="x_bag_arrival"
+                                    required="x_subcategory_code == 'bolsa_abasto_no_implantada'" />
                             </group>
 
                         </div>
@@ -1293,8 +1586,10 @@
                             </div>
 
                             <group col="2">
-                                <field name="x_shipping_noncompliance_type" required="1" />
-                                <field name="x_shipping_assigned_courier" required="1" />
+                                <field name="x_shipping_noncompliance_type"
+                                    required="x_subcategory_code == 'incumplimiento_visita'" />
+                                <field name="x_shipping_assigned_courier"
+                                    required="x_subcategory_code == 'incumplimiento_visita'" />
                             </group>
 
                         </div>
@@ -1307,13 +1602,16 @@
                             </div>
 
                             <group col="4">
-                                <field name="x_shipping_arrival_bag" required="1" />
-                                <field name="x_shipping_guide_number_detail" required="1" />
-                                <field name="x_shipping_content_detail" required="1" />
+                                <field name="x_shipping_arrival_bag"
+                                    required="x_subcategory_code == 'paquetes_alterados'" />
+                                <field name="x_shipping_guide_number_detail"
+                                    required="x_subcategory_code == 'paquetes_alterados'" />
+                                <field name="x_shipping_content_detail"
+                                    required="x_subcategory_code == 'paquetes_alterados'" />
                                 <field name="x_shipping_photo_evidence_confirmed"
                                     widget="radio"
                                     options="{'horizontal': true}"
-                                    required="1" />
+                                    required="x_subcategory_code == 'paquetes_alterados'" />
                             </group>
 
                         </div>
@@ -1325,9 +1623,12 @@
                             </div>
 
                             <group col="4">
-                                <field name="x_shipping_unreceived_pos_order" required="1" />
-                                <field name="x_shipping_unreceived_arrival_bag" required="1" />
-                                <field name="x_shipping_unreceived_transport" required="1" />
+                                <field name="x_shipping_unreceived_pos_order"
+                                    required="x_subcategory_code == 'paquetes_no_recibidos_trabajo'" />
+                                <field name="x_shipping_unreceived_arrival_bag"
+                                    required="x_subcategory_code == 'paquetes_no_recibidos_trabajo'" />
+                                <field name="x_shipping_unreceived_transport"
+                                    required="x_subcategory_code == 'paquetes_no_recibidos_trabajo'" />
                             </group>
 
                         </div>
@@ -1347,7 +1648,8 @@
                             </div>
 
                             <group col="2">
-                                <field name="x_shipping_lab_followup_pos_order" required="1" />
+                                <field name="x_shipping_lab_followup_pos_order"
+                                    required="x_subcategory_code == 'seguimiento_laboratorio'" />
                             </group>
 
                         </div>
@@ -1367,12 +1669,14 @@
                             </div>
 
                             <group col="3">
-                                <field name="x_shipping_extraordinary_pos_order" required="1" />
-                                <field name="x_shipping_extraordinary_sap_center" required="1" />
+                                <field name="x_shipping_extraordinary_pos_order"
+                                    required="x_subcategory_code == 'envio_extraordinario'" />
+                                <field name="x_shipping_extraordinary_sap_center"
+                                    required="x_subcategory_code == 'envio_extraordinario'" />
                                 <field name="x_shipping_extraordinary_manager_authorization"
                                     widget="radio"
                                     options="{'horizontal': true}"
-                                    required="1" />
+                                    required="x_subcategory_code == 'envio_extraordinario'" />
                             </group>
 
                         </div>
@@ -1385,10 +1689,14 @@
                             </div>
 
                             <group col="4">
-                                <field name="x_shipping_missing_accessory_order" required="1" />
-                                <field name="x_shipping_missing_accessory_brand" required="1" />
-                                <field name="x_shipping_missing_accessory_arrival_date" required="1" />
-                                <field name="x_shipping_missing_accessory_supplier" required="1" />
+                                <field name="x_shipping_missing_accessory_order"
+                                    required="x_subcategory_code == 'faltante_accesorios_pedido'" />
+                                <field name="x_shipping_missing_accessory_brand"
+                                    required="x_subcategory_code == 'faltante_accesorios_pedido'" />
+                                <field name="x_shipping_missing_accessory_arrival_date"
+                                    required="x_subcategory_code == 'faltante_accesorios_pedido'" />
+                                <field name="x_shipping_missing_accessory_supplier"
+                                    required="x_subcategory_code == 'faltante_accesorios_pedido'" />
                             </group>
 
                             <div class="mt16">
@@ -1411,9 +1719,12 @@
                             </div>
 
                             <group col="4">
-                                <field name="x_shipping_missing_accessory_bag" required="1" />
-                                <field name="x_shipping_missing_accessory_brand" required="1" />
-                                <field name="x_shipping_missing_accessory_arrival_date" required="1" />
+                                <field name="x_shipping_missing_accessory_bag"
+                                    required="x_subcategory_code == 'faltante_accesorios_surtido'" />
+                                <field name="x_shipping_missing_accessory_brand"
+                                    required="x_subcategory_code == 'faltante_accesorios_surtido'" />
+                                <field name="x_shipping_missing_accessory_arrival_date"
+                                    required="x_subcategory_code == 'faltante_accesorios_surtido'" />
                             </group>
 
                             <div class="mt16">
@@ -1438,17 +1749,21 @@
                             </div>
 
                             <group col="4">
-                                <field name="x_bag_number" required="1" />
-                                <field name="x_prev_guide_number" required="1" />
-                                <field name="x_transport_number" required="1" />
-                                <field name="x_prev_courier_type" required="1" />
+                                <field name="x_bag_number"
+                                    required="x_subcategory_code in ('faltante_mercancia', 'sobrante_mercancia', 'mercancia_danada')" />
+                                <field name="x_prev_guide_number"
+                                    required="x_subcategory_code in ('faltante_mercancia', 'sobrante_mercancia', 'mercancia_danada')" />
+                                <field name="x_transport_number"
+                                    required="x_subcategory_code in ('faltante_mercancia', 'sobrante_mercancia', 'mercancia_danada')" />
+                                <field name="x_prev_courier_type"
+                                    required="x_subcategory_code in ('faltante_mercancia', 'sobrante_mercancia', 'mercancia_danada')" />
                             </group>
 
                             <group col="4" class="mt8">
                                 <field name="x_prev_photo_evidence_confirm"
                                     widget="radio"
                                     options="{'horizontal': true}"
-                                    required="1" />
+                                    required="x_subcategory_code in ('faltante_mercancia', 'sobrante_mercancia', 'mercancia_danada')" />
                             </group>
 
                         </div>
@@ -1463,10 +1778,14 @@
                             </div>
 
                             <group col="4">
-                                <field name="x_bag_number" required="1" />
-                                <field name="x_prev_guide_number" required="1" />
-                                <field name="x_transport_number" required="1" />
-                                <field name="x_prev_courier_type" required="1" />
+                                <field name="x_bag_number"
+                                    required="x_subcategory_code in ('extravio_mensajeria', 'extravio_sucursal')" />
+                                <field name="x_prev_guide_number"
+                                    required="x_subcategory_code in ('extravio_mensajeria', 'extravio_sucursal')" />
+                                <field name="x_transport_number"
+                                    required="x_subcategory_code in ('extravio_mensajeria', 'extravio_sucursal')" />
+                                <field name="x_prev_courier_type"
+                                    required="x_subcategory_code in ('extravio_mensajeria', 'extravio_sucursal')" />
                             </group>
 
                         </div>
@@ -1480,29 +1799,39 @@
                             </div>
 
                             <group col="3">
-                                <field name="x_report_whatsapp_date" required="1" />
-                                <field name="x_report_marketing_date" required="1" />
-                                <field name="x_report_attached" widget="radio" required="1" />
+                                <field name="x_report_whatsapp_date"
+                                    required="x_subcategory_code in ('reporte_dispositivos', 'reporte_aplicaciones')" />
+                                <field name="x_report_marketing_date"
+                                    required="x_subcategory_code in ('reporte_dispositivos', 'reporte_aplicaciones')" />
+                                <field name="x_report_attached" widget="radio"
+                                    required="x_subcategory_code in ('reporte_dispositivos', 'reporte_aplicaciones')" />
                             </group>
 
                         </div>
-                        <div class="mt16" invisible="x_subcategory_code != 'seguimiento_solicitud'">
+
+                        <!-- CAMBIO 3: bloque resurtido -->
+                        <div class="mt16" invisible="not x_is_seguimiento_solicitud_resurtido">
 
                             <div class="o_form_sheet bg-success text-white p-2 rounded-2 mb-3">
                                 <strong>Seguimiento de solicitud</strong>
                             </div>
 
                             <group col="4">
-                                <field name="x_supply_material_code" required="1" />
-                                <field name="x_supply_material_description" required="1" />
-                                <field name="x_supply_quantity" required="1" />
-                                <field name="x_supply_unit_measure" required="1" />
+                                <field name="x_supply_material_code"
+                                    required="x_is_seguimiento_solicitud_resurtido" />
+                                <field name="x_supply_material_description"
+                                    required="x_is_seguimiento_solicitud_resurtido" />
+                                <field name="x_supply_quantity"
+                                    required="x_is_seguimiento_solicitud_resurtido" />
+                                <field name="x_supply_unit_measure"
+                                    required="x_is_seguimiento_solicitud_resurtido" />
 
-                                <field name="x_supply_center" required="1" />
+                                <field name="x_supply_center"
+                                    required="x_is_seguimiento_solicitud_resurtido" />
                                 <field name="x_supply_manager_approval_attached"
                                     widget="radio"
                                     options="{'horizontal': true}"
-                                    required="1" />
+                                    required="x_is_seguimiento_solicitud_resurtido" />
                             </group>
 
                         </div>
@@ -1515,15 +1844,17 @@
                             </div>
 
                             <group col="3">
-                                <field name="x_lab_local_pos_order" required="1" />
+                                <field name="x_lab_local_pos_order"
+                                    required="x_subcategory_code == 'trabajos_atrasados_laboratorio_local'" />
                                 <field name="x_lab_local_promise_date" />
                                 <field name="x_lab_local_name" />
                             </group>
 
                         </div>
 
+                        <!-- CAMBIO 4: bloque papelería -->
                         <div class="mt16"
-                            invisible="not (x_is_papeleria_seguimiento and x_subcategory_code == 'seguimiento_solicitud')">
+                            invisible="not x_is_seguimiento_solicitud_papeleria">
 
                             <div class="o_form_sheet bg-success text-white p-2 rounded-2 mb-3">
                                 <strong>Seguimiento de solicitud</strong>
@@ -1531,15 +1862,19 @@
 
                             <group col="4">
                                 <field name="x_supply_material_code" />
-                                <field name="x_supply_material_description" required="1" />
-                                <field name="x_supply_quantity" required="1" />
-                                <field name="x_supply_unit_measure" required="1" />
+                                <field name="x_supply_material_description"
+                                    required="x_is_seguimiento_solicitud_papeleria" />
+                                <field name="x_supply_quantity"
+                                    required="x_is_seguimiento_solicitud_papeleria" />
+                                <field name="x_supply_unit_measure"
+                                    required="x_is_seguimiento_solicitud_papeleria" />
 
-                                <field name="x_supply_center" required="1" />
+                                <field name="x_supply_center"
+                                    required="x_is_seguimiento_solicitud_papeleria" />
                                 <field name="x_supply_manager_approval_attached"
                                     widget="radio"
                                     options="{'horizontal': true}"
-                                    required="1" />
+                                    required="x_is_seguimiento_solicitud_papeleria" />
                             </group>
 
                         </div>
@@ -1551,8 +1886,10 @@
                             </div>
 
                             <group col="4">
-                                <field name="x_supply_sku_code" required="1" />
-                                <field name="x_supply_material_description" required="1" />
+                                <field name="x_supply_sku_code"
+                                    required="x_subcategory_code == 'abasto_accesorios_soluciones'" />
+                                <field name="x_supply_material_description"
+                                    required="x_subcategory_code == 'abasto_accesorios_soluciones'" />
                             </group>
 
                         </div>
@@ -1612,9 +1949,12 @@
                             </div>
 
                             <group col="4">
-                                <field name="x_supply_frame_type" required="1" />
-                                <field name="x_supply_frame_brand_basic" required="1" />
-                                <field name="x_supply_material_description" required="1" />
+                                <field name="x_supply_frame_type"
+                                    required="x_subcategory_code == 'abasto_armazones'" />
+                                <field name="x_supply_frame_brand_basic"
+                                    required="x_subcategory_code == 'abasto_armazones'" />
+                                <field name="x_supply_material_description"
+                                    required="x_subcategory_code == 'abasto_armazones'" />
                             </group>
 
                         </div>
@@ -1626,9 +1966,12 @@
                             </div>
 
                             <group col="4">
-                                <field name="x_supply_return_folio" required="1" />
-                                <field name="x_supply_sku_code" required="1" />
-                                <field name="x_supply_material_description" required="1" />
+                                <field name="x_supply_return_folio"
+                                    required="x_subcategory_code == 'devoluciones_aplicadas'" />
+                                <field name="x_supply_sku_code"
+                                    required="x_subcategory_code == 'devoluciones_aplicadas'" />
+                                <field name="x_supply_material_description"
+                                    required="x_subcategory_code == 'devoluciones_aplicadas'" />
                             </group>
 
                         </div>
@@ -1639,9 +1982,11 @@
                             </div>
 
                             <group col="4">
-                                <field name="x_supply_sku_code" required="1" />
+                                <field name="x_supply_sku_code"
+                                    required="x_subcategory_code == 'gotas_soluciones_alcon'" />
                                 <field name="x_supply_material_description"
-                                    string="Descripción del producto (*)" required="1" />
+                                    string="Descripción del producto (*)"
+                                    required="x_subcategory_code == 'gotas_soluciones_alcon'" />
                             </group>
 
                         </div>

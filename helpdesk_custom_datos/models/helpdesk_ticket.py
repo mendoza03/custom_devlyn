@@ -1,10 +1,31 @@
-from odoo import api, fields, models
+from odoo import api, fields, models, _
+from odoo.exceptions import ValidationError
 
 
 class HelpdeskTicket(models.Model):
     _inherit = "helpdesk.ticket"
 
     x_general_description = fields.Char(string="Descripción General", required=True)
+
+
+    @api.onchange("x_general_description")
+    def _onchange_x_general_description_set_name(self):
+        for rec in self:
+            if rec.x_general_description:
+                rec.name = rec.x_general_description
+
+    @api.model_create_multi
+    def create(self, vals_list):
+        for vals in vals_list:
+            if vals.get("x_general_description") and not vals.get("name"):
+                vals["name"] = vals["x_general_description"]
+        return super().create(vals_list)
+
+    def write(self, vals):
+        if vals.get("x_general_description") and not vals.get("name"):
+            vals["name"] = vals["x_general_description"]
+        return super().write(vals)
+    
     x_section_id = fields.Many2one("helpdesk.section", string="Sección", required=True)
 
     x_category_id = fields.Many2one(
@@ -13,7 +34,7 @@ class HelpdeskTicket(models.Model):
         required=True,
         domain="[('section_id', '=', x_section_id)]",
     )
-    
+
     x_subcategory_id = fields.Many2one(
         "helpdesk.ticket.subcategory",
         string="Subcategoría",
@@ -21,7 +42,11 @@ class HelpdeskTicket(models.Model):
         domain="[('category_id', '=', x_category_id)]",
     )
 
-    x_subcategory_code = fields.Char(related="x_subcategory_id.code", store=True, readonly=True)
+    x_subcategory_code = fields.Char(
+        related="x_subcategory_id.code",
+        store=True,
+        readonly=True,
+    )
 
     x_detailed_description = fields.Html(string="Descripción Detallada")
 
@@ -57,10 +82,19 @@ class HelpdeskTicket(models.Model):
         default="select",
         copy=False,
     )
-    x_lab_indicated = fields.Char(string="LAB indicado en portal de seguimiento de trabajos", copy=False)
+    x_lab_indicated = fields.Char(
+        string="LAB indicado en portal de seguimiento de trabajos",
+        copy=False,
+    )
 
-    x_shipping_guide_number = fields.Char(string="Número de guía de envío de armazón", copy=False)
-    x_frame_bag_number = fields.Char(string="Número de bolsa de envío de armazón", copy=False)
+    x_shipping_guide_number = fields.Char(
+        string="Número de guía de envío de armazón",
+        copy=False,
+    )
+    x_frame_bag_number = fields.Char(
+        string="Número de bolsa de envío de armazón",
+        copy=False,
+    )
     x_authorized_by = fields.Char(string="Persona que Autoriza", copy=False)
     x_order_type_adaptation = fields.Selection(
         [
@@ -88,10 +122,16 @@ class HelpdeskTicket(models.Model):
     )
 
     x_branch_email = fields.Char(string="Correo electronico de Sucursal", copy=False)
-    x_email_issue_type_2 = fields.Char(string="Tipo de Error, Envio o Recepción",copy=False)
+    x_email_issue_type_2 = fields.Char(
+        string="Tipo de Error, Envio o Recepción",
+        copy=False,
+    )
     x_contact_number = fields.Char(string="Número de contacto", copy=False)
 
-    x_internal_folio_number = fields.Char(string="Número de folio interno.", copy=False)
+    x_internal_folio_number = fields.Char(
+        string="Número de folio interno.",
+        copy=False,
+    )
 
     x_equipment_type = fields.Selection(
         [
@@ -118,10 +158,7 @@ class HelpdeskTicket(models.Model):
     x_store_number = fields.Char(string="N° de comercio", copy=False)
     x_interredes_user = fields.Char(string="Usuario de Interredes", copy=False)
 
-    x_printer_model = fields.Char(
-        string="Modelo de impresora",
-        copy=False,
-    )
+    x_printer_model = fields.Char(string="Modelo de impresora", copy=False)
 
     x_contact_person_name = fields.Char(
         string="Nombre de la persona que nos contactó",
@@ -168,8 +205,10 @@ class HelpdeskTicket(models.Model):
         copy=False,
     )
 
-
-    x_is_facturacion_reenvio = fields.Boolean(compute="_compute_x_is_facturacion_reenvio", store=False)
+    x_is_facturacion_reenvio = fields.Boolean(
+        compute="_compute_x_is_facturacion_reenvio",
+        store=False,
+    )
     x_is_dev_real_tc_db = fields.Boolean(
         compute="_compute_x_devolucion_category_flags",
         store=False,
@@ -178,7 +217,6 @@ class HelpdeskTicket(models.Model):
         compute="_compute_x_devolucion_category_flags",
         store=False,
     )
-
     x_is_dev_real_cash_transfer = fields.Boolean(
         compute="_compute_x_devolucion_category_flags",
         store=False,
@@ -188,10 +226,39 @@ class HelpdeskTicket(models.Model):
         compute="_compute_x_category_flags_extra",
         store=False,
     )
+    x_is_papeleria_seguimiento = fields.Boolean(
+        compute="_compute_x_category_flags_extra",
+        store=False,
+    )
+    x_is_resurtido_consumibles_seguimiento = fields.Boolean(
+        compute="_compute_x_category_flags_extra",
+        store=False,
+    )
+
+    # Flags específicos para evitar bloques repetidos en la vista
+    x_is_atraso_lente_contacto_online = fields.Boolean(
+        compute="_compute_x_view_context_flags",
+        store=False,
+    )
+    x_is_atraso_lente_contacto_receta = fields.Boolean(
+        compute="_compute_x_view_context_flags",
+        store=False,
+    )
+    x_is_seguimiento_solicitud_papeleria = fields.Boolean(
+        compute="_compute_x_view_context_flags",
+        store=False,
+    )
+    x_is_seguimiento_solicitud_resurtido = fields.Boolean(
+        compute="_compute_x_view_context_flags",
+        store=False,
+    )
 
     x_refac_order_number = fields.Char(string="Pedido (*)", copy=False)
     x_refac_sale_order = fields.Char(string="Orden de Venta (*)", copy=False)
-    x_refac_legal_name = fields.Char(string="Nombre o denominación social (*)", copy=False)
+    x_refac_legal_name = fields.Char(
+        string="Nombre o denominación social (*)",
+        copy=False,
+    )
     x_refac_rfc = fields.Char(string="RFC (*)", copy=False)
 
     x_refac_sat_screen_attached = fields.Selection(
@@ -305,10 +372,22 @@ class HelpdeskTicket(models.Model):
     x_card_refund_amount = fields.Float(string="Monto a devolver (*)", copy=False)
     x_card_refund_reason = fields.Char(string="Motivo de devolución (*)", copy=False)
 
-    x_card_number_16_digits = fields.Char(string="N° completo de la tarjeta 16 dígitos (*)", copy=False)
-    x_card_expiration_mmaa = fields.Char(string="Fecha de Vencimiento MMAA (*)", copy=False)
-    x_card_authorization_number = fields.Char(string="Número de Autorización (*)", copy=False)
-    x_card_holder_relationship = fields.Char(string="Parentesco Titular de la tarjeta con nombre r (*)", copy=False)
+    x_card_number_16_digits = fields.Char(
+        string="N° completo de la tarjeta 16 dígitos (*)",
+        copy=False,
+    )
+    x_card_expiration_mmaa = fields.Char(
+        string="Fecha de Vencimiento MMAA (*)",
+        copy=False,
+    )
+    x_card_authorization_number = fields.Char(
+        string="Número de Autorización (*)",
+        copy=False,
+    )
+    x_card_holder_relationship = fields.Char(
+        string="Parentesco Titular de la tarjeta con nombre r (*)",
+        copy=False,
+    )
 
     x_card_client_received_product = fields.Selection(
         [
@@ -321,9 +400,18 @@ class HelpdeskTicket(models.Model):
         copy=False,
     )
 
-    x_duplicate_affiliation = fields.Char(string="Afiliación (Tarjeta y duplicados)", copy=False)
-    x_duplicate_tracking_id = fields.Char(string="No. de seguimiento o ID (Tarjeta y duplicados)", copy=False)
-    x_duplicate_internal_terminal = fields.Char(string="Terminal Interna (Tarjeta y duplicados)", copy=False)
+    x_duplicate_affiliation = fields.Char(
+        string="Afiliación (Tarjeta y duplicados)",
+        copy=False,
+    )
+    x_duplicate_tracking_id = fields.Char(
+        string="No. de seguimiento o ID (Tarjeta y duplicados)",
+        copy=False,
+    )
+    x_duplicate_internal_terminal = fields.Char(
+        string="Terminal Interna (Tarjeta y duplicados)",
+        copy=False,
+    )
 
     x_duplicate_refund_request_attached = fields.Selection(
         [
@@ -351,12 +439,26 @@ class HelpdeskTicket(models.Model):
         string="Solicitud de devolución adjunta?",
         copy=False,
     )
+
     x_cash_society = fields.Char(string="Sociedad (*)", copy=False)
-    x_cash_banamex_branch_number = fields.Char(string="Número de sucursal Banamex (*)", copy=False)
-    x_cash_beneficiary_name = fields.Char(string="Nombre del beneficiario (*)", copy=False)
-    x_transfer_clabe_18 = fields.Char(string="Cuenta Clabe 18 dígitos (*)", copy=False)
-    x_transfer_account_holder = fields.Char(string="Titular de la cuenta (*)", copy=False)
+    x_cash_banamex_branch_number = fields.Char(
+        string="Número de sucursal Banamex (*)",
+        copy=False,
+    )
+    x_cash_beneficiary_name = fields.Char(
+        string="Nombre del beneficiario (*)",
+        copy=False,
+    )
+    x_transfer_clabe_18 = fields.Char(
+        string="Cuenta Clabe 18 dígitos (*)",
+        copy=False,
+    )
+    x_transfer_account_holder = fields.Char(
+        string="Titular de la cuenta (*)",
+        copy=False,
+    )
     x_transfer_bank = fields.Char(string="Banco (*)", copy=False)
+
     x_ale_incident_type = fields.Selection(
         [
             ("select", "-- seleccionar --"),
@@ -435,6 +537,7 @@ class HelpdeskTicket(models.Model):
     x_eval_employee_name = fields.Char(string="Nombre del empleado (*)", copy=False)
     x_eval_employee_number = fields.Char(string="N° de empleado (*)", copy=False)
     x_eval_branch = fields.Char(string="Sucursal (*)", copy=False)
+
     x_eval_policies_type = fields.Selection(
         [
             ("select", "-- seleccionar --"),
@@ -449,9 +552,16 @@ class HelpdeskTicket(models.Model):
         copy=False,
     )
 
-    x_eval_policies_employee_name = fields.Char(string="Nombre del empleado (*)", copy=False)
-    x_eval_policies_employee_number = fields.Char(string="N° de empleado (*)", copy=False)
+    x_eval_policies_employee_name = fields.Char(
+        string="Nombre del empleado (*)",
+        copy=False,
+    )
+    x_eval_policies_employee_number = fields.Char(
+        string="N° de empleado (*)",
+        copy=False,
+    )
     x_eval_policies_branch = fields.Char(string="Sucursal (*)", copy=False)
+
     x_promotion_is_responsible = fields.Selection(
         [
             ("select", "-- seleccionar --"),
@@ -467,11 +577,11 @@ class HelpdeskTicket(models.Model):
         string="Nombre del interesado (*)",
         copy=False,
     )
-
     x_promotion_employee_numbers = fields.Char(
         string="Numero(s) de empleados (*)",
         copy=False,
     )
+
     x_display_missing_promo_campaign = fields.Selection(
         [
             ("select", "-- seleccionar --"),
@@ -549,82 +659,16 @@ class HelpdeskTicket(models.Model):
         copy=False,
     )
 
-    x_display_manual_read = fields.Selection(
-        [
-            ("select", "-- seleccionar --"),
-            ("si", "Sí"),
-            ("no", "No"),
-        ],
-        string="Lei el manual (*)",
-        default="select",
-        copy=False,
-    )
-
-    x_display_aparador_type = fields.Char(string="Tipo de Aparador (*)", copy=False)
-
-    x_display_checklist_review = fields.Selection(
-        [
-            ("select", "-- seleccionar --"),
-            ("si", "Sí"),
-            ("no", "No"),
-        ],
-        string="Revise Check List (*)",
-        default="select",
-        copy=False,
-    )
-
-    x_display_missing_campaign_aparador = fields.Selection(
-        [
-            ("select", "-- seleccionar --"),
-            ("cenefa_repisa", "Cenefa de repisa"),
-            ("colgante", "Colgante"),
-            ("paquete_no_llego", "El paquete no llego"),
-            ("lona_aparador", "Lona de Aparador"),
-            ("solicitud_adicional", "Solicitud Adicional"),
-            ("vinil_aparador", "Vinil de Aparador"),
-        ],
-        string="Faltante de Campaña en Aparador",
-        default="select",
-        copy=False,
-    )
-
-    x_display_other = fields.Selection(
-        [
-            ("si", "Sí"),
-            ("no", "No"),
-        ],
-        string="Otro",
-        copy=False,
-    )
-
-    x_display_checklist_attached = fields.Selection(
-        [
-            ("si", "Sí"),
-            ("no", "No"),
-        ],
-        string="Es obligatorio añadir el check list donde se señale el elemento faltante.",
-        copy=False,
-    )
-
     x_damaged_element_to_replace = fields.Char(
         string="Elemento dañado a reponer (*)",
         copy=False,
     )
-
     x_damaged_brief_description = fields.Char(
         string="Breve Descripción (*)",
         copy=False,
     )
-
-    x_damaged_quantity = fields.Char(
-        string="Cantidad (*)",
-        copy=False,
-    )
-
-    x_damaged_measurements = fields.Char(
-        string="Medidas (*)",
-        copy=False,
-    )
+    x_damaged_quantity = fields.Char(string="Cantidad (*)", copy=False)
+    x_damaged_measurements = fields.Char(string="Medidas (*)", copy=False)
 
     x_damaged_photo_attached = fields.Selection(
         [
@@ -647,51 +691,19 @@ class HelpdeskTicket(models.Model):
         copy=False,
     )
 
-    x_agreement_number = fields.Char(
-        string="N° de Convenio (*)",
-        copy=False,
-    )
-
+    x_agreement_number = fields.Char(string="N° de Convenio (*)", copy=False)
     x_agreement_social_name = fields.Char(
         string="Nombre o denominación social (*)",
         copy=False,
     )
 
-    x_payment_center = fields.Char(
-        string="Centro (*)",
-        copy=False,
-    )
-
-    x_payment_pos_order = fields.Char(
-        string="Pedido POS. (*)",
-        copy=False,
-    )
-
-    x_payment_sale_date = fields.Date(
-        string="Fecha de Venta (*)",
-        copy=False,
-    )
-
-    x_payment_sale_total = fields.Float(
-        string="Total de Venta (*)",
-        copy=False,
-    )
-
-    x_payment_number_1 = fields.Char(
-        string="Pago N°1 (*)",
-        copy=False,
-    )
-
-    x_payment_receipt_1 = fields.Char(
-        string="Recibo N°1 (*)",
-        copy=False,
-    )
-
-    x_payment_date_1 = fields.Date(
-        string="Fecha de pago N°1 (*)",
-        copy=False,
-    )
-
+    x_payment_center = fields.Char(string="Centro (*)", copy=False)
+    x_payment_pos_order = fields.Char(string="Pedido POS. (*)", copy=False)
+    x_payment_sale_date = fields.Date(string="Fecha de Venta (*)", copy=False)
+    x_payment_sale_total = fields.Float(string="Total de Venta (*)", copy=False)
+    x_payment_number_1 = fields.Char(string="Pago N°1 (*)", copy=False)
+    x_payment_receipt_1 = fields.Char(string="Recibo N°1 (*)", copy=False)
+    x_payment_date_1 = fields.Date(string="Fecha de pago N°1 (*)", copy=False)
 
     x_capture_ov_error_type = fields.Selection(
         [
@@ -714,31 +726,19 @@ class HelpdeskTicket(models.Model):
     x_capture_ov_payment_type = fields.Char(string="Tipo de Pago (*)", copy=False)
     x_capture_ov_employee_number = fields.Char(string="N° de empleado (*)", copy=False)
 
-    x_bag_number = fields.Char(
-        string="Bolsa (*)",
-        copy=False,
-    )
-
-    x_bag_key = fields.Char(
-        string="Clave de la bolsa (*)",
-        copy=False,
-    )
+    x_bag_number = fields.Char(string="Bolsa (*)", copy=False)
+    x_bag_key = fields.Char(string="Clave de la bolsa (*)", copy=False)
 
     x_sap_branch_send = fields.Char(
         string="N° de sucursal SAP que envía traspaso (Ejem.: A303) (*)",
         copy=False,
     )
-
     x_sap_branch_receive = fields.Char(
         string="N° de sucursal SAP que recibe traspaso (Ejem.: A304) (*)",
         copy=False,
     )
 
-    x_transport_number = fields.Char(
-        string="N° de Transporte (*)",
-        copy=False,
-    )
-
+    x_transport_number = fields.Char(string="N° de Transporte (*)", copy=False)
     x_transfer = fields.Selection(
         [
             ("select", "-- seleccionar --"),
@@ -750,21 +750,16 @@ class HelpdeskTicket(models.Model):
         copy=False,
     )
 
-
     x_order_without_packaging_pos_order = fields.Char(
         string="Pedido POS. (*)",
         copy=False,
     )
-
-    x_order_without_packaging_date = fields.Date(
-        string="Fecha (*)",
-        copy=False,
-    )
-
+    x_order_without_packaging_date = fields.Date(string="Fecha (*)", copy=False)
     x_order_without_packaging_branch = fields.Char(
         string="Centro o Sucursal (*)",
         copy=False,
     )
+
     x_return_capture_error_type = fields.Selection(
         [
             ("select", "-- seleccionar --"),
@@ -794,37 +789,19 @@ class HelpdeskTicket(models.Model):
         string="Orden de Venta (*)",
         copy=False,
     )
-
-    x_return_capture_order = fields.Char(
-        string="Pedido (*)",
-        copy=False,
-    )
-
+    x_return_capture_order = fields.Char(string="Pedido (*)", copy=False)
     x_return_capture_cause_number = fields.Char(
         string="Causa Número (*)",
         copy=False,
     )
 
-    x_rescue_client_name = fields.Char(
-        string="Nombre del cliente (*)",
-        copy=False,
-    )
-
+    x_rescue_client_name = fields.Char(string="Nombre del cliente (*)", copy=False)
     x_rescue_client_phone = fields.Char(
         string="Teléfono del cliente. (*)",
         copy=False,
     )
-
-    x_rescue_sale_order = fields.Char(
-        string="Orden de Venta (*)",
-        copy=False,
-    )
-
-    x_rescue_order_number = fields.Char(
-        string="Pedido (*)",
-        copy=False,
-    )
-
+    x_rescue_sale_order = fields.Char(string="Orden de Venta (*)", copy=False)
+    x_rescue_order_number = fields.Char(string="Pedido (*)", copy=False)
     x_rescue_client_email = fields.Char(
         string="Correo electronico del cliente (*)",
         copy=False,
@@ -832,7 +809,10 @@ class HelpdeskTicket(models.Model):
 
     x_online_fulfillment = fields.Char(string="Fullfilment (*)", copy=False)
     x_online_sale_date = fields.Date(string="Fecha de Venta (*)", copy=False)
-    x_online_customer_email = fields.Char(string="Correo Electronico del Cliente", copy=False)
+    x_online_customer_email = fields.Char(
+        string="Correo Electronico del Cliente",
+        copy=False,
+    )
     x_online_pos_order = fields.Char(string="Pedido POS. (*)", copy=False)
     x_online_customer_name = fields.Char(string="Nombre del Cliente (*)", copy=False)
 
@@ -845,20 +825,52 @@ class HelpdeskTicket(models.Model):
         copy=False,
     )
 
-    x_online_missing_product = fields.Char(string="Producto faltante (*)", copy=False)
+    x_online_missing_product = fields.Char(
+        string="Producto faltante (*)",
+        copy=False,
+    )
+    x_online_requested_graduation = fields.Char(
+        string="Graduación solicitada (*)",
+        copy=False,
+    )
+    x_online_received_graduation = fields.Char(
+        string="Graduación recibida (*)",
+        copy=False,
+    )
+    x_online_return_sap_center = fields.Char(
+        string="Centro SAP en el que el cliente devolverá (*)",
+        copy=False,
+    )
+    x_online_return_bag_cedis = fields.Char(
+        string="Bolsa en la que se retorna el pedido a CeDIs (*)",
+        copy=False,
+    )
 
-    x_online_requested_graduation = fields.Char(string="Graduación solicitada (*)", copy=False)
-    x_online_received_graduation = fields.Char(string="Graduación recibida (*)", copy=False)
-    x_online_return_sap_center = fields.Char(string="Centro SAP en el que el cliente devolverá (*)", copy=False)
-    x_online_return_bag_cedis = fields.Char(string="Bolsa en la que se retorna el pedido a CeDIs (*)", copy=False)
+    x_online_reported_customer_vtex = fields.Char(
+        string="Vtex de cliente que reporta (*)",
+        copy=False,
+    )
+    x_online_arrived_order_vtex = fields.Char(
+        string="Vtex de pedido que le llegó al cliente (*)",
+        copy=False,
+    )
+    x_online_received_order_name = fields.Char(
+        string="A nombre de quién está el pedido recibido: (*)",
+        copy=False,
+    )
+    x_online_received_product = fields.Char(
+        string="Producto recibido (*)",
+        copy=False,
+    )
 
-    x_online_reported_customer_vtex = fields.Char(string="Vtex de cliente que reporta (*)", copy=False)
-    x_online_arrived_order_vtex = fields.Char(string="Vtex de pedido que le llegó al cliente (*)", copy=False)
-    x_online_received_order_name = fields.Char(string="A nombre de quién está el pedido recibido: (*)", copy=False)
-    x_online_received_product = fields.Char(string="Producto recibido (*)", copy=False)
-
-    x_online_return_reason = fields.Char(string="Razón por la que solicita devolución (*)", copy=False)
-    x_online_payment_reference = fields.Char(string="Referencia de pago (*)", copy=False)
+    x_online_return_reason = fields.Char(
+        string="Razón por la que solicita devolución (*)",
+        copy=False,
+    )
+    x_online_payment_reference = fields.Char(
+        string="Referencia de pago (*)",
+        copy=False,
+    )
 
     x_online_payment_platform = fields.Selection(
         [
@@ -871,10 +883,12 @@ class HelpdeskTicket(models.Model):
         default="select",
         copy=False,
     )
-    x_online_correct_graduation = fields.Char(string="Graduación correcta (*)", copy=False)
 
+    x_online_correct_graduation = fields.Char(
+        string="Graduación correcta (*)",
+        copy=False,
+    )
     x_online_promised_date = fields.Date(string="Fecha Promesa", copy=False)
-
     x_online_guide_number = fields.Char(string="N° de guía (*)", copy=False)
     x_online_receiver_name = fields.Char(
         string="Nombre de persona que puede recibir el paquete además del titular.",
@@ -882,9 +896,18 @@ class HelpdeskTicket(models.Model):
     )
     x_online_contact_phone = fields.Char(string="Teléfono de contacto", copy=False)
 
-    x_online_client_phone = fields.Char(string="Teléfono del cliente. (*)", copy=False)
-    x_online_new_address = fields.Char(string="Nuevo domicilio completo.", copy=False)
-    x_online_additional_references = fields.Char(string="Referencias adicionales (*)", copy=False)
+    x_online_client_phone = fields.Char(
+        string="Teléfono del cliente. (*)",
+        copy=False,
+    )
+    x_online_new_address = fields.Char(
+        string="Nuevo domicilio completo.",
+        copy=False,
+    )
+    x_online_additional_references = fields.Char(
+        string="Referencias adicionales (*)",
+        copy=False,
+    )
 
     x_online_exam_sap_center = fields.Char(
         string="CentroSAP donde se realizó examen de la vista",
@@ -906,18 +929,20 @@ class HelpdeskTicket(models.Model):
 
     x_online_sphere_od = fields.Char(string="Esfera OD (*)", copy=False)
     x_online_sphere_oi = fields.Char(string="Esfera OI (*)", copy=False)
-
     x_online_cylinder_od = fields.Char(string="Cilindro OD", copy=False)
     x_online_cylinder_oi = fields.Char(string="Cilindro OI", copy=False)
-
     x_online_axis_od = fields.Char(string="Eje OD", copy=False)
     x_online_axis_oi = fields.Char(string="Eje OI", copy=False)
-
-    x_online_ipd_od = fields.Char(string="Distancia interpupilar OD", copy=False)
-    x_online_ipd_oi = fields.Char(string="Distancia interpupilar OI", copy=False)
+    x_online_ipd_od = fields.Char(
+        string="Distancia interpupilar OD",
+        copy=False,
+    )
+    x_online_ipd_oi = fields.Char(
+        string="Distancia interpupilar OI",
+        copy=False,
+    )
 
     x_online_unshipped_order = fields.Char(string="Pedido (*)", copy=False)
-
     x_online_work_order_number = fields.Char(
         string="N° de Orden de Trabajo (*)",
         copy=False,
@@ -927,22 +952,18 @@ class HelpdeskTicket(models.Model):
         string="Orden de Venta (*)",
         copy=False,
     )
-
     x_frame_search_frame_code = fields.Char(
         string="Código de Armazón",
         copy=False,
     )
-
     x_frame_search_packaging_bag = fields.Char(
         string="Bolsa de embalaje",
         copy=False,
     )
-
     x_frame_search_shipping_date = fields.Date(
         string="Fecha de envío",
         copy=False,
     )
-
     x_frame_search_courier = fields.Char(
         string="Mensajería. (*)",
         copy=False,
@@ -972,16 +993,8 @@ class HelpdeskTicket(models.Model):
         string="Receta lente de Contacto",
         copy=False,
     )
-
-    x_lc_ot_number = fields.Char(
-        string="OT (*)",
-        copy=False,
-    )
-
-    x_lc_order_number = fields.Char(
-        string="Pedido (*)",
-        copy=False,
-    )
+    x_lc_ot_number = fields.Char(string="OT (*)", copy=False)
+    x_lc_order_number = fields.Char(string="Pedido (*)", copy=False)
 
     x_lc_provider = fields.Selection(
         [
@@ -996,26 +1009,19 @@ class HelpdeskTicket(models.Model):
         copy=False,
     )
 
-    x_quality_order_number = fields.Char(
-        string="Pedido (*)",
-        copy=False,
-    )
-
+    x_quality_order_number = fields.Char(string="Pedido (*)", copy=False)
     x_quality_customer_name = fields.Char(
         string="Nombre del Cliente (*)",
         copy=False,
     )
-
     x_quality_customer_phone = fields.Char(
         string="Teléfono del cliente. (*)",
         copy=False,
     )
-
     x_quality_shipping_bag = fields.Char(
         string="Bolsa de envío (*)",
         copy=False,
     )
-
     x_quality_courier_guide = fields.Char(
         string="Guia de Paquetería (*)",
         copy=False,
@@ -1034,27 +1040,14 @@ class HelpdeskTicket(models.Model):
         string="N° de empleado (*)",
         copy=False,
     )
-
     x_medallia_employee_name = fields.Char(
         string="Nombre del empleado (*)",
         copy=False,
     )
 
-    x_bag_arrival = fields.Char(
-        string="Bolsa de arribo (*)",
-        copy=False,
-    )
-
-    x_delivery_oc = fields.Char(
-        string="Entrega | OC",
-        copy=False,
-    )
-
-    x_paq_pos_order = fields.Char(
-        string="Pedido POS. (*)",
-        copy=False,
-    )
-
+    x_bag_arrival = fields.Char(string="Bolsa de arribo (*)", copy=False)
+    x_delivery_oc = fields.Char(string="Entrega | OC", copy=False)
+    x_paq_pos_order = fields.Char(string="Pedido POS. (*)", copy=False)
 
     x_shipping_noncompliance_type = fields.Selection(
         [
@@ -1071,17 +1064,14 @@ class HelpdeskTicket(models.Model):
         string="Mensajería asignada (*)",
         copy=False,
     )
-
     x_shipping_arrival_bag = fields.Char(
         string="Bolsa de arribo (*)",
         copy=False,
     )
-
     x_shipping_guide_number_detail = fields.Char(
         string="N° de guía (*)",
         copy=False,
     )
-
     x_shipping_content_detail = fields.Char(
         string="Detalle de contenido (*)",
         copy=False,
@@ -1097,14 +1087,18 @@ class HelpdeskTicket(models.Model):
     )
 
     x_shipping_unreceived_pos_order = fields.Char(
-        string="Pedido POS. (*)", copy=False)
-    
+        string="Pedido POS. (*)",
+        copy=False,
+    )
     x_shipping_unreceived_arrival_bag = fields.Char(
-        string="Bolsa de arribo (*)", copy=False)
-    
-    x_shipping_unreceived_transport= fields.Char(
-        string="Transporte (*)", copy=False)
-    
+        string="Bolsa de arribo (*)",
+        copy=False,
+    )
+    x_shipping_unreceived_transport = fields.Char(
+        string="Transporte (*)",
+        copy=False,
+    )
+
     x_shipping_lab_followup_pos_order = fields.Char(
         string="Pedido POS. (*)",
         copy=False,
@@ -1114,7 +1108,6 @@ class HelpdeskTicket(models.Model):
         string="Pedido POS. (*)",
         copy=False,
     )
-
     x_shipping_extraordinary_sap_center = fields.Char(
         string="Centro SAP a donde se redirecciona la entrega (*)",
         copy=False,
@@ -1133,17 +1126,14 @@ class HelpdeskTicket(models.Model):
         string="Pedido. (*)",
         copy=False,
     )
-
     x_shipping_missing_accessory_bag = fields.Char(
         string="Bolsa (*)",
         copy=False,
     )
-
     x_shipping_missing_accessory_brand = fields.Char(
         string="Marca del armazón (*)",
         copy=False,
     )
-
     x_shipping_missing_accessory_arrival_date = fields.Date(
         string="Fecha de llegada a sucursal (*)",
         copy=False,
@@ -1167,27 +1157,20 @@ class HelpdeskTicket(models.Model):
         string="Paño",
         copy=False,
     )
-
     x_shipping_missing_accessory_case = fields.Boolean(
         string="Estuche",
         copy=False,
     )
-
     x_shipping_missing_accessory_clipon = fields.Boolean(
         string="Clip on",
         copy=False,
     )
-
     x_shipping_missing_accessory_certificate = fields.Boolean(
         string="Certificado de autenticidad",
         copy=False,
     )
 
-
-    x_prev_guide_number = fields.Char(
-        string="N° de guía (*)",
-        copy=False,
-    )
+    x_prev_guide_number = fields.Char(string="N° de guía (*)", copy=False)
 
     x_prev_courier_type = fields.Selection(
         [
@@ -1211,12 +1194,10 @@ class HelpdeskTicket(models.Model):
         copy=False,
     )
 
-
     x_report_whatsapp_date = fields.Date(
         string="Fecha de reporte por WhatsApp",
         copy=False,
     )
-
     x_report_marketing_date = fields.Date(
         string="Fecha de reporte Marketing producto",
         copy=False,
@@ -1231,21 +1212,15 @@ class HelpdeskTicket(models.Model):
         copy=False,
     )
 
-
     x_supply_material_code = fields.Char(
         string="Código del material",
         copy=False,
     )
-
     x_supply_material_description = fields.Char(
-        string="Descripción del Material. (*)",
+        string="Descripción del Material (*)",
         copy=False,
     )
-
-    x_supply_quantity = fields.Char(
-        string="Cantidad (*)",
-        copy=False,
-    )
+    x_supply_quantity = fields.Char(string="Cantidad (*)", copy=False)
 
     x_supply_unit_measure = fields.Selection(
         [
@@ -1260,10 +1235,7 @@ class HelpdeskTicket(models.Model):
         copy=False,
     )
 
-    x_supply_center = fields.Char(
-        string="Centro (*)",
-        copy=False,
-    )
+    x_supply_center = fields.Char(string="Centro (*)", copy=False)
 
     x_supply_manager_approval_attached = fields.Selection(
         [
@@ -1274,34 +1246,21 @@ class HelpdeskTicket(models.Model):
         copy=False,
     )
 
-
     x_lab_local_pos_order = fields.Char(
         string="Pedido POS. (*)",
         copy=False,
     )
-
     x_lab_local_promise_date = fields.Date(
         string="Fecha Promesa",
         copy=False,
     )
-
     x_lab_local_name = fields.Char(
         string="Laboratorio local",
         copy=False,
     )
 
-    x_is_papeleria_seguimiento = fields.Boolean(
-        compute="_compute_x_category_flags_extra",
-        store=False,
-    )
-
     x_supply_sku_code = fields.Char(
         string="Codigo SKU (*)",
-        copy=False,
-    )
-
-    x_supply_material_description = fields.Char(
-        string="Descripción del Material (*)",
         copy=False,
     )
 
@@ -1319,11 +1278,11 @@ class HelpdeskTicket(models.Model):
         string="Marca con Base al Cuadro Basico (*)",
         copy=False,
     )
-
     x_supply_return_folio = fields.Char(
         string="Folio de la Devolución (*)",
         copy=False,
     )
+
     @api.depends("x_category_id")
     def _compute_x_is_facturacion_reenvio(self):
         target = self.env.ref(
@@ -1332,10 +1291,10 @@ class HelpdeskTicket(models.Model):
         )
         target_id = target.id if target else False
         for rec in self:
-            rec.x_is_facturacion_reenvio = bool(target_id and rec.x_category_id.id == target_id)
+            rec.x_is_facturacion_reenvio = bool(
+                target_id and rec.x_category_id.id == target_id
+            )
 
-            
-            
     @api.depends("x_category_id")
     def _compute_x_devolucion_category_flags(self):
         tc_db_category = self.env.ref(
@@ -1350,13 +1309,21 @@ class HelpdeskTicket(models.Model):
             "helpdesk_custom_datos.helpdesk_ticket_category_devoluciones_reales_efectivo_transferencia",
             raise_if_not_found=False,
         )
+
         tc_db_id = tc_db_category.id if tc_db_category else False
         cash_order_id = cash_order_category.id if cash_order_category else False
         cash_transfer_id = cash_transfer_category.id if cash_transfer_category else False
+
         for rec in self:
-            rec.x_is_dev_real_tc_db = bool(tc_db_id and rec.x_category_id.id == tc_db_id)
-            rec.x_is_dev_real_cash_order = bool(cash_order_id and rec.x_category_id.id == cash_order_id)
-            rec.x_is_dev_real_cash_transfer = bool(cash_transfer_id and rec.x_category_id.id == cash_transfer_id)
+            rec.x_is_dev_real_tc_db = bool(
+                tc_db_id and rec.x_category_id.id == tc_db_id
+            )
+            rec.x_is_dev_real_cash_order = bool(
+                cash_order_id and rec.x_category_id.id == cash_order_id
+            )
+            rec.x_is_dev_real_cash_transfer = bool(
+                cash_transfer_id and rec.x_category_id.id == cash_transfer_id
+            )
 
     @api.depends("x_category_id")
     def _compute_x_category_flags_extra(self):
@@ -1368,9 +1335,14 @@ class HelpdeskTicket(models.Model):
             "helpdesk_custom_datos.helpdesk_ticket_category_papeleria_seguimiento",
             raise_if_not_found=False,
         )
+        resurtido_category = self.env.ref(
+            "helpdesk_custom_datos.helpdesk_ticket_category_resurtido_consumibles_seguimiento",
+            raise_if_not_found=False,
+        )
 
         receta_lc_id = receta_lc_category.id if receta_lc_category else False
         papeleria_id = papeleria_category.id if papeleria_category else False
+        resurtido_id = resurtido_category.id if resurtido_category else False
 
         for rec in self:
             rec.x_is_receta_lc = bool(
@@ -1379,3 +1351,259 @@ class HelpdeskTicket(models.Model):
             rec.x_is_papeleria_seguimiento = bool(
                 papeleria_id and rec.x_category_id.id == papeleria_id
             )
+            rec.x_is_resurtido_consumibles_seguimiento = bool(
+                resurtido_id and rec.x_category_id.id == resurtido_id
+            )
+
+    @api.depends("x_category_id", "x_subcategory_code")
+    def _compute_x_view_context_flags(self):
+        category_online_sin_entregar = self.env.ref(
+            "helpdesk_custom_datos.helpdesk_ticket_category_fullfilment_online_sin_entregar",
+            raise_if_not_found=False,
+        )
+        category_receta_lc = self.env.ref(
+            "helpdesk_custom_datos.helpdesk_ticket_category_receta_lc_lente_contacto",
+            raise_if_not_found=False,
+        )
+        category_papeleria = self.env.ref(
+            "helpdesk_custom_datos.helpdesk_ticket_category_papeleria_seguimiento",
+            raise_if_not_found=False,
+        )
+        category_resurtido = self.env.ref(
+            "helpdesk_custom_datos.helpdesk_ticket_category_resurtido_consumibles_seguimiento",
+            raise_if_not_found=False,
+        )
+
+        online_id = category_online_sin_entregar.id if category_online_sin_entregar else False
+        receta_id = category_receta_lc.id if category_receta_lc else False
+        papeleria_id = category_papeleria.id if category_papeleria else False
+        resurtido_id = category_resurtido.id if category_resurtido else False
+
+        for rec in self:
+            rec.x_is_atraso_lente_contacto_online = bool(
+                rec.x_subcategory_code == "atraso_lente_contacto"
+                and online_id
+                and rec.x_category_id.id == online_id
+            )
+            rec.x_is_atraso_lente_contacto_receta = bool(
+                rec.x_subcategory_code == "atraso_lente_contacto"
+                and receta_id
+                and rec.x_category_id.id == receta_id
+            )
+            rec.x_is_seguimiento_solicitud_papeleria = bool(
+                rec.x_subcategory_code == "seguimiento_solicitud"
+                and papeleria_id
+                and rec.x_category_id.id == papeleria_id
+            )
+            rec.x_is_seguimiento_solicitud_resurtido = bool(
+                rec.x_subcategory_code == "seguimiento_solicitud"
+                and resurtido_id
+                and rec.x_category_id.id == resurtido_id
+            )
+
+    def _is_empty_required_value(self, value):
+        if value in (False, None, "", []):
+            return True
+        if isinstance(value, str) and not value.strip():
+            return True
+        if value == "select":
+            return True
+        return False
+
+    def _validate_required_fields(self, field_names, section_name):
+        for rec in self:
+            missing = []
+            for field_name in field_names:
+                field = rec._fields.get(field_name)
+                if not field:
+                    continue
+                value = rec[field_name]
+                if self._is_empty_required_value(value):
+                    missing.append(field.string or field_name)
+
+            if missing:
+                raise ValidationError(
+                    _("Para la sección '%s' faltan los siguientes campos obligatorios:\n- %s")
+                    % (section_name, "\n- ".join(missing))
+                )
+
+    @api.constrains(
+        "x_subcategory_code",
+        "x_category_id",
+        "x_subcategory_id",
+        "x_order_type",
+        "x_is_receta_lc",
+        "x_is_dev_real_tc_db",
+        "x_is_dev_real_cash_order",
+        "x_is_dev_real_cash_transfer",
+        "x_is_papeleria_seguimiento",
+        "x_is_resurtido_consumibles_seguimiento",
+        "x_is_atraso_lente_contacto_online",
+        "x_is_atraso_lente_contacto_receta",
+        "x_is_seguimiento_solicitud_papeleria",
+        "x_is_seguimiento_solicitud_resurtido",
+        "x_lc_recipe_name",
+        "x_lc_ot_number",
+        "x_lc_order_number",
+        "x_lc_provider",
+        "x_online_fulfillment",
+        "x_online_sale_date",
+        "x_online_customer_email",
+        "x_online_pos_order",
+        "x_online_customer_name",
+        "x_online_missing_product",
+        "x_online_requested_graduation",
+        "x_online_received_graduation",
+        "x_online_return_sap_center",
+        "x_online_return_bag_cedis",
+        "x_online_work_order_number",
+        "x_online_attachment_capture",
+        "x_order_number",
+        "x_bag",
+        "x_customer_warehouse",
+        "x_authorized_by",
+        "x_lab_indicated",
+        "x_job_type",
+        "x_original_order_number",
+        "x_shipping_guide_number",
+        "x_frame_bag_number",
+        "x_branch_email",
+        "x_email_issue_type_2",
+        "x_contact_number",
+        "x_internal_folio_number",
+        "x_equipment_type",
+        "x_model_or_brand",
+        "x_serial_number",
+        "x_fixed_asset_number",
+        "x_shipping_guide",
+        "x_courier",
+        "x_supply_material_code",
+        "x_supply_material_description",
+        "x_supply_quantity",
+        "x_supply_unit_measure",
+        "x_supply_center",
+        "x_supply_manager_approval_attached",
+    )
+    def _check_dynamic_required_fields(self):
+        for rec in self:
+            code = rec.x_subcategory_code or ""
+
+            # Atraso lente de contacto - Fullfilment / online
+            if rec.x_is_atraso_lente_contacto_online:
+                rec._validate_required_fields(
+                    ["x_online_pos_order", "x_online_work_order_number"],
+                    "Atraso lente de contacto - Online",
+                )
+
+            # Atraso lente de contacto - Receta LC
+            if rec.x_is_atraso_lente_contacto_receta:
+                rec._validate_required_fields(
+                    ["x_lc_recipe_name", "x_lc_ot_number", "x_lc_order_number", "x_lc_provider"],
+                    "Atraso lente de contacto - Receta LC",
+                )
+
+            # Seguimiento de solicitud - Resurtido
+            if rec.x_is_seguimiento_solicitud_resurtido:
+                rec._validate_required_fields(
+                    [
+                        "x_supply_material_code",
+                        "x_supply_material_description",
+                        "x_supply_quantity",
+                        "x_supply_unit_measure",
+                        "x_supply_center",
+                        "x_supply_manager_approval_attached",
+                    ],
+                    "Seguimiento de solicitud - Resurtido de consumibles",
+                )
+
+            # Seguimiento de solicitud - Papelería
+            if rec.x_is_seguimiento_solicitud_papeleria:
+                rec._validate_required_fields(
+                    [
+                        "x_supply_material_description",
+                        "x_supply_quantity",
+                        "x_supply_unit_measure",
+                        "x_supply_center",
+                        "x_supply_manager_approval_attached",
+                    ],
+                    "Seguimiento de solicitud - Papelería",
+                )
+
+            if code == "micas_sin_cortar":
+                rec._validate_required_fields(
+                    [
+                        "x_order_number",
+                        "x_bag",
+                        "x_customer_warehouse",
+                        "x_authorized_by",
+                        "x_lab_indicated",
+                        "x_order_type",
+                    ],
+                    "Micas sin cortar",
+                )
+
+            elif code == "trabajos_atrasados":
+                rec._validate_required_fields(
+                    [
+                        "x_job_type",
+                        "x_original_order_number",
+                        "x_order_number",
+                        "x_customer_warehouse",
+                        "x_lab_indicated",
+                        "x_shipping_guide_number",
+                        "x_frame_bag_number",
+                        "x_order_type",
+                    ],
+                    "Trabajos atrasados",
+                )
+
+            elif code == "correo_electronico":
+                rec._validate_required_fields(
+                    ["x_branch_email", "x_email_issue_type_2", "x_contact_number"],
+                    "Correo electrónico",
+                )
+
+            elif code == "equipo_computo":
+                rec._validate_required_fields(
+                    [
+                        "x_internal_folio_number",
+                        "x_equipment_type",
+                        "x_model_or_brand",
+                        "x_serial_number",
+                        "x_fixed_asset_number",
+                        "x_shipping_guide",
+                        "x_courier",
+                    ],
+                    "Equipo de cómputo",
+                )
+
+            elif code == "pedidos_incompletos":
+                rec._validate_required_fields(
+                    [
+                        "x_online_fulfillment",
+                        "x_online_sale_date",
+                        "x_online_customer_email",
+                        "x_online_pos_order",
+                        "x_online_customer_name",
+                        "x_online_missing_product",
+                        "x_online_attachment_capture",
+                    ],
+                    "Pedidos incompletos",
+                )
+
+            elif code == "graduacion_incorrecta":
+                rec._validate_required_fields(
+                    [
+                        "x_online_fulfillment",
+                        "x_online_sale_date",
+                        "x_online_customer_email",
+                        "x_online_pos_order",
+                        "x_online_customer_name",
+                        "x_online_requested_graduation",
+                        "x_online_received_graduation",
+                        "x_online_attachment_capture",
+                        "x_online_return_sap_center",
+                        "x_online_return_bag_cedis",
+                    ],
+                    "Pedidos con graduación incorrecta",
+                )

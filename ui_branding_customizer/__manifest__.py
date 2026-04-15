@@ -13,6 +13,7 @@
         "base",
         "base_setup",
         "web",
+        "jazzy_backend_theme",
     ],
     "data": [
         "views/res_config_settings_views.xml",

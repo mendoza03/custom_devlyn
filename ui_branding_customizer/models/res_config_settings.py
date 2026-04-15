@@ -79,3 +79,60 @@ class ResConfigSettings(models.TransientModel):
         config_parameter="ui_branding_customizer.font_size",
         default=14,
     )
+
+    # ===== Jazzy main menu background designer =====
+    ui_app_menu_style = fields.Selection(
+        selection=[
+            ("gradient", "Gradient"),
+            ("solid", "Solid"),
+        ],
+        string="Main Menu Background Style",
+        config_parameter="ui_branding_customizer.app_menu_style",
+        default="gradient",
+    )
+    ui_app_menu_bg_color_1 = fields.Char(
+        string="Main Menu Color 1",
+        config_parameter="ui_branding_customizer.app_menu_bg_color_1",
+        default="#041B4D",
+    )
+    ui_app_menu_bg_color_2 = fields.Char(
+        string="Main Menu Color 2",
+        config_parameter="ui_branding_customizer.app_menu_bg_color_2",
+        default="#123F92",
+    )
+    ui_app_menu_bg_color_3 = fields.Char(
+        string="Main Menu Color 3",
+        config_parameter="ui_branding_customizer.app_menu_bg_color_3",
+        default="#19BFE6",
+    )
+    ui_app_menu_gradient_angle = fields.Integer(
+        string="Gradient Angle",
+        config_parameter="ui_branding_customizer.app_menu_gradient_angle",
+        default=135,
+    )
+    ui_app_menu_overlay_opacity = fields.Integer(
+        string="Main Menu Overlay Opacity (%)",
+        config_parameter="ui_branding_customizer.app_menu_overlay_opacity",
+        default=18,
+    )
+    ui_app_menu_logo_opacity = fields.Integer(
+        string="Main Menu Logo Opacity (%)",
+        config_parameter="ui_branding_customizer.app_menu_logo_opacity",
+        default=18,
+    )
+    ui_app_menu_shadow = fields.Integer(
+        string="Main Menu Card/Item Shadow Strength",
+        config_parameter="ui_branding_customizer.app_menu_shadow",
+        default=18,
+    )
+
+    ui_internal_logo_width = fields.Integer(
+        string="Internal Watermark Width",
+        config_parameter="ui_branding_customizer.internal_logo_width",
+        default=220,
+    )
+    ui_internal_logo_opacity = fields.Integer(
+        string="Internal Watermark Opacity (%)",
+        config_parameter="ui_branding_customizer.internal_logo_opacity",
+        default=12,
+    )
