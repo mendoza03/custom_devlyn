@@ -19,7 +19,9 @@ class HelpdeskController(http.Controller):
     def _get_category_slug(self, category):
         if not category:
             return ""
-        env = request.env
+
+        env = request.env(user=request.website.user_id.id)
+        # env = request.env
         for slug, xmlid in CATEGORY_SLUG_XMLIDS.items():
             record = env.ref(xmlid, raise_if_not_found=False)
             if record and record.id == category.id:
@@ -27,9 +29,11 @@ class HelpdeskController(http.Controller):
         return ""
 
     def _validate_hierarchy(self, section_id, category_id, subcategory_id):
-        section = request.env['helpdesk.section'].sudo().browse(section_id) if section_id else request.env['helpdesk.section']
-        category = request.env['helpdesk.ticket.category'].sudo().browse(category_id) if category_id else request.env['helpdesk.ticket.category']
-        subcategory = request.env['helpdesk.ticket.subcategory'].sudo().browse(subcategory_id) if subcategory_id else request.env['helpdesk.ticket.subcategory']
+
+        env = request.env(user=request.website.user_id.id)
+        section = env['helpdesk.section'].sudo().browse(section_id) if section_id else request.env['helpdesk.section']
+        category = env['helpdesk.ticket.category'].sudo().browse(category_id) if category_id else request.env['helpdesk.ticket.category']
+        subcategory = env['helpdesk.ticket.subcategory'].sudo().browse(subcategory_id) if subcategory_id else request.env['helpdesk.ticket.subcategory']
 
         if section_id and not section.exists():
             return False
@@ -45,7 +49,8 @@ class HelpdeskController(http.Controller):
 
     @http.route(['/helpdesk', '/<string:lang>/helpdesk'], type='http', auth='public', website=True)
     def helpdesk_form(self, **kwargs):
-        sections = request.env['helpdesk.section'].sudo().search([('active', '=', True)], order='sequence, name, id')
+        env = request.env(user=request.website.user_id.id)
+        sections = env['helpdesk.section'].sudo().search([('active', '=', True)], order='sequence, name, id')
         return request.render('helpdesk_web_form.helpdesk_form_template', {'sections': sections})
 
     @http.route(
@@ -54,7 +59,8 @@ class HelpdeskController(http.Controller):
     )
     def helpdesk_categories(self, **post):
         section_id = int(post.get('section_id') or 0)
-        cats = request.env['helpdesk.ticket.category'].sudo().search([
+        env = request.env(user=request.website.user_id.id)
+        cats = env['helpdesk.ticket.category'].sudo().sudo().search([
             ('section_id', '=', section_id),
             ('active', '=', True),
         ])
@@ -69,7 +75,8 @@ class HelpdeskController(http.Controller):
     )
     def helpdesk_subcategories(self, **post):
         category_id = int(post.get('category_id') or 0)
-        subs = request.env['helpdesk.ticket.subcategory'].sudo().search([
+        env = request.env(user=request.website.user_id.id)
+        subs = env['helpdesk.ticket.subcategory'].sudo().search([
             ('category_id', '=', category_id),
             ('active', '=', True),
         ])
@@ -83,6 +90,7 @@ class HelpdeskController(http.Controller):
         type='http', auth='public', methods=['POST'], website=True
     )
     def helpdesk_submit(self, **post):
+        env = request.env(user=request.website.user_id.id)
 
         def _int(key):
             val = post.get(key)
@@ -117,7 +125,7 @@ class HelpdeskController(http.Controller):
         if not self._validate_hierarchy(section_id, category_id, subcategory_id):
             return request.not_found()
 
-        ticket = request.env['helpdesk.ticket'].sudo().create({
+        ticket = env['helpdesk.ticket'].sudo().create({
             # ── Campos base ───────────────────────────────────────────────────
             'name':                     _str('x_general_description'),
             'x_general_description':    _str('x_general_description'),
@@ -474,7 +482,7 @@ class HelpdeskController(http.Controller):
         files = request.httprequest.files.getlist('attachments')
         for f in files:
             if f and f.filename:
-                request.env['helpdesk.ticket.attachment.line'].sudo().create({
+                    env['helpdesk.ticket.attachment.line'].create({
                     'ticket_id': ticket.id,
                     'file':      base64.b64encode(f.read()),
                     'filename':  f.filename,
