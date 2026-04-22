@@ -6,6 +6,7 @@
     "depends": ["helpdesk","web"],
     "data": [
         "security/ir.model.access.csv",
+        "security/security.xml",
         "views/helpdesk_section_views.xml",
         "views/helpdesk_ticket_form_replace.xml",
         "views/helpdesk_ticket_attachments_views.xml",

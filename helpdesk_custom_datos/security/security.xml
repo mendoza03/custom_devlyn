@@ -1,0 +1,3 @@
+<record id="grupo_sucursal" model="res.groups">
+    <field name="name">Sucursal</field>
+</record>

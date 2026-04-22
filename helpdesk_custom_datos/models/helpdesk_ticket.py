@@ -1,6 +1,11 @@
 from odoo import api, fields, models, _
 from odoo.exceptions import ValidationError
+from odoo.exceptions import UserError
 
+class ResPartner(models.Model):
+    _inherit = 'res.partner'
+
+    sap_code = fields.Char(string="Centro SAP")
 
 class HelpdeskTicket(models.Model):
     _inherit = "helpdesk.ticket"
@@ -19,6 +24,10 @@ class HelpdeskTicket(models.Model):
         for vals in vals_list:
             if vals.get("x_general_description") and not vals.get("name"):
                 vals["name"] = vals["x_general_description"]
+
+            if self.env.user.branch_id:
+                vals['branch_id'] = self.env.user.branch_id.id
+
         return super().create(vals_list)
 
     def write(self, vals):
@@ -1283,6 +1292,15 @@ class HelpdeskTicket(models.Model):
         copy=False,
     )
 
+    branch_id = fields.Many2one(
+        'res.partner', 
+        string="Sucursal"
+    )
+    branch_name = fields.Char(related="branch_id.name", store=True)
+    sap_center = fields.Char(related="branch_id.sap_code", store=True)
+    phone = fields.Char(related="branch_id.phone", store=True)
+    taken_by_id = fields.Many2one('res.users', string="Tomado por")
+
     @api.depends("x_category_id")
     def _compute_x_is_facturacion_reenvio(self):
         target = self.env.ref(
@@ -1607,3 +1625,15 @@ class HelpdeskTicket(models.Model):
                     ],
                     "Pedidos con graduación incorrecta",
                 )
+
+    
+    def action_take_ticket(self):
+        if self.taken_by_id:
+            raise UserError("Este ticket ya fue tomado.")
+        self.taken_by_id = self.env.user.id
+
+    def write(self, vals):
+        for rec in self:
+            if rec.state not in ['new', 'waiting_user', 'resolved']:
+                raise UserError("No puedes modificar en este estado.")
+        return super().write(vals)
