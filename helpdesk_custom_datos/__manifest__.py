@@ -14,9 +14,11 @@
         "views/helpdesk_subcategory_views.xml",
         "views/helpdesk_section_menu.xml",
         "views/helpdesk_ticket_form_facturacion.xml",
+        "views/res_users_views.xml",
         "data/helpdesk_section_data.xml",
         "data/helpdesk_category_data.xml",
         "data/helpdesk_subcategory_data.xml",
+
 
     ],
     

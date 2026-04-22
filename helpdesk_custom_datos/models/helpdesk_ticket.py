@@ -7,6 +7,15 @@ class ResPartner(models.Model):
 
     sap_code = fields.Char(string="Centro SAP")
 
+
+class ResUsers(models.Model):
+    _inherit = 'res.users'
+
+    branch_id = fields.Many2one(
+        'res.partner',
+        string='Sucursal'
+    )
+    
 class HelpdeskTicket(models.Model):
     _inherit = "helpdesk.ticket"
 
