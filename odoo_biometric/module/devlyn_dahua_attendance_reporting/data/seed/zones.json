@@ -1,0 +1,37 @@
+[
+  {
+    "legacy_zone_id": 100,
+    "legacy_region_id": 1,
+    "name": "CERRADAS"
+  },
+  {
+    "legacy_zone_id": 101,
+    "legacy_region_id": 1,
+    "name": "NOROESTE"
+  },
+  {
+    "legacy_zone_id": 102,
+    "legacy_region_id": 1,
+    "name": "NORESTE"
+  },
+  {
+    "legacy_zone_id": 103,
+    "legacy_region_id": 1,
+    "name": "CENTRO"
+  },
+  {
+    "legacy_zone_id": 104,
+    "legacy_region_id": 1,
+    "name": "METROPOLITANA"
+  },
+  {
+    "legacy_zone_id": 105,
+    "legacy_region_id": 1,
+    "name": "SUR"
+  },
+  {
+    "legacy_zone_id": 500,
+    "legacy_region_id": 5,
+    "name": "Zona 0"
+  }
+]

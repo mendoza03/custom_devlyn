@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<templates xml:space="preserve">
+    <t
+        t-name="ui_branding_customizer.FormStatusIndicator"
+        t-inherit="web.FormStatusIndicator"
+        t-inherit-mode="extension"
+    >
+        <xpath expr="//button[hasclass('o_form_button_save')]" position="replace">
+            <button
+                type="button"
+                class="o_form_button_save btn btn-light border-0 px-2 py-1 lh-sm d-inline-flex align-items-center gap-1"
+                data-hotkey="s"
+                t-on-click.stop="save"
+                data-tooltip="Guardar"
+                aria-label="Guardar"
+                t-ref="save"
+            >
+                <i class="fa fa-floppy-o fa-fw" />
+                <span>Guardar</span>
+            </button>
+        </xpath>
+    </t>
+</templates>

@@ -1,0 +1,20 @@
+<odoo noupdate="1">
+    <record id="biometric_policy_default" model="biometric.policy">
+        <field name="name">Default Policy</field>
+        <field name="active">True</field>
+        <field name="biometric_mode">admin_demo_only</field>
+        <field name="attendance_sync_enabled">False</field>
+        <field name="admin_demo_login">admin</field>
+        <field name="liveness_threshold">80</field>
+        <field name="liveness_max_attempts">3</field>
+        <field name="gps_required">True</field>
+        <field name="geofence_enforced">False</field>
+        <field name="alert_country_change">True</field>
+        <field name="alert_asn_change">True</field>
+        <field name="alert_new_device">True</field>
+        <field name="alert_low_score">True</field>
+        <field name="auth_base_url">https://auth.odootest.mvpstart.click</field>
+        <field name="erp_base_url">https://erp.odootest.mvpstart.click</field>
+        <field name="api_key">change-me</field>
+    </record>
+</odoo>

@@ -1,0 +1,16 @@
+[Unit]
+Description=Biometric Attendance Sync Worker
+After=network.target odoo.service
+
+[Service]
+Type=simple
+User=biometric
+Group=biometric
+WorkingDirectory=/opt/biometric-ingest
+EnvironmentFile=/etc/attendance-sync.env
+ExecStart=/opt/biometric-ingest/venv/bin/python /opt/biometric-ingest/attendance_sync_worker.py
+Restart=always
+RestartSec=3
+
+[Install]
+WantedBy=multi-user.target

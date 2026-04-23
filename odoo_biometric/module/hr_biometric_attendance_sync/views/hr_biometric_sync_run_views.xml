@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="view_hr_biometric_sync_run_tree" model="ir.ui.view">
+        <field name="name">hr.biometric.sync.run.tree</field>
+        <field name="model">hr.biometric.sync.run</field>
+        <field name="arch" type="xml">
+            <list create="false" delete="false" default_order="started_at desc">
+                <field name="started_at"/>
+                <field name="run_type"/>
+                <field name="status"/>
+                <field name="last_normalized_event_id"/>
+                <field name="processed_count"/>
+                <field name="created_count"/>
+                <field name="updated_count"/>
+                <field name="skipped_count"/>
+                <field name="error_count"/>
+                <field name="message"/>
+            </list>
+        </field>
+    </record>
+
+    <record id="view_hr_biometric_sync_run_form" model="ir.ui.view">
+        <field name="name">hr.biometric.sync.run.form</field>
+        <field name="model">hr.biometric.sync.run</field>
+        <field name="arch" type="xml">
+            <form create="false" delete="false">
+                <sheet>
+                    <group>
+                        <group>
+                            <field name="name"/>
+                            <field name="run_type"/>
+                            <field name="status"/>
+                            <field name="started_at"/>
+                            <field name="finished_at"/>
+                        </group>
+                        <group>
+                            <field name="last_normalized_event_id"/>
+                            <field name="processed_count"/>
+                            <field name="created_count"/>
+                            <field name="updated_count"/>
+                            <field name="skipped_count"/>
+                            <field name="error_count"/>
+                        </group>
+                    </group>
+                    <group>
+                        <field name="message" nolabel="1"/>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="action_hr_biometric_sync_run" model="ir.actions.act_window">
+        <field name="name">Corridas de sync</field>
+        <field name="res_model">hr.biometric.sync.run</field>
+        <field name="view_mode">list,form</field>
+    </record>
+</odoo>

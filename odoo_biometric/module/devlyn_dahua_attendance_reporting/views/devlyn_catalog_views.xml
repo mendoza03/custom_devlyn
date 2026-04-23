@@ -1,0 +1,372 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="view_devlyn_catalog_region_list" model="ir.ui.view">
+        <field name="name">devlyn.catalog.region.list</field>
+        <field name="model">devlyn.catalog.region</field>
+        <field name="arch" type="xml">
+            <list>
+                <field name="name"/>
+                <field name="legacy_region_id"/>
+                <field name="active"/>
+            </list>
+        </field>
+    </record>
+
+    <record id="view_devlyn_catalog_region_form" model="ir.ui.view">
+        <field name="name">devlyn.catalog.region.form</field>
+        <field name="model">devlyn.catalog.region</field>
+        <field name="arch" type="xml">
+            <form>
+                <sheet>
+                    <group>
+                        <group>
+                            <field name="name"/>
+                            <field name="legacy_region_id"/>
+                        </group>
+                        <group>
+                            <field name="active"/>
+                        </group>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="view_devlyn_catalog_zone_list" model="ir.ui.view">
+        <field name="name">devlyn.catalog.zone.list</field>
+        <field name="model">devlyn.catalog.zone</field>
+        <field name="arch" type="xml">
+            <list>
+                <field name="name"/>
+                <field name="legacy_zone_id"/>
+                <field name="region_id"/>
+                <field name="active"/>
+            </list>
+        </field>
+    </record>
+
+    <record id="view_devlyn_catalog_zone_form" model="ir.ui.view">
+        <field name="name">devlyn.catalog.zone.form</field>
+        <field name="model">devlyn.catalog.zone</field>
+        <field name="arch" type="xml">
+            <form>
+                <sheet>
+                    <group>
+                        <group>
+                            <field name="name"/>
+                            <field name="legacy_zone_id"/>
+                        </group>
+                        <group>
+                            <field name="region_id"/>
+                            <field name="active"/>
+                        </group>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="view_devlyn_catalog_district_list" model="ir.ui.view">
+        <field name="name">devlyn.catalog.district.list</field>
+        <field name="model">devlyn.catalog.district</field>
+        <field name="arch" type="xml">
+            <list>
+                <field name="name"/>
+                <field name="legacy_district_id"/>
+                <field name="region_id"/>
+                <field name="zone_id"/>
+                <field name="active"/>
+            </list>
+        </field>
+    </record>
+
+    <record id="view_devlyn_catalog_district_form" model="ir.ui.view">
+        <field name="name">devlyn.catalog.district.form</field>
+        <field name="model">devlyn.catalog.district</field>
+        <field name="arch" type="xml">
+            <form>
+                <sheet>
+                    <group>
+                        <group>
+                            <field name="name"/>
+                            <field name="legacy_district_id"/>
+                        </group>
+                        <group>
+                            <field name="region_id"/>
+                            <field name="zone_id"/>
+                            <field name="active"/>
+                        </group>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="view_devlyn_catalog_format_list" model="ir.ui.view">
+        <field name="name">devlyn.catalog.format.list</field>
+        <field name="model">devlyn.catalog.format</field>
+        <field name="arch" type="xml">
+            <list>
+                <field name="name"/>
+                <field name="active"/>
+            </list>
+        </field>
+    </record>
+
+    <record id="view_devlyn_catalog_format_form" model="ir.ui.view">
+        <field name="name">devlyn.catalog.format.form</field>
+        <field name="model">devlyn.catalog.format</field>
+        <field name="arch" type="xml">
+            <form>
+                <sheet>
+                    <group>
+                        <field name="name"/>
+                        <field name="active"/>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="view_devlyn_catalog_status_list" model="ir.ui.view">
+        <field name="name">devlyn.catalog.status.list</field>
+        <field name="model">devlyn.catalog.status</field>
+        <field name="arch" type="xml">
+            <list>
+                <field name="name"/>
+                <field name="active"/>
+            </list>
+        </field>
+    </record>
+
+    <record id="view_devlyn_catalog_status_form" model="ir.ui.view">
+        <field name="name">devlyn.catalog.status.form</field>
+        <field name="model">devlyn.catalog.status</field>
+        <field name="arch" type="xml">
+            <form>
+                <sheet>
+                    <group>
+                        <field name="name"/>
+                        <field name="active"/>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="view_devlyn_catalog_optical_level_list" model="ir.ui.view">
+        <field name="name">devlyn.catalog.optical.level.list</field>
+        <field name="model">devlyn.catalog.optical.level</field>
+        <field name="arch" type="xml">
+            <list>
+                <field name="code"/>
+                <field name="name"/>
+                <field name="active"/>
+            </list>
+        </field>
+    </record>
+
+    <record id="view_devlyn_catalog_optical_level_form" model="ir.ui.view">
+        <field name="name">devlyn.catalog.optical.level.form</field>
+        <field name="model">devlyn.catalog.optical.level</field>
+        <field name="arch" type="xml">
+            <form>
+                <sheet>
+                    <group>
+                        <group>
+                            <field name="code"/>
+                            <field name="name"/>
+                        </group>
+                        <group>
+                            <field name="active"/>
+                        </group>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="view_devlyn_catalog_branch_search" model="ir.ui.view">
+        <field name="name">devlyn.catalog.branch.search</field>
+        <field name="model">devlyn.catalog.branch</field>
+        <field name="arch" type="xml">
+            <search>
+                <field name="center_code"/>
+                <field name="branch_code"/>
+                <field name="branch_name"/>
+                <field name="region_id"/>
+                <field name="zone_id"/>
+                <field name="district_id"/>
+                <field name="format_id"/>
+                <field name="status_id"/>
+                <field name="optical_level_id"/>
+                <filter name="active" string="Activas" domain="[('active', '=', True)]"/>
+                <filter name="inactive" string="Inactivas" domain="[('active', '=', False)]"/>
+                <separator/>
+                <filter name="group_region" string="Región" context="{'group_by': 'region_id'}"/>
+                <filter name="group_zone" string="Zona" context="{'group_by': 'zone_id'}"/>
+                <filter name="group_district" string="Distrito" context="{'group_by': 'district_id'}"/>
+                <filter name="group_format" string="Formato" context="{'group_by': 'format_id'}"/>
+                <filter name="group_status" string="Estatus" context="{'group_by': 'status_id'}"/>
+            </search>
+        </field>
+    </record>
+
+    <record id="view_devlyn_catalog_branch_list" model="ir.ui.view">
+        <field name="name">devlyn.catalog.branch.list</field>
+        <field name="model">devlyn.catalog.branch</field>
+        <field name="arch" type="xml">
+            <list>
+                <field name="center_code"/>
+                <field name="branch_code"/>
+                <field name="branch_name"/>
+                <field name="optical_level_id"/>
+                <field name="format_id"/>
+                <field name="status_id"/>
+                <field name="region_id"/>
+                <field name="zone_id"/>
+                <field name="district_id"/>
+                <field name="active"/>
+            </list>
+        </field>
+    </record>
+
+    <record id="view_devlyn_catalog_branch_form" model="ir.ui.view">
+        <field name="name">devlyn.catalog.branch.form</field>
+        <field name="model">devlyn.catalog.branch</field>
+        <field name="arch" type="xml">
+            <form>
+                <sheet>
+                    <group>
+                        <group>
+                            <field name="center_code"/>
+                            <field name="branch_code"/>
+                            <field name="branch_name"/>
+                            <field name="active"/>
+                        </group>
+                        <group>
+                            <field name="optical_level_id"/>
+                            <field name="format_id"/>
+                            <field name="status_id"/>
+                        </group>
+                    </group>
+                    <group>
+                        <group>
+                            <field name="region_id"/>
+                            <field name="zone_id"/>
+                            <field name="district_id"/>
+                        </group>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="action_devlyn_catalog_region" model="ir.actions.act_window">
+        <field name="name">Regiones</field>
+        <field name="res_model">devlyn.catalog.region</field>
+        <field name="view_mode">list,form</field>
+    </record>
+
+    <record id="action_devlyn_catalog_zone" model="ir.actions.act_window">
+        <field name="name">Zonas</field>
+        <field name="res_model">devlyn.catalog.zone</field>
+        <field name="view_mode">list,form</field>
+    </record>
+
+    <record id="action_devlyn_catalog_district" model="ir.actions.act_window">
+        <field name="name">Distritos</field>
+        <field name="res_model">devlyn.catalog.district</field>
+        <field name="view_mode">list,form</field>
+    </record>
+
+    <record id="action_devlyn_catalog_format" model="ir.actions.act_window">
+        <field name="name">Formatos</field>
+        <field name="res_model">devlyn.catalog.format</field>
+        <field name="view_mode">list,form</field>
+    </record>
+
+    <record id="action_devlyn_catalog_status" model="ir.actions.act_window">
+        <field name="name">Estatus</field>
+        <field name="res_model">devlyn.catalog.status</field>
+        <field name="view_mode">list,form</field>
+    </record>
+
+    <record id="action_devlyn_catalog_optical_level" model="ir.actions.act_window">
+        <field name="name">Nivel Óptica Ventas</field>
+        <field name="res_model">devlyn.catalog.optical.level</field>
+        <field name="view_mode">list,form</field>
+    </record>
+
+    <record id="action_devlyn_catalog_branch" model="ir.actions.act_window">
+        <field name="name">Sucursales</field>
+        <field name="res_model">devlyn.catalog.branch</field>
+        <field name="view_mode">list,form</field>
+        <field name="search_view_id" ref="view_devlyn_catalog_branch_search"/>
+    </record>
+
+    <menuitem
+        id="menu_devlyn_catalog_root"
+        name="Catálogos Devlyn"
+        parent="hr_attendance.menu_hr_attendance_configuration"
+        sequence="40"
+        groups="hr_attendance.group_hr_attendance_manager"
+    />
+
+    <menuitem
+        id="menu_devlyn_catalog_branch"
+        name="Sucursales"
+        parent="menu_devlyn_catalog_root"
+        sequence="10"
+        action="action_devlyn_catalog_branch"
+        groups="hr_attendance.group_hr_attendance_manager"
+    />
+    <menuitem
+        id="menu_devlyn_catalog_region"
+        name="Regiones"
+        parent="menu_devlyn_catalog_root"
+        sequence="20"
+        action="action_devlyn_catalog_region"
+        groups="hr_attendance.group_hr_attendance_manager"
+    />
+    <menuitem
+        id="menu_devlyn_catalog_zone"
+        name="Zonas"
+        parent="menu_devlyn_catalog_root"
+        sequence="30"
+        action="action_devlyn_catalog_zone"
+        groups="hr_attendance.group_hr_attendance_manager"
+    />
+    <menuitem
+        id="menu_devlyn_catalog_district"
+        name="Distritos"
+        parent="menu_devlyn_catalog_root"
+        sequence="40"
+        action="action_devlyn_catalog_district"
+        groups="hr_attendance.group_hr_attendance_manager"
+    />
+    <menuitem
+        id="menu_devlyn_catalog_format"
+        name="Formatos"
+        parent="menu_devlyn_catalog_root"
+        sequence="50"
+        action="action_devlyn_catalog_format"
+        groups="hr_attendance.group_hr_attendance_manager"
+    />
+    <menuitem
+        id="menu_devlyn_catalog_status"
+        name="Estatus"
+        parent="menu_devlyn_catalog_root"
+        sequence="60"
+        action="action_devlyn_catalog_status"
+        groups="hr_attendance.group_hr_attendance_manager"
+    />
+    <menuitem
+        id="menu_devlyn_catalog_optical_level"
+        name="Nivel Óptica Ventas"
+        parent="menu_devlyn_catalog_root"
+        sequence="70"
+        action="action_devlyn_catalog_optical_level"
+        groups="hr_attendance.group_hr_attendance_manager"
+    />
+</odoo>

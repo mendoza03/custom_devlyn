@@ -1,0 +1,16 @@
+[Unit]
+Description=Dahua Dashboard
+After=network.target
+
+[Service]
+Type=simple
+User=biometric
+Group=biometric
+WorkingDirectory=/opt/dahua-dashboard
+EnvironmentFile=/etc/dahua-dashboard.env
+ExecStart=/opt/dahua-dashboard/venv/bin/uvicorn app:app --host 127.0.0.1 --port 8090
+Restart=always
+RestartSec=3
+
+[Install]
+WantedBy=multi-user.target

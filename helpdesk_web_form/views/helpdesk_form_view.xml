@@ -4,6 +4,15 @@
         <t t-call="website.layout">
             <div class="container mt-5 mb-5">
 
+                <t t-if="error_message">
+                    <div class="alert alert-danger" style="white-space: pre-line;">
+                        <strong>Revisa los campos obligatorios.</strong>
+                        <div class="mt-2">
+                            <t t-esc="error_message"/>
+                        </div>
+                    </div>
+                </t>
+
                 <h3>Datos generales</h3>
 
                 <form action="/helpdesk/submit" method="post" enctype="multipart/form-data" class="row g-3">
@@ -14,9 +23,27 @@
                         <input type="text" name="x_general_description" class="form-control" required="1"/>
                     </div>
 
-                    <div class="col-md-6">
+                    <div class="col-md-4">
                         <label>Correo electrónico (*)</label>
-                        <input type="email" name="email" class="form-control" required="1"/>
+                        <input type="email" name="email" class="form-control" required="1" t-att-value="default_user_email"/>
+                    </div>
+
+                    <div class="col-md-4">
+                        <label>Teléfono (*)</label>
+                        <input type="text" name="x_numero_telefonico" class="form-control" required="1" t-att-value="default_user_phone"/>
+                    </div>
+
+                    <div class="col-md-4">
+                        <label>Sucursal</label>
+                        <select name="x_branch_id" class="form-select">
+                            <option value="">-- seleccionar --</option>
+                            <t t-foreach="branches" t-as="branch">
+                                <option
+                                    t-att-value="branch.id"
+                                    t-att-selected="str(branch.id) == str(default_user_branch_id or '') and 'selected' or None"
+                                ><t t-esc="branch.name"/></option>
+                            </t>
+                        </select>
                     </div>
 
                     <!-- Sección -->
@@ -2452,10 +2479,188 @@
                     </div>
 
                     <input type="hidden" name="csrf_token" t-att-value="request.csrf_token()"/>
+                    <input type="hidden" name="visible_required_fields" id="visible-required-fields"/>
 
                 </form>
+                <input type="hidden" id="helpdesk-form-data" t-att-value="form_data_b64 or ''"/>
+                <input type="hidden" id="helpdesk-restore-main-block" t-att-value="restore_main_block_id or ''"/>
+                <input type="hidden" id="helpdesk-restore-extra-block" t-att-value="restore_extra_block_id or ''"/>
+                <input type="hidden" id="helpdesk-restore-order-type-block" t-att-value="restore_order_type_block_id or ''"/>
             </div>
             <script type="text/javascript" src="/helpdesk_web_form/static/src/js/index.js"></script>
+            <script type="text/javascript">
+                (function () {
+                    const restoreNode = document.getElementById('helpdesk-form-data');
+                    const restoreMainBlockNode = document.getElementById('helpdesk-restore-main-block');
+                    const restoreExtraBlockNode = document.getElementById('helpdesk-restore-extra-block');
+                    const restoreOrderTypeBlockNode = document.getElementById('helpdesk-restore-order-type-block');
+                    const form = document.querySelector('form[action="/helpdesk/submit"]');
+                    const section = document.getElementById('section');
+                    const category = document.getElementById('category');
+                    const subcategory = document.getElementById('subcategory');
+                    const visibleRequiredFieldsNode = document.getElementById('visible-required-fields');
+                    if (!form || !section || !category || !subcategory) {
+                        return;
+                    }
+
+                    let restoredData = {};
+                    if (restoreNode &amp;&amp; restoreNode.value) {
+                        try {
+                            restoredData = JSON.parse(atob(restoreNode.value));
+                        } catch (error) {
+                            console.warn('Inline helpdesk restore failed', error);
+                        }
+                    }
+
+                    const populateField = (name, value) => {
+                        if (value === undefined || value === null || ['attachments', 'csrf_token'].includes(name)) {
+                            return;
+                        }
+                        form.querySelectorAll(`[name="${CSS.escape(name)}"]`).forEach((field) => {
+                            if (field.type === 'file') {
+                                return;
+                            }
+                            if (field.type === 'radio') {
+                                field.checked = field.value === value;
+                                return;
+                            }
+                            if (field.type === 'checkbox') {
+                                field.checked = Boolean(value);
+                                return;
+                            }
+                            field.value = value;
+                        });
+                    };
+
+                    const restoreSimpleFields = () => {
+                        Object.entries(restoredData).forEach(([name, value]) => {
+                            if (['x_section_id', 'x_category_id', 'x_subcategory_id', 'attachments', 'csrf_token'].includes(name)) {
+                                return;
+                            }
+                            populateField(name, value);
+                        });
+                    };
+
+                    const fetchOptions = async (url, params) => {
+                        const response = await fetch(url, {
+                            method: 'POST',
+                            headers: { 'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8' },
+                            body: new URLSearchParams(params),
+                        });
+                        if (!response.ok) {
+                            throw new Error(`Restore request failed: ${url}`);
+                        }
+                        return response.json();
+                    };
+
+                    const hideRestoreBlocks = () => {
+                        document.querySelectorAll('.subcategory-block').forEach((block) => {
+                            block.style.display = 'none';
+                        });
+                        ['block-satisfaccion_adaptacion', 'block-satisfaccion_imagen'].forEach((id) => {
+                            const block = document.getElementById(id);
+                            if (block) {
+                                block.style.display = 'none';
+                            }
+                        });
+                    };
+
+                    const showRestoreBlock = (id) => {
+                        if (!id) {
+                            return;
+                        }
+                        const block = document.getElementById(id);
+                        if (block) {
+                            block.style.display = 'block';
+                        }
+                    };
+
+                    const revealDynamicBlocks = () => {
+                        hideRestoreBlocks();
+                        showRestoreBlock(restoreMainBlockNode ? restoreMainBlockNode.value : '');
+                        showRestoreBlock(restoreExtraBlockNode ? restoreExtraBlockNode.value : '');
+                        showRestoreBlock(restoreOrderTypeBlockNode ? restoreOrderTypeBlockNode.value : '');
+                    };
+
+                    const collectVisibleRequiredFields = () => {
+                        if (!visibleRequiredFieldsNode) {
+                            return;
+                        }
+                        const names = [];
+                        form.querySelectorAll(
+                            '.subcategory-block input, .subcategory-block select, .subcategory-block textarea,' +
+                            '#block-satisfaccion_adaptacion input, #block-satisfaccion_adaptacion select, #block-satisfaccion_adaptacion textarea,' +
+                            '#block-satisfaccion_imagen input, #block-satisfaccion_imagen select, #block-satisfaccion_imagen textarea'
+                        ).forEach((field) => {
+                            if (!field.name || field.disabled) {
+                                return;
+                            }
+                            if (field.type === 'hidden' || field.type === 'file') {
+                                return;
+                            }
+                            if (field.offsetParent === null) {
+                                return;
+                            }
+                            names.push(field.name);
+                        });
+                        visibleRequiredFieldsNode.value = JSON.stringify([...new Set(names)]);
+                    };
+
+                    const restoreForm = async () => {
+                        restoreSimpleFields();
+
+                        const sectionId = restoredData.x_section_id || '';
+                        const categoryId = restoredData.x_category_id || '';
+                        const subcategoryId = restoredData.x_subcategory_id || '';
+
+                        if (!sectionId) {
+                            return;
+                        }
+
+                        section.value = String(sectionId);
+                        section.dispatchEvent(new Event('change', { bubbles: true }));
+
+                        if (categoryId) {
+                            const categories = await fetchOptions('/helpdesk/categories', { section_id: sectionId });
+                            category.innerHTML = '<option value="">-- seleccionar --</option>';
+                            categories.forEach((item) => {
+                                const option = document.createElement('option');
+                                option.value = item.id;
+                                option.textContent = item.name;
+                                option.dataset.slug = item.slug || '';
+                                category.appendChild(option);
+                            });
+                            category.value = String(categoryId);
+                            category.dispatchEvent(new Event('change', { bubbles: true }));
+                        }
+
+                        if (subcategoryId) {
+                            const subcategories = await fetchOptions('/helpdesk/subcategories', { category_id: categoryId });
+                            subcategory.innerHTML = '<option value="">-- seleccionar --</option>';
+                            subcategories.forEach((item) => {
+                                const option = document.createElement('option');
+                                option.value = item.id;
+                                option.textContent = item.name;
+                                option.dataset.code = item.code || '';
+                                subcategory.appendChild(option);
+                            });
+                            subcategory.value = String(subcategoryId);
+                            subcategory.dispatchEvent(new Event('change', { bubbles: true }));
+                        }
+
+                        restoreSimpleFields();
+                        revealDynamicBlocks();
+                        collectVisibleRequiredFields();
+                    };
+
+                    if (Object.keys(restoredData).length) {
+                        restoreForm().catch((error) => console.warn('Inline helpdesk restore failed', error));
+                    }
+                    window.addEventListener('load', revealDynamicBlocks);
+                    window.addEventListener('load', collectVisibleRequiredFields);
+                    form.addEventListener('submit', collectVisibleRequiredFields);
+                })();
+            </script>
         </t>
     </template>
 

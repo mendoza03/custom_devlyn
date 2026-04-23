@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="view_hr_biometric_sync_config_form" model="ir.ui.view">
+        <field name="name">hr.biometric.sync.config.form</field>
+        <field name="model">hr.biometric.sync.config</field>
+        <field name="arch" type="xml">
+            <form>
+                <sheet>
+                    <group>
+                        <group>
+                            <field name="name"/>
+                            <field name="active"/>
+                            <field name="source_mode_label"/>
+                            <field name="timezone_name"/>
+                        </group>
+                        <group>
+                            <field name="sync_interval_seconds"/>
+                            <field name="debounce_seconds"/>
+                            <field name="close_time_local"/>
+                            <field name="reconcile_time_local"/>
+                        </group>
+                    </group>
+                    <group>
+                        <group>
+                            <field name="auto_close_enabled"/>
+                            <field name="reconcile_enabled"/>
+                            <field name="accept_unresolved_device"/>
+                        </group>
+                        <group>
+                            <field name="last_close_run_date"/>
+                            <field name="last_reconcile_run_date"/>
+                        </group>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="action_hr_biometric_sync_config" model="ir.actions.act_window">
+        <field name="name">Configuracion biometrica</field>
+        <field name="res_model">hr.biometric.sync.config</field>
+        <field name="view_mode">form</field>
+        <field name="res_id" ref="hr_biometric_sync_config_default"/>
+    </record>
+</odoo>

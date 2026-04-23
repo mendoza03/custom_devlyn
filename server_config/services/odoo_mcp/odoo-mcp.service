@@ -1,0 +1,19 @@
+[Unit]
+Description=Devlyn Odoo Attendance MCP
+After=network.target odoo.service postgresql.service
+Requires=odoo.service
+
+[Service]
+Type=simple
+User=odoo
+Group=odoo
+WorkingDirectory=/opt/odoo-mcp
+EnvironmentFile=/etc/odoo-mcp.env
+Environment=PYTHONUNBUFFERED=1
+ExecStart=/opt/odoo-mcp/venv/bin/uvicorn --app-dir /opt/odoo-mcp odoo_mcp.app:create_app --factory --host 127.0.0.1 --port 8071
+Restart=always
+RestartSec=3
+TimeoutStartSec=30
+
+[Install]
+WantedBy=multi-user.target

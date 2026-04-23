@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="group_odoo_mcp_readonly" model="res.groups">
+        <field name="name">Odoo MCP Readonly</field>
+        <field name="comment">Read-only integration group for the Devlyn MCP service account.</field>
+    </record>
+</odoo>

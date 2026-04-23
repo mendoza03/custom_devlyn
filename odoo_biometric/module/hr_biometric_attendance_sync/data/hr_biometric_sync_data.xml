@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo noupdate="1">
+    <record id="hr_biometric_sync_config_default" model="hr.biometric.sync.config">
+        <field name="name">Default</field>
+        <field name="timezone_name">America/Mexico_City</field>
+        <field name="sync_interval_seconds">60</field>
+        <field name="debounce_seconds">90</field>
+        <field name="close_time_local">23:59</field>
+        <field name="reconcile_time_local">00:15</field>
+        <field name="source_mode_label">biometric_v1</field>
+        <field name="auto_close_enabled">True</field>
+        <field name="reconcile_enabled">True</field>
+        <field name="accept_unresolved_device">True</field>
+    </record>
+
+    <record id="hr_biometric_sync_cursor_main" model="hr.biometric.sync.cursor">
+        <field name="name">main</field>
+        <field name="last_normalized_event_id">0</field>
+    </record>
+</odoo>

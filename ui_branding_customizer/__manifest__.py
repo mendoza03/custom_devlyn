@@ -21,6 +21,7 @@
     ],
     "assets": {
         "web.assets_backend": [
+            "ui_branding_customizer/static/src/xml/form_status_indicator.xml",
             "ui_branding_customizer/static/src/scss/backend_theme.scss",
             "ui_branding_customizer/static/src/js/theme_customizer.js",
         ],

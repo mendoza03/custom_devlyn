@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="view_devlyn_catalog_reload_wizard_form" model="ir.ui.view">
+        <field name="name">devlyn.catalog.reload.wizard.form</field>
+        <field name="model">devlyn.catalog.reload.wizard</field>
+        <field name="arch" type="xml">
+            <form string="Recargar catálogos Devlyn">
+                <sheet>
+                    <group>
+                        <field name="load_summary" nolabel="1" colspan="2" widget="text"/>
+                    </group>
+                </sheet>
+                <footer>
+                    <button name="action_reload_catalogs" type="object" string="Recargar" class="btn-primary"/>
+                    <button string="Cerrar" special="cancel"/>
+                </footer>
+            </form>
+        </field>
+    </record>
+
+    <record id="action_devlyn_catalog_reload_wizard" model="ir.actions.act_window">
+        <field name="name">Recargar catálogos Devlyn</field>
+        <field name="res_model">devlyn.catalog.reload.wizard</field>
+        <field name="view_mode">form</field>
+        <field name="target">new</field>
+    </record>
+
+    <menuitem
+        id="menu_devlyn_catalog_reload"
+        name="Recargar catálogos"
+        parent="menu_devlyn_catalog_root"
+        sequence="90"
+        action="action_devlyn_catalog_reload_wizard"
+        groups="hr_attendance.group_hr_attendance_manager"
+    />
+</odoo>

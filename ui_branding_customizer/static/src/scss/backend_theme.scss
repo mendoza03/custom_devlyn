@@ -1,9 +1,9 @@
 :root {
     --ui-brand-primary: #5B21B6;
     --ui-brand-secondary: #7C3AED;
-    --ui-navbar-bg: #111827;
-    --ui-menu-bg: #1F2937;
-    --ui-menu-text: #F9FAFB;
+    --ui-navbar-bg: #FFFFFF;
+    --ui-menu-bg: #FFFFFF;
+    --ui-menu-text: #111827;
     --ui-body-bg: #F3F4F6;
     --ui-text-color: #111827;
     --ui-link-color: #2563EB;
@@ -51,7 +51,7 @@ body,
 }
 
 body {
-    background-color: var(--ui-body-bg) !important;
+    background-color: #ffffff !important;
 }
 
 .o_action_manager,
@@ -75,7 +75,7 @@ body {
 .o_navbar_apps_menu {
     background-color: var(--ui-navbar-bg) !important;
     color: var(--ui-menu-text) !important;
-    border-color: transparent !important;
+    border-color: rgba(17, 24, 39, 0.08) !important;
 }
 
 .o_main_navbar a,
@@ -114,6 +114,19 @@ body {
 .o_app_switcher,
 .o_action_manager .o_content {
     background-color: var(--ui-body-bg) !important;
+}
+
+#sidebar_panel,
+.app_bar .app_container .scroll_container .app_items_wrapper .app_items,
+.sidebar_panel .sidebar {
+    background-color: #FFFFFF !important;
+    border-right: 1px solid rgba(17, 24, 39, 0.08);
+}
+
+.sidebar_panel .sidebar .sidebar_menu li a,
+#sidebar_panel .sidebar_menu li a,
+#sidebar_panel .sidebar_menu li .nav-link {
+    color: var(--ui-text-color) !important;
 }
 
 /* SETTINGS / PANELS */
@@ -529,6 +542,12 @@ body::after {
 }
 
 /* FIX HOME MENU SIN ROMPER NAVBAR */
+body.ui-branding-home-menu-visible {
+    --ui-body-bg: #FFFFFF;
+    background: #FFFFFF !important;
+    background-color: #FFFFFF !important;
+}
+
 body.ui-branding-home-menu-visible .o_web_client,
 body.ui-branding-home-menu-visible .o_action_manager,
 body.ui-branding-home-menu-visible .o_main_content,
@@ -549,4 +568,15 @@ body.ui-branding-home-menu-visible .o_home_menu {
 /* ocultar watermark interno cuando está el home menu */
 body.ui-branding-home-menu-visible::after {
     display: none !important;
+}
+
+.o_form_status_indicator .o_form_button_save {
+    background-color: var(--ui-button-bg) !important;
+    color: var(--ui-button-text) !important;
+    border-radius: var(--ui-border-radius) !important;
+    box-shadow: 0 6px 18px rgba(0, 0, 0, 0.08);
+}
+
+.o_form_status_indicator .o_form_button_save:hover {
+    filter: brightness(0.95);
 }

@@ -1,6 +1,8 @@
 import base64
+import json
 
 from odoo import http
+from odoo.exceptions import UserError, ValidationError
 from odoo.http import request
 
 
@@ -13,23 +15,184 @@ CATEGORY_SLUG_XMLIDS = {
     "papeleria_seguimiento": "helpdesk_custom_datos.helpdesk_ticket_category_papeleria_seguimiento",
 }
 
+REFACTURACION_CODES = {
+    "error_captura_datos_fiscales",
+    "error_captura_uso_cfdi",
+    "error_captura_forma_pago",
+    "unificar_pedidos",
+    "dividir_pedido",
+    "unificar_conceptos",
+    "diferencia_convenio_credito",
+    "facturar_monto_especifico",
+    "periodo_facturacion_portal",
+}
+
+CONVENIOS_CODES = {
+    "apoyo_aplicar_convenio",
+    "convenios_institucionales",
+    "no_entran_manuales",
+    "dudas_promociones",
+}
+
+DEV_REAL_TC_DB_CODES = {"cargos_duplicados", "error_examen", "fecha_entrega", "mal_servicio"}
+DEV_REAL_CASH_ORDER_CODES = {"error_examen", "fecha_entrega", "mal_servicio"}
+DEV_REAL_CASH_TRANSFER_CODES = {"error_examen", "fecha_entrega", "mal_servicio"}
+
+DEV_TC_EXTRA_BLOCKS = {
+    "cargos_duplicados": "block-dev-tc-cargos_duplicados",
+    "error_examen": "block-dev-tc-error_examen",
+    "fecha_entrega": "block-dev-tc-fecha_entrega",
+}
+
+DEV_CASH_ORDER_EXTRA_BLOCKS = {
+    "error_examen": "block-dev-cash-order-error_examen",
+    "fecha_entrega": "block-dev-cash-order-fecha_entrega",
+}
+
+DEV_CASH_TRANSFER_EXTRA_BLOCKS = {
+    "error_examen": "block-dev-cash-transfer-error_examen",
+    "fecha_entrega": "block-dev-cash-transfer-fecha_entrega",
+}
+
 
 class HelpdeskController(http.Controller):
+
+    def _safe_int(self, value):
+        try:
+            return int(value)
+        except (TypeError, ValueError):
+            return False
+
+    def _default_user_email(self):
+        user = request.env.user
+        return user.email or user.partner_id.email or ''
+
+    def _default_user_phone(self):
+        user = request.env.user
+        if "work_phone" in user._fields and user.work_phone:
+            return user.work_phone
+        return user.partner_id.phone or ''
+
+    def _default_user_branch_id(self):
+        return request.env.user.x_branch_id.id or ''
+
+    def _sanitize_form_data(self, form_data=None):
+        sanitized = {}
+        for key, value in (form_data or {}).items():
+            if key in {'attachments'}:
+                continue
+            if hasattr(value, 'filename'):
+                continue
+            if isinstance(value, (list, tuple)):
+                clean_values = [
+                    item for item in value
+                    if not hasattr(item, 'filename')
+                ]
+                sanitized[key] = clean_values
+            else:
+                sanitized[key] = value
+        return sanitized
+
+    def _get_form_render_values(self, form_data=None, error_message=None):
+        env = request.env(user=request.website.user_id.id)
+        sections = env['helpdesk.section'].sudo().search([('active', '=', True)], order='sequence, name, id')
+        branches = env['devlyn.catalog.branch'].sudo().search([('active', '=', True)], order='center_code, branch_name, id')
+        safe_form_data = self._sanitize_form_data(form_data)
+        restore_values = self._get_restore_values(safe_form_data)
+        return {
+            'sections': sections,
+            'branches': branches,
+            'error_message': error_message or '',
+            'form_data_b64': base64.b64encode(json.dumps(safe_form_data).encode('utf-8')).decode('ascii'),
+            'default_user_email': self._default_user_email(),
+            'default_user_phone': self._default_user_phone(),
+            'default_user_branch_id': self._default_user_branch_id(),
+            **restore_values,
+        }
 
     def _get_category_slug(self, category):
         if not category:
             return ""
-        env = request.env
+
+        env = request.env(user=request.website.user_id.id)
+        # env = request.env
         for slug, xmlid in CATEGORY_SLUG_XMLIDS.items():
             record = env.ref(xmlid, raise_if_not_found=False)
             if record and record.id == category.id:
                 return slug
         return ""
 
+    def _resolve_restore_block_ids(self, category_slug="", subcategory_code=""):
+        if not subcategory_code:
+            return "", ""
+
+        if subcategory_code in REFACTURACION_CODES:
+            return "block-refacturacion", ""
+
+        if subcategory_code in CONVENIOS_CODES:
+            return "block-convenios", ""
+
+        if category_slug == "receta_lc_lente_contacto" and subcategory_code == "atraso_lente_contacto":
+            return "block-receta_lc_atraso_lente_contacto", ""
+
+        if category_slug == "papeleria_seguimiento" and subcategory_code == "seguimiento_solicitud":
+            return "block-papeleria_seguimiento", ""
+
+        if category_slug == "dev_real_tc_db" and subcategory_code in DEV_REAL_TC_DB_CODES:
+            return "block-dev-real-tc-db", DEV_TC_EXTRA_BLOCKS.get(subcategory_code, "")
+
+        if category_slug == "dev_real_cash_order" and subcategory_code in DEV_REAL_CASH_ORDER_CODES:
+            return "block-dev-real-cash-order", DEV_CASH_ORDER_EXTRA_BLOCKS.get(subcategory_code, "")
+
+        if category_slug == "dev_real_cash_transfer" and subcategory_code in DEV_REAL_CASH_TRANSFER_CODES:
+            return "block-dev-real-cash-transfer", DEV_CASH_TRANSFER_EXTRA_BLOCKS.get(subcategory_code, "")
+
+        return f"block-{subcategory_code}", ""
+
+    def _get_restore_values(self, form_data=None):
+        env = request.env(user=request.website.user_id.id)
+        category_slug = ""
+        subcategory_code = ""
+        main_block_id = ""
+        extra_block_id = ""
+        order_type_block_id = ""
+
+        category_id = self._safe_int((form_data or {}).get('x_category_id'))
+        subcategory_id = self._safe_int((form_data or {}).get('x_subcategory_id'))
+
+        if category_id:
+            category = env['helpdesk.ticket.category'].sudo().browse(category_id)
+            if category.exists():
+                category_slug = self._get_category_slug(category)
+
+        if subcategory_id:
+            subcategory = env['helpdesk.ticket.subcategory'].sudo().browse(subcategory_id)
+            if subcategory.exists():
+                subcategory_code = subcategory.code or ""
+
+        if category_slug or subcategory_code:
+            main_block_id, extra_block_id = self._resolve_restore_block_ids(category_slug, subcategory_code)
+
+        order_type = (form_data or {}).get('x_order_type') or ""
+        if order_type == "satisfaccion_adaptacion":
+            order_type_block_id = "block-satisfaccion_adaptacion"
+        elif order_type == "satisfaccion_imagen":
+            order_type_block_id = "block-satisfaccion_imagen"
+
+        return {
+            'restore_category_slug': category_slug,
+            'restore_subcategory_code': subcategory_code,
+            'restore_main_block_id': main_block_id,
+            'restore_extra_block_id': extra_block_id,
+            'restore_order_type_block_id': order_type_block_id,
+        }
+
     def _validate_hierarchy(self, section_id, category_id, subcategory_id):
-        section = request.env['helpdesk.section'].sudo().browse(section_id) if section_id else request.env['helpdesk.section']
-        category = request.env['helpdesk.ticket.category'].sudo().browse(category_id) if category_id else request.env['helpdesk.ticket.category']
-        subcategory = request.env['helpdesk.ticket.subcategory'].sudo().browse(subcategory_id) if subcategory_id else request.env['helpdesk.ticket.subcategory']
+
+        env = request.env(user=request.website.user_id.id)
+        section = env['helpdesk.section'].sudo().browse(section_id) if section_id else request.env['helpdesk.section']
+        category = env['helpdesk.ticket.category'].sudo().browse(category_id) if category_id else request.env['helpdesk.ticket.category']
+        subcategory = env['helpdesk.ticket.subcategory'].sudo().browse(subcategory_id) if subcategory_id else request.env['helpdesk.ticket.subcategory']
 
         if section_id and not section.exists():
             return False
@@ -43,18 +206,52 @@ class HelpdeskController(http.Controller):
             return False
         return True
 
-    @http.route(['/helpdesk', '/<string:lang>/helpdesk'], type='http', auth='public', website=True)
+    def _get_visible_required_fields(self, post):
+        raw_value = post.get('visible_required_fields') or '[]'
+        try:
+            field_names = json.loads(raw_value)
+        except (TypeError, ValueError):
+            return []
+        if not isinstance(field_names, list):
+            return []
+        cleaned_names = []
+        for field_name in field_names:
+            if not isinstance(field_name, str):
+                continue
+            field_name = field_name.strip()
+            if not field_name:
+                continue
+            cleaned_names.append(field_name)
+        return cleaned_names
+
+    def _get_visible_required_error(self, ticket_record, post):
+        missing = []
+        for field_name in dict.fromkeys(self._get_visible_required_fields(post)):
+            field = ticket_record._fields.get(field_name)
+            if not field:
+                continue
+            if ticket_record._is_empty_required_value(ticket_record[field_name]):
+                missing.append(field.string or field_name)
+
+        #if missing:
+            #return "Faltan los siguientes campos obligatorios visibles:\n- %s" % "\n- ".join(missing)
+        return False
+
+    @http.route(['/helpdesk', '/<string:lang>/helpdesk'], type='http', auth='user', website=True)
     def helpdesk_form(self, **kwargs):
-        sections = request.env['helpdesk.section'].sudo().search([('active', '=', True)], order='sequence, name, id')
-        return request.render('helpdesk_web_form.helpdesk_form_template', {'sections': sections})
+        return request.render(
+            'helpdesk_web_form.helpdesk_form_template',
+            self._get_form_render_values(),
+        )
 
     @http.route(
         ['/helpdesk/categories', '/<string:lang>/helpdesk/categories'],
-        type='http', auth='public', methods=['POST'], csrf=False, website=True
+        type='http', auth='user', methods=['POST'], csrf=False, website=True
     )
     def helpdesk_categories(self, **post):
         section_id = int(post.get('section_id') or 0)
-        cats = request.env['helpdesk.ticket.category'].sudo().search([
+        env = request.env(user=request.website.user_id.id)
+        cats = env['helpdesk.ticket.category'].sudo().sudo().search([
             ('section_id', '=', section_id),
             ('active', '=', True),
         ])
@@ -65,11 +262,12 @@ class HelpdeskController(http.Controller):
 
     @http.route(
         ['/helpdesk/subcategories', '/<string:lang>/helpdesk/subcategories'],
-        type='http', auth='public', methods=['POST'], csrf=False, website=True
+        type='http', auth='user', methods=['POST'], csrf=False, website=True
     )
     def helpdesk_subcategories(self, **post):
         category_id = int(post.get('category_id') or 0)
-        subs = request.env['helpdesk.ticket.subcategory'].sudo().search([
+        env = request.env(user=request.website.user_id.id)
+        subs = env['helpdesk.ticket.subcategory'].sudo().search([
             ('category_id', '=', category_id),
             ('active', '=', True),
         ])
@@ -80,9 +278,10 @@ class HelpdeskController(http.Controller):
 
     @http.route(
         ['/helpdesk/submit', '/<string:lang>/helpdesk/submit'],
-        type='http', auth='public', methods=['POST'], website=True
+        type='http', auth='user', methods=['POST'], website=True
     )
     def helpdesk_submit(self, **post):
+        env = request.env(user=request.website.user_id.id)
 
         def _int(key):
             val = post.get(key)
@@ -113,19 +312,27 @@ class HelpdeskController(http.Controller):
         section_id = _int('x_section_id')
         category_id = _int('x_category_id')
         subcategory_id = _int('x_subcategory_id')
+        branch_id = _int('x_branch_id')
+
+        if branch_id and not env['devlyn.catalog.branch'].sudo().browse(branch_id).exists():
+            return request.not_found()
 
         if not self._validate_hierarchy(section_id, category_id, subcategory_id):
             return request.not_found()
 
-        ticket = request.env['helpdesk.ticket'].sudo().create({
-            # ── Campos base ───────────────────────────────────────────────────
-            'name':                     _str('x_general_description'),
-            'x_general_description':    _str('x_general_description'),
-            'x_section_id':             section_id,
-            'x_category_id':            category_id,
-            'x_subcategory_id':         subcategory_id,
-            'x_detailed_description':   _str('x_detailed_description'),
-            'partner_email':            post.get('email'),
+        try:
+            ticket_vals = {
+                # ── Campos base ───────────────────────────────────────────────────
+                'name':                     _str('x_general_description'),
+                'x_general_description':    _str('x_general_description'),
+                'x_section_id':             section_id,
+                'x_category_id':            category_id,
+                'x_subcategory_id':         subcategory_id,
+                'x_detailed_description':   _str('x_detailed_description'),
+                'x_correo':                 _str('email'),
+                'x_numero_telefonico':      _str('x_numero_telefonico'),
+                'x_branch_id':              branch_id,
+                'partner_email':            _str('email'),
 
             # ── Micas sin cortar / Trabajos atrasados ─────────────────────────
             'x_order_number':           _str('x_order_number'),
@@ -465,26 +672,43 @@ class HelpdeskController(http.Controller):
             'x_supply_frame_brand_basic': _str('x_supply_frame_brand_basic'),
             'x_supply_return_folio': _str('x_supply_return_folio'),
 
-            # ── Laboratorio local ─────────────────────────────────────────────
-            'x_lab_local_pos_order': _str('x_lab_local_pos_order'),
-            'x_lab_local_promise_date': _date('x_lab_local_promise_date'),
-            'x_lab_local_name': _str('x_lab_local_name'),
-        })
+                # ── Laboratorio local ─────────────────────────────────────────────
+                'x_lab_local_pos_order': _str('x_lab_local_pos_order'),
+                'x_lab_local_promise_date': _date('x_lab_local_promise_date'),
+                'x_lab_local_name': _str('x_lab_local_name'),
+            }
 
-        files = request.httprequest.files.getlist('attachments')
-        for f in files:
-            if f and f.filename:
-                request.env['helpdesk.ticket.attachment.line'].sudo().create({
-                    'ticket_id': ticket.id,
-                    'file':      base64.b64encode(f.read()),
-                    'filename':  f.filename,
-                })
+            draft_ticket = env['helpdesk.ticket'].sudo().new(ticket_vals)
+            error_message = (
+                self._get_visible_required_error(draft_ticket, post)
+                or draft_ticket._get_dynamic_required_fields_error()
+            )
+            if error_message:
+                return request.render(
+                    'helpdesk_web_form.helpdesk_form_template',
+                    self._get_form_render_values(form_data=post, error_message=error_message),
+                )
+            ticket = env['helpdesk.ticket'].sudo().create(ticket_vals)
+
+            files = request.httprequest.files.getlist('attachments')
+            for f in files:
+                if f and f.filename:
+                    env['helpdesk.ticket.attachment.line'].create({
+                        'ticket_id': ticket.id,
+                        'file':      base64.b64encode(f.read()),
+                        'filename':  f.filename,
+                    })
+        except (ValidationError, UserError) as err:
+            return request.render(
+                'helpdesk_web_form.helpdesk_form_template',
+                self._get_form_render_values(form_data=post, error_message=str(err)),
+            )
 
         return request.redirect(f'/helpdesk/success?ticket_id={ticket.id}')
 
     @http.route(
         ['/helpdesk/success', '/<string:lang>/helpdesk/success'],
-        type='http', auth='public', website=True
+        type='http', auth='user', website=True
     )
     def helpdesk_success(self, ticket_id=None, **kwargs):
         return request.render('helpdesk_web_form.helpdesk_success_template', {

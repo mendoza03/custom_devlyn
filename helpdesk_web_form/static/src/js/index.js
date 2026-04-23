@@ -1,10 +1,21 @@
 window.addEventListener('load', function () {
 
+    const form        = document.querySelector('form[action="/helpdesk/submit"]');
+    const restoreNode = document.getElementById('helpdesk-form-data');
     const section     = document.getElementById('section');
     const category    = document.getElementById('category');
     const subcategory = document.getElementById('subcategory');
+    let restoredData = {};
 
-    if (!section || !category || !subcategory) return;
+    try {
+        if (restoreNode?.value) {
+            restoredData = JSON.parse(atob(restoreNode.value));
+        }
+    } catch (error) {
+        console.warn('Helpdesk form restore failed', error);
+    }
+
+    if (!form || !section || !category || !subcategory) return;
 
     const BLOCK_MAP = {
         'micas_sin_cortar':                        'block-micas_sin_cortar',
@@ -120,11 +131,101 @@ window.addEventListener('load', function () {
     let subcategoryCodes = {};
     let currentCategorySlug = '';
 
+    function isVisible(el) {
+        return Boolean(el) && el.offsetParent !== null;
+    }
+
+    function getDynamicFields() {
+        return form.querySelectorAll(
+            '.subcategory-block input, .subcategory-block select, .subcategory-block textarea,' +
+            '#block-satisfaccion_adaptacion input, #block-satisfaccion_adaptacion select, #block-satisfaccion_adaptacion textarea,' +
+            '#block-satisfaccion_imagen input, #block-satisfaccion_imagen select, #block-satisfaccion_imagen textarea'
+        );
+    }
+
+    function clearDynamicRequired() {
+        getDynamicFields().forEach(field => {
+            field.required = false;
+            field.setCustomValidity('');
+        });
+    }
+
+    function applyRadioRequired(fields) {
+        const radioNames = new Set();
+        fields.forEach(field => {
+            if (field.type === 'radio' && field.name) {
+                radioNames.add(field.name);
+            }
+        });
+        radioNames.forEach(name => {
+            const visibleGroup = Array.from(
+                form.querySelectorAll(`input[type="radio"][name="${CSS.escape(name)}"]`)
+            ).filter(isVisible);
+            visibleGroup.forEach(radio => {
+                radio.required = false;
+                radio.setCustomValidity('');
+            });
+            if (visibleGroup.length) {
+                visibleGroup[0].required = true;
+            }
+        });
+    }
+
+    function syncDynamicRequired() {
+        clearDynamicRequired();
+
+        const visibleFields = Array.from(getDynamicFields()).filter(field => {
+            if (!isVisible(field) || field.disabled) return false;
+            if (field.type === 'hidden' || field.type === 'file') return false;
+            return true;
+        });
+
+        visibleFields.forEach(field => {
+            if (field.type !== 'radio' && field.type !== 'checkbox') {
+                field.required = true;
+            }
+            field.setCustomValidity('');
+        });
+
+        applyRadioRequired(visibleFields);
+    }
+
+    function validateDynamicFields() {
+        syncDynamicRequired();
+
+        let firstInvalidField = null;
+        const visibleFields = Array.from(getDynamicFields()).filter(field => {
+            if (!isVisible(field) || field.disabled) return false;
+            if (field.type === 'hidden' || field.type === 'file') return false;
+            return true;
+        });
+
+        visibleFields.forEach(field => {
+            field.setCustomValidity('');
+
+            if (field.tagName === 'SELECT' && field.value === 'select') {
+                field.setCustomValidity('Selecciona una opcion valida.');
+            }
+
+            if (!firstInvalidField && !field.checkValidity()) {
+                firstInvalidField = field;
+            }
+        });
+
+        if (firstInvalidField) {
+            firstInvalidField.reportValidity();
+            firstInvalidField.focus();
+            return false;
+        }
+        return true;
+    }
+
     function hideAllSubcategoryBlocks() {
         document.querySelectorAll('.subcategory-block').forEach(el => {
             el.style.display = 'none';
         });
         hideOrderTypeBlocks();
+        syncDynamicRequired();
     }
 
     function hideOrderTypeBlocks() {
@@ -132,11 +233,197 @@ window.addEventListener('load', function () {
             const el = document.getElementById(id);
             if (el) el.style.display = 'none';
         });
+        syncDynamicRequired();
     }
 
     function showBlock(id) {
         const el = document.getElementById(id);
         if (el) el.style.display = 'block';
+        syncDynamicRequired();
+    }
+
+    function updateOrderTypeBlocks() {
+        hideOrderTypeBlocks();
+        const activeOrderType = Array.from(document.querySelectorAll('.order-type-select'))
+            .find(select => isVisible(select) && select.value);
+        if (!activeOrderType) return;
+        if (activeOrderType.value === 'satisfaccion_adaptacion') {
+            showBlock('block-satisfaccion_adaptacion');
+        } else if (activeOrderType.value === 'satisfaccion_imagen') {
+            showBlock('block-satisfaccion_imagen');
+        }
+    }
+
+    function updateTonerWarning() {
+        const tonerField = form.querySelector('[name="x_toner_below_15"]');
+        const warning = document.getElementById('block-toner-warning');
+        if (warning && tonerField) {
+            warning.style.display = (tonerField.value === 'no') ? 'block' : 'none';
+        }
+    }
+
+    function handleSubcategoryChange() {
+        hideAllSubcategoryBlocks();
+        const selectedOption = subcategory.options[subcategory.selectedIndex];
+        const code = subcategoryCodes[subcategory.value] || (selectedOption ? (selectedOption.dataset.code || '') : '');
+        showBlockForCode(code);
+        updateOrderTypeBlocks();
+        updateTonerWarning();
+    }
+
+    function populateField(name, value) {
+        if (value === undefined || value === null || name === 'attachments' || name === 'csrf_token') {
+            return;
+        }
+        const fields = form.querySelectorAll(`[name="${CSS.escape(name)}"]`);
+        fields.forEach(field => {
+            if (field.type === 'file') {
+                return;
+            }
+            if (field.type === 'radio') {
+                field.checked = field.value === value;
+                return;
+            }
+            if (field.type === 'checkbox') {
+                field.checked = Boolean(value);
+                return;
+            }
+            field.value = value;
+        });
+    }
+
+    function restoreSimpleFields() {
+        Object.entries(restoredData).forEach(([name, value]) => {
+            if (['x_section_id', 'x_category_id', 'x_subcategory_id', 'attachments', 'csrf_token'].includes(name)) {
+                return;
+            }
+            populateField(name, value);
+        });
+    }
+
+    function loadCategories(section_id, selectedCategoryId = '', selectedSubcategoryId = '') {
+        category.innerHTML = '<option value="">-- seleccionar --</option>';
+        subcategory.innerHTML = '<option value="">-- seleccionar --</option>';
+        category.disabled = true;
+        subcategory.disabled = true;
+
+        subcategoryCodes = {};
+        currentCategorySlug = '';
+        hideAllSubcategoryBlocks();
+
+        if (!section_id) {
+            category.disabled = false;
+            subcategory.disabled = false;
+            return Promise.resolve();
+        }
+
+        return fetch('/helpdesk/categories', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8' },
+            body: new URLSearchParams({ section_id: section_id })
+        })
+        .then(res => {
+            if (!res.ok) throw new Error('Error cargando categorías');
+            return res.json();
+        })
+        .then(data => {
+            const frag = document.createDocumentFragment();
+            data.forEach(c => {
+                const opt = document.createElement('option');
+                opt.value = c.id;
+                opt.textContent = c.name;
+                opt.dataset.slug = c.slug || c.code || '';
+                frag.appendChild(opt);
+            });
+            category.appendChild(frag);
+            category.disabled = false;
+            subcategory.disabled = false;
+
+            if (selectedCategoryId) {
+                category.value = String(selectedCategoryId);
+                const selectedOpt = category.options[category.selectedIndex];
+                currentCategorySlug = selectedOpt ? (selectedOpt.dataset.slug || '') : '';
+                return loadSubcategories(selectedCategoryId, selectedSubcategoryId);
+            }
+            return Promise.resolve();
+        })
+        .catch(err => {
+            console.error(err);
+            category.disabled = false;
+            subcategory.disabled = false;
+        });
+    }
+
+    function loadSubcategories(category_id, selectedSubcategoryId = '') {
+        const selectedOpt = category.options[category.selectedIndex];
+        currentCategorySlug = selectedOpt ? (selectedOpt.dataset.slug || '') : '';
+
+        subcategory.innerHTML = '<option value="">-- seleccionar --</option>';
+        subcategory.disabled = true;
+
+        subcategoryCodes = {};
+        hideAllSubcategoryBlocks();
+
+        if (!category_id) {
+            subcategory.disabled = false;
+            return Promise.resolve();
+        }
+
+        return fetch('/helpdesk/subcategories', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8' },
+            body: new URLSearchParams({ category_id: category_id })
+        })
+        .then(res => {
+            if (!res.ok) throw new Error('Error cargando subcategorías');
+            return res.json();
+        })
+        .then(data => {
+            const frag = document.createDocumentFragment();
+            data.forEach(sc => {
+                const opt = document.createElement('option');
+                opt.value = sc.id;
+                opt.textContent = sc.name;
+                opt.dataset.code = sc.code || '';
+                frag.appendChild(opt);
+                subcategoryCodes[sc.id] = sc.code || '';
+            });
+            subcategory.appendChild(frag);
+            subcategory.disabled = false;
+
+            if (selectedSubcategoryId) {
+                subcategory.value = String(selectedSubcategoryId);
+                handleSubcategoryChange();
+            }
+        })
+        .catch(err => {
+            console.error(err);
+            subcategory.disabled = false;
+        });
+    }
+
+    function restoreFormData() {
+        if (!Object.keys(restoredData).length) {
+            syncDynamicRequired();
+            return;
+        }
+
+        restoreSimpleFields();
+
+        const sectionId = restoredData.x_section_id || '';
+        const categoryId = restoredData.x_category_id || '';
+        const subcategoryId = restoredData.x_subcategory_id || '';
+
+        if (sectionId) {
+            section.value = String(sectionId);
+        }
+
+        loadCategories(sectionId, categoryId, subcategoryId).then(() => {
+            restoreSimpleFields();
+            updateOrderTypeBlocks();
+            updateTonerWarning();
+            syncDynamicRequired();
+        });
     }
 
     function showBlockForCode(code) {
@@ -196,117 +483,44 @@ window.addEventListener('load', function () {
     }
 
     section.addEventListener('change', function () {
-        const section_id = this.value;
-
-        category.innerHTML = '<option value="">-- seleccionar --</option>';
-        subcategory.innerHTML = '<option value="">-- seleccionar --</option>';
-        category.disabled = true;
-        subcategory.disabled = true;
-
-        subcategoryCodes = {};
-        currentCategorySlug = '';
-        hideAllSubcategoryBlocks();
-
-        if (!section_id) {
-            category.disabled = false;
-            subcategory.disabled = false;
-            return;
-        }
-
-        fetch('/helpdesk/categories', {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8' },
-            body: new URLSearchParams({ section_id: section_id })
-        })
-        .then(res => {
-            if (!res.ok) throw new Error('Error cargando categorías');
-            return res.json();
-        })
-        .then(data => {
-            const frag = document.createDocumentFragment();
-            data.forEach(c => {
-                const opt = document.createElement('option');
-                opt.value = c.id;
-                opt.textContent = c.name;
-                opt.dataset.slug = c.slug || c.code || '';
-                frag.appendChild(opt);
-            });
-            category.appendChild(frag);
-            category.disabled = false;
-            subcategory.disabled = false;
-        })
-        .catch(err => {
-            console.error(err);
-            category.disabled = false;
-            subcategory.disabled = false;
-        });
+        loadCategories(this.value);
     });
 
     category.addEventListener('change', function () {
-        const category_id = this.value;
-        const selectedOpt = this.options[this.selectedIndex];
-        currentCategorySlug = selectedOpt ? (selectedOpt.dataset.slug || '') : '';
-
-        subcategory.innerHTML = '<option value="">-- seleccionar --</option>';
-        subcategory.disabled = true;
-
-        subcategoryCodes = {};
-        hideAllSubcategoryBlocks();
-
-        if (!category_id) {
-            subcategory.disabled = false;
-            return;
-        }
-
-        fetch('/helpdesk/subcategories', {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8' },
-            body: new URLSearchParams({ category_id: category_id })
-        })
-        .then(res => {
-            if (!res.ok) throw new Error('Error cargando subcategorías');
-            return res.json();
-        })
-        .then(data => {
-            const frag = document.createDocumentFragment();
-            data.forEach(sc => {
-                const opt = document.createElement('option');
-                opt.value = sc.id;
-                opt.textContent = sc.name;
-                frag.appendChild(opt);
-                subcategoryCodes[sc.id] = sc.code || '';
-            });
-            subcategory.appendChild(frag);
-            subcategory.disabled = false;
-        })
-        .catch(err => {
-            console.error(err);
-            subcategory.disabled = false;
-        });
+        loadSubcategories(this.value);
     });
 
     subcategory.addEventListener('change', function () {
-        hideAllSubcategoryBlocks();
-        const code = subcategoryCodes[this.value] || '';
-        showBlockForCode(code);
+        handleSubcategoryChange();
     });
 
     document.addEventListener('change', function (e) {
         if (!e.target.classList.contains('order-type-select')) return;
-        hideOrderTypeBlocks();
-        if (e.target.value === 'satisfaccion_adaptacion') {
-            showBlock('block-satisfaccion_adaptacion');
-        } else if (e.target.value === 'satisfaccion_imagen') {
-            showBlock('block-satisfaccion_imagen');
-        }
+        updateOrderTypeBlocks();
     });
 
     document.addEventListener('change', function (e) {
-        if (e.target.id !== 'x_toner_below_15') return;
-        const warning = document.getElementById('block-toner-warning');
-        if (warning) {
-            warning.style.display = (e.target.value === 'no') ? 'block' : 'none';
+        if (e.target.name !== 'x_toner_below_15') return;
+        updateTonerWarning();
+    });
+
+    form.addEventListener('submit', function (e) {
+        if (!validateDynamicFields()) {
+            e.preventDefault();
         }
     });
+
+    form.addEventListener('change', function (e) {
+        if (e.target.matches('.subcategory-block input, .subcategory-block select, .subcategory-block textarea, #block-satisfaccion_adaptacion input, #block-satisfaccion_adaptacion select, #block-satisfaccion_adaptacion textarea, #block-satisfaccion_imagen input, #block-satisfaccion_imagen select, #block-satisfaccion_imagen textarea')) {
+            e.target.setCustomValidity('');
+            if (e.target.type === 'radio' && e.target.name) {
+                form.querySelectorAll(`input[type="radio"][name="${CSS.escape(e.target.name)}"]`).forEach(radio => {
+                    radio.setCustomValidity('');
+                });
+            }
+        }
+    });
+
+    restoreFormData();
 
 });

@@ -1,0 +1,121 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="rule_mcp_read_hr_employee" model="ir.rule">
+        <field name="name">MCP Read all employees</field>
+        <field name="model_id" ref="hr.model_hr_employee"/>
+        <field name="groups" eval="[(4, ref('odoo_mcp_readonly_access.group_odoo_mcp_readonly'))]"/>
+        <field name="domain_force">[(1, '=', 1)]</field>
+    </record>
+
+    <record id="rule_mcp_read_hr_attendance" model="ir.rule">
+        <field name="name">MCP Read all attendance</field>
+        <field name="model_id" ref="hr_attendance.model_hr_attendance"/>
+        <field name="groups" eval="[(4, ref('odoo_mcp_readonly_access.group_odoo_mcp_readonly'))]"/>
+        <field name="domain_force">[(1, '=', 1)]</field>
+    </record>
+
+    <record id="rule_mcp_read_hr_biometric_event" model="ir.rule">
+        <field name="name">MCP Read all biometric attendance events</field>
+        <field name="model_id" ref="hr_biometric_attendance_sync.model_hr_biometric_event"/>
+        <field name="groups" eval="[(4, ref('odoo_mcp_readonly_access.group_odoo_mcp_readonly'))]"/>
+        <field name="domain_force">[(1, '=', 1)]</field>
+    </record>
+
+    <record id="rule_mcp_read_hr_biometric_sync_config" model="ir.rule">
+        <field name="name">MCP Read biometric sync config</field>
+        <field name="model_id" ref="hr_biometric_attendance_sync.model_hr_biometric_sync_config"/>
+        <field name="groups" eval="[(4, ref('odoo_mcp_readonly_access.group_odoo_mcp_readonly'))]"/>
+        <field name="domain_force">[(1, '=', 1)]</field>
+    </record>
+
+    <record id="rule_mcp_read_biometric_attendance_summary" model="ir.rule">
+        <field name="name">MCP Read biometric attendance summary</field>
+        <field name="model_id" ref="odoo_biometric_bridge.model_biometric_attendance_summary"/>
+        <field name="groups" eval="[(4, ref('odoo_mcp_readonly_access.group_odoo_mcp_readonly'))]"/>
+        <field name="domain_force">[(1, '=', 1)]</field>
+    </record>
+
+    <record id="rule_mcp_read_devlyn_catalog_region" model="ir.rule">
+        <field name="name">MCP Read all Devlyn regions</field>
+        <field name="model_id" ref="devlyn_dahua_attendance_reporting.model_devlyn_catalog_region"/>
+        <field name="groups" eval="[(4, ref('odoo_mcp_readonly_access.group_odoo_mcp_readonly'))]"/>
+        <field name="domain_force">[(1, '=', 1)]</field>
+    </record>
+
+    <record id="rule_mcp_read_devlyn_catalog_zone" model="ir.rule">
+        <field name="name">MCP Read all Devlyn zones</field>
+        <field name="model_id" ref="devlyn_dahua_attendance_reporting.model_devlyn_catalog_zone"/>
+        <field name="groups" eval="[(4, ref('odoo_mcp_readonly_access.group_odoo_mcp_readonly'))]"/>
+        <field name="domain_force">[(1, '=', 1)]</field>
+    </record>
+
+    <record id="rule_mcp_read_devlyn_catalog_district" model="ir.rule">
+        <field name="name">MCP Read all Devlyn districts</field>
+        <field name="model_id" ref="devlyn_dahua_attendance_reporting.model_devlyn_catalog_district"/>
+        <field name="groups" eval="[(4, ref('odoo_mcp_readonly_access.group_odoo_mcp_readonly'))]"/>
+        <field name="domain_force">[(1, '=', 1)]</field>
+    </record>
+
+    <record id="rule_mcp_read_devlyn_catalog_format" model="ir.rule">
+        <field name="name">MCP Read all Devlyn formats</field>
+        <field name="model_id" ref="devlyn_dahua_attendance_reporting.model_devlyn_catalog_format"/>
+        <field name="groups" eval="[(4, ref('odoo_mcp_readonly_access.group_odoo_mcp_readonly'))]"/>
+        <field name="domain_force">[(1, '=', 1)]</field>
+    </record>
+
+    <record id="rule_mcp_read_devlyn_catalog_status" model="ir.rule">
+        <field name="name">MCP Read all Devlyn statuses</field>
+        <field name="model_id" ref="devlyn_dahua_attendance_reporting.model_devlyn_catalog_status"/>
+        <field name="groups" eval="[(4, ref('odoo_mcp_readonly_access.group_odoo_mcp_readonly'))]"/>
+        <field name="domain_force">[(1, '=', 1)]</field>
+    </record>
+
+    <record id="rule_mcp_read_devlyn_catalog_optical_level" model="ir.rule">
+        <field name="name">MCP Read all Devlyn optical levels</field>
+        <field name="model_id" ref="devlyn_dahua_attendance_reporting.model_devlyn_catalog_optical_level"/>
+        <field name="groups" eval="[(4, ref('odoo_mcp_readonly_access.group_odoo_mcp_readonly'))]"/>
+        <field name="domain_force">[(1, '=', 1)]</field>
+    </record>
+
+    <record id="rule_mcp_read_devlyn_catalog_branch" model="ir.rule">
+        <field name="name">MCP Read all Devlyn branches</field>
+        <field name="model_id" ref="devlyn_dahua_attendance_reporting.model_devlyn_catalog_branch"/>
+        <field name="groups" eval="[(4, ref('odoo_mcp_readonly_access.group_odoo_mcp_readonly'))]"/>
+        <field name="domain_force">[(1, '=', 1)]</field>
+    </record>
+
+    <record id="rule_mcp_read_project_project" model="ir.rule">
+        <field name="name">MCP Read all projects</field>
+        <field name="model_id" ref="project.model_project_project"/>
+        <field name="groups" eval="[(4, ref('odoo_mcp_readonly_access.group_odoo_mcp_readonly'))]"/>
+        <field name="domain_force">[(1, '=', 1)]</field>
+    </record>
+
+    <record id="rule_mcp_read_project_task" model="ir.rule">
+        <field name="name">MCP Read all tasks</field>
+        <field name="model_id" ref="project.model_project_task"/>
+        <field name="groups" eval="[(4, ref('odoo_mcp_readonly_access.group_odoo_mcp_readonly'))]"/>
+        <field name="domain_force">[(1, '=', 1)]</field>
+    </record>
+
+    <record id="rule_mcp_read_helpdesk_ticket" model="ir.rule">
+        <field name="name">MCP Read all helpdesk tickets</field>
+        <field name="model_id" ref="helpdesk.model_helpdesk_ticket"/>
+        <field name="groups" eval="[(4, ref('odoo_mcp_readonly_access.group_odoo_mcp_readonly'))]"/>
+        <field name="domain_force">[(1, '=', 1)]</field>
+    </record>
+
+    <record id="rule_mcp_read_res_users" model="ir.rule">
+        <field name="name">MCP Read all users</field>
+        <field name="model_id" ref="base.model_res_users"/>
+        <field name="groups" eval="[(4, ref('odoo_mcp_readonly_access.group_odoo_mcp_readonly'))]"/>
+        <field name="domain_force">[(1, '=', 1)]</field>
+    </record>
+
+    <record id="rule_mcp_read_res_partner" model="ir.rule">
+        <field name="name">MCP Read all contacts</field>
+        <field name="model_id" ref="base.model_res_partner"/>
+        <field name="groups" eval="[(4, ref('odoo_mcp_readonly_access.group_odoo_mcp_readonly'))]"/>
+        <field name="domain_force">[(1, '=', 1)]</field>
+    </record>
+</odoo>

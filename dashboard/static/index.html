@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Dahua Dashboard Prototype</title>
+    <link rel="icon" href="data:," />
+    <link rel="stylesheet" href="/static/styles.css" />
+  </head>
+  <body>
+    <div class="page-shell">
+      <header class="hero">
+        <div>
+          <p class="eyebrow">Live sobre EC2</p>
+          <h1>Dashboard de Ingesta Dahua</h1>
+          <p class="subtitle">
+            Visualización en vivo de access_control útiles, cuarentena, crudos y eventos técnicos de dispositivo, sin snapshot.
+          </p>
+        </div>
+        <div class="hero-meta">
+          <div class="meta-card">
+            <span class="meta-label">Horario mostrado</span>
+            <strong>GMT-6 (México)</strong>
+          </div>
+          <div class="meta-card" id="source-card">
+            <span class="meta-label">Fuente</span>
+            <strong id="source-mode">Cargando…</strong>
+          </div>
+        </div>
+      </header>
+
+      <section class="workspace">
+        <nav class="tabs" id="tabs"></nav>
+
+        <div class="toolbar">
+          <div class="toolbar-group">
+            <label>
+              Buscar
+              <input type="search" id="search-input" placeholder="UserID, DeviceID, payload, puerta..." />
+            </label>
+          </div>
+          <div class="toolbar-group" id="filter-bar"></div>
+          <div class="toolbar-group">
+            <label>
+              Página
+              <select id="page-size-select">
+                <option value="10">10</option>
+                <option value="25" selected>25</option>
+                <option value="50">50</option>
+                <option value="100">100</option>
+              </select>
+            </label>
+          </div>
+        </div>
+
+        <section class="table-card">
+          <div class="table-card-header">
+            <div class="table-card-heading">
+              <h2 id="table-title">Normalizados</h2>
+              <p id="table-caption">Cargando datos…</p>
+            </div>
+            <div class="table-card-actions">
+              <div class="loading-indicator" id="loading-indicator" hidden>
+                <span class="spinner" aria-hidden="true"></span>
+                <span id="loading-text">Cargando datos…</span>
+              </div>
+              <button id="refresh-button" class="ghost-button" type="button">Refrescar</button>
+            </div>
+          </div>
+
+          <div class="table-stage">
+            <div class="table-wrapper">
+              <table id="data-table">
+                <thead></thead>
+                <tbody></tbody>
+              </table>
+            </div>
+          </div>
+
+          <div class="pagination">
+            <button id="prev-button" type="button">Anterior</button>
+            <span id="page-indicator">Página 1</span>
+            <button id="next-button" type="button">Siguiente</button>
+          </div>
+        </section>
+
+      </section>
+    </div>
+
+    <dialog id="detail-dialog" class="detail-dialog">
+      <div class="detail-dialog-card">
+        <div class="table-card-header">
+          <div>
+            <h2>Detalle</h2>
+            <p id="detail-caption">Selecciona un registro para inspeccionar el payload.</p>
+          </div>
+          <button id="detail-close-button" class="ghost-button" type="button">Cerrar</button>
+        </div>
+        <pre id="detail-json">Sin selección.</pre>
+      </div>
+    </dialog>
+
+    <script src="/static/app.js" defer></script>
+  </body>
+</html>

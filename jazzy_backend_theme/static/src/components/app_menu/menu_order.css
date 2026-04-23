@@ -77,13 +77,14 @@ o_setting_search {
     display:none;
 }
 .app_components {
-    position: absolute;
-    height: 100vh;
+    position: fixed;
+    inset: var(--o-navbar-height) 0 0 0;
+    min-height: calc(100vh - var(--o-navbar-height));
     width: 100%;
     background: #f5f5f5f0;
     z-index: 99;
-    top: 40px;
     display:none;
+    overflow-y: auto;
     background: url("../../src/img/background.jpg"), linear-gradient(to bottom, #71639e, #b0adba);
 }
 .app-menu a{
@@ -160,13 +161,14 @@ o_setting_search {
     display:none;
 }
 .app_components {
-    position: absolute;
-    height: 100vh;
+    position: fixed;
+    inset: var(--o-navbar-height) 0 0 0;
+    min-height: calc(100vh - var(--o-navbar-height));
     width: 100%;
     background: #f5f5f5f0;
     z-index: 99;
-    top: 40px;
     display:none;
+    overflow-y: auto;
     background: url("../../img/background.jpg"), linear-gradient(to bottom, #71639e, #b0adba);
 }
 .app-menu a{

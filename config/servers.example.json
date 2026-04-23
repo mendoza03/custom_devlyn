@@ -1,0 +1,48 @@
+{
+  "servers": {
+    "devlyn_prod": {
+      "host": "52.6.240.186",
+      "user": "root",
+      "auth": "password",
+      "password": "REPLACE_ME",
+      "ssh_key_path": "~/.ssh/id_ed25519",
+      "aws_profile": "devlyn",
+      "region": "us-east-1",
+      "instance_id": "i-05132745173c98169",
+      "notes": "Produccion biometrica actual"
+    },
+    "aie_rollback_hold": {
+      "host": "13.218.124.119",
+      "user": "root",
+      "auth": "password",
+      "password": "REPLACE_ME",
+      "ssh_key_path": "~/.ssh/id_ed25519",
+      "aws_profile": "aie",
+      "region": "us-east-1",
+      "instance_id": "i-0f59d42c00367eb56",
+      "notes": "Instancia vieja en hold para rollback controlado"
+    },
+    "aie_community_testing": {
+      "host": "3.80.63.38",
+      "user": "root",
+      "auth": "password",
+      "password": "REPLACE_ME",
+      "ssh_key_path": "~/.ssh/id_ed25519",
+      "aws_profile": "aie",
+      "region": "us-east-1",
+      "instance_id": "i-088a44820aa9397cd",
+      "notes": "Community testing / staging historico"
+    },
+    "default_devlyn_testing": {
+      "host": "3.145.70.223",
+      "user": "root",
+      "auth": "password",
+      "password": "REPLACE_ME",
+      "ssh_key_path": "~/.ssh/id_ed25519",
+      "aws_profile": "default",
+      "region": "us-east-2",
+      "instance_id": "i-034fe1a0f0a525c19",
+      "notes": "Instancia Devlyn en profile default"
+    }
+  }
+}

@@ -12,12 +12,13 @@
             <xpath expr="//form" position="replace">
                 <form string="Ticket">
                     <field name="name" invisible="1" />
+                    <field name="x_is_stage_new" invisible="1" />
 
                     <header>
                         <field name="stage_id" widget="statusbar" options="{'clickable': True}" />
                     </header>
 
-                    <sheet>
+                    <sheet readonly="not x_is_stage_new">
                         <div class="oe_title">
 
                             <label for="x_general_description" string="Descripción General (*)" />
@@ -29,6 +30,22 @@
                                 />
                             </h1>
                         </div>
+
+                        <group string="Datos de contacto">
+                            <group>
+                                <field name="domain_user_ids" invisible="1" />
+                                <field name="user_id"
+                                    domain="['&amp;', ('id', 'in', domain_user_ids), ('share', '=', False)]"
+                                    widget="many2one_avatar_user"
+                                />
+                            </group>
+                            <group>
+                                <field name="x_centro_sap" />
+                                <field name="x_branch_id" />
+                                <field name="x_numero_telefonico" />
+                                <field name="x_correo" />
+                            </group>
+                        </group>
 
                         <group string="Datos generales">
                             <group>
@@ -2002,6 +2019,7 @@
                             </field>
                         </div>
                     </sheet>
+                    <chatter reload_on_post="True"/>
                 </form>
             </xpath>
 

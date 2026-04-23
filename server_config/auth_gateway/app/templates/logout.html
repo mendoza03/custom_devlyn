@@ -1,0 +1,47 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Validación biometrica</title>
+  <link rel="stylesheet" href="/static/css/auth.css">
+</head>
+<body>
+  <main class="auth-wrapper">
+    <section class="auth-card">
+      <div class="auth-header">
+        <h1>Validación biometrica</h1>
+        <p>Completa la verificación para salir</p>
+      </div>
+
+      <div id="step-logout" class="step active">
+        <div class="camera-controls">
+          <label for="cameraSelect">Cámara</label>
+          <select id="cameraSelect"></select>
+          <button id="btn-refresh-cameras" type="button">Actualizar cámaras</button>
+        </div>
+        <div class="video-stage">
+          <video id="camera" autoplay playsinline muted></video>
+          <div id="livePromptBadge" class="live-prompt-badge">Colócate frente a la cámara</div>
+        </div>
+        <div class="camera-progress-shell">
+          <div class="camera-progress-track">
+            <div id="challengeProgress" class="camera-progress-fill"></div>
+          </div>
+        </div>
+        <div class="actions-grid">
+          <button id="btn-logout" class="btn-primary">Comenzar prueba</button>
+        </div>
+        <ul id="challengeLog" class="challenge-log"></ul>
+      </div>
+
+      <pre id="status" class="status"></pre>
+    </section>
+  </main>
+
+  <script>
+    window.__NEXT_LOGOUT_URL__ = "{{ next_logout_url }}";
+  </script>
+  <script src="/static/js/logout.js"></script>
+</body>
+</html>

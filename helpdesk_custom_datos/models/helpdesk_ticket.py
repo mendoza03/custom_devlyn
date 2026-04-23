@@ -1,11 +1,141 @@
+import logging
+from datetime import datetime, time, timedelta
+
+import pytz
+
 from odoo import api, fields, models, _
-from odoo.exceptions import ValidationError
+from odoo.exceptions import UserError, ValidationError
+
+_logger = logging.getLogger(__name__)
 
 
 class HelpdeskTicket(models.Model):
     _inherit = "helpdesk.ticket"
 
+    _AUTO_CLOSE_WEEKDAY_HOURS = 24.0
+
+    def action_open_form_new_tab(self):
+        self.ensure_one()
+        menu = self.env.ref("helpdesk.helpdesk_ticket_menu_all")
+        url = f"/odoo/helpdesk.ticket/{self.id}?menu_id={menu.id}"
+        return {
+            "type": "ir.actions.act_url",
+            "url": url,
+            "target": "new",
+        }
+
+    def _get_locked_fields_outside_new_stage(self):
+        return {
+            field_name
+            for field_name in self._fields
+            if field_name.startswith("x_")
+        } | {"user_id", "name"}
+
+    @api.model
+    def _default_creator_email(self):
+        return self.env.user.email or self.env.user.partner_id.email or False
+
+    @api.model
+    def _default_creator_phone(self):
+        user = self.env.user
+        if "work_phone" in user._fields and user.work_phone:
+            return user.work_phone
+        return user.partner_id.phone or False
+
+    @api.model
+    def _default_creator_branch(self):
+        return self.env.user.x_branch_id
+
+    @api.model
+    def _get_inactivity_timezone(self, ticket):
+        return (
+            ticket.team_id.resource_calendar_id.tz
+            or ticket.user_id.tz
+            or ticket.create_uid.tz
+            or self.env.user.tz
+            or "UTC"
+        )
+
+    @api.model
+    def _get_weekday_hours_between(self, start_dt, end_dt, tz_name="UTC"):
+        if not start_dt or not end_dt or end_dt <= start_dt:
+            return 0.0
+
+        tz = pytz.timezone(tz_name or "UTC")
+        utc = pytz.UTC
+        start_local = utc.localize(start_dt).astimezone(tz)
+        end_local = utc.localize(end_dt).astimezone(tz)
+        total_seconds = 0.0
+        current = start_local
+
+        while current.date() < end_local.date():
+            next_midnight = tz.localize(datetime.combine(current.date() + timedelta(days=1), time.min))
+            if current.weekday() < 5:
+                total_seconds += (next_midnight - current).total_seconds()
+            current = next_midnight
+
+        if current.weekday() < 5:
+            total_seconds += (end_local - current).total_seconds()
+
+        return total_seconds / 3600.0
+
+    def _get_last_inactivity_datetime(self):
+        self.ensure_one()
+        return self.write_date or self.create_date or fields.Datetime.now()
+
+    def _get_auto_close_inactive_tickets(self, now=None):
+        now = now or fields.Datetime.now()
+        threshold = now - timedelta(hours=self._AUTO_CLOSE_WEEKDAY_HOURS)
+        tickets = self.search([
+            ("stage_id.fold", "=", False),
+            ("team_id", "!=", False),
+            ("write_date", "<=", threshold),
+        ])
+        return tickets.filtered(
+            lambda ticket: ticket._get_weekday_hours_between(
+                ticket._get_last_inactivity_datetime(),
+                now,
+                ticket._get_inactivity_timezone(ticket),
+            ) >= ticket._AUTO_CLOSE_WEEKDAY_HOURS
+        )
+
+    @api.model
+    def _cron_auto_close_inactive_weekday_tickets(self):
+        inactive_tickets = self._get_auto_close_inactive_tickets()
+        for ticket in inactive_tickets:
+            closing_stage = ticket.team_id._get_closing_stage()[:1]
+            if not closing_stage or ticket.stage_id == closing_stage:
+                continue
+            ticket.write({"stage_id": closing_stage.id})
+            ticket.message_post(
+                body=_("Ticket cerrado automáticamente tras 24 horas de inactividad en días hábiles."),
+                subtype_xmlid="mail.mt_note",
+            )
+
     x_general_description = fields.Char(string="Descripción General", required=True)
+    x_centro_sap = fields.Char(string="Centro SAP", copy=False)
+    x_branch_id = fields.Many2one(
+        "devlyn.catalog.branch",
+        string="Sucursal",
+        domain=[("active", "=", True)],
+        copy=False,
+        ondelete="restrict",
+        default=lambda self: self._default_creator_branch(),
+    )
+    x_numero_telefonico = fields.Char(
+        string="Número telefónico",
+        copy=False,
+        default=lambda self: self._default_creator_phone(),
+    )
+    x_correo = fields.Char(
+        string="Correo",
+        copy=False,
+        default=lambda self: self._default_creator_email(),
+    )
+    x_is_stage_new = fields.Boolean(
+        compute="_compute_x_is_stage_new",
+        store=False,
+    )
 
 
     @api.onchange("x_general_description")
@@ -14,17 +144,84 @@ class HelpdeskTicket(models.Model):
             if rec.x_general_description:
                 rec.name = rec.x_general_description
 
+    @api.onchange("user_id")
+    def _onchange_user_id_set_branch(self):
+        for rec in self:
+            if rec.user_id and not rec.x_branch_id:
+                rec.x_branch_id = rec.user_id.x_branch_id
+
+    @api.depends("stage_id.sequence")
+    def _compute_x_is_stage_new(self):
+        for rec in self:
+            rec.x_is_stage_new = not rec.stage_id or rec.stage_id.sequence == 0
+
     @api.model_create_multi
     def create(self, vals_list):
         for vals in vals_list:
             if vals.get("x_general_description") and not vals.get("name"):
                 vals["name"] = vals["x_general_description"]
-        return super().create(vals_list)
+            if not vals.get("x_numero_telefonico"):
+                vals["x_numero_telefonico"] = self._default_creator_phone()
+            if not vals.get("x_correo"):
+                vals["x_correo"] = self._default_creator_email()
+            if not vals.get("x_branch_id"):
+                ticket_user = self.env["res.users"].browse(vals.get("user_id")) if vals.get("user_id") else self.env.user
+                if ticket_user.x_branch_id:
+                    vals["x_branch_id"] = ticket_user.x_branch_id.id
+        tickets = super().create(vals_list)
+
+        for ticket in tickets.filtered("user_id"):
+            _logger.warning(
+                "HELPDESK DEBUG user_id create: ticket_id=%s ticket_ref=%s changed_by_id=%s changed_by=%s old_user_id=%s old_user=%s new_user_id=%s new_user=%s",
+                ticket.id,
+                ticket.ticket_ref or "",
+                self.env.user.id,
+                self.env.user.display_name,
+                False,
+                "",
+                ticket.user_id.id,
+                ticket.user_id.display_name,
+            )
+
+        return tickets
 
     def write(self, vals):
+        blocked_fields = self._get_locked_fields_outside_new_stage().intersection(vals)
+        blocked_tickets = self.filtered(lambda ticket: ticket.stage_id and ticket.stage_id.sequence != 0)
+        if blocked_fields and blocked_tickets:
+            raise UserError(
+                _(
+                    "Solo se pueden modificar estos campos cuando el ticket esta en estado Nuevo."
+                )
+            )
+
+        previous_user_by_ticket = {}
+        if "user_id" in vals:
+            for ticket in self:
+                previous_user_by_ticket[ticket.id] = ticket.user_id
+
         if vals.get("x_general_description") and not vals.get("name"):
             vals["name"] = vals["x_general_description"]
-        return super().write(vals)
+        result = super().write(vals)
+
+        if previous_user_by_ticket:
+            for ticket in self:
+                old_user = previous_user_by_ticket.get(ticket.id)
+                new_user = ticket.user_id
+                if old_user != new_user:
+                    _logger.warning(
+                        "HELPDESK DEBUG user_id write: ticket_id=%s ticket_ref=%s changed_by_id=%s changed_by=%s old_user_id=%s old_user=%s new_user_id=%s new_user=%s",
+                        ticket.id,
+                        ticket.ticket_ref or "",
+                        self.env.user.id,
+                        self.env.user.display_name,
+                        old_user.id if old_user else False,
+                        old_user.display_name if old_user else "",
+                        new_user.id if new_user else False,
+                        new_user.display_name if new_user else "",
+                    )
+
+        return result
     
     x_section_id = fields.Many2one("helpdesk.section", string="Sección", required=True)
 
@@ -1410,22 +1607,168 @@ class HelpdeskTicket(models.Model):
             return True
         return False
 
+    def _get_missing_required_field_labels(self, field_names):
+        self.ensure_one()
+        missing = []
+        for field_name in field_names:
+            field = self._fields.get(field_name)
+            if not field:
+                continue
+            value = self[field_name]
+            if self._is_empty_required_value(value):
+                missing.append(field.string or field_name)
+        return missing
+
+    def _get_required_fields_error(self, field_names, section_name):
+        self.ensure_one()
+        missing = self._get_missing_required_field_labels(field_names)
+        if not missing:
+            return False
+        return _(
+            "Para la sección '%s' faltan los siguientes campos obligatorios:\n- %s"
+        ) % (section_name, "\n- ".join(missing))
+
     def _validate_required_fields(self, field_names, section_name):
         for rec in self:
-            missing = []
-            for field_name in field_names:
-                field = rec._fields.get(field_name)
-                if not field:
-                    continue
-                value = rec[field_name]
-                if self._is_empty_required_value(value):
-                    missing.append(field.string or field_name)
+            error_message = rec._get_required_fields_error(field_names, section_name)
+            if error_message:
+                raise ValidationError(error_message)
 
-            if missing:
-                raise ValidationError(
-                    _("Para la sección '%s' faltan los siguientes campos obligatorios:\n- %s")
-                    % (section_name, "\n- ".join(missing))
-                )
+    def _get_dynamic_required_fields_error(self):
+        self.ensure_one()
+        code = self.x_subcategory_code or ""
+
+        if self.x_is_atraso_lente_contacto_online:
+            return self._get_required_fields_error(
+                ["x_online_pos_order", "x_online_work_order_number"],
+                "Atraso lente de contacto - Online",
+            )
+
+        if self.x_is_atraso_lente_contacto_receta:
+            return self._get_required_fields_error(
+                ["x_lc_recipe_name", "x_lc_ot_number", "x_lc_order_number", "x_lc_provider"],
+                "Atraso lente de contacto - Receta LC",
+            )
+
+        if self.x_is_seguimiento_solicitud_resurtido:
+            return self._get_required_fields_error(
+                [
+                    "x_supply_material_code",
+                    "x_supply_material_description",
+                    "x_supply_quantity",
+                    "x_supply_unit_measure",
+                    "x_supply_center",
+                    "x_supply_manager_approval_attached",
+                ],
+                "Seguimiento de solicitud - Resurtido de consumibles",
+            )
+
+        if self.x_is_seguimiento_solicitud_papeleria:
+            return self._get_required_fields_error(
+                [
+                    "x_supply_material_description",
+                    "x_supply_quantity",
+                    "x_supply_unit_measure",
+                    "x_supply_center",
+                    "x_supply_manager_approval_attached",
+                ],
+                "Seguimiento de solicitud - Papelería",
+            )
+
+        if code == "micas_sin_cortar":
+            return self._get_required_fields_error(
+                [
+                    "x_order_number",
+                    "x_bag",
+                    "x_customer_warehouse",
+                    "x_authorized_by",
+                    "x_lab_indicated",
+                    "x_order_type",
+                ],
+                "Micas sin cortar",
+            )
+
+        if code == "trabajos_atrasados":
+            return self._get_required_fields_error(
+                [
+                    "x_job_type",
+                    "x_original_order_number",
+                    "x_order_number",
+                    "x_customer_warehouse",
+                    "x_lab_indicated",
+                    "x_shipping_guide_number",
+                    "x_frame_bag_number",
+                    "x_order_type",
+                ],
+                "Trabajos atrasados",
+            )
+
+        if code == "correo_electronico":
+            return self._get_required_fields_error(
+                ["x_branch_email", "x_email_issue_type_2", "x_contact_number"],
+                "Correo electrónico",
+            )
+
+        if code == "equipo_computo":
+            return self._get_required_fields_error(
+                [
+                    "x_internal_folio_number",
+                    "x_equipment_type",
+                    "x_model_or_brand",
+                    "x_serial_number",
+                    "x_fixed_asset_number",
+                    "x_shipping_guide",
+                    "x_courier",
+                ],
+                "Equipo de cómputo",
+            )
+
+        if code == "problema_pagos_anticipos":
+            return self._get_required_fields_error(
+                [
+                    "x_payment_center",
+                    "x_payment_pos_order",
+                    "x_payment_sale_date",
+                    "x_payment_sale_total",
+                    "x_payment_number_1",
+                    "x_payment_receipt_1",
+                    "x_payment_date_1",
+                ],
+                "Problema de pagos (anticipos)",
+            )
+
+        if code == "pedidos_incompletos":
+            return self._get_required_fields_error(
+                [
+                    "x_online_fulfillment",
+                    "x_online_sale_date",
+                    "x_online_customer_email",
+                    "x_online_pos_order",
+                    "x_online_customer_name",
+                    "x_online_missing_product",
+                    "x_online_attachment_capture",
+                ],
+                "Pedidos incompletos",
+            )
+
+        if code == "graduacion_incorrecta":
+            return self._get_required_fields_error(
+                [
+                    "x_online_fulfillment",
+                    "x_online_sale_date",
+                    "x_online_customer_email",
+                    "x_online_pos_order",
+                    "x_online_customer_name",
+                    "x_online_requested_graduation",
+                    "x_online_received_graduation",
+                    "x_online_attachment_capture",
+                    "x_online_return_sap_center",
+                    "x_online_return_bag_cedis",
+                ],
+                "Pedidos con graduación incorrecta",
+            )
+
+        return False
 
     @api.constrains(
         "x_subcategory_code",
@@ -1458,6 +1801,13 @@ class HelpdeskTicket(models.Model):
         "x_online_return_bag_cedis",
         "x_online_work_order_number",
         "x_online_attachment_capture",
+        "x_payment_center",
+        "x_payment_pos_order",
+        "x_payment_sale_date",
+        "x_payment_sale_total",
+        "x_payment_number_1",
+        "x_payment_receipt_1",
+        "x_payment_date_1",
         "x_order_number",
         "x_bag",
         "x_customer_warehouse",
@@ -1486,124 +1836,6 @@ class HelpdeskTicket(models.Model):
     )
     def _check_dynamic_required_fields(self):
         for rec in self:
-            code = rec.x_subcategory_code or ""
-
-            # Atraso lente de contacto - Fullfilment / online
-            if rec.x_is_atraso_lente_contacto_online:
-                rec._validate_required_fields(
-                    ["x_online_pos_order", "x_online_work_order_number"],
-                    "Atraso lente de contacto - Online",
-                )
-
-            # Atraso lente de contacto - Receta LC
-            if rec.x_is_atraso_lente_contacto_receta:
-                rec._validate_required_fields(
-                    ["x_lc_recipe_name", "x_lc_ot_number", "x_lc_order_number", "x_lc_provider"],
-                    "Atraso lente de contacto - Receta LC",
-                )
-
-            # Seguimiento de solicitud - Resurtido
-            if rec.x_is_seguimiento_solicitud_resurtido:
-                rec._validate_required_fields(
-                    [
-                        "x_supply_material_code",
-                        "x_supply_material_description",
-                        "x_supply_quantity",
-                        "x_supply_unit_measure",
-                        "x_supply_center",
-                        "x_supply_manager_approval_attached",
-                    ],
-                    "Seguimiento de solicitud - Resurtido de consumibles",
-                )
-
-            # Seguimiento de solicitud - Papelería
-            if rec.x_is_seguimiento_solicitud_papeleria:
-                rec._validate_required_fields(
-                    [
-                        "x_supply_material_description",
-                        "x_supply_quantity",
-                        "x_supply_unit_measure",
-                        "x_supply_center",
-                        "x_supply_manager_approval_attached",
-                    ],
-                    "Seguimiento de solicitud - Papelería",
-                )
-
-            if code == "micas_sin_cortar":
-                rec._validate_required_fields(
-                    [
-                        "x_order_number",
-                        "x_bag",
-                        "x_customer_warehouse",
-                        "x_authorized_by",
-                        "x_lab_indicated",
-                        "x_order_type",
-                    ],
-                    "Micas sin cortar",
-                )
-
-            elif code == "trabajos_atrasados":
-                rec._validate_required_fields(
-                    [
-                        "x_job_type",
-                        "x_original_order_number",
-                        "x_order_number",
-                        "x_customer_warehouse",
-                        "x_lab_indicated",
-                        "x_shipping_guide_number",
-                        "x_frame_bag_number",
-                        "x_order_type",
-                    ],
-                    "Trabajos atrasados",
-                )
-
-            elif code == "correo_electronico":
-                rec._validate_required_fields(
-                    ["x_branch_email", "x_email_issue_type_2", "x_contact_number"],
-                    "Correo electrónico",
-                )
-
-            elif code == "equipo_computo":
-                rec._validate_required_fields(
-                    [
-                        "x_internal_folio_number",
-                        "x_equipment_type",
-                        "x_model_or_brand",
-                        "x_serial_number",
-                        "x_fixed_asset_number",
-                        "x_shipping_guide",
-                        "x_courier",
-                    ],
-                    "Equipo de cómputo",
-                )
-
-            elif code == "pedidos_incompletos":
-                rec._validate_required_fields(
-                    [
-                        "x_online_fulfillment",
-                        "x_online_sale_date",
-                        "x_online_customer_email",
-                        "x_online_pos_order",
-                        "x_online_customer_name",
-                        "x_online_missing_product",
-                        "x_online_attachment_capture",
-                    ],
-                    "Pedidos incompletos",
-                )
-
-            elif code == "graduacion_incorrecta":
-                rec._validate_required_fields(
-                    [
-                        "x_online_fulfillment",
-                        "x_online_sale_date",
-                        "x_online_customer_email",
-                        "x_online_pos_order",
-                        "x_online_customer_name",
-                        "x_online_requested_graduation",
-                        "x_online_received_graduation",
-                        "x_online_attachment_capture",
-                        "x_online_return_sap_center",
-                        "x_online_return_bag_cedis",
-                    ],
-                    "Pedidos con graduación incorrecta",
-                )
+            error_message = rec._get_dynamic_required_fields_error()
+            if error_message:
+                raise ValidationError(error_message)

@@ -1,0 +1,205 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="view_devlyn_attendance_branch_report_viewer_form" model="ir.ui.view">
+        <field name="name">devlyn.attendance.branch.report.viewer.form</field>
+        <field name="model">devlyn.attendance.branch.report.viewer</field>
+        <field name="arch" type="xml">
+            <form string="Asistencias por Sucursal" class="o_form_nosheet">
+                <header>
+                    <button
+                        name="action_refresh_view"
+                        type="object"
+                        string="Actualizar vista"
+                        class="btn-primary"
+                    />
+                    <button name="action_open_export_wizard" type="object" string="Exportar XLSX"/>
+                    <button name="action_open_segment_viewer" type="object" string="Detalle Intermitencias"/>
+                    <button name="action_clear_filters" type="object" string="Limpiar filtros"/>
+                </header>
+                <field name="title" invisible="1"/>
+                <group col="4">
+                    <group>
+                        <field name="date_from"/>
+                        <field name="date_to"/>
+                        <field name="resolution_scope"/>
+                        <field name="show_intermitencias"/>
+                        <field name="generated_at" readonly="1"/>
+                    </group>
+                    <group>
+                        <field name="employee_ids" widget="many2many_tags"/>
+                        <field name="branch_ids" widget="many2many_tags"/>
+                        <field name="format_ids" widget="many2many_tags"/>
+                        <field name="status_ids" widget="many2many_tags"/>
+                    </group>
+                    <group>
+                        <field name="region_ids" widget="many2many_tags"/>
+                        <field name="zone_ids" widget="many2many_tags"/>
+                        <field name="district_ids" widget="many2many_tags"/>
+                        <field name="optical_level_ids" widget="many2many_tags"/>
+                    </group>
+                    <group>
+                        <field name="total_rows" readonly="1"/>
+                        <field name="mapped_rows" readonly="1"/>
+                        <field name="unmapped_rows" readonly="1"/>
+                    </group>
+                </group>
+                <separator string="Resultados"/>
+                <field name="line_ids" nolabel="1" readonly="1" colspan="4">
+                    <list create="0" delete="0" edit="0">
+                        <field name="report_date"/>
+                        <field name="employee_number"/>
+                        <field name="employee_name"/>
+                        <field name="center_code"/>
+                        <field name="branch_code"/>
+                        <field name="branch_name"/>
+                        <field name="optical_level_display"/>
+                        <field name="format_id"/>
+                        <field name="status_id"/>
+                        <field name="region_id"/>
+                        <field name="zone_id"/>
+                        <field name="district_id"/>
+                        <field name="first_check_in_display"/>
+                        <field name="last_check_out_display"/>
+                        <field name="worked_hours_display"/>
+                        <field name="intermittence_count" column_invisible="not parent.show_intermitencias"/>
+                        <field name="total_gap_display" column_invisible="not parent.show_intermitencias"/>
+                        <field name="day_state" column_invisible="not parent.show_intermitencias"/>
+                    </list>
+                </field>
+            </form>
+        </field>
+    </record>
+
+    <record id="action_devlyn_attendance_branch_report_viewer" model="ir.actions.act_window">
+        <field name="name">Asistencias por Sucursal</field>
+        <field name="res_model">devlyn.attendance.branch.report.viewer</field>
+        <field name="view_mode">form</field>
+        <field name="view_id" ref="view_devlyn_attendance_branch_report_viewer_form"/>
+        <field name="target">current</field>
+    </record>
+
+    <record id="view_devlyn_attendance_branch_segment_viewer_form" model="ir.ui.view">
+        <field name="name">devlyn.attendance.branch.segment.viewer.form</field>
+        <field name="model">devlyn.attendance.branch.segment.viewer</field>
+        <field name="arch" type="xml">
+            <form string="Detalle de Intermitencias" class="o_form_nosheet">
+                <header>
+                    <button
+                        name="action_refresh_view"
+                        type="object"
+                        string="Actualizar vista"
+                        class="btn-primary"
+                    />
+                    <button name="action_export_xlsx" type="object" string="Exportar XLSX"/>
+                    <button name="action_clear_filters" type="object" string="Limpiar filtros"/>
+                </header>
+                <field name="title" invisible="1"/>
+                <group col="4">
+                    <group>
+                        <field name="date_from"/>
+                        <field name="date_to"/>
+                        <field name="resolution_scope"/>
+                        <field name="generated_at" readonly="1"/>
+                    </group>
+                    <group>
+                        <field name="employee_ids" widget="many2many_tags"/>
+                        <field name="branch_ids" widget="many2many_tags"/>
+                        <field name="format_ids" widget="many2many_tags"/>
+                        <field name="status_ids" widget="many2many_tags"/>
+                    </group>
+                    <group>
+                        <field name="region_ids" widget="many2many_tags"/>
+                        <field name="zone_ids" widget="many2many_tags"/>
+                        <field name="district_ids" widget="many2many_tags"/>
+                        <field name="optical_level_ids" widget="many2many_tags"/>
+                    </group>
+                    <group>
+                        <field name="total_rows" readonly="1"/>
+                    </group>
+                </group>
+                <separator string="Resultados"/>
+                <field name="line_ids" nolabel="1" readonly="1" colspan="4">
+                    <list create="0" delete="0" edit="0">
+                        <field name="report_date"/>
+                        <field name="employee_number"/>
+                        <field name="employee_name"/>
+                        <field name="segment_sequence"/>
+                        <field name="first_check_in_display"/>
+                        <field name="last_check_out_display"/>
+                        <field name="worked_minutes_display"/>
+                        <field name="gap_before_start_display"/>
+                        <field name="gap_before_end_display"/>
+                        <field name="gap_before_display"/>
+                        <field name="segment_state"/>
+                        <field name="center_code"/>
+                        <field name="branch_code"/>
+                        <field name="branch_name"/>
+                    </list>
+                </field>
+            </form>
+        </field>
+    </record>
+
+    <record id="action_devlyn_attendance_branch_segment_viewer" model="ir.actions.act_window">
+        <field name="name">Detalle de Intermitencias</field>
+        <field name="res_model">devlyn.attendance.branch.segment.viewer</field>
+        <field name="view_mode">form</field>
+        <field name="view_id" ref="view_devlyn_attendance_branch_segment_viewer_form"/>
+        <field name="target">current</field>
+    </record>
+
+    <record id="view_devlyn_attendance_branch_report_wizard_form" model="ir.ui.view">
+        <field name="name">devlyn.attendance.branch.report.wizard.form</field>
+        <field name="model">devlyn.attendance.branch.report.wizard</field>
+        <field name="arch" type="xml">
+            <form string="Asistencias por Sucursal">
+                <sheet>
+                    <group>
+                        <group>
+                            <field name="date_from"/>
+                            <field name="date_to"/>
+                            <field name="resolution_scope"/>
+                            <field name="show_intermitencias"/>
+                        </group>
+                        <group>
+                            <field name="employee_ids" widget="many2many_tags"/>
+                            <field name="branch_ids" widget="many2many_tags"/>
+                            <field name="format_ids" widget="many2many_tags"/>
+                        </group>
+                    </group>
+                    <group>
+                        <group>
+                            <field name="region_ids" widget="many2many_tags"/>
+                            <field name="zone_ids" widget="many2many_tags"/>
+                        </group>
+                        <group>
+                            <field name="district_ids" widget="many2many_tags"/>
+                            <field name="status_ids" widget="many2many_tags"/>
+                            <field name="optical_level_ids" widget="many2many_tags"/>
+                        </group>
+                    </group>
+                </sheet>
+                <footer>
+                    <button name="action_export_xlsx" type="object" string="Exportar XLSX" class="btn-primary"/>
+                    <button string="Cerrar" special="cancel"/>
+                </footer>
+            </form>
+        </field>
+    </record>
+
+    <record id="action_devlyn_attendance_branch_report_wizard" model="ir.actions.act_window">
+        <field name="name">Asistencias por Sucursal</field>
+        <field name="res_model">devlyn.attendance.branch.report.wizard</field>
+        <field name="view_mode">form</field>
+        <field name="target">new</field>
+    </record>
+
+    <menuitem
+        id="menu_devlyn_attendance_branch_report"
+        name="Asistencias por Sucursal"
+        parent="hr_attendance.menu_hr_attendance_reporting"
+        sequence="40"
+        action="action_devlyn_attendance_branch_report_viewer"
+        groups="hr_attendance.group_hr_attendance_officer"
+    />
+</odoo>

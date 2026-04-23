@@ -1,0 +1,14 @@
+[Unit]
+Description=Dahua HTTP Debug Listener
+After=network.target
+
+[Service]
+Type=simple
+WorkingDirectory=/app
+Environment=PYTHONUNBUFFERED=1
+ExecStart=/app/venv/bin/uvicorn dahua_listener:app --host 0.0.0.0 --port 60005
+Restart=always
+RestartSec=3
+
+[Install]
+WantedBy=multi-user.target

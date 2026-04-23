@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="helpdesk_ticket_view_tree_new_tab_button" model="ir.ui.view">
+        <field name="name">helpdesk.ticket.list.new.tab.button</field>
+        <field name="model">helpdesk.ticket</field>
+        <field name="inherit_id" ref="helpdesk.helpdesk_tickets_view_tree"/>
+        <field name="priority">90</field>
+        <field name="arch" type="xml">
+            <xpath expr="//list/field[@name='stage_id']" position="after">
+                <button
+                    name="action_open_form_new_tab"
+                    type="object"
+                    string="Abrir"
+                    icon="fa-external-link"
+                />
+            </xpath>
+        </field>
+    </record>
+</odoo>

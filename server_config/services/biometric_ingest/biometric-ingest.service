@@ -1,0 +1,21 @@
+[Unit]
+Description=Biometric Event Ingest API
+After=network.target postgresql.service
+Wants=postgresql.service
+
+[Service]
+Type=simple
+User=biometric
+Group=biometric
+WorkingDirectory=/opt/biometric-ingest
+EnvironmentFile=/etc/biometric-ingest.env
+Environment=PYTHONUNBUFFERED=1
+ExecStart=/opt/biometric-ingest/venv/bin/uvicorn biometric_ingest:app --host 127.0.0.1 --port 60006
+Restart=always
+RestartSec=3
+NoNewPrivileges=true
+PrivateTmp=true
+ReadWritePaths=/var/lib/biometric-ingest /var/log/biometric-ingest /var/log/dahua_events.log
+
+[Install]
+WantedBy=multi-user.target

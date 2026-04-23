@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <menuitem id="menu_hr_biometric_root" name="Biometria" parent="hr_attendance.menu_hr_attendance_root" sequence="20" groups="hr_attendance.group_hr_attendance_officer"/>
+    <menuitem id="menu_hr_biometric_events" name="Eventos biometricos" parent="menu_hr_biometric_root" sequence="10" action="action_hr_biometric_event" groups="hr_attendance.group_hr_attendance_officer"/>
+    <menuitem id="menu_hr_biometric_exceptions" name="Excepciones" parent="menu_hr_biometric_root" sequence="20" action="action_hr_biometric_event_exceptions" groups="hr_attendance.group_hr_attendance_officer"/>
+    <menuitem id="menu_hr_biometric_runs" name="Corridas de sync" parent="menu_hr_biometric_root" sequence="30" action="action_hr_biometric_sync_run" groups="hr_attendance.group_hr_attendance_officer"/>
+    <menuitem id="menu_hr_biometric_config" name="Configuracion" parent="menu_hr_biometric_root" sequence="40" action="action_hr_biometric_sync_config" groups="hr_attendance.group_hr_attendance_manager"/>
+</odoo>

@@ -1,0 +1,83 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>{{ page_title or "Acceso biometrico" }}</title>
+  <link rel="icon" href="/static/img/logo_devlyn.png">
+  <link rel="stylesheet" href="/static/css/auth.css">
+</head>
+<body>
+  <main class="auth-wrapper">
+    <section class="auth-card">
+      <div id="step-credentials" class="step active">
+        <form id="credentials-form" onsubmit="return false;">
+          <div class="brand">
+            <img src="/static/img/logo_devlyn.png" alt="Devlyn" class="brand-logo">
+          </div>
+          {% if auth_channel == "admin_demo" %}
+          <p class="hint">Canal de demostración biométrica solo para administrador.</p>
+          {% endif %}
+          <label>Usuario / Correo</label>
+          <input id="username" type="text" placeholder="Escribe tu usuario" autocomplete="username">
+
+          <label>Contraseña</label>
+          <input id="password" type="password" placeholder="Escribe tu contraseña" autocomplete="current-password">
+
+          {% if allow_login_action %}
+          <button id="btn-start" type="button" class="btn-primary">Iniciar sesión</button>
+          {% endif %}
+          {% if allow_checkout_action %}
+          <button id="btn-checkout" type="button" class="btn-secondary">Marcar salida</button>
+          {% endif %}
+        </form>
+        <ul id="credLog" class="challenge-log" aria-live="polite"></ul>
+      </div>
+
+      <div id="step-liveness" class="step">
+        <div class="auth-header">
+          <h1>Acceso biometrico</h1>
+          <p>Completa la verificación para continuar</p>
+        </div>
+        <div class="camera-controls">
+          <label for="cameraSelect">Cámara</label>
+          <select id="cameraSelect"></select>
+          <button id="btn-refresh-cameras" type="button">Actualizar cámaras</button>
+        </div>
+        <div class="video-stage">
+          <video id="camera" autoplay playsinline muted></video>
+          <div id="livePromptBadge" class="live-prompt-badge">Colócate frente a la cámara</div>
+        </div>
+        <div class="camera-progress-shell">
+          <div class="camera-progress-track">
+            <div id="challengeProgress" class="camera-progress-fill"></div>
+          </div>
+        </div>
+        <div class="actions-grid">
+          <button id="btn-liveness-start" class="btn-primary">Comenzar prueba</button>
+        </div>
+        <ul id="challengeLog" class="challenge-log"></ul>
+      </div>
+
+      <div id="step-complete" class="step">
+        <p>Prueba de vida local completada.</p>
+        <p class="hint">Puedes volver al inicio para realizar otra validación.</p>
+        <button id="btn-back" type="button" class="btn-secondary">Volver al inicio</button>
+      </div>
+
+      <pre id="status" class="status"></pre>
+    </section>
+  </main>
+
+  <script>
+    window.__LOGIN_MODE__ = "{{ login_mode }}";
+    window.__NEXT_URL__ = "{{ next_url }}";
+    window.__NEXT_LOGOUT_URL__ = "{{ next_logout_url }}";
+    window.__TRUSTED_LOGOUT_LOGIN__ = "{{ trusted_logout_login }}";
+    window.__TRUSTED_LOGOUT_TS__ = "{{ trusted_logout_ts }}";
+    window.__TRUSTED_LOGOUT_SIG__ = "{{ trusted_logout_sig }}";
+    window.__AUTH_CHANNEL__ = "{{ auth_channel or 'standard' }}";
+  </script>
+  <script src="/static/js/login.js"></script>
+</body>
+</html>
