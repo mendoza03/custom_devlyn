@@ -4,3 +4,4 @@ access_helpdesk_ticket_category_user,access.helpdesk.ticket.category.user,model_
 access_helpdesk_ticket_subcategory_user,access.helpdesk.ticket.subcategory.user,model_helpdesk_ticket_subcategory,base.group_user,1,1,1,1
 access_helpdesk_ticket_attachment_line_user,access.helpdesk.ticket.attachment.line.user,model_helpdesk_ticket_attachment_line,base.group_user,1,1,1,1
 access_devlyn_catalog_branch_internal_user,access.devlyn.catalog.branch.internal.user,devlyn_dahua_attendance_reporting.model_devlyn_catalog_branch,base.group_user,1,0,0,0
+access_helpdesk_ticket_commitment_wizard_user,access.helpdesk.ticket.commitment.wizard.user,model_helpdesk_ticket_commitment_wizard,base.group_user,1,1,1,1

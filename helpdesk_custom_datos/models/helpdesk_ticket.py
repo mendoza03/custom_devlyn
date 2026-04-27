@@ -1,12 +1,27 @@
 import logging
+import re
 from datetime import datetime, time, timedelta
 
 import pytz
+from lxml import etree
 
 from odoo import api, fields, models, _
 from odoo.exceptions import UserError, ValidationError
+from odoo.osv import expression
+from odoo.tools.safe_eval import safe_eval
 
 _logger = logging.getLogger(__name__)
+
+PEDIDO_FORMAT_REGEX = re.compile(r"^[A-Za-z0-9]{3}P\d{6}$")
+OV_FORMAT_REGEX = re.compile(r"^[A-Za-z0-9]{3}V\d{6}$")
+OT_FORMAT_REGEX = re.compile(r"^\d{10}$")
+BAG_FORMAT_REGEX = re.compile(r"^[A-Za-z0-9]{2}\d{8}$")
+IN_PROGRESS_STAGE_NAMES = {"In Progress", "En proceso de solución"}
+ON_HOLD_STAGE_NAMES = {"On Hold", "En espera"}
+SOLVED_STAGE_NAMES = {"Solved", "Solucionado"}
+CANCELLED_STAGE_NAMES = {"Cancelled", "Cancelado"}
+NEW_STAGE_NAMES = {"New", "Nuevo"}
+REQUIRED_VIEW_FIELD_SPECS_CACHE = {}
 
 
 class HelpdeskTicket(models.Model):
@@ -23,6 +38,77 @@ class HelpdeskTicket(models.Model):
             "url": url,
             "target": "new",
         }
+
+    def _get_stage_by_xmlid_or_name(self, xmlid, fallback_names):
+        self.ensure_one()
+        stage = self.env.ref(xmlid, raise_if_not_found=False)
+        if stage and (not stage.team_ids or self.team_id in stage.team_ids):
+            return stage
+
+        team_stage = self.team_id.stage_ids.filtered(lambda rec: rec.name in fallback_names)[:1]
+        if team_stage:
+            return team_stage
+
+        return self.env["helpdesk.stage"].search(
+            [
+                ("team_ids", "in", self.team_id.id),
+                ("name", "in", list(fallback_names)),
+            ],
+            order="sequence, id",
+            limit=1,
+        )
+
+    @api.model
+    def _is_in_progress_stage(self, stage):
+        ref_stage = self.env.ref("helpdesk.stage_in_progress", raise_if_not_found=False)
+        return bool(stage and ((ref_stage and stage.id == ref_stage.id) or stage.name in IN_PROGRESS_STAGE_NAMES))
+
+    def _change_stage(self, xmlid, fallback_names, extra_vals=None):
+        self.ensure_one()
+        stage = self._get_stage_by_xmlid_or_name(xmlid, fallback_names)
+        if not stage:
+            raise UserError(_("No se encontró el estado solicitado para este ticket."))
+
+        values = {"stage_id": stage.id}
+        if extra_vals:
+            values.update(extra_vals)
+        self.write(values)
+        return True
+
+    def action_set_stage_new(self):
+        for ticket in self:
+            ticket._change_stage("helpdesk.stage_new", NEW_STAGE_NAMES)
+        return True
+
+    def action_open_in_progress_wizard(self):
+        self.ensure_one()
+        return {
+            "name": _("Fecha compromiso"),
+            "type": "ir.actions.act_window",
+            "res_model": "helpdesk.ticket.commitment.wizard",
+            "view_mode": "form",
+            "view_id": self.env.ref("helpdesk_custom_datos.view_helpdesk_ticket_commitment_wizard_form").id,
+            "target": "new",
+            "context": {
+                "default_ticket_id": self.id,
+                "default_commitment_date": self.x_commitment_date or fields.Date.context_today(self),
+            },
+        }
+
+    def action_set_stage_on_hold(self):
+        for ticket in self:
+            ticket._change_stage("helpdesk.stage_on_hold", ON_HOLD_STAGE_NAMES)
+        return True
+
+    def action_set_stage_solved(self):
+        for ticket in self:
+            ticket._change_stage("helpdesk.stage_solved", SOLVED_STAGE_NAMES)
+        return True
+
+    def action_set_stage_cancelled(self):
+        for ticket in self:
+            ticket._change_stage("helpdesk.stage_cancelled", CANCELLED_STAGE_NAMES)
+        return True
 
     def _get_locked_fields_outside_new_stage(self):
         return {
@@ -136,6 +222,7 @@ class HelpdeskTicket(models.Model):
         compute="_compute_x_is_stage_new",
         store=False,
     )
+    x_commitment_date = fields.Date(string="Fecha compromiso", copy=False)
 
 
     @api.onchange("x_general_description")
@@ -155,6 +242,234 @@ class HelpdeskTicket(models.Model):
         for rec in self:
             rec.x_is_stage_new = not rec.stage_id or rec.stage_id.sequence == 0
 
+    @api.model
+    def _get_optional_ticket_format_rules(self):
+        return {
+            "x_order_number": (
+                PEDIDO_FORMAT_REGEX,
+                _("debe tener 10 posiciones: los primeros 4 caracteres alfanuméricos, los últimos 6 numéricos y el cuarto carácter debe ser 'P'."),
+            ),
+            "x_original_order_number": (
+                PEDIDO_FORMAT_REGEX,
+                _("debe tener 10 posiciones: los primeros 4 caracteres alfanuméricos, los últimos 6 numéricos y el cuarto carácter debe ser 'P'."),
+            ),
+            "x_refac_order_number": (
+                PEDIDO_FORMAT_REGEX,
+                _("debe tener 10 posiciones: los primeros 4 caracteres alfanuméricos, los últimos 6 numéricos y el cuarto carácter debe ser 'P'."),
+            ),
+            "x_card_order_number": (
+                PEDIDO_FORMAT_REGEX,
+                _("debe tener 10 posiciones: los primeros 4 caracteres alfanuméricos, los últimos 6 numéricos y el cuarto carácter debe ser 'P'."),
+            ),
+            "x_return_capture_order": (
+                PEDIDO_FORMAT_REGEX,
+                _("debe tener 10 posiciones: los primeros 4 caracteres alfanuméricos, los últimos 6 numéricos y el cuarto carácter debe ser 'P'."),
+            ),
+            "x_rescue_order_number": (
+                PEDIDO_FORMAT_REGEX,
+                _("debe tener 10 posiciones: los primeros 4 caracteres alfanuméricos, los últimos 6 numéricos y el cuarto carácter debe ser 'P'."),
+            ),
+            "x_online_unshipped_order": (
+                PEDIDO_FORMAT_REGEX,
+                _("debe tener 10 posiciones: los primeros 4 caracteres alfanuméricos, los últimos 6 numéricos y el cuarto carácter debe ser 'P'."),
+            ),
+            "x_lc_order_number": (
+                PEDIDO_FORMAT_REGEX,
+                _("debe tener 10 posiciones: los primeros 4 caracteres alfanuméricos, los últimos 6 numéricos y el cuarto carácter debe ser 'P'."),
+            ),
+            "x_quality_order_number": (
+                PEDIDO_FORMAT_REGEX,
+                _("debe tener 10 posiciones: los primeros 4 caracteres alfanuméricos, los últimos 6 numéricos y el cuarto carácter debe ser 'P'."),
+            ),
+            "x_shipping_missing_accessory_order": (
+                PEDIDO_FORMAT_REGEX,
+                _("debe tener 10 posiciones: los primeros 4 caracteres alfanuméricos, los últimos 6 numéricos y el cuarto carácter debe ser 'P'."),
+            ),
+            "x_refac_sale_order": (
+                OV_FORMAT_REGEX,
+                _("debe tener 10 posiciones: los primeros 4 caracteres alfanuméricos, los últimos 6 numéricos y el cuarto carácter debe ser 'V'."),
+            ),
+            "x_card_sale_order": (
+                OV_FORMAT_REGEX,
+                _("debe tener 10 posiciones: los primeros 4 caracteres alfanuméricos, los últimos 6 numéricos y el cuarto carácter debe ser 'V'."),
+            ),
+            "x_return_capture_sale_order": (
+                OV_FORMAT_REGEX,
+                _("debe tener 10 posiciones: los primeros 4 caracteres alfanuméricos, los últimos 6 numéricos y el cuarto carácter debe ser 'V'."),
+            ),
+            "x_rescue_sale_order": (
+                OV_FORMAT_REGEX,
+                _("debe tener 10 posiciones: los primeros 4 caracteres alfanuméricos, los últimos 6 numéricos y el cuarto carácter debe ser 'V'."),
+            ),
+            "x_frame_search_sale_order": (
+                OV_FORMAT_REGEX,
+                _("debe tener 10 posiciones: los primeros 4 caracteres alfanuméricos, los últimos 6 numéricos y el cuarto carácter debe ser 'V'."),
+            ),
+            "x_lc_ot_number": (
+                OT_FORMAT_REGEX,
+                _("debe tener 10 posiciones numéricas."),
+            ),
+            "x_online_work_order_number": (
+                OT_FORMAT_REGEX,
+                _("debe tener 10 posiciones numéricas."),
+            ),
+            "x_bag": (
+                BAG_FORMAT_REGEX,
+                _("debe tener 10 posiciones: los primeros 2 caracteres alfanuméricos y los últimos 8 numéricos."),
+            ),
+            "x_frame_bag_number": (
+                BAG_FORMAT_REGEX,
+                _("debe tener 10 posiciones: los primeros 2 caracteres alfanuméricos y los últimos 8 numéricos."),
+            ),
+            "x_bag_number": (
+                BAG_FORMAT_REGEX,
+                _("debe tener 10 posiciones: los primeros 2 caracteres alfanuméricos y los últimos 8 numéricos."),
+            ),
+            "x_online_return_bag_cedis": (
+                BAG_FORMAT_REGEX,
+                _("debe tener 10 posiciones: los primeros 2 caracteres alfanuméricos y los últimos 8 numéricos."),
+            ),
+            "x_frame_search_packaging_bag": (
+                BAG_FORMAT_REGEX,
+                _("debe tener 10 posiciones: los primeros 2 caracteres alfanuméricos y los últimos 8 numéricos."),
+            ),
+            "x_quality_shipping_bag": (
+                BAG_FORMAT_REGEX,
+                _("debe tener 10 posiciones: los primeros 2 caracteres alfanuméricos y los últimos 8 numéricos."),
+            ),
+            "x_bag_arrival": (
+                BAG_FORMAT_REGEX,
+                _("debe tener 10 posiciones: los primeros 2 caracteres alfanuméricos y los últimos 8 numéricos."),
+            ),
+            "x_shipping_arrival_bag": (
+                BAG_FORMAT_REGEX,
+                _("debe tener 10 posiciones: los primeros 2 caracteres alfanuméricos y los últimos 8 numéricos."),
+            ),
+            "x_shipping_unreceived_arrival_bag": (
+                BAG_FORMAT_REGEX,
+                _("debe tener 10 posiciones: los primeros 2 caracteres alfanuméricos y los últimos 8 numéricos."),
+            ),
+            "x_shipping_missing_accessory_bag": (
+                BAG_FORMAT_REGEX,
+                _("debe tener 10 posiciones: los primeros 2 caracteres alfanuméricos y los últimos 8 numéricos."),
+            ),
+        }
+
+    @api.model
+    def _get_duplicate_reference_field_groups(self):
+        return {
+            "pedido": [
+                "x_order_number",
+                "x_original_order_number",
+                "x_refac_order_number",
+                "x_card_order_number",
+                "x_return_capture_order",
+                "x_rescue_order_number",
+                "x_online_unshipped_order",
+                "x_lc_order_number",
+                "x_quality_order_number",
+                "x_shipping_missing_accessory_order",
+            ],
+            "ov": [
+                "x_refac_sale_order",
+                "x_card_sale_order",
+                "x_return_capture_sale_order",
+                "x_rescue_sale_order",
+                "x_frame_search_sale_order",
+            ],
+        }
+
+    @api.model
+    def _validate_optional_ticket_formats(self, vals):
+        for field_name, (pattern, message) in self._get_optional_ticket_format_rules().items():
+            if field_name not in vals:
+                continue
+            value = vals.get(field_name)
+            if value in (False, None, ""):
+                continue
+            value = value if isinstance(value, str) else str(value)
+            if not pattern.fullmatch(value):
+                raise ValidationError(
+                    _("El campo %(field)s %(message)s") % {
+                        "field": self._fields[field_name].string,
+                        "message": message,
+                    }
+                )
+
+    @api.model
+    def _find_duplicate_pending_ticket(self, subcategory_id, values, exclude_ids=None):
+        if not subcategory_id:
+            return False
+
+        exclude_ids = exclude_ids or []
+        cancelled_stage = self.env.ref("helpdesk.stage_cancelled", raise_if_not_found=False)
+        base_domain = [
+            ("x_subcategory_id", "=", subcategory_id),
+            ("id", "not in", exclude_ids),
+        ]
+        if cancelled_stage:
+            base_domain.append(("stage_id", "!=", cancelled_stage.id))
+
+        for field_names in self._get_duplicate_reference_field_groups().values():
+            for field_name in field_names:
+                value = values.get(field_name)
+                if value in (False, None, ""):
+                    continue
+                group_domain = expression.OR([[(candidate_field, "=", value)] for candidate_field in field_names])
+                conflict = self.sudo().search(expression.AND([base_domain, group_domain]), limit=1, order="id desc")
+                if conflict:
+                    return conflict
+
+        return False
+
+    @api.model
+    def _validate_duplicate_pending_ticket(self, vals, record=None):
+        subcategory_id = vals.get("x_subcategory_id")
+        if not subcategory_id and record:
+            subcategory_id = record.x_subcategory_id.id
+        if not subcategory_id:
+            return
+
+        all_reference_fields = []
+        for field_names in self._get_duplicate_reference_field_groups().values():
+            all_reference_fields.extend(field_names)
+
+        values = {}
+        for field_name in all_reference_fields:
+            if field_name in vals:
+                values[field_name] = vals.get(field_name)
+            elif record:
+                values[field_name] = record[field_name]
+
+        conflict = self._find_duplicate_pending_ticket(
+            subcategory_id=subcategory_id,
+            values=values,
+            exclude_ids=record.ids if record else [],
+        )
+        if conflict:
+            raise ValidationError(
+                _("Este pedido cuenta con el ticket %(ticket)s, el cual se encuentra pendiente de solución") % {
+                    "ticket": conflict.ticket_ref or conflict.id,
+                }
+            )
+
+    @api.model
+    def _validate_commitment_date_for_stage_change(self, vals, record=None):
+        if "stage_id" not in vals:
+            return
+
+        target_stage = self.env["helpdesk.stage"].browse(vals["stage_id"])
+        if not self._is_in_progress_stage(target_stage):
+            return
+
+        if record and record.stage_id == target_stage:
+            return
+
+        if not vals.get("x_commitment_date"):
+            raise ValidationError(
+                _("Al cambiar el estatus a 'En proceso de solución', se debe seleccionar la fecha compromiso.")
+            )
+
     @api.model_create_multi
     def create(self, vals_list):
         for vals in vals_list:
@@ -168,7 +483,11 @@ class HelpdeskTicket(models.Model):
                 ticket_user = self.env["res.users"].browse(vals.get("user_id")) if vals.get("user_id") else self.env.user
                 if ticket_user.x_branch_id:
                     vals["x_branch_id"] = ticket_user.x_branch_id.id
+            self._validate_optional_ticket_formats(vals)
+            self._validate_duplicate_pending_ticket(vals)
+            self._validate_commitment_date_for_stage_change(vals)
         tickets = super().create(vals_list)
+        tickets._validate_required_view_fields()
 
         for ticket in tickets.filtered("user_id"):
             _logger.warning(
@@ -202,7 +521,12 @@ class HelpdeskTicket(models.Model):
 
         if vals.get("x_general_description") and not vals.get("name"):
             vals["name"] = vals["x_general_description"]
+        self._validate_optional_ticket_formats(vals)
+        for record in self:
+            record._validate_duplicate_pending_ticket(vals, record=record)
+            record._validate_commitment_date_for_stage_change(vals, record=record)
         result = super().write(vals)
+        self._validate_required_view_fields()
 
         if previous_user_by_ticket:
             for ticket in self:
@@ -1606,6 +1930,70 @@ class HelpdeskTicket(models.Model):
         if value == "select":
             return True
         return False
+
+    @api.model
+    def _get_required_view_field_specs(self):
+        view = self.env.ref("helpdesk_custom_datos.helpdesk_ticket_view_form_custom_replace")
+        cache_key = (self.env.cr.dbname, view.id, view.write_date)
+        if cache_key not in REQUIRED_VIEW_FIELD_SPECS_CACHE:
+            arch = etree.fromstring(view.arch_db.encode())
+            REQUIRED_VIEW_FIELD_SPECS_CACHE[cache_key] = tuple(
+                (
+                    node.get("name"),
+                    (node.get("required") or "").strip(),
+                )
+                for node in arch.xpath("//field[@name][@required]")
+                if node.get("name") and (node.get("required") or "").strip()
+            )
+        return REQUIRED_VIEW_FIELD_SPECS_CACHE[cache_key]
+
+    def _get_required_view_eval_context(self):
+        self.ensure_one()
+        eval_context = {}
+        for field_name, field in self._fields.items():
+            value = self[field_name]
+            if field.type == "many2one":
+                eval_context[field_name] = value.id or False
+            elif field.type in {"one2many", "many2many"}:
+                eval_context[field_name] = value.ids
+            else:
+                eval_context[field_name] = value
+        return eval_context
+
+    def _get_required_view_missing_field_labels(self):
+        self.ensure_one()
+        eval_context = self._get_required_view_eval_context()
+        missing_labels = []
+        seen_labels = set()
+        for field_name, expression_text in self._get_required_view_field_specs():
+            try:
+                is_required = bool(safe_eval(expression_text, eval_context))
+            except Exception:
+                _logger.exception(
+                    "No se pudo evaluar la regla required='%s' para el campo %s en helpdesk.ticket",
+                    expression_text,
+                    field_name,
+                )
+                continue
+            if not is_required:
+                continue
+            field = self._fields.get(field_name)
+            if not field or not self._is_empty_required_value(self[field_name]):
+                continue
+            label = field.string or field_name
+            if label in seen_labels:
+                continue
+            seen_labels.add(label)
+            missing_labels.append(label)
+        return missing_labels
+
+    def _validate_required_view_fields(self):
+        for rec in self:
+            missing_labels = rec._get_required_view_missing_field_labels()
+            if missing_labels:
+                raise ValidationError(
+                    _("Faltan los siguientes campos obligatorios:\n- %s") % "\n- ".join(missing_labels)
+                )
 
     def _get_missing_required_field_labels(self, field_names):
         self.ensure_one()

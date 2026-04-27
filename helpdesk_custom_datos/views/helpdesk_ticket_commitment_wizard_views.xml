@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+
+    <record id="view_helpdesk_ticket_commitment_wizard_form" model="ir.ui.view">
+        <field name="name">helpdesk.ticket.commitment.wizard.form</field>
+        <field name="model">helpdesk.ticket.commitment.wizard</field>
+        <field name="arch" type="xml">
+            <form string="Fecha compromiso">
+                <group>
+                    <field name="ticket_id" invisible="1" />
+                    <field name="commitment_date" required="1" />
+                </group>
+                <footer>
+                    <button name="action_confirm" type="object" string="Confirmar"
+                        class="btn btn-primary" />
+                    <button string="Cancelar" special="cancel" class="btn btn-secondary" />
+                </footer>
+            </form>
+        </field>
+    </record>
+
+</odoo>
