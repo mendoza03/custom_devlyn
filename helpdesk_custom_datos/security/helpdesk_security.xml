@@ -24,23 +24,23 @@
     <delete id="helpdesk.helpdesk_ticket_report_analysis_rule_user" model="ir.rule"/>
 
     <record id="helpdesk_ticket_assigned_user_rule" model="ir.rule">
-        <field name="name">Helpdesk Ticket User: Assigned Tickets</field>
+        <field name="name">Helpdesk Ticket User: Tickets de mi sucursal</field>
         <field name="model_id" ref="helpdesk.model_helpdesk_ticket"/>
-        <field name="domain_force">[('user_id', '=', user.id)]</field>
+        <field name="domain_force">[('x_branch_id', '=', user.x_branch_id.id)]</field>
         <field name="groups" eval="[(4, ref('helpdesk.group_helpdesk_user'))]"/>
     </record>
 
     <record id="helpdesk_sla_report_analysis_assigned_user_rule" model="ir.rule">
-        <field name="name">Helpdesk SLA Report: Assigned Tickets</field>
+        <field name="name">Helpdesk SLA Report: Tickets de mi sucursal</field>
         <field name="model_id" ref="helpdesk.model_helpdesk_sla_report_analysis"/>
-        <field name="domain_force">[('ticket_id.user_id', '=', user.id)]</field>
+        <field name="domain_force">[('ticket_id.x_branch_id', '=', user.x_branch_id.id)]</field>
         <field name="groups" eval="[(4, ref('helpdesk.group_helpdesk_user'))]"/>
     </record>
 
     <record id="helpdesk_ticket_report_analysis_assigned_user_rule" model="ir.rule">
-        <field name="name">Helpdesk Ticket Report: Assigned Tickets</field>
+        <field name="name">Helpdesk Ticket Report: Tickets de mi sucursal</field>
         <field name="model_id" ref="helpdesk.model_helpdesk_ticket_report_analysis"/>
-        <field name="domain_force">[('ticket_id.user_id', '=', user.id)]</field>
+        <field name="domain_force">[('ticket_id.x_branch_id', '=', user.x_branch_id.id)]</field>
         <field name="groups" eval="[(4, ref('helpdesk.group_helpdesk_user'))]"/>
     </record>
 
