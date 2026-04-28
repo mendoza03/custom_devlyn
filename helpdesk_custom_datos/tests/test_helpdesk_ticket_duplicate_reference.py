@@ -83,3 +83,22 @@ class TestHelpdeskTicketDuplicateReference(HelpdeskCommon):
         })
 
         self.assertTrue(ticket)
+
+    def test_order_number_is_normalized_before_validation_and_duplicate_check(self):
+        ticket = self.env["helpdesk.ticket"].create({
+            **self._base_ticket_values(),
+            "stage_id": self.stage_progress.id,
+            "x_original_order_number": "  asdp151515  ",
+        })
+
+        self.assertEqual(ticket.x_original_order_number, "ASDP151515")
+
+        with self.assertRaisesRegex(
+            ValidationError,
+            r"Este pedido cuenta con el ticket .* se encuentra pendiente de solución",
+        ):
+            self.env["helpdesk.ticket"].create({
+                **self._base_ticket_values(),
+                "stage_id": self.stage_new.id,
+                "x_order_number": "ASDP151515",
+            })

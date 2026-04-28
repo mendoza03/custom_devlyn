@@ -122,6 +122,91 @@ class VolumeOdoo:
                 "stage_id": {"id": 77, "display_name": "Hecha"},
             },
         ]
+        self._helpdesk_stages = [
+            {"id": 1, "name": "Nuevo", "display_name": "Nuevo", "fold": False, "sequence": 1, "active": True},
+            {"id": 2, "name": "En proceso de solución", "display_name": "En proceso de solución", "fold": False, "sequence": 2, "active": True},
+            {"id": 3, "name": "Solucionado", "display_name": "Solucionado", "fold": True, "sequence": 9, "active": True},
+        ]
+        self._helpdesk_teams = [
+            {"id": 10, "name": "Soporte Devlyn", "display_name": "Soporte Devlyn", "sequence": 1, "active": True},
+        ]
+        self._helpdesk_tags = [{"id": 7, "name": "VIP", "display_name": "VIP"}]
+        self._helpdesk_sections = [
+            {"id": 100, "name": "TI", "display_name": "TI", "sequence": 1, "active": True},
+        ]
+        self._helpdesk_categories = [
+            {
+                "id": 200,
+                "name": "Accesos",
+                "display_name": "Accesos",
+                "section_id": {"id": 100, "display_name": "TI"},
+                "sequence": 1,
+                "active": True,
+            },
+        ]
+        self._helpdesk_subcategories = [
+            {
+                "id": 300,
+                "name": "Usuario contraseña",
+                "display_name": "Usuario contraseña",
+                "category_id": {"id": 200, "display_name": "Accesos"},
+                "code": "usuario_contrasena",
+                "sequence": 1,
+                "active": True,
+            },
+        ]
+        self._helpdesk_slas = [{"id": 50, "name": "Atención 24h", "display_name": "Atención 24h"}]
+        self._helpdesk_sla_statuses = [
+            {
+                "id": 501,
+                "display_name": "Atención 24h",
+                "sla_id": {"id": 50, "display_name": "Atención 24h"},
+                "status": "ongoing",
+                "deadline": "2026-04-18 18:00:00",
+                "reached_datetime": False,
+                "color": 2,
+            }
+        ]
+        self._helpdesk_tickets = [
+            {
+                "id": 1000 + index,
+                "name": f"Ticket {index}",
+                "display_name": f"Ticket {index}",
+                "ticket_ref": f"HD{index:04d}",
+                "partner_id": {"id": 900 + index, "display_name": f"Solicitante {index}"},
+                "partner_name": f"Solicitante {index}",
+                "partner_email": f"solicitante{index}@example.test",
+                "partner_phone": f"555-00{index:02d}",
+                "user_id": {"id": 16 if index % 2 else 12, "display_name": "Ivan" if index % 2 else "Adriana Mendoza"},
+                "team_id": {"id": 10, "display_name": "Soporte Devlyn"},
+                "stage_id": {"id": 3 if index <= 3 else 2, "display_name": "Solucionado" if index <= 3 else "En proceso de solución"},
+                "priority": "3" if index == 1 else "1",
+                "create_date": f"2026-04-{index:02d} 09:00:00",
+                "write_date": f"2026-04-{index:02d} 11:00:00",
+                "close_date": f"2026-04-{index:02d} 18:30:00" if index <= 3 else False,
+                "assign_date": f"2026-04-{index:02d} 10:00:00",
+                "create_uid": {"id": 2, "display_name": "Administrator"},
+                "description": f"<p>Detalle del ticket {index}</p>",
+                "tag_ids": [7] if index == 1 else [],
+                "sla_deadline": "2026-04-18 18:00:00",
+                "sla_reached_late": index == 3,
+                "sla_status_ids": [501] if index == 1 else [],
+                "active": True,
+                "x_general_description": f"Motivo ticket {index}",
+                "x_detailed_description": f"<p>Motivo detallado {index}</p>",
+                "x_section_id": {"id": 100, "display_name": "TI"},
+                "x_category_id": {"id": 200, "display_name": "Accesos"},
+                "x_subcategory_id": {"id": 300, "display_name": "Usuario contraseña"},
+                "x_subcategory_code": "usuario_contrasena",
+                "x_commitment_date": "2026-04-20",
+                "x_branch_id": {"id": 400, "display_name": "Sucursal Centro"},
+                "x_centro_sap": "A001",
+                "x_numero_telefonico": "555-0000",
+                "x_correo": "sucursal@example.test",
+                "x_order_number": "ABCP123456" if index == 1 else False,
+            }
+            for index in range(1, 15)
+        ]
 
     def healthcheck(self) -> dict[str, object]:
         return {"server_version": "19.0", "authenticated_uid": 999}
@@ -152,6 +237,24 @@ class VolumeOdoo:
             return len(self._filter_projects(domain))
         if model == "project.task.type":
             return len(self._task_stages)
+        if model == "helpdesk.ticket":
+            return len(self._filter_helpdesk_tickets(domain))
+        if model == "helpdesk.stage":
+            return len(self._helpdesk_stages)
+        if model == "helpdesk.team":
+            return len(self._helpdesk_teams)
+        if model == "helpdesk.tag":
+            return len(self._helpdesk_tags)
+        if model == "helpdesk.section":
+            return len(self._helpdesk_sections)
+        if model == "helpdesk.ticket.category":
+            return len(self._helpdesk_categories)
+        if model == "helpdesk.ticket.subcategory":
+            return len(self._helpdesk_subcategories)
+        if model == "helpdesk.sla":
+            return len(self._helpdesk_slas)
+        if model == "helpdesk.sla.status":
+            return len(self._helpdesk_sla_statuses)
         return 0
 
     def search_read(
@@ -176,6 +279,24 @@ class VolumeOdoo:
             data = self._filter_projects(domain)
         elif model == "project.task.type":
             data = self._task_stages
+        elif model == "helpdesk.ticket":
+            data = self._filter_helpdesk_tickets(domain)
+        elif model == "helpdesk.stage":
+            data = self._helpdesk_stages
+        elif model == "helpdesk.team":
+            data = self._helpdesk_teams
+        elif model == "helpdesk.tag":
+            data = self._helpdesk_tags
+        elif model == "helpdesk.section":
+            data = self._helpdesk_sections
+        elif model == "helpdesk.ticket.category":
+            data = self._helpdesk_categories
+        elif model == "helpdesk.ticket.subcategory":
+            data = self._helpdesk_subcategories
+        elif model == "helpdesk.sla":
+            data = self._helpdesk_slas
+        elif model == "helpdesk.sla.status":
+            data = self._helpdesk_sla_statuses
         else:
             data = []
         rows = data[offset : offset + limit]
@@ -194,6 +315,24 @@ class VolumeOdoo:
             data = self._employees
         elif model == "biometric.attendance.summary":
             data = self._attendance_summary
+        elif model == "helpdesk.ticket":
+            data = self._helpdesk_tickets
+        elif model == "helpdesk.stage":
+            data = self._helpdesk_stages
+        elif model == "helpdesk.team":
+            data = self._helpdesk_teams
+        elif model == "helpdesk.tag":
+            data = self._helpdesk_tags
+        elif model == "helpdesk.section":
+            data = self._helpdesk_sections
+        elif model == "helpdesk.ticket.category":
+            data = self._helpdesk_categories
+        elif model == "helpdesk.ticket.subcategory":
+            data = self._helpdesk_subcategories
+        elif model == "helpdesk.sla":
+            data = self._helpdesk_slas
+        elif model == "helpdesk.sla.status":
+            data = self._helpdesk_sla_statuses
         else:
             data = []
         id_set = {int(item) for item in ids}
@@ -260,6 +399,95 @@ class VolumeOdoo:
                 "sequence": {"type": "integer"},
                 "active": {"type": "boolean"},
             }
+        if model == "helpdesk.ticket":
+            return {
+                "id": {"type": "integer", "string": "ID", "store": True},
+                "name": {"type": "char", "string": "Subject", "required": True, "store": True},
+                "display_name": {"type": "char", "string": "Display Name", "store": False},
+                "ticket_ref": {"type": "char", "string": "Ticket IDs Sequence", "store": True},
+                "partner_id": {"type": "many2one", "relation": "res.partner", "string": "Customer", "store": True},
+                "partner_name": {"type": "char", "string": "Customer Name", "store": True},
+                "partner_email": {"type": "char", "string": "Customer Email", "store": True},
+                "partner_phone": {"type": "char", "string": "Customer Phone", "store": True},
+                "user_id": {"type": "many2one", "relation": "res.users", "string": "Assigned to", "store": True},
+                "team_id": {"type": "many2one", "relation": "helpdesk.team", "string": "Helpdesk Team", "store": True},
+                "stage_id": {"type": "many2one", "relation": "helpdesk.stage", "string": "Stage", "store": True},
+                "priority": {
+                    "type": "selection",
+                    "string": "Priority",
+                    "selection": [("0", "Low priority"), ("1", "Medium priority"), ("2", "High priority"), ("3", "Urgent")],
+                    "store": True,
+                },
+                "create_date": {"type": "datetime", "string": "Created on", "readonly": True, "store": True},
+                "write_date": {"type": "datetime", "string": "Last Updated on", "readonly": True, "store": True},
+                "close_date": {"type": "datetime", "string": "Close date", "store": True},
+                "assign_date": {"type": "datetime", "string": "First assignment date", "store": True},
+                "create_uid": {"type": "many2one", "relation": "res.users", "string": "Created by", "readonly": True, "store": True},
+                "description": {"type": "html", "string": "Description", "store": True},
+                "tag_ids": {"type": "many2many", "relation": "helpdesk.tag", "string": "Tags", "store": True},
+                "sla_deadline": {"type": "datetime", "string": "SLA Deadline", "readonly": True, "store": True},
+                "sla_reached_late": {"type": "boolean", "string": "Has SLA reached late", "readonly": True, "store": True},
+                "sla_status_ids": {"type": "one2many", "relation": "helpdesk.sla.status", "string": "SLA Status", "store": True},
+                "active": {"type": "boolean", "string": "Active", "store": True},
+                "x_general_description": {"type": "char", "string": "Descripción General", "required": True, "store": True},
+                "x_detailed_description": {"type": "html", "string": "Descripción Detallada", "store": True},
+                "x_section_id": {"type": "many2one", "relation": "helpdesk.section", "string": "Sección", "required": True, "store": True},
+                "x_category_id": {"type": "many2one", "relation": "helpdesk.ticket.category", "string": "Categoría", "required": True, "store": True},
+                "x_subcategory_id": {"type": "many2one", "relation": "helpdesk.ticket.subcategory", "string": "Subcategoría", "required": True, "store": True},
+                "x_subcategory_code": {"type": "char", "string": "Código", "readonly": True, "store": True},
+                "x_commitment_date": {"type": "date", "string": "Fecha compromiso", "store": True},
+                "x_branch_id": {"type": "many2one", "relation": "devlyn.catalog.branch", "string": "Sucursal", "store": True},
+                "x_centro_sap": {"type": "char", "string": "Centro SAP", "store": True},
+                "x_numero_telefonico": {"type": "char", "string": "Número telefónico", "store": True},
+                "x_correo": {"type": "char", "string": "Correo", "store": True},
+                "x_order_number": {"type": "char", "string": "Pedido", "store": True},
+            }
+        if model == "helpdesk.stage":
+            return {
+                "id": {"type": "integer"},
+                "name": {"type": "char"},
+                "display_name": {"type": "char"},
+                "sequence": {"type": "integer"},
+                "fold": {"type": "boolean"},
+                "active": {"type": "boolean"},
+            }
+        if model == "helpdesk.team":
+            return {"id": {"type": "integer"}, "name": {"type": "char"}, "display_name": {"type": "char"}, "sequence": {"type": "integer"}, "active": {"type": "boolean"}}
+        if model == "helpdesk.tag":
+            return {"id": {"type": "integer"}, "name": {"type": "char"}, "display_name": {"type": "char"}}
+        if model == "helpdesk.section":
+            return {"id": {"type": "integer"}, "name": {"type": "char"}, "display_name": {"type": "char"}, "sequence": {"type": "integer"}, "active": {"type": "boolean"}}
+        if model == "helpdesk.ticket.category":
+            return {
+                "id": {"type": "integer"},
+                "name": {"type": "char"},
+                "display_name": {"type": "char"},
+                "section_id": {"type": "many2one", "relation": "helpdesk.section"},
+                "sequence": {"type": "integer"},
+                "active": {"type": "boolean"},
+            }
+        if model == "helpdesk.ticket.subcategory":
+            return {
+                "id": {"type": "integer"},
+                "name": {"type": "char"},
+                "display_name": {"type": "char"},
+                "category_id": {"type": "many2one", "relation": "helpdesk.ticket.category"},
+                "code": {"type": "char"},
+                "sequence": {"type": "integer"},
+                "active": {"type": "boolean"},
+            }
+        if model == "helpdesk.sla":
+            return {"id": {"type": "integer"}, "name": {"type": "char"}, "display_name": {"type": "char"}}
+        if model == "helpdesk.sla.status":
+            return {
+                "id": {"type": "integer"},
+                "display_name": {"type": "char"},
+                "sla_id": {"type": "many2one", "relation": "helpdesk.sla"},
+                "status": {"type": "selection"},
+                "deadline": {"type": "datetime"},
+                "reached_datetime": {"type": "datetime"},
+                "color": {"type": "integer"},
+            }
         return {}
 
     def _filter_tasks(self, domain: list[object]) -> list[dict[str, object]]:
@@ -292,6 +520,42 @@ class VolumeOdoo:
                 continue
             field, operator, value = condition
             if field == "active" and operator == "=":
+                rows = [row for row in rows if bool(row.get("active")) is bool(value)]
+        return rows
+
+    def _filter_helpdesk_tickets(self, domain: list[object]) -> list[dict[str, object]]:
+        rows = list(self._helpdesk_tickets)
+        for condition in domain:
+            if not isinstance(condition, tuple) or len(condition) != 3:
+                continue
+            field, operator, value = condition
+            if field == "stage_id" and operator == "=":
+                rows = [row for row in rows if int((row.get("stage_id") or {}).get("id", 0)) == int(value)]
+            elif field == "stage_id.name" and operator == "ilike":
+                needle = str(value).casefold()
+                rows = [row for row in rows if needle in str((row.get("stage_id") or {}).get("display_name", "")).casefold()]
+            elif field == "user_id" and operator == "=":
+                rows = [row for row in rows if int((row.get("user_id") or {}).get("id", 0)) == int(value)]
+            elif field == "partner_id" and operator == "=":
+                rows = [row for row in rows if int((row.get("partner_id") or {}).get("id", 0)) == int(value)]
+            elif field == "priority" and operator == "=":
+                rows = [row for row in rows if str(row.get("priority")) == str(value)]
+            elif field == "tag_ids" and operator == "in":
+                allowed = {int(item) for item in value}
+                rows = [row for row in rows if any(int(tag_id) in allowed for tag_id in row.get("tag_ids", []))]
+            elif field == "create_date" and operator == ">=":
+                rows = [row for row in rows if str(row.get("create_date")) >= str(value)]
+            elif field == "create_date" and operator == "<":
+                rows = [row for row in rows if str(row.get("create_date")) < str(value)]
+            elif field == "close_date" and operator == ">=":
+                rows = [row for row in rows if row.get("close_date") and str(row.get("close_date")) >= str(value)]
+            elif field == "close_date" and operator == "<":
+                rows = [row for row in rows if row.get("close_date") and str(row.get("close_date")) < str(value)]
+            elif field == "close_date" and operator == "=" and value is False:
+                rows = [row for row in rows if not row.get("close_date")]
+            elif field == "close_date" and operator == "!=" and value is False:
+                rows = [row for row in rows if bool(row.get("close_date"))]
+            elif field == "active" and operator == "=":
                 rows = [row for row in rows if bool(row.get("active")) is bool(value)]
         return rows
 
@@ -497,3 +761,114 @@ def test_get_task_by_id_resolves_assignee_names():
     assert payload["items"][0]["assignees"] == [
         {"id": 16, "name": "Ivan", "login": "ivan@example.test", "active": True}
     ]
+
+
+def test_helpdesk_tools_are_discoverable_with_dashboard_filters():
+    with build_volume_test_client() as client:
+        tools = {tool["name"]: tool for tool in _list_tools(client)}
+
+    assert "get_helpdesk_catalogs" in tools
+    assert "describe_helpdesk_ticket_schema" in tools
+    properties = tools["search_helpdesk_tickets"]["inputSchema"]["properties"]
+    for field in [
+        "detail_level",
+        "limit",
+        "cursor",
+        "fields",
+        "stage_id",
+        "stage_name",
+        "user_id",
+        "partner_id",
+        "priority",
+        "ticket_type_id",
+        "tag_id",
+        "created_from",
+        "created_to",
+        "closed_from",
+        "closed_to",
+        "active",
+        "open_only",
+        "resolved_only",
+    ]:
+        assert field in properties
+    assert "detail_level=full" in tools["search_helpdesk_tickets"]["description"]
+
+
+def test_helpdesk_search_dashboard_rows_and_limit_cap_summary():
+    with build_volume_test_client() as client:
+        payload = _call_tool(client, "search_helpdesk_tickets", {"detail_level": "summary", "limit": 20})
+
+    assert payload["summary"]["requested_limit"] == 20
+    assert payload["summary"]["effective_limit"] == 8
+    assert payload["summary"]["limit"] == 8
+    assert payload["summary"]["returned_count"] == len(payload["items"])
+    assert payload["summary"]["returned_count"] <= 8
+    assert "limit_capped_to_8" in payload["warnings"]
+    assert payload["next_cursor"] is not None
+    item = payload["items"][0]
+    assert item["requester"]["name"] == "Solicitante 1"
+    assert item["assigned_agent"]["name"] == "Ivan"
+    assert item["stage"]["name"] == "Solucionado"
+    assert item["priority_label"] == "Urgent"
+    assert item["security_level_candidate"]["source"] == "priority"
+    assert item["category"]["name"] == "Accesos"
+    assert item["subcategory"]["name"] == "Usuario contraseña"
+    assert item["resolution_hours"] == 9.5
+
+
+def test_helpdesk_search_filters_stage_agent_requester_priority_dates_and_state():
+    with build_volume_test_client() as client:
+        by_stage = _call_tool(client, "search_helpdesk_tickets", {"stage_name": "proceso", "open_only": True, "limit": 5})
+        by_agent = _call_tool(client, "search_helpdesk_tickets", {"user_id": 12, "open_only": True, "limit": 5})
+        by_requester = _call_tool(client, "search_helpdesk_tickets", {"partner_id": 901, "resolved_only": True})
+        by_priority = _call_tool(client, "search_helpdesk_tickets", {"priority": "3"})
+        by_tag = _call_tool(client, "search_helpdesk_tickets", {"tag_id": 7})
+        by_dates = _call_tool(client, "search_helpdesk_tickets", {"created_from": "2026-04-02", "created_to": "2026-04-03"})
+
+    assert by_stage["summary"]["total_count"] == 11
+    assert {item["stage"]["name"] for item in by_stage["items"]} == {"En proceso de solución"}
+    assert all(item["assigned_agent"]["id"] == 12 for item in by_agent["items"])
+    assert by_requester["summary"]["total_count"] == 1
+    assert by_requester["items"][0]["requester"]["id"] == 901
+    assert by_priority["summary"]["total_count"] == 1
+    assert by_tag["summary"]["total_count"] == 1
+    assert by_dates["summary"]["total_count"] == 2
+
+
+def test_helpdesk_catalogs_and_schema_report_real_metadata_and_missing_ticket_type():
+    with build_volume_test_client() as client:
+        catalogs = _call_tool(client, "get_helpdesk_catalogs")
+        schema = _call_tool(client, "describe_helpdesk_ticket_schema")
+
+    item = catalogs["items"][0]
+    assert item["catalog_counts"]["stages"] == 3
+    assert item["catalog_counts"]["categories"] == 1
+    assert item["catalog_counts"]["subcategories"] == 1
+    assert {"value": "3", "label": "Urgent"} in item["priorities"]
+    assert "ticket_types" in item["unavailable_catalogs"]
+
+    schema_item = schema["items"][0]
+    assert "ticket_type_id" in schema_item["unavailable_expected_fields"]
+    assert schema_item["fields"]["priority"]["selection"][3] == ["3", "Urgent"] or schema_item["fields"]["priority"]["selection"][3] == ("3", "Urgent")
+    assert "x_category_id" in schema_item["custom_dashboard_fields"]
+    assert "no_dedicated_security_level_field" in schema["warnings"]
+
+
+def test_get_helpdesk_ticket_by_id_returns_audit_detail_and_custom_fields():
+    with build_volume_test_client() as client:
+        payload = _call_tool(client, "get_helpdesk_ticket_by_id", {"ticket_id": 1001})
+
+    assert payload["summary"]["found"] is True
+    item = payload["items"][0]
+    assert item["requester"] == {
+        "id": 901,
+        "name": "Solicitante 1",
+        "email": "solicitante1@example.test",
+        "phone": "555-0001",
+    }
+    assert item["assigned_agent"]["login"] == "ivan@example.test"
+    assert item["creator"]["name"] == "Administrator"
+    assert item["sla"]["statuses"][0]["sla"]["display_name"] == "Atención 24h"
+    assert item["custom_fields"]["x_order_number"] == "ABCP123456"
+    assert "field_unavailable:ticket_type_id" in payload["warnings"]
+    assert "no_dedicated_security_level_field" in payload["warnings"]

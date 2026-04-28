@@ -53,6 +53,119 @@ TEXT_LIMIT_BY_LEVEL: dict[DetailLevel, int] = {"summary": 96, "standard": 180, "
 CHAR_BUDGET_BY_LEVEL: dict[DetailLevel, int] = {"summary": 2800, "standard": 6500, "full": 14000}
 TASK_SUMMARY_SAMPLE_LIMIT = 1000
 TOP_PENDING_TASK_LIMIT = 5
+HELPDESK_PRIORITY_LABELS_FALLBACK = {
+    "0": "Low priority",
+    "1": "Medium priority",
+    "2": "High priority",
+    "3": "Urgent",
+}
+HELPDESK_SEARCH_FIELDS = [
+    "name",
+    "display_name",
+    "ticket_ref",
+    "partner_name",
+    "partner_email",
+    "partner_phone",
+    "description",
+    "x_general_description",
+    "x_detailed_description",
+    "x_correo",
+    "x_numero_telefonico",
+    "x_centro_sap",
+    "x_subcategory_code",
+]
+HELPDESK_EXPECTED_FIELDS = [
+    "id",
+    "name",
+    "display_name",
+    "ticket_ref",
+    "partner_id",
+    "partner_name",
+    "partner_email",
+    "partner_phone",
+    "user_id",
+    "team_id",
+    "stage_id",
+    "priority",
+    "create_date",
+    "write_date",
+    "close_date",
+    "assign_date",
+    "create_uid",
+    "description",
+    "tag_ids",
+    "sla_deadline",
+    "sla_reached_late",
+    "sla_status_ids",
+    "active",
+    "ticket_type_id",
+    "x_general_description",
+    "x_detailed_description",
+    "x_section_id",
+    "x_category_id",
+    "x_subcategory_id",
+    "x_subcategory_code",
+    "x_commitment_date",
+    "x_branch_id",
+    "x_centro_sap",
+    "x_numero_telefonico",
+    "x_correo",
+]
+HELPDESK_DASHBOARD_FIELDS = [
+    "id",
+    "ticket_ref",
+    "name",
+    "requester",
+    "assigned_agent",
+    "creator",
+    "stage",
+    "team",
+    "priority",
+    "priority_label",
+    "security_level_candidate",
+    "section",
+    "category",
+    "subcategory",
+    "create_date",
+    "write_date",
+    "close_date",
+    "assign_date",
+    "age_hours",
+    "resolution_hours",
+    "sla",
+    "description",
+]
+HELPDESK_PRIMARY_CUSTOM_FIELDS = [
+    "x_general_description",
+    "x_detailed_description",
+    "x_section_id",
+    "x_category_id",
+    "x_subcategory_id",
+    "x_subcategory_code",
+    "x_commitment_date",
+    "x_branch_id",
+    "x_centro_sap",
+    "x_numero_telefonico",
+    "x_correo",
+]
+HELPDESK_CATALOG_SPECS = {
+    "stages": ("helpdesk.stage", ["id", "name", "display_name", "sequence", "fold", "team_ids", "active"], "sequence asc, id asc"),
+    "teams": ("helpdesk.team", ["id", "name", "display_name", "sequence", "active"], "sequence asc, id asc"),
+    "tags": ("helpdesk.tag", ["id", "name", "display_name"], "name asc"),
+    "sections": ("helpdesk.section", ["id", "name", "display_name", "sequence", "active"], "sequence asc, id asc"),
+    "categories": (
+        "helpdesk.ticket.category",
+        ["id", "name", "display_name", "section_id", "sequence", "active"],
+        "sequence asc, id asc",
+    ),
+    "subcategories": (
+        "helpdesk.ticket.subcategory",
+        ["id", "name", "display_name", "category_id", "code", "sequence", "active"],
+        "sequence asc, id asc",
+    ),
+    "slas": ("helpdesk.sla", ["id", "name", "display_name"], "name asc"),
+    "ticket_types": ("helpdesk.ticket.type", ["id", "name", "display_name"], "name asc"),
+}
 
 
 def clamp_limit(limit: int | None, *, default: int, max_limit: int) -> int:
@@ -255,6 +368,125 @@ def _relation_display_name(value: Any) -> str | None:
     return None
 
 
+def _relation_id(value: Any) -> int | None:
+    if isinstance(value, dict):
+        raw_value = value.get("id")
+    elif isinstance(value, (list, tuple)) and value:
+        raw_value = value[0]
+    else:
+        raw_value = value
+    try:
+        return int(raw_value)
+    except (TypeError, ValueError):
+        return None
+
+
+def _coerce_relation_id_list(value: Any) -> list[int]:
+    if value in (None, False):
+        return []
+    if isinstance(value, dict):
+        value = [value.get("id")]
+    elif not isinstance(value, (list, tuple, set)):
+        value = [value]
+
+    ids: list[int] = []
+    for candidate in value:
+        raw_value = candidate.get("id") if isinstance(candidate, dict) else candidate
+        try:
+            ids.append(int(raw_value))
+        except (TypeError, ValueError):
+            continue
+    return ids
+
+
+def _priority_label_map(field_map: dict[str, Any]) -> dict[str, str]:
+    selection = field_map.get("priority", {}).get("selection") if field_map.get("priority") else None
+    if not selection:
+        return dict(HELPDESK_PRIORITY_LABELS_FALLBACK)
+    labels: dict[str, str] = {}
+    for item in selection:
+        if isinstance(item, (list, tuple)) and len(item) >= 2:
+            labels[str(item[0])] = str(item[1])
+    return labels or dict(HELPDESK_PRIORITY_LABELS_FALLBACK)
+
+
+def _is_present(value: Any) -> bool:
+    return value not in (None, False, "", [], {})
+
+
+def _parse_odoo_datetime(value: Any) -> datetime | None:
+    if not isinstance(value, str) or not value.strip():
+        return None
+    candidate = value.strip().replace("Z", "+00:00")
+    try:
+        parsed = datetime.fromisoformat(candidate)
+    except ValueError:
+        try:
+            parsed = datetime.fromisoformat(candidate.replace(" ", "T"))
+        except ValueError:
+            return None
+    if parsed.tzinfo is None:
+        parsed = parsed.replace(tzinfo=UTC)
+    return parsed.astimezone(UTC)
+
+
+def _hours_between(start_value: Any, end_value: Any | None = None) -> float | None:
+    start = _parse_odoo_datetime(start_value)
+    if start is None:
+        return None
+    end = _parse_odoo_datetime(end_value) if end_value else datetime.now(tz=UTC)
+    if end is None or end < start:
+        return None
+    return round((end - start).total_seconds() / 3600, 2)
+
+
+def _date_start(value: str | None) -> str | None:
+    parsed = parse_date_or_none(value)
+    return f"{parsed.isoformat()} 00:00:00" if parsed else None
+
+
+def _date_after(value: str | None) -> str | None:
+    parsed = parse_date_or_none(value)
+    return f"{(parsed + timedelta(days=1)).isoformat()} 00:00:00" if parsed else None
+
+
+def _safe_fields_get(odoo: OdooBackend, model: str) -> dict[str, Any]:
+    try:
+        return odoo.fields_get(model)
+    except Exception:
+        return {}
+
+
+def _safe_search_read(
+    odoo: OdooBackend,
+    model: str,
+    domain: list[Any],
+    *,
+    fields: list[str],
+    limit: int,
+    offset: int = 0,
+    order: str | None = None,
+) -> list[dict[str, Any]]:
+    try:
+        return odoo.search_read(model, domain, fields=fields, limit=limit, offset=offset, order=order)
+    except Exception:
+        return []
+
+
+def _schema_field_info(name: str, info: dict[str, Any]) -> dict[str, Any]:
+    payload = {
+        "name": name,
+        "type": info.get("type"),
+        "label": info.get("string"),
+        "relation": info.get("relation"),
+        "selection": info.get("selection"),
+        "store": info.get("store"),
+        "readonly": info.get("readonly"),
+        "required": info.get("required"),
+    }
+    return {key: value for key, value in payload.items() if value is not None}
+
+
 def _resolve_user_briefs(odoo: OdooBackend, user_ids: list[int]) -> dict[int, dict[str, Any]]:
     unique_ids = sorted({int(user_id) for user_id in user_ids})
     if not unique_ids:
@@ -451,6 +683,311 @@ def _build_task_operational_summary(
     )
 
 
+def _helpdesk_ticket_fields(field_map: dict[str, Any], *, include_custom: bool = False) -> list[str]:
+    fields = [field for field in HELPDESK_EXPECTED_FIELDS if field in field_map]
+    if include_custom:
+        for field_name, info in sorted(field_map.items()):
+            if not field_name.startswith("x_") or field_name in fields:
+                continue
+            if info.get("store") is False:
+                continue
+            fields.append(field_name)
+    return fields
+
+
+def _helpdesk_missing_expected_fields(field_map: dict[str, Any]) -> list[str]:
+    return [field for field in HELPDESK_EXPECTED_FIELDS if field not in field_map]
+
+
+def _helpdesk_domain(
+    field_map: dict[str, Any],
+    *,
+    query: str | None,
+    stage_id: int | None,
+    stage_name: str | None,
+    user_id: int | None,
+    partner_id: int | None,
+    priority: str | None,
+    ticket_type_id: int | None,
+    tag_id: int | None,
+    created_from: str | None,
+    created_to: str | None,
+    closed_from: str | None,
+    closed_to: str | None,
+    active: bool | None,
+    open_only: bool,
+    resolved_only: bool,
+) -> tuple[list[Any], list[str]]:
+    domain: list[Any] = []
+    warnings: list[str] = []
+
+    if active is not None:
+        if "active" in field_map:
+            domain.append(("active", "=", bool(active)))
+        else:
+            warnings.append("field_unavailable:active")
+
+    if query:
+        usable_search_fields = [field for field in HELPDESK_SEARCH_FIELDS if field in field_map]
+        if usable_search_fields:
+            domain.extend(_string_query_domain(usable_search_fields, query.strip()))
+
+    if stage_id is not None:
+        if "stage_id" in field_map:
+            domain.append(("stage_id", "=", int(stage_id)))
+        else:
+            warnings.append("field_unavailable:stage_id")
+    if stage_name:
+        if "stage_id" in field_map:
+            domain.append(("stage_id.name", "ilike", stage_name.strip()))
+        else:
+            warnings.append("field_unavailable:stage_id")
+    if user_id is not None:
+        if "user_id" in field_map:
+            domain.append(("user_id", "=", int(user_id)))
+        else:
+            warnings.append("field_unavailable:user_id")
+    if partner_id is not None:
+        if "partner_id" in field_map:
+            domain.append(("partner_id", "=", int(partner_id)))
+        else:
+            warnings.append("field_unavailable:partner_id")
+    if priority is not None:
+        if "priority" in field_map:
+            domain.append(("priority", "=", str(priority)))
+        else:
+            warnings.append("field_unavailable:priority")
+    if ticket_type_id is not None:
+        if "ticket_type_id" in field_map:
+            domain.append(("ticket_type_id", "=", int(ticket_type_id)))
+        else:
+            warnings.append("field_unavailable:ticket_type_id")
+    if tag_id is not None:
+        if "tag_ids" in field_map:
+            domain.append(("tag_ids", "in", [int(tag_id)]))
+        else:
+            warnings.append("field_unavailable:tag_ids")
+
+    if created_from or created_to:
+        if "create_date" in field_map:
+            if created_from:
+                domain.append(("create_date", ">=", _date_start(created_from)))
+            if created_to:
+                domain.append(("create_date", "<", _date_after(created_to)))
+        else:
+            warnings.append("field_unavailable:create_date")
+    if closed_from or closed_to:
+        if "close_date" in field_map:
+            if closed_from:
+                domain.append(("close_date", ">=", _date_start(closed_from)))
+            if closed_to:
+                domain.append(("close_date", "<", _date_after(closed_to)))
+        else:
+            warnings.append("field_unavailable:close_date")
+
+    if open_only and resolved_only:
+        warnings.append("conflicting_open_resolved_filters_ignored")
+    elif open_only:
+        if "close_date" in field_map:
+            domain.append(("close_date", "=", False))
+        elif "stage_id" in field_map:
+            domain.append(("stage_id.fold", "=", False))
+        else:
+            warnings.append("field_unavailable:close_date")
+        if active is None and "active" in field_map:
+            domain.append(("active", "=", True))
+    elif resolved_only:
+        if "close_date" in field_map:
+            domain.append(("close_date", "!=", False))
+        elif "stage_id" in field_map:
+            domain.append(("stage_id.fold", "=", True))
+        else:
+            warnings.append("field_unavailable:close_date")
+
+    return domain, sorted(set(warnings))
+
+
+def _read_helpdesk_tag_map(odoo: OdooBackend, tag_ids: list[int]) -> dict[int, dict[str, Any]]:
+    unique_ids = sorted({int(tag_id) for tag_id in tag_ids})
+    if not unique_ids:
+        return {}
+    fields = odoo.existing_fields("helpdesk.tag", ["id", "name", "display_name"])
+    rows = _safe_search_read(odoo, "helpdesk.tag", [("id", "in", unique_ids)], fields=fields, limit=len(unique_ids), order="name asc")
+    return {
+        int(row["id"]): {"id": int(row["id"]), "name": row.get("name") or row.get("display_name")}
+        for row in rows
+        if row.get("id")
+    }
+
+
+def _read_helpdesk_sla_status_map(odoo: OdooBackend, status_ids: list[int]) -> dict[int, dict[str, Any]]:
+    unique_ids = sorted({int(status_id) for status_id in status_ids})
+    if not unique_ids:
+        return {}
+    fields = odoo.existing_fields(
+        "helpdesk.sla.status",
+        ["id", "display_name", "sla_id", "status", "deadline", "reached_datetime", "color"],
+    )
+    rows = _safe_search_read(
+        odoo,
+        "helpdesk.sla.status",
+        [("id", "in", unique_ids)],
+        fields=fields,
+        limit=len(unique_ids),
+        order="id asc",
+    )
+    status_map: dict[int, dict[str, Any]] = {}
+    for row in rows:
+        status_id = row.get("id")
+        if not status_id:
+            continue
+        status_map[int(status_id)] = {
+            "id": int(status_id),
+            "name": row.get("display_name"),
+            "sla": row.get("sla_id"),
+            "status": row.get("status"),
+            "deadline": row.get("deadline"),
+            "reached_datetime": row.get("reached_datetime"),
+            "color": row.get("color"),
+        }
+    return status_map
+
+
+def _brief_relation(value: Any) -> dict[str, Any] | None:
+    relation_id = _relation_id(value)
+    display_name = _relation_display_name(value)
+    if relation_id is None and not display_name:
+        return None
+    return {"id": relation_id, "name": display_name}
+
+
+def _helpdesk_custom_fields(row: dict[str, Any]) -> dict[str, Any]:
+    custom_fields: dict[str, Any] = {}
+    for field_name, value in sorted(row.items()):
+        if not field_name.startswith("x_") or field_name in HELPDESK_PRIMARY_CUSTOM_FIELDS:
+            continue
+        if _is_present(value):
+            custom_fields[field_name] = value
+    return custom_fields
+
+
+def _enrich_helpdesk_rows(
+    odoo: OdooBackend,
+    rows: list[dict[str, Any]],
+    field_map: dict[str, Any],
+    *,
+    include_custom_fields: bool = False,
+) -> tuple[list[dict[str, Any]], list[str]]:
+    priority_labels = _priority_label_map(field_map)
+    tag_ids: list[int] = []
+    sla_status_ids: list[int] = []
+    user_ids: list[int] = []
+    for row in rows:
+        tag_ids.extend(_coerce_relation_id_list(row.get("tag_ids")))
+        sla_status_ids.extend(_coerce_relation_id_list(row.get("sla_status_ids")))
+        for field_name in ["user_id", "create_uid"]:
+            relation_id = _relation_id(row.get(field_name))
+            if relation_id:
+                user_ids.append(relation_id)
+
+    tag_map = _read_helpdesk_tag_map(odoo, tag_ids)
+    sla_status_map = _read_helpdesk_sla_status_map(odoo, sla_status_ids)
+    user_map = _resolve_user_briefs(odoo, user_ids)
+
+    enriched_rows: list[dict[str, Any]] = []
+    for row in rows:
+        item = dict(row)
+        assigned_id = _relation_id(row.get("user_id"))
+        creator_id = _relation_id(row.get("create_uid"))
+        assigned_agent = user_map.get(assigned_id) if assigned_id else None
+        creator = user_map.get(creator_id) if creator_id else None
+        item["requester"] = {
+            "id": _relation_id(row.get("partner_id")),
+            "name": row.get("partner_name") or _relation_display_name(row.get("partner_id")),
+            "email": row.get("partner_email") or row.get("x_correo"),
+            "phone": row.get("partner_phone") or row.get("x_numero_telefonico"),
+        }
+        item["assigned_agent"] = assigned_agent or _brief_relation(row.get("user_id"))
+        item["creator"] = creator or _brief_relation(row.get("create_uid"))
+        item["stage"] = _brief_relation(row.get("stage_id"))
+        item["team"] = _brief_relation(row.get("team_id"))
+        item["section"] = _brief_relation(row.get("x_section_id"))
+        item["category"] = _brief_relation(row.get("x_category_id"))
+        item["subcategory"] = _brief_relation(row.get("x_subcategory_id"))
+        priority_value = str(row.get("priority") or "")
+        priority_label = priority_labels.get(priority_value, priority_value or None)
+        item["priority_label"] = priority_label
+        item["security_level_candidate"] = {
+            "source": "priority",
+            "value": priority_value or None,
+            "label": priority_label,
+            "dedicated_field": False,
+        }
+        item["tags"] = [tag_map.get(tag_id, {"id": tag_id, "name": None}) for tag_id in _coerce_relation_id_list(row.get("tag_ids"))]
+        statuses = [
+            sla_status_map.get(status_id, {"id": status_id, "name": None})
+            for status_id in _coerce_relation_id_list(row.get("sla_status_ids"))
+        ]
+        item["sla"] = {
+            "deadline": row.get("sla_deadline"),
+            "reached_late": row.get("sla_reached_late"),
+            "statuses": statuses,
+            "status_count": len(statuses),
+        }
+        item["age_hours"] = _hours_between(row.get("create_date"))
+        item["resolution_hours"] = _hours_between(row.get("create_date"), row.get("close_date"))
+        item["time_to_assignment_hours"] = _hours_between(row.get("create_date"), row.get("assign_date"))
+        if include_custom_fields:
+            item["custom_fields"] = _helpdesk_custom_fields(row)
+            for field_name in list(item):
+                if field_name.startswith("x_") and field_name not in HELPDESK_PRIMARY_CUSTOM_FIELDS:
+                    item.pop(field_name, None)
+        enriched_rows.append(item)
+
+    return enriched_rows, ["no_dedicated_security_level_field"]
+
+
+def _helpdesk_catalog_payload(
+    odoo: OdooBackend,
+    field_map: dict[str, Any],
+    *,
+    detail_level: DetailLevel,
+    include_inactive: bool,
+) -> dict[str, Any]:
+    per_catalog_limit = {"summary": 10, "standard": 50, "full": 5000}[detail_level]
+    catalog_counts: dict[str, int] = {}
+    catalog_samples: dict[str, list[dict[str, Any]]] = {}
+    unavailable_catalogs: list[str] = []
+    any_truncated = False
+
+    for catalog_name, (model, candidate_fields, order) in HELPDESK_CATALOG_SPECS.items():
+        catalog_field_map = _safe_fields_get(odoo, model)
+        if not catalog_field_map:
+            unavailable_catalogs.append(catalog_name)
+            catalog_counts[catalog_name] = 0
+            catalog_samples[catalog_name] = []
+            continue
+        fields = [field for field in candidate_fields if field in catalog_field_map]
+        domain: list[Any] = []
+        if not include_inactive and "active" in catalog_field_map:
+            domain.append(("active", "=", True))
+        rows = _safe_search_read(odoo, model, domain, fields=fields, limit=5000, order=order)
+        catalog_counts[catalog_name] = len(rows)
+        catalog_samples[catalog_name] = rows[:per_catalog_limit]
+        if len(rows) > per_catalog_limit:
+            any_truncated = True
+
+    priority_labels = _priority_label_map(field_map)
+    return {
+        "catalog_counts": catalog_counts,
+        "catalog_samples": catalog_samples,
+        "priorities": [{"value": value, "label": label} for value, label in priority_labels.items()],
+        "unavailable_catalogs": unavailable_catalogs,
+        "per_catalog_limit": per_catalog_limit,
+        "truncated": any_truncated,
+    }
+
+
 def _default_limit_for_level(detail_level: DetailLevel, settings: Settings) -> int:
     return min(DEFAULT_LIMIT_BY_LEVEL[detail_level], settings.default_limit)
 
@@ -482,8 +1019,15 @@ def build_controlled_list_envelope(
     text_limit = _resolve_text_limit(detail_level, truncate_text)
     projected_rows = [_project_item(row, selected_fields, text_limit) for row in rows]
 
-    max_items = min(limit, MAX_ITEMS_BY_LEVEL[detail_level])
-    emitted_rows = projected_rows[:max_items]
+    warnings = list(warnings or [])
+    requested_limit = limit
+    effective_limit = min(requested_limit, MAX_ITEMS_BY_LEVEL[detail_level])
+    if requested_limit > effective_limit:
+        warning = f"limit_capped_to_{effective_limit}"
+        if warning not in warnings:
+            warnings.append(warning)
+
+    emitted_rows = projected_rows[:effective_limit]
     truncated = len(projected_rows) > len(emitted_rows)
     char_budget = CHAR_BUDGET_BY_LEVEL[detail_level]
     while len(emitted_rows) > 1 and len(dumps_text(emitted_rows)) > char_budget:
@@ -497,6 +1041,8 @@ def build_controlled_list_envelope(
     final_truncated = truncated or total_count > offset + len(emitted_rows)
     merged_summary = {
         "detail_level": detail_level,
+        "requested_limit": requested_limit,
+        "effective_limit": effective_limit,
         "returned_fields": selected_fields,
         "text_truncation_limit": text_limit,
     }
@@ -506,7 +1052,7 @@ def build_controlled_list_envelope(
         source=source,
         items=emitted_rows,
         total_count=total_count,
-        limit=limit,
+        limit=effective_limit,
         offset=offset,
         applied_defaults=applied_defaults,
         warnings=warnings,
@@ -660,7 +1206,7 @@ def build_mcp_server(runtime: Runtime) -> FastMCP:
             "recommended_flow": [
                 {"goal": "understand server scope", "tools_or_resources": ["describe_server_capabilities", "odoo-mcp://server/usage-guide"]},
                 {"goal": "estimate scope before fetching rows", "tools_or_resources": ["count_employees", "count_attendance_records", "count_hr_biometric_events", "count_dahua_normalized_events", "count_helpdesk_tickets"]},
-                {"goal": "paginate through operational data", "tools_or_resources": ["search_employees", "search_attendance_records", "search_hr_biometric_events", "search_dahua_normalized_events"]},
+                {"goal": "paginate through operational data", "tools_or_resources": ["search_employees", "search_attendance_records", "search_hr_biometric_events", "search_dahua_normalized_events", "search_helpdesk_tickets"]},
                 {"goal": "fetch one known record", "tools_or_resources": ["get_employee_by_id", "get_attendance_record_by_id", "get_hr_biometric_event_by_id", "get_dahua_normalized_event_by_id", "get_task_by_id", "get_helpdesk_ticket_by_id"]},
             ],
             "domains": {
@@ -694,7 +1240,9 @@ def build_mcp_server(runtime: Runtime) -> FastMCP:
                     "tasks": "search_tasks (summary adds pending_count, stage_breakdown, assignee_breakdown, top_pending_tasks)",
                     "task_detail": "get_task_by_id",
                     "helpdesk_count": "count_helpdesk_tickets",
-                    "helpdesk_search": "search_helpdesk_tickets",
+                    "helpdesk_catalogs": "get_helpdesk_catalogs",
+                    "helpdesk_schema": "describe_helpdesk_ticket_schema",
+                    "helpdesk_search": "search_helpdesk_tickets (dashboard-ready with requester, assignee, stage, priority/security candidate, categories, SLA, age, resolution time)",
                     "helpdesk_detail": "get_helpdesk_ticket_by_id",
                     "users": "search_users",
                     "contacts": "search_contacts",
@@ -730,6 +1278,10 @@ def build_mcp_server(runtime: Runtime) -> FastMCP:
                     "goal": "find tasks in a project with assignees and stage",
                     "steps": ["search_projects(query='biometricos', detail_level=summary)", "search_tasks(project_ids=[project_id], detail_level=summary)"],
                 },
+                {
+                    "goal": "build a Helpdesk ticket dashboard",
+                    "steps": ["get_helpdesk_catalogs(detail_level=summary)", "describe_helpdesk_ticket_schema(detail_level=summary)", "search_helpdesk_tickets(detail_level=full, limit=20)"],
+                },
             ],
             "rules": {
                 "pagination": PAGINATION_DESCRIPTION,
@@ -753,7 +1305,7 @@ def build_mcp_server(runtime: Runtime) -> FastMCP:
         payload = {
             "fields": {
                 "source": "Backend that produced the data: `odoo`, `biometric_ingest`, or `hybrid`.",
-                "summary": "Aggregates and counts. Search tools expose `summary.total_count`; count tools expose `summary.matched_count`.",
+                "summary": "Aggregates and counts. Search tools expose `summary.total_count`, `summary.requested_limit`, `summary.effective_limit`, and `summary.returned_count`; count tools expose `summary.matched_count`.",
                 "items": "Page of records, aggregated rows, or a single record.",
                 "next_cursor": "Opaque token for the next page, or null when exhausted.",
                 "applied_defaults": "Defaults applied automatically, such as inferred date windows.",
@@ -787,6 +1339,21 @@ def build_mcp_server(runtime: Runtime) -> FastMCP:
                 "date_from": "Inclusive ISO date `YYYY-MM-DD`.",
                 "date_to": "Inclusive ISO date `YYYY-MM-DD`.",
             },
+            "helpdesk_filters": {
+                "stage_id": "Odoo `helpdesk.stage` id.",
+                "stage_name": "Case-insensitive stage name match.",
+                "user_id": "Assigned `res.users` id.",
+                "partner_id": "Requester/customer `res.partner` id.",
+                "priority": "Odoo priority value, also used as `security_level_candidate` when no dedicated security field exists.",
+                "tag_id": "Odoo `helpdesk.tag` id.",
+                "ticket_type_id": "Accepted for compatibility; this Devlyn instance reports `field_unavailable:ticket_type_id` when absent.",
+                "created_from": "Inclusive ticket creation date `YYYY-MM-DD`.",
+                "created_to": "Inclusive ticket creation date `YYYY-MM-DD`.",
+                "closed_from": "Inclusive close date `YYYY-MM-DD`.",
+                "closed_to": "Inclusive close date `YYYY-MM-DD`.",
+                "open_only": "Only tickets without `close_date` when available.",
+                "resolved_only": "Only tickets with `close_date` when available.",
+            },
             "task_filters": {
                 "project_ids": "Optional list of Odoo `project.project` ids.",
                 "stage_ids": "Optional list of Odoo task stage ids.",
@@ -795,6 +1362,7 @@ def build_mcp_server(runtime: Runtime) -> FastMCP:
             "search_notes": {
                 "project_query_matching": "Project queries use accent-folded, casefolded matching so `Biométricos` and `biometricos` resolve the same project.",
                 "task_summary_aggregates": ["pending_count", "stage_breakdown", "assignee_breakdown", "top_pending_tasks"],
+                "helpdesk_dashboard_fields": HELPDESK_DASHBOARD_FIELDS,
             },
             "enums": {
                 "resolution_scope": ["all", "mapped_only", "sin_sucursal_only"],
@@ -868,6 +1436,34 @@ def build_mcp_server(runtime: Runtime) -> FastMCP:
                 "search_tool": "get_branch_attendance_report",
                 "enums": {"resolution_scope": ["all", "mapped_only", "sin_sucursal_only"]},
             },
+            "helpdesk": {
+                "primary_keys": ["id", "ticket_ref", "name"],
+                "filters": [
+                    "query",
+                    "stage_id",
+                    "stage_name",
+                    "user_id",
+                    "partner_id",
+                    "priority",
+                    "tag_id",
+                    "created_from",
+                    "created_to",
+                    "closed_from",
+                    "closed_to",
+                    "active",
+                    "open_only",
+                    "resolved_only",
+                    "cursor",
+                    "limit",
+                ],
+                "count_tool": "count_helpdesk_tickets",
+                "catalog_tool": "get_helpdesk_catalogs",
+                "schema_tool": "describe_helpdesk_ticket_schema",
+                "search_tool": "search_helpdesk_tickets",
+                "detail_tool": "get_helpdesk_ticket_by_id",
+                "dashboard_fields": HELPDESK_DASHBOARD_FIELDS,
+                "security_level_source": "priority",
+            },
         }
         payload = schemas.get(domain_name, {"error": "unknown_domain"})
         return dumps_text(payload, indent=True)
@@ -906,11 +1502,11 @@ def build_mcp_server(runtime: Runtime) -> FastMCP:
                         "Dahua ingestion events",
                         "projects",
                         "tasks",
-                        "helpdesk",
+                        "helpdesk dashboards",
                         "users",
                         "contacts",
                     ],
-                    "exploration_pattern": "count -> search -> detail",
+                    "exploration_pattern": "catalog/schema -> count -> search -> detail",
                     "response_envelope": STANDARD_ENVELOPE_FIELDS,
                 }
             ],
@@ -2427,97 +3023,326 @@ def build_mcp_server(runtime: Runtime) -> FastMCP:
         name="count_helpdesk_tickets",
         title="Count Helpdesk Tickets",
         description=(
-            "Count matching Odoo `helpdesk.ticket` rows before fetching pages. Supports the same free-text filter as "
-            "`search_helpdesk_tickets` and returns no rows in `items`; read `summary.matched_count`. Cost: low."
+            "Count matching Odoo `helpdesk.ticket` rows before fetching pages. Supports the same operational filters as "
+            "`search_helpdesk_tickets`, including stage, assignee, requester, priority, tags, created/closed dates, and "
+            "open/resolved state. Returns no rows in `items`; read `summary.matched_count`. Cost: low."
         ),
         annotations=read_only,
     )
-    async def count_helpdesk_tickets(query: str | None = None):
+    async def count_helpdesk_tickets(
+        query: str | None = None,
+        stage_id: int | None = None,
+        stage_name: str | None = None,
+        user_id: int | None = None,
+        partner_id: int | None = None,
+        priority: str | None = None,
+        ticket_type_id: int | None = None,
+        tag_id: int | None = None,
+        created_from: str | None = None,
+        created_to: str | None = None,
+        closed_from: str | None = None,
+        closed_to: str | None = None,
+        active: bool | None = None,
+        open_only: bool = False,
+        resolved_only: bool = False,
+    ):
         model = "helpdesk.ticket"
         field_map = runtime.odoo.fields_get(model)
-        domain: list[Any] = []
-        if query:
-            usable_search_fields = [field for field in ["name", "display_name"] if field in field_map]
-            if usable_search_fields:
-                domain.extend(_string_query_domain(usable_search_fields, query.strip()))
+        domain, warnings = _helpdesk_domain(
+            field_map,
+            query=query,
+            stage_id=stage_id,
+            stage_name=stage_name,
+            user_id=user_id,
+            partner_id=partner_id,
+            priority=priority,
+            ticket_type_id=ticket_type_id,
+            tag_id=tag_id,
+            created_from=created_from,
+            created_to=created_to,
+            closed_from=closed_from,
+            closed_to=closed_to,
+            active=active,
+            open_only=open_only,
+            resolved_only=resolved_only,
+        )
         matched_count = await asyncio.to_thread(runtime.odoo.search_count, model, domain)
-        return build_count_result(source="odoo", matched_count=matched_count)
+        return build_count_result(source="odoo", matched_count=matched_count, warnings=warnings)
 
     @mcp.tool(
         name="search_helpdesk_tickets",
         title="Search Helpdesk Tickets",
         description=(
-            "Read-only search over Odoo `helpdesk.ticket` for support operations adjacent to attendance and Odoo administration. "
-            "Default output uses `detail_level=summary`. Cost: low."
+            "Read-only search over Odoo `helpdesk.ticket` for operational dashboards. Supports filters by stage, assigned "
+            "agent, requester, priority/security candidate, tag, created/closed date, and open/resolved state. Use "
+            "`get_helpdesk_catalogs` to discover valid catalog ids and `describe_helpdesk_ticket_schema` to inspect fields. "
+            "Default output uses `detail_level=summary`; use `detail_level=full` for dashboards requiring requester, agent, "
+            "SLA, category, age, resolution time, and description. Cost: low to medium."
         ),
         annotations=read_only,
     )
     async def search_helpdesk_tickets(
         query: str | None = None,
+        stage_id: int | None = None,
+        stage_name: str | None = None,
+        user_id: int | None = None,
+        partner_id: int | None = None,
+        priority: str | None = None,
+        ticket_type_id: int | None = None,
+        tag_id: int | None = None,
+        created_from: str | None = None,
+        created_to: str | None = None,
+        closed_from: str | None = None,
+        closed_to: str | None = None,
+        active: bool | None = None,
+        open_only: bool = False,
+        resolved_only: bool = False,
         detail_level: DetailLevel = "summary",
         limit: int | None = None,
         cursor: str | None = None,
+        fields: list[str] | None = None,
         include_fields: list[str] | None = None,
         truncate_text: int | None = None,
     ):
-        return await _search_odoo_model(
-            model="helpdesk.ticket",
+        model = "helpdesk.ticket"
+        limit_value = clamp_limit(limit, default=_default_limit_for_level(detail_level, settings), max_limit=settings.max_limit)
+        offset = decode_offset_cursor(cursor)
+        field_map = runtime.odoo.fields_get(model)
+        domain, warnings = _helpdesk_domain(
+            field_map,
             query=query,
-            detail_level=detail_level,
-            limit=limit,
-            cursor=cursor,
+            stage_id=stage_id,
+            stage_name=stage_name,
+            user_id=user_id,
+            partner_id=partner_id,
+            priority=priority,
+            ticket_type_id=ticket_type_id,
+            tag_id=tag_id,
+            created_from=created_from,
+            created_to=created_to,
+            closed_from=closed_from,
+            closed_to=closed_to,
+            active=active,
+            open_only=open_only,
+            resolved_only=resolved_only,
+        )
+        odoo_fields = _helpdesk_ticket_fields(field_map)
+        total_count = await asyncio.to_thread(runtime.odoo.search_count, model, domain)
+        rows = await asyncio.to_thread(
+            runtime.odoo.search_read,
+            model,
+            domain,
+            fields=odoo_fields,
+            limit=limit_value,
+            offset=offset,
             order="id desc",
-            candidate_fields=[
+        )
+        enriched_rows, enrich_warnings = await asyncio.to_thread(
+            _enrich_helpdesk_rows,
+            runtime.odoo,
+            rows,
+            field_map,
+            include_custom_fields=False,
+        )
+        requested_fields = _merge_requested_fields(include_fields or [], fields)
+        warnings = sorted(set(warnings + enrich_warnings))
+        return build_controlled_list_envelope(
+            source="odoo",
+            rows=enriched_rows,
+            total_count=total_count,
+            offset=offset,
+            limit=limit_value,
+            detail_level=detail_level,
+            summary_fields=[
                 "id",
+                "ticket_ref",
+                "name",
+                "requester",
+                "assigned_agent",
+                "stage",
+                "priority",
+                "priority_label",
+                "security_level_candidate",
+                "category",
+                "subcategory",
+                "create_date",
+                "close_date",
+                "age_hours",
+                "resolution_hours",
+            ],
+            standard_fields=[
+                "id",
+                "ticket_ref",
                 "name",
                 "display_name",
-                "partner_id",
-                "user_id",
-                "team_id",
-                "stage_id",
+                "requester",
+                "assigned_agent",
+                "creator",
+                "stage",
+                "team",
                 "priority",
+                "priority_label",
+                "security_level_candidate",
+                "section",
+                "category",
+                "subcategory",
                 "create_date",
+                "write_date",
+                "close_date",
+                "assign_date",
+                "age_hours",
+                "resolution_hours",
+                "time_to_assignment_hours",
+                "sla",
+                "tags",
+                "active",
             ],
-            summary_fields=["id", "name", "team_id", "stage_id", "priority", "create_date"],
-            search_fields=["name", "display_name"],
-            include_fields=include_fields,
+            full_fields=HELPDESK_DASHBOARD_FIELDS + ["tags", "active", "x_branch_id", "x_centro_sap", "x_correo", "x_numero_telefonico"],
+            include_fields=requested_fields,
             truncate_text=truncate_text,
-            active=None,
+            warnings=warnings,
+            summary={
+                "model": model,
+                "dashboard_ready": True,
+                "security_level_source": "priority",
+            },
+        )
+
+    @mcp.tool(
+        name="get_helpdesk_catalogs",
+        title="Get Helpdesk Catalogs",
+        description=(
+            "Read-only catalog discovery for Helpdesk dashboards. Returns stages, teams, tags, Devlyn sections, categories, "
+            "subcategories, SLAs, priority values with labels, and unavailable catalog models such as ticket types when absent. "
+            "Use before filtering `search_helpdesk_tickets`. Cost: low."
+        ),
+        annotations=read_only,
+    )
+    async def get_helpdesk_catalogs(detail_level: DetailLevel = "summary", include_inactive: bool = False):
+        model = "helpdesk.ticket"
+        field_map = runtime.odoo.fields_get(model)
+        catalog_payload = await asyncio.to_thread(
+            _helpdesk_catalog_payload,
+            runtime.odoo,
+            field_map,
+            detail_level=detail_level,
+            include_inactive=include_inactive,
+        )
+        return build_envelope(
+            source="odoo",
+            items=[
+                {
+                    "catalog_counts": catalog_payload["catalog_counts"],
+                    "catalog_samples": catalog_payload["catalog_samples"],
+                    "priorities": catalog_payload["priorities"],
+                    "unavailable_catalogs": catalog_payload["unavailable_catalogs"],
+                }
+            ],
+            total_count=1,
+            limit=1,
+            offset=0,
+            warnings=[f"catalog_unavailable:{name}" for name in catalog_payload["unavailable_catalogs"]],
+            summary={
+                "detail_level": detail_level,
+                "include_inactive": include_inactive,
+                "per_catalog_limit": catalog_payload["per_catalog_limit"],
+            },
+            truncated=bool(catalog_payload["truncated"]),
+        )
+
+    @mcp.tool(
+        name="describe_helpdesk_ticket_schema",
+        title="Describe Helpdesk Ticket Schema",
+        description=(
+            "Describe the real `helpdesk.ticket` schema exposed by this Odoo instance: technical type, label, relation, "
+            "selection values, readonly/store/required flags, recommended dashboard fields, and expected fields unavailable "
+            "in this instance. Use `field_prefix='x_'` to inspect custom fields. Cost: low."
+        ),
+        annotations=read_only,
+    )
+    async def describe_helpdesk_ticket_schema(detail_level: DetailLevel = "summary", field_prefix: str | None = None):
+        model = "helpdesk.ticket"
+        field_map = runtime.odoo.fields_get(model)
+        prefix = (field_prefix or "").strip()
+        fields_payload = {
+            name: _schema_field_info(name, info)
+            for name, info in sorted(field_map.items())
+            if not prefix or name.startswith(prefix)
+        }
+        missing_fields = _helpdesk_missing_expected_fields(field_map)
+        recommended_odoo_fields = [field for field in HELPDESK_EXPECTED_FIELDS if field in field_map]
+        custom_dashboard_fields = [
+            name
+            for name in sorted(field_map)
+            if name.startswith("x_")
+            and any(token in name for token in ["section", "category", "subcategory", "security", "seguridad", "motivo", "commitment", "branch", "correo", "telefon", "general", "detailed"])
+        ]
+        return build_envelope(
+            source="odoo",
+            items=[
+                {
+                    "model": model,
+                    "fields": fields_payload,
+                    "recommended_odoo_fields": recommended_odoo_fields,
+                    "recommended_response_fields": HELPDESK_DASHBOARD_FIELDS,
+                    "custom_dashboard_fields": custom_dashboard_fields,
+                    "unavailable_expected_fields": missing_fields,
+                    "notes": {
+                        "security_level": "No dedicated security field was detected; use priority/security_level_candidate.",
+                        "ticket_type_id": "This field is reported as unavailable when absent from helpdesk.ticket.",
+                    },
+                }
+            ],
+            total_count=1,
+            limit=1,
+            offset=0,
+            warnings=["no_dedicated_security_level_field"] + [f"field_unavailable:{field}" for field in missing_fields],
+            summary={
+                "detail_level": detail_level,
+                "field_count": len(field_map),
+                "returned_field_count": len(fields_payload),
+                "field_prefix": prefix or None,
+            },
         )
 
     @mcp.tool(
         name="get_helpdesk_ticket_by_id",
         title="Get Helpdesk Ticket By ID",
         description=(
-            "Read-only detail lookup over Odoo `helpdesk.ticket` by numeric id. Use after `search_helpdesk_tickets` when you "
-            "already have a record identifier. Returns one item when found or `warnings=['not_found']` when missing. Cost: low."
+            "Read-only audit detail lookup over Odoo `helpdesk.ticket` by numeric id. Returns requester, assigned agent, "
+            "creator, dates, stage, priority/security candidate, categories, SLA, description, and non-empty custom `x_*` "
+            "fields for dashboard and audit use. Returns `warnings=['not_found']` when missing. Cost: low."
         ),
         annotations=read_only,
     )
     async def get_helpdesk_ticket_by_id(ticket_id: int):
         model = "helpdesk.ticket"
-        fields = runtime.odoo.existing_fields(
-            model,
-            [
-                "id",
-                "name",
-                "display_name",
-                "partner_id",
-                "user_id",
-                "team_id",
-                "stage_id",
-                "priority",
-                "create_date",
-            ],
+        field_map = runtime.odoo.fields_get(model)
+        fields_to_read = _helpdesk_ticket_fields(field_map, include_custom=True)
+        rows = await asyncio.to_thread(runtime.odoo.read, model, [int(ticket_id)], fields_to_read)
+        enriched_rows, enrich_warnings = await asyncio.to_thread(
+            _enrich_helpdesk_rows,
+            runtime.odoo,
+            rows,
+            field_map,
+            include_custom_fields=True,
         )
-        rows = await asyncio.to_thread(runtime.odoo.read, model, [int(ticket_id)], fields)
-        item = rows[0] if rows else None
-        warnings = [] if item is not None else ["not_found"]
+        item = enriched_rows[0] if enriched_rows else None
+        if item is None:
+            warnings = ["not_found"]
+        else:
+            missing_fields = _helpdesk_missing_expected_fields(field_map)
+            warnings = sorted(set(enrich_warnings + [f"field_unavailable:{field}" for field in missing_fields]))
         return build_single_record_result(
             source="odoo",
             item=item,
             warnings=warnings,
-            summary={"model": model, "requested_id": int(ticket_id)},
+            summary={
+                "model": model,
+                "requested_id": int(ticket_id),
+                "dashboard_ready": item is not None,
+                "security_level_source": "priority",
+            },
         )
 
     @mcp.tool(

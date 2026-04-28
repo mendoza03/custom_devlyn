@@ -14,7 +14,7 @@ Assets de despliegue centralizados por servicio.
   Unidades `systemd`, configuración `nginx`, `.env.example` y script de despliegue del dashboard.
 
 - `odoo_mcp/`
-  Unidad `systemd`, configuración `nginx`, `.env.example` y script de despliegue del MCP server.
+  Unidad `systemd`, drop-in de ciclo de vida con Odoo, configuración `nginx`, `.env.example` y script de despliegue del MCP server.
 
 ## Regla
 

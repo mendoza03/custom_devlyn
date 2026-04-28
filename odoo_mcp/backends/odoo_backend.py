@@ -160,7 +160,12 @@ class OdooBackend:
         cached = self._fields_cache.get(model)
         if cached is not None:
             return cached
-        fields = self.call(model, "fields_get", [], {"attributes": ["type", "string", "relation"]})
+        fields = self.call(
+            model,
+            "fields_get",
+            [],
+            {"attributes": ["type", "string", "relation", "selection", "store", "readonly", "required"]},
+        )
         return self._fields_cache.set(model, dict(fields))
 
     def existing_fields(self, model: str, candidates: list[str]) -> list[str]:

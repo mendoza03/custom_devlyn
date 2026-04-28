@@ -49,6 +49,8 @@ def test_tools_list_exposes_v2_ergonomics():
         "count_dahua_normalized_events",
         "get_dahua_normalized_event_by_id",
         "count_helpdesk_tickets",
+        "get_helpdesk_catalogs",
+        "describe_helpdesk_ticket_schema",
         "get_helpdesk_ticket_by_id",
     }:
         assert tool_name in tools

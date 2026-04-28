@@ -83,6 +83,7 @@ uvicorn odoo_mcp.app:create_app --factory --host 127.0.0.1 --port 8071
 Archivos operativos:
 
 - [`../server_config/services/odoo_mcp/odoo-mcp.service`](../server_config/services/odoo_mcp/odoo-mcp.service)
+- [`../server_config/services/odoo_mcp/odoo-service-mcp-wants.conf`](../server_config/services/odoo_mcp/odoo-service-mcp-wants.conf)
 - [`../server_config/services/odoo_mcp/odoo-mcp-http.conf`](../server_config/services/odoo_mcp/odoo-mcp-http.conf)
 - [`../server_config/services/odoo_mcp/odoo-mcp-https.conf`](../server_config/services/odoo_mcp/odoo-mcp-https.conf)
 - [`../server_config/services/odoo_mcp/odoo-mcp.env.example`](../server_config/services/odoo_mcp/odoo-mcp.env.example)
@@ -91,6 +92,24 @@ Archivos operativos:
 DNS:
 
 - [`../server_config/infra/scripts/configure_route53.sh`](../server_config/infra/scripts/configure_route53.sh) ahora también hace `UPSERT` de `mcp.odootest.mvpstart.click`.
+
+### Ciclo de vida systemd
+
+`odoo-mcp.service` depende de `odoo.service` y se detiene cuando Odoo se detiene. Para evitar que el MCP quede abajo despues de mantenimientos de Odoo, el despliegue instala el drop-in `/etc/systemd/system/odoo.service.d/10-odoo-mcp.conf` desde [`../server_config/services/odoo_mcp/odoo-service-mcp-wants.conf`](../server_config/services/odoo_mcp/odoo-service-mcp-wants.conf).
+
+El contrato esperado es:
+
+- `systemctl stop odoo` detiene tambien `odoo-mcp`.
+- `systemctl start odoo` arranca tambien `odoo-mcp`.
+- `systemctl restart odoo` reinicia el ciclo completo y deja `odoo-mcp` activo despues de Odoo.
+
+Verificacion rapida despues de mantenimiento:
+
+```bash
+sudo systemctl is-active odoo odoo-mcp
+sudo ss -ltnp | grep ':8071'
+curl -i https://mcp.odootest.mvpstart.click/healthz
+```
 
 ## Tools MCP
 
@@ -117,6 +136,8 @@ DNS:
 - `search_tasks`
 - `get_task_by_id`
 - `count_helpdesk_tickets`
+- `get_helpdesk_catalogs`
+- `describe_helpdesk_ticket_schema`
 - `search_helpdesk_tickets`
 - `get_helpdesk_ticket_by_id`
 - `search_users`

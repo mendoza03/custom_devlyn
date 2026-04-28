@@ -10,6 +10,7 @@ HTTP_CONF="${HTTP_CONF:-/etc/nginx/sites-available/odoo-mcp-http.conf}"
 HTTP_ENABLED="${HTTP_ENABLED:-/etc/nginx/sites-enabled/odoo-mcp-http.conf}"
 HTTPS_CONF="${HTTPS_CONF:-/etc/nginx/sites-available/odoo-mcp-https.conf}"
 HTTPS_ENABLED="${HTTPS_ENABLED:-/etc/nginx/sites-enabled/odoo-mcp-https.conf}"
+ODOO_SERVICE_DROPIN="${ODOO_SERVICE_DROPIN:-/etc/systemd/system/odoo.service.d/10-odoo-mcp.conf}"
 PUBLIC_HOST="${PUBLIC_HOST:-mcp.odootest.mvpstart.click}"
 CERTBOT_EMAIL="${CERTBOT_EMAIL:-admin@odootest.mvpstart.click}"
 DB_NAME="${DB_NAME:-devlyn_com}"
@@ -28,13 +29,14 @@ tar czf - \
 
 scp -o StrictHostKeyChecking=no \
   "${SCRIPT_DIR}/odoo-mcp.service" \
+  "${SCRIPT_DIR}/odoo-service-mcp-wants.conf" \
   "${SCRIPT_DIR}/odoo-mcp-http.conf" \
   "${SCRIPT_DIR}/odoo-mcp-https.conf" \
   "${SCRIPT_DIR}/odoo-mcp.env.example" \
   "${SSH_TARGET}:/tmp/"
 
 ssh -o StrictHostKeyChecking=no "${SSH_TARGET}" \
-  "APP_DIR='${APP_DIR}' ADDON_DIR='${ADDON_DIR}' ENV_FILE='${ENV_FILE}' HTTP_CONF='${HTTP_CONF}' HTTP_ENABLED='${HTTP_ENABLED}' HTTPS_CONF='${HTTPS_CONF}' HTTPS_ENABLED='${HTTPS_ENABLED}' PUBLIC_HOST='${PUBLIC_HOST}' CERTBOT_EMAIL='${CERTBOT_EMAIL}' DB_NAME='${DB_NAME}' bash -s" <<'EOF'
+  "APP_DIR='${APP_DIR}' ADDON_DIR='${ADDON_DIR}' ENV_FILE='${ENV_FILE}' HTTP_CONF='${HTTP_CONF}' HTTP_ENABLED='${HTTP_ENABLED}' HTTPS_CONF='${HTTPS_CONF}' HTTPS_ENABLED='${HTTPS_ENABLED}' ODOO_SERVICE_DROPIN='${ODOO_SERVICE_DROPIN}' PUBLIC_HOST='${PUBLIC_HOST}' CERTBOT_EMAIL='${CERTBOT_EMAIL}' DB_NAME='${DB_NAME}' bash -s" <<'EOF'
 set -euo pipefail
 
 APP_DIR="${APP_DIR:-/opt/odoo-mcp}"
@@ -45,6 +47,7 @@ HTTP_CONF="${HTTP_CONF:-/etc/nginx/sites-available/odoo-mcp-http.conf}"
 HTTP_ENABLED="${HTTP_ENABLED:-/etc/nginx/sites-enabled/odoo-mcp-http.conf}"
 HTTPS_CONF="${HTTPS_CONF:-/etc/nginx/sites-available/odoo-mcp-https.conf}"
 HTTPS_ENABLED="${HTTPS_ENABLED:-/etc/nginx/sites-enabled/odoo-mcp-https.conf}"
+ODOO_SERVICE_DROPIN="${ODOO_SERVICE_DROPIN:-/etc/systemd/system/odoo.service.d/10-odoo-mcp.conf}"
 PUBLIC_HOST="${PUBLIC_HOST:-mcp.odootest.mvpstart.click}"
 CERTBOT_EMAIL="${CERTBOT_EMAIL:-admin@odootest.mvpstart.click}"
 DB_NAME="${DB_NAME:-devlyn_com}"
@@ -66,6 +69,8 @@ if [[ ! -f "${ENV_FILE}" ]]; then
 fi
 
 sudo install -m 0644 /tmp/odoo-mcp.service /etc/systemd/system/odoo-mcp.service
+sudo install -d -m 0755 "$(dirname "${ODOO_SERVICE_DROPIN}")"
+sudo install -m 0644 /tmp/odoo-service-mcp-wants.conf "${ODOO_SERVICE_DROPIN}"
 sudo install -m 0644 /tmp/odoo-mcp-http.conf "${HTTP_CONF}"
 sudo install -m 0644 /tmp/odoo-mcp-https.conf "${HTTPS_CONF}"
 sudo ln -sfn "${HTTP_CONF}" "${HTTP_ENABLED}"

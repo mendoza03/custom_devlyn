@@ -2,6 +2,7 @@
 Description=Devlyn Odoo Attendance MCP
 After=network.target odoo.service postgresql.service
 Requires=odoo.service
+PartOf=odoo.service
 
 [Service]
 Type=simple

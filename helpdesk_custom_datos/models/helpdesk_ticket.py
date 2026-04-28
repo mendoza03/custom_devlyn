@@ -356,6 +356,20 @@ class HelpdeskTicket(models.Model):
         }
 
     @api.model
+    def _normalize_optional_ticket_format_vals(self, vals):
+        rules = self._get_optional_ticket_format_rules()
+        for field_name in rules:
+            if field_name not in vals:
+                continue
+            value = vals.get(field_name)
+            if value in (False, None, ""):
+                continue
+            value = value if isinstance(value, str) else str(value)
+            value = value.strip()
+            vals[field_name] = value.upper() if value else False
+        return vals
+
+    @api.model
     def _get_duplicate_reference_field_groups(self):
         return {
             "pedido": [
@@ -381,6 +395,7 @@ class HelpdeskTicket(models.Model):
 
     @api.model
     def _validate_optional_ticket_formats(self, vals):
+        self._normalize_optional_ticket_format_vals(vals)
         for field_name, (pattern, message) in self._get_optional_ticket_format_rules().items():
             if field_name not in vals:
                 continue
@@ -483,6 +498,7 @@ class HelpdeskTicket(models.Model):
                 ticket_user = self.env["res.users"].browse(vals.get("user_id")) if vals.get("user_id") else self.env.user
                 if ticket_user.x_branch_id:
                     vals["x_branch_id"] = ticket_user.x_branch_id.id
+            self._normalize_optional_ticket_format_vals(vals)
             self._validate_optional_ticket_formats(vals)
             self._validate_duplicate_pending_ticket(vals)
             self._validate_commitment_date_for_stage_change(vals)
@@ -521,6 +537,7 @@ class HelpdeskTicket(models.Model):
 
         if vals.get("x_general_description") and not vals.get("name"):
             vals["name"] = vals["x_general_description"]
+        self._normalize_optional_ticket_format_vals(vals)
         self._validate_optional_ticket_formats(vals)
         for record in self:
             record._validate_duplicate_pending_ticket(vals, record=record)
