@@ -2019,12 +2019,49 @@
                             </field>
                         </div>
                     </sheet>
-                    <chatter reload_on_post="True"/>
+                    <chatter reload_on_post="True" />
                 </form>
             </xpath>
 
         </field>
     </record>
 
+    <record id="helpdesk_ticket_kanban_inherit_branch_sap" model="ir.ui.view">
+        <field name="name">helpdesk.ticket.kanban.inherit.branch.sap</field>
+        <field name="model">helpdesk.ticket</field>
+        <field name="inherit_id" ref="helpdesk.helpdesk_ticket_view_kanban" />
+        <field name="arch" type="xml">
+
+            <xpath expr="//kanban" position="inside">
+                <field name="x_centro_sap" />
+                <field name="x_branch_id" />
+                <field name="x_numero_telefonico" />
+                <field name="x_correo" />
+            </xpath>
+
+            <xpath expr="//field[@name='name']" position="after">
+                <div class="mt-1 text-muted small" t-if="record.x_centro_sap.raw_value">
+                    <strong>Centro SAP:</strong>
+                    <field name="x_centro_sap" />
+                </div>
+
+                <div class="text-muted small" t-if="record.x_branch_id.raw_value">
+                    <strong>Sucursal:</strong>
+                    <field name="x_branch_id" />
+                </div>
+
+                <div class="text-muted small" t-if="record.x_numero_telefonico.raw_value">
+                    <strong>Teléfono:</strong>
+                    <field name="x_numero_telefonico" />
+                </div>
+
+                <div class="text-muted small" t-if="record.x_correo.raw_value">
+                    <strong>Correo:</strong>
+                    <field name="x_correo" />
+                </div>
+            </xpath>
+
+        </field>
+    </record>
 
 </odoo>

@@ -3,73 +3,78 @@
 
     <record model="res.groups.privilege" id="res_groups_privilege_helpdesk_ticket_visibility">
         <field name="name">Helpdesk Ticket Visibility</field>
-        <field name="category_id" ref="base.module_category_services"/>
+        <field name="category_id" ref="base.module_category_services" />
     </record>
 
     <record id="group_helpdesk_ticket_all" model="res.groups">
         <field name="name">Ver todos los tickets de Helpdesk</field>
         <field name="sequence">10</field>
-        <field name="privilege_id" ref="res_groups_privilege_helpdesk_ticket_visibility"/>
-        <field name="comment">Permite ver todos los tickets de Helpdesk sin otorgar permisos administrativos.</field>
-        <field name="implied_ids" eval="[(4, ref('helpdesk.group_helpdesk_user'))]"/>
+        <field name="privilege_id" ref="res_groups_privilege_helpdesk_ticket_visibility" />
+        <field name="comment">Permite ver todos los tickets de Helpdesk sin otorgar permisos
+            administrativos.</field>
+        <field name="implied_ids" eval="[(4, ref('helpdesk.group_helpdesk_user'))]" />
     </record>
 
     <function model="res.groups" name="write">
-        <value eval="[ref('base.default_user_group')]"/>
-        <value eval="{'implied_ids': [(3, ref('helpdesk.group_helpdesk_manager'))]}"/>
+        <value eval="[ref('base.default_user_group')]" />
+        <value eval="{'implied_ids': [(3, ref('helpdesk.group_helpdesk_manager'))]}" />
     </function>
 
-    <delete id="helpdesk.helpdesk_ticket_user_rule" model="ir.rule"/>
-    <delete id="helpdesk.helpdesk_sla_report_analysis_rule_user" model="ir.rule"/>
-    <delete id="helpdesk.helpdesk_ticket_report_analysis_rule_user" model="ir.rule"/>
+    <delete id="helpdesk.helpdesk_ticket_user_rule" model="ir.rule" />
+    <delete id="helpdesk.helpdesk_sla_report_analysis_rule_user" model="ir.rule" />
+    <delete id="helpdesk.helpdesk_ticket_report_analysis_rule_user" model="ir.rule" />
 
     <record id="helpdesk_ticket_assigned_user_rule" model="ir.rule">
         <field name="name">Helpdesk Ticket User: Tickets de mi sucursal</field>
-        <field name="model_id" ref="helpdesk.model_helpdesk_ticket"/>
+        <field name="model_id" ref="helpdesk.model_helpdesk_ticket" />
         <field name="domain_force">[('x_branch_id', '=', user.x_branch_id.id)]</field>
-        <field name="groups" eval="[(4, ref('helpdesk.group_helpdesk_user'))]"/>
+        <field name="groups" eval="[(4, ref('helpdesk.group_helpdesk_user'))]" />
     </record>
 
     <record id="helpdesk_sla_report_analysis_assigned_user_rule" model="ir.rule">
         <field name="name">Helpdesk SLA Report: Tickets de mi sucursal</field>
-        <field name="model_id" ref="helpdesk.model_helpdesk_sla_report_analysis"/>
+        <field name="model_id" ref="helpdesk.model_helpdesk_sla_report_analysis" />
         <field name="domain_force">[('ticket_id.x_branch_id', '=', user.x_branch_id.id)]</field>
-        <field name="groups" eval="[(4, ref('helpdesk.group_helpdesk_user'))]"/>
+        <field name="groups" eval="[(4, ref('helpdesk.group_helpdesk_user'))]" />
     </record>
 
     <record id="helpdesk_ticket_report_analysis_assigned_user_rule" model="ir.rule">
         <field name="name">Helpdesk Ticket Report: Tickets de mi sucursal</field>
-        <field name="model_id" ref="helpdesk.model_helpdesk_ticket_report_analysis"/>
+        <field name="model_id" ref="helpdesk.model_helpdesk_ticket_report_analysis" />
         <field name="domain_force">[('ticket_id.x_branch_id', '=', user.x_branch_id.id)]</field>
-        <field name="groups" eval="[(4, ref('helpdesk.group_helpdesk_user'))]"/>
+        <field name="groups" eval="[(4, ref('helpdesk.group_helpdesk_user'))]" />
     </record>
 
     <record id="helpdesk_team_all_tickets_rule" model="ir.rule">
         <field name="name">Helpdesk Team: All Tickets Visibility</field>
-        <field name="model_id" ref="helpdesk.model_helpdesk_team"/>
+        <field name="model_id" ref="helpdesk.model_helpdesk_team" />
         <field name="domain_force">[(1, '=', 1)]</field>
-        <field name="groups" eval="[(4, ref('helpdesk_custom_datos.group_helpdesk_ticket_all'))]"/>
+        <field name="groups" eval="[(4, ref('helpdesk_custom_datos.group_helpdesk_ticket_all'))]" />
     </record>
 
     <record id="helpdesk_ticket_all_tickets_rule" model="ir.rule">
         <field name="name">Helpdesk Ticket: All Tickets Visibility</field>
-        <field name="model_id" ref="helpdesk.model_helpdesk_ticket"/>
+        <field name="model_id" ref="helpdesk.model_helpdesk_ticket" />
         <field name="domain_force">[(1, '=', 1)]</field>
-        <field name="groups" eval="[(4, ref('helpdesk_custom_datos.group_helpdesk_ticket_all'))]"/>
+        <field name="groups" eval="[(4, ref('helpdesk_custom_datos.group_helpdesk_ticket_all'))]" />
+        <field name="perm_read" eval="True" />
+        <field name="perm_write" eval="True" />
+        <field name="perm_create" eval="True" />
+        <field name="perm_unlink" eval="False" />
     </record>
 
     <record id="helpdesk_sla_report_analysis_all_tickets_rule" model="ir.rule">
         <field name="name">Helpdesk SLA Report: All Tickets Visibility</field>
-        <field name="model_id" ref="helpdesk.model_helpdesk_sla_report_analysis"/>
+        <field name="model_id" ref="helpdesk.model_helpdesk_sla_report_analysis" />
         <field name="domain_force">[(1, '=', 1)]</field>
-        <field name="groups" eval="[(4, ref('helpdesk_custom_datos.group_helpdesk_ticket_all'))]"/>
+        <field name="groups" eval="[(4, ref('helpdesk_custom_datos.group_helpdesk_ticket_all'))]" />
     </record>
 
     <record id="helpdesk_ticket_report_analysis_all_tickets_rule" model="ir.rule">
         <field name="name">Helpdesk Ticket Report: All Tickets Visibility</field>
-        <field name="model_id" ref="helpdesk.model_helpdesk_ticket_report_analysis"/>
+        <field name="model_id" ref="helpdesk.model_helpdesk_ticket_report_analysis" />
         <field name="domain_force">[(1, '=', 1)]</field>
-        <field name="groups" eval="[(4, ref('helpdesk_custom_datos.group_helpdesk_ticket_all'))]"/>
+        <field name="groups" eval="[(4, ref('helpdesk_custom_datos.group_helpdesk_ticket_all'))]" />
     </record>
 
 </odoo>

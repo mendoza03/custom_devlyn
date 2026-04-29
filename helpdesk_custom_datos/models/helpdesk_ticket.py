@@ -26,10 +26,24 @@ class HelpdeskTicket(models.Model):
 
     def _get_locked_fields_outside_new_stage(self):
         return {
-            field_name
-            for field_name in self._fields
-            if field_name.startswith("x_")
-        } | {"user_id", "name"}
+            "user_id",
+            "name",
+            "x_general_description",
+            "x_centro_sap",
+            "x_branch_id",
+            "x_numero_telefonico",
+            "x_correo",
+            "x_section_id",
+            "x_category_id",
+            "x_subcategory_id",
+            "x_detailed_description",
+            "x_attachment_line_ids",
+        }
+
+    def _is_new_stage(self):
+        self.ensure_one()
+        stage_name = (self.stage_id.name or "").strip().lower()
+        return not self.stage_id or self.stage_id.sequence == 0 or stage_name in ("nuevo", "new")
 
     @api.model
     def _default_creator_email(self):
@@ -187,7 +201,7 @@ class HelpdeskTicket(models.Model):
 
     def write(self, vals):
         blocked_fields = self._get_locked_fields_outside_new_stage().intersection(vals)
-        blocked_tickets = self.filtered(lambda ticket: ticket.stage_id and ticket.stage_id.sequence != 0)
+        blocked_tickets = self.filtered(lambda ticket: not ticket._is_new_stage())
         if blocked_fields and blocked_tickets:
             raise UserError(
                 _(
