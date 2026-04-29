@@ -1,0 +1,18 @@
+<odoo>
+
+    <!-- Menú dentro de Helpdesk -->
+    <menuitem id="menu_helpdesk_sla_enterprise_reports"
+              name="SLA Reports"
+              parent="helpdesk.menu_helpdesk_root"
+              sequence="90"
+              groups="helpdesk_sla_enter_xlsx.group_helpdesk_sla_report_user"/>
+
+    <!-- Submenú -->
+    <menuitem id="menu_helpdesk_sla_enterprise_generate"
+              name="Generate SLA Report"
+              parent="menu_helpdesk_sla_enterprise_reports"
+              action="action_helpdesk_sla_report_wizard"
+              sequence="10"
+              groups="helpdesk_sla_report.group_helpdesk_sla_report_user"/>
+
+</odoo>

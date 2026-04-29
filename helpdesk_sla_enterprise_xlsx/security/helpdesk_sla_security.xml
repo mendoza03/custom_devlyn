@@ -1,0 +1,11 @@
+<odoo>
+    <record id="group_helpdesk_sla_report_user" model="res.groups">
+        <field name="name">SLA Report User</field>
+        <field name="implied_ids" eval="[(4, ref('base.group_user'))]"/>
+    </record>
+
+    <record id="group_helpdesk_sla_report_manager" model="res.groups">
+        <field name="name">SLA Report Manager</field>
+        <field name="implied_ids" eval="[(4, ref('group_helpdesk_sla_report_user'))]"/>
+    </record>
+</odoo>
