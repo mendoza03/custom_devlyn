@@ -77,4 +77,17 @@
         <field name="groups" eval="[(4, ref('helpdesk_custom_datos.group_helpdesk_ticket_all'))]" />
     </record>
 
+    <record id="helpdesk_ticket_rule_own_records" model="ir.rule">
+    <field name="name">Helpdesk Ticket - Propios registros</field>
+    <field name="model_id" ref="helpdesk.model_helpdesk_ticket"/>
+    <field name="domain_force">
+        ['|', ('create_uid', '=', user.id), ('user_id', '=', user.id)]
+    </field>
+    <field name="groups" eval="[(4, ref('base.group_user'))]"/>
+    <field name="perm_read" eval="1"/>
+    <field name="perm_write" eval="1"/>
+    <field name="perm_create" eval="1"/>
+    <field name="perm_unlink" eval="0"/>
+</record>
+
 </odoo>
