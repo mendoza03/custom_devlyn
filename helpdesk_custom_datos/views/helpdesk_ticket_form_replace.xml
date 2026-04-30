@@ -42,22 +42,22 @@
                         </div>
 
                         <group string="Datos de contacto">
-                            <group>
-                                <field name="domain_user_ids" invisible="1" />
-                                <field name="user_id"
-                                    domain="['&amp;', ('id', 'in', domain_user_ids), ('share', '=', False)]"
-                                    widget="many2one_avatar_user"
-                                />
-                            </group>
-                            <group>
-                                <field name="x_centro_sap" />
-                                <field name="x_commitment_date" readonly="1" />
-                                <field name="x_branch_id" />
-                                <field name="x_numero_telefonico" />
-                                <field name="x_correo" />
-                            </group>
-                        </group>
-
+    <group>
+        <field name="domain_user_ids" invisible="1" />
+        <field name="create_uid" string="Creado por" readonly="1" />
+        <field name="user_id"
+            domain="['&amp;', ('id', 'in', domain_user_ids), ('share', '=', False)]"
+            widget="many2one_avatar_user"
+        />
+    </group>
+    <group>
+        <field name="x_centro_sap" readonly="id" />
+        <field name="x_commitment_date" readonly="1" />
+        <field name="x_branch_id" readonly="id" />
+        <field name="x_numero_telefonico" readonly="id" />
+        <field name="x_correo" readonly="id" />
+    </group>
+</group>
                         <group string="Datos generales">
                             <group>
                                 <field name="x_section_id" />
@@ -2036,6 +2036,55 @@
 
         </field>
     </record>
+<record id="helpdesk_ticket_list_inherit_branch_sap_phone_created_by" model="ir.ui.view">
+    <field name="name">helpdesk.ticket.list.inherit.branch.sap.phone.created.by</field>
+    <field name="model">helpdesk.ticket</field>
+    <field name="inherit_id" ref="helpdesk.helpdesk_ticket_view_list"/>
+    <field name="priority">100</field>
+    <field name="arch" type="xml">
+        <xpath expr="//field[@name='name']" position="after">
+            <field name="create_uid" string="Creado por"/>
+            <field name="x_centro_sap"/>
+            <field name="x_branch_id"/>
+            <field name="x_numero_telefonico"/>
+            <field name="x_correo"/>
+        </xpath>
+    </field>
+</record>
 
+<record id="helpdesk_ticket_kanban_inherit_branch_sap_phone_created_by" model="ir.ui.view">
+    <field name="name">helpdesk.ticket.kanban.inherit.branch.sap.phone.created.by</field>
+    <field name="model">helpdesk.ticket</field>
+    <field name="inherit_id" ref="helpdesk.helpdesk_ticket_view_kanban"/>
+    <field name="priority">100</field>
+    <field name="arch" type="xml">
+        <xpath expr="//kanban" position="inside">
+            <field name="create_uid"/>
+            <field name="x_centro_sap"/>
+            <field name="x_branch_id"/>
+            <field name="x_numero_telefonico"/>
+            <field name="x_correo"/>
+        </xpath>
+    </field>
+</record>
+
+<record id="helpdesk_ticket_search_inherit_custom_filters" model="ir.ui.view">
+    <field name="name">helpdesk.ticket.search.inherit.custom.filters</field>
+    <field name="model">helpdesk.ticket</field>
+    <field name="inherit_id" ref="helpdesk.helpdesk_ticket_view_search"/>
+    <field name="priority">100</field>
+    <field name="arch" type="xml">
+        <xpath expr="//search" position="inside">
+            <field name="create_uid"/>
+            <field name="x_centro_sap"/>
+            <field name="x_branch_id"/>
+            <field name="x_numero_telefonico"/>
+            <field name="x_correo"/>
+            <filter string="Mis tickets creados" name="my_created_tickets" domain="[('create_uid', '=', uid)]"/>
+            <filter string="Mis tickets asignados" name="my_assigned_tickets" domain="[('user_id', '=', uid)]"/>
+        </xpath>
+    </field>
+</record>
 
 </odoo>
+.
