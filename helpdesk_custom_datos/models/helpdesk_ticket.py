@@ -117,6 +117,65 @@ class HelpdeskTicket(models.Model):
             if field_name.startswith("x_")
         } | {"user_id", "name"}
 
+    def _get_locked_fields_after_create(self):
+        return {
+            "x_centro_sap",
+            "x_branch_id",
+            "x_numero_telefonico",
+            "x_correo",
+        }
+
+    def _is_new_stage(self):
+        self.ensure_one()
+        stage_name = (self.stage_id.name or "").strip()
+        return not self.stage_id or self.stage_id.sequence == 0 or stage_name in NEW_STAGE_NAMES
+
+    @api.model
+    def _is_website_ticket_creation_context(self):
+        return bool(
+            self.env.context.get("website_id")
+            or self.env.context.get("website_form")
+            or self.env.context.get("website_form_model")
+            or self.env.context.get("from_website")
+            or self.env.context.get("default_website_id")
+        )
+
+    @api.model
+    def _prepare_website_logged_user_values(self, vals):
+        if self._is_website_ticket_creation_context() and not self.env.user._is_public():
+            vals["user_id"] = self.env.user.id
+        return vals
+
+    @api.model
+    def _translate_automatic_response_body(self, body):
+        if not body:
+            return body
+
+        replacements = {
+            "Ticket created": "Ticket creado",
+            "Your ticket has been created": "Tu ticket ha sido creado",
+            "Your request has been received": "Tu solicitud ha sido recibida",
+            "We will get back to you shortly": "Nos pondremos en contacto contigo pronto",
+            "The ticket has been closed": "El ticket ha sido cerrado",
+            "The ticket has been assigned": "El ticket ha sido asignado",
+            "Stage changed": "Estado actualizado",
+            "In Progress": "En proceso de solución",
+            "On Hold": "En espera",
+            "Solved": "Solucionado",
+            "Cancelled": "Cancelado",
+            "New": "Nuevo",
+        }
+
+        translated = body
+        for source, target in replacements.items():
+            translated = translated.replace(source, target)
+        return translated
+
+    def message_post(self, **kwargs):
+        if kwargs.get("body"):
+            kwargs["body"] = self._translate_automatic_response_body(kwargs["body"])
+        return super().message_post(**kwargs)
+
     @api.model
     def _default_creator_email(self):
         return self.env.user.email or self.env.user.partner_id.email or False
@@ -224,7 +283,6 @@ class HelpdeskTicket(models.Model):
     )
     x_commitment_date = fields.Date(string="Fecha compromiso", copy=False)
 
-
     @api.onchange("x_general_description")
     def _onchange_x_general_description_set_name(self):
         for rec in self:
@@ -237,10 +295,10 @@ class HelpdeskTicket(models.Model):
             if rec.user_id and not rec.x_branch_id:
                 rec.x_branch_id = rec.user_id.x_branch_id
 
-    @api.depends("stage_id.sequence")
+    @api.depends("stage_id.sequence", "stage_id.name")
     def _compute_x_is_stage_new(self):
         for rec in self:
-            rec.x_is_stage_new = not rec.stage_id or rec.stage_id.sequence == 0
+            rec.x_is_stage_new = rec._is_new_stage() if rec.stage_id else True
 
     @api.model
     def _get_optional_ticket_format_rules(self):
@@ -488,6 +546,8 @@ class HelpdeskTicket(models.Model):
     @api.model_create_multi
     def create(self, vals_list):
         for vals in vals_list:
+            self._prepare_website_logged_user_values(vals)
+
             if vals.get("x_general_description") and not vals.get("name"):
                 vals["name"] = vals["x_general_description"]
             if not vals.get("x_numero_telefonico"):
@@ -521,12 +581,23 @@ class HelpdeskTicket(models.Model):
         return tickets
 
     def write(self, vals):
+        locked_after_create_fields = self._get_locked_fields_after_create().intersection(vals)
+        if locked_after_create_fields and not self.env.user.has_group("helpdesk.group_helpdesk_manager"):
+            labels = []
+            for field_name in locked_after_create_fields:
+                field = self._fields.get(field_name)
+                labels.append(field.string if field else field_name)
+            raise UserError(
+                _("No se pueden modificar estos datos una vez creado el ticket:\n- %s")
+                % "\n- ".join(labels)
+            )
+
         blocked_fields = self._get_locked_fields_outside_new_stage().intersection(vals)
-        blocked_tickets = self.filtered(lambda ticket: ticket.stage_id and ticket.stage_id.sequence != 0)
+        blocked_tickets = self.filtered(lambda ticket: not ticket._is_new_stage())
         if blocked_fields and blocked_tickets:
             raise UserError(
                 _(
-                    "Solo se pueden modificar estos campos cuando el ticket esta en estado Nuevo."
+                    "Solo se pueden modificar estos campos cuando el ticket está en estado Nuevo."
                 )
             )
 
@@ -563,7 +634,7 @@ class HelpdeskTicket(models.Model):
                     )
 
         return result
-    
+
     x_section_id = fields.Many2one("helpdesk.section", string="Sección", required=True)
 
     x_category_id = fields.Many2one(
@@ -773,7 +844,6 @@ class HelpdeskTicket(models.Model):
         store=False,
     )
 
-    # Flags específicos para evitar bloques repetidos en la vista
     x_is_atraso_lente_contacto_online = fields.Boolean(
         compute="_compute_x_view_context_flags",
         store=False,
@@ -1950,10 +2020,24 @@ class HelpdeskTicket(models.Model):
 
     @api.model
     def _get_required_view_field_specs(self):
-        view = self.env.ref("helpdesk_custom_datos.helpdesk_ticket_view_form_custom_replace")
+        view = self.env.ref(
+            "helpdesk_custom_datos.helpdesk_ticket_view_form_custom_replace",
+            raise_if_not_found=False,
+        )
+        if not view:
+            return ()
+
         cache_key = (self.env.cr.dbname, view.id, view.write_date)
         if cache_key not in REQUIRED_VIEW_FIELD_SPECS_CACHE:
-            arch = etree.fromstring(view.arch_db.encode())
+            try:
+                arch_source = view.sudo()._get_combined_arch()
+                if hasattr(arch_source, "xpath"):
+                    arch = arch_source
+                else:
+                    arch = etree.fromstring(arch_source.encode())
+            except Exception:
+                arch = etree.fromstring(view.sudo().arch_db.encode())
+
             REQUIRED_VIEW_FIELD_SPECS_CACHE[cache_key] = tuple(
                 (
                     node.get("name"),
@@ -1962,11 +2046,18 @@ class HelpdeskTicket(models.Model):
                 for node in arch.xpath("//field[@name][@required]")
                 if node.get("name") and (node.get("required") or "").strip()
             )
+
         return REQUIRED_VIEW_FIELD_SPECS_CACHE[cache_key]
 
     def _get_required_view_eval_context(self):
         self.ensure_one()
-        eval_context = {}
+        eval_context = {
+            "uid": self.env.uid,
+            "id": self.id or False,
+            "True": True,
+            "False": False,
+            "None": None,
+        }
         for field_name, field in self._fields.items():
             value = self[field_name]
             if field.type == "many2one":
