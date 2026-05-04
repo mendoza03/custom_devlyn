@@ -40,11 +40,12 @@
                                 />
                             </h1>
                         </div>
+                        <field name="x_is_devoluciones_reales_section" invisible="1" />
 
                         <group string="Datos de contacto">
     <group>
         <field name="domain_user_ids" invisible="1" />
-        <field name="create_uid" string="Creado por" readonly="1" />
+        <field name="create_uid" string="Creado por" />
         <field name="user_id"
             domain="['&amp;', ('id', 'in', domain_user_ids), ('share', '=', False)]"
             widget="many2one_avatar_user"
@@ -63,6 +64,13 @@
                                 <field name="x_section_id" />
                             </group>
                         </group>
+
+                        <div class="mt16"
+                            invisible="not x_is_devoluciones_reales_section">
+                            <div class="o_alert o_alert_warning">
+                                <strong>Es necesario para la creación y seguimiento del ticket adjuntar el formato de "Solicitud de devolución"</strong>
+                            </div>
+                        </div>
 
                         <group>
                             <group>
@@ -220,6 +228,40 @@
                                     required="x_subcategory_code == 'equipo_computo'" />
                             </group>
                         </div>
+                        <div class="mt16" invisible="x_subcategory_code != 'mantenimiento_equipo_optico'">
+                            <div class="o_form_sheet bg-success text-white p-2 rounded-2 mb-3">
+                                <strong>Mantenimiento equipo óptico</strong>
+                            </div>
+
+                            <group col="4">
+                                <field name="x_fixed_asset_number"
+                                    required="x_subcategory_code == 'mantenimiento_equipo_optico'" />
+                                <field name="x_model_or_brand"
+                                    required="x_subcategory_code == 'mantenimiento_equipo_optico'" />
+                                <field name="x_optical_equipment_photo"
+                                    filename="x_optical_equipment_photo_filename"
+                                    required="x_subcategory_code == 'mantenimiento_equipo_optico'" />
+                                <field name="x_shipping_guide"
+                                    required="x_subcategory_code == 'mantenimiento_equipo_optico'" />
+                            </group>
+                        </div>
+                        <div class="mt16" invisible="x_subcategory_code != 'atraso_6_dias'">
+                            <div class="o_form_sheet bg-success text-white p-2 rounded-2 mb-3">
+                                <strong>Atraso 6 días o más</strong>
+                            </div>
+
+                            <group col="4">
+                                <field name="x_order_number"
+                                    required="x_subcategory_code == 'atraso_6_dias'" />
+                                <field name="x_card_sale_order"
+                                    string="OV (*)"
+                                    required="x_subcategory_code == 'atraso_6_dias'" />
+                                <field name="x_card_client_name"
+                                    required="x_subcategory_code == 'atraso_6_dias'" />
+                                <field name="x_courtesy_delay_days"
+                                    required="x_subcategory_code == 'atraso_6_dias'" />
+                            </group>
+                        </div>
                         <div class="mt16" invisible="x_subcategory_code != 'interredes'">
                             <div class="o_form_sheet bg-success text-white p-2 rounded-2 mb-3">
                                 <strong>Interredes</strong>
@@ -353,6 +395,66 @@
                             <div class="mt8">
                                 <strong>Adjuntar fotografía de área a limpiar</strong>
                             </div>
+                        </div>
+
+                        <div class="mt16" invisible="x_subcategory_code != 'aclaracion_pago_bonos_incentivos'">
+                            <div class="o_form_sheet bg-success text-white p-2 rounded-2 mb-3">
+                                <strong>Aclaración de pago de bonos e incentivos</strong>
+                            </div>
+
+                            <div class="mt8">
+                                <strong>Recuerda que para el cálculo del bono VIP’S se considera lo siguiente:</strong>
+                            </div>
+                            <div class="mt8">
+                                <strong>Solo se suman las ventas liquidadas al 100%</strong>
+                            </div>
+                            <div class="mt8">
+                                <strong>Las ventas con garantía por error de examen, error de captura o mala asesoría no se incluyen</strong>
+                            </div>
+                            <div class="mt8">
+                                <strong>En el caso de las ODV’s, únicamente aplican aquellas con un valor de $500 MXN o mayor.</strong>
+                            </div>
+                        </div>
+
+                        <div class="mt16" invisible="x_subcategory_code != 'no_recibidos_facturacion'">
+                            <div class="o_form_sheet bg-success text-white p-2 rounded-2 mb-3">
+                                <strong>No se recibieron archivos de facturación (xml y pdf)</strong>
+                            </div>
+
+                            <div class="mt8">
+                                <strong>No he recibido archivos PDF y XML de una factura realizada en portal</strong>
+                            </div>
+
+                            <group col="3" class="mt8">
+                                <field name="x_fact_busco_portal"
+                                    required="x_subcategory_code == 'no_recibidos_facturacion'" />
+                                <field name="x_fact_encontraste"
+                                    required="x_subcategory_code == 'no_recibidos_facturacion'" />
+                                <field name="x_fact_pdf_xml_incorrectos"
+                                    required="x_subcategory_code == 'no_recibidos_facturacion'" />
+                            </group>
+
+                            <div class="mt8">
+                                <strong>Para poder elaborar una nueva factura, el cliente deberá ingresar a su buzón tributario para aceptar la cancelación de la factura incorrecta.</strong>
+                            </div>
+                            <div class="mt8">
+                                <strong>El equipo de facturación podrá realizar las correcciones solicitadas en el SOS hasta que el cliente acepte la cancelación.</strong>
+                            </div>
+                            <div class="mt8">
+                                <strong>¡La correcta categorización de tu solicitud nos permite ser más ágiles y oportunos, proporcionándote el mejor servicio!</strong>
+                            </div>
+
+                            <group col="4" class="mt16"
+                                invisible="x_fact_busco_portal == 'select' or x_fact_encontraste == 'select' or x_fact_pdf_xml_incorrectos == 'select'">
+                                <field name="x_refac_payment_method"
+                                    required="x_subcategory_code == 'no_recibidos_facturacion' and x_fact_busco_portal != 'select' and x_fact_encontraste != 'select' and x_fact_pdf_xml_incorrectos != 'select'" />
+                                <field name="x_refac_order_number"
+                                    required="x_subcategory_code == 'no_recibidos_facturacion' and x_fact_busco_portal != 'select' and x_fact_encontraste != 'select' and x_fact_pdf_xml_incorrectos != 'select'" />
+                                <field name="x_refac_sale_order"
+                                    required="x_subcategory_code == 'no_recibidos_facturacion' and x_fact_busco_portal != 'select' and x_fact_encontraste != 'select' and x_fact_pdf_xml_incorrectos != 'select'" />
+                                <field name="x_refac_rfc"
+                                    required="x_subcategory_code == 'no_recibidos_facturacion' and x_fact_busco_portal != 'select' and x_fact_encontraste != 'select' and x_fact_pdf_xml_incorrectos != 'select'" />
+                            </group>
                         </div>
 
                         <div class="mt16"
@@ -1450,11 +1552,6 @@
                                 <strong>Atraso lente de contacto</strong>
                             </div>
 
-                            <group col="4">
-                                <field name="x_lc_recipe_name"
-                                    required="x_is_atraso_lente_contacto_receta" />
-                            </group>
-
                             <div class="mt8">
                                 <strong>*</strong>
                             </div>
@@ -1521,12 +1618,25 @@
                             </div>
 
                             <div class="mt16">
-                                <strong style="color:#009688;">(Dar click aquí) DEVLYN FS</strong>
+                                <strong>
+                                    <a href="https://devadfs.devlyn.mx/adfs/ls/"
+                                        target="_blank"
+                                        rel="noopener noreferrer"
+                                        style="color:#009688;">
+                                        (Dar click aquí) DEVLYN FS
+                                    </a>
+                                </strong>
                             </div>
 
                             <div class="mt16">
-                                <strong style="color:#009688;">Sigue los siguientes pasos (Dar click
-                                    aquí)</strong>
+                                <strong>
+                                    <a href="https://puc.devlyn.com.mx/ServiceTonic/files/public/km/3/40/Comunicado_reactivacion_de_acceso_a_Medallia_abril_2023_FV.pdf"
+                                        target="_blank"
+                                        rel="noopener noreferrer"
+                                        style="color:#009688;">
+                                        Sigue los siguientes pasos (Dar click aquí)
+                                    </a>
+                                </strong>
                             </div>
 
                             <div class="mt16">
@@ -2039,7 +2149,7 @@
 <record id="helpdesk_ticket_list_inherit_branch_sap_phone_created_by" model="ir.ui.view">
     <field name="name">helpdesk.ticket.list.inherit.branch.sap.phone.created.by</field>
     <field name="model">helpdesk.ticket</field>
-    <field name="inherit_id" ref="helpdesk.helpdesk_ticket_view_list"/>
+    <field name="inherit_id" ref="helpdesk.helpdesk_tickets_view_tree"/>
     <field name="priority">100</field>
     <field name="arch" type="xml">
         <xpath expr="//field[@name='name']" position="after">
@@ -2065,13 +2175,22 @@
             <field name="x_numero_telefonico"/>
             <field name="x_correo"/>
         </xpath>
+        <xpath expr="//t[@t-name='card']/field[@name='properties']" position="after">
+            <div class="mt-2 small">
+                <div><strong>Creado por:</strong> <field name="create_uid"/></div>
+                <div><strong>Centro SAP:</strong> <field name="x_centro_sap"/></div>
+                <div><strong>Sucursal:</strong> <field name="x_branch_id"/></div>
+                <div><strong>Telefono:</strong> <field name="x_numero_telefonico"/></div>
+                <div><strong>Correo:</strong> <field name="x_correo"/></div>
+            </div>
+        </xpath>
     </field>
 </record>
 
 <record id="helpdesk_ticket_search_inherit_custom_filters" model="ir.ui.view">
     <field name="name">helpdesk.ticket.search.inherit.custom.filters</field>
     <field name="model">helpdesk.ticket</field>
-    <field name="inherit_id" ref="helpdesk.helpdesk_ticket_view_search"/>
+    <field name="inherit_id" ref="helpdesk.helpdesk_tickets_view_search"/>
     <field name="priority">100</field>
     <field name="arch" type="xml">
         <xpath expr="//search" position="inside">
@@ -2087,4 +2206,3 @@
 </record>
 
 </odoo>
-.

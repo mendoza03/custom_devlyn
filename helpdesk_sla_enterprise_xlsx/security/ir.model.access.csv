@@ -1,0 +1,2 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_helpdesk_sla_report_wizard_user,access.helpdesk.sla.report.wizard.user,model_helpdesk_sla_report_wizard,helpdesk_sla_enterprise_xlsx.group_helpdesk_sla_report_user,1,1,1,1

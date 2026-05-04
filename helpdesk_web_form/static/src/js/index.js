@@ -2,6 +2,7 @@ window.addEventListener('load', function () {
 
     const form        = document.querySelector('form[action="/helpdesk/submit"]');
     const restoreNode = document.getElementById('helpdesk-form-data');
+    const devRealSectionIdNode = document.getElementById('helpdesk-dev-real-section-id');
     const section     = document.getElementById('section');
     const category    = document.getElementById('category');
     const subcategory = document.getElementById('subcategory');
@@ -36,6 +37,7 @@ window.addEventListener('load', function () {
         'acceso_plataforma':                       'block-acceso_plataforma',
         'desbloqueo_usuario_contrasena':           'block-desbloqueo_usuario_contrasena',
         'aclaracion_saldo_vacaciones':             'block-aclaracion_saldo_vacaciones',
+        'aclaracion_pago_bonos_incentivos':        'block-aclaracion_pago_bonos_incentivos',
         'error_plataforma':                        'block-error_plataforma',
         'display_campanas_aperturas':              'block-display_campanas_aperturas',
         'reposicion_elemento_danado':              'block-reposicion_elemento_danado',
@@ -143,6 +145,12 @@ window.addEventListener('load', function () {
         );
     }
 
+    function syncDynamicDisabledState() {
+        getDynamicFields().forEach(field => {
+            field.disabled = !isVisible(field);
+        });
+    }
+
     function clearDynamicRequired() {
         getDynamicFields().forEach(field => {
             field.required = false;
@@ -172,6 +180,7 @@ window.addEventListener('load', function () {
     }
 
     function syncDynamicRequired() {
+        syncDynamicDisabledState();
         clearDynamicRequired();
 
         const visibleFields = Array.from(getDynamicFields()).filter(field => {
@@ -228,6 +237,18 @@ window.addEventListener('load', function () {
         syncDynamicRequired();
     }
 
+    function updateDevRealSectionNotice() {
+        const notice = document.getElementById('block-dev-real-section-notice');
+        if (!notice) return;
+        const selectedOption = section.options[section.selectedIndex];
+        const selectedLabel = selectedOption ? (selectedOption.textContent || '').trim() : '';
+        const devRealSectionId = devRealSectionIdNode ? (devRealSectionIdNode.value || '') : '';
+        notice.style.display = (
+            (devRealSectionId && section.value === devRealSectionId)
+            || selectedLabel === 'Devoluciones Reales'
+        ) ? 'block' : 'none';
+    }
+
     function hideOrderTypeBlocks() {
         ['block-satisfaccion_adaptacion', 'block-satisfaccion_imagen'].forEach(id => {
             const el = document.getElementById(id);
@@ -262,6 +283,52 @@ window.addEventListener('load', function () {
         }
     }
 
+    function validateTonerAttachmentPolicy() {
+        const tonerField = form.querySelector('[name="x_toner_below_15"]');
+        const attachmentsField = form.querySelector('[name="attachments"]');
+
+        if (!tonerField || !attachmentsField || !isVisible(tonerField)) {
+            return true;
+        }
+
+        tonerField.setCustomValidity('');
+        attachmentsField.setCustomValidity('');
+
+        if (tonerField.value === 'no') {
+            tonerField.setCustomValidity('El envio de toner no procede si el porcentaje es mayor al 15%.');
+            tonerField.reportValidity();
+            tonerField.focus();
+            return false;
+        }
+
+        if (tonerField.value === 'si' && (!attachmentsField.files || !attachmentsField.files.length)) {
+            attachmentsField.setCustomValidity('Adjunta al menos un archivo en Anexos cuando el toner es menor o igual al 15%.');
+            attachmentsField.reportValidity();
+            attachmentsField.focus();
+            return false;
+        }
+
+        return true;
+    }
+
+    function updateNoRecibidosFacturacionFields() {
+        const detailsBlock = document.getElementById('block-no_recibidos_facturacion-details');
+        const buscoPortal = form.querySelector('[name="x_fact_busco_portal"]');
+        const encontraste = form.querySelector('[name="x_fact_encontraste"]');
+        const incorrectos = form.querySelector('[name="x_fact_pdf_xml_incorrectos"]');
+
+        if (!detailsBlock || !buscoPortal || !encontraste || !incorrectos) {
+            return;
+        }
+
+        const shouldShow = [buscoPortal, encontraste, incorrectos].every(field => (
+            isVisible(field) && field.value && field.value !== 'select'
+        ));
+
+        detailsBlock.style.display = shouldShow ? 'flex' : 'none';
+        syncDynamicRequired();
+    }
+
     function handleSubcategoryChange() {
         hideAllSubcategoryBlocks();
         const selectedOption = subcategory.options[subcategory.selectedIndex];
@@ -269,6 +336,7 @@ window.addEventListener('load', function () {
         showBlockForCode(code);
         updateOrderTypeBlocks();
         updateTonerWarning();
+        updateNoRecibidosFacturacionFields();
     }
 
     function populateField(name, value) {
@@ -314,6 +382,7 @@ window.addEventListener('load', function () {
         if (!section_id) {
             category.disabled = false;
             subcategory.disabled = false;
+            updateDevRealSectionNotice();
             return Promise.resolve();
         }
 
@@ -422,6 +491,7 @@ window.addEventListener('load', function () {
             restoreSimpleFields();
             updateOrderTypeBlocks();
             updateTonerWarning();
+            updateNoRecibidosFacturacionFields();
             syncDynamicRequired();
         });
     }
@@ -483,6 +553,7 @@ window.addEventListener('load', function () {
     }
 
     section.addEventListener('change', function () {
+        updateDevRealSectionNotice();
         loadCategories(this.value);
     });
 
@@ -504,8 +575,13 @@ window.addEventListener('load', function () {
         updateTonerWarning();
     });
 
+    document.addEventListener('change', function (e) {
+        if (!['x_fact_busco_portal', 'x_fact_encontraste', 'x_fact_pdf_xml_incorrectos'].includes(e.target.name)) return;
+        updateNoRecibidosFacturacionFields();
+    });
+
     form.addEventListener('submit', function (e) {
-        if (!validateDynamicFields()) {
+        if (!validateDynamicFields() || !validateTonerAttachmentPolicy()) {
             e.preventDefault();
         }
     });
@@ -519,8 +595,16 @@ window.addEventListener('load', function () {
                 });
             }
         }
+        if (e.target.name === 'x_toner_below_15' || e.target.name === 'attachments') {
+            const attachmentsField = form.querySelector('[name="attachments"]');
+            e.target.setCustomValidity('');
+            if (attachmentsField) {
+                attachmentsField.setCustomValidity('');
+            }
+        }
     });
 
     restoreFormData();
+    updateDevRealSectionNotice();
 
 });

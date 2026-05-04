@@ -1,0 +1,46 @@
+<odoo>
+    <record id="view_helpdesk_sla_report_wizard_form" model="ir.ui.view">
+        <field name="name">helpdesk.sla.report.wizard.form</field>
+        <field name="model">helpdesk.sla.report.wizard</field>
+        <field name="arch" type="xml">
+            <form string="Generate SLA Enterprise Report" create="false" edit="false" delete="false">
+                <sheet>
+                    <group>
+                        <group string="Period">
+                            <field name="company_id" groups="base.group_multi_company"/>
+                            <field name="date_from"/>
+                            <field name="date_to"/>
+                        </group>
+                        <group string="Filters">
+                            <field name="team_ids" widget="many2many_tags"/>
+                            <field name="user_ids" widget="many2many_tags"/>
+                            <field name="breached_only"/>
+                        </group>
+                    </group>
+                    <group string="Report Options">
+                        <field name="include_open_tickets"/>
+                        <field name="include_first_response"/>
+                        <field name="include_no_sla"/>
+                        <field name="sla_target_hours"/>
+                    </group>
+                    <separator string="Report Output"/>
+                    <p>
+                        This report generates an enterprise XLSX workbook with executive KPIs,
+                        SLA details, team summary, agent summary, and monthly summary.
+                    </p>
+                </sheet>
+                <footer>
+                    <button string="Export Enterprise XLSX" type="object" name="action_export_xlsx" class="btn-primary"/>
+                    <button string="Cancel" special="cancel"/>
+                </footer>
+            </form>
+        </field>
+    </record>
+
+    <record id="action_helpdesk_sla_report_wizard" model="ir.actions.act_window">
+        <field name="name">Generate SLA Enterprise Report</field>
+        <field name="res_model">helpdesk.sla.report.wizard</field>
+        <field name="view_mode">form</field>
+        <field name="target">new</field>
+    </record>
+</odoo>

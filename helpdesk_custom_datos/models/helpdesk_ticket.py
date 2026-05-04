@@ -16,6 +16,8 @@ PEDIDO_FORMAT_REGEX = re.compile(r"^[A-Za-z0-9]{3}P\d{6}$")
 OV_FORMAT_REGEX = re.compile(r"^[A-Za-z0-9]{3}V\d{6}$")
 OT_FORMAT_REGEX = re.compile(r"^\d{10}$")
 BAG_FORMAT_REGEX = re.compile(r"^[A-Za-z0-9]{2}\d{8}$")
+RFC_13_FORMAT_REGEX = re.compile(r"^.{13}$")
+CP_5_FORMAT_REGEX = re.compile(r"^.{5}$")
 IN_PROGRESS_STAGE_NAMES = {"In Progress", "En proceso de solución"}
 ON_HOLD_STAGE_NAMES = {"On Hold", "En espera"}
 SOLVED_STAGE_NAMES = {"Solved", "Solucionado"}
@@ -295,6 +297,12 @@ class HelpdeskTicket(models.Model):
             if rec.user_id and not rec.x_branch_id:
                 rec.x_branch_id = rec.user_id.x_branch_id
 
+    @api.onchange("x_section_id")
+    def _onchange_x_section_id_clear_classification(self):
+        for rec in self:
+            rec.x_category_id = False
+            rec.x_subcategory_id = False
+
     @api.depends("stage_id.sequence", "stage_id.name")
     def _compute_x_is_stage_new(self):
         for rec in self:
@@ -346,6 +354,14 @@ class HelpdeskTicket(models.Model):
             "x_refac_sale_order": (
                 OV_FORMAT_REGEX,
                 _("debe tener 10 posiciones: los primeros 4 caracteres alfanuméricos, los últimos 6 numéricos y el cuarto carácter debe ser 'V'."),
+            ),
+            "x_refac_rfc": (
+                RFC_13_FORMAT_REGEX,
+                _("debe tener exactamente 13 caracteres."),
+            ),
+            "x_refac_cp": (
+                CP_5_FORMAT_REGEX,
+                _("debe tener exactamente 5 caracteres."),
             ),
             "x_card_sale_order": (
                 OV_FORMAT_REGEX,
@@ -761,6 +777,8 @@ class HelpdeskTicket(models.Model):
     x_model_or_brand = fields.Char(string="Modelo y/o marca", copy=False)
     x_serial_number = fields.Char(string="Número de Serie", copy=False)
     x_fixed_asset_number = fields.Char(string="N° de activo fijo", copy=False)
+    x_optical_equipment_photo = fields.Binary(string="Fotografía", copy=False)
+    x_optical_equipment_photo_filename = fields.Char(string="Nombre de fotografía", copy=False)
     x_shipping_guide = fields.Char(string="N° de guía", copy=False)
     x_courier = fields.Char(string="Mensajería", copy=False)
 
@@ -800,22 +818,29 @@ class HelpdeskTicket(models.Model):
 
     x_fact_busco_portal = fields.Selection(
         [("select", "-- seleccionar --"), ("si", "Si"), ("no", "No")],
+        string="¿Buscaste la factura en el portal? (*)",
         default="select",
         copy=False,
     )
     x_fact_encontraste = fields.Selection(
         [("select", "-- seleccionar --"), ("si", "Si"), ("no", "No")],
+        string="¿La encontraste? (*)",
         default="select",
         copy=False,
     )
     x_fact_pdf_xml_incorrectos = fields.Selection(
         [("select", "-- seleccionar --"), ("si", "Si"), ("no", "No")],
+        string="¿Recibiste el PDF y XML con datos incorrectos? (*)",
         default="select",
         copy=False,
     )
 
     x_is_facturacion_reenvio = fields.Boolean(
         compute="_compute_x_is_facturacion_reenvio",
+        store=False,
+    )
+    x_is_devoluciones_reales_section = fields.Boolean(
+        compute="_compute_x_is_devoluciones_reales_section",
         store=False,
     )
     x_is_dev_real_tc_db = fields.Boolean(
@@ -962,6 +987,7 @@ class HelpdeskTicket(models.Model):
         [
             ("select", "-- seleccionar --"),
             ("solo_cp", "Solo CP"),
+            ("direccion_completa", "Dirección completa"),
         ],
         string="Dirección fiscal (*)",
         default="select",
@@ -974,6 +1000,7 @@ class HelpdeskTicket(models.Model):
     x_card_sap_center = fields.Char(string="Centro SAP (*)", copy=False)
     x_card_sale_order = fields.Char(string="Orden de Venta (*)", copy=False)
     x_card_order_number = fields.Char(string="Pedido (*)", copy=False)
+    x_courtesy_delay_days = fields.Char(string="Días de atraso (*)", copy=False)
 
     x_card_sale_date = fields.Date(string="Fecha de Venta (*)", copy=False)
     x_card_sale_amount = fields.Float(string="Monto de la venta (*)", copy=False)
@@ -1903,6 +1930,18 @@ class HelpdeskTicket(models.Model):
                 target_id and rec.x_category_id.id == target_id
             )
 
+    @api.depends("x_section_id")
+    def _compute_x_is_devoluciones_reales_section(self):
+        target = self.env.ref(
+            "helpdesk_custom_datos.helpdesk_section_devoluciones_reales",
+            raise_if_not_found=False,
+        )
+        target_id = target.id if target else False
+        for rec in self:
+            rec.x_is_devoluciones_reales_section = bool(
+                target_id and rec.x_section_id.id == target_id
+            )
+
     @api.depends("x_category_id")
     def _compute_x_devolucion_category_flags(self):
         tc_db_category = self.env.ref(
@@ -2130,6 +2169,19 @@ class HelpdeskTicket(models.Model):
             if error_message:
                 raise ValidationError(error_message)
 
+    def _validate_toner_attachment_policy(self):
+        for rec in self:
+            if rec.x_subcategory_code != "surtido_toner":
+                continue
+            if rec.x_toner_below_15 == "no":
+                raise ValidationError(
+                    _("No se puede crear el ticket porque el envío de tóner no procede si el porcentaje es mayor al 15%%.")
+                )
+            if rec.x_toner_below_15 == "si" and not rec.x_attachment_line_ids:
+                raise ValidationError(
+                    _("Debes adjuntar al menos un archivo en Anexos cuando el tóner es menor o igual al 15%%.")
+                )
+
     def _get_dynamic_required_fields_error(self):
         self.ensure_one()
         code = self.x_subcategory_code or ""
@@ -2142,7 +2194,7 @@ class HelpdeskTicket(models.Model):
 
         if self.x_is_atraso_lente_contacto_receta:
             return self._get_required_fields_error(
-                ["x_lc_recipe_name", "x_lc_ot_number", "x_lc_order_number", "x_lc_provider"],
+                ["x_lc_ot_number", "x_lc_order_number", "x_lc_provider"],
                 "Atraso lente de contacto - Receta LC",
             )
 
@@ -2219,6 +2271,28 @@ class HelpdeskTicket(models.Model):
                 "Equipo de cómputo",
             )
 
+        if code == "mantenimiento_equipo_optico":
+            return self._get_required_fields_error(
+                [
+                    "x_fixed_asset_number",
+                    "x_model_or_brand",
+                    "x_optical_equipment_photo",
+                    "x_shipping_guide",
+                ],
+                "Mantenimiento equipo óptico",
+            )
+
+        if code == "atraso_6_dias":
+            return self._get_required_fields_error(
+                [
+                    "x_order_number",
+                    "x_card_sale_order",
+                    "x_card_client_name",
+                    "x_courtesy_delay_days",
+                ],
+                "Solicitud folio micas de cortesía - Atraso 6 días o más",
+            )
+
         if code == "problema_pagos_anticipos":
             return self._get_required_fields_error(
                 [
@@ -2281,7 +2355,6 @@ class HelpdeskTicket(models.Model):
         "x_is_atraso_lente_contacto_receta",
         "x_is_seguimiento_solicitud_papeleria",
         "x_is_seguimiento_solicitud_resurtido",
-        "x_lc_recipe_name",
         "x_lc_ot_number",
         "x_lc_order_number",
         "x_lc_provider",
@@ -2305,6 +2378,9 @@ class HelpdeskTicket(models.Model):
         "x_payment_receipt_1",
         "x_payment_date_1",
         "x_order_number",
+        "x_card_sale_order",
+        "x_card_client_name",
+        "x_courtesy_delay_days",
         "x_bag",
         "x_customer_warehouse",
         "x_authorized_by",
@@ -2321,6 +2397,7 @@ class HelpdeskTicket(models.Model):
         "x_model_or_brand",
         "x_serial_number",
         "x_fixed_asset_number",
+        "x_optical_equipment_photo",
         "x_shipping_guide",
         "x_courier",
         "x_supply_material_code",
@@ -2329,9 +2406,13 @@ class HelpdeskTicket(models.Model):
         "x_supply_unit_measure",
         "x_supply_center",
         "x_supply_manager_approval_attached",
+        "x_toner_below_15",
+        "x_attachment_line_ids",
     )
     def _check_dynamic_required_fields(self):
         for rec in self:
             error_message = rec._get_dynamic_required_fields_error()
             if error_message:
                 raise ValidationError(error_message)
+            if not self.env.context.get("skip_toner_attachment_policy_validation"):
+                rec._validate_toner_attachment_policy()

@@ -13,6 +13,10 @@
                     </div>
                 </t>
 
+                <div id="block-dev-real-section-notice" class="alert alert-warning" style="display:none;">
+                    <strong>Es necesario para la creación y seguimiento del ticket adjuntar el formato de "Solicitud de devolución"</strong>
+                </div>
+
                 <h3>Datos generales</h3>
 
                 <form action="/helpdesk/submit" method="post" enctype="multipart/form-data" class="row g-3">
@@ -448,7 +452,7 @@
                                 </div>
                                 <div class="col-md-6">
                                     <label>RFC (*)</label>
-                                    <input type="text" name="x_refac_rfc" class="form-control"/>
+                                    <input type="text" name="x_refac_rfc" class="form-control" minlength="13" maxlength="13"/>
                                 </div>
                                 <div class="col-12">
                                     <strong>Es necesario adjuntar la pantalla del SAT de validación de RFC, nombre y código postal.</strong>
@@ -533,11 +537,12 @@
                                     <select name="x_refac_fiscal_address" class="form-select">
                                         <option value="select">-- seleccionar --</option>
                                         <option value="solo_cp">Solo CP</option>
+                                        <option value="direccion_completa">Dirección completa</option>
                                     </select>
                                 </div>
                                 <div class="col-md-6">
                                     <label>CP (*)</label>
-                                    <input type="text" name="x_refac_cp" class="form-control"/>
+                                    <input type="text" name="x_refac_cp" class="form-control" minlength="5" maxlength="5"/>
                                 </div>
                             </div>
                         </div>
@@ -548,29 +553,66 @@
                         <div class="card border-success">
                             <div class="card-header m-2 bg-success text-white"><strong>No se recibieron archivos de facturación (XML y PDF)</strong></div>
                             <div class="card-body row g-3">
+                                <div class="col-12">
+                                    <strong>No he recibido archivos PDF y XML de una factura realizada en portal</strong>
+                                </div>
                                 <div class="col-md-6">
-                                    <label>¿Buscó en portal? (*)</label>
-                                    <select name="x_fact_busco_portal" class="form-select">
+                                    <label>¿Buscaste la factura en el portal? (*)</label>
+                                    <select name="x_fact_busco_portal" id="x_fact_busco_portal" class="form-select">
                                         <option value="select">-- seleccionar --</option>
                                         <option value="si">Si</option>
                                         <option value="no">No</option>
                                     </select>
                                 </div>
                                 <div class="col-md-6">
-                                    <label>¿Encontró la factura? (*)</label>
-                                    <select name="x_fact_encontraste" class="form-select">
+                                    <label>¿La encontraste? (*)</label>
+                                    <select name="x_fact_encontraste" id="x_fact_encontraste" class="form-select">
                                         <option value="select">-- seleccionar --</option>
                                         <option value="si">Si</option>
                                         <option value="no">No</option>
                                     </select>
                                 </div>
                                 <div class="col-md-6">
-                                    <label>¿Los archivos PDF/XML son incorrectos? (*)</label>
-                                    <select name="x_fact_pdf_xml_incorrectos" class="form-select">
+                                    <label>¿Recibiste el PDF y XML con datos incorrectos? (*)</label>
+                                    <select name="x_fact_pdf_xml_incorrectos" id="x_fact_pdf_xml_incorrectos" class="form-select">
                                         <option value="select">-- seleccionar --</option>
                                         <option value="si">Si</option>
                                         <option value="no">No</option>
                                     </select>
+                                </div>
+                                <div class="col-12">
+                                    <strong>Para poder elaborar una nueva factura, el cliente deberá ingresar a su buzón tributario para aceptar la cancelación de la factura incorrecta.</strong>
+                                </div>
+                                <div class="col-12">
+                                    <strong>El equipo de facturación podrá realizar las correcciones solicitadas en el SOS hasta que el cliente acepte la cancelación.</strong>
+                                </div>
+                                <div class="col-12">
+                                    <strong>¡La correcta categorización de tu solicitud nos permite ser más ágiles y oportunos, proporcionándote el mejor servicio!</strong>
+                                </div>
+                                <div id="block-no_recibidos_facturacion-details" class="row g-3" style="display:none;">
+                                    <div class="col-md-3">
+                                        <label>Forma de Pago (*)</label>
+                                        <select name="x_refac_payment_method" class="form-select">
+                                            <option value="select">-- seleccionar --</option>
+                                            <option value="efectivo">Efectivo</option>
+                                            <option value="tarjeta_debito">Tarjeta de Débito</option>
+                                            <option value="tarjeta_credito">Tarjeta de crédito</option>
+                                            <option value="cheque_nominativo">Cheque nominativo</option>
+                                            <option value="monedero_electronico">Monedero electrónico</option>
+                                        </select>
+                                    </div>
+                                    <div class="col-md-3">
+                                        <label>Pedido (*)</label>
+                                        <input type="text" name="x_refac_order_number" class="form-control"/>
+                                    </div>
+                                    <div class="col-md-3">
+                                        <label>Orden de Venta (*)</label>
+                                        <input type="text" name="x_refac_sale_order" class="form-control"/>
+                                    </div>
+                                    <div class="col-md-3">
+                                        <label>RFC (*)</label>
+                                        <input type="text" name="x_refac_rfc" class="form-control" minlength="13" maxlength="13"/>
+                                    </div>
                                 </div>
                                 <div class="col-12">
                                     <strong>Adjuntar evidencia del caso y describir el problema detectado.</strong>
@@ -635,6 +677,26 @@
                                     <input type="text" name="x_contact_number" class="form-control"/>
                                 </div>
                                 <div class="col-12"><strong>Describe el detalle de la aclaración solicitada.</strong></div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div id="block-aclaracion_pago_bonos_incentivos" class="col-12 subcategory-block" style="display:none;">
+                        <div class="card border-success">
+                            <div class="card-header m-2 bg-success text-white"><strong>Aclaración de pago de bonos e incentivos</strong></div>
+                            <div class="card-body">
+                                <div class="mb-3">
+                                    <strong>Recuerda que para el cálculo del bono VIP’S se considera lo siguiente:</strong>
+                                </div>
+                                <div class="mb-3">
+                                    <strong>✅ Solo se suman las ventas liquidadas al 100%</strong>
+                                </div>
+                                <div class="mb-3">
+                                    <strong>❌ Las ventas con garantía por error de examen, error de captura o mala asesoría no se incluyen</strong>
+                                </div>
+                                <div>
+                                    <strong>📌 En el caso de las ODV’s, únicamente aplican aquellas con un valor de $500 MXN o mayor.</strong>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -2222,10 +2284,6 @@
                         <div class="card border-success">
                             <div class="card-header m-2 bg-success text-white"><strong>Atraso lente de contacto</strong></div>
                             <div class="card-body row g-3">
-                                <div class="col-md-6">
-                                    <label>Receta lente de Contacto (*)</label>
-                                    <input type="text" name="x_lc_recipe_name" class="form-control"/>
-                                </div>
                                 <div class="col-12">
                                     <strong>*</strong>
                                 </div>
@@ -2486,6 +2544,7 @@
                 <input type="hidden" id="helpdesk-restore-main-block" t-att-value="restore_main_block_id or ''"/>
                 <input type="hidden" id="helpdesk-restore-extra-block" t-att-value="restore_extra_block_id or ''"/>
                 <input type="hidden" id="helpdesk-restore-order-type-block" t-att-value="restore_order_type_block_id or ''"/>
+                <input type="hidden" id="helpdesk-dev-real-section-id" t-att-value="devoluciones_reales_section_id or ''"/>
             </div>
             <script type="text/javascript" src="/helpdesk_web_form/static/src/js/index.js"></script>
             <script type="text/javascript">
@@ -2494,6 +2553,7 @@
                     const restoreMainBlockNode = document.getElementById('helpdesk-restore-main-block');
                     const restoreExtraBlockNode = document.getElementById('helpdesk-restore-extra-block');
                     const restoreOrderTypeBlockNode = document.getElementById('helpdesk-restore-order-type-block');
+                    const devRealSectionIdNode = document.getElementById('helpdesk-dev-real-section-id');
                     const form = document.querySelector('form[action="/helpdesk/submit"]');
                     const section = document.getElementById('section');
                     const category = document.getElementById('category');
@@ -2541,6 +2601,80 @@
                         });
                     };
 
+                    const syncNoRecibidosFacturacionDetails = () => {
+                        const detailsBlock = document.getElementById('block-no_recibidos_facturacion-details');
+                        const buscoPortal = form.querySelector('[name="x_fact_busco_portal"]');
+                        const encontraste = form.querySelector('[name="x_fact_encontraste"]');
+                        const incorrectos = form.querySelector('[name="x_fact_pdf_xml_incorrectos"]');
+
+                        if (!detailsBlock || !buscoPortal || !encontraste || !incorrectos) {
+                            return;
+                        }
+
+                        const shouldShow = [buscoPortal, encontraste, incorrectos].every((field) => {
+                            if (!field) {
+                                return false;
+                            }
+                            return field.value &amp;&amp; field.value !== 'select';
+                        });
+
+                        detailsBlock.style.display = shouldShow ? 'flex' : 'none';
+
+                        detailsBlock.querySelectorAll('input, select, textarea').forEach((field) => {
+                            field.disabled = !shouldShow;
+                        });
+                    };
+
+                    const validateInlineTonerPolicy = () => {
+                        const tonerField = form.querySelector('[name="x_toner_below_15"]');
+                        const attachmentsField = form.querySelector('[name="attachments"]');
+
+                        if (!tonerField || tonerField.offsetParent === null || !attachmentsField) {
+                            return true;
+                        }
+
+                        tonerField.setCustomValidity('');
+                        attachmentsField.setCustomValidity('');
+
+                        if (tonerField.value === 'no') {
+                            tonerField.setCustomValidity('El envío de tóner no procede si el porcentaje es mayor al 15%.');
+                            tonerField.reportValidity();
+                            tonerField.focus();
+                            return false;
+                        }
+
+                        if (tonerField.value === 'si' &amp;&amp; (!attachmentsField.files || !attachmentsField.files.length)) {
+                            attachmentsField.setCustomValidity('Adjunta al menos un archivo en Anexos cuando el tóner es menor o igual al 15%.');
+                            attachmentsField.reportValidity();
+                            attachmentsField.focus();
+                            return false;
+                        }
+
+                        return true;
+                    };
+
+                    const updateInlineSpecialNotices = () => {
+                        const sectionNotice = document.getElementById('block-dev-real-section-notice');
+                        const bonosBlock = document.getElementById('block-aclaracion_pago_bonos_incentivos');
+                        const selectedSection = section.options[section.selectedIndex];
+                        const selectedSubcategory = subcategory.options[subcategory.selectedIndex];
+                        const selectedSectionLabel = selectedSection ? (selectedSection.textContent || '').trim() : '';
+                        const selectedSectionId = section.value || '';
+                        const devRealSectionId = devRealSectionIdNode ? (devRealSectionIdNode.value || '') : '';
+                        const subcategoryCode = selectedSubcategory ? (selectedSubcategory.dataset.code || '') : '';
+
+                        if (sectionNotice) {
+                            sectionNotice.style.display = (
+                                (devRealSectionId &amp;&amp; selectedSectionId === devRealSectionId)
+                                || selectedSectionLabel === 'Devoluciones Reales'
+                            ) ? 'block' : 'none';
+                        }
+
+                        if (bonosBlock) {
+                            bonosBlock.style.display = subcategoryCode === 'aclaracion_pago_bonos_incentivos' ? 'block' : 'none';
+                        }
+                    };
+
                     const fetchOptions = async (url, params) => {
                         const response = await fetch(url, {
                             method: 'POST',
@@ -2580,6 +2714,8 @@
                         showRestoreBlock(restoreMainBlockNode ? restoreMainBlockNode.value : '');
                         showRestoreBlock(restoreExtraBlockNode ? restoreExtraBlockNode.value : '');
                         showRestoreBlock(restoreOrderTypeBlockNode ? restoreOrderTypeBlockNode.value : '');
+                        syncNoRecibidosFacturacionDetails();
+                        updateInlineSpecialNotices();
                     };
 
                     const collectVisibleRequiredFields = () => {
@@ -2651,14 +2787,38 @@
                         restoreSimpleFields();
                         revealDynamicBlocks();
                         collectVisibleRequiredFields();
+                        syncNoRecibidosFacturacionDetails();
+                        updateInlineSpecialNotices();
                     };
 
                     if (Object.keys(restoredData).length) {
                         restoreForm().catch((error) => console.warn('Inline helpdesk restore failed', error));
                     }
+                    document.addEventListener('change', (event) => {
+                        if (!['x_fact_busco_portal', 'x_fact_encontraste', 'x_fact_pdf_xml_incorrectos'].includes(event.target.name)) {
+                            if (event.target.name === 'x_toner_below_15' || event.target.name === 'attachments') {
+                                event.target.setCustomValidity('');
+                                const attachmentsField = form.querySelector('[name="attachments"]');
+                                if (attachmentsField) {
+                                    attachmentsField.setCustomValidity('');
+                                }
+                            }
+                            return;
+                        }
+                        syncNoRecibidosFacturacionDetails();
+                        collectVisibleRequiredFields();
+                        updateInlineSpecialNotices();
+                    });
+                    window.addEventListener('load', syncNoRecibidosFacturacionDetails);
+                    window.addEventListener('load', updateInlineSpecialNotices);
                     window.addEventListener('load', revealDynamicBlocks);
                     window.addEventListener('load', collectVisibleRequiredFields);
-                    form.addEventListener('submit', collectVisibleRequiredFields);
+                    form.addEventListener('submit', (event) => {
+                        collectVisibleRequiredFields();
+                        if (!validateInlineTonerPolicy()) {
+                            event.preventDefault();
+                        }
+                    });
                 })();
             </script>
         </t>

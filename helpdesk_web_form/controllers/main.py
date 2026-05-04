@@ -97,6 +97,7 @@ class HelpdeskController(http.Controller):
         env = request.env(user=request.website.user_id.id)
         sections = env['helpdesk.section'].sudo().search([('active', '=', True)], order='sequence, name, id')
         branches = env['devlyn.catalog.branch'].sudo().search([('active', '=', True)], order='center_code, branch_name, id')
+        dev_real_section = env.ref('helpdesk_custom_datos.helpdesk_section_devoluciones_reales', raise_if_not_found=False)
         safe_form_data = self._sanitize_form_data(form_data)
         restore_values = self._get_restore_values(safe_form_data)
         return {
@@ -107,6 +108,7 @@ class HelpdeskController(http.Controller):
             'default_user_email': self._default_user_email(),
             'default_user_phone': self._default_user_phone(),
             'default_user_branch_id': self._default_user_branch_id(),
+            'devoluciones_reales_section_id': dev_real_section.id if dev_real_section else '',
             **restore_values,
         }
 
@@ -237,6 +239,18 @@ class HelpdeskController(http.Controller):
             #return "Faltan los siguientes campos obligatorios visibles:\n- %s" % "\n- ".join(missing)
         return False
 
+    def _get_toner_attachment_policy_error(self, post, files):
+        toner_value = (post.get('x_toner_below_15') or '').strip()
+        valid_files = [f for f in (files or []) if f and getattr(f, 'filename', '')]
+
+        if toner_value == 'no':
+            return 'No se puede crear el ticket porque el envío de tóner no procede si el porcentaje es mayor al 15%.'
+
+        if toner_value == 'si' and not valid_files:
+            return 'Debes adjuntar al menos un archivo en Anexos cuando el tóner es menor o igual al 15%.'
+
+        return False
+
     @http.route(['/helpdesk', '/<string:lang>/helpdesk'], type='http', auth='user', website=True)
     def helpdesk_form(self, **kwargs):
         return request.render(
@@ -281,32 +295,56 @@ class HelpdeskController(http.Controller):
         type='http', auth='user', methods=['POST'], website=True
     )
     def helpdesk_submit(self, **post):
-        env = request.env(user=request.website.user_id.id)
+        env = request.env
+
+        def _posted_value(key, default=""):
+            values = request.httprequest.form.getlist(key)
+            if not values:
+                value = post.get(key, default)
+                return value if value is not None else default
+
+            normalized = []
+            for value in values:
+                if value is None:
+                    continue
+                if isinstance(value, str):
+                    normalized.append(value.strip())
+                else:
+                    normalized.append(value)
+
+            non_empty = [value for value in normalized if value not in ("", None)]
+            if non_empty:
+                return non_empty[-1]
+            return normalized[-1] if normalized else default
 
         def _int(key):
-            val = post.get(key)
+            val = _posted_value(key)
             return int(val) if val else False
 
         def _str(key):
-            val = post.get(key, '').strip()
+            val = _posted_value(key, '')
+            val = val.strip() if isinstance(val, str) else val
             return val if val else False
 
         def _float(key):
-            val = post.get(key, '').strip()
+            val = _posted_value(key, '')
+            val = val.strip() if isinstance(val, str) else val
             try:
                 return float(val) if val else False
             except ValueError:
                 return False
 
         def _date(key):
-            val = post.get(key, '').strip()
+            val = _posted_value(key, '')
+            val = val.strip() if isinstance(val, str) else val
             return val if val else False
 
         def _sel(key):
-            return post.get(key) or 'select'
+            return _posted_value(key) or 'select'
 
         def _radio(key):
-            val = post.get(key, '').strip()
+            val = _posted_value(key, '')
+            val = val.strip() if isinstance(val, str) else val
             return val if val else False
 
         section_id = _int('x_section_id')
@@ -678,6 +716,16 @@ class HelpdeskController(http.Controller):
                 'x_lab_local_name': _str('x_lab_local_name'),
             }
 
+            # Keep the logged-in website user as env.uid so create_uid is set correctly,
+            # while sudo() only bypasses access checks for portal users.
+            files = request.httprequest.files.getlist('attachments')
+            toner_error = self._get_toner_attachment_policy_error(post, files)
+            if toner_error:
+                return request.render(
+                    'helpdesk_web_form.helpdesk_form_template',
+                    self._get_form_render_values(form_data=post, error_message=toner_error),
+                )
+
             draft_ticket = env['helpdesk.ticket'].sudo().new(ticket_vals)
             error_message = (
                 self._get_visible_required_error(draft_ticket, post)
@@ -688,16 +736,18 @@ class HelpdeskController(http.Controller):
                     'helpdesk_web_form.helpdesk_form_template',
                     self._get_form_render_values(form_data=post, error_message=error_message),
                 )
-            ticket = env['helpdesk.ticket'].sudo().create(ticket_vals)
+            ticket = env['helpdesk.ticket'].with_context(
+                skip_toner_attachment_policy_validation=True
+            ).sudo().create(ticket_vals)
 
-            files = request.httprequest.files.getlist('attachments')
             for f in files:
                 if f and f.filename:
-                    env['helpdesk.ticket.attachment.line'].create({
+                    env['helpdesk.ticket.attachment.line'].sudo().create({
                         'ticket_id': ticket.id,
                         'file':      base64.b64encode(f.read()),
                         'filename':  f.filename,
                     })
+            ticket._validate_toner_attachment_policy()
         except (ValidationError, UserError) as err:
             return request.render(
                 'helpdesk_web_form.helpdesk_form_template',
