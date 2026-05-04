@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id="property_contract_inherit_finance_quotes" model="ir.ui.view">
+        <field name="name">finance.quotes.view.form.inherit</field>
+        <field name="model">property.reservation</field>
+        <field name="inherit_id" ref="real_estate_bits.property_reservation_form_view"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='property_id']" position="after">
+                <field name="order_id" invisible="True" />
+                <field name="currency_id" invisible="True" />
+            </xpath>
+            <xpath expr="//button[@name='action_confirm']" position="after">
+                <button string="Send Email Reservation" name="send_email_template_reservation" type="object" class="oe_highlight" invisible="state not in 'draft'"/>
+            </xpath>
+            <xpath expr="//field[@name='channel_partner_id']/../.." position="attributes">
+                <attribute name="invisible">True</attribute>
+            </xpath>
+            <xpath expr="//separator" position="attributes">
+                <attribute name="invisible">True</attribute>
+            </xpath>
+        </field>
+    </record>
+
+</odoo>

@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id="property_contract_worksite_inherit_form" model="ir.ui.view">
+        <field name="name">property.contract.inherit.form</field>
+        <field name="model">property.contract</field>
+        <field name="inherit_id" ref="real_estate_bits.view_property_contract_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//sheet/div[contains(@class,'oe_title')]" position="before">
+                <div class="oe_button_box" name="button_box">
+                    <button
+                      name="action_open_contract_documents"
+                      type="object"
+                      class="oe_stat_button"
+                      icon="fa-folder-open"
+                    >
+                      <field name="documents_count" widget="statinfo" string="Documents"/>
+                    </button>
+                    <button name="action_open_cancel_documents"
+                            type="object"
+                            class="oe_stat_button"
+                            icon="fa-folder-open"
+                            invisible="cancel_doc_count == 0">
+                      <field name="cancel_doc_count" widget="statinfo" string="Cancelaciones"/>
+                    </button>
+                </div>
+            </xpath>
+
+            <xpath expr="//field[@name='property_area']" position="after">
+                <field name="property_area_words"/>
+                <field name="price_per_m_words"/>
+                <field name="pricing_words"/>
+                <field name="advance_payment_words"/>
+                <field name="extra_down_payment_words"/>
+                <field name="total_amount_to_pay_words"/>
+                <field name="amount_total_words"/>
+                <field name="total_interests_to_pay_words"/>
+                <field name="static_total_paid_interests_words"/>
+                <field name="paid_words"/>
+                <field name="total_paid_interests_words"/>
+                <field name="balance_words"/>
+            </xpath>
+        </field>
+    </record>
+
+</odoo>

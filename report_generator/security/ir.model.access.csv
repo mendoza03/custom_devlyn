@@ -1,0 +1,4 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+report_generator.access_mm_contract_document,access_mm_contract_document,report_generator.model_mm_contract_document,base.group_user,1,1,1,1
+report_generator.access_mm_contract_template,access_mm_contract_template,report_generator.model_mm_contract_template,base.group_user,1,1,1,1
+report_generator.access_mm_open_contract_wizard,access_mm_open_contract_wizard,report_generator.model_mm_open_contract_wizard,base.group_user,1,1,1,1

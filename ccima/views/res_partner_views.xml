@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="view_partner_form" model="ir.ui.view">
+        <field name="name">res.partner.view.form.inherit</field>
+        <field name="model">res.partner</field>
+        <field name="inherit_id" ref="base.view_partner_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//page[@name='internal_notes']" position="after">
+                <page name="additional_information" string="Additional information">
+                    <group name="address" string="Address">
+                        <field name="colony"/>
+                        <field name="colony_number"/>
+                    </group>
+                    <group invisible="is_company">
+                        <group name="personal_information" string="Personal information">
+                            <field name="individual_nationality"/>
+                            <field name="individual_dwelling_type"/>
+                            <field name="individual_level_education"/>
+                            <field name="individual_marital_status"/>
+                            <field name="individual_apply_goods"/>
+                            <field name="individual_spouses_name"/>
+                            <field name="individual_date_birth"/>
+                            <field name="individual_curp"/>
+                        </group>
+                        <group name="birth_information" string="place of birth">
+                            <field name="individual_birth_place_nationality" options="{'no_create': True}"/>
+                            <field name="individual_birth_place_state_id" options="{'no_create': True}" invisible="not individual_birth_place_nationality"/>
+                            <field name="individual_birth_place_city_id" options="{'no_create': True}" invisible="individual_birth_place_nationality != %(base.mx)d"/>
+                        </group>
+                        <group name="employment_information" string="Employment information">
+                            <field name="individual_company_work"/>
+                            <field name="individual_company_job_position"/>
+                            <field name="individual_company_seniority_tx"/>
+                            <field name="individual_company_mobile"/>
+                        </group>
+                    </group>
+                    <group name="company_information" string="Company information" invisible="not is_company">
+                        <group>
+                            <field name="company_type_business"/>
+                            <field name="company_activity"/>
+                            <field name="company_articles_incorporation"/>
+                            <field name="company_registry_number"/>
+                            <field name="company_date_registration"/>
+                            <field name="company_notary_number"/>
+                        </group>
+                        <group>
+                            <field name="company_notary_name"/>
+                            <field name="company_city_registration"/>
+                            <field name="company_purpose"/>
+                            <field name="company_commercial_registry_number"/>
+                            <field name="company_legal_representatives"/>
+                        </group>
+                    </group>
+                </page>
+            </xpath>
+
+            <xpath expr="//field[@name='user_id']" position="after">
+                <field name="has_saleman_assigner_group" invisible="True"/>
+            </xpath>
+
+            <xpath expr="//field[@name='user_id']" position="attributes">
+                <attribute name="readonly">not has_saleman_assigner_group</attribute>
+            </xpath>
+        </field>
+    </record>
+</odoo>

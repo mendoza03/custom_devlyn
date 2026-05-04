@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <!-- Parent Menus (Categories/Folders) - WITHOUT actions -->
+    <menuitem id="menu_dashboard_advisor"
+              name="Advisor Dashboard"
+              parent="crm.crm_menu_root"
+              sequence="20"/>
+
+    <menuitem id="menu_dashboard_manager"
+              name="Manager Dashboard"
+              parent="crm.crm_menu_root"
+              sequence="30"/>
+
+    <menuitem id="menu_dashboard_management"
+              name="Management Dashboard"
+              parent="crm.crm_menu_root"
+              sequence="40"/>
+
+    <menuitem id="menu_dashboard_control"
+              name="Control and Measurement Board"
+              parent="crm.crm_menu_root"
+              sequence="50"/>
+
+</odoo>

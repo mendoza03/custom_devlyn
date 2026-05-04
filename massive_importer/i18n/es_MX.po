@@ -1,0 +1,52 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* real_state_bits_finance_quote
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 17.0-20241007\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2024-10-14 19:08+0000\n"
+"PO-Revision-Date: 2024-10-14 19:08+0000\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+
+#. module: massive_importer
+#: model:ir.model.fields,field_description:massive_importer.field_massive_importer__name
+msgid "Upload File"
+msgstr "Subir Archivo"
+
+#. module: massive_importer
+#: model:ir.model.fields,field_description:massive_importer.field_massive_importer__filename
+msgid "Filename Name"
+msgstr "Nombre de Archivo"
+
+#. module: massive_importer
+#: model_terms:ir.ui.view,arch_db:massive_importer.view_massive_importer_values
+msgid "Import Products"
+msgstr "Importar Productos"
+
+#. module: massive_importer
+#: model_terms:ir.ui.view,arch_db:massive_importer.view_massive_importer_values
+msgid "Cancel"
+msgstr "Cancelar"
+
+#. module: massive_importer
+#: model:ir.actions.act_window,name:massive_importer.massive_importer_action
+msgid "Masive Importer"
+msgstr "Importador Masivo"
+
+#. module: massive_importer
+#: model:ir.ui.menu,name:massive_importer.action_property_menu
+msgid "Properties"
+msgstr "Propiedades"
+
+#. module: massive_importer
+#: model:ir.ui.menu,name:massive_importer.massive_importer_menu
+msgid "Massive Importer"
+msgstr "Importador Masivo"

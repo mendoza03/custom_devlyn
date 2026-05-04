@@ -1,0 +1,234 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    
+    <!-- Vista de lista de semanas con comparación -->
+    <record id="view_sale_goal_week_comparison_list" model="ir.ui.view">
+        <field name="name">sale.goal.week.comparison.list</field>
+        <field name="model">sale.goal.week</field>
+        <field name="arch" type="xml">
+            <list>
+                <field name="week_name"/>
+                <field name="start_date"/>
+                <field name="end_date"/>
+                
+                <!-- Metas -->
+                <field name="weekly_leads" string="Meta Leads"/>
+                <field name="weekly_closed" string="Meta Cierres"/>
+                
+                <!-- Real -->
+                <field name="actual_leads" string="Real Leads"/>
+                <field name="actual_closed" string="Real Cierres"/>
+                
+                <!-- Cumplimiento -->
+                <field name="leads_achievement" string="% Leads" widget="progressbar"/>
+                <field name="closed_achievement" string="% Cierres" widget="progressbar"/>
+                
+                <!-- Campos espejo invisibles para Dashboard Ninja -->
+                <field name="actual_leads_stored" invisible="1"/>
+                <field name="actual_prospect_stored" invisible="1"/>
+                <field name="actual_meeting_stored" invisible="1"/>
+                <field name="actual_opportunity_stored" invisible="1"/>
+                <field name="actual_reserved_stored" invisible="1"/>
+                <field name="actual_closed_stored" invisible="1"/>
+                <field name="actual_revenue_stored" invisible="1"/>
+                <field name="leads_achievement_stored" invisible="1"/>
+                <field name="prospect_achievement_stored" invisible="1"/>
+                <field name="meeting_achievement_stored" invisible="1"/>
+                <field name="opportunity_achievement_stored" invisible="1"/>
+                <field name="reserved_achievement_stored" invisible="1"/>
+                <field name="closed_achievement_stored" invisible="1"/>
+                <field name="leads_achievement_pct" invisible="1"/>
+                <field name="prospect_achievement_pct" invisible="1"/>
+                <field name="meeting_achievement_pct" invisible="1"/>
+                <field name="opportunity_achievement_pct" invisible="1"/>
+                <field name="reserved_achievement_pct" invisible="1"/>
+                <field name="closed_achievement_pct" invisible="1"/>
+                
+                <!-- Campos display con % para Dashboard Ninja -->
+                <field name="leads_achievement_display" invisible="1"/>
+                <field name="prospect_achievement_display" invisible="1"/>
+                <field name="meeting_achievement_display" invisible="1"/>
+                <field name="opportunity_achievement_display" invisible="1"/>
+                <field name="reserved_achievement_display" invisible="1"/>
+                <field name="closed_achievement_display" invisible="1"/>
+                <field name="actual_revenue_display" invisible="1"/>
+            </list>
+        </field>
+    </record>
+    
+    <!-- Vista gráfica -->
+    <record id="view_sale_goal_week_comparison_graph" model="ir.ui.view">
+        <field name="name">sale.goal.week.comparison.graph</field>
+        <field name="model">sale.goal.week</field>
+        <field name="arch" type="xml">
+            <graph string="Metas vs Real" type="bar" stacked="False">
+                <field name="week_name"/>
+                <field name="weekly_leads" type="measure"/>
+                <field name="actual_leads" type="measure"/>
+                <field name="weekly_closed" type="measure"/>
+                <field name="actual_closed" type="measure"/>
+            </graph>
+        </field>
+    </record>
+    
+    <!-- Extender vista del período para mostrar campos CRM -->
+    <record id="view_sale_goal_period_form_crm" model="ir.ui.view">
+        <field name="name">sale.goal.period.form.crm</field>
+        <field name="model">sale.goal.period</field>
+        <field name="arch" type="xml">
+            <form string="Período de Meta">
+                <header>
+                    <button name="update_period_leads" 
+                            type="object" 
+                            string="Actualizar Leads" 
+                            class="btn-secondary"/>
+                    <button name="action_view_leads" 
+                            type="object" 
+                            string="Ver Leads en CRM" 
+                            class="oe_highlight"
+                            invisible="actual_leads == 0"/>
+                    <button name="action_force_recompute" 
+                            type="object" 
+                            string="🔄 Recalcular Porcentajes" 
+                            class="btn-warning"/>
+                </header>
+                <sheet>
+                    <group>
+                        <group>
+                            <field name="period_name" readonly="1"/>
+                            <field name="monthly_amount"/>
+                            <field name="monthly_units"/>
+                            <field name="monthly_leads"/>
+                            <field name="monthly_prospect"/>
+                            <field name="monthly_meeting"/>
+                            <field name="monthly_opportunity"/>
+                            <field name="monthly_reserved"/>
+                            <field name="monthly_closed"/>
+                        </group>
+                        <group string="Datos Reales del CRM">
+                            <field name="actual_leads" string="Leads Reales"/>
+                            <field name="leads_achievement" string="% Leads" widget="percentage"/>
+                            <field name="actual_revenue_lead" string="Ingreso Real Leads" widget="monetary"/>
+                            <field name="lead_revenue_pct" string="% Ingreso Leads" widget="percentage"/>
+
+                            <field name="actual_prospect" string="Prospectos Reales"/>
+                            <field name="prospect_achievement" string="% Prospectos" widget="percentage"/>
+                            <field name="actual_revenue_prospect" string="Ingreso Real Prospectos" widget="monetary"/>
+                            <field name="prospect_revenue_pct" string="% Ingreso Prospectos" widget="percentage"/>
+
+                            <field name="actual_meeting" string="Citas Reales"/>
+                            <field name="meeting_achievement" string="% Citas" widget="percentage"/>
+                            <field name="actual_revenue_meeting" string="Ingreso Real Citas" widget="monetary"/>
+                            <field name="meeting_revenue_pct" string="% Ingreso Citas" widget="percentage"/>
+
+                            <field name="actual_opportunity" string="Oportunidades Reales"/>
+                            <field name="opportunity_achievement" string="% Oportunidades" widget="percentage"/>
+                            <field name="actual_revenue_opportunity" string="Ingreso Real Oportunidades" widget="monetary"/>
+                            <field name="opportunity_revenue_pct" string="% Ingreso Oportunidades" widget="percentage"/>
+
+                            <field name="actual_reserved" string="Apartados Reales"/>
+                            <field name="reserved_achievement" string="% Apartados" widget="percentage"/>
+                            <field name="actual_revenue_reserved" string="Ingreso Real Apartados" widget="monetary"/>
+                            <field name="reserved_revenue_pct" string="% Ingreso Apartados" widget="percentage"/>
+
+                            <field name="actual_closed" string="Cierres Reales"/>
+                            <field name="closed_achievement" string="% Cierres" widget="percentage"/>
+                            <field name="actual_revenue_closed" string="Ingreso Real Cierres" widget="monetary"/>
+                            <field name="closed_revenue_pct" string="% Ingreso Cierres" widget="percentage"/>
+
+                            <field name="actual_revenue_stored" string="Ingreso Esperado Real Total" widget="monetary"/>
+                            <field name="revenue_achievement" string="% Ingresos Total" widget="percentage"/>
+                            
+                            <!-- Campos espejo invisibles para Dashboard Ninja -->
+                            <field name="actual_leads_stored" invisible="1"/>
+                            <field name="actual_prospect_stored" invisible="1"/>
+                            <field name="actual_meeting_stored" invisible="1"/>
+                            <field name="actual_opportunity_stored" invisible="1"/>
+                            <field name="actual_reserved_stored" invisible="1"/>
+                            <field name="actual_closed_stored" invisible="1"/>
+                            <field name="actual_revenue_stored" invisible="1"/>
+                            <field name="leads_achievement_stored" invisible="1"/>
+                            <field name="prospect_achievement_stored" invisible="1"/>
+                            <field name="meeting_achievement_stored" invisible="1"/>
+                            <field name="opportunity_achievement_stored" invisible="1"/>
+                            <field name="reserved_achievement_stored" invisible="1"/>
+                            <field name="closed_achievement_stored" invisible="1"/>
+                            <field name="revenue_achievement_stored" invisible="1"/>
+                            <field name="monthly_achievement_stored" invisible="1"/>
+                            <field name="leads_achievement_pct" invisible="1"/>
+                            <field name="prospect_achievement_pct" invisible="1"/>
+                            <field name="meeting_achievement_pct" invisible="1"/>
+                            <field name="opportunity_achievement_pct" invisible="1"/>
+                            <field name="reserved_achievement_pct" invisible="1"/>
+                            <field name="closed_achievement_pct" invisible="1"/>
+                            <field name="revenue_achievement_pct" invisible="1"/>
+                            <field name="monthly_achievement_pct" invisible="1"/>
+                            <field name="lead_revenue_pct" invisible="1"/>
+                            <field name="prospect_revenue_pct" invisible="1"/>
+                            <field name="meeting_revenue_pct" invisible="1"/>
+                            <field name="opportunity_revenue_pct" invisible="1"/>
+                            <field name="reserved_revenue_pct" invisible="1"/>
+                            <field name="closed_revenue_pct" invisible="1"/>
+                            <field name="actual_revenue_lead" invisible="1"/>
+                            <field name="actual_revenue_prospect" invisible="1"/>
+                            <field name="actual_revenue_meeting" invisible="1"/>
+                            <field name="actual_revenue_opportunity" invisible="1"/>
+                            <field name="actual_revenue_reserved" invisible="1"/>
+                            <field name="actual_revenue_closed" invisible="1"/>
+                            
+                            <!-- Campos display con % para Dashboard Ninja -->
+                            <field name="leads_achievement_display" invisible="1"/>
+                            <field name="prospect_achievement_display" invisible="1"/>
+                            <field name="meeting_achievement_display" invisible="1"/>
+                            <field name="opportunity_achievement_display" invisible="1"/>
+                            <field name="reserved_achievement_display" invisible="1"/>
+                            <field name="closed_achievement_display" invisible="1"/>
+                            <field name="revenue_achievement_display" invisible="1"/>
+                            <field name="actual_revenue_display" invisible="1"/>
+                            <field name="monthly_amount_display" invisible="1"/>
+                            <!-- Campos display de ingreso por etapa para Dashboard Ninja -->
+                            <field name="lead_revenue_display" invisible="1"/>
+                            <field name="prospect_revenue_display" invisible="1"/>
+                            <field name="meeting_revenue_display" invisible="1"/>
+                            <field name="opportunity_revenue_display" invisible="1"/>
+                            <field name="reserved_revenue_display" invisible="1"/>
+                            <field name="closed_revenue_display" invisible="1"/>
+                            <field name="lead_revenue_pct_display" invisible="1"/>
+                            <field name="prospect_revenue_pct_display" invisible="1"/>
+                            <field name="meeting_revenue_pct_display" invisible="1"/>
+                            <field name="opportunity_revenue_pct_display" invisible="1"/>
+                            <field name="reserved_revenue_pct_display" invisible="1"/>
+                            <field name="closed_revenue_pct_display" invisible="1"/>
+                        </group>
+                    </group>
+                    
+                    <group string="Leads del Período" invisible="actual_leads == 0">
+                        <field name="lead_ids" nolabel="1">
+                            <list>
+                                <field name="name"/>
+                                <field name="partner_name"/>
+                                <field name="stage_id"/>
+                                <field name="expected_revenue"/>
+                                <field name="probability"/>
+                            </list>
+                        </field>
+                    </group>
+                    
+                    <notebook>
+                        <page string="Semanas">
+                            <field name="week_ids"/>
+                        </page>
+                    </notebook>
+                </sheet>
+            </form>
+        </field>
+    </record>
+    
+    <!-- Acción para el dashboard -->
+    <record id="action_sale_goal_week_comparison" model="ir.actions.act_window">
+        <field name="name">Metas vs Real</field>
+        <field name="res_model">sale.goal.week</field>
+        <field name="view_mode">graph,list</field>
+    </record>
+    
+</odoo>

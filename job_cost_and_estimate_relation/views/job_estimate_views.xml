@@ -1,0 +1,26 @@
+<?xml version="1.0"?>
+<odoo>
+    <data>
+        <record model="ir.ui.view" id="job_inherit_estimate_form_view">
+            <field name="name">sale.estimate.job.inherit</field>
+            <field name="model">sale.estimate.job</field>
+            <field name="inherit_id" ref="job_cost_estimate_customer.view_sale_estimate_form_job"/>
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='quotation_id']" position="after">
+                    <field name="jobcost_id"/>
+                </xpath>
+                <!-- <xpath expr="//sheet/div[@class='oe_title']" position="before"> -->
+                <xpath expr="//sheet/div[hasclass('oe_title')]" position="before">
+                    <div class="oe_button_box" name="button_box">
+                        <button name="action_view_job_cost_sheet"
+                            type="object"
+                            class="oe_stat_button"
+                            string="Job Cost Sheet"
+                            icon="fa-pencil-square-o">
+                        </button>
+                    </div>
+                </xpath>
+            </field>
+        </record>
+    </data>
+</odoo>

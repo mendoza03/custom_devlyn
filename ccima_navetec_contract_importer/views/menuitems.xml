@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <menuitem id="menu_navetec_contract_importer"
+            name="Contract importer navetec"
+            parent="real_estate_bits.menu_property_contracts"
+            action="ccima_navetec_contract_importer_action"
+            sequence="30"/>
+
+</odoo>

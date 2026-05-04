@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id="view_property_contract_form" model="ir.ui.view">
+        <field name="name">property.contract.view.form.inherit</field>
+        <field name="model">property.contract</field>
+        <field name="inherit_id" ref="real_estate_bits.view_property_contract_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//div[hasclass('oe_title')]" position="before">
+                <div class="oe_button_box" name="button_box">
+                    <field name="commission_id" invisible="1" column_invisible="1"/>
+                    <button name="action_view_commission" type="object" icon="fa-usd" string="Commission" invisible="not commission_id" groups="real_estate_commission.group_commission_manager"/>
+                </div>
+            </xpath>
+        </field>
+    </record>
+
+</odoo>

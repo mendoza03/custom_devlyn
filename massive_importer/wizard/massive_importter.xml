@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id="view_massive_importer_values" model="ir.ui.view">
+		<field name="name">massive.importer.wizard.form</field>
+		<field name="model">massive.importer</field>
+		<field name="arch" type="xml">
+			<form string="Importador de Productos">
+				<group>
+					<field name="name" filename="file_name"/>
+					<field name="file_name" invisible="1"/>
+				</group>
+				<footer>
+					<button string="Import Products" name="action_submit" type="object" class="btn-primary"/>
+					<button string="Cancel" class="btn-secondary" special="cancel"/>
+				</footer>
+			</form>
+		</field>
+	</record>
+
+    <record id="massive_importer_action" model="ir.actions.act_window">
+        <field name="name">Masive Importer</field>
+        <field name="res_model">massive.importer</field>
+        <field name="view_mode">form</field>
+        <field name="target">new</field>
+    </record>
+
+    <menuitem
+        id="massive_importer_menu"
+        name="Massive Importer"
+        action="massive_importer_action"
+        parent="real_estate_bits.menu_property_list_sub_unit"
+        sequence="10"/>
+
+    <menuitem
+        id="action_property_menu"
+        name="Properties"
+        action="real_estate_bits.action_property_act_window"
+        parent="real_estate_bits.menu_property_list_sub_unit"
+        sequence="9"/>
+</odoo>

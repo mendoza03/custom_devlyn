@@ -1,0 +1,221 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <template id="report_amortization_calculator_document" name="Amortization Calculator Report">
+    <t t-call="web.external_layout">
+        <t t-if="docs" t-foreach="docs" t-as="o">
+            <link rel="stylesheet" type="text/css" href="/habita_report_customs/static/src/css/quotation_style.css"/>
+            <div class="page habita-font">
+
+                <div class="habita-horizontal-line"/>
+
+                <div class="row habita-title-subtitle habita-col-6-style" id="intro_row">
+                    <div class="col-6 text-start habita-col-6-style">
+                        <h6 class="my-0 col-lg flex-grow-1 mb-1 mb-lg-0">
+                            CLIENT: <t t-out="o.partner_id.name"/>
+                        </h6>
+                    </div>
+                    <div class="col-6 text-end habita-col-6-style">
+                        <h6 class="my-0 col-lg flex-grow-1 mb-1 mb-lg-0">
+                            Date: <span t-field="o.create_date" t-options='{"widget": "date"}'/>
+                        </h6>
+                    </div>
+                </div>
+
+                <div class="habita-tiny-horizontal-line"/>
+
+                <div class="mb-2" style="background-color:#062E6F;border: 1px solid #0E2954;"/>
+                <div class="habita-title">
+                    <div class="title" style="background-color: #FFFFFF;">
+                        FINANCIAL YEAR
+                    </div>
+                </div>
+
+                <div class="row no-margin no-padding">
+
+                  <div class="col-8">
+
+                    <table class="habita-finance-table-style" style="width:90%;">
+                      <thead class="habita-table-header">
+                        <tr>
+                          <th class="text-start">FINANCE:</th>
+                          <th class="text-start" t-foreach="o.comparison_line_ids" t-as="line">
+                            <span t-out="line.plan_name"/>
+                          </th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        <tr><td>% Discount</td>
+                          <td class="highlight" t-foreach="o.comparison_line_ids" t-as="line">
+                            <span t-esc="'{:,.2f}'.format(line.promotion_id.porcent * 100)"/>%
+                          </td>
+                        </tr>
+                        <tr><td>Finance in months</td>
+                          <td t-foreach="o.comparison_line_ids" t-as="line">
+                            <span t-esc="'{:,.2f}'.format(line.months)"/>
+                          </td>
+                        </tr>
+                        <tr><td>P.U. with discount</td>
+                          <td t-foreach="o.comparison_line_ids" t-as="line">
+                              <t t-if="line.promotion_id.porcent_financial > 0">
+                                <t t-set="total_price_des" t-value="(line.gradual_financing_amount + line.hitch_amount) / o.meters"/>
+                                  $<span t-esc="'{:,.2f}'.format(total_price_des)"/>
+                              </t>
+                              <t t-else="">
+                                  $<span t-esc="'{:,.2f}'.format(line.unit_price_discount)"/>
+                              </t>
+                          </td>
+                        </tr>
+                        <tr style="background-color:#D6E4F5;"><td>Lot Price without Discount</td>
+                          <td t-foreach="o.comparison_line_ids" t-as="line">
+                            $<span t-esc="'{:,.2f}'.format(line.price_lot)"/>
+                          </td>
+                        </tr>
+                        <tr><td>Discount</td>
+                          <td class="highlight" t-foreach="o.comparison_line_ids" t-as="line">
+                            $<span t-esc="'{:,.2f}'.format(line.discount_value)"/>
+                          </td>
+                        </tr>
+                        <tr style="background-color:#D6E4F5;"><td>Gradual Initial Investment</td>
+                          <td t-foreach="o.comparison_line_ids" t-as="line">
+                              <t t-if="line.promotion_id.porcent_financial > 0">
+                                <t t-set="total_invest" t-value="line.gradual_financing_amount + line.hitch_amount"/>
+                                  $<span t-esc="'{:,.2f}'.format(total_invest)"/>
+                              </t>
+                              <t t-else="">
+                                  $<span t-esc="'{:,.2f}'.format(line.gradual_initial_investment)"/>
+                              </t>
+                          </td>
+                        </tr>
+                        <tr><td>Hitch 10%</td>
+                          <td t-foreach="o.comparison_line_ids" t-as="line">
+                            $<span t-esc="'{:,.2f}'.format(line.hitch_amount)"/>
+                          </td>
+                        </tr>
+                        <tr style="background-color:#D6E4F5;"><td>Amount Financial:</td>
+                          <td t-foreach="o.comparison_line_ids" t-as="line">
+                            $<span t-esc="'{:,.2f}'.format(line.gradual_financing_amount)"/>
+                          </td>
+                        </tr>
+
+                        <t t-foreach="o._prepare_blocks_for_report()" t-as="row">
+                            <tr>
+                                <td><t t-esc="row['name']"/></td>
+                                <t t-foreach="row['values']" t-as="val">
+                                    <td>
+                                        <t t-if="val is not None">
+                                            $<span t-esc="'{:,.2f}'.format(val)"/>
+                                        </t>
+                                        <t t-else="">------</t>
+                                    </td>
+                                </t>
+                            </tr>
+                        </t>
+                      </tbody>
+                    </table>
+
+                    <div style="height:30px;"></div>
+
+                    <table class="habita-finance-table-style" style="width:90%;">
+                      <tbody>
+                        <tr>
+                          <td>Utility in 4 years</td>
+                          <td t-foreach="o.comparison_line_ids" t-as="line">
+                            <t t-set="utility" t-value="o.val_year_extra - line.gradual_initial_investment"/>
+                            $<span t-esc="'{:,.2f}'.format(utility)"/>
+                          </td>
+                        </tr>
+                        <tr style="background-color:#D6E4F5;">
+                          <td>Projected performance in 4 years</td>
+                          <td t-foreach="o.comparison_line_ids" t-as="line">
+                            <t t-set="divided" t-value="((o.val_year_extra - line.gradual_initial_investment) / line.gradual_initial_investment) * 100"/>
+                            <span t-esc="'{:,.2f}'.format(round(divided))"/>%
+                          </td>
+                        </tr>
+                        <tr>
+                          <td>Performance divided by 4</td>
+                          <td t-foreach="o.comparison_line_ids" t-as="line">
+                            <t t-set="divided_by" t-value="(o.val_year_extra - line.gradual_initial_investment) / line.gradual_initial_investment"/>
+                            <t t-set="total_divided" t-value="(divided_by / 4) * 100"/>
+                            <span t-esc="'{:,.2f}'.format(round(total_divided))"/>%
+                          </td>
+                        </tr>
+                      </tbody>
+                    </table>
+
+                  </div>
+
+                  <div class="col-4">
+
+                    <table class="habita-finance-table-style" style="width:100%;">
+                      <tbody>
+                        <tr><td>Footage in m²</td><td class="highlight text-end" style="background-color:#062E6F; width:80px;"><span t-esc="'{:,.2f}'.format(o.meters)"/></td></tr>
+                        <tr><td>List price × m²</td><td class="highlight text-end" style="background-color:#062E6F; width:80px;">$<span t-esc="'{:,.2f}'.format(o.price_meter)"/></td></tr>
+                      </tbody>
+                    </table>
+
+                      <br/>
+                      <table class="habita-finance-table-style" style="width:100%;">
+                      <tbody>
+                        <tr><td>Annual capital gains yield</td><td class="highlight text-end" style="background-color:#062E6F; width:80px;">10.50%</td></tr>
+                      </tbody>
+                    </table>
+
+                    <div style="height:23px;"></div>
+
+                    <table class="habita-finance-table-style" style="width:100%;">
+                      <thead class="habita-table-header">
+                        <tr><th colspan="2" class="text-start">ASSET PROJECTION:</th></tr>
+                      </thead>
+                      <tbody>
+                        <tr><td>Value in 1 year</td><td class="text-end">$<span t-esc="'{:,.2f}'.format(o.val_year_1)"/></td></tr>
+                        <tr><td>Value in 2 years</td><td class="text-end">$<span t-esc="'{:,.2f}'.format(o.val_year_2)"/></td></tr>
+                        <tr><td>Value in 3 years</td><td class="text-end">$<span t-esc="'{:,.2f}'.format(o.val_year_3)"/></td></tr>
+                        <tr class="habita-table-header"><td>Value in 4 years</td><td class="text-end">$<span t-esc="'{:,.2f}'.format(o.val_year_4)"/></td></tr>
+                      </tbody>
+                    </table>
+
+                    <div style="height:8px;"></div>
+
+                    <div class="fin-notes"  style="font-size: 10pt;">
+                      <div class="fin-title">
+                        We have <t t-esc="len(o.comparison_line_ids)"/> Financing models:
+                      </div>
+                      <t t-foreach="o.comparison_line_ids" t-as="line">
+                        <div>
+                          <img src="/habita_report_customs/static/src/imgs/check_box_icon.svg" alt="Checkbox" style="width:16px;height:16px;"/>
+                          <t t-esc="line.plan_name"/>
+                        </div>
+                      </t>
+                        <div>
+                            Down payment: 10% of the total value
+                        </div>
+                        <div>
+                            First 48 months interest-free.
+                        </div>
+                        <div>
+                            3-year installment.
+                        </div>
+                    </div>
+
+                  </div>
+                </div>
+
+              <br/>
+
+                <section id="seller_info">
+                    <table class="col-6 habita-finance-table-style">
+                        <thead class="habita-table-header">
+                            <tr><td>Seller:</td><td><span t-field="user.partner_id.name"/></td></tr>
+                        </thead>
+                        <tbody>
+                            <tr><td>Phone:</td><td><span t-field="user.partner_id.phone"/></td></tr>
+                            <tr><td>Email:</td><td><span t-field="user.partner_id.email"/></td></tr>
+                        </tbody>
+                    </table>
+                </section>
+
+            </div>
+        </t>
+    </t>
+</template>
+</odoo>

@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <data noupdate="1">
+        <record id="rental_quotation_mail_template" model="mail.template">
+            <field name="name">Rental Quotation Mail Template</field>
+            <field name="model_id" ref="tk_rental.model_rent_order"/>
+            <field name="subject">Rental Quotation for {{ object.customer_id.name }}</field>
+            <field name="email_from">{{object.company_id.email}}</field>
+            <field name="partner_to">{{ object.customer_id.id }}</field>
+            <field name="body_html" type="html">
+                <p>
+                    Dear,
+                    <h4>
+                        <strong>
+                            <t t-out="object.customer_id.name"/>
+                        </strong>
+                    </h4>
+                </p>
+                <p>
+                    We hope this message finds you well. Thank you for considering
+                    <span>
+                        <strong>
+                            <t t-out="object.company_id.name"/>
+                        </strong>
+                    </span>
+                    for your rental needs. We are pleased to provide you with a rental quotation based on your
+                    requirements. Please find the details below:
+                </p>
+                <hr/>
+                <table>
+                    <tr>
+                        <td colspan="2">
+                            <strong>
+                                Contract Details
+                            </strong>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <strong>
+                                Order Number:
+                            </strong>
+                        </td>
+                        <td>
+                            <t t-out="object.order_number"/>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <strong>
+                                Start Date:
+                            </strong>
+                        </td>
+                        <td>
+                            <t t-out="object.start_date"/>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <strong>
+                                Return Date:
+                            </strong>
+                        </td>
+                        <td>
+                            <t t-out="object.return_date"/>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <strong>
+                                Total Estimations:
+                            </strong>
+                        </td>
+                        <td>
+                            <span t-field="object.total_item_cost"/>
+                        </td>
+                    </tr>
+                </table>
+                <hr/>
+                <p>
+                    Please review the quotation, and if you have any questions or require further information, do not
+                    hesitate to contact us at
+                    <span>
+                        <strong>
+                            <t t-out="object.company_id.phone"/>
+                        </strong>
+                    </span>
+                </p>
+                <p>
+                    If you are ready to proceed with the rental, please confirm your acceptance by replying to this
+                    email or contacting us by phone.
+                </p>
+                <p>
+                    Thank you for choosing
+                    <span>
+                        <strong>
+                            <t t-out="object.company_id.name"/>
+                        </strong>
+                    </span>
+                    for your rental needs. We look forward to serving you and providing you with excellent service.
+                </p>
+                <h5>
+                    Best regards,
+                    <br/>
+                    <strong>
+                        <t t-out="object.responsible_id.name"/>
+                    </strong>
+                </h5>
+                <hr/>
+                <span>
+                    <h5>
+                        <t t-out="object.company_id.name"/>
+                    </h5>
+                    <t t-out="object.company_id.phone"/>
+                    <br/>
+                    <t t-out="object.company_id.email"/>
+                    <br/>
+                    <t t-out="object.company_id.website"/>
+                </span>
+            </field>
+            <field name="report_template_ids" eval="[(4, ref('tk_rental.action_quotation_report_template'))]"/>
+            <field name="lang">{{ object.customer_id.lang }}</field>
+            <field name="auto_delete" eval="False"/>
+        </record>
+    </data>
+</odoo>

@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id="rent_stock_picking_form_view" model="ir.ui.view">
+            <field name="name">rent.stock.picking.form.view</field>
+            <field name="model">stock.picking</field>
+            <field name="inherit_id" ref="stock.view_picking_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='origin']" position="after">
+                    <field name="rent_order_id" invisible="rent_order_id == False" readonly="1"/>
+                    <field name="maintenance_request_id" invisible="maintenance_request_id == False" readonly="1"/>
+                </xpath>
+            </field>
+        </record>
+
+        <!--Delivery Orders-->
+        <record id="action_delivery_order" model="ir.actions.act_window">
+            <field name="name">Delivery Orders</field>
+            <field name="res_model">stock.picking</field>
+            <field name="domain">[('rent_order_id', '!=', False), ('is_return_order', '=', False)]</field>
+            <field name="context">{'create': False}</field>
+            <field name="view_mode">list,kanban,form,calendar,activity</field>
+        </record>
+
+        <!--Return Orders-->
+        <record id="action_return_order" model="ir.actions.act_window">
+            <field name="name">Return Orders</field>
+            <field name="res_model">stock.picking</field>
+            <field name="domain">[('rent_order_id', '!=', False), ('is_return_order', '!=', False)]</field>
+            <field name="context">{'create': False}</field>
+            <field name="view_mode">list,kanban,form,calendar,activity</field>
+        </record>
+    </data>
+</odoo>

@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <!-- List View -->
+    <record id="view_property_sales_week_property_detail_list" model="ir.ui.view">
+        <field name="name">property.sales.week.property.detail.list</field>
+        <field name="model">property.sales.week.property.detail</field>
+        <field name="arch" type="xml">
+            <list string="Detalle de Propiedades Vendidas" create="false" edit="false" delete="false">
+                <field name="week_name"/>
+                <field name="week_number"/>
+                <field name="property_name"/>
+                <field name="property_ref"/>
+                <field name="manager_name"/>
+                <field name="cluster_name"/>
+                <field name="worksite_name"/>
+                <field name="sold_amount_display"/>
+                <field name="state"/>
+                <field name="calendar_id"/>
+            </list>
+        </field>
+    </record>
+
+    <!-- Form View -->
+    <record id="view_property_sales_week_property_detail_form" model="ir.ui.view">
+        <field name="name">property.sales.week.property.detail.form</field>
+        <field name="model">property.sales.week.property.detail</field>
+        <field name="arch" type="xml">
+            <form string="Detalle de Propiedad" create="false" edit="false" delete="false">
+                <sheet>
+                    <group>
+                        <group string="Semana">
+                            <field name="week_name" readonly="1"/>
+                            <field name="week_number" readonly="1"/>
+                            <field name="calendar_id" readonly="1"/>
+                        </group>
+                        <group string="Propiedad">
+                            <field name="property_id" readonly="1"/>
+                            <field name="property_ref" readonly="1"/>
+                            <field name="state" readonly="1"/>
+                        </group>
+                    </group>
+                    <group>
+                        <group string="Ubicación">
+                            <field name="cluster_id" readonly="1"/>
+                            <field name="worksite_id" readonly="1"/>
+                        </group>
+                        <group string="Venta">
+                            <field name="manager_id" readonly="1"/>
+                            <field name="sold_amount_display" readonly="1"/>
+                        </group>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <!-- Search View -->
+    <record id="view_property_sales_week_property_detail_search" model="ir.ui.view">
+        <field name="name">property.sales.week.property.detail.search</field>
+        <field name="model">property.sales.week.property.detail</field>
+        <field name="arch" type="xml">
+            <search>
+                <field name="property_name"/>
+                <field name="manager_name"/>
+                <field name="cluster_name"/>
+                <field name="worksite_name"/>
+                <field name="week_number"/>
+                <field name="calendar_id"/>
+                <group expand="0" string="Group By">
+                    <filter string="Semana" name="group_week" context="{'group_by': 'week_number'}"/>
+                    <filter string="Gerente" name="group_manager" context="{'group_by': 'manager_id'}"/>
+                    <filter string="Cluster" name="group_cluster" context="{'group_by': 'cluster_id'}"/>
+                    <filter string="Obra" name="group_worksite" context="{'group_by': 'worksite_id'}"/>
+                    <filter string="Calendario" name="group_calendar" context="{'group_by': 'calendar_id'}"/>
+                </group>
+            </search>
+        </field>
+    </record>
+
+    <!-- Action -->
+    <record id="action_property_sales_week_property_detail" model="ir.actions.act_window">
+        <field name="name">Detalle por Propiedades (Dashboard)</field>
+        <field name="res_model">property.sales.week.property.detail</field>
+        <field name="view_mode">list,form</field>
+    </record>
+
+    <!-- Menu -->
+    <menuitem id="menu_property_sales_week_property_detail"
+              name="Detalle por Propiedades (Dashboard)"
+              parent="real_estate_bits.menu_real_estate_configuration"
+              action="action_property_sales_week_property_detail"
+              sequence="18"/>
+
+</odoo>

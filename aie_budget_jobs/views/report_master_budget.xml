@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="master_budget_report" model="account.report">
+    <field name="name">Master Budget Report</field>
+    <field name="custom_handler_model_id" ref="model_master_budget_report_handler"/>
+    <field name="column_ids" eval="[(5, 0, 0)]"/>
+     <field name="column_ids" eval="[
+        (0, 0, {'name': 'code', 'expression_label': 'code'}),
+        (0, 0, {'name': 'name', 'expression_label': 'name'}),
+        (0, 0, {'name': 'type', 'expression_label': 'type'}),
+        (0, 0, {'name': 'parent', 'expression_label': 'parent'}),
+        (0, 0, {'name': 'project', 'expression_label': 'project'}),
+        (0, 0, {'name': 'task', 'expression_label': 'task'}),
+        (0, 0, {'name': 'product', 'expression_label': 'product'}),
+        (0, 0, {'name': 'price unit', 'expression_label': 'price_unit'}),
+        (0, 0, {'name': 'quantity', 'expression_label': 'quantity'}),
+        (0, 0, {'name': 'UoM', 'expression_label': 'product_uom'}),
+        (0, 0, {'name': 'Subtotal', 'expression_label': 'price_subtotal'}),
+        (0, 0, {'name': 'Total', 'expression_label': 'price_total'}),
+        (0, 0, {'name': 'amount residual', 'expression_label': 'amount_residual'})
+    ]"/>
+  </record>
+
+  <record id="action_report_master_budget" model="ir.actions.client">
+    <field name="name">Master Budget Report</field>
+    <field name="tag">account_report</field>
+    <field name="context" eval="{'report_id': ref('master_budget_report')}"/>
+  </record>
+
+    <menuitem id="menu_master_budget_report"
+          name="Master Budget Report"
+          groups="account.group_account_readonly"
+          parent="aie_master_budget.master_budget_root_menu"
+          sequence="30"
+          action="action_report_master_budget"/>
+
+</odoo>

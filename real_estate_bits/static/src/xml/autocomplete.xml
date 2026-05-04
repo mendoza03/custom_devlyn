@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<templates id="template" xml:space="preserve">
+    <t t-name="AutoComplete" t-inherit-mode="primary" t-inherit="web.CharField">
+        <xpath expr="//t[@t-else='']" position="inside">
+            <button t-if="hasGoogle.val" class="btn btn-default map-toggle" t-on-click="toggleMap"
+                    style="width: 32px; height: 26px; text-align: center; padding: 0; float: right;">
+                <img style="width: 16px;" src="/real_estate_bits/static/src/img/marker.png"/>
+            </button>
+            <div class='gmap-container' t-ref="gmapContainer"
+                style=" height: 250px; width: 100%; border-radius: 4px; position: fixed; z-index:999; display: none;"/>
+        </xpath>
+    </t>
+</templates>

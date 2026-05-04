@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="quick_create_opportunity_form_inherit_crm" model="ir.ui.view">
+        <field name="name">crm.lead.view.form.inherit</field>
+        <field name="model">crm.lead</field>
+        <field name="inherit_id" ref="crm.quick_create_opportunity_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='phone']" position="after">
+                <field name="medium_id" options="{'no_create': True, 'no_open': True}"/>
+                <field name="source_id" required="1" options="{'no_create': True, 'no_open': True}"/>
+                <field name="referred"/>
+            </xpath>
+        </field>
+    </record>
+</odoo>

@@ -1,0 +1,146 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id="view_property_contract_form_customs" model="ir.ui.view">
+        <field name="name">property.contract.view.form.inherit</field>
+        <field name="model">property.contract</field>
+        <field name="inherit_id" ref="real_estate_bits.view_property_contract_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='account_income']" position="after">
+                <field name="order_id" invisible="True" />
+                <field name="currency_id" invisible="True" />
+                <field name="moratorium_interest" readonly="state not in 'draft'" widget="percentage" />
+            </xpath>
+            
+            <xpath expr="//sheet//field[@name='partner_id']" position="attributes">
+                <attribute name="string">costumer</attribute>
+            </xpath>
+
+            <xpath expr="//sheet//field[@name='property_area']" position="attributes">
+                <attribute name="string">property area (m2)</attribute>
+            </xpath>
+
+            <xpath expr="//notebook//field[@name='loan_line_ids']//list//field[@name='amount']" position="attributes">
+                <attribute name="string">monthly payment</attribute>
+            </xpath>
+
+            <xpath expr="//notebook//field[@name='loan_line_ids']//list//field[@name='invoice_id']" position="attributes">
+                <attribute name="widget">many2one</attribute>
+            </xpath>
+            
+            <xpath expr="//notebook//field[@name='loan_line_ids']//list//field[@name='amount']" position="before">
+                <field name="capital_payment_state" column_invisible="True"/>
+                <field name="initial_balance" decoration-success="capital_payment_state == 'paid'" decoration-info="capital_payment_state == 'draft'"  decoration-warning="capital_payment_state == 'debt'" optional="show"/>
+            </xpath>
+
+            <xpath expr="//notebook//field[@name='loan_line_ids']//list//field[@name='amount_residual']" position="after">
+                <field name="credit_note_type_decoration" column_invisible="True"/>
+                <field name="amount_paid" optional="show"/>
+                <field name="payment_date" optional="show"/>
+                <field name="final_balance" optional="show"/>
+                <field name="moratorium_interest" optional="show"/>
+                <field name="interest_of_interest" optional="hide"/>
+                <field name="interest_accrued" optional="show"/>
+                <field name="forgiven_interest" decoration-success="credit_note_type_decoration == 'positive'" decoration-info="credit_note_type_decoration == 'draft'"  decoration-warning="credit_note_type_decoration == 'negative'" optional="show"/>
+                <field name="credit_note_id" widget="many2one"/>
+            </xpath>
+
+            <xpath expr="//notebook//field[@name='loan_line_ids']//list//field[@name='date']" position="before" >
+                <field name="count_line" optional="show"/>
+            </xpath>
+
+            <xpath expr="//notebook//field[@name='loan_line_ids']//list//button[@name='make_invoice']" position="after" >
+                <field name="show_payment_to_capital" column_invisible="True" />
+                <field name="show_payment_in_current_month" column_invisible="True" />
+                <button string="Make a payment to capital" name="make_payment_to_capital" type="object" icon="fa-money"
+                    invisible="capital_invoice_id == True or show_payment_in_current_month == False"
+                />
+            </xpath>
+
+            <xpath expr="//notebook//field[@name='loan_line_ids']//list//field[@name='amount']" position="after">
+                <field name="interest"/>
+                <field name="amount_to_capital_type" column_invisible="True"/>
+                <field name="amount_capital"/>
+                <field name="amount_to_capital" decoration-success="amount_to_capital_type == 'positive'" decoration-mute="amount_to_capital_type == 'normal'"  decoration-danger="amount_to_capital_type == 'negative'"/>
+                <field name="capital_payment_id" widget="many2one"/>
+                <field name="capital_invoice_id" widget="many2one"/>
+                <field name="difered_hitch" column_invisible="not parent.is_difered_hitch" />
+                <field name="currency_id" column_invisible="True" />
+            </xpath>
+
+            <xpath expr="//notebook//field[@name='loan_line_ids']/list" position="attributes">
+                <attribute name="default_order">count_line asc</attribute>
+                <attribute name="editable">top</attribute>
+            </xpath>
+
+            <xpath expr="//notebook//field[@name='loan_line_ids']" position="attributes">
+                <attribute name="readonly">True</attribute>
+            </xpath>
+
+            <xpath expr="//notebook//field[@name='loan_line_ids']/list//field[@name='date']" position="attributes">
+                <attribute name="optional">show</attribute>
+            </xpath>
+
+            <xpath expr="//notebook//field[@name='loan_line_ids']/list//field[@name='name']" position="attributes">
+                <attribute name="optional">hide</attribute>
+            </xpath>
+
+            <xpath expr="//notebook//field[@name='loan_line_ids']/list//field[@name='payment_state']" position="attributes">
+                <attribute name="optional">hide</attribute>
+            </xpath>
+
+            <xpath expr="//field[@name='advance_payment_type']" position="after">
+                <field name="is_difered_hitch" readonly="state not in 'draft'" />
+                <div class="o_row" style="width: 50% !important" invisible="not is_difered_hitch">
+                    <label for="hitch_difered_months"/>
+                    <field name="hitch_difered_months" invisible="not is_difered_hitch" required="is_difered_hitch" readonly="state not in 'draft'"/>
+                    <span>Months</span>
+                </div>
+                <field name="periodicity_hitch" readonly="state not in 'draft'"/>
+            </xpath>
+            
+            <xpath expr="//field[@name='advance_payment']" position="after">
+                <field name="extra_down_payment" readonly="state not in 'draft'" widget="monetary" options="{'currency_field': 'currency_id'}" />
+            </xpath>
+            
+            <xpath expr="//page[1]//group[@class='oe_subtotal_footer oe_right']" position="replace">
+                <group class="oe_subtotal_footer oe_right">
+                    <field name="total_amount_to_pay" decoration-bf="True" widget="monetary" options="{'currency_field': 'currency_id'}"/>
+                    <field name="amount_total" string="Total amount to pay without interest" widget="monetary" options="{'currency_field': 'currency_id'}"/>
+                    <field name="total_interests_to_pay" widget="monetary" options="{'currency_field': 'currency_id'}"/>
+                    <field name="static_total_paid_interests" widget="monetary" options="{'currency_field': 'currency_id'}"/>
+                    <field name="paid" string="Amount paid to capital" decoration-success="True" widget="monetary" options="{'currency_field': 'currency_id'}"/>
+                    <field name="total_paid_interests" decoration-warning="True" widget="monetary" options="{'currency_field': 'currency_id'}"/>
+                    <field name="balance" string="Outstanding balance to be paid" decoration-info="True" widget="monetary" options="{'currency_field': 'currency_id'}"/>
+                </group>
+            </xpath>
+        </field>
+    </record>
+
+
+    <record id="view_installment_template_form_inherit_bits_customs" model="ir.ui.view">
+        <field name="name">installmente.template.view.form.inherit.custom</field>
+        <field name="model">installment.template</field>
+        <field name="inherit_id" ref="real_estate_bits.view_installment_template_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='repetition_rate']" position="after">
+                <field name="cat" widget="percentage" />
+            </xpath>
+            <xpath expr="//group" position="after">
+                <group name="payment_terms" string="Payment Terms">
+                    <field name="payment_term_ids">
+                        <list string="payment_terms" editable="bottom">
+                            <field name="installment_template_id" column_invisible="True" />
+                            <field name="name" />
+                            <field name="end_month" />
+                            <field name="gap_days" column_invisible="True" />
+                            <field name="interest" widget="percentage" />
+                        </list>
+                    </field>
+                </group>
+                
+            </xpath>
+        </field>
+    </record>
+
+</odoo>

@@ -1,0 +1,655 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* ccima
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 18.0+e-20241118\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2025-03-08 19:43+0000\n"
+"PO-Revision-Date: 2025-03-08 19:43+0000\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+#. module: ccima
+#: model_terms:ir.ui.view,arch_db:ccima.view_property_kanban
+msgid "<b>Develop: </b>"
+msgstr "<b>Desarrollo: </b>"
+
+#. module: ccima
+#: model_terms:ir.ui.view,arch_db:ccima.view_property_kanban
+msgid "<b>External amenity maintenance fee: </b>"
+msgstr "<b>Cuota de mantenimiento externo por amenidad: </b>"
+
+#. module: ccima
+#: model_terms:ir.ui.view,arch_db:ccima.view_property_kanban
+msgid "<b>External charges: </b>"
+msgstr "<b>Cargos externos: </b>"
+
+#. module: ccima
+#: model_terms:ir.ui.view,arch_db:ccima.view_property_kanban
+msgid "<b>External initial maintenance fee: </b>"
+msgstr "<b>Cuota de mantenimiento externo inicial: </b>"
+
+#. module: ccima
+#: model_terms:ir.ui.view,arch_db:ccima.view_property_kanban
+msgid "<b>External maximum maintenance fee: </b>"
+msgstr "<b>Cuota de mantenimiento externo máximo: </b>"
+
+#. module: ccima
+#: model_terms:ir.ui.view,arch_db:ccima.view_property_kanban
+msgid "<b>Terrain type: </b>"
+msgstr "<b>Tipo de terreno: </b>"
+
+#. module: ccima
+#: model_terms:ir.ui.view,arch_db:ccima.view_property_kanban
+msgid "<span class=\"text-bg-danger\">Sold</span>"
+msgstr "<span class=\"text-bg-danger\">Vendido</span>"
+
+#. module: ccima
+#: model_terms:ir.ui.view,arch_db:ccima.view_property_kanban
+msgid "<span class=\"text-bg-info\">Lease</span>"
+msgstr "<span class=\"text-bg-info\">Alquiler</span>"
+
+#. module: ccima
+#: model_terms:ir.ui.view,arch_db:ccima.view_property_kanban
+msgid "<span class=\"text-bg-success\">Available</span>"
+msgstr "<span class=\"text-bg-success\">Disponible</span>"
+
+#. module: ccima
+#: model_terms:ir.ui.view,arch_db:ccima.view_property_kanban
+msgid "<span class=\"text-bg-warning\">Reserved</span>"
+msgstr "<span class=\"text-bg-warning\">Reservado</span>"
+
+#. module: ccima
+#: model:ir.model,name:ccima.model_mail_activity
+#: model:ir.model.fields,field_description:ccima.field_res_partner__company_activity
+#: model:ir.model.fields,field_description:ccima.field_res_users__company_activity
+msgid "Activity"
+msgstr "Actividad"
+
+#. module: ccima
+#: model:ir.model,name:ccima.model_mail_activity_type
+msgid "Activity Type"
+msgstr "Tipo de actividad"
+
+#. module: ccima
+#: model:ir.model,name:ccima.model_mail_activity_schedule
+msgid "Activity schedule plan Wizard"
+msgstr "Asistente para planificar actividades"
+
+#. module: ccima
+#: model_terms:ir.ui.view,arch_db:ccima.crm_lead_view_form_inherit_ccima
+msgid "Add a Document"
+msgstr "Añadir un documento"
+
+#. module: ccima
+#: model_terms:ir.ui.view,arch_db:ccima.view_partner_form
+msgid "Additional information"
+msgstr "Información adicional"
+
+#. module: ccima
+#: model_terms:ir.ui.view,arch_db:ccima.view_partner_form
+msgid "Address"
+msgstr "Dirección"
+
+#. module: ccima
+#: model:res.groups,comment:ccima.group_access_saleman_assigner
+msgid "Allows you to modify the seller of the contacts"
+msgstr "Permite modificar el vendedor de los contactos"
+
+#. module: ccima
+#: model:ir.model.fields,field_description:ccima.field_res_partner__individual_apply_goods
+#: model:ir.model.fields,field_description:ccima.field_res_users__individual_apply_goods
+msgid "Aplica Bienes"
+msgstr ""
+
+#. module: ccima
+#: model:ir.model.fields,field_description:ccima.field_res_partner__company_articles_incorporation
+#: model:ir.model.fields,field_description:ccima.field_res_users__company_articles_incorporation
+msgid "Articles of Incorporation"
+msgstr "Acta constitutiva"
+
+#. module: ccima
+#: model:ir.model.fields.selection,name:ccima.selection__res_partner__individual_level_education__bachelors_degree
+msgid "Bachelors degree"
+msgstr "Licenciatura"
+
+#. module: ccima
+#: model:ir.model.fields.selection,name:ccima.selection__res_partner__individual_level_education__engineering
+msgid "Bachelors degree in Engineering"
+msgstr "Ingeniería"
+
+#. module: ccima
+#: model:ir.model.fields,field_description:ccima.field_mail_activity_type__background_color
+msgid "Background Color"
+msgstr ""
+
+#. module: ccima
+#: model:ir.model.fields,field_description:ccima.field_crm_stage__background_color
+msgid "Background color"
+msgstr ""
+
+#. module: ccima
+#: model:ir.model.fields.selection,name:ccima.selection__res_partner__individual_dwelling_type__borrowed
+msgid "Borrowed"
+msgstr "Prestado"
+
+#. module: ccima
+#: model:ir.model,name:ccima.model_crm_stage
+msgid "CRM Stages"
+msgstr "Etapas del CRM"
+
+#. module: ccima
+#: model:ir.model.fields,field_description:ccima.field_res_partner__individual_curp
+#: model:ir.model.fields,field_description:ccima.field_res_users__individual_curp
+msgid "CURP"
+msgstr ""
+
+#. module: ccima
+#: model:ir.model.fields,field_description:ccima.field_res_partner__company_city_registration
+#: model:ir.model.fields,field_description:ccima.field_res_users__company_city_registration
+msgid "City of Registration"
+msgstr "Ciudad de registro"
+
+#. module: ccima
+#: model:ir.model.fields,field_description:ccima.field_res_partner__colony
+#: model:ir.model.fields,field_description:ccima.field_res_users__colony
+msgid "Colony"
+msgstr "Colonia"
+
+#. module: ccima
+#: model:ir.model.fields,field_description:ccima.field_res_partner__colony_number
+#: model:ir.model.fields,field_description:ccima.field_res_users__colony_number
+msgid "Colony number"
+msgstr "Número de colonia"
+
+#. module: ccima
+#: model:ir.model.fields,field_description:ccima.field_res_partner__company_commercial_registry_number
+#: model:ir.model.fields,field_description:ccima.field_res_users__company_commercial_registry_number
+msgid "Commercial Registry Number"
+msgstr "Folio mercantil"
+
+#. module: ccima
+#: model_terms:ir.ui.view,arch_db:ccima.view_partner_form
+msgid "Company information"
+msgstr "Información de la compañía"
+
+#. module: ccima
+#: model:ir.model.fields,field_description:ccima.field_res_partner__individual_company_mobile
+#: model:ir.model.fields,field_description:ccima.field_res_users__individual_company_mobile
+msgid "Company mobile"
+msgstr "Celular de la compañía"
+
+#. module: ccima
+#: model:ir.model.fields,field_description:ccima.field_res_partner__individual_company_work
+#: model:ir.model.fields,field_description:ccima.field_res_users__individual_company_work
+msgid "Company where they work"
+msgstr "Empresa que labora"
+
+#. module: ccima
+#: model:ir.model,name:ccima.model_res_partner
+msgid "Contact"
+msgstr "Contacto"
+
+#. module: ccima
+#: model:ir.model.fields,field_description:ccima.field_res_partner__company_purpose
+#: model:ir.model.fields,field_description:ccima.field_res_users__company_purpose
+msgid "Corporate Purpose"
+msgstr "Objeto social"
+
+#. module: ccima
+#: model:ir.model.fields,field_description:ccima.field_product_product__property_date
+#: model:ir.model.fields,field_description:ccima.field_product_template__property_date
+msgid "Date"
+msgstr "Fecha de apartado"
+
+#. module: ccima
+#: model:ir.model.fields,field_description:ccima.field_res_partner__individual_date_birth
+#: model:ir.model.fields,field_description:ccima.field_res_users__individual_date_birth
+msgid "Date of birth"
+msgstr "Fecha de nacimiento"
+
+#. module: ccima
+#: model:ir.model.fields,field_description:ccima.field_res_partner__company_date_registration
+#: model:ir.model.fields,field_description:ccima.field_res_users__company_date_registration
+msgid "Date of registration"
+msgstr "Fecha de registro"
+
+#. module: ccima
+#: model:ir.model.fields.selection,name:ccima.selection__res_partner__individual_marital_status__divorced
+msgid "Divorced"
+msgstr "Divorciado"
+
+#. module: ccima
+#: model:ir.model.fields,field_description:ccima.field_crm_lead__attachment_line_ids
+#: model_terms:ir.ui.view,arch_db:ccima.crm_lead_view_form_inherit_ccima
+msgid "Documents"
+msgstr "Documentos"
+
+#. module: ccima
+#: model:ir.model.fields,field_description:ccima.field_res_partner__individual_dwelling_type
+#: model:ir.model.fields,field_description:ccima.field_res_users__individual_dwelling_type
+msgid "Dwelling Type"
+msgstr "Tipo de vivienda"
+
+#. module: ccima
+#: model_terms:ir.ui.view,arch_db:ccima.view_partner_form
+msgid "Employment information"
+msgstr "Información laboral"
+
+#. module: ccima
+#. odoo-python
+#: code:addons/ccima/models/mail_activity.py:0
+msgid "End date and time"
+msgstr "Fecha y hora de finalización"
+
+#. module: ccima
+#: model:ir.model.fields,field_description:ccima.field_product_product__estimated_date
+#: model:ir.model.fields,field_description:ccima.field_product_template__estimated_date
+msgid "Estimated date"
+msgstr "Fecha estimada"
+
+#. module: ccima
+#: model:ir.model.fields,field_description:ccima.field_product_product__external_amenity_maintenance_fee
+#: model:ir.model.fields,field_description:ccima.field_product_template__external_amenity_maintenance_fee
+msgid "External amenity maintenance fee"
+msgstr "Cuota de mantenimiento externo por amenidad"
+
+#. module: ccima
+#: model:ir.model.fields,field_description:ccima.field_product_product__external_initial_maintenance_fee
+#: model:ir.model.fields,field_description:ccima.field_product_template__external_initial_maintenance_fee
+msgid "External initial maintenance fee"
+msgstr "Cuota de mantenimiento externo inicial"
+
+#. module: ccima
+#: model:ir.model.fields,field_description:ccima.field_product_product__external_maximum_maintenance_fee
+#: model:ir.model.fields,field_description:ccima.field_product_template__external_maximum_maintenance_fee
+msgid "External maximum maintenance fee"
+msgstr "Cuota de mantenimiento externo máximo"
+
+#. module: ccima
+#: model:ir.module.category,name:ccima.ccima_groups_category
+msgid "Extra permissions"
+msgstr "Permisos Extras"
+
+#. module: ccima
+#: model:res.groups,comment:ccima.group_access_show_only_costumer_assigned
+msgid "Filter contacts to only show contacts to the assigned salesperson"
+msgstr ""
+"Filtrar contactos para mostrar únicamente los contactos del vendedor "
+"asignado"
+
+#. module: ccima
+#: model:ir.module.category,description:ccima.ccima_groups_category
+msgid "Groups related to the CCIMA"
+msgstr "Permisos relacionados con CCIMA"
+
+#. module: ccima
+#: model:ir.model.fields.selection,name:ccima.selection__res_partner__individual_level_education__high_school
+msgid "High school"
+msgstr "Escuela Preparatoria"
+
+#. module: ccima
+#: model:ir.model.fields,field_description:ccima.field_res_partner__individual_level_education
+#: model:ir.model.fields,field_description:ccima.field_res_users__individual_level_education
+msgid "Individual Level Education"
+msgstr "Grado de estudios"
+
+#. module: ccima
+#: model:ir.model.fields,field_description:ccima.field_res_partner__individual_company_job_position
+#: model:ir.model.fields,field_description:ccima.field_res_users__individual_company_job_position
+msgid "Job position"
+msgstr "Puesto"
+
+#. module: ccima
+#: model:ir.model,name:ccima.model_crm_lead
+msgid "Lead/Opportunity"
+msgstr "Lead/oportunidad"
+
+#. module: ccima
+#: model:ir.model.fields,field_description:ccima.field_res_partner__company_legal_representatives
+#: model:ir.model.fields,field_description:ccima.field_res_users__company_legal_representatives
+msgid "Legal Representative's Information"
+msgstr "Datos del Representante Legal"
+
+#. module: ccima
+#: model:ir.model.fields,field_description:ccima.field_res_partner__individual_marital_status
+#: model:ir.model.fields,field_description:ccima.field_res_users__individual_marital_status
+msgid "Marital Status"
+msgstr "Estado civil"
+
+#. module: ccima
+#: model:ir.model.fields.selection,name:ccima.selection__res_partner__individual_marital_status__married
+msgid "Married"
+msgstr "Casado"
+
+#. module: ccima
+#: model:ir.model.fields.selection,name:ccima.selection__res_partner__individual_level_education__masters_degree
+msgid "Masters degree"
+msgstr "Maestría"
+
+#. module: ccima
+#: model:ir.model.fields,field_description:ccima.field_res_partner__company_notary_name
+#: model:ir.model.fields,field_description:ccima.field_res_users__company_notary_name
+msgid "Name of the Notary"
+msgstr "Nombre del notario"
+
+#. module: ccima
+#: model:ir.model.fields,field_description:ccima.field_res_partner__individual_birth_place_nationality
+#: model:ir.model.fields,field_description:ccima.field_res_partner__individual_nationality
+#: model:ir.model.fields,field_description:ccima.field_res_users__individual_birth_place_nationality
+#: model:ir.model.fields,field_description:ccima.field_res_users__individual_nationality
+msgid "Nationality"
+msgstr "Nacionalidad"
+
+#. module: ccima
+#: model:ir.model.fields,field_description:ccima.field_crm_stage__need_job_position
+msgid "Need Job position"
+msgstr "Necesita puesto de trabajo"
+
+#. module: ccima
+#: model:ir.model.fields,field_description:ccima.field_crm_stage__need_address_to_move
+msgid "Need address to move"
+msgstr "Se necesita la dirección para mover"
+
+#. module: ccima
+#: model:ir.model.fields,field_description:ccima.field_crm_stage__need_at_least_one_quote
+msgid "Need at least one quotation"
+msgstr "Necesita al menos una cotización"
+
+#. module: ccima
+#: model:ir.model.fields,field_description:ccima.field_crm_stage__need_company_to_move
+msgid "Need company to move"
+msgstr "Se necesita la empresa para mover"
+
+#. module: ccima
+#: model:ir.model.fields,field_description:ccima.field_crm_stage__need_date_deadline
+msgid "Need date deadline"
+msgstr "Necesita fecha límite"
+
+#. module: ccima
+#: model:ir.model.fields,field_description:ccima.field_crm_stage__need_email_to_move
+msgid "Need email to move"
+msgstr "Se necesita el correo electrónico para mover"
+
+#. module: ccima
+#: model:ir.model.fields,field_description:ccima.field_crm_stage__need_origin_to_move
+msgid "Need origin to move"
+msgstr "Se necesita origen para mover"
+
+#. module: ccima
+#: model:ir.model.fields,field_description:ccima.field_crm_stage__need_partner_id_to_move
+msgid "Need partner to move"
+msgstr "Se necesita el cliente para mover"
+
+#. module: ccima
+#: model:ir.model.fields,field_description:ccima.field_crm_stage__need_phone_to_move
+msgid "Need phone to move"
+msgstr "Se necesita teléfono para mover"
+
+#. module: ccima
+#: model:ir.model.fields,field_description:ccima.field_crm_stage__need_property_id
+msgid "Need property"
+msgstr "Necesita propiedad"
+
+#. module: ccima
+#: model:ir.model.fields,field_description:ccima.field_crm_stage__need_salesman_to_move
+msgid "Need salesman to move"
+msgstr "Se necesita vendedor para mover"
+
+#. module: ccima
+#: model:ir.model.fields,field_description:ccima.field_crm_stage__need_title_to_move
+msgid "Need title to move"
+msgstr "Se necesita título para mover"
+
+#. module: ccima
+#: model:ir.model.fields,field_description:ccima.field_res_partner__company_notary_number
+#: model:ir.model.fields,field_description:ccima.field_res_users__company_notary_number
+msgid "Notary No."
+msgstr "No. notaría"
+
+#. module: ccima
+#: model:ir.model.fields.selection,name:ccima.selection__res_partner__individual_dwelling_type__own
+msgid "Own"
+msgstr "Propio"
+
+#. module: ccima
+#: model_terms:ir.ui.view,arch_db:ccima.view_partner_form
+msgid "Personal information"
+msgstr "Información personal"
+
+#. module: ccima
+#: model:ir.model.fields.selection,name:ccima.selection__res_partner__individual_level_education__phd
+msgid "PhD"
+msgstr "Doctorado"
+
+#. module: ccima
+#: model:ir.model.fields.selection,name:ccima.selection__product_template__terrain_type__premium_a
+msgid "Premium A"
+msgstr ""
+
+#. module: ccima
+#: model:ir.model.fields.selection,name:ccima.selection__product_template__terrain_type__premium_aa
+msgid "Premium AA"
+msgstr ""
+
+#. module: ccima
+#: model:ir.model.fields.selection,name:ccima.selection__product_template__terrain_type__premium_aaa
+msgid "Premium AAA"
+msgstr ""
+
+#. module: ccima
+#: model:ir.model.fields.selection,name:ccima.selection__res_partner__individual_level_education__primary
+msgid "Primary school"
+msgstr "Escuela primaria"
+
+#. module: ccima
+#: model:ir.model.fields,field_description:ccima.field_crm_lead__project_worksite_id
+msgid "Project Worksite"
+msgstr ""
+
+#. module: ccima
+#: model:ir.model,name:ccima.model_product_template
+msgid "Property"
+msgstr "Producto"
+
+#. module: ccima
+#: model:ir.model,name:ccima.model_property_reservation
+msgid "Property Reservation"
+msgstr "Reserva de propiedad"
+
+#. module: ccima
+#: model:ir.model.fields,field_description:ccima.field_product_product__property_area
+#: model:ir.model.fields,field_description:ccima.field_product_template__property_area
+msgid "Property Size (Sq. ft)"
+msgstr "Superficie (m²)"
+
+#. module: ccima
+#: model:ir.model.fields,field_description:ccima.field_res_partner__vat
+#: model:ir.model.fields,field_description:ccima.field_res_users__vat
+msgid "RFC"
+msgstr "NIF"
+
+#. module: ccima
+#: model:ir.model.fields,field_description:ccima.field_crm_lead__Recommended_by
+msgid "Recommended_by"
+msgstr "Recomendado por"
+
+#. module: ccima
+#: model:ir.model.fields,field_description:ccima.field_res_partner__company_registry_number
+#: model:ir.model.fields,field_description:ccima.field_res_users__company_registry_number
+msgid "Registry Number"
+msgstr "Folio"
+
+#. module: ccima
+#: model:ir.model.fields.selection,name:ccima.selection__res_partner__individual_dwelling_type__rented
+msgid "Rented"
+msgstr "Rentado"
+
+#. module: ccima
+#: model:res.groups,name:ccima.group_access_saleman_assigner
+msgid "Saleman assigner"
+msgstr "Asignar vendedor"
+
+#. module: ccima
+#: model:ir.model.fields.selection,name:ccima.selection__res_partner__individual_level_education__secondary
+msgid "Secondary school"
+msgstr "Secundaria"
+
+#. module: ccima
+#: model:ir.model.fields,field_description:ccima.field_res_partner__individual_company_seniority
+#: model:ir.model.fields,field_description:ccima.field_res_users__individual_company_seniority
+msgid "Seniority"
+msgstr "Antigüedad"
+
+#. module: ccima
+#: model:ir.model.fields,field_description:ccima.field_crm_stage__short_name
+#: model:ir.model.fields,field_description:ccima.field_mail_activity_type__short_name
+msgid "Short name"
+msgstr "Nombre corto"
+
+#. module: ccima
+#: model:res.groups,name:ccima.group_access_show_only_costumer_assigned
+msgid "Show only assigned contacts"
+msgstr "Mostrar solo contactos asignados"
+
+#. module: ccima
+#: model:ir.model.fields.selection,name:ccima.selection__res_partner__individual_marital_status__single
+msgid "Single"
+msgstr "Soltero"
+
+#. module: ccima
+#: model:ir.model.fields,field_description:ccima.field_res_partner__individual_spouses_name
+#: model:ir.model.fields,field_description:ccima.field_res_users__individual_spouses_name
+msgid "Spouse's Name"
+msgstr "Nombre del cónyuge"
+
+#. module: ccima
+#: model:ir.model.fields.selection,name:ccima.selection__product_template__terrain_type__standard_a
+msgid "Standard A"
+msgstr "Estándar A"
+
+#. module: ccima
+#: model:ir.model.fields.selection,name:ccima.selection__product_template__terrain_type__standard_aa
+msgid "Standard AA"
+msgstr "Estándar AA"
+
+#. module: ccima
+#: model:ir.model.fields.selection,name:ccima.selection__product_template__terrain_type__standard_aaa
+msgid "Standard AAA"
+msgstr "Estándar AAA"
+
+#. module: ccima
+#: model_terms:ir.ui.view,arch_db:ccima.view_order_form_inherit_ccima
+msgid "Surface"
+msgstr "Superficie"
+
+#. module: ccima
+#: model:ir.model.fields.selection,name:ccima.selection__res_partner__individual_level_education__tsu
+msgid "TSU"
+msgstr ""
+
+#. module: ccima
+#: model:ir.model.fields,field_description:ccima.field_product_product__terrain_type
+#: model:ir.model.fields,field_description:ccima.field_product_template__terrain_type
+msgid "Terrain type"
+msgstr "Tipo de terreno"
+
+#. module: ccima
+#: model:ir.model.fields,field_description:ccima.field_crm_stage__text_color
+msgid "Text color"
+msgstr ""
+
+#. module: ccima
+#: model:ir.model.fields,help:ccima.field_res_partner__vat
+#: model:ir.model.fields,help:ccima.field_res_users__vat
+msgid ""
+"The Tax Identification Number. Values here will be validated based on the "
+"country format. You can use '/' to indicate that the partner is not subject "
+"to tax."
+msgstr ""
+"El número de identificación fiscal. Los valores establecidos aquí se "
+"validarán según el formato del país. Puede utilizar \"/\" para indicar que "
+"el contacto no está sujeto a impuestos."
+
+#. module: ccima
+#. odoo-python
+#: code:addons/ccima/models/crm_lead_inherit.py:0
+msgid ""
+"The field %(name_field)s, It is necessary to change to the stage "
+"%(stage_name)s\n"
+msgstr ""
+"El campo %(name_field)s, es necesario para cambiar a la etapa "
+"%(stage_name)s\n"
+
+#. module: ccima
+#: model:ir.model.fields,field_description:ccima.field_crm_lead__has_saleman_assigner_group
+#: model:ir.model.fields,field_description:ccima.field_res_partner__has_saleman_assigner_group
+#: model:ir.model.fields,field_description:ccima.field_res_users__has_saleman_assigner_group
+msgid "The user has the permission to assign the seller?"
+msgstr ""
+
+#. module: ccima
+#: model:ir.model.constraint,message:ccima.constraint_res_partner_uniq_res_partner_name
+msgid "There is already another contact with the same name"
+msgstr "Ya existe otro contacto con el mismo nombre"
+
+#. module: ccima
+#: model:ir.model.fields,field_description:ccima.field_mail_activity__task_time
+#: model:ir.model.fields,field_description:ccima.field_mail_activity_schedule__task_time
+msgid "Time when the task was completed"
+msgstr "Hora en que se completó la tarea"
+
+#. module: ccima
+#: model:ir.model.fields,field_description:ccima.field_res_partner__company_type_business
+#: model:ir.model.fields,field_description:ccima.field_res_users__company_type_business
+msgid "Type of business"
+msgstr "Giro de la empresa"
+
+#. module: ccima
+#: model_terms:ir.ui.view,arch_db:ccima.view_order_form_inherit_ccima
+msgid "Unit price on list"
+msgstr "Precio Unitario de Lista"
+
+#. module: ccima
+#: model:ir.model.fields.selection,name:ccima.selection__res_partner__individual_marital_status__widower
+msgid "Widower"
+msgstr "Viudo"
+
+#. module: ccima
+#: model:ir.model.fields,field_description:ccima.field_res_partner__individual_birth_place_city_id
+#: model:ir.model.fields,field_description:ccima.field_res_users__individual_birth_place_city_id
+msgid "city"
+msgstr "Ciudad"
+
+#. module: ccima
+#: model_terms:ir.ui.view,arch_db:ccima.mail_activity_type_view_form
+msgid "e.g. WA"
+msgstr "ej. WA"
+
+#. module: ccima
+#: model:ir.model.fields,field_description:ccima.field_crm_lead__legal_personality
+msgid "legal personality"
+msgstr "Personería jurídica"
+
+#. module: ccima
+#: model_terms:ir.ui.view,arch_db:ccima.view_partner_form
+msgid "place of birth"
+msgstr "Lugar de nacimiento"
+
+#. module: ccima
+#: model:ir.model.fields,field_description:ccima.field_res_partner__individual_birth_place_state_id
+#: model:ir.model.fields,field_description:ccima.field_res_users__individual_birth_place_state_id
+msgid "state"
+msgstr "Estado"
+
+#. module: ccima
+#. odoo-python
+#: code:addons/ccima/models/crm_lead_inherit.py:0
+msgid "string"
+msgstr ""

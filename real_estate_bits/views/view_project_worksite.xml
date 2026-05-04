@@ -1,0 +1,534 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record model="ir.ui.view" id="project_worksite_form">
+        <field name="name">Project Worksite Form</field>
+        <field name="model">project.worksite</field>
+        <field name="type">form</field>
+        <field name="arch" type="xml">
+            <form string="Project">
+                <header>
+                    <field name="visible_button_property" invisible="1"/>
+                    <field name="visible_button_project" invisible="1"/>
+                    <button name="action_create_sub_project" type="object" string="Create Project" class="oe_highlight" invisible="visible_button_project ==  False"/>
+                    <button name="action_create_property" type="object" string="Create Property"
+                            class="oe_highlight" invisible="visible_button_property == False"/>
+                </header>
+                <sheet>
+
+                    <div class="oe_button_box" name="button_box">
+                        <button class="oe_stat_button" type="object" name="action_view_all_property"
+                                icon="fa-file-text-o" invisible="property_count == 0">
+                            <field string="Property" name="property_count" widget="statinfo"/>
+                        </button>
+                        <button class="oe_stat_button" type="object" name="action_view_all_sub_project"
+                                icon="fa-file-text-o" invisible="sub_project_count == 0">
+                            <field string="Projects" name="sub_project_count" widget="statinfo"/>
+                        </button>
+                        <button class="oe_stat_button" name="toggle_active_value" type="object" icon="fa-archive">
+                            <div class="o_stat_info o_form_field">
+                                <span style="font-weight: bold;" class="text-danger"
+                                      invisible="active == True">Archive
+                                </span>
+                                <span style="font-weight: bold;" class="text-success"
+                                      invisible="active == False">Active
+                                </span>
+                            </div>
+                        </button>
+                    </div>
+
+                    <field name="image_1920" widget="image" class="oe_avatar" options="{'zoom': true}"/>
+                    <field name="project_is_readonly" invisible="1"/>
+                    <field name="sub_project_is_readonly" invisible="1"/>
+                    <field name="active" invisible="1"/>
+                    <field name="parent_id" invisible="1"/>
+
+                    <div class="oe_title mb24">
+                        <h1>
+                            <field class="text-break" name="name" placeholder="Project" default_focus="1"
+                                   required="1"/>
+                        </h1>
+                        <div class="o_row">
+                            <field name="default_code" on_change="1" required="1" placeholder="Code"/>
+                        </div>
+                    </div>
+
+                    <group>
+                        <group string="Worksite Information">
+<!--                            <field name="purchase_date"/>-->
+                            <field name="launch_date" string="Date"/>
+                            <field name="partner_id"/>
+                            <field name="company_id" groups="base.group_multi_company"/>
+                            <field name="project_type" required="1" string="Worksite Type"
+                                   readonly="project_is_readonly == True"/>
+                        </group>
+
+                         <group string="Address Details">
+
+                            <field name="region_id"/>
+                            <label for="street" string="Address"/>
+                            <div class="o_address_format">
+                                <field name="street" readonly="False" placeholder="Street..."
+                                       class="o_address_street"/>
+                                <field name="street2" readonly="False" placeholder="Street 2..."
+                                       class="o_address_street"/>
+                                <field name="city" readonly="False" placeholder="City" class="o_address_city"/>
+                                <field name="state_id" readonly="False" class="o_address_state" placeholder="State"
+                                       options="{'no_open': True, 'no_quick_create': True}"
+                                       context="{'default_country_id': country_id}"/>
+                                <field name="zip" readonly="False" placeholder="ZIP" class="o_address_zip"/>
+                                <field name="country_id" readonly="False" placeholder="Country"
+                                       class="o_address_country"
+                                       options='{"no_open": True, "no_create": True}'/>
+                            </div>
+
+
+                        </group>
+
+                    </group>
+
+                    <group string="Units / Area Details">
+                            <group>
+                                <field name="sold_units"/>
+                                <field name="sold_area"/>
+                            </group>
+                            <group>
+                                <field name="available_units"/>
+                                <field name="available_area"/>
+                            </group>
+                        </group>
+
+
+                    <group string="Basic Information">
+                        <field name="parent_id" invisible="1"/>
+                            <div invisible="parent_id !=  False">
+                                <div class="o_group">
+                                    <table class="o_group o_inner_group o_group_col_6">
+                                        <tbody>
+                                            <tr>
+                                                <td class="o_td_label">
+                                                    <label string="Total No. Tower" for="no_of_property"
+                                                           invisible="project_type != 'tower'"/>
+                                                    <label string="No. of Sub-Project/Phase" for="no_of_property"
+                                                           invisible="project_type != 'villa'"/>
+                                                    <label string="Total No. Towers" for="no_of_property"
+                                                           invisible="project_type != 'commercial'"/>
+                                                    <label string="No. of Sub-Project/Phase" for="no_of_property"
+                                                           invisible="project_type != 'plots'"/>
+                                                    <label string="Total No. Warehouse" for="no_of_property"
+                                                           invisible="project_type != 'warehouse'"/>
+                                                </td>
+                                                <td style="width: 100%;">
+                                                    <field name="no_of_property" nolabel="1"
+                                                           readonly="project_is_readonly == True"/>
+                                                </td>
+                                            </tr>
+                                            <tr invisible="project_type not in ['tower', 'commercial']">
+                                                <td class="o_td_label">
+                                                    <label for="no_of_floors"/>
+                                                </td>
+                                                <td style="width: 100%;">
+                                                    <field name="no_of_floors" nolabel="1"
+                                                           readonly="project_is_readonly == True"/>
+                                                </td>
+                                            </tr>
+                                            <tr invisible="project_type not in ['tower', 'commercial']">
+                                                <td class="o_td_label">
+                                                    <label for="props_per_floors"/>
+                                                </td>
+                                                <td style="width: 100%;">
+                                                    <field name="props_per_floors" nolabel="1"
+                                                           readonly="project_is_readonly == True"/>
+                                                </td>
+                                            </tr>
+                                            <tr invisible="project_type not in ['tower', 'commercial']">
+                                                <td class="o_td_label">
+                                                    <label for="no_of_shops"/>
+                                                </td>
+                                                <td style="width: 100%;">
+                                                    <field name="no_of_shops" nolabel="1"
+                                                           readonly="project_is_readonly == True"/>
+                                                </td>
+                                            </tr>
+                                            <tr invisible="project_type not in ['tower', 'commercial']">
+                                                <td class="o_td_label">
+                                                    <label for="amenities_ids"/>
+                                                </td>
+                                                <td style="width: 100%;">
+                                                    <field name="amenities_ids" nolabel="1" widget="many2many_tags"
+                                                           readonly="project_is_readonly == True"/>
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                            <hr/>
+                            <group>
+                                <group>
+                                    <field name="total_area" string="Total Property Area" readonly="1"/>
+                                    <field name="total_value_of_project" readonly="1"/>
+                                    <field name="total_maintenance_collection" readonly="1"/>
+                                </group>
+                            </group>
+
+                    </group>
+                    <notebook colspan="4">
+
+                        <page string="Project" invisible="child_ids == False">
+                            <field name="child_ids" readonly="1">
+                                <list create="0" delete="0">
+                                    <field name="default_code"/>
+                                    <field name="name"/>
+                                </list>
+                            </field>
+                        </page>
+
+                        <page string="Properties" invisible="property_ids == False">
+                            <field name="property_ids" readonly="1"
+                                   context="{'form_view_ref': 'real_estate_bits.view_property_form'}">
+                                <list create="0" delete="0">
+                                    <field name="default_code"/>
+                                    <field name="name"/>
+                                    <field name="project_worksite_id"/>
+                                    <field name="region_id"/>
+                                </list>
+                            </field>
+                        </page>
+
+                        <page string="Floor Plans">
+                            <group name="floor_plan_template_images">
+                                <field name="property_plan_ids" class="o_website_sale_image_list"
+                                       context="{'default_name': name, 'default_is_visible': False}" mode="kanban"
+                                       add-label="Add Floor Plan" nolabel="1"/>
+                            </group>
+                        </page>
+                        <page string="Documents">
+                            <field name="attachment_line_ids" class="o_website_sale_image_list"
+                                   context="{'default_name': name, 'default_is_visible': False, 'default_filetype': 'pdf'}"
+                                   mode="kanban" add-label="Add a Document" nolabel="1"/>
+                        </page>
+                        <page string="Additional Information">
+                            <group>
+                                <group>
+                                    <field name="license_code"/>
+                                    <field name="license_date"/>
+                                    <field name="date_added"/>
+                                    <field name="license_location"/>
+                                </group>
+                            </group>
+                        </page>
+                        <page string="Geolocation">
+                            <group>
+                                <group>
+                                    <field name="address" widget="place_autocomplete" class="oe_inline"/>
+                                </group>
+                            </group>
+                        </page>
+                        <page string="Notes">
+                            <field name="note" colspan="4" nolabel="1"/>
+                        </page>
+                    </notebook>
+                </sheet>
+                <chatter/>
+            </form>
+        </field>
+    </record>
+
+    <record model="ir.ui.view" id="sub_project_worksite_form">
+        <field name="name">Project Worksite Form</field>
+        <field name="model">project.worksite</field>
+        <field name="type">form</field>
+        <field name="arch" type="xml">
+            <form string="Real Estate">
+                <header>
+                    <field name="visible_button_property" invisible="1"/>
+                    <field name="visible_button_project" invisible="1"/>
+                    <button name="action_create_condominium" type="object"
+                            string="Create condominium" class="oe_highlight"
+                            />
+                </header>
+
+                <sheet>
+                    <div class="oe_button_box" name="button_box">
+                        <button class="oe_stat_button" name="view_maintenance" icon="fa-gears"
+                                type="object" invisible="maintenance_count == 0">
+                            <field name="maintenance_count" string="Maintenance" widget="statinfo"/>
+                        </button>
+                        <button class="oe_stat_button" type="object" name="action_view_condominiums"
+                                icon="fa-building-o">
+                           <field name="condominium_count" widget="statinfo" string="Condominiums"/>
+                        </button>
+                        <button class="oe_stat_button" name="toggle_active_value" type="object" icon="fa-archive">
+                            <div class="o_stat_info o_form_field">
+                                <span style="font-weight: bold;" class="text-danger"
+                                      invisible="active == True">Archive
+                                </span>
+                                <span style="font-weight: bold;" class="text-success"
+                                      invisible="active == False">Active
+                                </span>
+                            </div>
+                        </button>
+                    </div>
+                    <field name="image_1920" widget="image" class="oe_avatar" options="{'zoom': true}"/>
+                    <field name="project_is_readonly" invisible="1"/>
+                    <field name="sub_project_is_readonly" invisible="1"/>
+                    <field name="active" invisible="1"/>
+                    <field name="parent_id" invisible="1"/>
+
+                    <div class="oe_title mb24">
+                        <h1>
+                            <field class="text-break" name="name" placeholder="Project" default_focus="1"
+                                   required="1"/>
+                        </h1>
+                        <div class="o_row">
+                            <field name="default_code" on_change="1" required="1" placeholder="Code"/>
+                        </div>
+                    </div>
+
+                    <group string="Basic Info. Of Project">
+                        <group>
+<!--                            <field name="purchase_date"/>-->
+                            <field name="partner_id"/>
+                            <field name="parent_id" readonly="1"/>
+                            <field name="is_demo_worksite" invisible="1"/>
+                            <field name="project_type" required="1"
+                                   readonly="project_is_readonly == True"/>
+                        </group>
+                        <group>
+                        </group>
+                    </group>
+                    <hr/>
+                    <group>
+                        <group invisible="parent_id == False">
+                            <field name="no_of_floors"
+
+                                   invisible="project_type not in ['tower', 'commercial']"
+                                   readonly="sub_project_is_readonly == True"/>
+                            <field name="count_condominium" required="True"/>
+                            <field name="props_per_floors"
+
+                                   invisible="project_type not in ['tower', 'commercial']"
+                                   readonly="sub_project_is_readonly == True"/>
+                            <field name="no_of_villa"
+
+                                   invisible="project_type != 'villa'"
+                                   readonly="sub_project_is_readonly == True"/>
+                            <field name="no_of_property" string="No. of Property"
+
+                                   invisible="project_type not in ['plots', 'warehouse']"
+                                   readonly="sub_project_is_readonly == True"/>
+                        </group>
+                        <group>
+                            <field name="no_of_shops"
+
+                                   invisible="no_of_shops == 0"
+                                   readonly="sub_project_is_readonly == True"/>
+                            <field name="amenities_ids" widget="many2many_tags"
+
+                                   invisible="project_type not in ['tower', 'commercial']"
+                                   readonly="sub_project_is_readonly == True"/>
+                        </group>
+                    </group>
+                    <hr/>
+                    <group>
+                        <group>
+                            <field name="sold_units"/>
+                            <field name="sold_area"/>
+                        </group>
+                        <group>
+                            <field name="available_units"/>
+                            <field name="available_area"/>
+                        </group>
+                    </group>
+                    <field name="parent_id" invisible="1"/>
+                            <group invisible="parent_id == False">
+                                <group>
+                                    <field name="property_type_id" string="Property Type"/>
+                                    <field name="property_area" string="Property Area"/>
+                                    <field name="property_price_type" string="Property Selling Type"/>
+                                    <field name="price_per_m" string="Selling Price"/>
+                                    <!--                                        <field name="rooms"/>-->
+                                    <!--                                        <field name="bathroom"/>-->
+                                    <field name="utility_ids">
+                                        <list editable="bottom">
+                                            <field name="name" required="1"/>
+                                            <field name="price"/>
+                                        </list>
+                                    </field>
+                                </group>
+                                <group>
+                                    <!--                                        <field name="electricity_meter"/>-->
+                                    <!--                                        <field name="water_meter"/>-->
+                                    <!--                                        <field name="facing_sides"/>-->
+                                    <field name="maintenance_type" required="1"/>
+                                    <field name="maintenance_charges"/>
+                                </group>
+                            </group>
+                            <hr/>
+                            <table class="o_group o_inner_group o_group_col_6">
+                                <tbody>
+                                    <tr>
+                                        <td class="o_td_label">
+                                            <label string="Total Tower Area" for="total_area"
+                                                   invisible="project_type != 'tower'"/>
+                                            <label string="Total Villa Area" for="total_area"
+                                                   invisible="project_type != 'villa'"/>
+                                            <label string="Total Towers Area" for="total_area"
+                                                   invisible="project_type != 'commercial'"/>
+                                            <label string="Total Plot Area" for="total_area"
+                                                   invisible="project_type != 'plots'"/>
+                                            <label string="Total Warehouse Area" for="total_area"
+                                                   invisible="project_type != 'warehouse'"/>
+                                        </td>
+                                        <td>
+                                            <field name="total_area" nolabel="1"/>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                            <group>
+                                <group>
+                                    <field name="total_value_of_project" string="Total Value of Sub Project"
+                                           readonly="1"/>
+                                    <field name="amenities_charges" readonly="1"/>
+                                    <field name="total_maintenance_collection"/>
+                                </group>
+                            </group>
+                    <hr/>
+                    <div class="o_group" invisible="parent_id == False">
+
+                        <table class="o_group o_inner_group" style="width: 100%;">
+                            <tbody>
+                                <tr>
+                                    <td style="width: 25%;">
+                                        <label for="project_area" string="Project Area (m²)"/>
+                                    </td>
+                                    <td style="width: 30%;">
+                                        <field name="project_area"/>
+                                    </td>
+                                    <td style="width: 15%;">
+                                        <field name="unit_of_measure"/>
+                                    </td>
+                                    <td style="width: 30%;">
+                                        <field name="converted_area" readonly="0"/>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+
+                    </div>
+                    <notebook colspan="4">
+                        <page string="Properties">
+                            <field name="property_ids"
+                                   context="{
+                                        'default_is_property':True,
+                                        'form_view_ref':'real_estate_bits.view_property_form',
+                                        'list_view_ref':'real_estate_bits.view_property_list'}"/>
+                        </page>
+
+                        <page string="Condominiums">
+                            <field name="condominium_ids"/>
+                        </page>
+
+                        <page string="Floor Plans">
+                            <group name="floor_plan_template_images">
+                                <field name="property_plan_ids" class="o_website_sale_image_list"
+                                       context="{'default_name': name, 'default_is_visible': False}" mode="kanban"
+                                       add-label="Add Floor Plan" nolabel="1"/>
+                            </group>
+                        </page>
+                        <page string="Documents">
+                            <field name="attachment_line_ids" class="o_website_sale_image_list"
+                                   context="{'default_name': name, 'default_is_visible': False, 'default_filetype': 'pdf'}"
+                                   mode="kanban" add-label="Add a Document" nolabel="1"/>
+                        </page>
+                        <page string="Additional Information">
+                            <group>
+                                <group>
+                                    <field name="license_code"/>
+                                    <field name="license_date"/>
+                                    <field name="date_added"/>
+                                    <field name="license_location"/>
+                                </group>
+                            </group>
+                        </page>
+                        <page string="Geolocation">
+                            <group>
+                                <group>
+                                    <field name="address" widget="place_autocomplete" class="oe_inline"/>
+                                </group>
+                            </group>
+                        </page>
+                        <page string="Notes">
+                            <field name="note" colspan="4" nolabel="1"/>
+                        </page>
+                    </notebook>
+                </sheet>
+                <chatter/>
+            </form>
+        </field>
+    </record>
+
+    <record model="ir.ui.view" id="project_worksite_list">
+        <field name="name">Project Worksite List</field>
+        <field name="model">project.worksite</field>
+        <field name="type">list</field>
+        <field name="arch" type="xml">
+            <list string="Tower">
+                <field name="default_code"/>
+                <field name="name"/>
+                <field name="partner_id"/>
+                <field name="region_id"/>
+            </list>
+        </field>
+    </record>
+
+    <record model="ir.ui.view" id="project_worksite_search">
+        <field name="name">Project Worksite Search</field>
+        <field name="model">project.worksite</field>
+        <field name="type">search</field>
+        <field name="arch" type="xml">
+            <search string="Top Search">
+                <group>
+                    <field name="name"/>
+                    <field name="partner_id"/>
+                </group>
+                <filter string="Archived" name="filter_inactive" domain="[('active', '=', False)]"/>
+                <newline/>
+                <group expand="0" string="Group By...">
+                    <filter name="region" string="Region" domain="[]" context="{'group_by':'region_id'}"/>
+                    <filter name="parent_id" string="Project" domain="[]" context="{'group_by':'parent_id'}"/>
+                    <filter name="partner" string="Partner" domain="[]" context="{'group_by':'partner_id'}"/>
+                </group>
+            </search>
+        </field>
+    </record>
+
+    <record model="ir.actions.act_window" id="action_project_worksite_act_window">
+        <field name="name">Worksite</field>
+        <field name="res_model">project.worksite</field>
+        <field name="view_mode">kanban,list,form</field>
+        <field name="view_ids" eval="[
+            (5, 0, 0),
+            (0, 0, {'view_mode': 'list'}),
+            (0, 0, {'view_mode': 'form', 'view_id': ref('project_worksite_form')}),
+            ]"
+        />
+        <field name="context">{'create': True}</field>
+        <field name="domain">[('parent_id', '=', False),('is_demo_worksite','=',False)]</field>
+    </record>
+
+    <record model="ir.actions.act_window" id="action_sub_project_worksite_act_window">
+        <field name="name">Project</field>
+        <field name="res_model">project.worksite</field>
+        <field name="view_mode">kanban,list,form</field>
+        <field name="view_ids" eval="[
+            (5, 0, 0),
+            (0, 0, {'view_mode': 'list'}),
+            (0, 0, {'view_mode': 'form', 'view_id': ref('sub_project_worksite_form')})]"/>
+        <field name="context">{'create': False, 'search_default_parent_id': True}</field>
+        <field name="domain">[('parent_id', '!=', False),('is_demo_worksite','=',False)]</field>
+    </record>
+
+</odoo>

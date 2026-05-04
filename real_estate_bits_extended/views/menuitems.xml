@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <menuitem
+        id="worksite_menu"
+        name="Worksites"
+        parent="real_estate_bits.menu_real_estate_configuration"
+        sequence="35"/>
+
+        <menuitem
+            id="project_amenities_menu"
+            name="Amenities"
+            action="project_amenities_action"
+            parent="real_estate_bits_extended.worksite_menu"
+            sequence="20"/>
+
+        <menuitem
+            id="additional_expense_menu"
+            name="Additional expenses"
+            action="additional_expense_action"
+            parent="real_estate_bits_extended.worksite_menu"
+            sequence="30"/>
+
+</odoo>

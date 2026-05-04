@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+  <template id="property_map_public_page" name="Property Map Public Page">
+    <t t-call="website.layout">
+      <div id="wrap" class="oe_structure">
+        <section class="container py-4">
+          <h3 class="mb-3" t-esc="record.name"/>
+          <div class="pm-wrapper">
+            <img class="pm-img" t-att-src="image_url" alt="Map"/>
+            <div class="pm-layer" aria-hidden="true">
+              <t t-foreach="record.line_ids" t-as="line">
+                <div class="pm-box"
+                     t-attf-style="left:#{line.x_pct}%; top:#{line.y_pct}%; width:#{line.w_pct or 20.0}%; height:#{line.h_pct or 12.0}%;"
+                >
+                  <p class="pm-title" t-esc="line.product_id.display_name or 'Property'"/>
+                </div>
+              </t>
+            </div>
+          </div>
+          <p class="text-muted mt-3">Note: boxes show the product name for now.</p>
+        </section>
+      </div>
+
+      <style>
+        .pm-wrapper { position: relative; max-width: 1200px; margin: 0 auto; }
+        .pm-img { width: 100%; height: auto; display: block; border-radius: 10px; }
+        .pm-layer { position: absolute; inset: 0; pointer-events: none; }
+        .pm-box {
+          position: absolute; box-sizing: border-box;
+          border: 2px solid rgba(14,165,233,.9);
+          background: rgba(14,165,233,.12);
+          border-radius: 12px; padding: 10px 12px;
+          backdrop-filter: blur(2px);
+          pointer-events: auto; overflow: hidden;
+        }
+        .pm-title { font-weight: 700; margin: 0; font-size: 14px; }
+      </style>
+    </t>
+  </template>
+</odoo>

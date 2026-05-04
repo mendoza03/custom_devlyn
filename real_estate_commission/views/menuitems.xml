@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <menuitem
+        id="commissions_menu"
+        name="Commissions"
+        sequence="10"
+        web_icon="real_estate_commission,static/description/icon.png"
+        groups="real_estate_commission.group_commission_manager"/>
+
+        <menuitem
+            id="commission_calculate_menu"
+            name="Calculate"
+            action="commission_calculate_action"
+            parent="commissions_menu"
+            sequence="10"/>
+
+        <menuitem
+            id="commissions_config_menu"
+            name="Configuration"
+            parent="commissions_menu"
+            sequence="20"/>
+
+            <!-- <menuitem
+                id="commissions_settings_menu"
+                name="Settings"
+                action="action_tudepa_config"
+                parent="commissions_config_menu"
+                sequence="0"/> -->
+
+            <menuitem
+                id="commissions_scenaries_menu"
+                name="Scenaries"
+                action="commission_scenary_action"
+                parent="commissions_config_menu"
+                sequence="10"/>
+
+</odoo>

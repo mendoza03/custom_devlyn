@@ -1,0 +1,526 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <template id="sale_order_portal_content" name="Custom QWEB Portal" inherit_id="sale.sale_order_portal_content">
+        <xpath expr="//*[@id='informations']" position="attributes">
+            <attribute name="style">margin-left: 0px;</attribute>
+        </xpath>
+        <xpath expr="//div[@id='intro_row']" position="replace">
+            <div class="habita-horizontal-line"/>
+            <div class="habita-title">
+                <div class="logo" style="display: flex; justify-content: center; align-items: center; height: 100px;">
+                    <img  t-att-src="image_data_uri(sale_order.order_line.product_id.worksite_id.image_1920)" alt="Logo"/>
+                </div>
+            </div>
+            <div class="habita-tiny-horizontal-line"/>
+            <div class="row habita-title-subtitle habita-col-6-style" id="intro_row" style="margin-left: 0px;">
+                <div class="col-6 text-start habita-col-6-style">
+                    <h6 class="habita-font my-0 col-lg flex-grow-1 mb-1 mb-lg-0">
+                        <t t-out="sale_order.type_name"/>: <t t-out="sale_order.name"/>
+                    </h6>
+                </div>
+                <div class="col-6 text-end habita-col-6-style">
+                    <h6 class="habita-font my-0 col-lg flex-grow-1 mb-1 mb-lg-0 text-end">
+                        Date: <span t-field="sale_order.date_order" t-options='{"widget": "date"}'/>
+                    </h6>
+                </div>
+            </div>
+            <div class="habita-tiny-horizontal-line"/>
+        </xpath>
+        <xpath expr="//div[@id='sale_info']" position="replace">
+            <div id="product_info" class="col-12 col-lg-6 mb-4 no-padding">
+                <t t-set="lines_to_report" t-value="sale_order._get_order_lines_to_report()"/>
+                <t t-foreach="lines_to_report" t-as="line">
+                    <table class="col-12 habita-finance-table-style">
+                        <thead class="habita-table-header">
+                            <tr>
+                                <th class="text-start">Product: </th>
+                                <th class="text-left"> <span t-field="line.product_id.name"/> </th>
+                            </tr>
+                        </thead>
+
+                        <tbody id="sale_info_table">
+                            <tr>
+                                <td style="text-align: left;"> 
+                                    Description:
+                                </td>
+                                <td style="text-align: left;"> 
+                                    <span t-field="line.name"/>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </t>
+            </div>
+            <div id="sale_info" class="col-12 col-lg-6 mb-4">
+                <div class="row no-margin no-padding">
+                    <table class="col-12 habita-finance-table-style">
+                        <thead class="habita-table-header">
+                            <tr>
+                                <th class="text-start">Partner: </th>
+                                <th class="text-left"> <span t-field="sale_order.partner_id.name"/> </th>
+                            </tr>
+                        </thead>
+                        <tbody id="sale_address_table">
+                            <tr>
+                                <td style="text-align: left;">
+                                    Phone:
+                                </td>
+                                <td style="text-align: left;">
+                                    <span t-field="sale_order.partner_id.phone"/>
+                                </td>
+                            </tr>
+                            <tr class="habita-title-subtitle">
+                                <td style="text-align: left;">
+                                    Email:
+                                </td>
+                                <td style="text-align: left;">
+                                    <span t-field="sale_order.partner_id.email"/>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </xpath>
+
+        <xpath expr="//div[@id='customer_info']" position="replace"/>
+
+        <xpath expr="//table[@id='sales_order_table']" position="replace">
+            <div class="mb-2" style="background-color:#062E6F;border: 1px solid #0E2954;"/>
+            <div class="habita-title">
+                <div class="title" style="background-color: #FFFFFF;">
+                   FINANCIAL YEAR <t t-out="sale_order.order_line.product_id.worksite_id.name.upper()"/>
+                </div>
+            </div>
+        </xpath>
+    </template>
+
+    <template id="sale_order_portal_content_totals_table" name="Remove Totals" inherit_id="sale.sale_order_portal_content_totals_table">
+        <xpath expr="//table" position="attributes">
+            <attribute name="class">d-none</attribute>
+        </xpath>
+    </template>
+
+    <template id="sale_order_portal_content_real_state_customs" name="Customs QWEB" inherit_id="real_state_bits_finance_quote.sale_order_portal_content_real_state_customs">
+        <xpath expr="//*[@id='content-finance']" position="replace">
+            <t t-set="annual_capital_gains_yield_years" t-value="sale_order._calculate_asset_projection()"/>
+            <t t-set="years_len" t-value="len(annual_capital_gains_yield_years)"/>
+            <section id="content-finance">
+                <div class="row no-margin no-padding">
+                    <t t-set="finance_table" t-value="sale_order._get_dynamic_finance_table()"/>
+                    <t t-set="finance_lines" t-value="sale_order.financial_lines"/>
+
+                    <table class="col-8 habita-finance-table-style">
+                        <thead class="habita-table-header">
+                            <tr>
+                                <th class="text-start">Finance: </th>
+                                <t t-if="sale_order.finance_ids">
+                                    <t t-foreach="sale_order.finance_ids" t-as="finance">
+                                        <th class="text-start"> <span t-field="finance.name"/> </th>
+                                    </t>
+                                </t>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>% Discount</td>
+                                <t t-if="sale_order.financial_lines">
+                                    <t t-foreach="sale_order.financial_lines" t-as="lines">
+                                        <td style="text-align: left;" class="highlight"> <span t-esc="lines.promotion_id.porcent * 100" t-options='{"widget": "float", "precision": 2}'/>% </td>
+                                    </t>
+                                </t>
+                            </tr>
+                            <tr>
+                                <td>Finance in months:</td>
+                                <t t-if="sale_order.financial_lines">
+                                    <t t-foreach="sale_order.financial_lines" t-as="lines">
+                                        <td> <span t-field="lines.finance_months"/> </td>
+                                    </t>
+                                </t>
+                            </tr>
+                            <!-- <tr>
+                                <td>CAT</td>
+                                <t t-if="sale_order.finance_ids">
+                                    <t t-foreach="sale_order.finance_ids" t-as="line">
+                                        <td> <span t-esc="line.cat * 100" t-options='{"widget": "float", "precision": 2}'/>% </td>
+                                    </t>
+                                </t>
+                            </tr> -->
+                            <tr>
+                                <td>P.U. with discount:</td>
+                                <t t-if="sale_order.financial_lines">
+                                    <t t-foreach="sale_order.financial_lines" t-as="lines">
+                                        <t t-if="lines.promotion_id.porcent_financial > 0">
+                                            <t t-set="total_price_des" t-value="(lines.amount_finance + lines.hitch) / sale_order.order_line.product_id.property_area"/>
+                                              <td>$<span t-esc="'{:,.2f}'.format(total_price_des)"/></td>
+                                          </t>
+                                          <t t-else="">
+                                              <t t-set="price" t-value="sale_order.order_line[0].product_id.price_per_m"/>
+                                                <t t-set="discount" t-value="lines.promotion_id.porcent * price"/>
+                                                <t t-set="discounted" t-value="price - discount"/>
+                                                <td>
+                                                    <span t-esc="discounted" t-options='{"widget": "monetary", "precision": 2, "display_currency": sale_order.currency_id}'/>
+                                                </td>
+                                          </t>
+                                    </t>
+                                </t>
+                            </tr>
+                            <tr>
+                                <td class="habita-table-header">Lot Price without Discount:</td>
+                                <t t-if="sale_order.financial_lines">
+                                    <t t-foreach="sale_order.financial_lines" t-as="lines">
+                                        <t t-if="sale_order.order_line">
+                                            <td class="habita-table-header">
+                                                <span t-field="sale_order.order_line[0].product_id.net_price" t-options='{"widget": "monetary", "precision": 2, "display_currency": sale_order.currency_id}'/>
+                                            </td>
+                                        </t>
+                                    </t>
+                                </t>
+                            </tr>
+                            <tr>
+                                <td>Discount:</td>
+                                <t t-if="sale_order.financial_lines">
+                                    <t t-foreach="sale_order.financial_lines" t-as="lines">
+                                        <t t-set="price" t-value="sale_order.order_line[0].product_id.net_price"/>
+                                        <t t-set="discount" t-value="lines.discount_total"/>
+
+                                        <td class="highlight"> <span t-esc="discount" t-options='{"widget": "monetary", "precision": 2, "display_currency": sale_order.currency_id}'/> </td>
+                                    </t>
+                                </t>
+                            </tr>
+                            <tr>
+                                <td class="habita-table-header">Gradual Initial Investment:</td>
+                                <t t-if="sale_order.financial_lines">
+                                    <t t-foreach="sale_order.financial_lines" t-as="lines">
+                                        <td class="habita-table-header">
+                                            <span t-field="lines.gradual_initial_investment" t-options='{"widget": "monetary", "precision": 2, "display_currency": sale_order.currency_id}'/>
+                                        </td>
+                                    </t>
+                                </t>
+                            </tr>
+                            <!-- <tr>
+                                <td>% Hitch</td>
+                                <t t-if="sale_order.financial_lines">
+                                    <t t-foreach="sale_order.financial_lines" t-as="lines">
+                                        <td> <span t-esc="lines.hitch_porcent * 100"/>% </td>
+                                    </t>    
+                                </t>
+                            </tr> -->
+                            <tr>
+                                <td>Hitch 10%</td>
+                                <t t-if="sale_order.financial_lines">
+                                    <t t-foreach="sale_order.financial_lines" t-as="lines">
+                                        <td> <span t-field="lines.hitch" t-options='{"widget": "monetary", "precision": 2, "display_currency": sale_order.currency_id}'/> </td>
+                                    </t>
+                                </t>
+                            </tr>
+                            <tr>
+                                <td class="habita-table-header">Amount Financial:</td>
+                                <t t-if="sale_order.financial_lines">
+                                    <t t-foreach="sale_order.financial_lines" t-as="lines">
+                                        <td class="habita-table-header"> <span t-field="lines.amount_finance" t-options='{"widget": "monetary", "precision": 2, "display_currency": sale_order.currency_id}'/> </td>
+                                    </t>
+                                </t>
+                            </tr>
+                            <t t-foreach="finance_table.items()" t-as="group">
+                                <tr>
+                                    <td>Monthly of <t t-out="group[0]"/></td>
+                                    <t t-foreach="finance_lines" t-as="line">
+                                        <t t-set="cell" t-value="group[1].get(line.id)"/>
+                                        <td>
+                                            <t t-if="cell">
+                                                <span t-esc="cell['monthly_payment']" t-options='{"widget": "monetary", "precision": 2, "display_currency": sale_order.currency_id}'/>
+                                            </t>
+                                            <t t-else="">
+                                                - - - - - -
+                                            </t>
+                                        </td>
+                                    </t>
+                                </tr>
+                            </t>
+
+                        </tbody>
+                        <tr style="height: 20px;"></tr>
+                        <tr style="height: 20px;"></tr>
+                        <tbody>
+                            <tr>
+                                <td> Utility in <t t-out="years_len"/> years </td>
+                                <t t-if="sale_order.finance_ids">
+                                    <t t-foreach="sale_order.financial_lines" t-as="lines">
+                                        <t t-set="price" t-value="sale_order.order_line[0].product_id.net_price"/>
+                                        <t t-set="discount" t-value="lines.discount_total"/>
+                                        <t t-set="discounted" t-value="price - discount"/>
+                                        <t t-set="gradual" t-value="lines.gradual_initial_investment"/>
+                                        <t t-set="percentage_total" t-value="sale_order.annual_capital_gains_yield"/>
+                                        <t t-set="gain_year" t-value="annual_capital_gains_yield_years[2] * percentage_total"/>
+                                        <t t-set="total_val" t-value="gain_year + annual_capital_gains_yield_years[2]"/>
+                                        <t t-set="total_4year" t-value="total_val - gradual"/>
+
+
+                                        <td>
+                                            <t t-out="round(total_4year)" t-options='{"widget": "monetary", "precision": 2, "display_currency": sale_order.currency_id}' />
+                                        </td>
+                                    </t>
+                                </t>
+                            </tr>
+                            <tr>
+                                <td class="habita-table-header"> Projected performance in <t t-out="years_len"/> years </td>
+                                <t t-if="sale_order.finance_ids">
+                                    <t t-foreach="sale_order.financial_lines" t-as="lines">
+                                        <t t-set="price" t-value="sale_order.order_line[0].product_id.net_price"/>
+                                        <t t-set="discount" t-value="lines.discount_total"/>
+                                        <t t-set="discounted" t-value="price - discount"/>
+                                        <t t-set="gradual" t-value="lines.gradual_initial_investment"/>
+                                        <t t-set="percentage_total" t-value="sale_order.annual_capital_gains_yield"/>
+                                        <t t-set="gain_year" t-value="annual_capital_gains_yield_years[2] * percentage_total"/>
+                                        <t t-set="total_val" t-value="gain_year + annual_capital_gains_yield_years[2]"/>
+                                        <t t-set="total_4year" t-value="total_val - gradual"/>
+                                        <t t-set="gradual" t-value="lines.gradual_initial_investment"/>
+                                        <td class="habita-table-header">
+                                            <t t-out="round((total_4year / gradual) * 100)" t-options='{"widget": "float", "precision": 2}'/>%
+                                        </td>
+                                    </t>
+                                </t>
+                            </tr>
+                            <tr>
+                                <td> Performance divided by <t t-out="years_len"/></td>
+                                <t t-if="sale_order.finance_ids">
+                                    <t t-foreach="sale_order.financial_lines" t-as="lines">
+                                        <t t-set="price" t-value="sale_order.order_line[0].product_id.net_price"/>
+                                        <t t-set="discount" t-value="lines.promotion_id.porcent * price"/>
+                                        <t t-set="discounted" t-value="price - discount"/>
+                                        <t t-set="gradual" t-value="lines.gradual_initial_investment"/>
+                                        <t t-set="percentage_total" t-value="sale_order.annual_capital_gains_yield"/>
+                                        <t t-set="gain_year" t-value="annual_capital_gains_yield_years[2] * percentage_total"/>
+                                        <t t-set="total_val" t-value="gain_year + annual_capital_gains_yield_years[2]"/>
+                                        <t t-set="total_4year" t-value="total_val - gradual"/>
+                                        <t t-set="gradual" t-value="lines.gradual_initial_investment"/>
+                                        <td> 
+                                            <t t-out="round( ((total_4year / gradual) * 100) / 4)" t-options='{"widget": "float", "precision": 2}'/>%
+                                        </td>
+                                    </t>
+                                </t>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <div class="row col-4 no-margin no-padding">
+                        <div class="col-2"/>
+                        <table class="col-10 habita-finance-table-style" style="height: 100px;">
+                            <tbody>
+                                <tr>
+                                    <td style="text-align: left;"> 
+                                        Footage in m2
+                                    </td>
+                                    <td class="highlight" style="text-align: right;"> 
+                                        <span t-out="sale_order.order_line.product_id.property_area"/>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td style="text-align: left;"> 
+                                        List price &#215; m<sup>2</sup>
+                                    </td>
+                                    <td class="highlight" style="text-align: right;">
+                                        <span t-out="sale_order.order_line.price_unit" t-options='{"widget": "monetary", "precision": 2, "display_currency": sale_order.currency_id}'/>
+                                    </td>
+                                </tr>
+                            </tbody>
+                            <tr style="height: 20px; font-size: 10px;"/>
+                            <tbody>
+                                <tr>
+                                    <td style="text-align: left;"> 
+                                        Annual capital gains yield
+                                    </td>
+                                    <td class="highlight" style="text-align: right;"> 
+                                        <span t-out="f'{float(sale_order.annual_capital_gains_yield) * 100:.2f}%'"/>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+
+                        <div class="col-2"/>
+                        <table class="col-10 habita-finance-table-style" style="height: 100px;">
+                            <thead class="habita-table-header">
+                                <tr>
+                                    <th class="text-start" colspan="2" >Asset projection: </th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <t t-foreach="annual_capital_gains_yield_years" t-as="year">
+                                    <tr style="height: 20px;" t-att-class="'habita-table-header' if year_index == (years_len - 1) else ''">
+                                        <td style="text-align: left;">
+                                            Value in <span t-esc="year_index + 1"/> 
+                                            <t t-if="year_index == 0">
+                                                year
+                                            </t>
+                                            <t t-else="">
+                                                years
+                                            </t>
+                                        </td>
+                                        <td style="text-align: right;">
+                                            <span t-esc="year" t-options='{"widget": "monetary", "precision": 2, "display_currency": sale_order.currency_id}'/>
+                                        </td>
+                                    </tr>
+                                </t>
+                            </tbody>
+                        </table>
+
+                        <div class="col-2"/>
+                        <div class="col-10 habita-font no-padding" style="font-size: 12px; height: 100px;">
+                            We have <t t-out="len(sale_order.financial_lines)"/> financing models: <br/>
+                            <t t-foreach="sale_order.financial_lines" t-as="line">
+                                <div>
+                                    <img src="/habita_report_customs/static/src/imgs/check_box_icon.svg" alt="Checkbox" style="width: 16px; height: 16px;"/> <span t-field="line.name"/>
+                                </div>
+                            </t>
+                            Down payment: 10% of the total value <br/>
+                            First 48 months interest-free. <br/>
+                            3-year installment. <br/>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            <br/>
+        </xpath>
+        
+        <xpath expr="//div[@id='name-hitch']" position="replace"/>
+
+        <xpath expr="//section[@id='difer-hitch']" position="replace">
+            <t t-if="sale_order.hitch_ids">
+                <section id="deferred-hitch">
+                    <div class="row no-margin no-padding">
+                        <table class="col-8 habita-finance-table-style">
+                            <thead class="habita-table-header">
+                                <tr> <th colspan="4" class="text-center">Diferid Hitch</th> </tr>
+                                <tr>
+                                    <th class="text-start">Finance: </th>
+                                    <t t-if="sale_order.finance_ids">
+                                        <t t-foreach="sale_order.finance_ids" t-as="finance">
+                                            <th class="text-start"> <span t-field="finance.name"/> </th>
+                                        </t>
+                                    </t>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>Amount Total Hitch</td>
+                                    <t t-if="sale_order.financial_lines">
+                                        <t t-foreach="sale_order.financial_lines" t-as="lines">
+                                            <td> <span t-esc="lines.hitch" t-options='{"widget": "monetary", "precision": 2, "display_currency": sale_order.currency_id}' /> </td>
+                                        </t>
+                                    </t>
+                                </tr>
+                                <tr>
+                                    <td>Month to Difer</td>
+                                    <t t-if="sale_order.financial_lines">
+                                        <t t-foreach="sale_order.hitch_ids" t-as="line">
+                                            <td> <span t-field="line.months"/> </td>
+                                        </t>
+                                    </t>
+                                </tr>
+                                <tr>
+                                    <td>Amount per month</td>
+                                    <t t-if="sale_order.finance_ids">
+                                        <t t-foreach="sale_order.hitch_ids" t-as="line">
+                                            <td> <span t-esc="line.amount" t-options='{"widget": "monetary", "precision": 2, "display_currency": sale_order.currency_id}'/> </td>
+                                        </t>
+                                    </t>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </section>
+            </t>
+            <br/>
+            <div class="habita-horizontal-line"/>
+            <br/>
+        </xpath>
+
+        <xpath expr="//section[@id='terms']" position="replace">
+            <section id="terms">
+                <div class="habita-font no-margin no-padding">
+                    <div class="row col-12 no-margin no-padding">
+                        <div class="col-6"/>
+                        <table class="habita-expiration-table-style col-6">
+                            <thead>
+                                <tr>
+                                    <th class="text-end">
+                                        Expiration Date: <span t-field="sale_order.validity_date" t-options="{'widget':'date'}"/>
+                                    </th> 
+                                </tr>
+                            </thead>
+                        </table>
+                    </div>
+                    <t t-set="tc_url" t-value="'%s/terms' % (sale_order.get_base_url())"/>
+                    <table class="col-12 habita-finance-table-style">
+                        <thead class="habita-table-header">
+                            <tr> 
+                                <th colspan="2" class="text-left">Terms and Conditions</th> 
+                                <th colspan="2" class="text-left">
+                                    <em><a href="/terms"><t t-out="tc_url"/></a></em>
+                                </th> 
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td colspan="4" >
+                                    <t t-if="sale_order.terms_type == 'html'">
+                                        <ul>
+                                            <li>Down payment: The down payment will be paid as agreed in the attached financial year, ensuring that the operation is based on the previously defined conditions.</li>
+                                            <li>Promotion: To take advantage of the current conditions, the transaction must be completed within a maximum period of 10 business days. This implies completing the full payment of the down payment and signing the contract. We are at your disposal to resolve any questions that may arise.</li>
+                                        </ul>
+                                        * Changes in price and financial conditions without prior notice.
+                                    </t>
+                                    <t t-else="">
+                                        <em t-field="sale_order.note"/>
+                                    </t>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </section>
+
+            <br/>
+
+            <section id="seller_info">
+                <div class="no-margin no-padding">
+                    <table class="col-6 habita-finance-table-style">
+                        <thead class="habita-table-header">
+                            <tr>
+                                <td class="text-left" > Seller: </td>
+                                <td class="text-left" > <span t-field="sale_order.user_id.name"/> </td>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td> Phone: </td>
+                                <td class="text-left" > <span t-field="sale_order.user_id.partner_id.phone"/> </td>
+                            </tr>
+                            <tr class="habita-title-subtitle">
+                                <td style="text-align: left;"> Email: </td>
+                                <td style="text-align: left;"> <span t-field="sale_order.user_id.partner_id.email"/> </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </section>
+        </xpath>
+    </template>
+
+    <template id="sale_order_portal_content_inherit_sale_stock" name="Remove Delivery QWEB" inherit_id="sale_stock.sale_order_portal_content_inherit_sale_stock">
+        <xpath expr="//div[@t-if='delivery_orders']" position="replace">
+            <div class="oe_structure"></div>
+        </xpath>
+    </template>
+
+    <template id="sale_order_portal_template" name="Change Color button" inherit_id="sale.sale_order_portal_template">
+        <xpath expr="//div[@id='sale_order_sidebar_button']//a" position="attributes">
+            <attribute name="style">background-color:#C7DBFA;color:#042559</attribute>
+        </xpath>
+        <xpath expr="//a[@id='print_invoice_report']" position="attributes">
+            <attribute name="style">background-color:#D1D1D1;color:#042559</attribute>
+        </xpath>
+    </template>
+
+</odoo>

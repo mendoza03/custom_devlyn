@@ -1,0 +1,9 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_menu_restriction_group_admin,menu.restriction.group.admin,model_menu_restriction_group,base.group_system,1,1,1,1
+access_menu_restriction_group_user,menu.restriction.group.user,model_menu_restriction_group,base.group_user,1,0,0,0
+access_menu_restriction_permission_admin,menu.restriction.permission.admin,model_menu_restriction_permission,base.group_system,1,1,1,1
+access_menu_restriction_permission_user,menu.restriction.permission.user,model_menu_restriction_permission,base.group_user,1,0,0,0
+access_menu_restriction_button_admin,menu.restriction.button.admin,model_menu_restriction_button,base.group_system,1,1,1,1
+access_menu_restriction_button_user,menu.restriction.button.user,model_menu_restriction_button,base.group_user,1,0,0,0
+access_menu_restriction_report_admin,menu.restriction.report.admin,model_menu_restriction_report,base.group_system,1,1,1,1
+access_menu_restriction_report_user,menu.restriction.report.user,model_menu_restriction_report,base.group_user,1,0,0,0

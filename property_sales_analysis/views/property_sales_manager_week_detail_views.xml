@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <!-- List View -->
+    <record id="view_property_sales_manager_week_detail_list" model="ir.ui.view">
+        <field name="name">property.sales.manager.week.detail.list</field>
+        <field name="model">property.sales.manager.week.detail</field>
+        <field name="arch" type="xml">
+            <list string="Detalle de Gerentes por Semana" create="false" edit="false" delete="false">
+                <field name="manager_name"/>
+                <field name="week_name"/>
+                <field name="week_number"/>
+                <field name="sold_count"/>
+                <field name="sold_amount_display"/>
+                <field name="calendar_id"/>
+            </list>
+        </field>
+    </record>
+
+    <!-- Form View -->
+    <record id="view_property_sales_manager_week_detail_form" model="ir.ui.view">
+        <field name="name">property.sales.manager.week.detail.form</field>
+        <field name="model">property.sales.manager.week.detail</field>
+        <field name="arch" type="xml">
+            <form string="Detalle de Venta" create="false" edit="false" delete="false">
+                <sheet>
+                    <group>
+                        <group>
+                            <field name="manager_id" readonly="1"/>
+                            <field name="calendar_id" readonly="1"/>
+                        </group>
+                        <group>
+                            <field name="week_number" readonly="1"/>
+                            <field name="sold_count" readonly="1"/>
+                            <field name="sold_amount_display" readonly="1"/>
+                        </group>
+                    </group>
+                    <group>
+                        <field name="properties_list" readonly="1" widget="text"/>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <!-- Search View -->
+    <record id="view_property_sales_manager_week_detail_search" model="ir.ui.view">
+        <field name="name">property.sales.manager.week.detail.search</field>
+        <field name="model">property.sales.manager.week.detail</field>
+        <field name="arch" type="xml">
+            <search>
+                <field name="manager_id"/>
+                <field name="week_number"/>
+                <field name="calendar_id"/>
+                <filter string="Por Gerente" name="group_by_manager" context="{'group_by':'manager_id'}"/>
+                <filter string="Por Semana" name="group_by_week" context="{'group_by':'week_number'}"/>
+                <filter string="Por Calendario" name="group_by_calendar" context="{'group_by':'calendar_id'}"/>
+            </search>
+        </field>
+    </record>
+
+    <!-- Action -->
+    <record id="action_property_sales_manager_week_detail" model="ir.actions.act_window">
+        <field name="name">Ventas de Gerentes por Semana</field>
+        <field name="res_model">property.sales.manager.week.detail</field>
+        <field name="view_mode">list,form</field>
+        <field name="context">{'create': False}</field>
+    </record>
+
+    <!-- Menu -->
+    <menuitem id="menu_property_sales_manager_week_detail"
+              name="Detalle Gerentes (Dashboard)"
+              parent="real_estate_bits.menu_real_estate_configuration"
+              action="action_property_sales_manager_week_detail"
+              sequence="16"/>
+
+</odoo>

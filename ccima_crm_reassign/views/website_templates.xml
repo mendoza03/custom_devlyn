@@ -1,0 +1,483 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+  <template id="contract_upload_page" name="Contract Upload Page">
+  <t t-call="website.layout">
+
+    <t t-set="selected_rev_id" t-value="selected_rev_id or 0"/>
+    <t t-set="missing_fields" t-value="missing_fields or {}"/>
+    <t t-set="all_done" t-value="all_done or False"/>
+
+    <div class="container py-5">
+      <h1 class="mb-4">Upload Contract Files</h1>
+
+      <!-- ===== Styles ===== -->
+      <style>
+  .mm-doc-card{
+    border: 1px solid #cfd6df;
+    border-radius: 6px;
+    padding: 10px 12px;
+    background: #fff;
+  }
+  .mm-doc-title{
+    font-size: 14px;
+    font-weight: 600;
+    margin: 0 0 8px 0;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+  }
+  .mm-info-btn{
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 18px;
+    height: 18px;
+    border-radius: 999px;
+    border: 1px solid #6b7280;
+    color: #334155;
+    text-decoration: none;
+    font-size: 12px;
+    line-height: 1;
+    background: #fff;
+    padding: 0;
+  }
+  .mm-info-btn:hover{
+    background: #f1f5f9;
+    color: #0f172a;
+  }
+
+  /* Transparent modal background */
+  .modal-content{
+    background: transparent !important;
+    border: 0 !important;
+    box-shadow: none !important;
+  }
+
+  /* Card that contains the help image */
+  .mm-modal-card{
+    background: rgba(237, 237, 235, 0.96);
+    border-radius: 28px;
+    box-shadow: 0 18px 40px rgba(0,0,0,.35);
+    padding: 18px;
+    position: relative;
+    max-width: 920px;
+    width: 100%;
+  }
+
+  .mm-modal-img{
+    width: 100%;
+    height: auto;
+    display: block;
+    border-radius: 18px;
+  }
+
+  /* Close button */
+  .mm-modal-close-x{
+    position: absolute;
+    top: 10px;
+    right: 14px;
+    font-size: 26px;
+    color: #111827;
+    opacity: .75;
+    z-index: 5;
+    text-decoration: none;
+  }
+  .mm-modal-close-x:hover{ opacity: 1; }
+
+          .modal-backdrop.show{
+  opacity: .25 !important;
+}
+      </style>
+
+      <t t-if="request.params.get('error')">
+        <div class="alert alert-danger" role="alert">
+          Something went wrong: <t t-esc="request.params.get('error')"/>
+        </div>
+      </t>
+
+      <form action="/contract/upload/submit" method="post" enctype="multipart/form-data" class="row g-3">
+        <input type="hidden" name="csrf_token" t-att-value="request.csrf_token()"/>
+
+        <div class="col-12">
+          <label class="form-label">Contract Brief</label>
+          <select class="form-select" name="rev_id" required="required">
+            <option value="">Select one...</option>
+            <t t-foreach="briefs" t-as="b">
+              <option t-att-value="b.id" t-att-selected="b.id == selected_rev_id or None">
+                <t t-esc="b.display_name"/>
+              </option>
+            </t>
+          </select>
+        </div>
+
+        <t t-if="selected_rev_id and all_done">
+          <div class="col-12 mt-4">
+            <div class="alert alert-success" role="alert">
+              All required documents are already uploaded. Thank you.
+            </div>
+          </div>
+        </t>
+
+        <!-- Acta de nacimiento -->
+        <t t-if="not selected_rev_id or missing_fields.get('full_name_file_name', True)">
+          <div class="col-12 mt-4">
+            <h4 class="mb-3">Acta de nacimiento</h4>
+            <div class="row g-3">
+              <div class="col-12 col-md-6">
+                <input class="form-control" type="file" name="full_name_file"/>
+              </div>
+            </div>
+          </div>
+        </t>
+
+        <div class="col-12 mt-4">
+          <div class="row g-3">
+
+            <!-- Identificación oficial -->
+            <t t-if="not selected_rev_id or missing_fields.get('official_id_file_name', True)">
+              <div class="col-12 col-md-6">
+                <div class="mm-doc-card">
+                  <div class="mm-doc-title">
+                    <span>Identificación oficial</span>
+
+                    <button type="button"
+                            class="mm-info-btn mm-open-modal"
+                            data-mm-modal-id="mm_modal_official_id"
+                            aria-label="Help">
+                      <i class="fa fa-info" aria-hidden="true"></i>
+                    </button>
+                  </div>
+
+                  <input class="form-control" type="file" name="official_id_file"/>
+                </div>
+              </div>
+            </t>
+
+            <!-- Comprobante de domicilio -->
+            <t t-if="not selected_rev_id or missing_fields.get('address_file_name', True)">
+              <div class="col-12 col-md-6">
+                <div class="mm-doc-card">
+                  <div class="mm-doc-title">
+                    <span>Comprobante de domicilio</span>
+
+                    <button type="button"
+                            class="mm-info-btn mm-open-modal"
+                            data-mm-modal-id="mm_modal_address"
+                            aria-label="Help">
+                      <i class="fa fa-info" aria-hidden="true"></i>
+                    </button>
+                  </div>
+
+                  <input class="form-control" type="file" name="address_file"/>
+                </div>
+              </div>
+            </t>
+
+            <!-- Estado de cuenta -->
+            <t t-if="not selected_rev_id or missing_fields.get('bank_statement_file_name', True)">
+              <div class="col-12 col-md-6">
+                <div class="mm-doc-card">
+                  <div class="mm-doc-title">
+                    <span>Estado de cuenta</span>
+
+                    <button type="button"
+                            class="mm-info-btn mm-open-modal"
+                            data-mm-modal-id="mm_modal_bank"
+                            aria-label="Help">
+                      <i class="fa fa-info" aria-hidden="true"></i>
+                    </button>
+                  </div>
+
+                  <input class="form-control" type="file" name="bank_statement_file"/>
+                </div>
+              </div>
+            </t>
+
+            <!-- RFC -->
+            <t t-if="not selected_rev_id or missing_fields.get('rfc_file_name', True)">
+              <div class="col-12 col-md-6">
+                <div class="mm-doc-card">
+                  <div class="mm-doc-title">
+                    <span>RFC</span>
+
+                    <button type="button"
+                            class="mm-info-btn mm-open-modal"
+                            data-mm-modal-id="mm_modal_rfc"
+                            aria-label="Help">
+                      <i class="fa fa-info" aria-hidden="true"></i>
+                    </button>
+                  </div>
+
+                  <input class="form-control" type="file" name="rfc_file"/>
+                </div>
+              </div>
+            </t>
+
+            <!-- CURP -->
+            <t t-if="not selected_rev_id or missing_fields.get('curp_file_name', True)">
+              <div class="col-12 col-md-6">
+                <div class="mm-doc-card">
+                  <div class="mm-doc-title">
+                    <span>CURP</span>
+
+                    <button type="button"
+                            class="mm-info-btn mm-open-modal"
+                            data-mm-modal-id="mm_modal_curp"
+                            aria-label="Help">
+                      <i class="fa fa-info" aria-hidden="true"></i>
+                    </button>
+                  </div>
+
+                  <input class="form-control" type="file" name="curp_file"/>
+                </div>
+              </div>
+            </t>
+
+          </div>
+        </div>
+
+        <div class="col-12 mt-3">
+          <button type="submit"
+                  class="btn btn-primary"
+                  t-att-disabled="selected_rev_id and all_done or None">
+            Upload
+          </button>
+        </div>
+      </form>
+    </div>
+
+    <!-- ===== Modals (Bootstrap) ===== -->
+    <!-- ================== Identificación oficial ================== -->
+<div class="modal fade" id="mm_modal_official_id" tabindex="-1" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered modal-lg">
+    <div class="modal-content">
+      <div class="modal-body d-flex justify-content-center">
+
+        <div class="mm-modal-card">
+          <button type="button"
+                  class="mm-modal-close-x btn btn-link p-0"
+                  data-bs-dismiss="modal"
+                  aria-label="Close">×</button>
+
+          <img class="mm-modal-img"
+               src="/ccima_crm_reassign/static/src/img/help_official_id.svg"
+               alt="Official ID Help"/>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ================== Comprobante de domicilio ================== -->
+<div class="modal fade" id="mm_modal_address" tabindex="-1" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered modal-lg">
+    <div class="modal-content">
+      <div class="modal-body d-flex justify-content-center">
+
+        <div class="mm-modal-card">
+          <button type="button"
+                  class="mm-modal-close-x btn btn-link p-0"
+                  data-bs-dismiss="modal"
+                  aria-label="Close">×</button>
+
+          <img class="mm-modal-img"
+               src="/ccima_crm_reassign/static/src/img/help_address.svg"
+               alt="Address Help"/>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ================== Estado de cuenta ================== -->
+<div class="modal fade" id="mm_modal_bank" tabindex="-1" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered modal-lg">
+    <div class="modal-content">
+      <div class="modal-body d-flex justify-content-center">
+
+        <div class="mm-modal-card">
+          <button type="button"
+                  class="mm-modal-close-x btn btn-link p-0"
+                  data-bs-dismiss="modal"
+                  aria-label="Close">×</button>
+
+          <img class="mm-modal-img"
+               src="/ccima_crm_reassign/static/src/img/help_bank.svg"
+               alt="Bank Statement Help"/>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ================== RFC ================== -->
+<div class="modal fade" id="mm_modal_rfc" tabindex="-1" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered modal-lg">
+    <div class="modal-content">
+      <div class="modal-body d-flex justify-content-center">
+
+        <div class="mm-modal-card">
+          <button type="button"
+                  class="mm-modal-close-x btn btn-link p-0"
+                  data-bs-dismiss="modal"
+                  aria-label="Close">×</button>
+
+          <img class="mm-modal-img"
+               src="/ccima_crm_reassign/static/src/img/help_rfc.svg"
+               alt="RFC Help"/>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ================== CURP ================== -->
+<div class="modal fade" id="mm_modal_curp" tabindex="-1" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered modal-lg">
+    <div class="modal-content">
+      <div class="modal-body d-flex justify-content-center">
+
+        <div class="mm-modal-card">
+          <button type="button"
+                  class="mm-modal-close-x btn btn-link p-0"
+                  data-bs-dismiss="modal"
+                  aria-label="Close">×</button>
+
+          <img class="mm-modal-img"
+               src="/ccima_crm_reassign/static/src/img/help_curp.svg"
+               alt="CURP Help"/>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</div>
+
+
+    <!-- ===== JS (Bootstrap Modal) ===== -->
+    <script type="text/javascript">
+  document.addEventListener('DOMContentLoaded', function () {
+
+    function manualOpen(modalEl){
+      modalEl.classList.add('show');
+      modalEl.style.display = 'block';
+      modalEl.removeAttribute('aria-hidden');
+      document.body.classList.add('modal-open');
+
+      // ensure backdrop
+      let bd = document.querySelector('.modal-backdrop');
+      if (!bd) {
+        bd = document.createElement('div');
+        bd.className = 'modal-backdrop fade show';
+        document.body.appendChild(bd);
+      }
+
+      // close on backdrop click
+      bd.addEventListener('click', function () {
+        manualClose(modalEl);
+      }, { once: true });
+
+      // close on ESC
+      const escHandler = function (ev) {
+        if (ev.key === 'Escape') {
+          manualClose(modalEl);
+        }
+      };
+      document.addEventListener('keydown', escHandler, { once: true });
+    }
+
+    function manualClose(modalEl){
+      modalEl.classList.remove('show');
+      modalEl.style.display = 'none';
+      modalEl.setAttribute('aria-hidden', 'true');
+      document.body.classList.remove('modal-open');
+
+      const bd = document.querySelector('.modal-backdrop');
+      if (bd) { bd.remove(); }
+    }
+
+    function openModal(modalEl){
+      if (!modalEl) { return; }
+
+      if (window.bootstrap &amp;&amp; window.bootstrap.Modal) {
+        const modal = window.bootstrap.Modal.getOrCreateInstance(modalEl, {
+          backdrop: true,
+          keyboard: true,
+          focus: true,
+        });
+        modal.show();
+      } else {
+        manualOpen(modalEl);
+      }
+    }
+
+    function closeModal(modalEl){
+      if (!modalEl) { return; }
+
+      if (window.bootstrap &amp;&amp; window.bootstrap.Modal) {
+        const modal = window.bootstrap.Modal.getOrCreateInstance(modalEl);
+        modal.hide();
+      } else {
+        manualClose(modalEl);
+      }
+    }
+
+    // Open on info buttons
+    document.querySelectorAll('.mm-open-modal').forEach((btn) => {
+      btn.addEventListener('click', function () {
+        const modalId = btn.getAttribute('data-mm-modal-id');
+        const modalEl = modalId ? document.getElementById(modalId) : null;
+        openModal(modalEl);
+      });
+    });
+
+    // Close on X buttons (always)
+    document.querySelectorAll('.mm-modal-close-x').forEach((btn) => {
+      btn.addEventListener('click', function () {
+        const modalEl = btn.closest('.modal');
+        closeModal(modalEl);
+      });
+    });
+
+  });
+</script>
+
+
+  </t>
+</template>
+
+
+  <template id="contract_upload_thanks_page" name="Contract Upload Thanks Page">
+    <t t-call="website.layout">
+        <section class="py-5">
+            <div class="container">
+                <div class="text-center py-5">
+
+                    <div class="mb-4">
+                        <img src="/ccima_crm_reassign/static/src/img/thanks_icon.png"
+                             alt="Thanks"
+                             style="width:90px; height:auto;"/>
+                    </div>
+
+                    <h1 class="fw-bold mb-3">Gracias</h1>
+
+                    <p class="mb-1">Tus archivos fueron enviados.</p>
+                    <p class="mb-4">
+                        Un Aliado Sherpa se pondrá en contacto contigo lo antes posible.
+                    </p>
+
+                    <a href="/" class="text-decoration-none">
+                        Volver a la página principal
+                    </a>
+
+                </div>
+            </div>
+        </section>
+    </t>
+</template>
+
+</odoo>

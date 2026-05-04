@@ -1,0 +1,129 @@
+<?xml version="1.0"?>
+<odoo>
+
+    <record id="project_task_view_todo_form_inherit_custom_note" model="ir.ui.view">
+        <field name="name">project.task.view.todo.form.inherit</field>
+        <field name="model">project.task</field>
+        <field name="inherit_id" ref="project_todo.project_task_view_todo_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='user_ids']" position="after">
+                <field name="is_task_custom" invisible="1"/>
+                <field name="is_project_custom" invisible="1"/>
+                <field name="custom_note_project_id" options="{'no_create_edit': True}" required="is_project_custom" invisible="not is_project_custom"/>
+            </xpath>
+            <xpath expr="//field[@name='tag_ids']" position="after">
+                <field name="task_id" options="{'no_create_edit': True}"
+                invisible="not is_task_custom" required="is_project_custom"/>
+            </xpath>
+        </field>
+    </record>
+
+    <record id="project_task_view_todo_search_inherit_custom_project" model="ir.ui.view">
+        <field name="name">project.task.view.todo.search.inherit</field>
+        <field name="model">project.task</field>
+        <field name="inherit_id" ref="project_todo.project_task_view_todo_search"/>
+        <field name="arch" type="xml">
+            <xpath expr="//search" position="inside">
+                <field name="task_id"/>
+                <field name="custom_note_project_id"/>
+            </xpath>
+            <xpath expr="//filter" position="inside">
+                <filter string="Task" name="task" context="{'group_by':'task_id'}"/>
+                <filter string="Project" name="project" context="{'group_by':'custom_note_project_id'}"/>
+            </xpath>
+        </field>
+    </record>
+
+    <!-- Project Note main action + view links-->
+    
+    <record id="action_project_note_note" model="ir.actions.act_window">
+        <field name="name">Notes</field>
+        <field name="res_model">project.task</field>
+        <field name="domain">[('is_project_custom','=',True),('user_ids', 'in', [uid]), ('project_id', '=', False), ('parent_id', '=', False)]</field>
+        <field name="view_mode">kanban,form,list,activity</field>
+        <field name="search_view_id" ref="project_todo.project_task_view_todo_search"/>
+        <field name="context">{'search_default_open_tasks': 1, 'list_view_ref': 'project_todo.project_task_view_todo_tree', 'default_is_project_custom': True}</field>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+                No to-do found. Let's create one!
+            </p><p>
+                Keep your work organized by using memos and to-do lists.
+                Your to-do items are private by default, but you can choose to share them with others by adding them as assignees.
+            </p>
+        </field>
+    </record>
+
+     <record model="ir.actions.act_window.view" id="project_note_action_todo_kanban_view">
+        <field name="view_mode">kanban</field>
+        <field name="view_id" ref="project_todo.project_task_view_todo_kanban"/>
+        <field name="act_window_id" ref="action_project_note_note"/>
+    </record>
+
+    <record model="ir.actions.act_window.view" id="project_note_action_todo_form_view">
+        <field name="view_mode">form</field>
+        <field name="view_id" ref="project_todo.project_task_view_todo_form"/>
+        <field name="act_window_id" ref="action_project_note_note"/>
+    </record>
+
+    <record model="ir.actions.act_window.view" id="project_note_action_todo_tree_view">
+        <field name="view_mode">list</field>
+        <field name="view_id" ref="project_todo.project_task_view_todo_tree"/>
+        <field name="act_window_id" ref="action_project_note_note"/>
+    </record>
+
+    <record model="ir.actions.act_window.view" id="project_note_action_todo_activity_view">
+        <field name="view_mode">activity</field>
+        <field name="view_id" ref="project_todo.project_task_view_todo_activity"/>
+        <field name="act_window_id" ref="action_project_note_note"/>
+    </record>
+
+
+    <!-- Task Note main action + view links-->
+
+    <record id="action_task_note_note" model="ir.actions.act_window">
+        <field name="name">Notes</field>
+        <field name="res_model">project.task</field>
+        <field name="domain">[('is_task_custom','=',True),('user_ids', 'in', [uid]), ('project_id', '=', False), ('parent_id', '=', False)]</field>
+        <field name="view_mode">kanban,form,list,activity</field>
+        <field name="search_view_id" ref="project_todo.project_task_view_todo_search"/>
+        <field name="context">{'search_default_open_tasks': 1, 'list_view_ref': 'project_todo.project_task_view_todo_tree', 'default_is_task_custom': True}</field>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+                No to-do found. Let's create one!
+            </p><p>
+                Keep your work organized by using memos and to-do lists.
+                Your to-do items are private by default, but you can choose to share them with others by adding them as assignees.
+            </p>
+        </field>
+    </record>
+
+    <record model="ir.actions.act_window.view" id="project_task_note_action_todo_kanban_view">
+        <field name="view_mode">kanban</field>
+        <field name="view_id" ref="project_todo.project_task_view_todo_kanban"/>
+        <field name="act_window_id" ref="action_task_note_note"/>
+    </record>
+
+    <record model="ir.actions.act_window.view" id="project_task_note_action_todo_form_view">
+        <field name="view_mode">form</field>
+        <field name="view_id" ref="project_todo.project_task_view_todo_form"/>
+        <field name="act_window_id" ref="action_task_note_note"/>
+    </record>
+
+    <record model="ir.actions.act_window.view" id="project_task_note_action_todo_tree_view">
+        <field name="view_mode">list</field>
+        <field name="view_id" ref="project_todo.project_task_view_todo_tree"/>
+        <field name="act_window_id" ref="action_task_note_note"/>
+    </record>
+
+    <record model="ir.actions.act_window.view" id="project_task_note_action_todo_activity_view">
+        <field name="view_mode">activity</field>
+        <field name="view_id" ref="project_todo.project_task_view_todo_activity"/>
+        <field name="act_window_id" ref="action_task_note_note"/>
+    </record>
+
+    <menuitem id="notes_job_project_menu" parent="menu_job_cost_project" name="Project Notes" action="action_project_note_note" 
+              sequence="80"/>
+    <menuitem id="notes_job_cost_task_menu" parent="menu_job_cost_orders" name="Job Notes" action="action_task_note_note" 
+              sequence="2"/>
+
+</odoo>

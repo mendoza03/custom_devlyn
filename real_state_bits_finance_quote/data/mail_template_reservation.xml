@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id="email_template_property_reservation" model="mail.template">
+            <field name="name">Reservation: Send Reservation</field>
+            <field name="model_id" ref="real_estate_bits.model_property_reservation"/>
+            <field name="subject">Reservation {{ object.name or 'n/a' }}</field>
+            <field name="email_from">{{ (object.user_id.email_formatted or object.company_id.email_formatted) }}</field>
+            <field name="partner_to">{{ object.partner_id.id }}</field>
+            <field name="description">Send information about the property reservation to customer</field>
+            <field name="body_html" type="html">
+<div style="margin: 0px; padding: 0px;">
+    <p style="margin: 0px; padding: 0px; font-size: 13px;">
+        Hello <span style="font-weight: bold;" t-out="object.partner_id.name or ''"></span>, 
+        <br/><br/>
+        Your property reservation <span style="font-weight: bold;" t-out="object.name or ''"></span>
+        
+        amounting in <span style="font-weight: bold;" t-out="format_amount(object.deposit, object.currency_id) or ''">$ 10.00</span> is ready for review.
+    
+        <br/><br/>
+        Do not hesitate to contact us if you have any questions.
+        <t t-if="not is_html_empty(object.user_id.signature)">
+            <br/><br/>
+            <t t-out="object.user_id.signature or ''">--<br/>Mitchell Admin</t>
+        </t>
+        <br/><br/>
+    </p>
+</div>
+            </field>
+            <!-- <field name="report_template_ids" eval="[(4, ref('sale.action_report_saleorder'))]"/> -->
+            <field name="lang">{{ object.partner_id.lang }}</field>
+            <field name="auto_delete" eval="True"/>
+        </record>
+
+</odoo>

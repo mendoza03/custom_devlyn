@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    
+    <!-- Main Menu -->
+    <menuitem
+        id="menu_sale_goals_root"
+        name="Metas de Ventas"
+        web_icon="sale_goals_management,static/description/icon.png"
+        sequence="20"/>
+    
+    <!-- Submenu: Metas -->
+    <menuitem
+        id="menu_sale_goals"
+        name="Metas"
+        parent="menu_sale_goals_root"
+        action="action_sale_goal"
+        sequence="10"/>
+    
+    <!-- Submenu: Configuración (ya está en Settings pero también aquí) -->
+    <menuitem
+        id="menu_sale_goals_config_main"
+        name="Configuración"
+        parent="menu_sale_goals_root"
+        action="action_sale_goal_config"
+        sequence="100"/>
+    
+</odoo>

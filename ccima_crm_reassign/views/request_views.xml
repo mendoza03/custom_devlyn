@@ -1,0 +1,105 @@
+<odoo>
+  <!-- ACTION -->
+  <record id="action_mm_refund_request" model="ir.actions.act_window">
+    <field name="name">Refund Requests</field>
+    <field name="res_model">mm.refund.request</field>
+    <field name="view_mode">list,form</field>
+    <field name="target">current</field>
+  </record>
+
+  <!-- MENUS -->
+  <menuitem id="menu_mm_refund_root" name="Refund Requests" sequence="10"/>
+  <menuitem id="menu_mm_refund_requests" name="Requests"
+            parent="menu_mm_refund_root"
+            action="action_mm_refund_request"
+            sequence="10"/>
+
+  <!-- LIST -->
+  <record id="view_mm_refund_request_list" model="ir.ui.view">
+    <field name="name">mm.refund.request.list</field>
+    <field name="model">mm.refund.request</field>
+    <field name="arch" type="xml">
+      <list string="Refund Requests" create="1" edit="1">
+        <field name="create_date"/>
+        <field name="partner_name"/>
+        <field name="development_name"/>
+        <field name="unit_type"/>
+        <field name="reference"/>
+        <field name="contract_signed"/>
+        <field name="total_refund"/>
+      </list>
+    </field>
+  </record>
+
+  <!-- FORM -->
+  <record id="view_mm_refund_request_form" model="ir.ui.view">
+    <field name="name">mm.refund.request.form</field>
+    <field name="model">mm.refund.request</field>
+    <field name="arch" type="xml">
+      <form string="Refund Request">
+        <sheet>
+
+          <group>
+            <group string="Customer Data">
+              <field name="partner_name"/>
+              <field name="contact_after"/>
+            </group>
+
+            <group string="Unit Data">
+              <field name="development_name"/>
+              <field name="reference"/>
+              <field name="unit_type"/>
+              <field name="meters2"/>
+              <field name="unit_amount"/>
+              <field name="contract_signed"/>
+            </group>
+          </group>
+
+          <group string="Refund">
+            <group string="Apartado">
+              <field name="apartado_amount"/>
+              <field name="apartado_payment_date"/>
+              <field name="apartado_payment_method"/>
+              <field name="apartado_discount"/>
+              <field name="apartado_real_refund"/>
+            </group>
+
+            <group string="Enganche">
+              <field name="enganche_amount"/>
+              <field name="enganche_payment_date"/>
+              <field name="enganche_payment_method"/>
+              <field name="enganche_discount"/>
+              <field name="enganche_real_refund"/>
+            </group>
+          </group>
+
+          <group>
+            <group string="Totals">
+              <field name="total_refund" readonly="1"/>
+              <field name="currency_id" readonly="1"/>
+            </group>
+
+            <group string="Documentation">
+              <field name="doc_request_signed"/>
+              <field name="doc_official_id"/>
+              <field name="doc_clabe"/>
+              <field name="doc_vouchers"/>
+            </group>
+          </group>
+
+          <group string="Notes">
+            <field name="note" placeholder="Internal note..."/>
+          </group>
+
+          <group string="Refund Reason">
+            <field name="refund_reason" placeholder="Customer reason..."/>
+          </group>
+
+        </sheet>
+
+        <chatter/>
+      </form>
+    </field>
+  </record>
+
+</odoo>

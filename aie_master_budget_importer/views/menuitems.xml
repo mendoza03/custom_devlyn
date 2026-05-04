@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <menuitem id="menu_master_budget_importer"
+        name="Importer"
+        action="master_budget_importer_action"
+        parent="aie_master_budget.master_budget_config_menu"
+        groups="aie_master_budget.group_access_aie_master_budget_admin"
+        sequence="20"/>
+
+</odoo>

@@ -1,0 +1,261 @@
+/* ===== Scrollbar CSS ===== */
+/* Firefox */
+* {
+    scrollbar-width: auto;
+    scrollbar-color: #714B67 #ffffff;
+}
+
+/* Chrome, Edge, and Safari */
+*::-webkit-scrollbar {
+    width: 12px;
+}
+
+*::-webkit-scrollbar-track {
+    background: #ffffff;
+}
+
+*::-webkit-scrollbar-thumb {
+    background-color: #714B67;
+    border-radius: 20px;
+    border: 3px double #ffffff;
+}
+
+.bg-gray-100 {
+    background-color: #e7eef5 !important;
+}
+
+div.p-5-reb {
+    padding: 1.5rem 3rem !important;
+
+}
+
+.dashboard span{
+    color: #4B49AC ;
+}
+
+.dashboard h3{
+    font-size: 32px;
+    margin: 0;
+}
+
+.dashboard h6{
+    font-size: 18px;
+}
+
+.drop-btn{
+    background-color: #567696;
+    color: #fff;
+    padding: 16px 32px;
+    line-height: 20px;
+    border-radius: 8px;
+    font-size: 24px;
+    border: none;
+    display: inline-block;
+}
+
+.drop-btn::after {
+    font-size: 24px !important;
+}
+
+.dropdown-menu-reb {
+    min-width: 170px;
+    padding: 5px 0;
+    margin: 2px 0 0;
+    font-size: 14px;
+    -webkit-background-clip: padding-box;
+    background-clip: padding-box;
+    border: 1px solid #ccc;
+    border: 1px solid rgba(0,0,0,.15);
+    border-radius: 4px;
+    -webkit-box-shadow: 0 6px 12px rgb(0 0 0 / 18%);
+    box-shadow: 0 6px 12px rgb(0 0 0 / 18%);
+    width: 100%;
+    margin-left: -53%;
+}
+
+.check-box {
+    padding: 0 8%;
+}
+
+.check-box label{
+    margin-bottom: 0px;
+    font-size: 16px;
+    margin-left: 8px;
+}
+
+/* CARDS section */
+
+.card-reb{
+    height: 100%;
+    padding: 10px;
+    color: #fff;
+    border-radius: 10px !important;
+}
+
+.card-reb:hover{
+    box-shadow: 0 7px 30px -2px #919191;
+}
+
+.card-reb .card-body-reb {
+    background-color: unset !important;
+    color: white;
+    text-align: center;
+}
+
+.card-body-reb p:nth-child(1){
+    font-size: 24px;
+    line-height: 2.3rem;
+}
+
+.card-body-reb p:nth-child(2){
+    font-size: 48px;
+    line-height: 30px;
+}
+
+.card-dark-reb{
+    background-color:  #304d6d !important;
+}
+
+.card-gray-reb{
+    background-color: #527597 !important;
+}
+
+.card-bluish-reb{
+    background-color: #247ba0 !important;
+}
+
+.card-slate-reb{
+    background-color: #545e75 !important;
+}
+
+.card-silk-blue-reb{
+    background-color:   #4b85bb !important;
+}
+
+.card-navy-reb{
+    background-color: #1d56a7 !important;
+}
+
+/* buttons */
+
+.dash-btns{
+    margin: 0px;
+}
+
+@media only screen and (max-width: 600px) {
+    .dash-btns {
+        margin: 0px;
+    }
+
+    .mar-bo-4 {
+        margin-bottom: 50px;
+    }
+
+    div.p-5 {
+        padding-bottom: 0px  !important;;
+    }
+
+    .col{
+        flex-basis: unset !important;
+    }
+}
+
+.primary-btn-reb{
+    background-color: #fff;
+    border: 4px solid #567696;
+    padding: 10px 24px;
+    box-shadow: 0 7px 14px -2px #919191;
+    color: #1c3752;
+    line-height: 20px;
+    font-weight: 400;
+    text-decoration: none;
+    border-radius: 4px;
+    font-size: 16px;
+    display: inline-block;
+    width: 275px;
+}
+
+.primary-btn-reb:hover{
+    background-color: #6c89a7a6;
+    color: var(--black);
+    box-shadow: 0 7px 30px -2px #919191;
+
+}
+
+.primary-btn-reb i{
+    font-size:20px;
+}
+
+a, div, h1, h2, h3, h4, h5, p, span {
+    text-shadow: none;
+}
+
+.chartjs-legend ul {
+    margin-bottom: 0;
+    list-style: none;
+    padding-left: 0;
+}
+
+ul li, ol li, dl li {
+    line-height: 1.8;
+}
+
+.chartjs-legend ul li {
+    display: -webkit-flex;
+    display: flex;
+    -webkit-align-items: center;
+    align-items: center;
+}
+
+li {
+    display: list-item;
+    text-align: -webkit-match-parent;
+}
+
+#temp_margin {
+    margin-bottom: 6%;
+}
+
+.text-muted-reb {
+    font-size: 16px;
+    color: #737F8B !important;
+}
+
+.text-primary-reb {
+    color: #4B49AC !important;
+}
+
+.fs-30-reb {
+    font-size: 30px;
+}
+
+.font-weight-medium {
+    font-weight: 600;
+}
+
+
+.chartjs-legend ul li span {
+    width: 2.562rem;
+    height: 1.312rem;
+    margin-right: 0.4rem;
+    display: inline-block;
+    font-size: 4.875rem;
+    border-radius: 5px;
+}
+
+/* chats section */
+.links a{
+    font-size: 16px;
+    color: #000;
+}
+
+/* Brochure */
+.list-brochure h4{
+    font-size: 22px;
+    line-height: 30px;
+}
+
+hr{
+    margin-top: 10px !important;
+    margin-bottom: 12px !important;
+}

@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id="project_worksite_form_inherit_real_state_quote" model="ir.ui.view">
+        <field name="name">project.worksite.view.form.inherit</field>
+        <field name="model">project.worksite</field>
+        <field name="inherit_id" ref="real_estate_bits.project_worksite_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='project_type']" position="after">
+                <field name="promotion_ids" widget="many2many_tags" options="{'no_create':True, 'no_create_edit':True }" />
+            </xpath>
+        </field>
+    </record>
+
+    <record id="view_property_form_inherit_real_state_quote" model="ir.ui.view">
+        <field name="name">product.template.view.form.inherit</field>
+        <field name="model">product.template</field>
+        <field name="inherit_id" ref="real_estate_bits.view_property_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='property_type_id']" position="after">
+                <field name="promotion_ids" widget="many2many_tags" options="{'no_create':True, 'no_create_edit':True }" />            
+            </xpath>
+        </field>
+    </record>
+
+    <record model="ir.actions.act_window" id="real_estate_bits.action_property_act_window">
+        <field name="context" eval="{
+                'default_is_property':True,
+                'default_sale_ok':False,
+                'default_purchase_ok':False,
+                'default_uom_id': ref('uom.uom_square_meter')
+                }"/>
+    </record>
+</odoo>

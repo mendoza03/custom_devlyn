@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <record id="res_config_settings_view_form_rs" model="ir.ui.view">
+        <field name="name">res.config.settings.form.inherit.rs</field>
+        <field name="model">res.config.settings</field>
+        <field name="priority" eval="70"/>
+        <field name="inherit_id" ref="base.res_config_settings_view_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//form" position="inside">
+                <app data-string="Real Estate" string="Real Estate" name="real_estate_bits">
+
+                    <block title="Ownership Contracts" name="ownership_contracts">
+                        <setting id="income_account"
+                                 help="Set default Income Account for properties">
+                            <field name="income_account"
+                                   string="Contracts Income Account"
+                                   options="{'no_create': True, 'no_create_edit': True, 'no_open': True}"/>
+                        </setting>
+                        <setting id="income_journal">
+                            <field name="income_journal"
+                                   options="{'no_create': True, 'no_create_edit': True, 'no_open': True}"/>
+                        </setting>
+                        <setting id="maintenance_journal">
+                            <field name="maintenance_journal"
+                                   options="{'no_create': True, 'no_create_edit': True, 'no_open': True}"/>
+                        </setting>
+                    </block>
+
+                    <block title="Rental Contracts" name="rental_contracts">
+                        <setting id="security_deposit_account"
+                                 help="Set default Security Deposit account for properties">
+                            <field name="security_deposit_account" string="Contracts Income Account"
+                                   options="{'no_create': True, 'no_create_edit': True, 'no_open': True}"/>
+                        </setting>
+                        <setting id="revenue_account" groups="base.group_multi_company"
+                                 help="Revenue Account used in contracts">
+                            <field name="revenue_account" string="Revenue"
+                                   options="{'no_create': True, 'no_create_edit': True, 'no_open': True}"/>
+                        </setting>
+                    </block>
+
+                    <block title="Email Reminder" name="real_estate_email_reminder">
+                        <setting id="emi_reminder"
+                                 help="Invoice Payment Reminder">
+                            <field name="emi_reminder" string="EMI Reminder"/>
+                        </setting>
+                        <setting id="contract_expire_reminder"
+                                 help="Property Contract Expire Email Notification">
+                            <field name="contract_expire_reminder" string="Contract Expire Reminder"/>
+                        </setting>
+                    </block>
+
+                    <!--                    <block title="Commissions" name="rental_contracts">-->
+                    <!--                        <setting id="security_deposit_account"-->
+                    <!--                                 help="Allow manual pay commission">-->
+                    <!--                            <field name="when_to_pay"/>-->
+                    <!--                        </setting>-->
+                    <!--                    </block>-->
+
+                </app>
+            </xpath>
+        </field>
+    </record>
+
+    <record id="action_real_estate_config" model="ir.actions.act_window">
+        <field name="name">Settings</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">res.config.settings</field>
+        <field name="view_mode">form</field>
+        <field name="target">inline</field>
+        <field name="context">{'module' : 'real_estate_bits', 'bin_size': False}</field>
+    </record>
+
+</odoo>

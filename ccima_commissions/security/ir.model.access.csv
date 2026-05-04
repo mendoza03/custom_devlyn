@@ -1,0 +1,5 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+ccima_commissions.access_ccima_commissions,access_ccima_commissions,ccima_commissions.model_ccima_commissions,base.group_user,1,1,1,1
+ccima_commissions.access_ccima_commissions_lines,access_ccima_commissions_lines,ccima_commissions.model_ccima_commissions_lines,base.group_user,1,1,1,1
+ccima_commissions.access_ccima_commission_source,access_ccima_commission_source,ccima_commissions.model_ccima_commission_source,base.group_user,1,1,1,1
+ccima_commissions.access_ccima_commission_source_line,access_ccima_commission_source_line,ccima_commissions.model_ccima_commission_source_line,base.group_user,1,1,1,1

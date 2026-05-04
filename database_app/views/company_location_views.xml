@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="view_company_location_form" model="ir.ui.view">
+        <field name="name">company.location.form</field>
+        <field name="model">company.location</field>
+        <field name="arch" type="xml">
+            <form string="Company Location">
+                <group>
+                    <field name="name"/>
+                    <field name="address" widget="url"/>
+                </group>
+            </form>
+        </field>
+    </record>
+
+    <record id="view_company_location_tree" model="ir.ui.view">
+        <field name="name">company.location.tree</field>
+        <field name="model">company.location</field>
+        <field name="arch" type="xml">
+            <list string="Company Locations">
+                <field name="name"/>
+                <field name="address" widget="url"/>
+            </list>
+        </field>
+    </record>
+
+    <record id="action_company_location" model="ir.actions.act_window">
+        <field name="name">Company Locations</field>
+        <field name="res_model">company.location</field>
+        <field name="view_mode">list,form</field>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+                Create a new company location
+            </p>
+        </field>
+    </record>
+
+    <menuitem id="menu_database_root"
+              name="Database"
+              sequence="10"/>
+
+    <menuitem id="menu_company_location"
+              name="Company Locations"
+              parent="menu_database_root"
+              action="action_company_location"
+              sequence="10"/>
+</odoo>

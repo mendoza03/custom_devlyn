@@ -1,0 +1,220 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+
+        <record id="email_template_send_contract_reminder" model="mail.template">
+            <field name="name">Email Reminder: Property Contract expire</field>
+            <field name="email_from">{{object.user_id.company_id.email}}</field>
+            <field name="subject">Your property contract expire soon</field>
+            <field name="email_to">{{object.user_id.email}}</field>
+            <field name="auto_delete" eval="False"/>
+            <field name="lang">{{object.partner_id.lang}}</field>
+            <field name="model_id" ref="real_estate_bits.model_property_contract"/>
+            <field name="body_html" type="html">
+                <table border="0" cellpadding="0"
+                       style="padding-top: 16px; background-color: #F1F1F1; color: #454748; width: 100%; border-collapse:separate;">
+                    <tr>
+                        <td align="center">
+                            <table border="0" width="590" cellpadding="0"
+                                   style="padding: 16px; background-color: white; color: #454748; border-collapse:separate;"
+                                   summary="o_mail_notification">
+                                <tbody>
+                                    <tr>
+                                        <td align="center">
+                                            <table border="0" cellpadding="0" cellspacing="0" width="690"
+                                                   style="background-color: white; color: #454748; border-collapse:separate;">
+                                                <tbody>
+                                                    <!-- HEADER -->
+                                                    <tr>
+                                                        <td align="center" style="min-width: 690px;">
+                                                            <table border="0" cellpadding="0" cellspacing="0"
+                                                                   width="690"
+                                                                   style="min-width: 690px; background-color: white; padding: 0px 8px 0px 8px; border-collapse:separate;">
+                                                                <tr>
+                                                                    <td valign="middle"
+                                                                        style="font-size: 18px;color: #0e0e0f;line-height: 28px;">
+                                                                        <span style="font-size: 20px; font-weight: bold;">
+                                                                            Your property contract will expire soon :
+                                                                            <t t-if="object.property_id.name">
+                                                                                <span style="font-size: 20px; font-weight: bold;"
+                                                                                      t-out="object.property_id.name or ''">
+                                                                                </span>
+                                                                            </t>
+                                                                        </span>
+                                                                    </td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td colspan="2" style="text-align:center;">
+                                                                        <hr width="100%"
+                                                                            style="background-color:rgb(204,204,204);border:medium none;clear:both;display:block;font-size:0px;min-height:1px;line-height:0; margin: 16px 0px 16px 0px;"/>
+                                                                    </td>
+                                                                </tr>
+                                                            </table>
+                                                        </td>
+                                                    </tr>
+                                                    <!-- CONTENT -->
+                                                    <tr>
+                                                        <td align="center"
+                                                            style="min-width: 690px;font:16px/22px 'Helvetica Neue',Arial,'sans-serif';text-align:left;color: #62646a;padding: 0px 40px 40px 40px;line-height: 24px;">
+                                                            <table border="0" cellpadding="0" cellspacing="0"
+                                                                   width="690"
+                                                                   style="min-width: 590px; background-color: white; padding: 0px 8px 0px 8px; border-collapse:separate;">
+                                                                <tr>
+                                                                    <td valign="top">
+                                                                        <div>
+                                                                            Hi
+                                                                            <t t-out="object.partner_id.name or ''"/>,
+                                                                            <br/>
+                                                                            <br/>
+                                                                            <p>
+                                                                                Your property contract will expire soon.
+                                                                            </p>
+                                                                            <p>
+                                                                                Property :
+                                                                                <t t-out="object.property_id.name or ''"/>
+                                                                            </p>
+                                                                            <p>
+                                                                                Project :
+                                                                                <t t-out="object.project_id.name or ''"/>
+                                                                            </p>
+
+                                                                            Thanks,
+                                                                            <br/>
+                                                                            <span style="color:#222325">
+                                                                                <t t-out="object.company_id.name or ''"/>
+                                                                            </span>
+
+                                                                        </div>
+                                                                    </td>
+                                                                </tr>
+                                                            </table>
+                                                        </td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td align="center"
+                                                            style="min-width: 590px;font:16px/22px 'Helvetica Neue',Arial,'sans-serif';text-align:left;color: #62646a;padding: 0px 40px 40px 40px;line-height: 24px;">
+
+                                                        </td>
+                                                    </tr>
+
+                                                </tbody>
+                                            </table>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </td>
+                    </tr>
+                </table>
+            </field>
+
+        </record>
+
+        <record id="email_template_send_emi_reminder" model="mail.template">
+            <field name="name">Email Reminder: For Upcoming Property EMI</field>
+            <field name="email_from">{{object.user_id.company_id.email}}</field>
+            <field name="subject">Your property EMI coming soon</field>
+            <field name="email_to">{{object.user_id.email}}</field>
+            <field name="auto_delete" eval="False"/>
+            <field name="lang">{{object.partner_id.lang}}</field>
+            <field name="model_id" ref="account.model_account_move"/>
+            <field name="body_html" type="html">
+                <table border="0" cellpadding="0"
+                       style="padding-top: 16px; background-color: #F1F1F1; color: #454748; width: 100%; border-collapse:separate;">
+                    <tr>
+                        <td align="center">
+                            <table border="0" width="590" cellpadding="0"
+                                   style="padding: 16px; background-color: white; color: #454748; border-collapse:separate;"
+                                   summary="o_mail_notification">
+                                <tbody>
+                                    <tr>
+                                        <td align="center">
+                                            <table border="0" cellpadding="0" cellspacing="0" width="690"
+                                                   style="background-color: white; color: #454748; border-collapse:separate;">
+                                                <tbody>
+                                                    <!-- HEADER -->
+                                                    <tr>
+                                                        <td align="center" style="min-width: 690px;">
+                                                            <table border="0" cellpadding="0" cellspacing="0"
+                                                                   width="690"
+                                                                   style="min-width: 690px; background-color: white; padding: 0px 8px 0px 8px; border-collapse:separate;">
+                                                                <tr>
+                                                                    <td valign="middle"
+                                                                        style="font-size: 18px;color: #0e0e0f;line-height: 28px;">
+                                                                        <span style="font-size: 20px; font-weight: bold;">
+                                                                            Your property invoice :
+                                                                            <t t-if="object.name">
+                                                                                <span style="font-size: 20px; font-weight: bold;"
+                                                                                      t-out="object.name or ''">
+                                                                                </span>
+                                                                            </t>
+                                                                        </span>
+                                                                    </td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td colspan="2" style="text-align:center;">
+                                                                        <hr width="100%"
+                                                                            style="background-color:rgb(204,204,204);border:medium none;clear:both;display:block;font-size:0px;min-height:1px;line-height:0; margin: 16px 0px 16px 0px;"/>
+                                                                    </td>
+                                                                </tr>
+                                                            </table>
+                                                        </td>
+                                                    </tr>
+                                                    <!-- CONTENT -->
+                                                    <tr>
+                                                        <td align="center"
+                                                            style="min-width: 690px;font:16px/22px 'Helvetica Neue',Arial,'sans-serif';text-align:left;color: #62646a;padding: 0px 40px 40px 40px;line-height: 24px;">
+                                                            <table border="0" cellpadding="0" cellspacing="0"
+                                                                   width="690"
+                                                                   style="min-width: 590px; background-color: white; padding: 0px 8px 0px 8px; border-collapse:separate;">
+                                                                <tr>
+                                                                    <td valign="top">
+                                                                        <div>
+                                                                            Hi
+                                                                            <t t-out="object.partner_id.name or ''"/>,
+                                                                            <br/>
+                                                                            <br/>
+                                                                            <p>
+                                                                                Your property invoice was generated.
+                                                                            </p>
+                                                                            <p>
+                                                                                Property :
+                                                                                <t t-out="object.property_id.name or ''"/>
+                                                                            </p>
+                                                                            <p>
+                                                                                Project :
+                                                                                <t t-out="object.project_id.name or ''"/>
+                                                                            </p>
+                                                                            Thanks,
+                                                                            <br/>
+                                                                            <span style="color:#222325">
+                                                                                <t t-out="object.company_id.name or ''"/>
+                                                                            </span>
+                                                                        </div>
+                                                                    </td>
+                                                                </tr>
+                                                            </table>
+                                                        </td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td align="center"
+                                                            style="min-width: 590px;font:16px/22px 'Helvetica Neue',Arial,'sans-serif';text-align:left;color: #62646a;padding: 0px 40px 40px 40px;line-height: 24px;">
+
+                                                        </td>
+                                                    </tr>
+
+                                                </tbody>
+                                            </table>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </td>
+                    </tr>
+                </table>
+            </field>
+
+        </record>
+
+    </data>
+</odoo>

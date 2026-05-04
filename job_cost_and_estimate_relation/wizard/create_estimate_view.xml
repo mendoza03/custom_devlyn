@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record model="ir.ui.view" id="create_estimation_form_view">
+            <field name="name">job.cost.estimate.form</field>
+            <field name="model">job.cost.estimate</field>
+                <field name="arch" type="xml">
+                    <form string="Jobcost Estimation">
+                        <p class="oe_grey">
+                            This wizard will help you to create job Estimation for the Current Job Cost Sheet.
+                        </p>
+                        <group>
+                            <group>
+                                <field name="partner_id"/>
+                            </group>
+                            <group>
+                                <field name="price_list_id"/>
+                            </group>
+                        </group>
+                        <footer>
+                            <button name="create_estimation" string="Create Estimiation" type="object" class="btn-primary"/>
+                            or
+                            <button string="Cancel" class="btn-default" special="cancel"/>
+                        </footer>
+                    </form>
+                </field>
+        </record>
+        
+        <record id="action_create_estimation" model="ir.actions.act_window">
+            <field name="name">Create Job Estimation</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">job.cost.estimate</field>
+            <!-- <field name="view_type">form</field> -->
+            <field name="view_mode">form</field>
+            <field name="view_id" ref="create_estimation_form_view"/>
+            <field name="target">new</field>
+        </record>
+        
+   </data>
+</odoo>

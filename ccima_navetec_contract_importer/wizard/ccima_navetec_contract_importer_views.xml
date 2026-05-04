@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id="ccima_navetec_contract_importer_view_form" model="ir.ui.view">
+        <field name="name">ccima.navetec.contract.importer.view.form</field>
+        <field name="model">ccima.navetec.contract.importer</field>
+        <field name="arch" type="xml">
+            <form>
+                <sheet>
+                    <group>
+                        <group>
+                            <field name="file" filename="filename" readonly="state != 'get'"/>
+                            <field name="filename" invisible="1"/>
+                            <field name="account_income" required="1" readonly="state != 'get'"/>
+                            <field name="advance_payment_journal_id" required="1" readonly="state != 'get'"/>
+                            <field name="moratorium_interest" required="1" readonly="state != 'get'"/>
+                        </group>
+                    </group>
+                    <field name="line_ids" mode="list" readonly="1" invisible="state == 'get'">
+                        <list decoration-muted="state == 'pending'" decoration-success="state == 'done'" decoration-danger="state == 'error'">
+                            <field name="filename"/>
+                            <field name="state"/>
+                            <field name="message"/>
+                        </list>
+                    </field>
+                </sheet>
+                <footer>
+                    <field name="is_correct_to_import" invisible="1"/>
+                    <button name="action_import_data" string="Import contracts" type="object" class="btn-primary" invisible="state != 'import' or is_correct_to_import == False"/>
+                    <button name="action_read_files" string="Load file" type="object" class="btn-primary" invisible="state != 'get'"/>
+                    <button string="Cancel" class="btn-secondary" special="cancel"/>
+                </footer>
+            </form>
+        </field>
+    </record>
+
+    <record id="ccima_navetec_contract_importer_action" model="ir.actions.act_window">
+        <field name="name">Contract Importer Navetec</field>
+        <field name="res_model">ccima.navetec.contract.importer</field>
+        <field name="view_mode">form</field>
+        <field name="target">new</field>
+    </record>
+
+</odoo>

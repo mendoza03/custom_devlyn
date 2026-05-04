@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<templates id="template" xml:space="preserve">
+
+    <t t-name="real_estate_bits_extended.RealEstateDashboard" t-inherit="real_estate_bits.RealEstateDashboard" t-inherit-mode="extension">
+        <xpath expr="//div[hasclass('charts-inner')]/div[hasclass('row')]/div[hasclass('col-xl-5')][1]//h4[hasclass('card-title')]" position="replace">
+            <h4 class="card-title">
+                Total M2
+            </h4>
+        </xpath>
+    </t>
+
+</templates>

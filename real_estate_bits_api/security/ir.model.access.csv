@@ -1,0 +1,6 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_project_worksite,access.project.worksite,real_estate_bits.model_project_worksite,real_estate_bits_api.real_estate_bits_app_group,1,0,0,0
+access_crm_lead,access.crm.lead,crm.model_crm_lead,real_estate_bits_api.real_estate_bits_app_group,0,0,1,0
+access_product_template,access.product.template,product.model_product_template,real_estate_bits_api.real_estate_bits_app_group,1,0,0,0
+access_res_company,access.res.company,base.model_res_company,real_estate_bits_api.real_estate_bits_app_group,1,0,0,0
+access_res_country_state,access.res.country.state,base.model_res_country_state,real_estate_bits_api.real_estate_bits_app_group,1,0,0,0

@@ -1,0 +1,24 @@
+<?xml version="1.0"?>
+<odoo>
+    <data>
+        <record model="ir.ui.view" id="job_costing_form_view_inherit_create_estimate">
+            <field name="name">Job.Costing.Form.inherit.create_estimate</field>
+            <field name="model">job.costing</field>
+            <field name="inherit_id" ref="odoo_job_costing_management.job_costing_form_view"/>
+            <field name="arch" type="xml">
+                <xpath expr="//button[@name='action_cancel']" position="before">
+                    <button name="%(action_create_estimation)d" string="Create Estimation" type="action" class="oe_highlight"/> 
+                </xpath>
+                <!-- <xpath expr="//div[@class='oe_button_box']" position="inside"> -->
+                <xpath expr="//div[hasclass('oe_button_box')]" position="inside">
+                        <button name="action_view_job_estimate"
+                            type="object"
+                            class="oe_stat_button"
+                            string="Job Estimations"
+                            icon="fa-pencil-square-o">
+                        </button>
+                </xpath>
+            </field>
+        </record>
+    </data>
+</odoo>

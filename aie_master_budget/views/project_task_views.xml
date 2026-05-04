@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="view_task_form2" model="ir.ui.view">
+        <field name="name">project.task.view.form.inherit</field>
+        <field name="model">project.task</field>
+        <field name="inherit_id" ref="project.view_task_form2"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='partner_id']" position="after">
+                <field name="has_admin_access_master_budget" invisible="True"/>
+                <field name="master_budget_line_id" readonly="not has_admin_access_master_budget" domain="[('type', '=', 'task')]" options='{"no_create": True}' groups="aie_master_budget.group_access_aie_master_budget_user,aie_master_budget.group_access_aie_master_budget_admin"/>                
+            </xpath>     
+        </field>
+    </record>
+</odoo>

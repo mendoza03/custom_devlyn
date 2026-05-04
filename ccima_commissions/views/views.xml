@@ -1,0 +1,273 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id="view_ccima_commissions_list" model="ir.ui.view">
+        <field name="name">ccima.commissions.list</field>
+        <field name="model">ccima.commissions</field>
+        <field name="arch" type="xml">
+            <list>
+                <field name="name"/>
+                <field name="partner_id"/>
+                <field name="reference"/>
+                <field name="amount_to_commission"/>
+                <field name="down_payment"/>
+                <field name="deposit"/>
+                <field name="deposit_date"/>
+                <field name="contract_date"/>
+                <field name="lead_id"/>
+                <field name="promotion_name"/>
+                <field name="region"/>
+                <field name="total_commission"/>
+                <field name="total_amount"/>
+                <field name="total_to_pay"/>
+            </list>
+        </field>
+    </record>
+
+    <record id="view_ccima_commissions_form" model="ir.ui.view">
+        <field name="name">ccima.commissions.form</field>
+        <field name="model">ccima.commissions</field>
+        <field name="arch" type="xml">
+            <form>
+                <header>
+                    <button name="action_set_draft" type="object" string="Set Draft"
+                            class="btn-secondary"/>
+
+                    <button name="action_set_reviewed" type="object" string="Mark Reviewed"
+                            class="btn-primary"/>
+
+                    <button name="action_set_paid" type="object" string="Mark Paid"
+                            class="btn-success"/>
+
+                    <button name="action_calculate_lines" type="object" string="Calculate" class="btn-primary"/>
+
+
+                    <field name="state" widget="statusbar" statusbar_visible="draft,reviewed,paid"/>
+                </header>
+
+                <sheet>
+                    <group>
+                        <group>
+                            <field name="name"/>
+                            <field name="partner_id"/>
+                            <field name="reference"/>
+                            <field name="lead_id"/>
+                            <field name="origin_id"/>
+                            <field name="promotion_name"/>
+                            <field name="region"/>
+                        </group>
+                        <group>
+                            <field name="amount_to_commission"/>
+                            <field name="down_payment"/>
+                            <field name="deposit"/>
+                            <field name="deposit_date"/>
+                            <field name="contract_date"/>
+                        </group>
+                    </group>
+
+                    <group string="Totals">
+                        <field name="total_commission"/>
+                        <field name="total_amount"/>
+                        <field name="total_to_pay"/>
+                    </group>
+
+                    <group string="Finance Info">
+                        <field name="finance_amount_total"/>
+                        <field name="finance_descount"/>
+                        <field name="finance_hitch"/>
+                        <field name="finance_amount_finance"/>
+                    </group>
+
+                    <notebook>
+                        <page string="Commission Lines">
+                            <field name="commission_line_ids">
+                                <list editable="bottom">
+                                    <field name="employee_id"/>
+                                    <field name="position" readonly="1" force_save="1"/>
+                                    <field name="lot" readonly="1" force_save="1"/>
+                                    <field name="amount_to_commission" readonly="1" force_save="1"/>
+                                    <field name="commission"/>
+                                    <field name="amount"/>
+                                    <field name="payment_type"/>
+                                    <field name="discount"/>
+                                    <field name="to_pay"/>
+                                </list>
+                            </field>
+                        </page>
+                    </notebook>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="view_ccima_commissions_lines_list" model="ir.ui.view">
+        <field name="name">ccima.commissions.lines.list</field>
+        <field name="model">ccima.commissions.lines</field>
+        <field name="arch" type="xml">
+            <list>
+                <field name="commission_id"/>
+                <field name="employee_id"/>
+                <field name="position"/>
+                <field name="lot"/>
+                <field name="amount_to_commission"/>
+                <field name="commission"/>
+                <field name="amount"/>
+                <field name="payment_type"/>
+                <field name="discount"/>
+                <field name="to_pay"/>
+            </list>
+        </field>
+    </record>
+
+    <record id="view_ccima_commissions_lines_form" model="ir.ui.view">
+        <field name="name">ccima.commissions.lines.form</field>
+        <field name="model">ccima.commissions.lines</field>
+        <field name="arch" type="xml">
+            <form>
+                <sheet>
+                    <group>
+                        <field name="commission_id"/>
+                        <field name="employee_id"/>
+                        <field name="position"/>
+                        <field name="lot"/>
+                    </group>
+                    <group>
+                        <field name="amount_to_commission"/>
+                        <field name="commission"/>
+                        <field name="amount"/>
+                        <field name="payment_type"/>
+                        <field name="discount"/>
+                        <field name="to_pay"/>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+
+    <record id="view_ccima_commission_source_list" model="ir.ui.view">
+        <field name="name">ccima.commission.source.list</field>
+        <field name="model">ccima.commission.source</field>
+        <field name="arch" type="xml">
+            <list>
+                <field name="name"/>
+                <field name="origin_ids"/>
+                <field name="total_commission_percent"/>
+                <field name="position"/>
+            </list>
+        </field>
+    </record>
+
+    <record id="view_ccima_commission_source_form" model="ir.ui.view">
+        <field name="name">ccima.commission.source.form</field>
+        <field name="model">ccima.commission.source</field>
+        <field name="arch" type="xml">
+            <form>
+                <sheet>
+                    <group>
+                        <group>
+                            <field name="name"/>
+                            <field name="origin_ids" widget="many2many_tags"/>
+                            <field name="total_commission_percent"/>
+                            <field name="position"/>
+                        </group>
+                    </group>
+
+                    <notebook>
+                        <page string="Commission Lines">
+                            <field name="line_ids">
+                                <list editable="bottom">
+                                    <field name="name"/>
+                                    <field name="commission_percent"/>
+                                    <field name="flow_percent"/>
+                                    <field name="total_percent"/>
+                                </list>
+                            </field>
+                        </page>
+                    </notebook>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="view_ccima_commission_source_line_list" model="ir.ui.view">
+        <field name="name">ccima.commission.source.line.list</field>
+        <field name="model">ccima.commission.source.line</field>
+        <field name="arch" type="xml">
+            <list>
+                <field name="commission_source_id"/>
+                <field name="name"/>
+                <field name="commission_percent"/>
+                <field name="flow_percent"/>
+            </list>
+        </field>
+    </record>
+
+    <record id="view_ccima_commission_source_line_form" model="ir.ui.view">
+        <field name="name">ccima.commission.source.line.form</field>
+        <field name="model">ccima.commission.source.line</field>
+        <field name="arch" type="xml">
+            <form>
+                <sheet>
+                    <group>
+                        <field name="commission_source_id"/>
+                        <field name="name"/>
+                        <field name="commission_percent"/>
+                        <field name="flow_percent"/>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="action_ccima_commission_source" model="ir.actions.act_window">
+        <field name="name">Commission by Origin</field>
+        <field name="res_model">ccima.commission.source</field>
+        <field name="view_mode">list,form</field>
+        <field name="help" type="html">
+            <p>Configure commission templates per origin (utm.source).</p>
+        </field>
+    </record>
+
+
+    <menuitem id="menu_ccima_commissions_root" name="Commissions"/>
+
+
+
+    <menuitem id="menu_ccima_commission_source"
+              name="Commission by Origin"
+              parent="menu_ccima_commissions_root"
+              action="action_ccima_commission_source"
+              sequence="20"/>
+
+
+
+    <record id="action_ccima_commissions" model="ir.actions.act_window">
+        <field name="name">Commissions</field>
+        <field name="res_model">ccima.commissions</field>
+        <field name="view_mode">list,form</field>
+        <field name="help" type="html">
+            <p>Create and manage commission records and their lines.</p>
+        </field>
+    </record>
+
+
+    <record id="hr_employee_form_inherit_ccima" model="ir.ui.view">
+        <field name="name">hr.employee.form.inherit.ccima</field>
+        <field name="model">hr.employee</field>
+        <field name="inherit_id" ref="hr.view_employee_form"/>
+        <field name="arch" type="xml">
+            <xpath expr = "//field[@name='coach_id']" position = "after" >
+                <field name = "payment_type"/>
+            </xpath>
+        </field>
+    </record>
+
+    <menuitem id="menu_ccima_commissions_root"
+              name="Commissions"/>
+
+    <menuitem id="menu_ccima_commissions"
+              name="Commissions"
+              parent="menu_ccima_commissions_root"
+              action="action_ccima_commissions"/>
+</odoo>

@@ -1,0 +1,6 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_modality_finance_line,access_modality_finance_line,model_modality_finance_line,,1,1,1,1
+access_payment_terms,access_payment_terms,model_payment_terms,,1,1,1,1
+access_difer_hitch,access_difer_hitch,model_difer_hitch,,1,1,1,1
+access_promotions_property,access_promotions_property,model_promotions_property,,1,1,1,1
+access_payment_to_capital_wizard,access.payment.to.capital.wizard,model_payment_to_capital_wizard,,1,1,1,1

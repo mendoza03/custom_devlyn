@@ -1,0 +1,2 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_massive_importer,access_management_importer,model_massive_importer,,1,1,1,1

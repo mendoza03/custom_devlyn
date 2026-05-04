@@ -1,0 +1,8 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_commission_calculate,access.commission.calculate,model_commission_calculate,base.group_user,1,1,1,1
+access_commission_factor_sale,access.commission.factor.sale,model_commission_factor_sale,base.group_user,1,1,1,1
+access_commission_factor,access.commission.factor,model_commission_factor,base.group_user,1,1,1,1
+access_commission_scenary,access.commission.scenary,model_commission_scenary,base.group_user,1,1,1,1
+access_project_property_additional,access.project.property.additional,model_project_property_additional,base.group_user,1,1,1,1
+access_project_type,access.project.type,model_project_type,base.group_user,1,1,1,1
+access_crm_leads_assignation_config,crm.leads.assignation.config,model_crm_leads_assignation_config,,1,1,1,1

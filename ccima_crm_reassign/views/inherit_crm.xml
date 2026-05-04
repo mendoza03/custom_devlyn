@@ -1,0 +1,125 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+  <record id="amortization_calculator_action_form" model="ir.actions.act_window">
+        <field name="name">amortization calculator</field>
+        <field name="res_model">amortization.calculator</field>
+        <field name="view_mode">form</field>
+        <field name="target">current</field>
+    </record>
+
+    <record id="view_crm_reassign_form" model="ir.ui.view">
+        <field name="name">crm.reassign.form</field>
+        <field name="model">crm.lead</field>
+        <field name="inherit_id" ref="crm.crm_lead_view_form"/>
+        <field name="arch" type="xml">
+        
+          <xpath expr="//header" position="inside">
+                <button name="action_open_amortization"
+                    type="object"
+                    string="Amortization"
+                    class="oe_highlight"/>
+            </xpath>
+            <xpath expr="//div[@id='probability']" position="inside">
+                <label for="date_deadline" class="d-inline-block"/>
+                <field name="date_deadline"/>
+            </xpath>
+            <xpath expr="//field[@name='day_close']" position="after">
+                <xpath expr="//form[1]/sheet[1]/group[1]/group[not(@name)][1]/field[@name='user_id']" position="move"/>
+            </xpath>
+
+            <xpath expr="//form[1]/sheet[1]/group[1]/group[not(@name)][1]/div[1]/field[@name='date_deadline']" position="replace"/>
+            <xpath expr="//form[1]/sheet[1]/group[1]/group[not(@name)][1]/label[1]" position="replace"/>
+
+            <xpath expr="//sheet/notebook" position="inside">
+                <page string="Master">
+                    <field name="documents_master" />
+                </page>
+                <page string="Rules">
+                    <field name="documents_rules" />
+                </page>
+                <page string="Sunning">
+                    <field name="documents_sunning" />
+                </page>
+                <page string="Location">
+                    <field name="documents_location" />
+                </page>
+                <page string="Payment procedure">
+                    <field name="documents_procedure" />
+                </page>
+                <page string="Presentation">
+                    <field name="documents_presentation" />
+                </page>
+                <page string="Flyers">
+                    <field name="documents_flyers"/>
+                </page>
+                <page string="Technical specifications amenities">
+                    <field name="documents_amenities" />
+                </page>
+                <page string="Virtual tour">
+                    <field name="documents_tour" />
+                </page>
+                <page string="Videos">
+                    <field name="documents_videos"/>
+                </page>
+                <page string="Work progress">
+                    <field name="documents_work"/>
+                </page>
+                <page string="Draft contract">
+                    <field name="documents_contract" />
+                </page>
+                <page string="Bitacora expediente">
+                    <field name="folder_creation_log" readonly="1" nolabel="1"/>
+                </page>
+
+            </xpath>
+
+            <xpath expr="//field[@name='tag_ids']" position="after">
+                <button name="action_open_url"
+                    type="object"
+                    string="Disponibilidad"
+                    class="btn-primary"/>
+                <field name="has_contract_brief"/>
+                <field name="contract_brief_id"/>
+                <field name="brief_id"/>
+             </xpath>
+
+            <xpath expr="//button[@name='%(crm.crm_lead_lost_action)d']" position="replace">
+              <button name="action_my_mark_lost" string="Lost" type="object"
+                      data-hotkey="l" title="Mark as lost"
+                      invisible="type != 'opportunity' or (probability == 0 and not active)"/>
+            </xpath>
+
+            <div name="button_box" position="inside">
+                <button
+                  name="action_view_contract_briefs"
+                  type="object"
+                  class="oe_stat_button"
+                  icon="fa-file-text-o">
+                  <field name="contract_brief_count" widget="statinfo" string="Contract Brief"/>
+                </button>
+            </div>
+
+
+        </field>
+    </record>
+
+    <record id="view_real_estate_bits_inherit_form" model="ir.ui.view">
+        <field name="name">real.estate_bits.inherit.form</field>
+        <field name="model">crm.lead</field>
+        <field name="inherit_id" ref="real_estate_bits.view_crm_lead_real_estate_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='property_id']" position="replace">
+                <field name="condominium_crm_domain_ids" invisible="1"/>
+                <field name="development_crm" domain="[('parent_id', '=', False)]" options="{'no_create': True, 'no_open': True}"/>
+                <field name="condominium_crm" options="{'no_create': True, 'no_open': True}" domain="[('id', 'in', condominium_crm_domain_ids)]"/>
+                <field name="property_id" domain="[('condominium_worksite_id', '=', condominium_crm), ('state', '=', 'free')]" options="{'no_create': True, 'no_open': True}"/>
+            </xpath>
+
+        </field>
+    </record>
+
+
+
+
+</odoo>

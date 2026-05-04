@@ -1,0 +1,336 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* habita_report_customs
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 18.0+e-20241118\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2025-03-28 05:54+0000\n"
+"PO-Revision-Date: 2025-03-28 05:54+0000\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+#. module: habita_report_customs
+#: model_terms:ir.ui.view,arch_db:habita_report_customs.report_saleorder_document_habita
+#: model_terms:ir.ui.view,arch_db:habita_report_customs.sale_order_portal_content_real_state_customs
+msgid "% Discount"
+msgstr "% Descuento"
+
+#. module: habita_report_customs
+#: model_terms:ir.ui.view,arch_db:habita_report_customs.report_saleorder_document_habita
+#: model_terms:ir.ui.view,arch_db:habita_report_customs.sale_order_portal_content_real_state_customs
+msgid "* Changes in price and financial conditions without prior notice."
+msgstr "* Cambios de precio y condiciones ﬁnancieras sin previo aviso."
+
+#. module: habita_report_customs
+#: model_terms:ir.ui.view,arch_db:habita_report_customs.report_saleorder_document_habita
+#: model_terms:ir.ui.view,arch_db:habita_report_customs.sale_order_portal_content_real_state_customs
+msgid "10 years"
+msgstr "10 años"
+
+#. module: habita_report_customs
+#: model_terms:ir.ui.view,arch_db:habita_report_customs.report_saleorder_document_habita
+#: model_terms:ir.ui.view,arch_db:habita_report_customs.sale_order_portal_content_real_state_customs
+msgid "15 years"
+msgstr "15 años"
+
+#. module: habita_report_customs
+#: model_terms:ir.ui.view,arch_db:habita_report_customs.report_saleorder_document_habita
+#: model_terms:ir.ui.view,arch_db:habita_report_customs.sale_order_portal_content_real_state_customs
+msgid "20 years"
+msgstr "20 años"
+
+#. module: habita_report_customs
+#: model_terms:ir.ui.view,arch_db:habita_report_customs.report_saleorder_document_habita
+#: model_terms:ir.ui.view,arch_db:habita_report_customs.sale_order_portal_content_real_state_customs
+msgid "Amount Financial:"
+msgstr "Monto Financiero:"
+
+#. module: habita_report_customs
+#: model_terms:ir.ui.view,arch_db:habita_report_customs.report_saleorder_document_habita
+#: model_terms:ir.ui.view,arch_db:habita_report_customs.sale_order_portal_content_real_state_customs
+msgid "Amount Total Hitch"
+msgstr "Monto Total de Enganche"
+
+#. module: habita_report_customs
+#: model_terms:ir.ui.view,arch_db:habita_report_customs.report_saleorder_document_habita
+#: model_terms:ir.ui.view,arch_db:habita_report_customs.sale_order_portal_content_real_state_customs
+msgid "Amount per month"
+msgstr "Monto por mes"
+
+#. module: habita_report_customs
+#: model_terms:ir.ui.view,arch_db:habita_report_customs.report_saleorder_document_habita
+#: model_terms:ir.ui.view,arch_db:habita_report_customs.sale_order_portal_content_real_state_customs
+msgid "Annual capital gains yield"
+msgstr "Proyección de rendimiento en plusvalía anual"
+
+#. module: habita_report_customs
+#: model_terms:ir.ui.view,arch_db:habita_report_customs.report_saleorder_document_habita
+#: model_terms:ir.ui.view,arch_db:habita_report_customs.sale_order_portal_content_real_state_customs
+msgid "Asset projection:"
+msgstr "Proyección del activo:"
+
+#. module: habita_report_customs
+#: model_terms:ir.ui.view,arch_db:habita_report_customs.report_saleorder_document_habita
+#: model_terms:ir.ui.view,arch_db:habita_report_customs.sale_order_portal_content_real_state_customs
+msgid "Checkbox"
+msgstr ""
+
+#. module: habita_report_customs
+#: model_terms:ir.ui.view,arch_db:habita_report_customs.report_saleorder_document_habita
+#: model_terms:ir.ui.view,arch_db:habita_report_customs.sale_order_portal_content
+msgid "Date:"
+msgstr "Fecha:"
+
+#. module: habita_report_customs
+#: model_terms:ir.ui.view,arch_db:habita_report_customs.report_saleorder_document_habita
+#: model_terms:ir.ui.view,arch_db:habita_report_customs.sale_order_portal_content
+msgid "Description:"
+msgstr "Descripción:"
+
+#. module: habita_report_customs
+#: model_terms:ir.ui.view,arch_db:habita_report_customs.report_saleorder_document_habita
+#: model_terms:ir.ui.view,arch_db:habita_report_customs.sale_order_portal_content_real_state_customs
+msgid "Diferid Hitch"
+msgstr "Enganche diferido"
+
+#. module: habita_report_customs
+#: model_terms:ir.ui.view,arch_db:habita_report_customs.report_saleorder_document_habita
+#: model_terms:ir.ui.view,arch_db:habita_report_customs.sale_order_portal_content_real_state_customs
+msgid "Discount:"
+msgstr "Descuento:"
+
+#. module: habita_report_customs
+#: model_terms:ir.ui.view,arch_db:habita_report_customs.report_saleorder_document_habita
+#: model_terms:ir.ui.view,arch_db:habita_report_customs.sale_order_portal_content_real_state_customs
+msgid ""
+"Down payment: 10% of the total value <br/>\n"
+"                            First 48 months interest-free. <br/>\n"
+"                            3-year installment. <br/>"
+msgstr ""
+"Enganche: 10% del valor total <br/>\n"
+"                            Primeros 48 meses sin intereses. <br/>\n"
+"                            Entrega a 3 años. <br/>"
+
+#. module: habita_report_customs
+#: model_terms:ir.ui.view,arch_db:habita_report_customs.report_saleorder_document_habita
+#: model_terms:ir.ui.view,arch_db:habita_report_customs.sale_order_portal_content_real_state_customs
+msgid ""
+"Down payment: The down payment will be paid as agreed in the attached "
+"financial year, ensuring that the operation is based on the previously "
+"defined conditions."
+msgstr ""
+"Enganche: El pago del enganche se realizará según lo acordado en el "
+"ejercicio financiero adjunto, garantizando que la operación se base en las "
+"condiciones definidas previamente."
+
+#. module: habita_report_customs
+#: model_terms:ir.ui.view,arch_db:habita_report_customs.report_saleorder_document_finance_custom
+#: model_terms:ir.ui.view,arch_db:habita_report_customs.report_saleorder_document_habita
+#: model_terms:ir.ui.view,arch_db:habita_report_customs.sale_order_portal_content
+#: model_terms:ir.ui.view,arch_db:habita_report_customs.sale_order_portal_content_real_state_customs
+msgid "Email:"
+msgstr "Correo:"
+
+#. module: habita_report_customs
+#: model_terms:ir.ui.view,arch_db:habita_report_customs.report_saleorder_document_finance_custom
+#: model_terms:ir.ui.view,arch_db:habita_report_customs.report_saleorder_document_habita
+#: model_terms:ir.ui.view,arch_db:habita_report_customs.sale_order_portal_content_real_state_customs
+msgid "Expiration Date:"
+msgstr "Fecha de vencimiento:"
+
+#. module: habita_report_customs
+#: model_terms:ir.ui.view,arch_db:habita_report_customs.report_saleorder_document_habita
+#: model_terms:ir.ui.view,arch_db:habita_report_customs.sale_order_portal_content
+msgid "FINANCIAL YEAR"
+msgstr "EJERCICIO FINANCIERO"
+
+#. module: habita_report_customs
+#: model_terms:ir.ui.view,arch_db:habita_report_customs.report_saleorder_document_habita
+#: model_terms:ir.ui.view,arch_db:habita_report_customs.sale_order_portal_content_real_state_customs
+msgid "Finance in months:"
+msgstr "Financiamiento en meses:"
+
+#. module: habita_report_customs
+#: model_terms:ir.ui.view,arch_db:habita_report_customs.report_saleorder_document_habita
+#: model_terms:ir.ui.view,arch_db:habita_report_customs.sale_order_portal_content_real_state_customs
+msgid "Finance:"
+msgstr "Financiamiento:"
+
+#. module: habita_report_customs
+#: model_terms:ir.ui.view,arch_db:habita_report_customs.report_saleorder_document_habita
+#: model_terms:ir.ui.view,arch_db:habita_report_customs.sale_order_portal_content_real_state_customs
+msgid "Footage in m2"
+msgstr "Metraje en m2"
+
+#. module: habita_report_customs
+#: model_terms:ir.ui.view,arch_db:habita_report_customs.report_saleorder_document_habita
+#: model_terms:ir.ui.view,arch_db:habita_report_customs.sale_order_portal_content_real_state_customs
+msgid "Gradual Initial Investment:"
+msgstr "Inversión Inicial Gradual"
+
+#. module: habita_report_customs
+#: model_terms:ir.ui.view,arch_db:habita_report_customs.report_saleorder_document_habita
+#: model_terms:ir.ui.view,arch_db:habita_report_customs.sale_order_portal_content_real_state_customs
+msgid "Hitch 10%"
+msgstr "Enganche 10%"
+
+#. module: habita_report_customs
+#: model_terms:ir.ui.view,arch_db:habita_report_customs.report_saleorder_document_habita
+#: model_terms:ir.ui.view,arch_db:habita_report_customs.sale_order_portal_content_real_state_customs
+msgid "List price × m<sup>2</sup>"
+msgstr "Precio de lista × m<sup>2</sup>"
+
+#. module: habita_report_customs
+#: model_terms:ir.ui.view,arch_db:habita_report_customs.report_saleorder_document_habita
+#: model_terms:ir.ui.view,arch_db:habita_report_customs.sale_order_portal_content
+msgid "Logo"
+msgstr ""
+
+#. module: habita_report_customs
+#: model_terms:ir.ui.view,arch_db:habita_report_customs.report_saleorder_document_habita
+#: model_terms:ir.ui.view,arch_db:habita_report_customs.sale_order_portal_content_real_state_customs
+msgid "Lot Price without Discount:"
+msgstr "Precio del lote sin descuento:"
+
+#. module: habita_report_customs
+#: model_terms:ir.ui.view,arch_db:habita_report_customs.report_saleorder_document_habita
+#: model_terms:ir.ui.view,arch_db:habita_report_customs.sale_order_portal_content_real_state_customs
+msgid "Month to Difer"
+msgstr "Número de meses a diferir"
+
+#. module: habita_report_customs
+#: model_terms:ir.ui.view,arch_db:habita_report_customs.report_saleorder_document_habita
+#: model_terms:ir.ui.view,arch_db:habita_report_customs.sale_order_portal_content_real_state_customs
+msgid "Monthly of 1 to 48"
+msgstr "Mensualidades de 1 a 48"
+
+#. module: habita_report_customs
+#: model_terms:ir.ui.view,arch_db:habita_report_customs.report_saleorder_document_habita
+#: model_terms:ir.ui.view,arch_db:habita_report_customs.sale_order_portal_content_real_state_customs
+msgid "Monthly of 121 to 180 (60 months)"
+msgstr "Mensualidades de 121 a 180 (60 meses)"
+
+#. module: habita_report_customs
+#: model_terms:ir.ui.view,arch_db:habita_report_customs.report_saleorder_document_habita
+#: model_terms:ir.ui.view,arch_db:habita_report_customs.sale_order_portal_content_real_state_customs
+msgid "Monthly of 181 to 240 (60 months)"
+msgstr "Mensualidades de 181 a 240 (60 meses)"
+
+#. module: habita_report_customs
+#: model_terms:ir.ui.view,arch_db:habita_report_customs.report_saleorder_document_habita
+#: model_terms:ir.ui.view,arch_db:habita_report_customs.sale_order_portal_content_real_state_customs
+msgid "Monthly of 49 to 120 (72 months)"
+msgstr "Mensualidades de 49 a 120 (72 meses)"
+
+#. module: habita_report_customs
+#: model_terms:ir.ui.view,arch_db:habita_report_customs.report_saleorder_document_habita
+#: model_terms:ir.ui.view,arch_db:habita_report_customs.sale_order_portal_content_real_state_customs
+msgid "P.U. with discount:"
+msgstr "P.U. con descuento"
+
+#. module: habita_report_customs
+#: model_terms:ir.ui.view,arch_db:habita_report_customs.report_saleorder_document_habita
+#: model_terms:ir.ui.view,arch_db:habita_report_customs.sale_order_portal_content
+msgid "Partner:"
+msgstr "Cliente:"
+
+#. module: habita_report_customs
+#: model_terms:ir.ui.view,arch_db:habita_report_customs.report_saleorder_document_habita
+#: model_terms:ir.ui.view,arch_db:habita_report_customs.sale_order_portal_content_real_state_customs
+msgid "Performance divided by"
+msgstr "Rendimiento dividido por"
+
+#. module: habita_report_customs
+#: model_terms:ir.ui.view,arch_db:habita_report_customs.report_saleorder_document_finance_custom
+#: model_terms:ir.ui.view,arch_db:habita_report_customs.report_saleorder_document_habita
+#: model_terms:ir.ui.view,arch_db:habita_report_customs.sale_order_portal_content
+#: model_terms:ir.ui.view,arch_db:habita_report_customs.sale_order_portal_content_real_state_customs
+msgid "Phone:"
+msgstr "Teléfono:"
+
+#. module: habita_report_customs
+#: model_terms:ir.ui.view,arch_db:habita_report_customs.report_saleorder_document_habita
+#: model_terms:ir.ui.view,arch_db:habita_report_customs.sale_order_portal_content
+msgid "Product:"
+msgstr "Producto:"
+
+#. module: habita_report_customs
+#: model_terms:ir.ui.view,arch_db:habita_report_customs.report_saleorder_document_habita
+#: model_terms:ir.ui.view,arch_db:habita_report_customs.sale_order_portal_content_real_state_customs
+msgid "Projected performance in"
+msgstr "Rendimiento proyectado en"
+
+#. module: habita_report_customs
+#: model_terms:ir.ui.view,arch_db:habita_report_customs.report_saleorder_document_habita
+#: model_terms:ir.ui.view,arch_db:habita_report_customs.sale_order_portal_content_real_state_customs
+msgid ""
+"Promotion: To take advantage of the current conditions, the transaction must"
+" be completed within a maximum period of 10 business days. This implies "
+"completing the full payment of the down payment and signing the contract. We"
+" are at your disposal to resolve any questions that may arise."
+msgstr ""
+"Promoción: Para aprovechar las condiciones actuales, la transacción debe "
+"completarse en un plazo máximo de 10 días hábiles. Esto implica realizar el "
+"pago total del anticipo y firmar el contrato. Estamos a su disposición para "
+"resolver cualquier duda que pueda surgir."
+
+#. module: habita_report_customs
+#: model_terms:ir.ui.view,arch_db:habita_report_customs.report_saleorder_document_finance_custom
+#: model_terms:ir.ui.view,arch_db:habita_report_customs.report_saleorder_document_habita
+#: model_terms:ir.ui.view,arch_db:habita_report_customs.sale_order_portal_content_real_state_customs
+msgid "Seller:"
+msgstr "Contacto de Venta:"
+
+#. module: habita_report_customs
+#: model_terms:ir.ui.view,arch_db:habita_report_customs.report_saleorder_document_finance_custom
+#: model_terms:ir.ui.view,arch_db:habita_report_customs.report_saleorder_document_habita
+#: model_terms:ir.ui.view,arch_db:habita_report_customs.sale_order_portal_content_real_state_customs
+msgid "Terms and Conditions"
+msgstr "Términos y Condiciones"
+
+#. module: habita_report_customs
+#: model_terms:ir.ui.view,arch_db:habita_report_customs.report_saleorder_document_finance_custom
+msgid "Terms and Payment"
+msgstr "Términos y Pago"
+
+#. module: habita_report_customs
+#: model_terms:ir.ui.view,arch_db:habita_report_customs.report_saleorder_document_habita
+#: model_terms:ir.ui.view,arch_db:habita_report_customs.sale_order_portal_content_real_state_customs
+msgid "Utility in"
+msgstr "Utilidad en"
+
+#. module: habita_report_customs
+#: model_terms:ir.ui.view,arch_db:habita_report_customs.report_saleorder_document_habita
+#: model_terms:ir.ui.view,arch_db:habita_report_customs.sale_order_portal_content_real_state_customs
+msgid "Value in"
+msgstr "Valor en"
+
+#. module: habita_report_customs
+#: model_terms:ir.ui.view,arch_db:habita_report_customs.report_saleorder_document_habita
+#: model_terms:ir.ui.view,arch_db:habita_report_customs.sale_order_portal_content_real_state_customs
+msgid "We have 3 financing models: <br/>"
+msgstr "Tenemos 3 modelos de financiamiento:"
+
+#. module: habita_report_customs
+#: model_terms:ir.ui.view,arch_db:habita_report_customs.report_saleorder_document_habita
+#: model_terms:ir.ui.view,arch_db:habita_report_customs.sale_order_portal_content_real_state_customs
+msgid "year"
+msgstr "año"
+
+#. module: habita_report_customs
+#: model_terms:ir.ui.view,arch_db:habita_report_customs.report_saleorder_document_habita
+#: model_terms:ir.ui.view,arch_db:habita_report_customs.sale_order_portal_content_real_state_customs
+msgid "years"
+msgstr "años"
+
+#. module: habita_report_customs
+#: model_terms:ir.ui.view,arch_db:habita_report_customs.report_saleorder_document_habita
+#: model_terms:ir.ui.view,arch_db:habita_report_customs.sale_order_portal_content_real_state_customs
+msgid "Monthly of"
+msgstr "Mensualidad"

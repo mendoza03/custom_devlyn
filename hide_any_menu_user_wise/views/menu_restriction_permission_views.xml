@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <!-- List view for Menu Restriction Permission -->
+    <record id="view_menu_restriction_permission_list" model="ir.ui.view">
+        <field name="name">menu.restriction.permission.list</field>
+        <field name="model">menu.restriction.permission</field>
+        <field name="arch" type="xml">
+            <list string="Menu Permissions" create="1" delete="1">
+                <field name="menu_id"/>
+                <field name="model_name"/>
+                <field name="perm_read" widget="boolean_toggle"/>
+                <field name="perm_write" widget="boolean_toggle"/>
+                <field name="perm_create" widget="boolean_toggle"/>
+                <field name="perm_unlink" widget="boolean_toggle"/>
+                <field name="apply_to_all_users" widget="boolean_toggle"/>
+                <field name="active" widget="boolean_toggle"/>
+            </list>
+        </field>
+    </record>
+
+    <!-- Form view for Menu Restriction Permission -->
+    <record id="view_menu_restriction_permission_form" model="ir.ui.view">
+        <field name="name">menu.restriction.permission.form</field>
+        <field name="model">menu.restriction.permission</field>
+        <field name="arch" type="xml">
+            <form string="Menu Permission">
+                <sheet>
+                    <widget name="web_ribbon" title="Archived" bg_color="text-bg-danger" invisible="active"/>
+                    <group>
+                        <group>
+                            <field name="restriction_group_id" readonly="context.get('default_restriction_group_id', False)"/>
+                            <field name="menu_id" options="{'no_create': True}"/>
+                            <field name="model_id" readonly="1"/>
+                            <field name="model_name" readonly="1"/>
+                        </group>
+                        <group>
+                            <field name="active" widget="boolean_toggle"/>
+                            <field name="apply_to_all_users" widget="boolean_toggle"/>
+                        </group>
+                    </group>
+                    <group string="Permissions">
+                        <group>
+                            <field name="perm_read" widget="boolean_toggle"/>
+                            <field name="perm_write" widget="boolean_toggle"/>
+                        </group>
+                        <group>
+                            <field name="perm_create" widget="boolean_toggle"/>
+                            <field name="perm_unlink" widget="boolean_toggle"/>
+                        </group>
+                    </group>
+                    <group string="Specific Users" invisible="apply_to_all_users">
+                        <field name="specific_user_ids" 
+                               widget="many2many_tags" 
+                               options="{'no_create': True}"
+                               domain="[('id', 'in', restriction_group_id.user_ids.ids)]"
+                               nolabel="1"/>
+                    </group>
+                    <div class="alert alert-info" role="alert" invisible="not apply_to_all_users">
+                        <strong>Note:</strong> These permissions will apply to all users in the restriction group.
+                    </div>
+                    <div class="alert alert-warning" role="alert" invisible="apply_to_all_users or specific_user_ids">
+                        <strong>Warning:</strong> Please select at least one specific user or enable "Apply to All Group Users".
+                    </div>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <!-- Search view for Menu Restriction Permission -->
+    <record id="view_menu_restriction_permission_search" model="ir.ui.view">
+        <field name="name">menu.restriction.permission.search</field>
+        <field name="model">menu.restriction.permission</field>
+        <field name="arch" type="xml">
+            <search string="Menu Permissions">
+                <field name="restriction_group_id"/>
+                <field name="menu_id"/>
+                <field name="model_name"/>
+                <filter string="Active" name="active" domain="[('active', '=', True)]"/>
+                <filter string="Archived" name="inactive" domain="[('active', '=', False)]"/>
+                <separator/>
+                <filter string="Read Only" name="read_only" 
+                        domain="[('perm_read', '=', True), ('perm_write', '=', False), ('perm_create', '=', False), ('perm_unlink', '=', False)]"/>
+                <filter string="No Delete" name="no_delete" domain="[('perm_unlink', '=', False)]"/>
+                <filter string="No Create" name="no_create" domain="[('perm_create', '=', False)]"/>
+                <filter string="No Edit" name="no_edit" domain="[('perm_write', '=', False)]"/>
+                <separator/>
+                <filter string="Apply to All Users" name="apply_to_all" domain="[('apply_to_all_users', '=', True)]"/>
+                <filter string="Specific Users Only" name="specific_users" domain="[('apply_to_all_users', '=', False)]"/>
+                <group expand="0" string="Group By">
+                    <filter string="Restriction Group" name="group_by_restriction" context="{'group_by': 'restriction_group_id'}"/>
+                    <filter string="Menu" name="group_by_menu" context="{'group_by': 'menu_id'}"/>
+                    <filter string="Model" name="group_by_model" context="{'group_by': 'model_name'}"/>
+                </group>
+            </search>
+        </field>
+    </record>
+
+    <!-- Action for Menu Restriction Permission -->
+    <record id="action_menu_restriction_permission" model="ir.actions.act_window">
+        <field name="name">Menu Permissions</field>
+        <field name="res_model">menu.restriction.permission</field>
+        <field name="view_mode">list,form</field>
+        <field name="context">{'search_default_active': 1}</field>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+                Create a Menu Permission Rule
+            </p>
+            <p>
+                Configure granular permissions (Read, Write, Create, Delete) for specific menus.
+                These permissions will be applied to users in the restriction group.
+            </p>
+        </field>
+    </record>
+
+    <!-- Menu item for Menu Restriction Permission (optional, if you want direct access) -->
+    <menuitem id="menu_menu_restriction_permission"
+              name="Menu Permissions"
+              parent="base.menu_users"
+              action="action_menu_restriction_permission"
+              sequence="21"/>
+
+</odoo>

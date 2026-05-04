@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+
+        <record id="ir_cron_send_email_notification_contract" model="ir.cron">
+            <field name="name">Email Reminder: Property Contract expire</field>
+            <field name="model_id" ref="model_property_contract"/>
+            <field eval="True" name="active"/>
+            <field name="user_id" ref="base.user_root"/>
+            <field name="interval_number">1</field>
+            <field name="interval_type">days</field>
+            <field name="numbercall">-1</field>
+            <field eval="False" name="doall"/>
+            <field name="state">code</field>
+            <field name="code">model.send_email_notification()</field>
+        </record>
+
+        <record id="ir_cron_send_email_notification_account_move" model="ir.cron">
+            <field name="name">Email Reminder: For Upcoming Property EMI</field>
+            <field name="model_id" ref="model_account_move"/>
+            <field eval="True" name="active"/>
+            <field name="user_id" ref="base.user_root"/>
+            <field name="interval_number">1</field>
+            <field name="interval_type">days</field>
+            <field name="numbercall">-1</field>
+            <field eval="False" name="doall"/>
+            <field name="state">code</field>
+            <field name="code">model.send_email_notification()</field>
+        </record>
+
+    </data>
+</odoo>

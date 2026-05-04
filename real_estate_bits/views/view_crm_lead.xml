@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id="view_crm_lead_real_estate_form" model="ir.ui.view">
+        <field name="name">crm.lead.real.estate.form</field>
+        <field name="model">crm.lead</field>
+        <field name="inherit_id" ref="crm.crm_lead_view_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//button[@name='action_sale_quotations_new']" position="after">
+                <button string="New Booking" name="action_create_new_booking" type="object" class="oe_highlight"
+                        title="Create new property booking"
+                        invisible="type == 'lead' or probability == 0 and not active"/>
+            </xpath>
+            <xpath expr="//field[@name='user_id']" position="before">
+                <field name="property_id" domain="[('is_property', '=', True)]"
+                       options="{'no_create': True, 'no_open': True}"/>
+            </xpath>
+        </field>
+    </record>
+
+</odoo>

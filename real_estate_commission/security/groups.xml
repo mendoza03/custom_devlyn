@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="group_commission_manager" model="res.groups">
+        <field name="name">Commission administrator</field>
+        <field name="category_id" ref="base.module_category_hidden"/>
+    </record>
+
+    <record id="base.default_user" model="res.users">
+        <field name="groups_id" eval="[(4,ref('real_estate_commission.group_commission_manager'))]"/>
+    </record>
+</odoo>

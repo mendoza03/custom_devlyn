@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <menuitem
+                id="social_dashboard_main_menu"
+                name="Social Dashboard"
+                web_icon="odoo_lead_forms_ad_integration_hub_crm,static/description/facebook.png"
+                sequence="9"/>
+
+
+        <menuitem
+                id="social_dashboard_social_configuration"
+                parent="social_dashboard_main_menu"
+                name="Configuration"
+                sequence="40"/>
+
+    </data>
+</odoo>

@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id="view_crm_lead_document_tree" model="ir.ui.view">
+        <field name="name">crm.lead.document.tree</field>
+        <field name="model">crm.lead.document</field>
+        <field name="arch" type="xml">
+            <list>
+                <field name="file_name"/>
+                <field name="file" widget="binary"/>
+                <field name="document_type" invisible="1"/>
+            </list>
+        </field>
+    </record>
+
+    <record id="view_crm_lead_document_form" model="ir.ui.view">
+    <field name="name">crm.lead.document.form</field>
+    <field name="model">crm.lead.document</field>
+    <field name="arch" type="xml">
+        <form>
+            <group>
+                <field name="name" widget="url"/>
+                <field name="user_ids" widget="many2many_avatar_user" options="{'no_open': False, 'no_create_edit': True}"/>
+                <field name="partner_ids" widget="many2many_avatar_user" options="{'no_open': False, 'no_create_edit': True}"/>
+                <field name="document_type" invisible="1"/>
+                <field name="file" filename="file_name"/>
+                <field name="file_name"/>
+                <field name="filetype" invisible="1"/>
+                <field name="is_saved" invisible="1"/>
+            </group>
+
+            <group string="Vista previa">
+                <field name="file_preview_html" widget="html" nolabel="1" readonly="1" invisible="is_saved"/>
+                <field name="file" widget="image" invisible="(not is_saved) or (filetype != 'image')"/>
+                <field name="file" widget="pdf_viewer" invisible="(not is_saved) or (filetype != 'pdf')"/>
+                <div class="o_form_label" invisible="(not is_saved) or (filetype in ('image','pdf'))">
+                    No hay vista previa disponible.
+                </div>
+            </group>
+        </form>
+    </field>
+</record>
+
+    <record id="view_crm_lead_document_kanban" model="ir.ui.view">
+    <field name="name">crm.lead.document.kanban</field>
+    <field name="model">crm.lead.document</field>
+    <field name="arch" type="xml">
+        <kanban class="o_kanban_crm_lead_document">
+            <field name="file_name"/>
+            <field name="name"/>
+            <field name="document_type"/>
+            <field name="filetype"/>
+
+            <templates>
+                <t t-name="kanban-box">
+                    <div class="o_kanban_record">
+                        <div class="o_kanban_primary">
+                            <span t-esc="record.file_name.value or record.name.value"/>
+                        </div>
+                    </div>
+                </t>
+            </templates>
+        </kanban>
+    </field>
+</record>
+
+
+</odoo>

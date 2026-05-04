@@ -1,0 +1,130 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <data>
+        <!-- Property Reservation -->
+        <record id="property_reservation_list_view" model="ir.ui.view">
+            <field name="name">Property Reservation List</field>
+            <field name="model">property.reservation</field>
+            <field name="arch" type="xml">
+                <list>
+                    <field name="name"/>
+                    <field name="partner_id"/>
+                    <field name="user_id"/>
+                    <field name="net_price"/>
+                    <field name="property_code"/>
+                    <field name="floor"/>
+                </list>
+            </field>
+        </record>
+
+        <record id="property_reservation_form_view" model="ir.ui.view">
+            <field name="name">Property Reservation Form</field>
+            <field name="model">property.reservation</field>
+            <field name="arch" type="xml">
+                <form string="Property Reservation">
+                    <header>
+                        <button name="action_confirm" type="object" string="Confirm" class="oe_highlight"
+                                invisible="state != 'draft'"/>
+                        <button name="action_contract_ownership" type="object" string="Sell" class="oe_highlight"
+                                invisible="state == 'canceled' or state == 'draft' or state == 'contracted'"/>
+                        <button name="action_contract_rental" type="object" string="Rent" class="oe_highlight"
+                                invisible="state == 'canceled' or state =='draft' or state == 'contracted'"/>
+                        <button name="action_cancel" type="object" string="Cancel" class="oe_highlight"
+                                invisible="state == 'canceled' or state == 'draft' or state == 'contracted'"/>
+                        <button name="action_draft" type="object" string="Reset To Draft"
+                                invisible="state == 'draft' or state == 'contracted' or state == 'confirmed'"/>
+                        <button name="action_receive_deposit" type="object" string="Receive Deposit"
+                                class="oe_highlight" invisible="state != 'confirmed' or deposit_count != 0"/>
+                        <button name="action_create_commission_bill" type="object" string="Pay Commission"
+                                invisible="state != 'confirmed' or deposit_count != 0"/>
+                        <field name="state" widget="statusbar" statusbar_visible="draft,confirmed"/>
+                    </header>
+                    <sheet>
+                        <div class="oe_button_box" name="button_box">
+                            <button type="object" name="view_contract_own" class="oe_stat_button"
+                                    icon="fa-book" invisible="contract_count_own == 0">
+                                <field name="contract_count_own" widget="statinfo"/>
+                            </button>
+                            <button type="object" name="view_contract_rent" class="oe_stat_button"
+                                    icon="fa-book" invisible="contract_count_rent == 0">
+                                <field name="contract_count_rent" widget="statinfo"/>
+                            </button>
+                            <button type="object" name="view_deposits" class="oe_stat_button" icon="fa-credit-card"
+                                    invisible="deposit_count == 0">
+                                <field name="deposit_count" widget="statinfo"/>
+                            </button>
+                            <button type="object" name="view_commission_bills" class="oe_stat_button"
+                                    string="Commission Bills" icon="fa-pencil-square-o"
+                                    invisible="not count_commissions_bills">
+                                <field name="count_commissions_bills" widget="statinfo" string="Commission Bills"/>
+                            </button>
+                        </div>
+                        <div class="oe_title mb24">
+                            <h1>
+                                <field class="text-break" name="name" readonly="1"/>
+                            </h1>
+                        </div>
+                        <group>
+                            <group string="Booking Data">
+                                <field name="partner_id" readonly="state != 'draft'" required="1"/>
+
+                                <field name="user_id"/>
+                                <field name="date" readonly="state != 'draft'" required="1"/>
+                            </group>
+                            <group string="Booking Payment">
+                                <field name="company_id" invisible="1" groups="base.group_multi_company"/>
+                                <field name="deposit"/>
+                            </group>
+                        </group>
+                        <group>
+                            <group string="Property Info">
+                                <field name="property_id" options="{'no_create': True, 'no_create_edit': True}"
+                                       context="{'form_view_ref':'real_estate_bits.view_property_form'}"
+                                       readonly="state != 'draft'"/>
+                                <field name="property_code"/>
+                                <field name="floor" readonly="state != 'draft'"/>
+                                <field name="address" readonly="state != 'draft'"/>
+                                <field name="property_type_id" readonly="state != 'draft'"/>
+                                <field name="property_area" readonly="state != 'draft'"/>
+                                <field name="net_price" readonly="1"/>
+                            </group>
+                            <group string="Project Info">
+                                <field name="project_id" options="{'no_create': True, 'no_create_edit': True}"
+                                       readonly="state != 'draft'"/>
+                                <field name="project_code" string="Project Code"/>
+                                <field name="region_id" readonly="state != 'draft'"/>
+                            </group>
+                        </group>
+                        <separator string="Commission Details" colspan="4"/>
+                        <group>
+                            <group>
+                                <field name="channel_partner_id" readonly="state != 'draft'"/>
+                                <field name="commission_base_amount_selection" required="1"/>
+                                <field name="commission_base_amount"/>
+                            </group>
+                            <group>
+                                <field name="commission_status" required="1"/>
+                                <field name="channel_partner_commission"/>
+                                <field name="total_commission"/>
+                            </group>
+                        </group>
+                    </sheet>
+                    <chatter/>
+                </form>
+            </field>
+        </record>
+
+        <record id="property_reservation_form_action" model="ir.actions.act_window">
+            <field name="name">Property Booking</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">property.reservation</field>
+            <field name="view_id" ref="property_reservation_list_view"/>
+            <field name="help" type="html">
+                <p class="oe_view_nocontent_create">
+                    Click to add a new Property Reservation
+                </p>
+            </field>
+        </record>
+
+    </data>
+</odoo>

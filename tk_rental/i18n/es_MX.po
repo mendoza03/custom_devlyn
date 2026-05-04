@@ -1,0 +1,892 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* tk_rental
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 17.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2024-08-13 18:14+0000\n"
+"PO-Revision-Date: 2024-08-13 18:14+0000\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+
+
+#. module: tk_rental
+#. odoo-javascript
+#: code:addons/tk_rental/static/src/xml/template.xml:0
+msgid "All Static"
+msgstr "Todo Estático"
+
+#. module: tk_rental
+#. odoo-javascript
+#: code:addons/tk_rental/static/src/xml/template.xml:0
+msgid "Orders"
+msgstr "Órdenes"
+
+#. module: tk_rental
+#. odoo-javascript
+#: code:addons/tk_rental/static/src/xml/template.xml:0
+msgid "Draft"
+msgstr "Borrador"
+
+#. module: tk_rental
+#. odoo-javascript
+#: code:addons/tk_rental/static/src/xml/template.xml:0
+msgid "In Progress"
+msgstr "En Progreso"
+
+#. module: tk_rental
+#. odoo-javascript
+#: code:addons/tk_rental/static/src/xml/template.xml:0
+msgid "Closed"
+msgstr "Cerrado"
+
+#. module: tk_rental
+#. odoo-javascript
+#: code:addons/tk_rental/static/src/xml/template.xml:0
+msgid "Cancelled"
+msgstr "Cancelado"
+
+#. module: tk_rental
+#. odoo-javascript
+#: code:addons/tk_rental/static/src/xml/template.xml:0
+msgid "Rejects"
+msgstr "Rechazados"
+
+#. module: tk_rental
+#. odoo-javascript
+#: code:addons/tk_rental/static/src/xml/template.xml:0 
+msgid "Rent Quotation Details"
+msgstr "Detalles de Cotización de Renta"
+
+#. module: tk_rental
+#. odoo-javascript
+#: code:addons/tk_rental/static/src/xml/template.xml:0 
+msgid "Quotations"
+msgstr "Cotizaciones"
+
+#. module: tk_rental
+#. odoo-javascript
+#: code:addons/tk_rental/static/src/xml/template.xml:0 
+msgid "Sent"
+msgstr "Enviado"
+
+#. module: tk_rental
+#. odoo-javascript
+#: code:addons/tk_rental/static/src/xml/template.xml:0 
+msgid "Approved"
+msgstr "Aprobado"
+
+#. module: tk_rental
+#. odoo-javascript
+#: code:addons/tk_rental/static/src/xml/template.xml:0 
+msgid "Rent Order Status"
+msgstr "Estado de Órdenes de Renta"
+
+#. module: tk_rental
+#. odoo-javascript
+#: code:addons/tk_rental/static/src/xml/template.xml:0 
+msgid "Delivery Orders"
+msgstr "Órdenes de Entrega"
+
+#. module: tk_rental
+#. odoo-javascript
+#: code:addons/tk_rental/static/src/xml/template.xml:0 
+msgid "Draft"
+msgstr "Borrador"
+
+#. module: tk_rental
+#. odoo-javascript
+#: code:addons/tk_rental/static/src/xml/template.xml:0 
+msgid "Completed"
+msgstr "Completado"
+
+#. module: tk_rental
+#. odoo-javascript
+#: code:addons/tk_rental/static/src/xml/template.xml:0 
+msgid "Pending"
+msgstr "Pendiente"
+
+#. module: tk_rental
+#. odoo-javascript
+#: code:addons/tk_rental/static/src/xml/template.xml:0 
+msgid "Return Orders"
+msgstr "Órdenes de Devolución"
+
+#. module: tk_rental
+#. odoo-javascript
+#: code:addons/tk_rental/static/src/xml/template.xml:0 
+msgid "Returns"
+msgstr "Devoluciones"
+
+#. module: tk_rental
+#: model:ir.actions.client,name:tk_rental.action_rental_dashboard
+msgid "Statistics"
+msgstr "Estadísticas"
+
+#. module: tk_rental
+#: model:ir.model.fields.selection,name:tk_rental.selection__rent_order__status__approve
+msgid "Quotation Approved"
+msgstr "Cotización Aprobada"
+
+#. module: tk_rental
+#. odoo-javascript
+#: code:addons/tk_rental/static/src/xml/template.xml:0
+#: model:ir.model.fields.selection,name:tk_rental.selection__rent_order__status__in_progress
+msgid "In Progress"
+msgstr "En Progreso"
+
+#. module: tk_rental
+#. odoo-javascript
+#: code:addons/tk_rental/static/src/xml/template.xml:0
+#: model:ir.model.fields.selection,name:tk_rental.selection__rent_order__status__close
+msgid "Closed"
+msgstr "Cerrado"
+
+#. module: tk_rental
+#. odoo-javascript
+#. odoo-python
+#: code:addons/tk_rental/models/rent_order.py:0
+#: code:addons/tk_rental/static/src/xml/template.xml:0
+#: model:ir.actions.act_window,name:tk_rental.action_return_order
+#: model:ir.model.fields,field_description:tk_rental.field_rent_order__return_order_count
+#: model:ir.ui.menu,name:tk_rental.menu_action_return_order
+#: model_terms:ir.ui.view,arch_db:tk_rental.rent_order_form_view
+msgid "Return Orders"
+msgstr "Órdenes de Devolución"
+
+#. module: tk_rental
+#. odoo-javascript
+#: code:addons/tk_rental/static/src/xml/template.xml:0
+#: model:ir.model.fields.selection,name:tk_rental.selection__rent_order__status__total_orders
+msgid "Total Orders"
+msgstr "Órdenes Totales"
+
+#. module: tk_rental
+#. odoo-javascript
+#: code:addons/tk_rental/static/src/xml/template.xml:0
+#: model:ir.model.fields.selection,name:tk_rental.selection__rent_order__status__new_orders
+msgid "New Orders"
+msgstr "Órdenes Nuevas"
+
+#. module: tk_rental
+#. odoo-javascript
+#: code:addons/tk_rental/static/src/xml/template.xml:0
+#: model:ir.model.fields.selection,name:tk_rental.selection__rent_order__status__cancelled
+msgid "Cancelled"
+msgstr "Cancelado"
+
+#. module: tk_rental
+#. odoo-javascript
+#: code:addons/tk_rental/static/src/xml/template.xml:0
+#: model:ir.model.fields.selection,name:tk_rental.selection__rent_order__status__reject_orders
+msgid "Reject Orders"
+msgstr "Órdenes Rechazadas"
+
+#. module: tk_rental
+#. odoo-javascript
+#: code:addons/tk_rental/static/src/xml/template.xml:0
+#: model:ir.model.fields.selection,name:tk_rental.selection__rent_order__status__quotations
+msgid "Quotations"
+msgstr "Cotizaciones"
+
+#. module: tk_rental
+#. odoo-javascript
+#: code:addons/tk_rental/static/src/xml/template.xml:0
+#: model:ir.model.fields.selection,name:tk_rental.selection__rent_order__status__quotations_sent
+msgid "Quotations Sent"
+msgstr "Cotizaciones Enviadas"
+
+#. module: tk_rental
+#. odoo-javascript
+#: code:addons/tk_rental/static/src/xml/template.xml:0
+#: model:ir.model.fields.selection,name:tk_rental.selection__rent_order__status__draft_orders
+msgid "Draft Orders"
+msgstr "Órdenes en Borrador"
+
+#. module: tk_rental
+#. odoo-javascript
+#: code:addons/tk_rental/static/src/xml/template.xml:0
+#: model:ir.model.fields.selection,name:tk_rental.selection__rent_order__status__done_orders
+msgid "Done Orders"
+msgstr "Órdenes Completadas"
+
+#. module: tk_rental
+#. odoo-javascript
+#: code:addons/tk_rental/static/src/xml/template.xml:0
+#: model:ir.model.fields.selection,name:tk_rental.selection__rent_order__status__in_delivery
+msgid "In Delivery"
+msgstr "En Entrega"
+
+#. module: tk_rental
+#: model:ir.ui.menu,name:tk_rental.menu_rental_dashboard
+msgid "Dashboard"
+msgstr "Tablero"
+
+#. module: tk_rental
+#: model:ir.ui.menu,name:tk_rental.menu_rent_order
+msgid "Contracts"
+msgstr "Contratos"
+
+#. module: tk_rental
+#: model:ir.ui.menu,name:tk_rental.menu_customer
+msgid "Customers"
+msgstr "Clientes"
+
+#. module: tk_rental
+#. odoo-javascript
+#. odoo-python
+#: code:addons/tk_rental/models/maintenance_inherit.py:0
+#: code:addons/tk_rental/models/rent_order.py:0
+#: code:addons/tk_rental/static/src/xml/template.xml:0
+#: model:ir.actions.act_window,name:tk_rental.action_delivery_order
+#: model:ir.model.fields,field_description:tk_rental.field_maintenance_request__order_count
+#: model:ir.model.fields,field_description:tk_rental.field_rent_order__delivery_order_count
+#: model:ir.ui.menu,name:tk_rental.menu_action_delivery_order
+#: model_terms:ir.ui.view,arch_db:tk_rental.maintenance_request_inherit_form_view
+#: model_terms:ir.ui.view,arch_db:tk_rental.rent_order_form_view
+msgid "Delivery Orders"
+msgstr "Órdenes de Entrega"
+
+#. module: tk_rental
+#: model:ir.actions.act_window,name:tk_rental.action_rent_invoices
+#: model:ir.model.fields,field_description:tk_rental.field_rent_order__invoice_count
+#: model:ir.ui.menu,name:tk_rental.menu_rent_invoices
+#: model_terms:ir.ui.view,arch_db:tk_rental.maintenance_request_inherit_form_view
+#: model_terms:ir.ui.view,arch_db:tk_rental.rent_order_form_view
+msgid "Invoices"
+msgstr "Facturas"
+
+#. module: tk_rental
+#: model:ir.actions.act_window,name:tk_rental.action_rent_product_template
+#: model:ir.ui.menu,name:tk_rental.menu_rent_product
+msgid "Rental Equipments"
+msgstr "Equipos de Renta"
+
+#. module: tk_rental
+#: model:ir.ui.menu,name:tk_rental.menu_rent_reports
+msgid "Reporting"
+msgstr "Informes"
+
+#. module: tk_rental
+#: model:ir.ui.menu,name:tk_rental.menu_rent_term
+msgid "Terms Templates"
+msgstr "Plantillas de Términos"
+
+#. module: tk_rental
+#: model:ir.ui.menu,name:tk_rental.main_menu_rental
+msgid "Rental"
+msgstr "Renta"
+
+#. module: tk_rental
+#. odoo-javascript
+#: code:addons/tk_rental/static/src/js/other/rental_dashboard.js:0
+msgid "Total Orders"
+msgstr "Órdenes Totales"
+
+#. module: tk_rental
+#: model:ir.actions.act_window,name:tk_rental.action_rent_product
+msgid "Rental Equipment"
+msgstr "Equipo de Renta"
+
+#. module: tk_rental
+#: model:ir.actions.act_window,name:tk_rental.action_rent_order
+msgid "Rent Contracts"
+msgstr "Contrato de renta"
+
+#. module: tk_rental
+#: model:ir.model.fields.selection,name:tk_rental.selection__rent_order__status__quotation_sent
+msgid "Quotation Sent"
+msgstr "Cotización enviada"
+
+#. module: tk_rental
+#: model:ir.model.fields.selection,name:tk_rental.selection__rent_order__status__quotation
+#: model_terms:ir.ui.view,arch_db:tk_rental.rent_order_form_view
+msgid "Quotation"
+msgstr "Cotización"
+
+#. module: tk_rental
+#. odoo-python
+#: code:addons/tk_rental/models/rent_order.py:0
+#: model:ir.model.fields.selection,name:tk_rental.selection__rent_order__status__draft
+msgid "New"
+msgstr "Nuevo"
+
+#. module: tk_rental
+#: model:ir.model.fields.selection,name:tk_rental.selection__rent_order__status__reject
+#: model_terms:ir.ui.view,arch_db:tk_rental.rent_order_form_view
+msgid "Reject"
+msgstr "Rechazar"
+
+#. module: tk_rental
+#: model:ir.model.fields,field_description:tk_rental.field_equipment_delivery__invoice_state
+msgid " Status"
+msgstr " Estado"
+
+#. module: tk_rental
+#: model:ir.model.fields,field_description:tk_rental.field_equipment_delivery__extra_invoice_state
+msgid " Status "
+msgstr " Estado"
+
+#. module: tk_rental
+#: model:ir.model.fields,field_description:tk_rental.field_product_product__can_be_rental
+#: model:ir.model.fields,field_description:tk_rental.field_product_template__can_be_rental
+#: model_terms:ir.ui.view,arch_db:tk_rental.rent_product_search_view
+msgid "Can be Rental"
+msgstr "Puede ser de alquiler"
+
+#. module: tk_rental
+#: model:ir.model.fields,field_description:tk_rental.field_product_product__is_vehicle
+#: model:ir.model.fields,field_description:tk_rental.field_product_template__is_vehicle
+msgid "Is Vehicle"
+msgstr "Es vehículo"
+
+#. module: tk_rental
+#: model_terms:ir.ui.view,arch_db:tk_rental.rent_product_form_view
+#: model_terms:ir.ui.view,arch_db:tk_rental.rent_product_template_from_view
+msgid "Pricing Details"
+msgstr "Detalles de precios"
+
+#. module: tk_rental
+#: model_terms:ir.ui.view,arch_db:tk_rental.rent_product_form_view
+#: model_terms:ir.ui.view,arch_db:tk_rental.rent_product_template_from_view
+msgid "Depreciation"
+msgstr "Depreciación"
+
+#. module: tk_rental
+#: model:ir.model.fields,field_description:tk_rental.field_equipment_delivery__description
+#: model:ir.model.fields,field_description:tk_rental.field_rent_term__description
+#: model:ir.model.fields,field_description:tk_rental.field_renting_items__description
+msgid "Description"
+msgstr "Descripción"
+
+#. module: tk_rental
+#: model_terms:ir.ui.view,arch_db:tk_rental.rent_order_form_view
+msgid "Descriptions"
+msgstr "Descripcion"
+
+#. module: tk_rental
+#: model:ir.model,name:tk_rental.model_equipment_image
+#: model:ir.model.fields,field_description:tk_rental.field_product_product__equipment_image_ids
+#: model:ir.model.fields,field_description:tk_rental.field_product_template__equipment_image_ids
+msgid "Equipment Image"
+msgstr ""
+
+#. module: tk_rental
+#: model_terms:ir.ui.view,arch_db:tk_rental.rent_product_form_view
+#: model_terms:ir.ui.view,arch_db:tk_rental.rent_product_template_from_view
+msgid "Equipment Images"
+msgstr "Imagen del equipo"
+
+#. module: tk_rental
+#: model:ir.model.fields,field_description:tk_rental.field_product_product__serial_number
+#: model:ir.model.fields,field_description:tk_rental.field_product_template__serial_number
+#: model:ir.model.fields,field_description:tk_rental.field_renting_items__serial_number
+msgid "Serial Number"
+msgstr "Número de serie"
+
+#. module: tk_rental
+#: model:ir.model.fields,field_description:tk_rental.field_product_product__maintenance_hours
+msgid "Maintenance Hours"
+msgstr "Horas de mantenimiento"
+
+#. module: tk_rental
+#: model:ir.ui.menu,name:tk_rental.menu_renting_items_report
+msgid "Renting Items History"
+msgstr "Historial de artículos alquilados"
+
+#. module: tk_rental
+#: model:ir.model,name:tk_rental.model_equipment_odometer
+#: model:ir.ui.menu,name:tk_rental.menu_equipment_odometer_report
+msgid "Equipment Odometer History"
+msgstr "Historial del odómetro del equipo"
+
+#. module: tk_rental
+#: model:ir.model.fields,field_description:tk_rental.field_renting_items__equipment_odometer_id
+msgid "Equipment Odometer"
+msgstr "Odómetro del equipo"
+
+#. module: tk_rental
+#: model:ir.model.fields,field_description:tk_rental.field_equipment_delivery__product_id
+#: model:ir.model.fields,field_description:tk_rental.field_equipment_odometer__product_id
+#: model:ir.model.fields,field_description:tk_rental.field_maintenance_equipment__product_id
+#: model:ir.model.fields,field_description:tk_rental.field_renting_items__product_id
+#: model:ir.model.fields,field_description:tk_rental.field_update_last_odometer__equipment_id
+#: model_terms:ir.ui.view,arch_db:tk_rental.equipment_odometer_search_view
+msgid "Equipment"
+msgstr "Equipo"
+
+#. module: tk_rental
+#: model:ir.model.fields,field_description:tk_rental.field_maintenance_request__product_id
+msgid " Equipment"
+msgstr "Equipo"
+
+#. module: tk_rental
+#: model:ir.model.fields,field_description:tk_rental.field_rent_order__start_date
+#: model:ir.model.fields,field_description:tk_rental.field_renting_items__start_date
+msgid "Start Date"
+msgstr "Fecha de inicio"
+
+#. module: tk_rental
+#: model:ir.model.fields,field_description:tk_rental.field_rent_order__return_date
+#: model:ir.model.fields,field_description:tk_rental.field_renting_items__return_date
+msgid "Return Date"
+msgstr "Fecha de devolución"
+
+#. module: tk_rental
+#: model:ir.model.fields,field_description:tk_rental.field_equipment_delivery__product_qty
+#: model:ir.model.fields,field_description:tk_rental.field_maintenance_spare_part__qty
+#: model:ir.model.fields,field_description:tk_rental.field_renting_items__product_qty
+msgid "Quantity"
+msgstr "Cantidad"
+
+#. module: tk_rental
+#: model:ir.model.fields,field_description:tk_rental.field_renting_items__equipment_renting_info_id
+msgid " Rent Type"
+msgstr " Tipo de alquiler"
+
+#. module: tk_rental
+#: model:ir.model.fields,field_description:tk_rental.field_renting_items__range
+msgid "Rent Type"
+msgstr "Tipo de alquiler"
+
+#. module: tk_rental
+#: model:ir.model.fields,field_description:tk_rental.field_renting_items__renting_amount
+#: model_terms:ir.ui.view,arch_db:tk_rental.renting_items_form_view
+msgid "Renting Amount"
+msgstr "Monto del alquiler"
+
+#. module: tk_rental
+#: model:ir.model.fields,field_description:tk_rental.field_renting_items__rent_per_unit
+msgid "Rent / Unit"
+msgstr "Alquiler / Unidad"
+
+#. module: tk_rental
+#: model:ir.model.fields,field_description:tk_rental.field_equipment_odometer__unit
+#: model:ir.model.fields,field_description:tk_rental.field_update_last_odometer__unit
+#: model_terms:ir.ui.view,arch_db:tk_rental.rent_order_form_view
+#: model_terms:ir.ui.view,arch_db:tk_rental.renting_items_menu_tree_view
+#: model_terms:ir.ui.view,arch_db:tk_rental.renting_items_tree_view
+msgid "Unit"
+msgstr "Unidad"
+
+#. module: tk_rental
+#: model:ir.model.fields,field_description:tk_rental.field_renting_items__rent_amount
+msgid "Rent Amount"
+msgstr "Monto del alquiler"
+
+#. module: tk_rental
+#: model:ir.model.fields,field_description:tk_rental.field_renting_items__extra_hour_amount
+msgid "Extra Hours Amount"
+msgstr "Monto por horas extra"
+
+#. module: tk_rental
+#: model:ir.model.fields,field_description:tk_rental.field_renting_items__total_amount
+msgid "Total Amount"
+msgstr "Monto total"
+
+#. module: tk_rental
+#: model:ir.model.fields,field_description:tk_rental.field_equipment_delivery__create_date
+#: model:ir.model.fields,field_description:tk_rental.field_equipment_delivery_image__create_date
+#: model:ir.model.fields,field_description:tk_rental.field_equipment_image__create_date
+#: model:ir.model.fields,field_description:tk_rental.field_equipment_odometer__create_date
+#: model:ir.model.fields,field_description:tk_rental.field_equipment_renting_info__create_date
+#: model:ir.model.fields,field_description:tk_rental.field_maintenance_service__create_date
+#: model:ir.model.fields,field_description:tk_rental.field_maintenance_spare_part__create_date
+#: model:ir.model.fields,field_description:tk_rental.field_rent_order__create_date
+#: model:ir.model.fields,field_description:tk_rental.field_rent_term__create_date
+#: model:ir.model.fields,field_description:tk_rental.field_rental_dashboard__create_date
+#: model:ir.model.fields,field_description:tk_rental.field_renting_items__create_date
+#: model:ir.model.fields,field_description:tk_rental.field_renting_items_image__create_date
+#: model:ir.model.fields,field_description:tk_rental.field_update_last_odometer__create_date
+msgid "Created on"
+msgstr "Creado el"
+
+#. module: tk_rental
+#: model:ir.model.fields,field_description:tk_rental.field_equipment_odometer__current_readings
+msgid "Current Reading"
+msgstr "Lectura actual"
+
+#. module: tk_rental
+#: model:ir.model.fields,field_description:tk_rental.field_update_last_odometer__current_odometer_reading
+msgid "Current Readings"
+msgstr "Lectura actual"
+
+#. module: tk_rental
+#: model:ir.model.fields,field_description:tk_rental.field_equipment_odometer__last_readings
+msgid "Last Reading"
+msgstr "Última lectura"
+
+#. module: tk_rental
+#: model:ir.model.fields,field_description:tk_rental.field_update_last_odometer__last_odometer_reading
+msgid "Last Readings"
+msgstr "Última lectura"
+
+#. module: tk_rental
+#: model:ir.model,name:tk_rental.model_rent_term
+msgid "Rent Term"
+msgstr "Plazo de alquiler"
+
+#. module: tk_rental
+#: model:ir.actions.act_window,name:tk_rental.action_rent_term
+msgid "Rent Terms"
+msgstr "Plazo de alquiler"
+
+#. module: tk_rental
+#: model:ir.model.fields,field_description:tk_rental.field_equipment_delivery_image__name
+#: model:ir.model.fields,field_description:tk_rental.field_equipment_image__name
+#: model:ir.model.fields,field_description:tk_rental.field_rent_term__name
+#: model:ir.model.fields,field_description:tk_rental.field_renting_items_image__name
+msgid "Name"
+msgstr "Nombre"
+
+#. module: tk_rental
+#: model:ir.actions.act_window,name:tk_rental.action_renting_items
+#: model:ir.actions.act_window,name:tk_rental.action_renting_items_list_menu
+#: model:ir.model,name:tk_rental.model_renting_items
+#: model:ir.model.fields,field_description:tk_rental.field_rent_order__renting_items_ids
+#: model:ir.model.fields,field_description:tk_rental.field_renting_items_image__renting_items_id
+#: model_terms:ir.ui.view,arch_db:tk_rental.rent_order_form_view
+msgid "Renting Items"
+msgstr "Artículos de alquiler"
+
+#. module: tk_rental
+#: model:ir.actions.act_window,name:tk_rental.action_equipment_odometer_report_list_menu
+msgid "Equipments Odometer"
+msgstr "Odómetro de equipos"
+
+#. module: tk_rental
+#: model:ir.model.fields.selection,name:tk_rental.selection__rent_order__status__delivery
+#: model_terms:ir.ui.view,arch_db:tk_rental.rent_order_form_view
+msgid "Delivered"
+msgstr "Entregado"
+
+#. module: tk_rental
+#: model:ir.model.fields.selection,name:tk_rental.selection__rent_order__status__return
+#: model_terms:ir.ui.view,arch_db:tk_rental.rent_order_form_view
+msgid "Return"
+msgstr "Regresado"
+
+#. module: tk_rental
+#: model_terms:ir.ui.view,arch_db:tk_rental.rent_order_form_view
+msgid "Return"
+msgstr "Regresar"
+
+#. module: tk_rental
+#: model_terms:ir.ui.view,arch_db:tk_rental.rent_order_form_view
+msgid "Update Odometer"
+msgstr "Actualizar el odómetro"
+
+#. module: tk_rental
+#: model:ir.actions.act_window,name:tk_rental.update_last_odometer_wizard_action
+msgid "Update Odometer Reading"
+msgstr "Actualizar lectura del odómetro"
+
+#. module: tk_rental
+#: model_terms:ir.ui.view,arch_db:tk_rental.update_last_odometer_view_form
+msgid "Update Readings"
+msgstr "Actualizar lecturas"
+
+#. module: tk_rental
+#: model_terms:ir.ui.view,arch_db:tk_rental.rent_order_form_view
+msgid "Close"
+msgstr "Cerrar"
+
+#. module: tk_rental
+#: model_terms:ir.ui.view,arch_db:tk_rental.rent_order_form_view
+msgid "Customer Details"
+msgstr "Detalles del cliente"
+
+#. module: tk_rental
+#: model:ir.model.fields,field_description:tk_rental.field_equipment_delivery__return_charge
+msgid "Damage Charge"
+msgstr "Cargo por daños"
+
+
+#. module: tk_rental
+#: model:ir.model.fields,field_description:tk_rental.field_equipment_delivery__invoice_id
+#: model_terms:ir.ui.view,arch_db:tk_rental.rent_order_form_view
+msgid "Damage Invoice"
+msgstr "Factura por daños"
+
+#. module: tk_rental
+#: model:ir.model.fields,field_description:tk_rental.field_renting_items__total_day_diff
+msgid "Day Difference"
+msgstr "Diferencia de días"
+
+#. module: tk_rental
+#: model:ir.model.fields,field_description:tk_rental.field_equipment_renting_info__renting_day
+msgid "Days"
+msgstr "Días"
+
+#. module: tk_rental
+#: model_terms:ir.ui.view,arch_db:tk_rental.rent_order_form_view
+msgid "Deliver Order"
+msgstr "Orden de entrega"
+
+#. module: tk_rental
+#: model_terms:ir.ui.view,arch_db:tk_rental.rent_order_form_view
+msgid "Billing Address"
+msgstr "Dirección de facturación"
+
+#. module: tk_rental
+#: model_terms:ir.ui.view,arch_db:tk_rental.rent_order_form_view
+msgid "<span class=\"o_form_label o_td_label\" name=\"address_name\">Address</span>"
+msgstr "<span class=\"o_form_label o_td_label\" name=\"address_name\">Dirección</span>"
+
+#. module: tk_rental
+#: model:ir.model.fields,field_description:tk_rental.field_maintenance_equipment__customer_id
+#: model:ir.model.fields,field_description:tk_rental.field_maintenance_request__customer_id
+#: model:ir.model.fields,field_description:tk_rental.field_rent_order__customer_id
+#: model_terms:ir.ui.view,arch_db:tk_rental.rent_order_search_view
+msgid "Customer"
+msgstr "Cliente"
+
+#. module: tk_rental
+#: model_terms:ir.ui.view,arch_db:tk_rental.rent_order_form_view
+msgid "Customer Details"
+msgstr "Detalles del cliente"
+
+#. module: tk_rental
+#: model:ir.model.fields,field_description:tk_rental.field_rent_order__shipping_street
+msgid "Street"
+msgstr "Calle"
+
+#. module: tk_rental
+#: model:ir.model.fields,field_description:tk_rental.field_rent_order__shipping_street2
+msgid "Street 2"
+msgstr "Calle 2"
+
+#. module: tk_rental
+#: model_terms:ir.ui.view,arch_db:tk_rental.rent_order_form_view
+msgid "Street 2..."
+msgstr "Calle 2..."
+
+#. module: tk_rental
+#: model_terms:ir.ui.view,arch_db:tk_rental.rent_order_form_view
+msgid "Street..."
+msgstr "Calle..."
+
+#. module: tk_rental
+#: model:ir.model.fields,field_description:tk_rental.field_rent_order__billing_city
+msgid " City"
+msgstr " Ciudad"
+
+#. module: tk_rental
+#: model:ir.model.fields,field_description:tk_rental.field_rent_order__billing_country_id
+msgid " Country"
+msgstr " País"
+
+#. module: tk_rental
+#: model:ir.model.fields,field_description:tk_rental.field_rent_order__billing_state_id
+msgid " Estado"
+msgstr ""
+
+#. module: tk_rental
+#: model:ir.model.fields,field_description:tk_rental.field_rent_order__rent_term_id
+msgid " Terms & Conditions"
+msgstr " Términos y condiciones"
+
+#. module: tk_rental
+#: model_terms:ir.ui.view,arch_db:tk_rental.rent_order_form_view
+msgid "Shipping Address"
+msgstr "Dirección de envió"
+
+#. module: tk_rental
+#: model_terms:ir.ui.view,arch_db:tk_rental.rent_order_form_view
+msgid "Contract Details"
+msgstr "Detalles del contrato"
+
+
+#. module: tk_rental
+#. odoo-python
+#: code:addons/tk_rental/models/maintenance_inherit.py:0
+#: model:ir.model.fields,field_description:tk_rental.field_maintenance_request__invoice_id
+msgid "Invoice"
+msgstr "Factura"
+
+#. module: tk_rental
+#: model_terms:ir.ui.view,arch_db:tk_rental.rent_order_form_view
+msgid "Invoice Details"
+msgstr "Detalles de la factura"
+
+#. module: tk_rental
+#: model:ir.model.fields,field_description:tk_rental.field_rent_order__invoice_id
+msgid "Renting Invoice"
+msgstr "Factura de renta"
+
+#. module: tk_rental
+#: model_terms:ir.ui.view,arch_db:tk_rental.rent_order_form_view
+msgid "Delivery Order Details"
+msgstr "Detalles del pedido de entrega"
+
+#. module: tk_rental
+#: model:ir.model.fields,field_description:tk_rental.field_rent_order__description
+#: model_terms:ir.ui.view,arch_db:tk_rental.rent_order_form_view
+#: model_terms:ir.ui.view,arch_db:tk_rental.rent_term_form_view
+msgid "Terms & Conditions"
+msgstr "Términos y condiciones"
+
+#. module: tk_rental
+#: model:ir.model.fields,field_description:tk_rental.field_rent_order__shipping_country_id
+#: model_terms:ir.ui.view,arch_db:tk_rental.rent_order_form_view
+msgid "Country"
+msgstr "País"
+
+#. module: tk_rental
+#: model_terms:ir.ui.view,arch_db:tk_rental.rent_order_form_view
+msgid "Create Delivery"
+msgstr "Crear Entrega"
+
+#. module: tk_rental
+#: model_terms:ir.ui.view,arch_db:tk_rental.maintenance_request_inherit_form_view
+msgid "Create Delivery Order"
+msgstr "Crear Orden de Entrega"
+
+#. module: tk_rental
+#: model_terms:ir.ui.view,arch_db:tk_rental.rent_order_form_view
+msgid "Create Extra Hour Charge Invoice"
+msgstr "Crear Factura por Cargo de Hora Extra"
+
+#. module: tk_rental
+#: model_terms:ir.ui.view,arch_db:tk_rental.maintenance_request_inherit_form_view
+#: model_terms:ir.ui.view,arch_db:tk_rental.rent_order_form_view
+msgid "Create Invoice"
+msgstr "Crear Factura"
+
+#. module: tk_rental
+#: model_terms:ir.ui.view,arch_db:tk_rental.rent_product_form_view
+msgid "Create Maintenance"
+msgstr "Crear Mantenimiento"
+
+#. module: tk_rental
+#: model_terms:ir.ui.view,arch_db:tk_rental.maintenance_equipment_inherit_form_view
+msgid "Create Maintenance Request"
+msgstr "Crear Solicitud de Mantenimiento"
+
+#. module: tk_rental
+#: model_terms:ir.ui.view,arch_db:tk_rental.rent_order_form_view
+msgid "Create Return Damage Charge Invoice"
+msgstr "Crear Factura por Cargo de Daño de Devolución"
+
+
+#. module: tk_rental
+#: model:ir.model.fields,field_description:tk_rental.field_equipment_delivery__deliver_order_id
+#: model:ir.model.fields,field_description:tk_rental.field_maintenance_request__delivery_order_id
+#: model:ir.model.fields,field_description:tk_rental.field_rent_order__delivery_order_id
+msgid "Delivery Order"
+msgstr "Orden de Entrega"
+
+#. module: tk_rental
+#: model_terms:ir.ui.view,arch_db:tk_rental.rent_order_form_view
+msgid "Delivery Order Details"
+msgstr "Detalles de la Orden de Entrega"
+
+#. module: tk_rental
+#: model:ir.model.fields,field_description:tk_rental.field_rent_order__delivery_type
+#: model_terms:ir.ui.view,arch_db:tk_rental.rent_order_search_view
+msgid "Delivery Type"
+msgstr "Tipo de Entrega"
+
+#. module: tk_rental
+#: model_terms:ir.ui.view,arch_db:tk_rental.rent_order_form_view
+msgid "ZIP"
+msgstr "Código Postal"
+
+#. module: tk_rental
+#: model:ir.model.fields,field_description:tk_rental.field_rent_order__shipping_zip
+msgid "Zip"
+msgstr "Código Postal"
+
+#. module: tk_rental
+#: model:ir.model.fields,field_description:tk_rental.field_maintenance_request__warehouse_id
+#: model:ir.model.fields,field_description:tk_rental.field_rent_order__warehouse_id
+msgid "Warehouse"
+msgstr "Almacén"
+
+#. module: tk_rental
+#: model:ir.model.fields,field_description:tk_rental.field_rent_order__delivery_type
+#: model_terms:ir.ui.view,arch_db:tk_rental.rent_order_search_view
+msgid "Delivery Type"
+msgstr "Tipo de Entrega"
+
+#. module: tk_rental
+#: model:ir.model.fields,field_description:tk_rental.field_equipment_image__product_id
+#: model:ir.model.fields,field_description:tk_rental.field_equipment_renting_info__product_id
+msgid "Product"
+msgstr "Producto"
+
+#. module: tk_rental
+#: model:ir.model.fields,field_description:tk_rental.field_equipment_image__product_template_id
+#: model:ir.model.fields,field_description:tk_rental.field_equipment_renting_info__product_template_id
+msgid "Product Template"
+msgstr "Plantilla de Producto"
+
+#. module: tk_rental
+#: model:ir.model.fields.selection,name:tk_rental.selection__rent_order__delivery_type__product_wise_delivery
+msgid "Product Wise Delivery"
+msgstr "Entrega por Producto"
+
+#. module: tk_rental
+#. odoo-python
+#: code:addons/tk_rental/models/rent_order.py:0
+msgid "Please fill in all required renting items"
+msgstr "Por favor, complete todos los artículos de alquiler requeridos"
+
+#. module: tk_rental
+#. odoo-python
+#: code:addons/tk_rental/models/product_inherit.py:0
+msgid "Please include the number of days in the pricing details tab"
+msgstr "Por favor, incluya el número de días en la pestaña de detalles de precios"
+
+#. module: tk_rental
+#: model:ir.model.fields,field_description:tk_rental.field_equipment_renting_info__rate
+#: model:ir.model.fields,field_description:tk_rental.field_maintenance_spare_part__price
+msgid "Price"
+msgstr "Precio"
+
+#. module: tk_rental
+#: model_terms:ir.ui.view,arch_db:tk_rental.rent_order_form_view
+msgid "Reject Reasons"
+msgstr "Razones de Rechazo"
+
+#. module: tk_rental
+#: model:ir.model.fields,field_description:tk_rental.field_product_product__request_count
+#: model:ir.model.fields,field_description:tk_rental.field_product_template__request_count
+msgid "Request"
+msgstr "Solicitud"
+
+#. module: tk_rental
+#. odoo-python
+#: code:addons/tk_rental/models/product_inherit.py:0
+msgid "Requests"
+msgstr "Solicitudes"
+
+#. module: tk_rental
+#: model_terms:ir.ui.view,arch_db:tk_rental.maintenance_request_inherit_form_view
+msgid "Required Services"
+msgstr "Servicios Requeridos"
+
+#. module: tk_rental
+#: model_terms:ir.ui.view,arch_db:tk_rental.maintenance_request_inherit_form_view
+msgid "Required Spare Parts"
+msgstr "Piezas de Repuesto Requeridas"
+
+#. module: tk_rental
+#: model_terms:ir.ui.view,arch_db:tk_rental.rent_order_form_view
+msgid "Reset to Draft"
+msgstr "Restablecer a Borrador"
+
+#. module: tk_rental
+#. odoo-python
+#: code:addons/tk_rental/models/rent_order.py:0
+msgid ""
+"All delivery orders must be converted into return orders before proceeding."
+msgstr ""
+"Todos los pedidos de entrega deben convertirse en pedidos de devolución antes de continuar."

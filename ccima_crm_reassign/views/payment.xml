@@ -1,0 +1,258 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="action_report_payment_receipt" model="ir.actions.report">
+        <field name="name">Payment Receipt</field>
+        <field name="model">crm.lead</field>
+        <field name="report_type">qweb-pdf</field>
+        <field name="report_name">ccima_crm_reassign.report_payment_receipt_document</field>
+        <field name="report_file">ccima_crm_reassign.report_payment_receipt_document</field>
+        <field name="print_report_name">'Receipt - %s' % (object.display_name or '')</field>
+    </record>
+
+    <template id="report_payment_receipt_document">
+    <t t-call="web.html_container">
+        <t t-foreach="docs" t-as="o">
+            <t t-call="web.basic_layout">
+                <t t-set="base_url" t-value="o.get_base_url()"/>
+
+                <main>
+                    <style>
+                        /* ===== PAGE ===== */
+                        .pb-receipt{
+                            border:2px solid #1f4e79;
+                            padding:16px 18px;
+                            width:100%;
+                            box-sizing:border-box;
+                            font-family: Arial, Helvetica, sans-serif;
+                            color:#1f2d3d;
+                        }
+
+                        /* ===== HEADER ===== */
+                        .pb-header{
+                            width:100%;
+                            border-collapse:collapse;
+                        }
+                        .pb-header td{vertical-align:top;}
+                        .pb-logo{
+                            width:120px;
+                        }
+                        .pb-logo img{width:110px; height:auto; display:block;}
+                        .pb-title{
+                            text-align:center;
+                            padding:0 10px;
+                        }
+                        .pb-title .t1{
+                            font-size:22px;
+                            font-weight:800;
+                            letter-spacing:.3px;
+                            margin-top:6px;
+                            white-space:nowrap;
+                        }
+                        .pb-title .t2{
+                            font-size:11px;
+                            margin-top:2px;
+                        }
+                        .pb-client{
+                            width:140px;
+                            text-align:right;
+                            font-size:18px;
+                            font-weight:800;
+                            padding-top:10px;
+                        }
+
+                        /* ===== TOP BOXES ===== */
+                        .pb-top{
+                            width:100%;
+                            border-collapse:separate;
+                            border-spacing:10px 10px;
+                            margin-top:10px;
+                        }
+                        .pb-box{
+                            background:#cfd8e3;
+                            border:1px solid #c0ccda;
+                            height:36px;
+                            padding:8px 10px;
+                            font-size:14px;
+                            box-sizing:border-box;
+                            white-space:nowrap;
+                        }
+                        .pb-box.small{
+                            width:100%;
+                        }
+
+                        /* ===== BIG LABELS LEFT + BIG BOX RIGHT ===== */
+                        .pb-lines{
+                            width:100%;
+                            border-collapse:separate;
+                            border-spacing:0 12px;
+                            margin-top:6px;
+                        }
+                        .pb-lines td{vertical-align:top;}
+                        .pb-label{
+                            width:180px;
+                            font-size:28px;
+                            font-weight:500;
+                            color:#1f2d3d;
+                            padding-right:12px;
+                            white-space:nowrap;
+                        }
+                        .pb-big{
+                            background:#cfd8e3;
+                            border:1px solid #c0ccda;
+                            height:54px;
+                            width:100%;
+                        }
+                        .pb-huge{
+                            background:#cfd8e3;
+                            border:1px solid #c0ccda;
+                            height:170px;
+                            width:100%;
+                        }
+
+                        /* ===== TERMS ===== */
+                        .pb-terms{
+                            margin-top:14px;
+                            font-size:12px;
+                        }
+                        .pb-terms b{font-weight:800;}
+                        .pb-terms ul{margin:6px 0 0 16px; padding:0;}
+                        .pb-terms li{margin:3px 0;}
+
+                        /* ===== SIGNATURES ===== */
+                        .pb-sign{
+                            width:100%;
+                            border-collapse:collapse;
+                            margin-top:90px;
+                        }
+                        .pb-sign td{
+                            width:50%;
+                            text-align:center;
+                            padding:0 50px;
+                        }
+                        .pb-line{
+                            border-top:2px solid #2f3e50;
+                            margin:0 auto 8px auto;
+                            width:100%;
+                        }
+                        .pb-sign .ttl{
+                            font-size:18px;
+                            font-weight:700;
+                            margin-bottom:2px;
+                        }
+                        .pb-sign .sub{
+                            font-size:18px;
+                            line-height:1.2;
+                        }
+
+                        /* ===== BOTTOM LOGOS ===== */
+                        .pb-bottom{
+                            width:100%;
+                            border-collapse:collapse;
+                            margin-top:36px;
+                        }
+                        .pb-bottom td{vertical-align:bottom;}
+                        .pb-bottom .l img{height:70px; display:block;}
+                        .pb-bottom .r img{height:80px; display:block; float:right;}
+                    </style>
+
+                    <div class="page">
+                        <div class="pb-receipt">
+
+                            <!-- HEADER -->
+                            <table class="pb-header">
+                                <tr>
+                                    <td class="pb-logo">
+                                        <img t-att-src="base_url + '/ccima_crm_reassign/static/src/img/logo_portto.png'"/>
+                                    </td>
+                                    <td class="pb-title">
+                                        <div class="t1">RECIBO DE PAGO PORTTO BLANCO CIMATARIO</div>
+                                        <div class="t2">Km 17.5, Carretera Federal 57, SANTA ROSA JAUREGUI, 76220 Santiago de Querétaro, Qro.</div>
+                                    </td>
+                                    <td class="pb-client">Cliente</td>
+                                </tr>
+                            </table>
+
+                            <!-- TOP BOXES -->
+                            <table class="pb-top">
+                                <tr>
+                                    <td style="width:35%;">
+                                        <div class="pb-box">Referencia:</div>
+                                    </td>
+                                    <td style="width:35%;">
+                                        <div class="pb-box">Método de pago:</div>
+                                    </td>
+                                    <td style="width:30%;">
+                                        <div class="pb-box">Folio: HAB-________-PBC</div>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td style="width:35%;"></td>
+                                    <td style="width:35%;"></td>
+                                    <td style="width:30%;">
+                                        <div class="pb-box">Fecha:</div>
+                                    </td>
+                                </tr>
+                            </table>
+
+                            <!-- BIG LINES -->
+                            <table class="pb-lines">
+                                <tr>
+                                    <td class="pb-label">Recibimos de:</td>
+                                    <td><div class="pb-big"></div></td>
+                                </tr>
+                                <tr>
+                                    <td class="pb-label">Cantidad de:</td>
+                                    <td><div class="pb-big"></div></td>
+                                </tr>
+                                <tr>
+                                    <td class="pb-label">Promociones:</td>
+                                    <td><div class="pb-huge"></div></td>
+                                </tr>
+                            </table>
+
+                            <!-- TERMS -->
+                            <div class="pb-terms">
+                                <b>Términos y Condiciones.</b>
+                                <ul>
+                                    <li>Válido si paga enganche completo y firma de contrato en un periodo máximo de 10 días hábiles posteriores al apartado.</li>
+                                    <li>En caso de cancelación se penalizará por gastos administrativos el monto del apartado.</li>
+                                    <li>Cambios sin previo aviso.</li>
+                                </ul>
+                            </div>
+
+                            <!-- SIGNATURES -->
+                            <table class="pb-sign">
+                                <tr>
+                                    <td>
+                                        <div class="pb-line"></div>
+                                        <div class="ttl">Entrega:</div>
+                                        <div class="sub">Nombre y Firma<br/>del Cliente</div>
+                                    </td>
+                                    <td>
+                                        <div class="pb-line"></div>
+                                        <div class="ttl">Recibe:</div>
+                                        <div class="sub">Nombre y Firma<br/>del Asesor</div>
+                                    </td>
+                                </tr>
+                            </table>
+
+                            <!-- BOTTOM LOGOS -->
+                            <table class="pb-bottom">
+                                <tr>
+                                    <td class="l">
+                                        <img t-att-src="base_url + '/ccima_crm_reassign/static/src/img/logo_aliado.png'"/>
+                                    </td>
+                                    <td class="r">
+                                        <img t-att-src="base_url + '/ccima_crm_reassign/static/src/img/logo_ccima.png'"/>
+                                    </td>
+                                </tr>
+                            </table>
+
+                        </div>
+                    </div>
+                </main>
+            </t>
+        </t>
+    </t>
+</template>
+</odoo>

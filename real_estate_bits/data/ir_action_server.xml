@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+
+        <record id="action_download_property_contract_zip" model="ir.actions.server">
+            <field name="name">Descargar ZIP</field>
+            <field name="model_id" ref="real_estate_bits.model_property_contract"/>
+            <field name="binding_model_id" ref="real_estate_bits.model_property_contract"/>
+            <field name="state">code</field>
+            <field name="code">action = records.action_download_zip()</field>
+        </record>
+
+    </data>
+</odoo>

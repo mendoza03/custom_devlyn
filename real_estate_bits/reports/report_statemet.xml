@@ -1,0 +1,233 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <template id="property_sale_statement_doc">
+        <t t-call="web.external_layout">
+            <div class="page" style="line-height: 1.6;">
+                <div class="row">
+                    <div class="col-3" style="background-color: #C8CEDA;text-align: center;">
+                        <span t-field="o.property_id.worksite_id.image_1920" t-options="{'widget': 'image'}" role="img" style="max-width: 50x;height: 50px;"/>
+                    </div>
+                    <div class="col-9" style="background-color: #C8CEDA;text-align: center;">
+                        Statement <span t-field="o.partner_id.name"/>
+                    </div>
+                </div>
+
+                <div class="mt-2">
+
+  <style>
+    .stmt-title{
+      text-align:center;
+      font-weight:700;
+      font-size:16px;
+      margin: 14px 0 10px 0;
+      letter-spacing: .5px;
+    }
+    .stmt-info{
+      font-size: 10px;
+      line-height: 1.35;
+    }
+    .stmt-info .lbl{
+      font-weight:600;
+      margin-right:6px;
+      white-space:nowrap;
+    }
+    .stmt-line{
+      border-top: 2px solid #0b2a5a;
+      margin: 8px 0 10px 0;
+    }
+    .stmt-row{
+      margin-bottom: 2px;
+    }
+    .stmt-right{
+      text-align:right;
+    }
+  </style>
+
+  <!-- TITLE -->
+  <div class="stmt-title">ESTADO DE CUENTA</div>
+
+  <!-- TOP INFO (2 columns) -->
+  <div class="row stmt-info">
+
+    <!-- LEFT COLUMN -->
+    <div class="col-7">
+      <div class="stmt-row">
+        <span class="lbl">CLIENTE:</span>
+        <span t-field="o.partner_id.name"/>
+      </div>
+
+      <div class="stmt-row">
+        <span class="lbl">LOTE:</span>
+        <span t-field="o.property_id.name"/>
+      </div>
+
+      <div class="stmt-row">
+        <span class="lbl">PRECIO TOTAL:</span>
+        $<t t-esc="'{:,.2f}'.format(o.pricing or 0.0)"/>
+      </div>
+
+      <div class="stmt-row">
+        <span class="lbl">ENGANCHE:</span>
+        $<t t-esc="'{:,.2f}'.format(o.advance_payment or 0.0)"/>
+      </div>
+
+      <div class="stmt-row">
+        <span class="lbl">A FINANCIAR:</span>
+        <t t-set="to_finance" t-value="(o.pricing or 0.0) - (o.advance_payment or 0.0)"/>
+        $<t t-esc="'{:,.2f}'.format(to_finance)"/>
+      </div>
+
+      <div class="stmt-row">
+        <span class="lbl">TIPO DE SALDO:</span>
+        <span> SALDOS VENCIDOS </span>
+        <!-- si tienes un campo real, cámbialo:
+             <span t-field="o.balance_type"/> -->
+      </div>
+
+      <div class="stmt-row">
+        <span class="lbl">BONO:</span>
+        $
+      </div>
+    </div>
+
+    <!-- RIGHT COLUMN -->
+    <div class="col-5 stmt-right">
+
+      <div class="stmt-row">
+        <span class="lbl">ENGANCHE PAGADO:</span>
+        $<t t-esc="'{:,.2f}'.format(o.advance_payment or 0.0)"/>
+      </div>
+
+      <div class="stmt-row">
+        <span class="lbl">MENSUALIDADES PAGADAS:</span>
+        $<t t-esc="'{:,.2f}'.format(o.total_paid_interests or 0.0)"/>
+      </div>
+
+      <div class="stmt-row">
+        <span class="lbl">INTERÉS DE FINANCIAMIENTO PAGADO:</span>
+        $<t t-esc="'{:,.2f}'.format(o.total_interests_to_pay or 0.0)"/>
+      </div>
+
+      <div class="stmt-row" style="margin-top:6px;">
+        <span class="lbl">TOTAL PAGADO:</span>
+        <t t-set="total_paid" t-value="(o.advance_payment or 0.0) + (o.paid or 0.0)"/>
+        $<t t-esc="'{:,.2f}'.format(total_paid)"/>
+      </div>
+
+      <div class="stmt-line"></div>
+
+      <div class="stmt-row">
+        <span class="lbl">DEUDA VENCIDA:</span>
+        $<t t-esc="'{:,.2f}'.format(o.balance or 0.0)"/>
+        <!-- Si 'balance' NO es deuda vencida sino saldo restante,
+             dime tu campo real de deuda vencida y lo sustituimos -->
+      </div>
+
+    </div>
+  </div>
+
+  <!-- separator like the image -->
+  <div class="stmt-line"></div>
+</div>
+
+
+                <t t-set="all_lines" t-value="o.get_line_to_print()"/>
+                <t t-set="linesprint" t-value="[l for l in all_lines if l.get('amount_paid', 0) &gt; 0]"/>
+                <t t-if="linesprint">
+                    <table class="table table-bordered mt16" style="font-size: 9px; table-layout: fixed; width: 100%;">
+                        <thead>
+                            <tr>
+                                <th class="text-center"><span>Period</span></th>
+                                <th class="text-center"><span>Monthly Payment Date</span></th>
+                                <th class="text-center"><span>Initial Balance</span></th>
+                                <th class="text-center"><span>Monthly payment</span></th>
+                                <th class="text-center"><span>Capital</span></th>
+                                <th class="text-center"><span>Advance Payments on Capital</span></th>
+                                <th class="text-center"><span>Interests</span></th>
+                                <th class="text-center"><span>Paid</span></th>
+                                <th class="text-center"><span>Final Balance</span></th>
+                                <th class="text-center"><span>Payment date</span></th>
+                                <th class="text-center"><span>Late Payment Interest</span></th>
+                                <th class="text-center"><span>Interest Accrued</span></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr t-foreach="linesprint" t-as="line" class="text-center">
+                                <td><t t-esc="line['count_line']"/></td>
+                                <td><t t-esc="line['date']"/></td>
+                                <td>$<t t-esc="'{:,.2f}'.format(line['initial_balance'])"/></td>
+                                <td>$<t t-esc="'{:,.2f}'.format(line['amount'])"/></td>
+                                <td>$<t t-esc="'{:,.2f}'.format(line['amount_capital'])"/></td>
+                                <td><t t-esc="line['amount_to_capital']"/></td>
+                                <td><t t-esc="line['interest']"/></td>
+                                <td>$<t t-esc="'{:,.2f}'.format(line['amount_paid'])"/></td>
+                                <td>$<t t-esc="'{:,.2f}'.format(line['final_balance'])"/></td>
+                                <td style="white-space: nowrap; font-size: 9px;">
+                                    <t t-if="line['payment_date']">
+                                        <t t-esc="line['payment_date'].strftime('%Y-%m-%d')"/>
+                                    </t>
+                                    <t t-if="not line['payment_date']">-</t>
+                                </td>
+                                <td><t t-esc="line['moratorium_interest']"/></td>
+                                <td>$<t t-esc="'{:,.2f}'.format(line['accrued_interest'])"/></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </t>
+
+                <br/><br/><br/>
+
+                <div class="row">
+                    <div class="col-12 text-center">
+                        MOVEMENT LOG
+                    </div>
+                </div>
+
+
+
+                <t t-set="paymentsprint" t-value="o.get_payment_to_print()"/>
+                <t t-if="paymentsprint">
+                     <table class="table table-bordered mt16" style="font-size: 9px; table-layout: fixed; width: 100%;">
+                        <thead>
+                            <tr>
+                                <th class="text-center"><span>Date</span></th>
+                                <th class="text-center"><span>Amount</span></th>
+                                <th class="text-center"><span>Concept</span></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr t-foreach="paymentsprint" t-as="line" class="text-center">
+                                <td><t t-esc="line['date']"/></td>
+                                <td>$<t t-esc="'{:,.2f}'.format(line['amount'])"/></td>
+                                <td><t t-esc="line['memo']"/></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </t>
+
+
+            </div>
+        </t>
+    </template>
+
+    <template id="property_statement_template">
+        <t t-call="web.html_container">
+            <t t-foreach="docs" t-as="o">
+                <t t-call="real_estate_bits.property_sale_statement_doc" t-lang="o.partner_id.lang"/>
+            </t>
+        </t>
+    </template>
+
+    <record id="action_report_statement" model="ir.actions.report">
+        <field name="name">Statement</field>
+        <field name="model">property.contract</field>
+        <field name="report_type">qweb-pdf</field>
+        <field name="print_report_name">'Property Sale Contract - %s' % object.name</field>
+        <field name="report_name">real_estate_bits.property_statement_template</field>
+        <field name="report_file">real_estate_bits.property_statement_template</field>
+        <field name="binding_model_id" ref="model_property_contract"/>
+        <field name="binding_type">report</field>
+    </record>
+
+</odoo>

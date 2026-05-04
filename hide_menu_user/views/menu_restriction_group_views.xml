@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <!-- list view for Menu Restriction Groups -->
+    <record id="view_menu_restriction_group_list" model="ir.ui.view">
+        <field name="name">menu.restriction.group.list</field>
+        <field name="model">menu.restriction.group</field>
+        <field name="arch" type="xml">
+            <list string="Menu Restriction Groups">
+                <field name="name"/>
+                <field name="user_count" string="Users"/>
+                <field name="menu_count" string="Hidden Menus"/>
+                <field name="active" widget="boolean_toggle"/>
+            </list>
+        </field>
+    </record>
+
+    <!-- Form view for Menu Restriction Groups -->
+    <record id="view_menu_restriction_group_form" model="ir.ui.view">
+        <field name="name">menu.restriction.group.form</field>
+        <field name="model">menu.restriction.group</field>
+        <field name="arch" type="xml">
+            <form string="Menu Restriction Group">
+                <sheet>
+                    <div class="oe_button_box" name="button_box">
+                        <button name="action_view_users" 
+                                type="object" 
+                                class="oe_stat_button" 
+                                icon="fa-users"
+                                invisible="user_count == 0">
+                            <field name="user_count" widget="statinfo" string="Users"/>
+                        </button>
+                        <button name="action_view_menus" 
+                                type="object" 
+                                class="oe_stat_button" 
+                                icon="fa-list"
+                                invisible="menu_count == 0">
+                            <field name="menu_count" widget="statinfo" string="Hidden Menus"/>
+                        </button>
+                    </div>
+                    <widget name="web_ribbon" title="Archived" bg_color="text-bg-danger" invisible="active"/>
+                    <group>
+                        <group>
+                            <field name="name" placeholder="e.g. Sales Team Limited"/>
+                            <field name="active" widget="boolean_toggle"/>
+                        </group>
+                    </group>
+                    <notebook>
+                        <page string="Users" name="users">
+                            <field name="user_ids" widget="many2many" options="{'no_create': True}">
+                                <list>
+                                    <field name="name"/>
+                                    <field name="login"/>
+                                    <field name="email"/>
+                                </list>
+                            </field>
+                        </page>
+                        <page string="Hidden Menus" name="menus">
+                            <field name="hide_menu_ids" widget="many2many" options="{'no_create': True}">
+                                <list>
+                                    <field name="complete_name"/>
+                                    <field name="action"/>
+                                </list>
+                            </field>
+                        </page>
+                    </notebook>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <!-- Search view for Menu Restriction Groups -->
+    <record id="view_menu_restriction_group_search" model="ir.ui.view">
+        <field name="name">menu.restriction.group.search</field>
+        <field name="model">menu.restriction.group</field>
+        <field name="arch" type="xml">
+            <search string="Menu Restriction Groups">
+                <field name="name"/>
+                <field name="user_ids"/>
+                <field name="hide_menu_ids"/>
+                <filter string="Active" name="active" domain="[('active', '=', True)]"/>
+                <filter string="Archived" name="inactive" domain="[('active', '=', False)]"/>
+                <group expand="0" string="Group By">
+                    <filter string="Active" name="group_by_active" context="{'group_by': 'active'}"/>
+                </group>
+            </search>
+        </field>
+    </record>
+
+    <!-- Action for Menu Restriction Groups -->
+    <record id="action_menu_restriction_group" model="ir.actions.act_window">
+        <field name="name">Menu Restriction Groups</field>
+        <field name="res_model">menu.restriction.group</field>
+        <field name="view_mode">list,form</field>
+        <field name="context">{'search_default_active': 1}</field>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+                Create a Menu Restriction Group
+            </p>
+            <p>
+                Menu Restriction Groups allow you to hide specific menus for multiple users at once.
+                Simply create a group, add users, and select which menus to hide.
+            </p>
+        </field>
+    </record>
+
+    <!-- Menu item for Menu Restriction Groups -->
+    <menuitem id="menu_menu_restriction_group"
+              name="Menu Restriction Groups"
+              parent="base.menu_users"
+              action="action_menu_restriction_group"
+              sequence="20"/>
+
+</odoo>

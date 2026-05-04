@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id="create_estimation_form_view_inherit_estimated_qty" model="ir.ui.view">
+            <field name="name">job.cost.estimate.form.inherit.estimated.qty</field>
+            <field name="model">job.cost.estimate</field>
+            <field name="inherit_id" ref="job_cost_and_estimate_relation.create_estimation_form_view"/>
+            <field name="arch" type="xml">
+                <field name="partner_id" position="after">
+                    <field name="estimated_qty"/>
+                </field>
+            </field>
+        </record>
+    </data>
+</odoo>

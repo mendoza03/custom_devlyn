@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<odoo>
+    <record id="crm_lead_view_form_inherit" model="ir.ui.view">
+        <field name="name">crm.lead.form.inherit.ccima</field>
+        <field name="model">crm.lead</field>
+        <field name="inherit_id" ref="crm.crm_lead_view_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='property_id']" position="after">
+                <field name="days_since_last_activity" readonly="1"/>
+                <field name="interaction_count" readonly="1"/>
+                <field name="interaction_count_frozen" invisible="1"/>
+                <field name="property_date" readonly="1" invisible="1"/>
+                <field name="property_date_display" invisible="1"/>
+                <field name="delivery_date_crm" readonly="1" invisible="1"/>
+                <field name="delivery_date_display" readonly="1" invisible="1"/>
+                <field name="calculated_closing_date" readonly="1" invisible="1"/>
+                <field name="contacted" readonly="1" invisible="1"/>
+                <field name="expected_revenue_display" invisible="1"/>
+            </xpath>
+            <xpath expr="//page[@name='lead']" position="after">
+                <page string="Profiling" name="ccima_info">
+                    <field name="show_prospect_fields" invisible="1"/>
+                    <field name="show_appointment_fields" invisible="1"/>
+                    <field name="show_opportunity_fields" invisible="1"/>
+                    <group>
+                        <group string="Prospect" invisible="not show_prospect_fields">
+                            <field name="real_interest"/>
+                            <field name="profile"/>
+                            <field name="authority"/>
+                            <field name="product"/>
+                            <field name="has_budget"/>
+                            <field name="timeline" widget="radio"/>
+                            <field name="location_defined"/>
+                        </group>
+                        <group string="Appointment" invisible="not show_appointment_fields">
+                            <field name="commitment_level"/>
+                            <field name="detailed_presentation"/>
+                        </group>
+                        <group string="Sales Opportunity" invisible="not show_appointment_fields">
+                            <field name="tour_completed"/>
+                        </group>
+                    </group>
+                </page>
+            </xpath>
+        </field>
+    </record>
+</odoo>

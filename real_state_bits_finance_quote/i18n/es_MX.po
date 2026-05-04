@@ -1,0 +1,1146 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* real_state_bits_finance_quote
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 18.0+e-20241118\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2025-03-30 15:46+0000\n"
+"PO-Revision-Date: 2025-03-30 15:46+0000\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+#. module: real_state_bits_finance_quote
+#: model:product.template,name:real_state_bits_finance_quote.product_product_capital_credit_contract_product_template
+msgid " Capital Credit Product"
+msgstr ""
+
+#. module: real_state_bits_finance_quote
+#: model_terms:ir.ui.view,arch_db:real_state_bits_finance_quote.report_saleorder_document_finance
+#: model_terms:ir.ui.view,arch_db:real_state_bits_finance_quote.sale_order_portal_content_real_state_customs
+msgid "% Discount"
+msgstr "% Descuento"
+
+#. module: real_state_bits_finance_quote
+#: model:ir.model.fields,field_description:real_state_bits_finance_quote.field_modality_finance_line__hitch_porcent
+#: model:ir.model.fields,field_description:real_state_bits_finance_quote.field_sale_order__hitch_porcent
+#: model_terms:ir.ui.view,arch_db:real_state_bits_finance_quote.report_saleorder_document_finance
+#: model_terms:ir.ui.view,arch_db:real_state_bits_finance_quote.sale_order_portal_content_real_state_customs
+msgid "% Hitch"
+msgstr "% Enganche"
+
+#. module: real_state_bits_finance_quote
+#. odoo-python
+#: code:addons/real_state_bits_finance_quote/models/sale_order.py:0
+msgid "%(finance_name)s financing: Hitch to %(val_defer)s month(s)"
+msgstr "Financiamiento a %(finance_name)s: diferido a %(val_defer)s mes(es)"
+
+#. module: real_state_bits_finance_quote
+#: model:ir.model.fields,field_description:real_state_bits_finance_quote.field_modality_finance_line__financial_line_1
+msgid "1 to 48 months"
+msgstr "1 a 48 meses"
+
+#. module: real_state_bits_finance_quote
+#: model:ir.model.fields,field_description:real_state_bits_finance_quote.field_modality_finance_line__financial_line_3
+msgid "121 to 180 months"
+msgstr "121 a 180 meses"
+
+#. module: real_state_bits_finance_quote
+#: model:ir.model.fields,field_description:real_state_bits_finance_quote.field_modality_finance_line__financial_line_4
+msgid "181 to 240 months"
+msgstr "180 a 240 meses"
+
+#. module: real_state_bits_finance_quote
+#: model:ir.model.fields,field_description:real_state_bits_finance_quote.field_modality_finance_line__financial_line_2
+msgid "49 to 120 months"
+msgstr "49 a 120 meses"
+
+#. module: real_state_bits_finance_quote
+#: model_terms:ir.ui.view,arch_db:real_state_bits_finance_quote.sale_order_portal_template_custmoms
+msgid ""
+"<br/>\n"
+"            <span> Finance to Select</span>"
+msgstr ""
+"<br/>\n"
+"            <span>Finance to Select</span>"
+
+#. module: real_state_bits_finance_quote
+#: model:mail.template,body_html:real_state_bits_finance_quote.email_template_property_reservation
+msgid ""
+"<div style=\"margin: 0px; padding: 0px;\">\n"
+"    <p style=\"margin: 0px; padding: 0px; font-size: 13px;\">\n"
+"        Hello <span style=\"font-weight: bold;\" t-out=\"object.partner_id.name or ''\"/>, \n"
+"        <br/><br/>\n"
+"        Your property reservation <span style=\"font-weight: bold;\" t-out=\"object.name or ''\"/>\n"
+"        \n"
+"        amounting in <span style=\"font-weight: bold;\" t-out=\"format_amount(object.deposit, object.currency_id) or ''\">$ 10.00</span> is ready for review.\n"
+"    \n"
+"        <br/><br/>\n"
+"        Do not hesitate to contact us if you have any questions.\n"
+"        <t t-if=\"not is_html_empty(object.user_id.signature)\" data-o-mail-quote-container=\"1\">\n"
+"            <br/><br/>\n"
+"            <t t-out=\"object.user_id.signature or ''\" data-o-mail-quote=\"1\">--<br data-o-mail-quote=\"1\"/>Mitchell Admin</t>\n"
+"        </t>\n"
+"        <br/><br/>\n"
+"    </p>\n"
+"</div>\n"
+"            "
+msgstr ""
+
+#. module: real_state_bits_finance_quote
+#: model_terms:ir.ui.view,arch_db:real_state_bits_finance_quote.sale_order_portal_template_custmoms
+msgid "<i class=\"fa fa-print\"/> Download Ebrosure"
+msgstr "<i class=\"fa fa-print\"/> Descargar Ebrosure"
+
+#. module: real_state_bits_finance_quote
+#: model_terms:ir.ui.view,arch_db:real_state_bits_finance_quote.sale_order_portal_template_custmoms
+msgid "<option selected=\"\" disabled=\"\" value=\"\"> <span>Choose...</span> </option>"
+msgstr ""
+
+#. module: real_state_bits_finance_quote
+#: model_terms:ir.ui.view,arch_db:real_state_bits_finance_quote.view_order_form_inherit_real_estate_bits
+#: model_terms:ir.ui.view,arch_db:real_state_bits_finance_quote.view_property_contract_form_customs
+msgid "<span>Months</span>"
+msgstr "<span>Meses</span>"
+
+#. module: real_state_bits_finance_quote
+#. odoo-javascript
+#: code:addons/real_state_bits_finance_quote/static/src/signature_form/signature_form.js:0
+msgid "Accept & Sign"
+msgstr ""
+
+#. module: real_state_bits_finance_quote
+#: model:ir.model.fields,field_description:real_state_bits_finance_quote.field_promotions_property__active
+msgid "Active"
+msgstr "Activo"
+
+#. module: real_state_bits_finance_quote
+#. odoo-python
+#: code:addons/real_state_bits_finance_quote/models/loan_line.py:0
+msgid "Add a payment to capital"
+msgstr ""
+
+#. module: real_state_bits_finance_quote
+#: model:ir.model.fields,field_description:real_state_bits_finance_quote.field_modality_finance_line__amount_finance
+msgid "Amount Finance"
+msgstr "Total a Financiar"
+
+#. module: real_state_bits_finance_quote
+#: model_terms:ir.ui.view,arch_db:real_state_bits_finance_quote.report_saleorder_document_finance
+#: model_terms:ir.ui.view,arch_db:real_state_bits_finance_quote.sale_order_portal_content_real_state_customs
+msgid "Amount Financial:"
+msgstr "Total a Financiar"
+
+#. module: real_state_bits_finance_quote
+#: model:ir.model.fields,field_description:real_state_bits_finance_quote.field_loan_line__difered_hitch
+#: model:ir.model.fields,field_description:real_state_bits_finance_quote.field_modality_finance_line__hitch
+#: model_terms:ir.ui.view,arch_db:real_state_bits_finance_quote.report_saleorder_document_finance
+msgid "Amount Hitch"
+msgstr "Enganche a Pagar"
+
+#. module: real_state_bits_finance_quote
+#: model:ir.model.fields,field_description:real_state_bits_finance_quote.field_loan_line__amount_paid
+msgid "Amount Paid"
+msgstr "Cantidad Pagada"
+
+#. module: real_state_bits_finance_quote
+#: model:ir.model.fields,field_description:real_state_bits_finance_quote.field_loan_line__amount_residual
+msgid "Amount Residual"
+msgstr "Monto adeudado"
+
+#. module: real_state_bits_finance_quote
+#: model:ir.model.fields,field_description:real_state_bits_finance_quote.field_modality_finance_line__amount_total
+msgid "Amount Total"
+msgstr "Total"
+
+#. module: real_state_bits_finance_quote
+#: model_terms:ir.ui.view,arch_db:real_state_bits_finance_quote.report_saleorder_document_finance
+#: model_terms:ir.ui.view,arch_db:real_state_bits_finance_quote.sale_order_portal_content_real_state_customs
+msgid "Amount Total Hitch"
+msgstr "Importe del Enganche Total"
+
+#. module: real_state_bits_finance_quote
+#: model:ir.model.fields,field_description:real_state_bits_finance_quote.field_difer_hitch__amount
+msgid "Amount hitch"
+msgstr "Total Enganche"
+
+#. module: real_state_bits_finance_quote
+#: model:ir.model.fields,field_description:real_state_bits_finance_quote.field_loan_line__amount_paid_manual
+msgid "Amount paid manual"
+msgstr ""
+
+#. module: real_state_bits_finance_quote
+#: model_terms:ir.ui.view,arch_db:real_state_bits_finance_quote.view_property_contract_form_customs
+msgid "Amount paid to capital"
+msgstr "Monto pagado al capital"
+
+#. module: real_state_bits_finance_quote
+#: model_terms:ir.ui.view,arch_db:real_state_bits_finance_quote.report_saleorder_document_finance
+#: model_terms:ir.ui.view,arch_db:real_state_bits_finance_quote.sale_order_portal_content_real_state_customs
+msgid "Amount per month"
+msgstr "Total por mes"
+
+#. module: real_state_bits_finance_quote
+#: model:ir.model.fields,field_description:real_state_bits_finance_quote.field_sale_order__annual_capital_gains_yield
+msgid "Annual capital gains yield percentage"
+msgstr "Porcentaje de rendimiento de plusvalía anual"
+
+#. module: real_state_bits_finance_quote
+#: model:ir.model.fields,field_description:real_state_bits_finance_quote.field_property_contract__balance
+msgid "Balance"
+msgstr "Saldo"
+
+#. module: real_state_bits_finance_quote
+#: model:ir.model.fields,field_description:real_state_bits_finance_quote.field_property_contract__price_per_m
+msgid "Base Price"
+msgstr "Precio base"
+
+#. module: real_state_bits_finance_quote
+#: model:ir.model.fields.selection,name:real_state_bits_finance_quote.selection__difer_hitch__period_payment__6
+#: model:ir.model.fields.selection,name:real_state_bits_finance_quote.selection__property_contract__periodicity_hitch__6
+msgid "Biannual"
+msgstr "Semestral"
+
+#. module: real_state_bits_finance_quote
+#: model:ir.model.fields.selection,name:real_state_bits_finance_quote.selection__difer_hitch__period_payment__2
+#: model:ir.model.fields.selection,name:real_state_bits_finance_quote.selection__property_contract__periodicity_hitch__2
+msgid "Bimonthly"
+msgstr "Bimestral"
+
+#. module: real_state_bits_finance_quote
+#: model:ir.model.fields.selection,name:real_state_bits_finance_quote.selection__loan_line__payment_state__blocked
+#: model:ir.model.fields.selection,name:real_state_bits_finance_quote.selection__loan_line__payment_state_manual__blocked
+msgid "Blocked"
+msgstr "Bloqueado"
+
+#. module: real_state_bits_finance_quote
+#: model:ir.model.fields,field_description:real_state_bits_finance_quote.field_installment_template__cat
+#: model_terms:ir.ui.view,arch_db:real_state_bits_finance_quote.report_saleorder_document_finance
+#: model_terms:ir.ui.view,arch_db:real_state_bits_finance_quote.sale_order_portal_content_real_state_customs
+msgid "CAT"
+msgstr ""
+
+#. module: real_state_bits_finance_quote
+#: model_terms:ir.ui.view,arch_db:real_state_bits_finance_quote.view_order_form_inherit_real_estate_bits
+msgid "Calculate Financial"
+msgstr "Calcular Financiamiento"
+
+#. module: real_state_bits_finance_quote
+#: model_terms:ir.ui.view,arch_db:real_state_bits_finance_quote.payment_to_capital_wizard_view_form
+msgid "Cancel"
+msgstr ""
+
+#. module: real_state_bits_finance_quote
+#: model:ir.model.fields,field_description:real_state_bits_finance_quote.field_loan_line__amount_capital
+msgid "Capital"
+msgstr ""
+
+#. module: real_state_bits_finance_quote
+#: model:product.template,name:real_state_bits_finance_quote.product_product_capital_contract_product_template
+msgid "Capital Product"
+msgstr "Pago de mensualidad"
+
+#. module: real_state_bits_finance_quote
+#: model:product.template,name:real_state_bits_finance_quote.product_product_capital_contract_product_template
+msgid "construction monthly payment"
+msgstr "Pago de mensualidad contruccion"
+
+#. module: real_state_bits_finance_quote
+#: model:product.template,name:real_state_bits_finance_quote.product_product_capital_contract_product_template
+msgid "property monthly payment"
+msgstr "Pago de mensualidad terreno"
+
+#. module: real_state_bits_finance_quote
+#: model_terms:ir.actions.act_window,help:real_state_bits_finance_quote.promotions_property_action
+msgid "Click to add a new promotion for property or unit"
+msgstr ""
+
+#. module: real_state_bits_finance_quote
+#: model:ir.actions.server,name:real_state_bits_finance_quote.account_move_cron_invoices_ir_actions_server
+msgid "Create Automatic Invoices from Contracts"
+msgstr ""
+
+#. module: real_state_bits_finance_quote
+#: model:ir.model.fields,field_description:real_state_bits_finance_quote.field_difer_hitch__create_uid
+#: model:ir.model.fields,field_description:real_state_bits_finance_quote.field_modality_finance_line__create_uid
+#: model:ir.model.fields,field_description:real_state_bits_finance_quote.field_payment_terms__create_uid
+#: model:ir.model.fields,field_description:real_state_bits_finance_quote.field_payment_to_capital_wizard__create_uid
+#: model:ir.model.fields,field_description:real_state_bits_finance_quote.field_promotions_property__create_uid
+msgid "Created by"
+msgstr ""
+
+#. module: real_state_bits_finance_quote
+#: model:ir.model.fields,field_description:real_state_bits_finance_quote.field_difer_hitch__create_date
+#: model:ir.model.fields,field_description:real_state_bits_finance_quote.field_modality_finance_line__create_date
+#: model:ir.model.fields,field_description:real_state_bits_finance_quote.field_payment_terms__create_date
+#: model:ir.model.fields,field_description:real_state_bits_finance_quote.field_payment_to_capital_wizard__create_date
+#: model:ir.model.fields,field_description:real_state_bits_finance_quote.field_promotions_property__create_date
+msgid "Created on"
+msgstr ""
+
+#. module: real_state_bits_finance_quote
+#: model:ir.model.fields,field_description:real_state_bits_finance_quote.field_payment_to_capital_wizard__currency_id
+#: model:ir.model.fields,field_description:real_state_bits_finance_quote.field_property_contract__currency_id
+#: model:ir.model.fields,field_description:real_state_bits_finance_quote.field_property_reservation__currency_id
+msgid "Currency Id"
+msgstr ""
+
+#. module: real_state_bits_finance_quote
+#: model:ir.model.fields,field_description:real_state_bits_finance_quote.field_loan_line__currency_id
+msgid "Currnency Id"
+msgstr "Divisa"
+
+#. module: real_state_bits_finance_quote
+#: model:ir.model.fields,field_description:real_state_bits_finance_quote.field_payment_terms__gap_days
+msgid "Days DIference"
+msgstr ""
+
+#. module: real_state_bits_finance_quote
+#: model:ir.model.fields.selection,name:real_state_bits_finance_quote.selection__loan_line__capital_payment_state__debt
+msgid "Debt"
+msgstr ""
+
+#. module: real_state_bits_finance_quote
+#: model:ir.model.fields,field_description:real_state_bits_finance_quote.field_sale_order__difer_hitch
+msgid "Defer Hitch"
+msgstr "Diferir Enganche"
+
+#. module: real_state_bits_finance_quote
+#: model:ir.model.fields,field_description:real_state_bits_finance_quote.field_sale_order__val_defer
+msgid "Defer To"
+msgstr "Diferir A"
+
+#. module: real_state_bits_finance_quote
+#: model:ir.model.fields,field_description:real_state_bits_finance_quote.field_property_contract__is_difered_hitch
+#: model_terms:ir.ui.view,arch_db:real_state_bits_finance_quote.report_saleorder_document_finance
+#: model_terms:ir.ui.view,arch_db:real_state_bits_finance_quote.sale_order_portal_content_real_state_customs
+#: model_terms:ir.ui.view,arch_db:real_state_bits_finance_quote.view_order_form_inherit_real_estate_bits
+msgid "Difered Hitch"
+msgstr "Diferir Enganche"
+
+#. module: real_state_bits_finance_quote
+#: model:product.template,name:real_state_bits_finance_quote.product_product_difered_hitch_product_template
+msgid "Difered Hitch Product"
+msgstr "Pago diferido de enganche "
+
+#. module: real_state_bits_finance_quote
+#: model:ir.model.fields,field_description:real_state_bits_finance_quote.field_property_contract__hitch_difered_months
+msgid "Difered To:"
+msgstr "Diferir A:"
+
+#. module: real_state_bits_finance_quote
+#: model:ir.model.fields,field_description:real_state_bits_finance_quote.field_modality_finance_line__discount_total
+msgid "Discount"
+msgstr "Descuento"
+
+#. module: real_state_bits_finance_quote
+#: model:ir.ui.menu,name:real_state_bits_finance_quote.promotions_property_menu
+msgid "Discount Promotions"
+msgstr "Promociones de Descuento"
+
+#. module: real_state_bits_finance_quote
+#: model_terms:ir.ui.view,arch_db:real_state_bits_finance_quote.report_saleorder_document_finance
+#: model_terms:ir.ui.view,arch_db:real_state_bits_finance_quote.sale_order_portal_content_real_state_customs
+msgid "Discount:"
+msgstr "Descuento:"
+
+#. module: real_state_bits_finance_quote
+#: model:ir.model.fields,field_description:real_state_bits_finance_quote.field_difer_hitch__display_name
+#: model:ir.model.fields,field_description:real_state_bits_finance_quote.field_modality_finance_line__display_name
+#: model:ir.model.fields,field_description:real_state_bits_finance_quote.field_payment_terms__display_name
+#: model:ir.model.fields,field_description:real_state_bits_finance_quote.field_payment_to_capital_wizard__display_name
+#: model:ir.model.fields,field_description:real_state_bits_finance_quote.field_promotions_property__display_name
+msgid "Display Name"
+msgstr ""
+
+#. module: real_state_bits_finance_quote
+#: model:ir.model.fields,field_description:real_state_bits_finance_quote.field_modality_finance_line__domain_promotion_ids
+msgid "Domain Promotion Ids"
+msgstr ""
+
+#. module: real_state_bits_finance_quote
+#: model_terms:ir.ui.view,arch_db:real_state_bits_finance_quote.sale_order_portal_template_custmoms
+msgid "Download Ebrosure"
+msgstr ""
+
+#. module: real_state_bits_finance_quote
+#: model:ir.model.fields.selection,name:real_state_bits_finance_quote.selection__loan_line__capital_payment_state__draft
+#: model:ir.model.fields.selection,name:real_state_bits_finance_quote.selection__loan_line__credit_note_type_decoration__draft
+msgid "Draft"
+msgstr ""
+
+#. module: real_state_bits_finance_quote
+#: model:ir.model.fields,field_description:real_state_bits_finance_quote.field_sale_order__ebroshure_file
+msgid "Ebroshure"
+msgstr ""
+
+#. module: real_state_bits_finance_quote
+#: model:ir.model.fields,field_description:real_state_bits_finance_quote.field_sale_order__ebroshure_filename
+msgid "Ebroshure Filename"
+msgstr "Nombre del Archivo Ebroshure"
+
+#. module: real_state_bits_finance_quote
+#: model:ir.model.fields,field_description:real_state_bits_finance_quote.field_payment_terms__end_month
+msgid "End month"
+msgstr "Fin de Mes"
+
+#. module: real_state_bits_finance_quote
+#: model_terms:ir.ui.view,arch_db:real_state_bits_finance_quote.payment_to_capital_wizard_view_form
+msgid "Enter the amount of the payment you wish to make to capital."
+msgstr "Ingresa el monto del pago que se desea realizar a capital"
+
+#. module: real_state_bits_finance_quote
+#: model:ir.model.fields,field_description:real_state_bits_finance_quote.field_sale_order__validity_date
+msgid "Expiration"
+msgstr "Vencimiento"
+
+#. module: real_state_bits_finance_quote
+#: model:ir.model.fields,field_description:real_state_bits_finance_quote.field_sale_order__extra_hitch_porcent
+msgid "Extra Hitch %"
+msgstr "Enganche Extra %"
+
+#. module: real_state_bits_finance_quote
+#: model:ir.model.fields,field_description:real_state_bits_finance_quote.field_property_contract__extra_down_payment
+msgid "Extra down payment"
+msgstr "Pago inicial adicional"
+
+#. module: real_state_bits_finance_quote
+#: model:ir.model.fields,field_description:real_state_bits_finance_quote.field_loan_line__amount_to_capital
+msgid "Extra payments to capital"
+msgstr "Pagos adicionales al capital"
+
+#. module: real_state_bits_finance_quote
+#: model:ir.model.fields,field_description:real_state_bits_finance_quote.field_modality_finance_line__name
+#: model_terms:ir.ui.view,arch_db:real_state_bits_finance_quote.view_order_form_inherit_real_estate_bits
+msgid "Finance"
+msgstr "Financiamiento"
+
+#. module: real_state_bits_finance_quote
+#: model:ir.model.fields,field_description:real_state_bits_finance_quote.field_modality_finance_line__interest_id
+msgid "Finance Id"
+msgstr "Id de Financiamiento"
+
+#. module: real_state_bits_finance_quote
+#: model:ir.model.fields,field_description:real_state_bits_finance_quote.field_difer_hitch__finance_id
+msgid "Finance Line Id"
+msgstr ""
+
+#. module: real_state_bits_finance_quote
+#: model:ir.model.fields,field_description:real_state_bits_finance_quote.field_sale_order__finance_ids
+msgid "Finance Modality"
+msgstr "Modalidad de Financiamiento"
+
+#. module: real_state_bits_finance_quote
+#: model_terms:ir.ui.view,arch_db:real_state_bits_finance_quote.report_saleorder_document_finance
+#: model_terms:ir.ui.view,arch_db:real_state_bits_finance_quote.sale_order_portal_content_real_state_customs
+msgid "Finance in months:"
+msgstr "Meses de Financiamiento:"
+
+#. module: real_state_bits_finance_quote
+#: model:ir.model.fields,field_description:real_state_bits_finance_quote.field_modality_finance_line__finance_months
+msgid "Finance months"
+msgstr "Meses Financiados"
+
+#. module: real_state_bits_finance_quote
+#: model_terms:ir.ui.view,arch_db:real_state_bits_finance_quote.report_saleorder_document_finance
+#: model_terms:ir.ui.view,arch_db:real_state_bits_finance_quote.sale_order_portal_content_real_state_customs
+msgid "Finance:"
+msgstr "Financiamiento:"
+
+#. module: real_state_bits_finance_quote
+#: model:ir.model.fields,field_description:real_state_bits_finance_quote.field_sale_order__financial_lines
+#: model_terms:ir.ui.view,arch_db:real_state_bits_finance_quote.view_order_form_inherit_real_estate_bits
+msgid "Financial Lines"
+msgstr "Lineas de Financiamiento"
+
+#. module: real_state_bits_finance_quote
+#: model_terms:ir.ui.view,arch_db:real_state_bits_finance_quote.report_saleorder_document_finance
+#: model_terms:ir.ui.view,arch_db:real_state_bits_finance_quote.sale_order_portal_content_real_state_customs
+msgid "Gradual Initial Investment:"
+msgstr "Inversión Inicial Gradual:"
+
+#. module: real_state_bits_finance_quote
+#: model_terms:ir.ui.view,arch_db:real_state_bits_finance_quote.sale_order_portal_content_real_state_customs
+msgid "Hitch"
+msgstr ""
+
+#. module: real_state_bits_finance_quote
+#: model:ir.model.fields,field_description:real_state_bits_finance_quote.field_difer_hitch__hitch
+msgid "Hitch %"
+msgstr "Importe del Enganche"
+
+#. module: real_state_bits_finance_quote
+#: model:ir.model.fields,field_description:real_state_bits_finance_quote.field_sale_order__hitch_ids
+msgid "Hitch Ids"
+msgstr "Enganches"
+
+#. module: real_state_bits_finance_quote
+#: model:ir.model.fields,field_description:real_state_bits_finance_quote.field_difer_hitch__id
+#: model:ir.model.fields,field_description:real_state_bits_finance_quote.field_modality_finance_line__id
+#: model:ir.model.fields,field_description:real_state_bits_finance_quote.field_payment_terms__id
+#: model:ir.model.fields,field_description:real_state_bits_finance_quote.field_payment_to_capital_wizard__id
+#: model:ir.model.fields,field_description:real_state_bits_finance_quote.field_promotions_property__id
+msgid "ID"
+msgstr ""
+
+#. module: real_state_bits_finance_quote
+#: model:ir.model.fields.selection,name:real_state_bits_finance_quote.selection__loan_line__payment_state__in_payment
+#: model:ir.model.fields.selection,name:real_state_bits_finance_quote.selection__loan_line__payment_state_manual__in_payment
+msgid "In Payment"
+msgstr "En proceso de pago"
+
+#. module: real_state_bits_finance_quote
+#: model:ir.model.fields,field_description:real_state_bits_finance_quote.field_loan_line__initial_balance
+msgid "Initial Balance"
+msgstr "Balance Inicial"
+
+#. module: real_state_bits_finance_quote
+#: model:ir.model,name:real_state_bits_finance_quote.model_installment_template
+msgid "Installment Template"
+msgstr "Plantilla de pago a plazos"
+
+#. module: real_state_bits_finance_quote
+#: model:ir.model.fields,field_description:real_state_bits_finance_quote.field_payment_terms__installment_template_id
+msgid "Installment Template Id"
+msgstr "Id de Plantilla de Cuotas"
+
+#. module: real_state_bits_finance_quote
+#: model:ir.model.fields,field_description:real_state_bits_finance_quote.field_loan_line__interest
+#: model:ir.model.fields,field_description:real_state_bits_finance_quote.field_payment_terms__interest
+msgid "Interest"
+msgstr "Interes"
+
+#. module: real_state_bits_finance_quote
+#: model:product.template,name:real_state_bits_finance_quote.product_product_interest_contract_product_template
+msgid "Interest Product"
+msgstr ""
+
+#. module: real_state_bits_finance_quote
+#. odoo-python
+#: code:addons/real_state_bits_finance_quote/models/loan_line.py:0
+msgid "Invoice"
+msgstr ""
+
+#. module: real_state_bits_finance_quote
+#: model:ir.model.fields.selection,name:real_state_bits_finance_quote.selection__loan_line__payment_state__invoicing_legacy
+#: model:ir.model.fields.selection,name:real_state_bits_finance_quote.selection__loan_line__payment_state_manual__invoicing_legacy
+msgid "Invoicing App Legacy"
+msgstr "Sistema anterior de facturación"
+
+#. module: real_state_bits_finance_quote
+#: model:ir.model.fields,field_description:real_state_bits_finance_quote.field_difer_hitch__write_uid
+#: model:ir.model.fields,field_description:real_state_bits_finance_quote.field_modality_finance_line__write_uid
+#: model:ir.model.fields,field_description:real_state_bits_finance_quote.field_payment_terms__write_uid
+#: model:ir.model.fields,field_description:real_state_bits_finance_quote.field_payment_to_capital_wizard__write_uid
+#: model:ir.model.fields,field_description:real_state_bits_finance_quote.field_promotions_property__write_uid
+msgid "Last Updated by"
+msgstr ""
+
+#. module: real_state_bits_finance_quote
+#: model:ir.model.fields,field_description:real_state_bits_finance_quote.field_difer_hitch__write_date
+#: model:ir.model.fields,field_description:real_state_bits_finance_quote.field_modality_finance_line__write_date
+#: model:ir.model.fields,field_description:real_state_bits_finance_quote.field_payment_terms__write_date
+#: model:ir.model.fields,field_description:real_state_bits_finance_quote.field_payment_to_capital_wizard__write_date
+#: model:ir.model.fields,field_description:real_state_bits_finance_quote.field_promotions_property__write_date
+msgid "Last Updated on"
+msgstr ""
+
+#. module: real_state_bits_finance_quote
+#: model:ir.model,name:real_state_bits_finance_quote.model_crm_lead
+msgid "Lead/Opportunity"
+msgstr "Lead/oportunidad"
+
+#. module: real_state_bits_finance_quote
+#: model:ir.model,name:real_state_bits_finance_quote.model_difer_hitch
+msgid "Line for hitch difered"
+msgstr ""
+
+#. module: real_state_bits_finance_quote
+#: model:ir.model,name:real_state_bits_finance_quote.model_modality_finance_line
+msgid "Lines from modality finance"
+msgstr ""
+
+#. module: real_state_bits_finance_quote
+#: model:ir.model,name:real_state_bits_finance_quote.model_loan_line
+msgid "Loan Line"
+msgstr "Línea de préstamo"
+
+#. module: real_state_bits_finance_quote
+#: model_terms:ir.ui.view,arch_db:real_state_bits_finance_quote.sale_order_portal_content_real_state_customs
+msgid "Lot Price withour Discount:"
+msgstr "Precio de lote sin descuento:"
+
+#. module: real_state_bits_finance_quote
+#: model_terms:ir.ui.view,arch_db:real_state_bits_finance_quote.report_saleorder_document_finance
+msgid "Lot Price without Discount:"
+msgstr ""
+
+#. module: real_state_bits_finance_quote
+#. odoo-python
+#: code:addons/real_state_bits_finance_quote/models/property_contract_inherit.py:0
+msgid "Maintenance"
+msgstr ""
+
+#. module: real_state_bits_finance_quote
+#: model_terms:ir.ui.view,arch_db:real_state_bits_finance_quote.view_property_contract_form_customs
+msgid "Make a payment to capital"
+msgstr "Realizar un pago a capital"
+
+#. module: real_state_bits_finance_quote
+#: model:ir.model.fields,field_description:real_state_bits_finance_quote.field_loan_line__payment_date_manual
+msgid "Manual Payment Date"
+msgstr "Fecha de pago manual"
+
+#. module: real_state_bits_finance_quote
+#: model:ir.model.fields,field_description:real_state_bits_finance_quote.field_loan_line__payment_state_manual
+msgid "Manual Payment State"
+msgstr "Estado de pago manual"
+
+#. module: real_state_bits_finance_quote
+#: model_terms:ir.ui.view,arch_db:real_state_bits_finance_quote.report_saleorder_document_finance
+#: model_terms:ir.ui.view,arch_db:real_state_bits_finance_quote.sale_order_portal_content_real_state_customs
+msgid "Monthly of 1 to 48"
+msgstr "Mensualidades 1 a 48"
+
+#. module: real_state_bits_finance_quote
+#: model_terms:ir.ui.view,arch_db:real_state_bits_finance_quote.report_saleorder_document_finance
+#: model_terms:ir.ui.view,arch_db:real_state_bits_finance_quote.sale_order_portal_content_real_state_customs
+msgid "Monthly of 121 to 180"
+msgstr "Mensualidades 121 a 180"
+
+#. module: real_state_bits_finance_quote
+#: model_terms:ir.ui.view,arch_db:real_state_bits_finance_quote.report_saleorder_document_finance
+#: model_terms:ir.ui.view,arch_db:real_state_bits_finance_quote.sale_order_portal_content_real_state_customs
+msgid "Monthly of 181 to 240"
+msgstr "Mensualidades 181 a 240"
+
+#. module: real_state_bits_finance_quote
+#: model_terms:ir.ui.view,arch_db:real_state_bits_finance_quote.report_saleorder_document_finance
+#: model_terms:ir.ui.view,arch_db:real_state_bits_finance_quote.sale_order_portal_content_real_state_customs
+msgid "Monthly of 49 to 120"
+msgstr "Mensualidades 49 a 120"
+
+#. module: real_state_bits_finance_quote
+#: model:ir.model.fields,field_description:real_state_bits_finance_quote.field_difer_hitch__months
+msgid "Months"
+msgstr "Meses"
+
+#. module: real_state_bits_finance_quote
+#. odoo-python
+#: code:addons/real_state_bits_finance_quote/models/sale_order.py:0
+msgid "Months must be greater than 0"
+msgstr ""
+
+#. module: real_state_bits_finance_quote
+#: model_terms:ir.ui.view,arch_db:real_state_bits_finance_quote.report_saleorder_document_finance
+#: model_terms:ir.ui.view,arch_db:real_state_bits_finance_quote.sale_order_portal_content_real_state_customs
+msgid "Months to Difer"
+msgstr "Meses a Diferir"
+
+#. module: real_state_bits_finance_quote
+#: model:ir.model.fields,field_description:real_state_bits_finance_quote.field_loan_line__moratorium_interest
+#: model:ir.model.fields,field_description:real_state_bits_finance_quote.field_property_contract__moratorium_interest
+msgid "Moratorium Interest"
+msgstr "Interés Moratorio"
+
+#. module: real_state_bits_finance_quote
+#: model:ir.model.fields,field_description:real_state_bits_finance_quote.field_loan_line__moratorium_interest_manual
+msgid "Moratorium Interest Manual"
+msgstr ""
+
+#. module: real_state_bits_finance_quote
+#: model:product.template,name:real_state_bits_finance_quote.product_product_moratorium_interest_contract_product_template
+msgid "Moratorium Interest Product"
+msgstr "Pago de intereses moratorios"
+
+#. module: real_state_bits_finance_quote
+#: model:ir.model.fields,field_description:real_state_bits_finance_quote.field_difer_hitch__name
+#: model:ir.model.fields,field_description:real_state_bits_finance_quote.field_promotions_property__name
+msgid "Name"
+msgstr "Nombre"
+
+#. module: real_state_bits_finance_quote
+#: model:ir.model.fields.selection,name:real_state_bits_finance_quote.selection__loan_line__amount_to_capital_type__negative
+#: model:ir.model.fields.selection,name:real_state_bits_finance_quote.selection__loan_line__credit_note_type_decoration__negative
+msgid "Negative"
+msgstr "Negativo"
+
+#. module: real_state_bits_finance_quote
+#: model:ir.model.fields.selection,name:real_state_bits_finance_quote.selection__loan_line__amount_to_capital_type__normal
+#: model:ir.model.fields.selection,name:real_state_bits_finance_quote.selection__loan_line__capital_payment_state__normal
+#: model:ir.model.fields.selection,name:real_state_bits_finance_quote.selection__loan_line__credit_note_type_decoration__normal
+msgid "Normal"
+msgstr ""
+
+#. module: real_state_bits_finance_quote
+#: model:ir.model.fields.selection,name:real_state_bits_finance_quote.selection__loan_line__payment_state__not_paid
+#: model:ir.model.fields.selection,name:real_state_bits_finance_quote.selection__loan_line__payment_state_manual__not_paid
+msgid "Not Paid"
+msgstr "Sin pagar"
+
+#. module: real_state_bits_finance_quote
+#: model:ir.model.fields,field_description:real_state_bits_finance_quote.field_difer_hitch__order_id
+#: model:ir.model.fields,field_description:real_state_bits_finance_quote.field_modality_finance_line__order_id
+#: model:ir.model.fields,field_description:real_state_bits_finance_quote.field_property_contract__order_id
+#: model:ir.model.fields,field_description:real_state_bits_finance_quote.field_property_reservation__order_id
+msgid "Order Id"
+msgstr "ID de la Orden"
+
+#. module: real_state_bits_finance_quote
+#: model_terms:ir.ui.view,arch_db:real_state_bits_finance_quote.view_property_contract_form_customs
+msgid "Outstanding balance to be paid"
+msgstr "Saldo pendiente de pagar"
+
+#. module: real_state_bits_finance_quote
+#. odoo-python
+#: code:addons/real_state_bits_finance_quote/models/property_reservation.py:0
+msgid "Ownership Contract"
+msgstr ""
+
+#. module: real_state_bits_finance_quote
+#: model:ir.model.fields,field_description:real_state_bits_finance_quote.field_modality_finance_line__pu_discount
+msgid "P.U. Discount"
+msgstr "P.U. con Descuento"
+
+#. module: real_state_bits_finance_quote
+#: model_terms:ir.ui.view,arch_db:real_state_bits_finance_quote.report_saleorder_document_finance
+#: model_terms:ir.ui.view,arch_db:real_state_bits_finance_quote.sale_order_portal_content_real_state_customs
+msgid "P.U. with discount:"
+msgstr "P.U. con descuento"
+
+#. module: real_state_bits_finance_quote
+#: model:ir.model.fields.selection,name:real_state_bits_finance_quote.selection__loan_line__capital_payment_state__paid
+#: model:ir.model.fields.selection,name:real_state_bits_finance_quote.selection__loan_line__payment_state__paid
+#: model:ir.model.fields.selection,name:real_state_bits_finance_quote.selection__loan_line__payment_state_manual__paid
+msgid "Paid"
+msgstr "Pagado"
+
+#. module: real_state_bits_finance_quote
+#: model:ir.model.fields,field_description:real_state_bits_finance_quote.field_property_contract__paid
+msgid "Paid Amount"
+msgstr "Monto de pago"
+
+#. module: real_state_bits_finance_quote
+#: model:ir.model.fields.selection,name:real_state_bits_finance_quote.selection__loan_line__payment_state__partial
+#: model:ir.model.fields.selection,name:real_state_bits_finance_quote.selection__loan_line__payment_state_manual__partial
+msgid "Partially Paid"
+msgstr "Pagado parcialmente"
+
+#. module: real_state_bits_finance_quote
+#: model:ir.model.fields,field_description:real_state_bits_finance_quote.field_loan_line__amount
+msgid "Payment"
+msgstr "Pago"
+
+#. module: real_state_bits_finance_quote
+#: model:ir.model.fields,field_description:real_state_bits_finance_quote.field_loan_line__payment_date
+msgid "Payment Date"
+msgstr "Fecha de pago"
+
+#. module: real_state_bits_finance_quote
+#: model:ir.model.fields,field_description:real_state_bits_finance_quote.field_loan_line__payment_state
+msgid "Payment State"
+msgstr "Estado de pago"
+
+#. module: real_state_bits_finance_quote
+#: model:ir.model.fields,field_description:real_state_bits_finance_quote.field_installment_template__payment_term_ids
+#: model_terms:ir.ui.view,arch_db:real_state_bits_finance_quote.view_installment_template_form_inherit_bits_customs
+msgid "Payment Terms"
+msgstr "Términos de Pago"
+
+#. module: real_state_bits_finance_quote
+#: model:ir.model,name:real_state_bits_finance_quote.model_payment_to_capital_wizard
+msgid "Payment To Capital Wizard"
+msgstr "Asistente de Pago a Capital"
+
+#. module: real_state_bits_finance_quote
+#: model:ir.model,name:real_state_bits_finance_quote.model_payment_terms
+msgid "Payment terms for installment.templates"
+msgstr ""
+
+#. module: real_state_bits_finance_quote
+#. odoo-python
+#: code:addons/real_state_bits_finance_quote/models/property_contract_inherit.py:0
+msgid ""
+"Payment to capital of the contract: %(contract_name)s - in the monthly "
+"payment %(month_number)s"
+msgstr ""
+"Pago a capital del contrato: %(contract_name)s - en el pago mensual "
+"%(month_number)s"
+
+#. module: real_state_bits_finance_quote
+#: model:ir.model,name:real_state_bits_finance_quote.model_account_payment
+msgid "Payments"
+msgstr "Pagos"
+
+#. module: real_state_bits_finance_quote
+#: model:ir.model.fields,field_description:real_state_bits_finance_quote.field_difer_hitch__period_payment
+#: model:ir.model.fields,field_description:real_state_bits_finance_quote.field_property_contract__periodicity_hitch
+msgid "Periodicity"
+msgstr "Periodicidad"
+
+#. module: real_state_bits_finance_quote
+#. odoo-python
+#: code:addons/real_state_bits_finance_quote/models/property_contract_inherit.py:0
+msgid "Please select first payment date!"
+msgstr "¡Por favor selecciona la fecha del primer pago!"
+
+#. module: real_state_bits_finance_quote
+#. odoo-python
+#: code:addons/real_state_bits_finance_quote/models/loan_line.py:0
+msgid "Please set income account for this contract!"
+msgstr "¡Por favor establece la cuenta de ingresos para este contrato!"
+
+#. module: real_state_bits_finance_quote
+#. odoo-python
+#: code:addons/real_state_bits_finance_quote/models/loan_line.py:0
+msgid "Please set receivable account for partner!"
+msgstr "¡Por favor establece la cuenta por cobrar para el socio!"
+
+#. module: real_state_bits_finance_quote
+#. odoo-python
+#: code:addons/real_state_bits_finance_quote/models/property_contract_inherit.py:0
+msgid "Please set the Advance Payment Date!"
+msgstr ""
+
+#. module: real_state_bits_finance_quote
+#. odoo-python
+#: code:addons/real_state_bits_finance_quote/models/property_contract_inherit.py:0
+msgid "Please set the Advance Payment Journal!"
+msgstr ""
+
+#. module: real_state_bits_finance_quote
+#: model:ir.model.fields,field_description:real_state_bits_finance_quote.field_promotions_property__porcent
+msgid "Porcent Discount"
+msgstr "Porcentaje de Descuento"
+
+#. module: real_state_bits_finance_quote
+#: model:ir.model.fields.selection,name:real_state_bits_finance_quote.selection__loan_line__amount_to_capital_type__positive
+#: model:ir.model.fields.selection,name:real_state_bits_finance_quote.selection__loan_line__credit_note_type_decoration__positive
+msgid "Positive"
+msgstr "Positivo"
+
+#. module: real_state_bits_finance_quote
+#: model:ir.model.fields,field_description:real_state_bits_finance_quote.field_property_contract__project_id
+msgid "Project"
+msgstr "Proyecto"
+
+#. module: real_state_bits_finance_quote
+#: model:ir.model,name:real_state_bits_finance_quote.model_project_worksite
+msgid "Project Worksite"
+msgstr "Desarrollo"
+
+#. module: real_state_bits_finance_quote
+#: model:ir.model.fields,field_description:real_state_bits_finance_quote.field_sale_order__annual_capital_gains_yield_years
+msgid "Projection of years"
+msgstr "Proyección de años"
+
+#. module: real_state_bits_finance_quote
+#: model:ir.model.fields,field_description:real_state_bits_finance_quote.field_modality_finance_line__promotion_id
+msgid "Promotion Id"
+msgstr "Promoción"
+
+#. module: real_state_bits_finance_quote
+#: model:ir.actions.act_window,name:real_state_bits_finance_quote.promotions_property_action
+#: model:ir.model.fields,field_description:real_state_bits_finance_quote.field_product_product__promotion_ids
+#: model:ir.model.fields,field_description:real_state_bits_finance_quote.field_product_template__promotion_ids
+#: model:ir.model.fields,field_description:real_state_bits_finance_quote.field_project_worksite__promotion_ids
+msgid "Promotions"
+msgstr "Promociones"
+
+#. module: real_state_bits_finance_quote
+#: model_terms:ir.ui.view,arch_db:real_state_bits_finance_quote.promotions_property_view_tree
+msgid "Promotions Property"
+msgstr ""
+
+#. module: real_state_bits_finance_quote
+#: model:ir.model,name:real_state_bits_finance_quote.model_promotions_property
+msgid "Promotions for Property or Unit"
+msgstr ""
+
+#. module: real_state_bits_finance_quote
+#. odoo-python
+#: code:addons/real_state_bits_finance_quote/models/sale_order.py:0
+msgid "Properties"
+msgstr ""
+
+#. module: real_state_bits_finance_quote
+#: model:ir.model,name:real_state_bits_finance_quote.model_product_template
+msgid "Property"
+msgstr "Producto"
+
+#. module: real_state_bits_finance_quote
+#: model:ir.model,name:real_state_bits_finance_quote.model_property_contract
+msgid "Property Contract"
+msgstr "Contrato de la unidad"
+
+#. module: real_state_bits_finance_quote
+#: model:ir.model,name:real_state_bits_finance_quote.model_property_reservation
+msgid "Property Reservation"
+msgstr "Reserva de propiedad"
+
+#. module: real_state_bits_finance_quote
+#: model:ir.model.fields,field_description:real_state_bits_finance_quote.field_property_contract__static_total_paid_interests
+msgid "Property interest amount"
+msgstr "Importe de intereses de la propiedad"
+
+#. module: real_state_bits_finance_quote
+#: model:ir.model.fields.selection,name:real_state_bits_finance_quote.selection__difer_hitch__period_payment__3
+#: model:ir.model.fields.selection,name:real_state_bits_finance_quote.selection__property_contract__periodicity_hitch__3
+msgid "Quarterly"
+msgstr "Trimestral"
+
+#. module: real_state_bits_finance_quote
+#: model:mail.template,subject:real_state_bits_finance_quote.email_template_property_reservation
+msgid "Reservation {{ object.name or 'n/a' }}"
+msgstr ""
+
+#. module: real_state_bits_finance_quote
+#: model:mail.template,name:real_state_bits_finance_quote.email_template_property_reservation
+msgid "Reservation: Send Reservation"
+msgstr "Reserva: Enviar Reservación"
+
+#. module: real_state_bits_finance_quote
+#: model:ir.model.fields,field_description:real_state_bits_finance_quote.field_sale_order__contracts
+#: model_terms:ir.ui.view,arch_db:real_state_bits_finance_quote.view_order_form_inherit_real_estate_bits
+msgid "Reservations"
+msgstr "Reservas"
+
+#. module: real_state_bits_finance_quote
+#: model:ir.model.fields.selection,name:real_state_bits_finance_quote.selection__loan_line__payment_state__reversed
+#: model:ir.model.fields.selection,name:real_state_bits_finance_quote.selection__loan_line__payment_state_manual__reversed
+msgid "Reversed"
+msgstr "Revertido"
+
+#. module: real_state_bits_finance_quote
+#: model:ir.model,name:real_state_bits_finance_quote.model_sale_order
+msgid "Sales Order"
+msgstr "Orden de venta"
+
+#. module: real_state_bits_finance_quote
+#: model:ir.model,name:real_state_bits_finance_quote.model_sale_order_line
+msgid "Sales Order Line"
+msgstr "Línea de la orden de venta"
+
+#. module: real_state_bits_finance_quote
+#: model:ir.model.fields,field_description:real_state_bits_finance_quote.field_sale_order__section_date
+msgid "Section Date"
+msgstr ""
+
+#. module: real_state_bits_finance_quote
+#: model:ir.model.fields,field_description:real_state_bits_finance_quote.field_sale_order__finance_id
+msgid "Select Finance"
+msgstr "Seleccionar Financiamiento"
+
+#. module: real_state_bits_finance_quote
+#: model:ir.model.fields,field_description:real_state_bits_finance_quote.field_property_reservation__net_price
+msgid "Selling Price"
+msgstr "Precio de venta"
+
+#. module: real_state_bits_finance_quote
+#: model_terms:ir.ui.view,arch_db:real_state_bits_finance_quote.property_contract_inherit_finance_quotes
+msgid "Send Email Reservation"
+msgstr ""
+
+#. module: real_state_bits_finance_quote
+#: model:mail.template,description:real_state_bits_finance_quote.email_template_property_reservation
+msgid "Send information about the property reservation to customer"
+msgstr ""
+
+#. module: real_state_bits_finance_quote
+#: model:ir.model.fields,field_description:real_state_bits_finance_quote.field_payment_terms__name
+msgid "Start month"
+msgstr "Inicio de mes"
+
+#. module: real_state_bits_finance_quote
+#. odoo-python
+#: code:addons/real_state_bits_finance_quote/models/payment_terms.py:0
+msgid "The end month should be greater than initial month"
+msgstr "El mes final debe ser mayor que el mes inicial"
+
+#. module: real_state_bits_finance_quote
+#. odoo-python
+#: code:addons/real_state_bits_finance_quote/models/sale_order.py:0
+msgid "The month to difer should be greater than 0"
+msgstr "El mes a diferir debe ser mayor que 0"
+
+#. module: real_state_bits_finance_quote
+#. odoo-python
+#: code:addons/real_state_bits_finance_quote/models/property_contract_inherit.py:0
+msgid "The months for difered hitch should be greater than 0"
+msgstr "Los meses para el enganche diferido deben ser mayores que 0"
+
+#. module: real_state_bits_finance_quote
+#: model:ir.model.fields,field_description:real_state_bits_finance_quote.field_property_contract__total_paid_interests
+msgid "Total amount of interest to paid"
+msgstr "Monto de intereses pagados"
+
+#. module: real_state_bits_finance_quote
+#: model:ir.model.fields,field_description:real_state_bits_finance_quote.field_property_contract__total_interests_to_pay
+msgid "Total amount of interest to pay"
+msgstr "Total de intereses a pagar"
+
+#. module: real_state_bits_finance_quote
+#: model:ir.model.fields,field_description:real_state_bits_finance_quote.field_property_contract__total_amount_to_pay
+msgid "Total amount to pay"
+msgstr "Monto total a pagar"
+
+#. module: real_state_bits_finance_quote
+#: model_terms:ir.ui.view,arch_db:real_state_bits_finance_quote.view_property_contract_form_customs
+msgid "Total amount to pay without interest"
+msgstr "Cantidad total a pagar sin intereses"
+
+#. module: real_state_bits_finance_quote
+#: model:ir.model.fields,help:real_state_bits_finance_quote.field_sale_order__validity_date
+msgid ""
+"Validity of the order, after that you will not able to sign & pay the "
+"quotation."
+msgstr ""
+"Validez de la orden, después de eso no podrá firmar y pagar la cotización."
+
+#. module: real_state_bits_finance_quote
+#. odoo-python
+#: code:addons/real_state_bits_finance_quote/models/property_contract_inherit.py:0
+msgid "You must select a Periodicity for the Hitch"
+msgstr "Debes seleccionar una periodicidad para el enganche"
+
+#. module: real_state_bits_finance_quote
+#. odoo-python
+#: code:addons/real_state_bits_finance_quote/models/sale_order.py:0
+msgid "You should choose a modality finance"
+msgstr "Debes elegir una modalidad de financiamiento"
+
+#. module: real_state_bits_finance_quote
+#: model:ir.model.fields,field_description:real_state_bits_finance_quote.field_payment_to_capital_wizard__payment_amount
+msgid "amount to be paid"
+msgstr "monto a pagar"
+
+#. module: real_state_bits_finance_quote
+#: model:ir.model.fields.selection,name:real_state_bits_finance_quote.selection__property_contract__periodicity_hitch__12
+msgid "annual"
+msgstr "Anual"
+
+#. module: real_state_bits_finance_quote
+#: model:ir.model.fields,field_description:real_state_bits_finance_quote.field_loan_line__capital_payment_id
+msgid "capital payment"
+msgstr "pago de capital"
+
+#. module: real_state_bits_finance_quote
+#: model:ir.model.fields,field_description:real_state_bits_finance_quote.field_payment_to_capital_wizard__contract_id
+msgid "contract id"
+msgstr ""
+
+#. module: real_state_bits_finance_quote
+#: model_terms:ir.ui.view,arch_db:real_state_bits_finance_quote.view_property_contract_form_customs
+msgid "costumer"
+msgstr "Cliente"
+
+#. module: real_state_bits_finance_quote
+#: model_terms:ir.ui.view,arch_db:real_state_bits_finance_quote.payment_to_capital_wizard_view_form
+msgid "create payment"
+msgstr "crear pago"
+
+#. module: real_state_bits_finance_quote
+#: model:ir.model.fields,field_description:real_state_bits_finance_quote.field_loan_line__credit_note_id
+msgid "credit note"
+msgstr "Nota de crédito"
+
+#. module: real_state_bits_finance_quote
+#: model:ir.model.fields,field_description:real_state_bits_finance_quote.field_loan_line__credit_note_type_decoration
+msgid "credit note type decoration"
+msgstr ""
+
+#. module: real_state_bits_finance_quote
+#: model:ir.model.fields,field_description:real_state_bits_finance_quote.field_loan_line__final_balance
+msgid "final balance"
+msgstr "Balance final"
+
+#. module: real_state_bits_finance_quote
+#: model:ir.model.fields,field_description:real_state_bits_finance_quote.field_loan_line__final_balance_manual
+msgid "final balance manual"
+msgstr "Balance final manual"
+
+#. module: real_state_bits_finance_quote
+#: model:ir.model.fields,field_description:real_state_bits_finance_quote.field_loan_line__forgiven_interest
+msgid "forgiven interest"
+msgstr "interés condonado"
+
+#. module: real_state_bits_finance_quote
+#: model:ir.model.fields,field_description:real_state_bits_finance_quote.field_loan_line__interest_accrued
+msgid "interest accrued"
+msgstr "Interés acumulado"
+
+#. module: real_state_bits_finance_quote
+#: model:ir.model.fields,field_description:real_state_bits_finance_quote.field_loan_line__interest_of_accrued_manual
+msgid "interest of accrued manual"
+msgstr "Interés acumulado manual"
+
+#. module: real_state_bits_finance_quote
+#: model:ir.model.fields,field_description:real_state_bits_finance_quote.field_loan_line__interest_of_interest
+msgid "interest of interest"
+msgstr "Interés del interés"
+
+#. module: real_state_bits_finance_quote
+#: model:ir.model.fields,field_description:real_state_bits_finance_quote.field_loan_line__interest_of_interest_manual
+msgid "interest of interest manual"
+msgstr "Interés del interes manual"
+
+#. module: real_state_bits_finance_quote
+#: model:ir.model.fields.selection,name:real_state_bits_finance_quote.selection__property_contract__periodicity_hitch__1
+msgid "monthly"
+msgstr "Mensual"
+
+#. module: real_state_bits_finance_quote
+#: model_terms:ir.ui.view,arch_db:real_state_bits_finance_quote.view_property_contract_form_customs
+msgid "monthly payment"
+msgstr "Mensualidad"
+
+#. module: real_state_bits_finance_quote
+#. odoo-python
+#: code:addons/real_state_bits_finance_quote/models/loan_line.py:0
+msgid "monthly payment number "
+msgstr "mensualidad número "
+
+#. module: real_state_bits_finance_quote
+#: model:ir.model.fields,field_description:real_state_bits_finance_quote.field_payment_to_capital_wizard__payment_number
+msgid "payment number"
+msgstr ""
+
+#. module: real_state_bits_finance_quote
+#: model_terms:ir.ui.view,arch_db:real_state_bits_finance_quote.view_installment_template_form_inherit_bits_customs
+msgid "payment_terms"
+msgstr ""
+
+#. module: real_state_bits_finance_quote
+#: model_terms:ir.ui.view,arch_db:real_state_bits_finance_quote.view_property_contract_form_customs
+msgid "property area (m2)"
+msgstr "rea de propiedad (m2)"
+
+#. module: real_state_bits_finance_quote
+#: model:ir.model.fields,field_description:real_state_bits_finance_quote.field_loan_line__show_payment_to_capital
+msgid "show payment to capital"
+msgstr "mostrar pago a capital"
+
+#. module: real_state_bits_finance_quote
+#: model:ir.model.fields,field_description:real_state_bits_finance_quote.field_loan_line__capital_payment_state
+msgid "state of capital invoice"
+msgstr "estado del pago a capital"
+
+#. module: real_state_bits_finance_quote
+#: model:ir.model.fields,field_description:real_state_bits_finance_quote.field_loan_line__amount_to_capital_type
+msgid "type of capital payment"
+msgstr "tipo de pago a capital"
+
+#. module: real_state_bits_finance_quote
+#: model:ir.model.fields,field_description:real_state_bits_finance_quote.field_promotions_property__porcent_bono
+msgid "Discount bono"
+msgstr "Bono de descuento"
+
+#. module: real_state_bits_finance_quote
+#: model:ir.model.fields,field_description:real_state_bits_finance_quote.field_promotions_property__porcent_financial
+msgid "Porcent Discount financial"
+msgstr "Porcentaje Enganche"

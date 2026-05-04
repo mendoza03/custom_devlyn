@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="sign_real_estate_extension_sign_send_request_view_form_inherit" model="ir.ui.view">
+        <field name="name">sign.send.request.view.form.inherit</field>
+        <field name="model">sign.send.request</field>
+        <field name="inherit_id" ref="sign.sign_send_request_view_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='signer_id']" position="after">
+                <field name="opportunity_id"/>
+                <field name="sale_order_id"/>
+                <field name="finance_time"/>
+                <field name="property_contract_id"/>
+            </xpath>
+        </field>
+    </record>
+</odoo>

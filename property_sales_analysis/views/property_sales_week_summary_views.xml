@@ -1,0 +1,139 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <!-- List View -->
+    <record id="view_property_sales_week_summary_list" model="ir.ui.view">
+        <field name="name">property.sales.week.summary.list</field>
+        <field name="model">property.sales.week.summary</field>
+        <field name="arch" type="xml">
+            <list string="Resumen Semanal" create="false">
+                <field name="name"/>
+                <field name="week_start"/>
+                <field name="week_end"/>
+                <field name="total_lots"/>
+                <field name="total_sold"/>
+                <field name="sold_percentage_display"/>
+                <field name="worksites_list"/>
+            </list>
+        </field>
+    </record>
+
+    <!-- Form View -->
+    <record id="view_property_sales_week_summary_form" model="ir.ui.view">
+        <field name="name">property.sales.week.summary.form</field>
+        <field name="model">property.sales.week.summary</field>
+        <field name="arch" type="xml">
+            <form string="Detalle de Semana" create="false" edit="false">
+                <header>
+                    <button name="action_refresh"
+                            type="object"
+                            string="Actualizar Datos"
+                            class="btn-primary"/>
+                </header>
+                <sheet>
+                    <div class="oe_title">
+                        <h1>
+                            <field name="name" readonly="1"/>
+                        </h1>
+                        <h3>
+                            <field name="week_start" readonly="1"/> - <field name="week_end" readonly="1"/>
+                        </h3>
+                    </div>
+                    <group>
+                        <group string="Configuración">
+                            <field name="calendar_id" readonly="1"/>
+                            <field name="week_number" readonly="1"/>
+                            <field name="company_id" readonly="1"/>
+                        </group>
+                        <group string="Totales">
+                            <field name="total_lots" readonly="1"/>
+                            <field name="total_sold" readonly="1"/>
+                            <field name="sold_percentage_display" readonly="1"/>
+                        </group>
+                    </group>
+                    
+                    <group>
+                        <group string="Clusters">
+                            <field name="cluster_ids" widget="many2many_tags" readonly="1"/>
+                        </group>
+                        <group string="Obras con Ventas">
+                            <field name="worksites_list" readonly="1"/>
+                            <field name="has_estepa" readonly="1"/>
+                            <field name="has_desierto" readonly="1"/>
+                            <field name="has_sabana" readonly="1"/>
+                            <field name="has_tundra" readonly="1"/>
+                        </group>
+                    </group>
+                    
+                    <notebook>
+                        <page string="Resumen por Cluster (Dashboard)" name="cluster_summary">
+                            <field name="cluster_summary_ids" nolabel="1"/>
+                        </page>
+                        
+                        <page string="Líneas de Detalle (Dashboard)" name="detail_lines">
+                            <field name="cluster_detail_ids" nolabel="1"/>
+                        </page>
+                        
+                        <page string="Detalle por Propiedades (Dashboard)" name="property_detail">
+                            <field name="property_detail_ids" nolabel="1"/>
+                        </page>
+                        
+                        <page string="Detalle por Cluster" name="clusters">
+                            <group>
+                                <field name="cluster_details" readonly="1" nolabel="1" widget="text"/>
+                            </group>
+                        </page>
+                        
+                        <page string="Detalle por Gerente" name="managers">
+                            <group>
+                                <field name="manager_details" readonly="1" nolabel="1" widget="text"/>
+                            </group>
+                        </page>
+                    </notebook>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <!-- Generator Form -->
+    <record id="view_property_sales_week_summary_generator_form" model="ir.ui.view">
+        <field name="name">property.sales.week.summary.generator.form</field>
+        <field name="model">property.sales.week.summary.generator</field>
+        <field name="arch" type="xml">
+            <form>
+                <group>
+                    <field name="calendar_id"/>
+                </group>
+                <footer>
+                    <button name="action_generate"
+                            type="object"
+                            string="Generar Resumen Semanal"
+                            class="btn-primary"/>
+                    <button string="Cancelar" class="btn-secondary" special="cancel"/>
+                </footer>
+            </form>
+        </field>
+    </record>
+
+    <!-- Actions -->
+    <record id="action_property_sales_week_summary" model="ir.actions.act_window">
+        <field name="name">Resumen por Semanas</field>
+        <field name="res_model">property.sales.week.summary</field>
+        <field name="view_mode">list,form</field>
+    </record>
+
+    <record id="action_property_sales_week_summary_generator" model="ir.actions.act_window">
+        <field name="name">Generar Resumen Semanal</field>
+        <field name="res_model">property.sales.week.summary.generator</field>
+        <field name="view_mode">form</field>
+        <field name="target">new</field>
+    </record>
+
+    <!-- Menu -->
+    <menuitem id="menu_property_sales_week_summary"
+              name="Resumen por Semanas"
+              parent="real_estate_bits.menu_real_estate_configuration"
+              action="action_property_sales_week_summary_generator"
+              sequence="13"/>
+
+</odoo>

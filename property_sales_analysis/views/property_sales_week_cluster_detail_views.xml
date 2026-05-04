@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <!-- List View -->
+    <record id="view_property_sales_week_cluster_detail_list" model="ir.ui.view">
+        <field name="name">property.sales.week.cluster.detail.list</field>
+        <field name="model">property.sales.week.cluster.detail</field>
+        <field name="arch" type="xml">
+            <list string="Detalle Semanal por Cluster/Obra" create="false" edit="false" delete="false">
+                <field name="week_name"/>
+                <field name="week_number"/>
+                <field name="cluster_id"/>
+                <field name="worksite_id"/>
+                <field name="sold_count"/>
+                <field name="sold_amount_display"/>
+                <field name="calendar_id"/>
+            </list>
+        </field>
+    </record>
+
+    <!-- Form View -->
+    <record id="view_property_sales_week_cluster_detail_form" model="ir.ui.view">
+        <field name="name">property.sales.week.cluster.detail.form</field>
+        <field name="model">property.sales.week.cluster.detail</field>
+        <field name="arch" type="xml">
+            <form string="Detalle de Venta" create="false" edit="false" delete="false">
+                <sheet>
+                    <group>
+                        <group>
+                            <field name="week_id" readonly="1"/>
+                            <field name="week_number" readonly="1"/>
+                            <field name="calendar_id" readonly="1"/>
+                        </group>
+                        <group>
+                            <field name="cluster_id" readonly="1"/>
+                            <field name="worksite_id" readonly="1"/>
+                            <field name="sold_count" readonly="1"/>
+                            <field name="sold_amount_display" readonly="1"/>
+                        </group>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <!-- Search View -->
+    <record id="view_property_sales_week_cluster_detail_search" model="ir.ui.view">
+        <field name="name">property.sales.week.cluster.detail.search</field>
+        <field name="model">property.sales.week.cluster.detail</field>
+        <field name="arch" type="xml">
+            <search>
+                <field name="week_number"/>
+                <field name="cluster_id"/>
+                <field name="worksite_id"/>
+                <field name="calendar_id"/>
+                <filter string="Por Semana" name="group_by_week" context="{'group_by':'week_number'}"/>
+                <filter string="Por Cluster" name="group_by_cluster" context="{'group_by':'cluster_id'}"/>
+                <filter string="Por Obra" name="group_by_worksite" context="{'group_by':'worksite_id'}"/>
+                <filter string="Por Calendario" name="group_by_calendar" context="{'group_by':'calendar_id'}"/>
+            </search>
+        </field>
+    </record>
+
+    <!-- Action -->
+    <record id="action_property_sales_week_cluster_detail" model="ir.actions.act_window">
+        <field name="name">Ventas Semanales por Cluster/Obra</field>
+        <field name="res_model">property.sales.week.cluster.detail</field>
+        <field name="view_mode">list,form</field>
+        <field name="context">{'create': False}</field>
+    </record>
+
+    <!-- Menu -->
+    <menuitem id="menu_property_sales_week_cluster_detail"
+              name="Detalle Semanal (Dashboard)"
+              parent="real_estate_bits.menu_real_estate_configuration"
+              action="action_property_sales_week_cluster_detail"
+              sequence="15"/>
+
+</odoo>

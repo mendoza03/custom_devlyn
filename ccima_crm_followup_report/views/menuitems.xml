@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <menuitem id="menu_ccima_crm_folloup_report"
+            name="Follow-up"
+            parent="crm.crm_menu_report"
+            action="ccima_crm_followup_report_action"
+            sequence="30"/>
+
+</odoo>

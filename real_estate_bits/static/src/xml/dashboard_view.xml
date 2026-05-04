@@ -1,0 +1,137 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<templates id="template" xml:space="preserve">
+
+    <t t-name="RealEstateDashboard" owl="1">
+        <div class="o_action">
+        <main class="bg-gray-100 main-font o_content">
+
+            <!-- HEADER -->
+            <section class="dashboard">
+                <div class="container-scroller p-5 p-5-reb" style="padding-top: 35px !important;">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="row">
+                                <div class="col-12 col-xl-4 mb-4 mb-xl-0">
+                                    <h3 class="font-weight-bold">
+                                        Welcome,
+                                    </h3>
+                                    <h3 class="font-weight-normal small" id="welcome_msg"/>
+                                </div>
+
+                                <div class="col-12 col-xl-4 mb-4 mb-xl-0" style="overflow: hidden;height: 50px;">
+                                    <h3 id="project_names" style="font-size: 14px;color: #8f9094;text-align: center;"/>
+                                </div>
+
+                                <div class="col-12 col-xl-4">
+                                    <div class="justify-content-end d-flex">
+                                        <div class="dropdown flex-md-grow-1 flex-xl-grow-0">
+                                            <a class="drop-btn btn-md dropdown-toggle" role="button" href="#"
+                                               style="color: inherit;color:white;"
+                                               id="dropdownMenuDate2" data-bs-toggle="dropdown" aria-haspopup="true"
+                                               aria-expanded="true">
+                                                Project Selection
+                                            </a>
+                                            <div class="dropdown-menu dropdown-menu-reb dropdown-menu-right p-3"
+                                                 aria-labelledby="dropdownMenuDate2" id="project_selection" role="menu"
+                                                 style="max-height: 180px;overflow-y: auto;">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- CARDS SECTION -->
+            <section class="cards">
+                <div class="container-scroller p-5 p-5-reb">
+                    <div class="row" id="cards"/>
+                </div>
+            </section>
+
+            <!-- BUTTONS -->
+            <section class="buttons">
+                <div class="container-scroller p-5 p-5-reb">
+                    <div class="row text-center dash-btns">
+                        <div class="col col-reb mb-4" id="btn_new_project" t-on-click="btnNewProject">
+                            <a href="#" class="primary-btn-reb text-decoration-none">
+                                <i class="fa fa-plus pr-3"/>New Projects
+                            </a>
+                        </div>
+                        <div class="col col-reb mb-4" id="btn_new_booking" t-on-click="btnNewBooking">
+                            <a href="#" class="primary-btn-reb text-decoration-none">
+                                <i class="fa fa-plus pr-3"/>New Bookings
+                            </a>
+                        </div>
+                        <div class="col col-reb mb-4" id="btn_new_rent_contract" t-on-click="btnNewRentContract">
+                            <a href="#" class="primary-btn-reb text-decoration-none">
+                                <i class="fa fa-plus pr-3"/>New Rent Contract
+                            </a>
+                        </div>
+                        <div class="col col-reb mb-4" id="btn_new_ownership_contract" t-on-click="btnNewOwnershipContract">
+                            <a href="#" class="primary-btn-reb text-decoration-none">
+                                <i class="fa fa-plus pr-3"/>New Ownership Contract
+                            </a>
+                        </div>
+                        <div class="col col-reb" id="btn_new_register_payment" t-on-click="btnNewRegisterPayment">
+                            <a href="#" class="primary-btn-reb text-decoration-none">
+                                <i class="fa fa-plus pr-3"/>Register Payment
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- CHARTS -->
+            <section class="charts">
+                <div class="container-scroller">
+                    <div class="charts-inner p-5 p-5-reb">
+                        <div class="row mar-bo-4">
+                            <div class="col-xl-5 mb-4">
+                                <div class="card card-reb">
+                                    <div class="card-body">
+                                        <h4 class="card-title">Total SFT</h4>
+                                        <div class="row mb-5" id="sft_chart_data"/>
+                                        <div id="sft_chart_bits"/>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="col-xl-5 mb-4">
+                                <div class="card card-reb">
+                                    <div class="card-body" id="temp_margin">
+                                        <h4 class="card-title">Renting Revenue</h4>
+                                        <div class="row mb-5" id="renting-revenue-data"/>
+                                        <div id="renting_revenue_chart"/>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="col-xl-2 mb-4">
+                                <div class="card card-reb">
+                                    <div class="card-body" style="max-height: 555px;overflow-y: auto;">
+                                        <h4 class="card-title mb-2">Brochure</h4>
+                                        <div class="links text-center mt-5" id="brochure-list"/>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="col-xl-5 mb-4">
+                                <div class="card card-reb">
+                                    <div class="card-body">
+                                        <h4 class="card-title">Property Type</h4>
+                                        <div id="property_type_chart"/>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </main>
+        </div>
+    </t>
+
+</templates>

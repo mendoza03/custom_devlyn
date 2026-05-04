@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+  <record id="rev_crm_contract_brief_form_inherit_contract_button" model="ir.ui.view">
+    <field name="name">rev.crm.contract.brief.form.inherit.contract.button</field>
+
+    <field name="model">rev.crm.contract.brief</field>
+
+    <field name="inherit_id" ref="ccima_crm_reassign.view_form_contract_brief"/>
+
+    <field name="arch" type="xml">
+      <xpath expr="//form/header" position="inside">
+        <button
+          name="action_open_contract"
+          type="object"
+          string="Generate Contract"
+          class="btn-primary"
+          />
+      </xpath>
+    </field>
+  </record>
+
+
+  <record id="view_mm_open_contract_wizard_form" model="ir.ui.view">
+    <field name="name">mm.open.contract.wizard.form</field>
+    <field name="model">mm.open.contract.wizard</field>
+    <field name="arch" type="xml">
+        <form string="Open Contract">
+            <group>
+                <field name="template_id" options="{'no_create': True}"/>
+            </group>
+
+            <footer>
+                <button name="action_confirm" type="object" string="Open" class="btn-primary"/>
+                <button string="Cancel" special="cancel" class="btn-secondary"/>
+            </footer>
+        </form>
+    </field>
+</record>
+
+</odoo>

@@ -1,0 +1,23 @@
+<odoo>
+    <data>
+        <record id="job_costing_form_view_inherit_add_requisition_button" model="ir.ui.view">
+            <field name="name">job.costing.form.inherit.add.requisition.button</field>
+            <field name="model">job.costing</field>
+            <field name="inherit_id" ref="odoo_job_costing_management.job_costing_form_view"/>
+            <field name="arch" type="xml">
+                <xpath expr="//form" position="inside">
+                      <field name="hide_add_to_requisition" invisible="1"/>
+
+                </xpath>
+                <xpath expr="//field[@name='job_cost_line_ids']//field[@name='total_cost']" position="after">
+                    <field name="is_subcontracted" invisible="1"/>
+                    <button name="action_add_to_requisition"
+                            string="Add to Requisition"
+                            type="object"
+                            invisible="is_subcontracted"
+                            class="btn-primary"/>
+                </xpath>
+            </field>
+        </record>
+    </data>
+</odoo>

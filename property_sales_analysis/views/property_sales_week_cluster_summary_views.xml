@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <!-- List View -->
+    <record id="view_property_sales_week_cluster_summary_list" model="ir.ui.view">
+        <field name="name">property.sales.week.cluster.summary.list</field>
+        <field name="model">property.sales.week.cluster.summary</field>
+        <field name="arch" type="xml">
+            <list string="Resumen Consolidado por Cluster" create="false" edit="false" delete="false">
+                <field name="week_name"/>
+                <field name="week_number"/>
+                <field name="cluster_id"/>
+                <field name="sold_count"/>
+                <field name="sold_amount_display"/>
+                <field name="calendar_id"/>
+            </list>
+        </field>
+    </record>
+
+    <!-- Form View -->
+    <record id="view_property_sales_week_cluster_summary_form" model="ir.ui.view">
+        <field name="name">property.sales.week.cluster.summary.form</field>
+        <field name="model">property.sales.week.cluster.summary</field>
+        <field name="arch" type="xml">
+            <form string="Detalle Consolidado" create="false" edit="false" delete="false">
+                <sheet>
+                    <group>
+                        <group>
+                            <field name="week_name" readonly="1"/>
+                            <field name="week_number" readonly="1"/>
+                            <field name="cluster_id" readonly="1"/>
+                        </group>
+                        <group>
+                            <field name="sold_count" readonly="1"/>
+                            <field name="sold_amount_display" readonly="1"/>
+                            <field name="calendar_id" readonly="1"/>
+                        </group>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <!-- Search View -->
+    <record id="view_property_sales_week_cluster_summary_search" model="ir.ui.view">
+        <field name="name">property.sales.week.cluster.summary.search</field>
+        <field name="model">property.sales.week.cluster.summary</field>
+        <field name="arch" type="xml">
+            <search>
+                <field name="cluster_id"/>
+                <field name="week_number"/>
+                <field name="calendar_id"/>
+                <group expand="0" string="Group By">
+                    <filter string="Cluster" name="group_cluster" context="{'group_by': 'cluster_id'}"/>
+                    <filter string="Semana" name="group_week" context="{'group_by': 'week_number'}"/>
+                    <filter string="Calendario" name="group_calendar" context="{'group_by': 'calendar_id'}"/>
+                </group>
+            </search>
+        </field>
+    </record>
+
+    <!-- Action -->
+    <record id="action_property_sales_week_cluster_summary" model="ir.actions.act_window">
+        <field name="name">Resumen por Cluster (Dashboard)</field>
+        <field name="res_model">property.sales.week.cluster.summary</field>
+        <field name="view_mode">list,form</field>
+    </record>
+
+    <!-- Menu -->
+    <menuitem id="menu_property_sales_week_cluster_summary"
+              name="Resumen por Cluster (Dashboard)"
+              parent="real_estate_bits.menu_real_estate_configuration"
+              action="action_property_sales_week_cluster_summary"
+              sequence="17"/>
+
+</odoo>

@@ -1,0 +1,352 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* ccima_crm
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 18.0+e-20260119\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2026-03-05 05:14+0000\n"
+"PO-Revision-Date: 2026-03-05 05:14+0000\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+#. module: ccima_crm
+#: model_terms:ir.ui.view,arch_db:ccima_crm.crm_lead_view_form_inherit
+msgid "Appointment"
+msgstr "Cita"
+
+#. module: ccima_crm
+#. odoo-python
+#: code:addons/ccima_crm/models/crm_lead.py:0
+#: model:ir.model.fields,field_description:ccima_crm.field_crm_lead__authority
+msgid "Authority"
+msgstr "Autoridad"
+
+#. module: ccima_crm
+#: model:ir.model.fields,help:ccima_crm.field_crm_lead__calculated_closing_date
+msgid "Business days between property reserved date and delivery"
+msgstr "Días hábiles entre la fecha de reserva de la propiedad y la entrega"
+
+#. module: ccima_crm
+#: model:ir.model.fields.selection,name:ccima_crm.selection__crm_lead__authority__client
+msgid "Client"
+msgstr "Cliente"
+
+#. module: ccima_crm
+#: model:ir.model.fields,field_description:ccima_crm.field_product_product__closing_date
+#: model:ir.model.fields,field_description:ccima_crm.field_product_template__closing_date
+msgid "Closing Date"
+msgstr "Fecha de Cierre"
+
+#. module: ccima_crm
+#. odoo-python
+#: code:addons/ccima_crm/models/crm_lead.py:0
+#: model:ir.model.fields,field_description:ccima_crm.field_crm_lead__commitment_level
+msgid "Commitment Level"
+msgstr "Nivel de Compromiso"
+
+#. module: ccima_crm
+#: model:ir.model.fields,field_description:ccima_crm.field_crm_lead__contacted
+msgid "Contacted"
+msgstr "Contactado"
+
+#. module: ccima_crm
+#: model_terms:ir.ui.view,arch_db:ccima_crm.product_template_form_lead_partner
+msgid "Customer"
+msgstr "Cliente"
+
+#. module: ccima_crm
+#: model:ir.model.fields,help:ccima_crm.field_product_product__lead_partner_id
+#: model:ir.model.fields,help:ccima_crm.field_product_template__lead_partner_id
+msgid "Customer associated with the lead linked to this property"
+msgstr "Cliente asociado con el lead vinculado a esta propiedad"
+
+#. module: ccima_crm
+#: model:ir.model.fields,help:ccima_crm.field_product_product__inactive_date
+#: model:ir.model.fields,help:ccima_crm.field_product_template__inactive_date
+msgid "Date when the property was marked as inactive"
+msgstr "Fecha en que la propiedad fue marcada como inactiva"
+
+#. module: ccima_crm
+#: model:ir.model.fields,field_description:ccima_crm.field_crm_lead__days_since_last_activity
+msgid "Days Since Last Activity"
+msgstr "Días desde última actividad"
+
+#. module: ccima_crm
+#: model:ir.model.fields.selection,name:ccima_crm.selection__crm_lead__timeline__delivery
+msgid "Delivery"
+msgstr "Entrega"
+
+#. module: ccima_crm
+#: model:ir.model.fields,field_description:ccima_crm.field_crm_lead__delivery_date_crm
+msgid "Delivery Date"
+msgstr "Fecha de Entrega"
+
+#. module: ccima_crm
+#: model:ir.model.fields,field_description:ccima_crm.field_crm_lead__delivery_date_display
+msgid "Delivery Date (Display)"
+msgstr "Fecha de Entrega (Visualización)"
+
+#. module: ccima_crm
+#: model:ir.model.fields,field_description:ccima_crm.field_crm_lead__detailed_presentation
+msgid "Detailed Presentation"
+msgstr "Presentación Detallada"
+
+#. module: ccima_crm
+#: model:ir.model.fields,field_description:ccima_crm.field_crm_lead__expected_revenue_display
+msgid "Expected Revenue"
+msgstr "Ingreso Esperado"
+
+#. module: ccima_crm
+#: model:ir.model.fields,help:ccima_crm.field_product_product__closing_date
+#: model:ir.model.fields,help:ccima_crm.field_product_template__closing_date
+msgid "Expected closing or delivery date for this property"
+msgstr "Fecha esperada de cierre o entrega para esta propiedad"
+
+#. module: ccima_crm
+#: model:ir.model.fields,help:ccima_crm.field_crm_lead__expected_revenue_display
+msgid "Expected revenue formatted with thousands separator"
+msgstr "Ingreso esperado formateado con separador de miles"
+
+#. module: ccima_crm
+#: model:ir.model.fields,field_description:ccima_crm.field_crm_lead__interaction_count_frozen
+msgid "Frozen Interaction Count"
+msgstr ""
+
+#. module: ccima_crm
+#: model:ir.model.fields,help:ccima_crm.field_crm_lead__interaction_count_frozen
+msgid "Frozen count of interactions when reaching 'Apartado' stage"
+msgstr ""
+
+#. module: ccima_crm
+#. odoo-python
+#: code:addons/ccima_crm/models/crm_lead.py:0
+#: model:ir.model.fields,field_description:ccima_crm.field_crm_lead__has_budget
+msgid "Has Budget"
+msgstr "Cuenta con Presupuesto"
+
+#. module: ccima_crm
+#: model:ir.model.fields.selection,name:ccima_crm.selection__crm_lead__commitment_level__high
+msgid "High"
+msgstr "Alto"
+
+#. module: ccima_crm
+#: model:ir.model.fields,field_description:ccima_crm.field_product_product__inactive_date
+#: model:ir.model.fields,field_description:ccima_crm.field_product_template__inactive_date
+msgid "Inactive Date"
+msgstr "Fecha de Inactivación"
+
+#. module: ccima_crm
+#: model:ir.model.fields,field_description:ccima_crm.field_product_product__inactive_month
+#: model:ir.model.fields,field_description:ccima_crm.field_product_template__inactive_month
+msgid "Inactive Month"
+msgstr "Mes de Inactivación"
+
+#. module: ccima_crm
+#: model:ir.model.fields,field_description:ccima_crm.field_crm_lead__interaction_count
+msgid "Interactions"
+msgstr "Interacciones"
+
+#. module: ccima_crm
+#: model:ir.model.fields.selection,name:ccima_crm.selection__crm_lead__timeline__investment
+msgid "Investment"
+msgstr "Inversión"
+
+#. module: ccima_crm
+#: model:ir.model.fields.selection,name:ccima_crm.selection__crm_lead__profile__investor
+msgid "Investor"
+msgstr "Inversionista"
+
+#. module: ccima_crm
+#: model:ir.model.fields,field_description:ccima_crm.field_product_product__lead_partner_id
+#: model:ir.model.fields,field_description:ccima_crm.field_product_template__lead_partner_id
+msgid "Lead Customer"
+msgstr "Cliente del Lead"
+
+#. module: ccima_crm
+#: model:ir.model,name:ccima_crm.model_crm_lead
+msgid "Lead/Opportunity"
+msgstr "Lead/oportunidad"
+
+#. module: ccima_crm
+#. odoo-python
+#: code:addons/ccima_crm/models/crm_lead.py:0
+#: model:ir.model.fields,field_description:ccima_crm.field_crm_lead__location_defined
+msgid "Location Defined"
+msgstr "Ubicación Definida"
+
+#. module: ccima_crm
+#: model:ir.model.fields.selection,name:ccima_crm.selection__crm_lead__commitment_level__low
+msgid "Low"
+msgstr "Bajo"
+
+#. module: ccima_crm
+#: model:ir.model.fields.selection,name:ccima_crm.selection__crm_lead__commitment_level__medium
+msgid "Medium"
+msgstr "Medio"
+
+#. module: ccima_crm
+#: model:ir.model.fields,help:ccima_crm.field_product_product__inactive_month
+#: model:ir.model.fields,help:ccima_crm.field_product_template__inactive_month
+msgid "Month and year of inactivation in format 'January 2026'"
+msgstr "Mes y año de inactivación en formato 'Enero 2026'"
+
+#. module: ccima_crm
+#: model:ir.model.fields.selection,name:ccima_crm.selection__crm_lead__has_budget__no
+#: model:ir.model.fields.selection,name:ccima_crm.selection__crm_lead__location_defined__no
+#: model:ir.model.fields.selection,name:ccima_crm.selection__crm_lead__real_interest__no
+msgid "No"
+msgstr ""
+
+#. module: ccima_crm
+#: model:ir.model.fields,help:ccima_crm.field_crm_lead__interaction_count
+msgid ""
+"Number of calendar activities until reaching 'Apartado' stage. This value "
+"freezes once the lead reaches 'Apartado' stage."
+msgstr ""
+
+#. module: ccima_crm
+#: model:ir.model.fields.selection,name:ccima_crm.selection__crm_lead__product__pbb
+msgid "PBB"
+msgstr ""
+
+#. module: ccima_crm
+#: model:ir.model.fields.selection,name:ccima_crm.selection__crm_lead__product__pbc
+msgid "PBC"
+msgstr ""
+
+#. module: ccima_crm
+#: model:ir.model.fields.selection,name:ccima_crm.selection__crm_lead__authority__partner
+msgid "Partner"
+msgstr "Socio"
+
+#. module: ccima_crm
+#: model:ir.model.fields.selection,name:ccima_crm.selection__crm_lead__tour_completed__physical
+msgid "Physical"
+msgstr "Físico"
+
+#. module: ccima_crm
+#. odoo-python
+#: code:addons/ccima_crm/models/crm_lead.py:0
+msgid ""
+"Please complete the following fields before advancing:\n"
+"\n"
+"• %s"
+msgstr ""
+"Por favor complete los siguientes campos antes de avanzar:\n"
+"\n"
+"• %s"
+
+#. module: ccima_crm
+#. odoo-python
+#: code:addons/ccima_crm/models/crm_lead.py:0
+#: model:ir.model.fields,field_description:ccima_crm.field_crm_lead__product
+msgid "Product"
+msgstr "Producto"
+
+#. module: ccima_crm
+#. odoo-python
+#: code:addons/ccima_crm/models/crm_lead.py:0
+#: model:ir.model.fields,field_description:ccima_crm.field_crm_lead__profile
+msgid "Profile"
+msgstr "Perfil"
+
+#. module: ccima_crm
+#: model_terms:ir.ui.view,arch_db:ccima_crm.crm_lead_view_form_inherit
+msgid "Profiling"
+msgstr "Perfilamiento"
+
+#. module: ccima_crm
+#: model:ir.model,name:ccima_crm.model_product_template
+msgid "Property"
+msgstr "Producto"
+
+#. module: ccima_crm
+#: model:ir.model.fields,field_description:ccima_crm.field_crm_lead__property_date
+msgid "Property Reserved Date"
+msgstr "Fecha de Reserva de Propiedad"
+
+#. module: ccima_crm
+#: model:ir.model.fields,field_description:ccima_crm.field_crm_lead__property_date_display
+msgid "Property Reserved Date (Display)"
+msgstr "Fecha de Apartado"
+
+#. module: ccima_crm
+#: model_terms:ir.ui.view,arch_db:ccima_crm.crm_lead_view_form_inherit
+msgid "Prospect"
+msgstr "Prospecto"
+
+#. module: ccima_crm
+#. odoo-python
+#: code:addons/ccima_crm/models/crm_lead.py:0
+#: model:ir.model.fields,field_description:ccima_crm.field_crm_lead__real_interest
+msgid "Real Interest"
+msgstr "Interés Real"
+
+#. module: ccima_crm
+#: model_terms:ir.ui.view,arch_db:ccima_crm.crm_lead_view_form_inherit
+msgid "Sales Opportunity"
+msgstr "Oportunidad de Venta"
+
+#. module: ccima_crm
+#: model:ir.model.fields,field_description:ccima_crm.field_crm_lead__show_appointment_fields
+msgid "Show Appointment Fields"
+msgstr "Mostrar Campos de Cita"
+
+#. module: ccima_crm
+#: model:ir.model.fields,field_description:ccima_crm.field_crm_lead__show_opportunity_fields
+msgid "Show Opportunity Fields"
+msgstr "Mostrar Campos de Oportunidad"
+
+#. module: ccima_crm
+#: model:ir.model.fields,field_description:ccima_crm.field_crm_lead__show_prospect_fields
+msgid "Show Prospect Fields"
+msgstr "Mostrar Campos de Prospecto"
+
+#. module: ccima_crm
+#: model:ir.model.fields,field_description:ccima_crm.field_crm_lead__calculated_closing_date
+msgid "Time to Closing"
+msgstr "Tiempo de cierre"
+
+#. module: ccima_crm
+#: model:ir.model.fields,field_description:ccima_crm.field_crm_lead__timeline
+msgid "Timeline"
+msgstr "Tiempos"
+
+#. module: ccima_crm
+#: model:ir.model.fields,field_description:ccima_crm.field_crm_lead__tour_completed
+msgid "Tour Completed"
+msgstr "Recorrido Realizado"
+
+#. module: ccima_crm
+#: model:ir.model.fields,help:ccima_crm.field_crm_lead__contacted
+msgid "True if the lead has at least one activity registered"
+msgstr "Verdadero si el lead tiene al menos una actividad registrada"
+
+#. module: ccima_crm
+#: model:ir.model.fields.selection,name:ccima_crm.selection__crm_lead__profile__user
+msgid "User"
+msgstr "Usuario"
+
+#. module: ccima_crm
+#. odoo-python
+#: code:addons/ccima_crm/models/crm_lead.py:0
+msgid "Validation Error"
+msgstr "Error de Validación"
+
+#. module: ccima_crm
+#: model:ir.model.fields.selection,name:ccima_crm.selection__crm_lead__tour_completed__virtual
+msgid "Virtual"
+msgstr ""
+
+#. module: ccima_crm
+#: model:ir.model.fields.selection,name:ccima_crm.selection__crm_lead__has_budget__yes
+#: model:ir.model.fields.selection,name:ccima_crm.selection__crm_lead__location_defined__yes
+#: model:ir.model.fields.selection,name:ccima_crm.selection__crm_lead__real_interest__yes
+msgid "Yes"
+msgstr "Sí"

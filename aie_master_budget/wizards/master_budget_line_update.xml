@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id="master_budget_line_update_view_form" model="ir.ui.view">
+        <field name="name">master.budget.line.update.view.form</field>
+        <field name="model">master.budget.line.update</field>
+        <field name="arch" type="xml">
+            <form>
+                <group>
+                    <group>
+                        <field name="product_id" domain="[('id', 'in', domain_product_ids)]" options="{'no_create': True}" required="1"/>
+                        <field name="price_unit"/>
+                    </group>
+                </group>
+                <footer>
+                    <button string="Confirm" name="action_confirm" confirm="Are you sure?" type="object" class="oe_highlight"/>
+                    <button string="Cancel" class="btn-secondary" special="cancel"/>
+                </footer>
+            </form>
+        </field>
+    </record>
+
+    <record id="master_budget_line_update_action" model="ir.actions.act_window">
+        <field name="name">Update Budget Line</field>
+        <field name="res_model">master.budget.line.update</field>
+        <field name="view_mode">form</field>
+        <field name="target">new</field>
+    </record>
+</odoo>

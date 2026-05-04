@@ -1,0 +1,74 @@
+<?xml version="1.0"?>
+<odoo>
+    <record id="view_amortization_calculator_form" model="ir.ui.view">
+        <field name="name">view.amortization.calculator.form</field>
+        <field name="model">amortization.calculator</field>
+        <field name="arch" type="xml">
+            <form string="Amortization Calculator">
+                <header>
+                    <button name="action_generate_comparison" type="object" string="Generate Comparative"/>
+                    <button name="action_print_financial_year"
+                        type="object"
+                        string="Financial Year"
+                        class="btn-primary"/>
+                </header>
+                <sheet>
+                    <group>
+                        <field name="name"/>
+                        <field name="partner_id"/>
+                        <field name="meters"/>
+                        <field name="price_meter"/>
+                        <field name="hitch_percentage"/>
+                        <field name="payments" widget="many2many_tags"/>
+                    </group>
+                    <notebook>
+                        <page string="Comparativo Financiero">
+                            <field name="comparison_line_ids" widget="sol_o2m" mode="list">
+                                <list string="Comparativo Financiero" editable="bottom" limit="200" class="mm-compare-list">
+                                    <field name="plan_name" readonly="1" force_save="1"/>
+                                    <field name="months" readonly="1" force_save="1"/>
+                                    <field name="unit_price_discount" readonly="1" force_save="1"/>
+                                    <field name="price_lot" readonly="1" force_save="1"/>
+                                    <field name="promotion_id"/>
+                                    <field name="discount_value" readonly="1" force_save="1"/>
+                                    <field name="initial_investment" readonly="1" force_save="1"/>
+                                    <field name="gradual_initial_investment" readonly="1" force_save="1"/>
+                                    <field name="hitch_amount" readonly="1" force_save="1"/>
+                                    <field name="gradual_financing_amount" readonly="1" force_save="1"/>
+                                    <field name="comparison_block_ids" widget="sol_o2m" mode="list" readonly="1" force_save="1" invisible="1">
+                                        <list editable="bottom" limit="200">
+                                            <field name="block_name"/>
+                                            <field name="amount"/>
+                                        </list>
+                                    </field>
+                                </list>
+                            </field>
+                        </page>
+                    </notebook>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="view_amortization_calculator_list" model="ir.ui.view">
+        <field name="name">view.amortization_calculator.list</field>
+        <field name="model">amortization.calculator</field>
+        <field name="arch" type="xml">
+            <list string="Amortization Calculator">
+                <field name="name"/>
+            </list>
+        </field>
+    </record>
+
+    <record id="action_amortization_calculator_form" model="ir.actions.act_window">
+        <field name="name">Amortization Calculator</field>
+        <field name="res_model">amortization.calculator</field>
+        <field name="view_mode">list,form</field>
+    </record>
+
+    <menuitem id="menu_amortization_calculator"
+             parent="crm.crm_menu_config"
+             action="action_amortization_calculator_form"
+             sequence="12"
+             groups="base.group_no_one"/>
+</odoo>

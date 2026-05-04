@@ -1,0 +1,14 @@
+"id","name","model_id:id","group_id:id","perm_read","perm_write","perm_create","perm_unlink"
+tk_rental.access_rent_order,access_rent_order,tk_rental.model_rent_order,base.group_user,1,1,1,1
+tk_rental.access_rent_term,access_rent_term,tk_rental.model_rent_term,base.group_user,1,1,1,1
+tk_rental.access_renting_items,access_renting_items,tk_rental.model_renting_items,base.group_user,1,1,1,0
+tk_rental.access_equipment_delivery,access_equipment_delivery,tk_rental.model_equipment_delivery,base.group_user,1,1,1,1
+tk_rental.access_rental_dashboard,access_rental_dashboard,tk_rental.model_rental_dashboard,base.group_user,1,1,1,1
+tk_rental.access_renting_items_image,access_renting_items_image,tk_rental.model_renting_items_image,base.group_user,1,1,1,1
+tk_rental.access_equipment_delivery_image,access_equipment_delivery_image,tk_rental.model_equipment_delivery_image,base.group_user,1,1,1,1
+tk_rental.access_maintenance_spare_part,access_maintenance_spare_part,tk_rental.model_maintenance_spare_part,base.group_user,1,1,1,1
+tk_rental.access_maintenance_service,access_maintenance_service,tk_rental.model_maintenance_service,base.group_user,1,1,1,1
+tk_rental.access_equipment_image,access_equipment_image,tk_rental.model_equipment_image,base.group_user,1,1,1,1
+tk_rental.access_equipment_renting_info,access_equipment_renting_info,tk_rental.model_equipment_renting_info,base.group_user,1,1,1,1
+tk_rental.access_equipment_odometer,access_equipment_odometer,tk_rental.model_equipment_odometer,base.group_user,1,1,1,1
+tk_rental.access_update_last_odometer,access_update_last_odometer,tk_rental.model_update_last_odometer,base.group_user,1,1,1,0

@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <!-- List View -->
+    <record id="view_property_sales_manager_summary_list" model="ir.ui.view">
+        <field name="name">property.sales.manager.summary.list</field>
+        <field name="model">property.sales.manager.summary</field>
+        <field name="arch" type="xml">
+            <list string="Resumen de Gerentes" create="false">
+                <field name="manager_name"/>
+                <field name="calendar_name"/>
+                <field name="total_sold"/>
+                <field name="total_amount_display"/>
+            </list>
+        </field>
+    </record>
+
+    <!-- Form View -->
+    <record id="view_property_sales_manager_summary_form" model="ir.ui.view">
+        <field name="name">property.sales.manager.summary.form</field>
+        <field name="model">property.sales.manager.summary</field>
+        <field name="arch" type="xml">
+            <form string="Detalle de Gerente" create="false" edit="false">
+                <header>
+                    <button name="action_refresh"
+                            type="object"
+                            string="Actualizar Datos"
+                            class="btn-primary"/>
+                </header>
+                <sheet>
+                    <div class="oe_title">
+                        <h1>
+                            <field name="manager_name" readonly="1"/>
+                        </h1>
+                    </div>
+                    <group>
+                        <group string="Configuración">
+                            <field name="manager_id" readonly="1"/>
+                            <field name="calendar_id" readonly="1"/>
+                            <field name="company_id" readonly="1"/>
+                        </group>
+                        <group string="Totales">
+                            <field name="total_sold" readonly="1"/>
+                            <field name="total_amount_display" readonly="1"/>
+                        </group>
+                    </group>
+                    
+                    <notebook>
+                        <page string="Líneas de Detalle (Dashboard)" name="detail_lines">
+                            <field name="week_detail_ids" nolabel="1"/>
+                        </page>
+                        
+                        <page string="Actividad por Semana" name="weekly">
+                            <group>
+                                <field name="weekly_details" readonly="1" nolabel="1" widget="text"/>
+                            </group>
+                        </page>
+                        
+                        <page string="Ventas por Cluster" name="clusters">
+                            <group>
+                                <field name="cluster_details" readonly="1" nolabel="1" widget="text"/>
+                            </group>
+                        </page>
+                        
+                        <page string="Propiedades Vendidas" name="properties">
+                            <group>
+                                <field name="properties_list" readonly="1" nolabel="1" widget="text"/>
+                            </group>
+                        </page>
+                    </notebook>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <!-- Generator Form -->
+    <record id="view_property_sales_manager_summary_generator_form" model="ir.ui.view">
+        <field name="name">property.sales.manager.summary.generator.form</field>
+        <field name="model">property.sales.manager.summary.generator</field>
+        <field name="arch" type="xml">
+            <form>
+                <group>
+                    <field name="calendar_id"/>
+                </group>
+                <footer>
+                    <button name="action_generate"
+                            type="object"
+                            string="Generar Resumen de Gerentes"
+                            class="btn-primary"/>
+                    <button string="Cancelar" class="btn-secondary" special="cancel"/>
+                </footer>
+            </form>
+        </field>
+    </record>
+
+    <!-- Actions -->
+    <record id="action_property_sales_manager_summary" model="ir.actions.act_window">
+        <field name="name">Resumen por Gerentes</field>
+        <field name="res_model">property.sales.manager.summary</field>
+        <field name="view_mode">list,form</field>
+    </record>
+
+    <record id="action_property_sales_manager_summary_generator" model="ir.actions.act_window">
+        <field name="name">Generar Resumen de Gerentes</field>
+        <field name="res_model">property.sales.manager.summary.generator</field>
+        <field name="view_mode">form</field>
+        <field name="target">new</field>
+    </record>
+
+    <!-- Menu -->
+    <menuitem id="menu_property_sales_manager_summary"
+              name="Resumen por Gerentes"
+              parent="real_estate_bits.menu_real_estate_configuration"
+              action="action_property_sales_manager_summary_generator"
+              sequence="14"/>
+
+</odoo>

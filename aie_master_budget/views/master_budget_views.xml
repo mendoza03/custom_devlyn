@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id="master_budget_view_list" model="ir.ui.view">
+            <field name="name">master.budget.view.list</field>
+            <field name="model">master.budget</field>
+            <field name="arch" type="xml">
+                <list>
+                    <field name="name"/>
+                    <field name="project_id"/>
+                    <field name="period_start"/>
+                    <field name="period_end"/>
+                    <field name="company_id" invisible="True"/>
+                </list>
+            </field>
+        </record>
+
+        <record id="master_budget_view_form" model="ir.ui.view">
+            <field name="name">master.budget.view.form</field>
+            <field name="model">master.budget</field>
+            <field name="arch" type="xml">
+                <form string="Create a new master budget">
+                    <header>
+                        <button string="Confirm" name="action_confirm" type="object" class="oe_highlight" invisible="state != 'draft'"/>
+                        <button string="Change price" name="%(master_budget_line_update_action)d" type="action" class="btn-secondary"/>
+                        <field name="state" widget="statusbar" statusbar_visible="draft,confirm"/>
+                    </header>
+                    <sheet>
+                        <group>
+                            <group name="general_information" string="General information">
+                                <field name="name"/>
+                                <field name="project_id" required="1"/>
+                                <field name="company_id"/>
+                            </group>
+                            <group name="period" string="Period">
+                                <field name="period_start"/>
+                                <field name="period_end"/>
+                            </group>
+                            <notebook>
+                                <page name="lines" string="Lines" readonly="not project_id">
+                                    <field name="line_ids"/>
+                                </page>
+                            </notebook>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <record id="master_budget_action" model="ir.actions.act_window">
+            <field name="name">Master budget records</field>
+            <field name="res_model">master.budget</field>
+            <field name="view_mode">list,form</field>
+            <field name="help" type="html">
+                <p class="o_view_nocontent_smiling_face">
+                    There are no records to display.
+                </p>
+            </field>
+        </record>
+
+    </data>
+</odoo>

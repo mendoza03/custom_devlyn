@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id="promotions_property_view_tree" model="ir.ui.view">
+        <field name="name">promotions_property.view.tree</field>
+        <field name="model">promotions.property</field>
+        <field name="arch" type="xml">
+            <list string="Promotions Property" editable="bottom">
+                <field name="name" />
+                <field name="porcent" widget="percentage" />
+                <field name="porcent_financial" widget="percentage" />
+                <field name="porcent_bono" />
+                <field name="active" column_invisible="True" />
+            </list>
+        </field>
+    </record>
+
+    <record id="promotions_property_action" model="ir.actions.act_window">
+        <field name="name">Promotions</field>
+        <field name="res_model">promotions.property</field>
+        <field name="view_mode">list</field>
+        <field name="help" type="html">
+            <p class="oe_view_nocontent_create">
+                Click to add a new promotion for property or unit
+            </p>
+        </field>
+    </record>
+
+    <menuitem
+        id="promotions_property_menu"
+        name="Discount Promotions"
+        action="promotions_property_action"
+        parent="real_estate_bits.menu_real_estate_configuration"
+        sequence="10"/>
+</odoo>

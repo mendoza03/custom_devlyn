@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <data noupdate="1">
+        <record id="equipment_rental_damage_charges_mail_template" model="mail.template">
+            <field name="name">Equipment Rental Charges Mail Template</field>
+            <field name="model_id" ref="tk_rental.model_rent_order"/>
+            <field name="subject">Equipment Rental Damage Charges Notification</field>
+            <field name="email_from">{{object.company_id.email}}</field>
+            <field name="partner_to">{{ object.customer_id.id }}</field>
+            <field name="body_html" type="html">
+                <p>
+                    Dear,
+                    <h4>
+                        <strong>
+                            <t t-out="object.customer_id.name"/>
+                        </strong>
+                    </h4>
+                </p>
+                <p>
+                    We trust this message finds you well. As part of our standard procedure, we have conducted a
+                    thorough inspection of the equipment you recently returned. Unfortunately, we have identified
+                    damages that require repair or replacement.
+                </p>
+                <p>
+                    Please find below the details of the damage charges:
+                </p>
+                <hr/>
+
+                <table class="table table-sm o_main_table table-borderless" style="width: 100%">
+                    <tr>
+                        <td style="text-align: left; padding: 2px; width: 50%">
+                            <strong>Equipment</strong>
+                        </td>
+                        <td style="text-align: right; padding: 2px; width: 20%">
+                            <strong>Qty</strong>
+                        </td>
+                        <td style="text-align: right; padding: 2px; width: 30%">
+                            <strong>Charges</strong>
+                        </td>
+                    </tr>
+                    <t t-foreach="object.equipment_delivery_ids" t-as="equip">
+                        <tr>
+                            <td style="text-align: left; padding: 2px; width: 50%">
+                                <span t-field="equip.product_id"/>
+                            </td>
+                            <td style="text-align: right; padding: 2px; width: 20%">
+                                <span t-field="equip.product_qty"/>
+                            </td>
+                            <td style="text-align: right; padding: 2px; width: 30%">
+                                <span t-field="equip.return_charge"/>
+                            </td>
+                        </tr>
+                    </t>
+                    <tr>
+                        <td colspan="2" style="text-align: left; padding: 2px; width: 70%">
+                            <strong>Total Damage Charges:</strong>
+                        </td>
+                        <td style="text-align: right; padding: 2px; width: 30%">
+                            <span t-field="object.total_damage_charge"/>
+                        </td>
+                    </tr>
+                </table>
+                <hr/>
+                <p>
+                    These charges will be applied to your account in accordance with our rental agreement. If you have
+                    any questions or need further clarification regarding these charges, please don't hesitate to
+                    contact our customer support team at
+                    <span>
+                        <strong>
+                            <t t-out="object.company_id.phone"/>
+                        </strong>
+                    </span>
+                    .
+                </p>
+                <p>
+                    Your satisfaction is of utmost importance to us, and we appreciate your business with
+                    <span>
+                        <strong>
+                            <t t-out="object.company_id.name"/>
+                        </strong>
+                    </span>
+                    We look forward to serving you again in the future.
+                </p>
+                <h5>
+                    Best regards,
+                    <br/>
+                    <strong>
+                        <t t-out="object.responsible_id.name"/>
+                    </strong>
+                </h5>
+                <hr/>
+                <span>
+                    <h5>
+                        <t t-out="object.company_id.name"/>
+                    </h5>
+                    <t t-out="object.company_id.phone"/>
+                    <br/>
+                    <t t-out="object.company_id.email"/>
+                    <br/>
+                    <t t-out="object.company_id.website"/>
+                </span>
+            </field>
+            <field name="report_template_ids"
+                   eval="[(4, ref('tk_rental.action_return_order_details_report_template'))]"/>
+            <field name="lang">{{ object.customer_id.lang }}</field>
+            <field name="auto_delete" eval="False"/>
+        </record>
+    </data>
+</odoo>

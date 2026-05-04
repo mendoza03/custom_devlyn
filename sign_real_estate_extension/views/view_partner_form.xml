@@ -1,0 +1,375 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="sign_real_estate_extension_view_partner_form_inherit" model="ir.ui.view">
+        <field name="name">res.partner.view.form.inherit</field>
+        <field name="model">res.partner</field>
+        <field name="inherit_id" ref="base.view_partner_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//notebook" position="inside">
+                <page string="contract information" groups="base.group_no_one">
+                    <group>
+                        <field name="property_name" readonly="True"/>
+                        <field name="property_lot" readonly="True"/>
+                        <field name="property_footage" readonly="True"/>
+                        <field name="property_amount" readonly="True"/>
+                        <field name="monthly_payments_1_to_48" readonly="True"/>
+                        <field name="monthly_payments_49_to_120" readonly="True"/>
+                        <field name="monthly_payments_121_to_180" readonly="True"/>
+                        <field name="monthly_payments_181_to_240" readonly="True"/>
+                        <field name="property_internal_code" readonly="True"/>
+                        <field name="monthly_payments_1_to_48_text" readonly="True"/>
+                        <field name="monthly_payments_49_to_120_text" readonly="True"/>
+                        <field name="monthly_payments_121_to_180_text" readonly="True"/>
+                        <field name="monthly_payments_181_to_240_text" readonly="True"/>
+                        <field name="related_public_deeds" readonly="True"/>
+                        <field name="recent_public_deed" readonly="True"/>
+                        <field name="otherwise_clause" readonly="True"/>
+                        <field name="compliance_clause" readonly="True"/>
+                        <field name="company_legal_name" readonly="True"/>
+                        <field name="company_legal_rep" readonly="True"/>
+                        <field name="company_constitutive_act" readonly="True"/>
+                        <field name="company_notary" readonly="True"/>
+                        <field name="company_address" readonly="True"/>
+                        <field name="company_email" readonly="True"/>
+                        <field name="loan_lines_text" readonly="True" nolabel="1" placeholder="Loan schedule will appear here when a contract is linked."/>
+                        <field name="property_attachment_1_name"/>
+                        <field name="property_attachment_1_url"/>
+                        <field name="vat_amount"/>
+                        <field name="vat_amount_text"/>
+                        <field name="total_without_tax"/>
+                        <field name="total_without_tax_text"/>
+                        <field name="maintenance_fee"/>
+                        <field name="maintenance_fee_text"/>
+                        <field name="property_footage_text"/>
+                        <field name="property_lot_text"/>
+                        <field name="property_pricing"/>
+                        <field name="property_pricing_text"/>
+                        <field name="related_public_deeds"/>
+                        <field name="recent_public_deed"/>
+                        <field name="otherwise_clause"/>
+                        <field name="compliance_clause"/>
+                        <field name="company_legal_name"/>
+                        <field name="company_legal_rep"/>
+                        <field name="company_constitutive_act"/>
+                        <field name="company_notary"/>
+                        <field name="company_address"/>
+                        <field name="company_email"/>
+                        <field name="partner_related_public_deeds"/>
+                        <field name="partner_recent_public_deed"/>
+                        <field name="partner_legal_name"/>
+                        <field name="partner_legal_representative"/>
+                        <field name="partner_constitutive_deed"/>
+                        <field name="partner_current_notary"/>
+                        <field name="partner_registered_address"/>
+                        <field name="partner_contact_email"/>
+                        <field name="person_type_client"/>
+                        <field name="full_name_client"/>
+                        <field name="curp_client"/>
+                        <field name="rfc_client"/>
+                        <field name="marital_status_client"/>
+                        <field name="nationality_client"/>
+                        <field name="address_client"/>
+                        <field name="phone_number_client"/>
+                        <field name="email_client"/>
+                        <field name="official_id_client"/>
+                        <field name="lives_in_house_client"/>
+                        <field name="studies_client"/>
+                        <field name="profession_client"/>
+                        <field name="occupation_client"/>
+                        <field name="employer_name_client"/>
+                        <field name="job_position_client"/>
+                        <field name="seniority_client"/>
+                        <field name="employer_phone_client"/>
+                        <field name="employer_address_client"/>
+                        <field name="place_of_birth_client"/>
+                        <field name="date_of_birth_client"/>
+                        <field name="applies_assets_client"/>
+                        <field name="first_names_client"/>
+                        <field name="last_name_materno_client"/>
+                        <field name="last_name_paterno_client"/>
+
+                        <field name="stockholder_full_name_1"/>
+                        <field name="stockholder_address_1"/>
+                        <field name="stockholder_lives_in_house_1"/>
+                        <field name="stockholder_studies_1"/>
+                        <field name="stockholder_profession_1"/>
+                        <field name="stockholder_marital_status_1"/>
+                        <field name="stockholder_phone_number_1"/>
+                        <field name="stockholder_email_1"/>
+                        <field name="stockholder_nationality_1"/>
+                        <field name="stockholder_rfc_1"/>
+                        <field name="stockholder_curp_1"/>
+                        <field name="stockholder_occupation_1"/>
+                        <field name="stockholder_job_position_1"/>
+                        <field name="stockholder_seniority_1"/>
+                        <field name="stockholder_employer_name_1"/>
+                        <field name="stockholder_employer_phone_1"/>
+                        <field name="stockholder_employer_address_1"/>
+                        <field name="stockholder_applies_assets_1"/>
+                        <field name="stockholder_shares_percentage_1"/>
+
+                        <field name="stockholder_full_name_2"/>
+                        <field name="stockholder_address_2"/>
+                        <field name="stockholder_lives_in_house_2"/>
+                        <field name="stockholder_studies_2"/>
+                        <field name="stockholder_profession_2"/>
+                        <field name="stockholder_marital_status_2"/>
+                        <field name="stockholder_phone_number_2"/>
+                        <field name="stockholder_email_2"/>
+                        <field name="stockholder_nationality_2"/>
+                        <field name="stockholder_rfc_2"/>
+                        <field name="stockholder_curp_2"/>
+                        <field name="stockholder_occupation_2"/>
+                        <field name="stockholder_job_position_2"/>
+                        <field name="stockholder_seniority_2"/>
+                        <field name="stockholder_employer_name_2"/>
+                        <field name="stockholder_employer_phone_2"/>
+                        <field name="stockholder_employer_address_2"/>
+                        <field name="stockholder_applies_assets_2"/>
+                        <field name="stockholder_shares_percentage_2"/>
+
+                        <field name="stockholder_full_name_3"/>
+                        <field name="stockholder_address_3"/>
+                        <field name="stockholder_lives_in_house_3"/>
+                        <field name="stockholder_studies_3"/>
+                        <field name="stockholder_profession_3"/>
+                        <field name="stockholder_marital_status_3"/>
+                        <field name="stockholder_phone_number_3"/>
+                        <field name="stockholder_email_3"/>
+                        <field name="stockholder_nationality_3"/>
+                        <field name="stockholder_rfc_3"/>
+                        <field name="stockholder_curp_3"/>
+                        <field name="stockholder_occupation_3"/>
+                        <field name="stockholder_job_position_3"/>
+                        <field name="stockholder_seniority_3"/>
+                        <field name="stockholder_employer_name_3"/>
+                        <field name="stockholder_employer_phone_3"/>
+                        <field name="stockholder_employer_address_3"/>
+                        <field name="stockholder_applies_assets_3"/>
+                        <field name="stockholder_shares_percentage_3"/>
+
+                        <field name="stockholder_full_name_4"/>
+                        <field name="stockholder_address_4"/>
+                        <field name="stockholder_lives_in_house_4"/>
+                        <field name="stockholder_studies_4"/>
+                        <field name="stockholder_profession_4"/>
+                        <field name="stockholder_marital_status_4"/>
+                        <field name="stockholder_phone_number_4"/>
+                        <field name="stockholder_email_4"/>
+                        <field name="stockholder_nationality_4"/>
+                        <field name="stockholder_rfc_4"/>
+                        <field name="stockholder_curp_4"/>
+                        <field name="stockholder_occupation_4"/>
+                        <field name="stockholder_job_position_4"/>
+                        <field name="stockholder_seniority_4"/>
+                        <field name="stockholder_employer_name_4"/>
+                        <field name="stockholder_employer_phone_4"/>
+                        <field name="stockholder_employer_address_4"/>
+                        <field name="stockholder_applies_assets_4"/>
+                        <field name="stockholder_shares_percentage_4"/>
+
+                        <field name="stockholder_full_name_5"/>
+                        <field name="stockholder_address_5"/>
+                        <field name="stockholder_lives_in_house_5"/>
+                        <field name="stockholder_studies_5"/>
+                        <field name="stockholder_profession_5"/>
+                        <field name="stockholder_marital_status_5"/>
+                        <field name="stockholder_phone_number_5"/>
+                        <field name="stockholder_email_5"/>
+                        <field name="stockholder_nationality_5"/>
+                        <field name="stockholder_rfc_5"/>
+                        <field name="stockholder_curp_5"/>
+                        <field name="stockholder_occupation_5"/>
+                        <field name="stockholder_job_position_5"/>
+                        <field name="stockholder_seniority_5"/>
+                        <field name="stockholder_employer_name_5"/>
+                        <field name="stockholder_employer_phone_5"/>
+                        <field name="stockholder_employer_address_5"/>
+                        <field name="stockholder_applies_assets_5"/>
+                        <field name="stockholder_shares_percentage_5"/>
+
+                        <field name="stockholder_full_name_6"/>
+                        <field name="stockholder_address_6"/>
+                        <field name="stockholder_lives_in_house_6"/>
+                        <field name="stockholder_studies_6"/>
+                        <field name="stockholder_profession_6"/>
+                        <field name="stockholder_marital_status_6"/>
+                        <field name="stockholder_phone_number_6"/>
+                        <field name="stockholder_email_6"/>
+                        <field name="stockholder_nationality_6"/>
+                        <field name="stockholder_rfc_6"/>
+                        <field name="stockholder_curp_6"/>
+                        <field name="stockholder_occupation_6"/>
+                        <field name="stockholder_job_position_6"/>
+                        <field name="stockholder_seniority_6"/>
+                        <field name="stockholder_employer_name_6"/>
+                        <field name="stockholder_employer_phone_6"/>
+                        <field name="stockholder_employer_address_6"/>
+                        <field name="stockholder_applies_assets_6"/>
+                        <field name="stockholder_shares_percentage_6"/>
+
+                        <field name="stockholder_full_name_7"/>
+                        <field name="stockholder_address_7"/>
+                        <field name="stockholder_lives_in_house_7"/>
+                        <field name="stockholder_studies_7"/>
+                        <field name="stockholder_profession_7"/>
+                        <field name="stockholder_marital_status_7"/>
+                        <field name="stockholder_phone_number_7"/>
+                        <field name="stockholder_email_7"/>
+                        <field name="stockholder_nationality_7"/>
+                        <field name="stockholder_rfc_7"/>
+                        <field name="stockholder_curp_7"/>
+                        <field name="stockholder_occupation_7"/>
+                        <field name="stockholder_job_position_7"/>
+                        <field name="stockholder_seniority_7"/>
+                        <field name="stockholder_employer_name_7"/>
+                        <field name="stockholder_employer_phone_7"/>
+                        <field name="stockholder_employer_address_7"/>
+                        <field name="stockholder_applies_assets_7"/>
+                        <field name="stockholder_shares_percentage_7"/>
+
+                        <field name="stockholder_full_name_8"/>
+                        <field name="stockholder_address_8"/>
+                        <field name="stockholder_lives_in_house_8"/>
+                        <field name="stockholder_studies_8"/>
+                        <field name="stockholder_profession_8"/>
+                        <field name="stockholder_marital_status_8"/>
+                        <field name="stockholder_phone_number_8"/>
+                        <field name="stockholder_email_8"/>
+                        <field name="stockholder_nationality_8"/>
+                        <field name="stockholder_rfc_8"/>
+                        <field name="stockholder_curp_8"/>
+                        <field name="stockholder_occupation_8"/>
+                        <field name="stockholder_job_position_8"/>
+                        <field name="stockholder_seniority_8"/>
+                        <field name="stockholder_employer_name_8"/>
+                        <field name="stockholder_employer_phone_8"/>
+                        <field name="stockholder_employer_address_8"/>
+                        <field name="stockholder_applies_assets_8"/>
+                        <field name="stockholder_shares_percentage_8"/>
+
+                        <field name="stockholder_full_name_9"/>
+                        <field name="stockholder_address_9"/>
+                        <field name="stockholder_lives_in_house_9"/>
+                        <field name="stockholder_studies_9"/>
+                        <field name="stockholder_profession_9"/>
+                        <field name="stockholder_marital_status_9"/>
+                        <field name="stockholder_phone_number_9"/>
+                        <field name="stockholder_email_9"/>
+                        <field name="stockholder_nationality_9"/>
+                        <field name="stockholder_rfc_9"/>
+                        <field name="stockholder_curp_9"/>
+                        <field name="stockholder_occupation_9"/>
+                        <field name="stockholder_job_position_9"/>
+                        <field name="stockholder_seniority_9"/>
+                        <field name="stockholder_employer_name_9"/>
+                        <field name="stockholder_employer_phone_9"/>
+                        <field name="stockholder_employer_address_9"/>
+                        <field name="stockholder_applies_assets_9"/>
+                        <field name="stockholder_shares_percentage_9"/>
+
+                        <field name="stockholder_full_name_10"/>
+                        <field name="stockholder_address_10"/>
+                        <field name="stockholder_lives_in_house_10"/>
+                        <field name="stockholder_studies_10"/>
+                        <field name="stockholder_profession_10"/>
+                        <field name="stockholder_marital_status_10"/>
+                        <field name="stockholder_phone_number_10"/>
+                        <field name="stockholder_email_10"/>
+                        <field name="stockholder_nationality_10"/>
+                        <field name="stockholder_rfc_10"/>
+                        <field name="stockholder_curp_10"/>
+                        <field name="stockholder_occupation_10"/>
+                        <field name="stockholder_job_position_10"/>
+                        <field name="stockholder_seniority_10"/>
+                        <field name="stockholder_employer_name_10"/>
+                        <field name="stockholder_employer_phone_10"/>
+                        <field name="stockholder_employer_address_10"/>
+                        <field name="stockholder_applies_assets_10"/>
+                        <field name="stockholder_shares_percentage_10"/>
+                        <field name="street_name_1"/>
+                        <field name="external_number_1"/>
+                        <field name="number_1"/>
+                        <field name="internal_number_1"/>
+                        <field name="suburb_1"/>
+                        <field name="municipality_1"/>
+                        <field name="state_name_1"/>
+                        <field name="zip_code_1"/>
+                        <field name="street_name_2"/>
+                        <field name="external_number_2"/>
+                        <field name="number_2"/>
+                        <field name="internal_number_2"/>
+                        <field name="suburb_2"/>
+                        <field name="municipality_2"/>
+                        <field name="state_name_2"/>
+                        <field name="zip_code_2"/>
+                        <field name="street_name_3"/>
+                        <field name="external_number_3"/>
+                        <field name="number_3"/>
+                        <field name="internal_number_3"/>
+                        <field name="suburb_3"/>
+                        <field name="municipality_3"/>
+                        <field name="state_name_3"/>
+                        <field name="zip_code_3"/>
+                        <field name="street_name_4"/>
+                        <field name="external_number_4"/>
+                        <field name="number_4"/>
+                        <field name="internal_number_4"/>
+                        <field name="suburb_4"/>
+                        <field name="municipality_4"/>
+                        <field name="state_name_4"/>
+                        <field name="zip_code_4"/>
+                        <field name="street_name_5"/>
+                        <field name="external_number_5"/>
+                        <field name="number_5"/>
+                        <field name="internal_number_5"/>
+                        <field name="suburb_5"/>
+                        <field name="municipality_5"/>
+                        <field name="state_name_5"/>
+                        <field name="zip_code_5"/>
+                        <field name="street_name_6"/>
+                        <field name="external_number_6"/>
+                        <field name="number_6"/>
+                        <field name="internal_number_6"/>
+                        <field name="suburb_6"/>
+                        <field name="municipality_6"/>
+                        <field name="state_name_6"/>
+                        <field name="zip_code_6"/>
+                        <field name="street_name_7"/>
+                        <field name="external_number_7"/>
+                        <field name="number_7"/>
+                        <field name="internal_number_7"/>
+                        <field name="suburb_7"/>
+                        <field name="municipality_7"/>
+                        <field name="state_name_7"/>
+                        <field name="zip_code_7"/>
+                        <field name="street_name_8"/>
+                        <field name="external_number_8"/>
+                        <field name="number_8"/>
+                        <field name="internal_number_8"/>
+                        <field name="suburb_8"/>
+                        <field name="municipality_8"/>
+                        <field name="state_name_8"/>
+                        <field name="zip_code_8"/>
+                        <field name="street_name_9"/>
+                        <field name="external_number_9"/>
+                        <field name="number_9"/>
+                        <field name="internal_number_9"/>
+                        <field name="suburb_9"/>
+                        <field name="municipality_9"/>
+                        <field name="state_name_9"/>
+                        <field name="zip_code_9"/>
+                        <field name="street_name_10"/>
+                        <field name="external_number_10"/>
+                        <field name="number_10"/>
+                        <field name="internal_number_10"/>
+                        <field name="suburb_10"/>
+                        <field name="municipality_10"/>
+                        <field name="state_name_10"/>
+                        <field name="zip_code_10"/>
+                    </group>
+                </page>
+            </xpath>
+        </field>
+    </record>
+</odoo>

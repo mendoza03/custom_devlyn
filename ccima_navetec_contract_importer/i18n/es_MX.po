@@ -1,0 +1,172 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* ccima_navetec_contract_importer
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 18.0+e-20250131\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2025-02-14 22:02+0000\n"
+"PO-Revision-Date: 2025-02-14 22:02+0000\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+#. module: ccima_navetec_contract_importer
+#: model:ir.model.fields,field_description:ccima_navetec_contract_importer.field_ccima_navetec_contract_importer__advance_payment_journal_id
+msgid "Advance Payment Journal"
+msgstr "Diario de pagos anticipados"
+
+#. module: ccima_navetec_contract_importer
+#: model_terms:ir.ui.view,arch_db:ccima_navetec_contract_importer.ccima_navetec_contract_importer_view_form
+msgid "Cancel"
+msgstr "Cancelar"
+
+#. module: ccima_navetec_contract_importer
+#: model:ir.model,name:ccima_navetec_contract_importer.model_ccima_navetec_contract_importer
+#: model:ir.model.fields,field_description:ccima_navetec_contract_importer.field_ccima_navetec_contract_importer_line__contract_importer_id
+msgid "Contract Importer"
+msgstr "Importador de contratos"
+
+#. module: ccima_navetec_contract_importer
+#: model:ir.actions.act_window,name:ccima_navetec_contract_importer.ccima_navetec_contract_importer_action
+msgid "Contract Importer Navetec"
+msgstr "Importador de contratos Navetec"
+
+#. module: ccima_navetec_contract_importer
+#: model:ir.ui.menu,name:ccima_navetec_contract_importer.menu_navetec_contract_importer
+msgid "Contract importer navetec"
+msgstr "Importador de contratos Navetec"
+
+#. module: ccima_navetec_contract_importer
+#: model:ir.model.fields,field_description:ccima_navetec_contract_importer.field_ccima_navetec_contract_importer__create_uid
+#: model:ir.model.fields,field_description:ccima_navetec_contract_importer.field_ccima_navetec_contract_importer_line__create_uid
+msgid "Created by"
+msgstr "Creado por"
+
+#. module: ccima_navetec_contract_importer
+#: model:ir.model.fields,field_description:ccima_navetec_contract_importer.field_ccima_navetec_contract_importer__create_date
+#: model:ir.model.fields,field_description:ccima_navetec_contract_importer.field_ccima_navetec_contract_importer_line__create_date
+msgid "Created on"
+msgstr "Creado en"
+
+#. module: ccima_navetec_contract_importer
+#: model:ir.model.fields,field_description:ccima_navetec_contract_importer.field_ccima_navetec_contract_importer_line__data
+msgid "Data"
+msgstr "Información"
+
+#. module: ccima_navetec_contract_importer
+#: model:ir.model.fields,field_description:ccima_navetec_contract_importer.field_ccima_navetec_contract_importer_line__data_text
+msgid "Data (Text)"
+msgstr "Información (Texto)"
+
+#. module: ccima_navetec_contract_importer
+#: model:ir.model.fields,field_description:ccima_navetec_contract_importer.field_ccima_navetec_contract_importer__display_name
+#: model:ir.model.fields,field_description:ccima_navetec_contract_importer.field_ccima_navetec_contract_importer_line__display_name
+msgid "Display Name"
+msgstr "Nombre mostrado"
+
+#. module: ccima_navetec_contract_importer
+#: model:ir.model.fields.selection,name:ccima_navetec_contract_importer.selection__ccima_navetec_contract_importer__state__done
+#: model:ir.model.fields.selection,name:ccima_navetec_contract_importer.selection__ccima_navetec_contract_importer_line__state__done
+msgid "Done"
+msgstr "Hecho"
+
+#. module: ccima_navetec_contract_importer
+#: model:ir.model.fields.selection,name:ccima_navetec_contract_importer.selection__ccima_navetec_contract_importer_line__state__error
+msgid "Error"
+msgstr ""
+
+#. module: ccima_navetec_contract_importer
+#: model:ir.model.fields,field_description:ccima_navetec_contract_importer.field_ccima_navetec_contract_importer__file
+msgid "File"
+msgstr "Archivo"
+
+#. module: ccima_navetec_contract_importer
+#: model:ir.model.fields,field_description:ccima_navetec_contract_importer.field_ccima_navetec_contract_importer__filename
+#: model:ir.model.fields,field_description:ccima_navetec_contract_importer.field_ccima_navetec_contract_importer_line__filename
+msgid "Filename"
+msgstr "Nombre del archivo"
+
+#. module: ccima_navetec_contract_importer
+#: model:ir.model.fields,field_description:ccima_navetec_contract_importer.field_ccima_navetec_contract_importer__id
+#: model:ir.model.fields,field_description:ccima_navetec_contract_importer.field_ccima_navetec_contract_importer_line__id
+msgid "ID"
+msgstr ""
+
+#. module: ccima_navetec_contract_importer
+#: model:ir.model.fields.selection,name:ccima_navetec_contract_importer.selection__ccima_navetec_contract_importer__state__import
+msgid "Import"
+msgstr "Importar"
+
+#. module: ccima_navetec_contract_importer
+#: model_terms:ir.ui.view,arch_db:ccima_navetec_contract_importer.ccima_navetec_contract_importer_view_form
+msgid "Import contracts"
+msgstr "Importar contratos"
+
+#. module: ccima_navetec_contract_importer
+#: model:ir.model.fields,field_description:ccima_navetec_contract_importer.field_ccima_navetec_contract_importer__account_income
+msgid "Income Account"
+msgstr "Cuenta de ingresos"
+
+#. module: ccima_navetec_contract_importer
+#: model:ir.model.fields,field_description:ccima_navetec_contract_importer.field_ccima_navetec_contract_importer__is_correct_to_import
+msgid "Is correct to import"
+msgstr "Está correcto para importar"
+
+#. module: ccima_navetec_contract_importer
+#: model:ir.model.fields,field_description:ccima_navetec_contract_importer.field_ccima_navetec_contract_importer__write_uid
+#: model:ir.model.fields,field_description:ccima_navetec_contract_importer.field_ccima_navetec_contract_importer_line__write_uid
+msgid "Last Updated by"
+msgstr "Última actualización por"
+
+#. module: ccima_navetec_contract_importer
+#: model:ir.model.fields,field_description:ccima_navetec_contract_importer.field_ccima_navetec_contract_importer__write_date
+#: model:ir.model.fields,field_description:ccima_navetec_contract_importer.field_ccima_navetec_contract_importer_line__write_date
+msgid "Last Updated on"
+msgstr "Última actualización por"
+
+#. module: ccima_navetec_contract_importer
+#: model:ir.model.fields,field_description:ccima_navetec_contract_importer.field_ccima_navetec_contract_importer__line_ids
+msgid "Lines"
+msgstr "Líneas"
+
+#. module: ccima_navetec_contract_importer
+#: model_terms:ir.ui.view,arch_db:ccima_navetec_contract_importer.ccima_navetec_contract_importer_view_form
+msgid "Load file"
+msgstr "Procesar archivo"
+
+#. module: ccima_navetec_contract_importer
+#: model:ir.model.fields,field_description:ccima_navetec_contract_importer.field_ccima_navetec_contract_importer_line__message
+msgid "Message"
+msgstr "Mensaje"
+
+#. module: ccima_navetec_contract_importer
+#: model:ir.model.fields,field_description:ccima_navetec_contract_importer.field_ccima_navetec_contract_importer__moratorium_interest
+msgid "Moratorium Interest"
+msgstr "Interés moratorio"
+
+#. module: ccima_navetec_contract_importer
+#: model:ir.model,name:ccima_navetec_contract_importer.model_ccima_navetec_contract_importer_line
+msgid "Navetec Contract Importer Line"
+msgstr "Línea del importador de contatos"
+
+#. module: ccima_navetec_contract_importer
+#: model:ir.model.fields.selection,name:ccima_navetec_contract_importer.selection__ccima_navetec_contract_importer__state__get
+#: model:ir.model.fields.selection,name:ccima_navetec_contract_importer.selection__ccima_navetec_contract_importer_line__state__pending
+msgid "Pending"
+msgstr "Pendiente"
+
+#. module: ccima_navetec_contract_importer
+#: model:ir.model.fields,field_description:ccima_navetec_contract_importer.field_ccima_navetec_contract_importer__state
+#: model:ir.model.fields,field_description:ccima_navetec_contract_importer.field_ccima_navetec_contract_importer_line__state
+msgid "State"
+msgstr "Estado"
+
+#. module: ccima_navetec_contract_importer
+#: model:ir.model.fields,field_description:ccima_navetec_contract_importer.field_ccima_navetec_contract_importer__templates
+msgid "Templates"
+msgstr "Plantillas"

@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+
+    <menuitem id="menu_real_estate_root" name="Real Estate" sequence="5"
+              web_icon="real_estate_bits,static/description/icon.png"/>
+
+    <record id="action_real_estate_dashboard" model="ir.actions.client">
+        <field name="name">Dashboard</field>
+        <field name="tag">real_estate</field>
+    </record>
+
+    <!--   Dashboard -->
+    <menuitem name="Dashboard" id="real_estate_menu_dashboard" parent="real_estate_bits.menu_real_estate_root"
+              action="action_real_estate_dashboard" sequence="1"/>
+
+    <!-- Project -->
+    <menuitem id="menu_real_estate_project_root" name="Project"
+              parent="real_estate_bits.menu_real_estate_root" sequence="10"/>
+    <menuitem id="menu_real_estate_region" name="Region" action="action_region_act_window" sequence="5"
+              parent="real_estate_bits.menu_real_estate_project_root"/>
+    <menuitem id="menu_real_estate_project" name="Worksite" action="action_project_worksite_act_window" sequence="10"
+              parent="real_estate_bits.menu_real_estate_project_root"/>
+    <menuitem id="menu_real_estate_sub_project" name="Project" action="action_sub_project_worksite_act_window"
+              sequence="15" parent="real_estate_bits.menu_real_estate_project_root"/>
+    <!-- Property -->
+    <menuitem id="menu_property_list_sub_unit" action="action_property_act_window" sequence="20"
+              parent="real_estate_bits.menu_real_estate_root"/>
+
+    <!-- Booking -->
+    <menuitem id="menu_property_reservation" name="Booking"
+              parent="real_estate_bits.menu_real_estate_root" sequence="30"
+              action="real_estate_bits.property_reservation_form_action"/>
+
+    <menuitem id="menu_condominium_reservation" name="Condominium"
+              parent="real_estate_bits.menu_real_estate_project_root" sequence="30"
+              action="real_estate_bits.property_condominium_form_action"/>
+
+    <!-- Contracting -->
+    <menuitem id="menu_property_contracts" name="Contracts" sequence="40"
+              parent="real_estate_bits.menu_real_estate_root"/>
+
+    <menuitem id="menu_property_renting_contracts" name="Renting Contracts" sequence="10"
+              action="real_estate_bits.action_property_renting_contract_act_window"
+              parent="real_estate_bits.menu_property_contracts"/>
+    <menuitem id="menu_property_sales_contracts" name="Sales Contracts" sequence="20"
+              action="real_estate_bits.action_property_sales_contract_act_window"
+              parent="real_estate_bits.menu_property_contracts"/>
+
+    <!-- Maintenance -->
+    <menuitem id="menu_property_maintenance_main" name="Maintenance" sequence="50"
+              action="real_estate_bits.action_maintenance_order_list"
+              parent="real_estate_bits.menu_real_estate_root"/>
+
+    <!--    <menuitem action="repair.action_repair_order_list" name="Repair Order" sequence="28"-->
+    <!--              id="menu_property_repair_order" parent="menu_property_maintenance_main"/>-->
+
+    <!-- Commission -->
+    <!--        <menuitem id="menu_commission_main" name="Commissions" sequence="29"-->
+    <!--                  parent="real_estate_bits.menu_real_estate_root" action="sales_commission_worksheet_action"/>-->
+
+    <!-- Configuration -->
+    <menuitem id="menu_real_estate_configuration" name="Configuration"
+              parent="real_estate_bits.menu_real_estate_root" sequence="80"/>
+
+    <menuitem id="menu_real_estate_config_setting" name="Settings" parent="menu_real_estate_configuration"
+              sequence="10" action="real_estate_bits.action_real_estate_config"/>
+    <menuitem id="menu_attachment_lines" name="Documents" parent="menu_real_estate_configuration"
+              sequence="15" action="real_estate_bits.action_attachment_lines_act_window"/>
+    <menuitem id="menu_commission_teams" name="Sales Teams" sequence="20"
+              action="sales_team.crm_team_action_config" parent="menu_real_estate_configuration"/>
+    <menuitem id="menu_real_estate_installment_template" name="Installment Template"
+              action="action_installment_template_form_act_window" sequence="30"
+              parent="real_estate_bits.menu_real_estate_configuration"/>
+
+
+</odoo>

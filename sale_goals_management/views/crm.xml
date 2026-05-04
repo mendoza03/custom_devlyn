@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    
+    <!-- Extender formulario de CRM Lead -->
+    <record id="view_crm_lead_form_stage_tracking" model="ir.ui.view">
+        <field name="name">crm.lead.form.stage.tracking</field>
+        <field name="model">crm.lead</field>
+        <field name="inherit_id" ref="crm.crm_lead_view_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//page[@name='internal_notes']" position="after">
+                <page string="Historial de Etapas" name="stage_history" invisible="1">
+                    <group>
+                        <group string="Etapas Alcanzadas">
+                            <field name="was_lead" readonly="1"/>
+                            <field name="was_prospect" readonly="1"/>
+                            <field name="was_meeting" readonly="1"/>
+                            <field name="was_opportunity" readonly="1"/>
+                            <field name="was_reserved" readonly="1"/>
+                            <field name="was_closed" readonly="1"/>
+                        </group>
+                        <group string="Fechas de Cada Etapa">
+                            <field name="lead_date" readonly="1"/>
+                            <field name="prospect_date" readonly="1"/>
+                            <field name="meeting_date" readonly="1"/>
+                            <field name="opportunity_date" readonly="1"/>
+                            <field name="reserved_date" readonly="1"/>
+                            <field name="closed_date" readonly="1"/>
+                        </group>
+                    </group>
+                </page>
+            </xpath>
+        </field>
+    </record>
+
+</odoo>

@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id="project_worksite_form" model="ir.ui.view">
+        <field name="name">project.worksite.view.form.inherit</field>
+        <field name="model">project.worksite</field>
+        <field name="inherit_id" ref="real_estate_bits.project_worksite_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//notebook/page[3]" position="after">
+                <page name="amenities" string="Amenities" invisible="parent_id">
+                    <field name="amenities_ids" options="{'no_create': True, 'no_open': True}"/>
+                </page>
+            </xpath>
+        </field>
+    </record>
+
+    <record id="sub_project_worksite_form" model="ir.ui.view">
+        <field name="name">project.worksite.view.form.inherit</field>
+        <field name="model">project.worksite</field>
+        <field name="inherit_id" ref="real_estate_bits.sub_project_worksite_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='amenities_ids']" position="attributes">
+                <attribute name="invisible">1</attribute>
+            </xpath>
+        </field>
+    </record>
+
+</odoo>

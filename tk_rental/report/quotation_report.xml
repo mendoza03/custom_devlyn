@@ -1,0 +1,224 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <data>
+        <template id="quotation_report_template">
+            <t t-call="web.html_container">
+                <t t-foreach="docs" t-as="quo">
+                    <t t-call="web.external_layout">
+                        <div class="page">
+                            <div id="add" class="row mt32 mb32">
+                                <div class="col-4">
+                                    <strong>Shipping Address:</strong>
+                                    <br/>
+                                    <span t-field="quo.shipping_street"/>
+                                    <br/>
+                                    <span t-field="quo.shipping_street2"/>
+                                    <br/>
+                                    <span t-field="quo.shipping_city"/>&#160;
+                                    <span t-field="quo.shipping_state_id"/>&#160;
+                                    <span t-field="quo.shipping_zip"/>&#160;
+                                    <br/>
+                                    <span t-field="quo.shipping_country_id"/>
+                                </div>
+                                <div class="col-4">
+                                    <strong>Billing Address:</strong>
+                                    <br/>
+                                    <span t-field="quo.billing_street"/>
+                                    <br/>
+                                    <span t-field="quo.billing_street2"/>
+                                    <br/>
+                                    <span t-field="quo.billing_city"/>&#160;
+                                    <span t-field="quo.billing_state_id"/>&#160;
+                                    <span t-field="quo.billing_zip"/>&#160;
+                                    <br/>
+                                    <span t-field="quo.billing_country_id"/>
+                                </div>
+                                <div class="col-4">
+                                    <strong>Contract Duration:</strong>
+                                    <br/>
+                                    <strong>Start Date</strong>
+                                    <br/>
+                                    <span t-field="quo.start_date"/>
+                                    <br/>
+                                    <strong>Return Date</strong>
+                                    <br/>
+                                    <span t-field="quo.return_date"/>
+                                </div>
+                            </div>
+                            <br/>
+                            <div id="information" class="row mt32 mb32">
+                                <div class="col-4" t-if="quo.order_number" name="order_number">
+                                    <strong>Order Number</strong>
+                                    <p class="m-0" t-field="quo.order_number"/>
+                                </div>
+                                <div class="col-4" t-if="quo.customer_id" name="customer_id">
+                                    <strong>Customer</strong>
+                                    <p class="m-0" t-field="quo.customer_id"/>
+                                </div>
+                                <div class="col-4" t-if="quo.responsible_id" name="responsible_id">
+                                    <strong>Responsible</strong>
+                                    <p class="m-0" t-field="quo.responsible_id"/>
+                                </div>
+                            </div>
+                            <br/>
+                            <table class="table table-sm o_main_table table-borderless mt-4" style="font-size: 10px;">
+                                <tr style="border-bottom: 1px solid darkgray;">
+                                    <td style="text-align: left; padding: 2px;">
+                                        <strong>Equipment</strong>
+                                    </td>
+                                    <td style="text-align: left; padding: 2px;">
+                                        <strong>Sr Number</strong>
+                                    </td>
+                                    <td style="text-align: left; padding: 2px;">
+                                        <strong>Start Date</strong>
+                                    </td>
+                                    <td style="text-align: left; padding: 2px;">
+                                        <strong>Return Date</strong>
+                                    </td>
+                                    <td style="text-align: right; padding: 2px;">
+                                        <strong>Qty</strong>
+                                    </td>
+                                    <td style="text-align: left; padding: 2px;">
+                                        <strong>Rent Type</strong>
+                                    </td>
+                                    <td style="text-align: right; padding: 2px;">
+                                        <strong>Renting Amount</strong>
+                                    </td>
+                                    <td style="text-align: left; padding: 2px;">
+                                        <strong>Unit</strong>
+                                    </td>
+                                    <td style="text-align: right; padding: 2px;">
+                                        <strong>Rent Amount</strong>
+                                    </td>
+                                    <td style="text-align: right; padding: 2px;">
+                                        <strong>Extra Hours Amount</strong>
+                                    </td>
+                                    <td style="text-align: right; padding: 2px;">
+                                        <strong>Rent / Unit</strong>
+                                    </td>
+                                    <td style="text-align: right; padding: 2px;">
+                                        <strong>Total Amount</strong>
+                                    </td>
+                                </tr>
+                                <t t-foreach="quo.renting_items_ids" t-as="item">
+                                    <tr style="border-bottom: 1px solid darkgray;">
+                                        <td style="text-align: left; padding: 2px;">
+                                            <span t-field="item.product_id"/>
+                                        </td>
+                                        <td style="text-align: left; padding: 2px;">
+                                            <span t-field="item.serial_number"/>
+                                        </td>
+                                        <td style="text-align: left; padding: 2px;">
+                                            <span t-field="item.start_date"/>
+                                        </td>
+                                        <td style="text-align: left; padding: 2px;">
+                                            <span t-field="item.return_date"/>
+                                        </td>
+                                        <td style="text-align: right; padding: 2px;">
+                                            <span t-field="item.product_qty"/>
+                                        </td>
+                                        <td style="text-align: left; padding: 2px;">
+                                            <span t-field="item.equipment_renting_info_id"/>
+                                        </td>
+                                        <td style="text-align: right; padding: 2px;">
+                                            <span t-field="item.renting_amount"/>
+                                        </td>
+                                        <td style="text-align: left; padding: 2px;">
+                                            <span t-field="item.range"/>
+                                        </td>
+                                        <td style="text-align: right; padding: 2px;">
+                                            <span t-field="item.rent_amount"/>
+                                        </td>
+                                        <td style="text-align: right; padding: 2px;">
+                                            <span t-field="item.extra_hour_amount"/>
+                                        </td>
+                                        <td style="text-align: right; padding: 2px;">
+                                            <span t-field="item.rent_per_unit"/>
+                                        </td>
+                                        <td style="text-align: right; padding: 2px;">
+                                            <span t-field="item.total_amount"/>
+                                        </td>
+                                    </tr>
+                                </t>
+                                <tr>
+                                    <td colspan="11">
+                                    </td>
+                                    <td style="text-align: right;padding-top: 1rem; padding: 2px;">
+                                        <strong>Total</strong>
+                                        <span t-field="quo.total_item_cost"/>
+                                    </td>
+                                </tr>
+                            </table>
+                            <p style="page-break-after:always;"/>
+                            <table class="table table-bordered table-sm" t-if="quo.renting_items_ids">
+                                <tr>
+                                    <td style="text-align: center; font-size: 12px; background-color: #F8F8F8;"
+                                        colspan="100%">
+                                        <strong>Renting Item Images</strong>
+                                    </td>
+                                </tr>
+                                <t t-foreach="quo.renting_items_ids" t-as="produce_name">
+                                    <tr>
+                                        <td colspan="100%">
+                                            <span t-field="produce_name.product_id"/>
+                                        </td>
+                                    </tr>
+                                    <t t-set="ap_tag" t-value="str('&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td&gt;')"/>
+                                    <t t-set="img_count" t-value="0"/>
+                                    <t t-if="produce_name.renting_items_image_ids">
+                                        <tr>
+                                            <td colspan="100%">
+                                                <t t-foreach="produce_name.renting_items_image_ids" t-as="img">
+                                                    <t t-set="img_count" t-value="img_count + 1"/>
+                                                    <div style="display: inline-block;text-align:center;">
+                                                        <t t-if="img.avatar">
+                                                            <img t-att-src="image_data_uri(img.avatar)"
+                                                                 style="width: 160px; height: 160px;"/>
+                                                        </t>
+                                                        <h6>
+                                                            <span t-field="img.name"/>
+                                                        </h6>
+                                                    </div>
+                                                    <t t-if="img_count % 5 == 0">
+                                                        <t t-raw="ap_tag"/>
+                                                    </t>
+                                                </t>
+                                            </td>
+                                        </tr>
+                                    </t>
+                                </t>
+                            </table>
+                            <p style="page-break-after:always;"/>
+                            <table class="table table-bordered table-sm" style="width: 100%;" t-if="quo.description">
+                                <tr>
+                                    <td style="text-align: center; font-size: 12px; background-color: #F8F8F8;">
+                                        <strong>Terms &amp; Conditions</strong>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <span t-field="quo.rent_term_id"/>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <span t-field="quo.description"/>
+                                    </td>
+                                </tr>
+                            </table>
+                        </div>
+                    </t>
+                </t>
+            </t>
+        </template>
+    </data>
+    <record id="action_quotation_report_template" model="ir.actions.report">
+        <field name="name">Quotation Report</field>
+        <field name="model">rent.order</field>
+        <field name="report_type">qweb-pdf</field>
+        <field name="report_name">tk_rental.quotation_report_template</field>
+        <field name="report_file">tk_rental.quotation_report_template</field>
+        <field name="binding_model_id" ref="model_rent_order"/>
+        <field name="binding_type">report</field>
+    </record>
+</odoo>

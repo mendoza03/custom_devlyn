@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id="view_property_contract_form_moratorium_extension" model="ir.ui.view">
+            <field name="name">property.contract.view.form.moratorium.extension</field>
+            <field name="model">property.contract</field>
+            <field name="inherit_id" ref="real_state_bits_finance_quote.view_property_contract_form_customs"/>
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='loan_line_ids']/list//field[@name='moratorium_interest']" position="after">
+                    <field name="cal_interest_moratorium" optional="show"/>
+                </xpath>
+            </field>
+        </record>
+    </data>
+</odoo>

@@ -1,0 +1,5 @@
+.o_form_view .mm-compare-list thead th[data-name="promotion_id"] {
+  font-weight: bold;
+  background-color: #cffc47;
+  color: #991717;
+}

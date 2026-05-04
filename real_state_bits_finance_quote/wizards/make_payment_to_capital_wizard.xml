@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="payment_to_capital_wizard_view_form" model="ir.ui.view">
+        <field name="name">payment.to.capital.wizard.view.form</field>
+        <field name="model">payment.to.capital.wizard</field>
+        <field name="arch" type="xml">
+            <form string="">
+                <sheet>
+                    <p>Enter the amount of the payment you wish to make to capital.</p>
+                    <group>
+                        <field name="currency_id" invisible="True" />
+                        <field name="payment_number" invisible="True" />
+                        <field name="payment_amount" widget="monetary" options="{'currency_field': 'currency_id'}"/>
+                        <field name="contract_id" invisible="True"/>
+                    </group>
+                </sheet>
+                <footer>
+                    <button string="create payment" name="apply_payment_in_contract" type="object" class="btn-primary"/>
+                    <button string="Cancel" class="btn-secondary" special="cancel"/>
+                </footer>
+            </form>
+        </field>
+    </record>
+</odoo>

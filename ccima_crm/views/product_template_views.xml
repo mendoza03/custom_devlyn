@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="product_template_form_lead_partner" model="ir.ui.view">
+        <field name="name">product.template.form.lead.partner</field>
+        <field name="model">product.template</field>
+        <field name="inherit_id" ref="ccima_crm_reassign.view_product_template_inherit_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='name']" position="after">
+                <field name="lead_partner_id" readonly="1" string="Customer" options="{'no_open': True, 'no_create': True}"/>
+                <field name="inactive_date" readonly="1"/>
+                <field name="inactive_month" readonly="1"/>
+            </xpath>
+            <xpath expr="//field[@name='property_date']" position="after">
+                <field name="closing_date"/>
+            </xpath>
+        </field>
+    </record>
+</odoo>

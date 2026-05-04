@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id="crm_stage_form" model="ir.ui.view">
+        <field name="name">crm.stage.view.form.inherit</field>
+        <field name="model">crm.stage</field>
+        <field name="inherit_id" ref="crm.crm_stage_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='team_count']" position="after">
+                <field name="background_color" widget="color"/>
+                <field name="text_color" widget="color"/>
+            </xpath>
+
+            <xpath expr="//field[@name='requirements']" position="replace">
+                <group>
+                    <group>
+                        <field name="need_partner_id_to_move" widget="boolean_toggle"/>
+                        <field name="need_email_to_move" widget="boolean_toggle"/>
+                        <field name="need_phone_to_move" widget="boolean_toggle"/>
+                        <field name="need_origin_to_move" widget="boolean_toggle"/>
+                    </group>
+                    <group>
+                        <field name="need_salesman_to_move" widget="boolean_toggle"/>
+                        <field name="need_company_to_move" widget="boolean_toggle"/>
+                        <field name="need_title_to_move" widget="boolean_toggle"/>
+                        <field name="need_address_to_move" widget="boolean_toggle"/>
+                    </group>
+                    <group>
+                        <field name="need_job_position" widget="boolean_toggle"/>
+                        <field name="need_property_id" widget="boolean_toggle"/>
+                        <field name="need_date_deadline" widget="boolean_toggle"/>
+                        <field name="need_at_least_one_quote" widget="boolean_toggle"/>
+                    </group>
+                </group>
+            </xpath>
+        </field>
+    </record>
+
+</odoo>

@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id="project_worksite_form" model="ir.ui.view">
+        <field name="name">project.worksite.view.form.inherit</field>
+        <field name="model">project.worksite</field>
+        <field name="inherit_id" ref="real_estate_bits.project_worksite_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='project_type']" position="after">
+                <field name="commission_percentage" invisible="parent_id" groups="real_estate_commission.group_commission_manager"/>
+                <field name="commission_percentage_parent" invisible="not parent_id" groups="real_estate_commission.group_commission_manager"/>
+            </xpath>
+        </field>
+    </record>
+
+    <record id="sub_project_worksite_form" model="ir.ui.view">
+        <field name="name">project.worksite.view.form.inherit</field>
+        <field name="model">project.worksite</field>
+        <field name="inherit_id" ref="real_estate_bits.sub_project_worksite_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='project_type']" position="after">
+                <field name="commission_percentage_parent" groups="tudepa.group_commission_manager"/>
+            </xpath>
+        </field>
+    </record>
+
+</odoo>

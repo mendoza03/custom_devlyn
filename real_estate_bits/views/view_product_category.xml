@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id="product_category_form_view_inherit_commission_by_range" model="ir.ui.view">
+        <field name="name">product.category.form.inherit</field>
+        <field name="model">product.category</field>
+        <field name="inherit_id" ref="product.product_category_form_view"/>
+        <field name="arch" type="xml">
+            <group name="first" position="after"> 
+                <group string="Sales Commission" invisible="is_apply !=  True">
+<!--                    <field name="sales_manager_commission" attrs="{'invisible': [('is_apply', '!=', True)]}"/>-->
+<!--                    <field name="sales_person_commission" attrs="{'invisible': [('is_apply', '!=', True)]}"/>-->
+                    <field name="commission_type"/>
+                    <field name="is_apply" invisible="1"/>
+                    <field name="commission_range_ids" colspan="2" invisible="is_apply != True" nolabel="1">
+                            <list editable="bottom">
+                                <field name="starting_range" />
+                                <field name="ending_range" />
+                                <field name="sales_manager_commission" />
+                                <field name="sales_person_commission" />
+                                <field name="sales_manager_commission_amount" />
+                                <field name="sales_person_commission_amount" />
+                            </list>
+                    </field>
+                </group>
+             </group>
+        </field>
+    </record>
+
+    <menuitem id="menu_product_in_config_sale_commission_multi_level" name="Products" parent="sale.menu_sale_config" sequence="11"/>
+    <menuitem
+        action="product.product_category_action_form" id="menu_product_category_config_sale_commission_external_user"
+        parent="menu_product_in_config_sale_commission_multi_level" sequence="2"/>
+</odoo>

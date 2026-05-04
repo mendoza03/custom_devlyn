@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id="view_property_form" model="ir.ui.view">
+        <field name="name">product.template.view.form.inherit</field>
+        <field name="model">product.template</field>
+        <field name="inherit_id" ref="real_estate_bits.view_property_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//notebook/page[1]" position="after">
+                <page name="specs" string="Specs">
+                    <group>
+                        <group name="tower">
+                            <field name="number_bedrooms"/>
+                            <field name="number_bathrooms"/>
+                        </group>
+                    </group>
+                </page>
+            </xpath>
+        </field>
+    </record>
+
+    <record id="additional_expense_view_list" model="ir.ui.view">
+        <field name="name">product.template.view.list</field>
+        <field name="model">product.template</field>
+        <field name="arch" type="xml">
+            <list string="Additional expenses">
+                <field name="name"/>
+                <field name="list_price"/>
+            </list>
+        </field>
+    </record>
+
+    <record id="additional_expense_view_form" model="ir.ui.view">
+        <field name="name">product.template.view.form</field>
+        <field name="model">product.template</field>
+        <field name="arch" type="xml">
+            <form string="Additional expense">
+                <sheet>
+                    <group>
+                        <group>
+                            <field name="name"/>
+                            <field name="list_price"/>
+                        </group>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="additional_expense_action" model="ir.actions.act_window">
+        <field name="name">Additional expense</field>
+        <field name="res_model">product.template</field>
+        <field name="view_mode">list,form</field>
+        <field name="domain">[('is_additional_expense','=',True)]</field>
+        <field name="context">{
+            'default_is_additional_expense':True,
+            'default_sale_ok':False,
+            'default_purchase_ok':False,}
+        </field>
+        <field name="view_id" ref="additional_expense_view_list"/>
+    </record>
+
+    <record id="additional_expense_action_list_view" model="ir.actions.act_window.view">
+        <field name="sequence" eval="10"/>
+        <field name="view_mode">list</field>
+        <field name="view_id" ref="additional_expense_view_list"/>
+        <field name="act_window_id" ref="additional_expense_action"/>
+    </record>
+
+    <record id="additional_expense_action_form_view" model="ir.actions.act_window.view">
+        <field name="sequence" eval="20"/>
+        <field name="view_mode">form</field>
+        <field name="view_id" ref="additional_expense_view_form"/>
+        <field name="act_window_id" ref="additional_expense_action"/>
+    </record>
+
+</odoo>

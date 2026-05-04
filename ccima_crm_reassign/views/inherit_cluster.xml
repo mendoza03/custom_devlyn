@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id="view_project_worksite_inherit_form" model="ir.ui.view">
+        <field name="name">project.worksite.inherit.form</field>
+        <field name="model">project.worksite</field>
+        <field name="inherit_id" ref="real_estate_bits.sub_project_worksite_form"/>
+        <field name="arch" type="xml">
+              <xpath expr="//form[1]/sheet[1]/notebook[1]/page[7]" position="replace"/>
+              <xpath expr="//form[1]/sheet[1]/notebook[1]/page[6]" position="replace"/>
+              <xpath expr="//form[1]/sheet[1]/notebook[1]/page[5]" position="replace"/>
+              <xpath expr="//form[1]/sheet[1]/notebook[1]/page[4]" position="replace"/>
+              <xpath expr="//form[1]/sheet[1]/notebook[1]/page[3]" position="replace"/>
+                <xpath expr="//form[1]/sheet[1]/notebook[1]" position="inside">
+                    <page string="Master" name="master_cluster">
+                      <field name="documents_master" mode="kanban" context="{'default_document_type': 'master', 'default_lead_id': False}"/>
+                    </page>
+                </xpath>
+                <xpath expr="//field[@name='project_type']" position="after">
+                    <field name="url"/>
+                </xpath>
+
+                <xpath expr="//field[@name='maintenance_charges']" position="after">
+                    <button name="action_open_url"
+                    type="object"
+                    string="Disponibilidad"
+                    class="btn-primary"/>
+                </xpath>
+        </field>
+    </record>
+
+</odoo>

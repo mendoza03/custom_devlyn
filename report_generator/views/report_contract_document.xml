@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+
+  <record id="paperformat_mm_contract" model="report.paperformat">
+    <field name="name">MM Contract</field>
+    <field name="default" eval="False"/>
+    <field name="format">A4</field>
+    <field name="orientation">Portrait</field>
+
+    <field name="margin_top">35</field>
+    <field name="margin_bottom">35</field>
+    <field name="margin_left">10</field>
+    <field name="margin_right">10</field>
+
+    <field name="header_line" eval="False"/>
+    <field name="dpi">90</field>
+  </record>
+
+  <record id="report_mm_contract_document" model="ir.actions.report">
+    <field name="name">Contract PDF</field>
+    <field name="model">mm.contract.document</field>
+    <field name="report_type">qweb-pdf</field>
+    <field name="report_name">report_generator.mm_contract_document_pdf</field>
+    <field name="report_file">report_generator.mm_contract_document_pdf</field>
+    <field name="print_report_name">'%s' % (object.name)</field>
+    <field name="paperformat_id" ref="report_generator.paperformat_mm_contract"/>
+  </record>
+
+  <template id="mm_external_layout_contract">
+  <t t-call="web.external_layout">
+
+    <style>
+      .mm-contract-header img,
+      .mm-contract-footer img{
+        width: 100% !important;
+        height: auto !important;
+        display: block;
+      }
+    </style>
+
+    <!-- HEADER -->
+    <div class="header">
+      <t t-if="o and o.rendered_header">
+        <div class="mm-contract-header oe_structure">
+          <t t-raw="o.rendered_header"/>
+        </div>
+      </t>
+    </div>
+
+    <!-- FOOTER -->
+    <div class="footer">
+      <t t-if="o and o.rendered_footer">
+        <div class="mm-contract-footer oe_structure">
+          <t t-raw="o.rendered_footer"/>
+        </div>
+      </t>
+    </div>
+
+    <!-- BODY SLOT -->
+    <div class="article">
+      <t t-out="0"/>
+    </div>
+
+  </t>
+</template>
+
+
+
+
+
+
+  <template id="mm_contract_document_pdf">
+  <t t-call="web.html_container">
+    <t t-foreach="docs" t-as="o">
+      <t t-call="report_generator.mm_external_layout_contract">
+
+        <style>
+          .mm-contract-body { text-align: justify; line-height: 1.7; }
+          .mm-contract-body p { margin: 0 0 8px 0; }
+        </style>
+
+        <div class="page">
+          <div class="mm-contract-body oe_structure">
+            <t t-raw="o.rendered_body"/>
+          </div>
+        </div>
+
+      </t>
+    </t>
+  </t>
+</template>
+
+
+
+
+</odoo>

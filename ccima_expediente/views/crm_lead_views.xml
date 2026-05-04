@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id="view_crm_lead_expediente_form" model="ir.ui.view">
+        <field name="name">crm.lead.expediente.form</field>
+        <field name="model">crm.lead</field>
+        <field name="inherit_id" ref="crm.crm_lead_view_form"/>
+        <field name="arch" type="xml">
+
+            <!-- Smart button -->
+            <xpath expr="//div[hasclass('oe_button_box')]" position="inside">
+                <button name="action_open_expediente_lead"
+                        type="object"
+                        class="oe_stat_button"
+                        icon="fa-file-text-o"
+                        invisible="not expediente_lead_id">
+                    <div class="o_field_widget o_stat_info">
+                        <span class="o_stat_value">
+                            <field name="contract_stage"/>
+                        </span>
+                        <span class="o_stat_text">Contract Stage</span>
+                    </div>
+                </button>
+            </xpath>
+
+            <!-- contract_stage_text below brief_id -->
+            <xpath expr="//field[@name='brief_id']" position="after">
+                <field name="contract_stage_text"
+                       readonly="1"
+                       string="Contract Stage"
+                       invisible="not contract_stage_text"/>
+            </xpath>
+
+            <!-- Expediente group near description -->
+            <xpath expr="//field[@name='description']" position="before">
+                <group string="Expediente" invisible="not expediente_lead_id">
+                    <field name="expediente_lead_id" readonly="1" string="Expediente Lead"/>
+                    <field name="contract_stage" readonly="1" string="Contract Stage"/>
+                </group>
+                <group string="Origin" invisible="not origin_lead_id">
+                    <field name="origin_lead_id" readonly="1" string="Origin Lead"/>
+                </group>
+            </xpath>
+
+        </field>
+    </record>
+
+</odoo>

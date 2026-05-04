@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id="product_product_capital_contract" model="product.product">
+        <field name="name">Capital Product</field>
+        <field name="type">service</field>
+    </record>
+
+    <record id="product_product_interest_contract" model="product.product">
+        <field name="name">Interest Product</field>
+        <field name="type">service</field>
+    </record>
+
+    <record id="product_product_moratorium_interest_contract" model="product.product">
+        <field name="name">Moratorium Interest Product</field>
+        <field name="type">service</field>
+    </record>
+
+    <record id="product_product_difered_hitch" model="product.product">
+        <field name="name">Difered Hitch Product</field>
+        <field name="type">service</field>
+    </record>
+
+    <record id="product_product_capital_credit_contract" model="product.product">
+        <field name="name"> Capital Credit Product</field>
+        <field name="type">service</field>
+    </record>
+
+    <record id="product_product_capital_payment" model="product.product">
+        <field name="name"> Capital Payment</field>
+        <field name="type">service</field>
+    </record>
+
+</odoo>

@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="view_partner_form_inherit_legal_info" model="ir.ui.view">
+        <field name="name">res.partner.form.partner.legal.info</field>
+        <field name="model">res.partner</field>
+        <field name="inherit_id" ref="base.view_partner_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//notebook" position="inside">
+                <page string="Partner Legal Info">
+                    <group>
+                        <group>
+                            <field name="partner_legal_name"/>
+                            <field name="partner_legal_representative"/>
+                            <field name="partner_constitutive_deed"/>
+                            <field name="partner_current_notary"/>
+                        </group>
+                        <group>
+                            <field name="partner_related_public_deeds"/>
+                            <field name="partner_recent_public_deed"/>
+                            <field name="partner_registered_address"/>
+                            <field name="partner_contact_email"/>
+                        </group>
+                    </group>
+                </page>
+            </xpath>
+        </field>
+    </record>
+</odoo>

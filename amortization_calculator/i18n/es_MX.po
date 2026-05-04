@@ -1,0 +1,415 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* amortization_calculator
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 18.0+e\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2025-08-08 01:28+0000\n"
+"PO-Revision-Date: 2025-08-08 01:28+0000\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+#. module: amortization_calculator
+#: model_terms:ir.ui.view,arch_db:amortization_calculator.report_amortization_calculator_document
+msgid "% Discount"
+msgstr "% Descuento"
+
+#. module: amortization_calculator
+#: model:ir.actions.report,print_report_name:amortization_calculator.action_report_amortization_calculator
+msgid "'Property Sale Contract - %s' % object.name"
+msgstr ""
+
+#. module: amortization_calculator
+#: model_terms:ir.ui.view,arch_db:amortization_calculator.report_amortization_calculator_document
+msgid "10.50%"
+msgstr ""
+
+#. module: amortization_calculator
+#: model_terms:ir.ui.view,arch_db:amortization_calculator.report_amortization_calculator_document
+msgid "3-year installment."
+msgstr "Entrega a 3 años."
+
+#. module: amortization_calculator
+#: model_terms:ir.ui.view,arch_db:amortization_calculator.report_amortization_calculator_document
+msgid "ASSET PROJECTION:"
+msgstr "Proyección del activo:"
+
+#. module: amortization_calculator
+#: model:ir.model.fields,field_description:amortization_calculator.field_amortization_comparison_line__amortization_id
+msgid "Amortization"
+msgstr "Amortización"
+
+#. module: amortization_calculator
+#: model:ir.actions.act_window,name:amortization_calculator.action_amortization_calculator_form
+#: model:ir.model,name:amortization_calculator.model_amortization_calculator
+#: model:ir.ui.menu,name:amortization_calculator.menu_amortization_calculator
+#: model_terms:ir.ui.view,arch_db:amortization_calculator.view_amortization_calculator_form
+#: model_terms:ir.ui.view,arch_db:amortization_calculator.view_amortization_calculator_list
+msgid "Amortization Calculator"
+msgstr "Calculadora"
+
+#. module: amortization_calculator
+#: model_terms:ir.ui.view,arch_db:amortization_calculator.report_amortization_calculator_document
+msgid "Amount Financial:"
+msgstr "Monto a financiar:"
+
+#. module: amortization_calculator
+#: model:ir.model.fields,field_description:amortization_calculator.field_amortization_comparison_line__gradual_financing_amount
+msgid "Amount to be Financed Gradual"
+msgstr "Monto a financiar Gradual"
+
+#. module: amortization_calculator
+#: model:ir.model.fields,field_description:amortization_calculator.field_amortization_calculator__financing_amount
+#: model:ir.model.fields,field_description:amortization_calculator.field_amortization_comparison_line__financing_amount
+msgid "Amount to finance"
+msgstr "Monto a financiar"
+
+#. module: amortization_calculator
+#: model_terms:ir.ui.view,arch_db:amortization_calculator.report_amortization_calculator_document
+msgid "Annual capital gains yield"
+msgstr "Proyección de rendimiento en plusvalía anual"
+
+#. module: amortization_calculator
+#: model:ir.model.fields,field_description:amortization_calculator.field_account_bank_statement_line__balance_account
+msgid "Balance Account"
+msgstr "Cuenta de saldo"
+
+#. module: amortization_calculator
+#: model:ir.model,name:amortization_calculator.model_account_bank_statement_line
+msgid "Bank Statement Line"
+msgstr "Línea de un estado de cuenta bancario"
+
+#. module: amortization_calculator
+#: model:ir.model.fields,field_description:amortization_calculator.field_account_move_line__batch
+msgid "Batch"
+msgstr "Lote"
+
+#. module: amortization_calculator
+#: model:ir.model.fields,field_description:amortization_calculator.field_amortization_comparison_block__block_name
+msgid "Block name"
+msgstr "Nombre del bloque"
+
+#. module: amortization_calculator
+#: model:ir.model.fields,field_description:amortization_calculator.field_amortization_comparison_line__comparison_block_ids
+msgid "Blocks"
+msgstr "Bloques"
+
+#. module: amortization_calculator
+#: model_terms:ir.ui.view,arch_db:amortization_calculator.report_amortization_calculator_document
+msgid "CLIENT:"
+msgstr "Cliente:"
+
+#. module: amortization_calculator
+#: model_terms:ir.ui.view,arch_db:amortization_calculator.report_amortization_calculator_document
+msgid "Checkbox"
+msgstr ""
+
+#. module: amortization_calculator
+#: model:ir.model.fields,field_description:amortization_calculator.field_amortization_comparison_block__comparison_line_id
+msgid "Comparative"
+msgstr "Comparativa"
+
+#. module: amortization_calculator
+#: model:ir.model,name:amortization_calculator.model_amortization_comparison_block
+msgid "Comparative monthly payment blocks"
+msgstr "Bloques de pago mensuales comparativos"
+
+#. module: amortization_calculator
+#: model_terms:ir.ui.view,arch_db:amortization_calculator.view_amortization_calculator_form
+msgid "Comparativo Financiero"
+msgstr ""
+
+#. module: amortization_calculator
+#: model:ir.model.fields,field_description:amortization_calculator.field_amortization_calculator__create_uid
+#: model:ir.model.fields,field_description:amortization_calculator.field_amortization_comparison_block__create_uid
+#: model:ir.model.fields,field_description:amortization_calculator.field_amortization_comparison_line__create_uid
+msgid "Created by"
+msgstr ""
+
+#. module: amortization_calculator
+#: model:ir.model.fields,field_description:amortization_calculator.field_amortization_calculator__create_date
+#: model:ir.model.fields,field_description:amortization_calculator.field_amortization_comparison_block__create_date
+#: model:ir.model.fields,field_description:amortization_calculator.field_amortization_comparison_line__create_date
+msgid "Created on"
+msgstr ""
+
+#. module: amortization_calculator
+#: model_terms:ir.ui.view,arch_db:amortization_calculator.report_amortization_calculator_document
+msgid "Date:"
+msgstr "Fecha:"
+
+#. module: amortization_calculator
+#: model:ir.model.fields,field_description:amortization_calculator.field_amortization_calculator__discount_value
+#: model:ir.model.fields,field_description:amortization_calculator.field_amortization_comparison_line__discount_value
+#: model_terms:ir.ui.view,arch_db:amortization_calculator.report_amortization_calculator_document
+msgid "Discount"
+msgstr "Descuento"
+
+#. module: amortization_calculator
+#: model:ir.model.fields,field_description:amortization_calculator.field_amortization_calculator__display_name
+#: model:ir.model.fields,field_description:amortization_calculator.field_amortization_comparison_block__display_name
+#: model:ir.model.fields,field_description:amortization_calculator.field_amortization_comparison_line__display_name
+msgid "Display Name"
+msgstr ""
+
+#. module: amortization_calculator
+#: model:ir.model.fields,field_description:amortization_calculator.field_amortization_calculator__hitch_percentage
+msgid "Down payment percentage"
+msgstr "Porcentaje de pago inicial"
+
+#. module: amortization_calculator
+#: model_terms:ir.ui.view,arch_db:amortization_calculator.report_amortization_calculator_document
+msgid "Down payment: 10% of the total value"
+msgstr "Enganche: 10% del valor total"
+
+#. module: amortization_calculator
+#: model_terms:ir.ui.view,arch_db:amortization_calculator.report_amortization_calculator_document
+msgid "Email:"
+msgstr "Correo:"
+
+#. module: amortization_calculator
+#: model_terms:ir.ui.view,arch_db:amortization_calculator.report_amortization_calculator_document
+msgid "FINANCE:"
+msgstr "Financiamiento:"
+
+#. module: amortization_calculator
+#: model_terms:ir.ui.view,arch_db:amortization_calculator.report_amortization_calculator_document
+msgid "FINANCIAL YEAR"
+msgstr "EJERCICIO FINANCIERO"
+
+#. module: amortization_calculator
+#: model_terms:ir.ui.view,arch_db:amortization_calculator.report_amortization_calculator_document
+msgid "Finance in months"
+msgstr "Financiamiento en meses:"
+
+#. module: amortization_calculator
+#: model:ir.model,name:amortization_calculator.model_amortization_comparison_line
+#: model:ir.model.fields,field_description:amortization_calculator.field_amortization_calculator__comparison_line_ids
+msgid "Financial Comparative"
+msgstr ""
+
+#. module: amortization_calculator
+#: model:ir.actions.report,name:amortization_calculator.action_report_amortization_calculator
+#: model_terms:ir.ui.view,arch_db:amortization_calculator.view_amortization_calculator_form
+msgid "Financial Year"
+msgstr "Ejercicio Financiero"
+
+#. module: amortization_calculator
+#: model_terms:ir.ui.view,arch_db:amortization_calculator.report_amortization_calculator_document
+msgid "Financing models:"
+msgstr "modelos de financiamiento"
+
+#. module: amortization_calculator
+#: model_terms:ir.ui.view,arch_db:amortization_calculator.report_amortization_calculator_document
+msgid "First 48 months interest-free."
+msgstr "Primeros 48 meses sin intereses."
+
+#. module: amortization_calculator
+#: model_terms:ir.ui.view,arch_db:amortization_calculator.report_amortization_calculator_document
+msgid "Footage in m²"
+msgstr "Metraje<sup>2</sup>"
+
+#. module: amortization_calculator
+#: model_terms:ir.ui.view,arch_db:amortization_calculator.view_amortization_calculator_form
+msgid "Generate Comparative"
+msgstr "Generar Comparativo"
+
+#. module: amortization_calculator
+#: model:ir.model.fields,field_description:amortization_calculator.field_amortization_calculator__gradual_initial_investment
+#: model:ir.model.fields,field_description:amortization_calculator.field_amortization_comparison_line__gradual_initial_investment
+#: model_terms:ir.ui.view,arch_db:amortization_calculator.report_amortization_calculator_document
+msgid "Gradual Initial Investment"
+msgstr "Inversión Inicial Gradual"
+
+#. module: amortization_calculator
+#: model:ir.model.fields,field_description:amortization_calculator.field_amortization_calculator__hitch_amount
+#: model:ir.model.fields,field_description:amortization_calculator.field_amortization_comparison_line__hitch_amount
+msgid "Hitch"
+msgstr "Enganche"
+
+#. module: amortization_calculator
+#: model_terms:ir.ui.view,arch_db:amortization_calculator.report_amortization_calculator_document
+msgid "Hitch 10%"
+msgstr "Enganche 10%"
+
+#. module: amortization_calculator
+#: model:ir.model.fields,field_description:amortization_calculator.field_amortization_calculator__id
+#: model:ir.model.fields,field_description:amortization_calculator.field_amortization_comparison_block__id
+#: model:ir.model.fields,field_description:amortization_calculator.field_amortization_comparison_line__id
+msgid "ID"
+msgstr ""
+
+#. module: amortization_calculator
+#: model:ir.model.fields,field_description:amortization_calculator.field_amortization_calculator__initial_investment
+#: model:ir.model.fields,field_description:amortization_calculator.field_amortization_comparison_line__initial_investment
+msgid "Initial investment"
+msgstr "Inversión inicial"
+
+#. module: amortization_calculator
+#: model:ir.model,name:amortization_calculator.model_account_move_line
+msgid "Journal Item"
+msgstr "Apunte contable"
+
+#. module: amortization_calculator
+#: model:ir.model.fields,field_description:amortization_calculator.field_amortization_calculator__write_uid
+#: model:ir.model.fields,field_description:amortization_calculator.field_amortization_comparison_block__write_uid
+#: model:ir.model.fields,field_description:amortization_calculator.field_amortization_comparison_line__write_uid
+msgid "Last Updated by"
+msgstr ""
+
+#. module: amortization_calculator
+#: model:ir.model.fields,field_description:amortization_calculator.field_amortization_calculator__write_date
+#: model:ir.model.fields,field_description:amortization_calculator.field_amortization_comparison_block__write_date
+#: model:ir.model.fields,field_description:amortization_calculator.field_amortization_comparison_line__write_date
+msgid "Last Updated on"
+msgstr ""
+
+#. module: amortization_calculator
+#: model_terms:ir.ui.view,arch_db:amortization_calculator.report_amortization_calculator_document
+msgid "List price × m²"
+msgstr "Precio de lista × m<sup>2</sup>"
+
+#. module: amortization_calculator
+#: model_terms:ir.ui.view,arch_db:amortization_calculator.report_amortization_calculator_document
+msgid "Lot Price without Discount"
+msgstr "Precio del lote sin descuento:"
+
+#. module: amortization_calculator
+#: model:ir.model.fields,field_description:amortization_calculator.field_amortization_calculator__price_lot
+msgid "Lot price without discount"
+msgstr "Precio del lote sin descuento:"
+
+#. module: amortization_calculator
+#: model:ir.model.fields,field_description:amortization_calculator.field_amortization_calculator__meters
+msgid "Meters"
+msgstr "Metros"
+
+#. module: amortization_calculator
+#: model:ir.model.fields,field_description:amortization_calculator.field_amortization_comparison_line__months
+msgid "Months"
+msgstr "Meses"
+
+#. module: amortization_calculator
+#: model:ir.model.fields,field_description:amortization_calculator.field_amortization_calculator__name
+msgid "Name"
+msgstr "Nombre"
+
+#. module: amortization_calculator
+#: model:ir.model.fields,field_description:amortization_calculator.field_amortization_calculator__unit_price_discount
+#: model:ir.model.fields,field_description:amortization_calculator.field_amortization_comparison_line__unit_price_discount
+#: model_terms:ir.ui.view,arch_db:amortization_calculator.report_amortization_calculator_document
+msgid "P.U. with discount"
+msgstr "P.U. con descuento"
+
+#. module: amortization_calculator
+#: model:ir.model.fields,field_description:amortization_calculator.field_amortization_calculator__partner_id
+msgid "Partner"
+msgstr "Contacto"
+
+#. module: amortization_calculator
+#: model:ir.model.fields,field_description:amortization_calculator.field_amortization_calculator__payments
+msgid "Payment plans"
+msgstr "Planes de pago"
+
+#. module: amortization_calculator
+#: model_terms:ir.ui.view,arch_db:amortization_calculator.report_amortization_calculator_document
+msgid "Performance divided by 4"
+msgstr "Rendimiento dividido por 4"
+
+#. module: amortization_calculator
+#: model_terms:ir.ui.view,arch_db:amortization_calculator.report_amortization_calculator_document
+msgid "Phone:"
+msgstr "Teléfono:"
+
+#. module: amortization_calculator
+#: model:ir.model.fields,field_description:amortization_calculator.field_amortization_comparison_line__plan_name
+msgid "Plan"
+msgstr ""
+
+#. module: amortization_calculator
+#: model:ir.model.fields,field_description:amortization_calculator.field_amortization_calculator__price_meter
+msgid "Price per meter"
+msgstr "Precio por metro"
+
+#. module: amortization_calculator
+#: model:ir.model.fields,field_description:amortization_calculator.field_amortization_comparison_line__price_lot
+msgid "Price without discount"
+msgstr "Precio del lote sin descuento:"
+
+#. module: amortization_calculator
+#: model_terms:ir.ui.view,arch_db:amortization_calculator.report_amortization_calculator_document
+msgid "Projected performance in 4 years"
+msgstr "Rendimiento proyectado en 4 años"
+
+#. module: amortization_calculator
+#: model:ir.model.fields,field_description:amortization_calculator.field_amortization_calculator__promotion_id
+#: model:ir.model.fields,field_description:amortization_calculator.field_amortization_comparison_line__promotion_id
+msgid "Promotion"
+msgstr "Promoción"
+
+#. module: amortization_calculator
+#: model_terms:ir.ui.view,arch_db:amortization_calculator.report_amortization_calculator_document
+msgid "Seller:"
+msgstr "Contacto de Venta:"
+
+#. module: amortization_calculator
+#: model:ir.model.fields,field_description:amortization_calculator.field_amortization_comparison_block__amount
+msgid "Total amount"
+msgstr "Monto total"
+
+#. module: amortization_calculator
+#: model_terms:ir.ui.view,arch_db:amortization_calculator.report_amortization_calculator_document
+msgid "Utility in 4 years"
+msgstr "Utilidad en 4 años"
+
+#. module: amortization_calculator
+#: model:ir.model.fields,field_description:amortization_calculator.field_amortization_calculator__val_year_extra
+msgid "Value extra"
+msgstr ""
+
+#. module: amortization_calculator
+#: model:ir.model.fields,field_description:amortization_calculator.field_amortization_calculator__val_year_1
+#: model_terms:ir.ui.view,arch_db:amortization_calculator.report_amortization_calculator_document
+msgid "Value in 1 year"
+msgstr "Valor en 1 año"
+
+#. module: amortization_calculator
+#: model:ir.model.fields,field_description:amortization_calculator.field_amortization_calculator__val_year_2
+msgid "Value in 2 year"
+msgstr ""
+
+#. module: amortization_calculator
+#: model_terms:ir.ui.view,arch_db:amortization_calculator.report_amortization_calculator_document
+msgid "Value in 2 years"
+msgstr "Valor en 2 años"
+
+#. module: amortization_calculator
+#: model:ir.model.fields,field_description:amortization_calculator.field_amortization_calculator__val_year_3
+msgid "Value in 3 year"
+msgstr "Valor en 3 años"
+
+#. module: amortization_calculator
+#: model_terms:ir.ui.view,arch_db:amortization_calculator.report_amortization_calculator_document
+msgid "Value in 3 years"
+msgstr "Valor en 3 años"
+
+#. module: amortization_calculator
+#: model:ir.model.fields,field_description:amortization_calculator.field_amortization_calculator__val_year_4
+msgid "Value in 4 year"
+msgstr "Valor en 4 años"
+
+#. module: amortization_calculator
+#: model_terms:ir.ui.view,arch_db:amortization_calculator.report_amortization_calculator_document
+msgid "Value in 4 years"
+msgstr "Valor en 4 años"
+
+#. module: amortization_calculator
+#: model_terms:ir.ui.view,arch_db:amortization_calculator.report_amortization_calculator_document
+msgid "We have"
+msgstr "Tenemos"

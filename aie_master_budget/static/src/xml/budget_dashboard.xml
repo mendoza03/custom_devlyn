@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<templates xml:space="preserve">
+    <t t-name="aie_master_budget.dashboard_template">
+        <div class="o_control_panel o_action budget_report">
+            <div class="o_control_panel d-flex flex-column gap-3 px-3 pt-2 pb-3">
+                <div style="height: 0.2cm; width: 100%;"/>
+            </div>
+            <div class="o_content">
+                <div style="height: 0.2cm; width: 100%;"/>
+                <div class="mx-auto fit-content w-print-100">
+                    <div class="d-flex align-items-start">
+                        <table class="table table-borderless table-hover w-print-100 budget-striped">
+                            <thead class="sticky">
+                                <tr>
+                                    <th colspan="6" style="display: table-cell; unicode-bidi: isolate;">
+                                        <span class="companies_header" t-esc="props.title"/>
+                                    </th>
+                                </tr>
+                                <tr>
+                                    <th class="column_header">Project</th>
+                                    <th class="column_header">Task</th>
+                                    <th class="column_header">Spending center</th>
+                                    <th class="column_header">Fund</th>
+                                    <th class="column_header">Budget item</th>
+                                    <th class="column_header">Quantity</th>
+                                    <th class="column_header">Mesure unit</th>
+                                    <th class="column_header">Original amount</th>
+                                    <th class="column_header">Extensions</th>
+                                    <th class="column_header">Reductions</th>
+                                    <th class="column_header">Available amount</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <t t-foreach="state.data" t-as="group" t-key="group.key">
+                                    <tr class="clickable" t-att-tr-button-group-key="group.key.join('_')">
+                                        <td colspan="11">
+                                            <div>
+                                                <button class="btn btn_dropdown line_level_1" t-att-id="'btn_' + group.key.join('_')" t-on-click="(ev) => this.toggleGroup(ev)">
+                                                    <i t-att-i-button-group-key="group.key.join('_')" class="fa fa-caret-right"/>
+                                                </button>
+                                                Key: <t t-esc="group.key[0]"/>-<t t-esc="group.key[1]"/>-<t t-esc="group.key[2]"/>-<t t-esc="group.key[3]"/>-<t t-esc="group.key[4]"/>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                    <t t-foreach="group.lines" t-as="line" t-key="line.id">
+                                        <tr t-att-data-group-key="group.key.join('_')" class="d-none">
+                                            <td><t t-esc="line.project"/></td>
+                                            <td><t t-esc="line.task"/></td>
+                                            <td><t t-esc="line.spending_center"/></td>
+                                            <td><t t-esc="line.monetary_fund"/></td>
+                                            <td><t t-esc="line.budget_id"/></td>
+                                            <td><t t-esc="line.quantity"/></td>
+                                            <td><t t-esc="line.uom"/></td>
+                                            <td><t t-esc="formatCurrency(line.original_amount)"/></td>
+                                            <td t-att-class="line.class"><t t-esc="formatCurrency(line.extension_amount)"/></td>
+                                            <td t-att-class="line.class"><t t-esc="formatCurrency(line.reduction_amount)"/></td>
+                                            <td><t t-esc="formatCurrency(line.available_amount)"/></td>
+                                        </tr>
+                                    </t>
+                                </t>
+                                <tr class="total">
+                                    <td colspan="7" class="text-right">Total</td>
+                                    <td><t t-esc="formatCurrency(state.totals['total_original_amount'])"/></td>
+                                    <td><t t-esc="formatCurrency(state.totals['total_extension_amount'])"/></td>
+                                    <td><t t-esc="formatCurrency(state.totals['total_reduction_amount'])"/></td>
+                                    <td><t t-esc="formatCurrency(state.totals['total_available_amount'])"/></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </t>
+</templates>

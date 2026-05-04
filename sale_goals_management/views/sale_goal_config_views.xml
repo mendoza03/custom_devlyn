@@ -1,0 +1,142 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    
+    <!-- Form View -->
+    <record id="view_sale_goal_config_form" model="ir.ui.view">
+        <field name="name">sale.goal.config.form</field>
+        <field name="model">sale.goal.config</field>
+        <field name="arch" type="xml">
+            <form string="Configuración de Metas de Ventas">
+                <sheet>
+                    <group>
+                        <group string="Configuración de Precio">
+                            <field name="currency_id" invisible="1"/>
+                            <field name="average_unit_price" widget="monetary"/>
+                            <field name="leads_per_unit"/>
+                        </group>
+                        <group string="Tasas de Conversión del Embudo (%)">
+                            <field name="prospect_rate"/>
+                            <field name="meeting_rate"/>
+                            <field name="opportunity_rate"/>
+                            <field name="reserved_rate"/>
+                            <field name="closed_rate"/>
+                        </group>
+                    </group>
+                    
+                    <notebook>
+                        <page name="calendars" string="Calendarios Anuales">
+                            <group>
+                                <button name="action_create_calendar" string="Crear Calendario Nuevo" 
+                                        type="object" class="oe_highlight" 
+                                        context="{'default_config_id': id}"/>
+                            </group>
+                            <field name="calendar_ids" nolabel="1" context="{'default_config_id': id}"/>
+                        </page>
+                    </notebook>
+                </sheet>
+            </form>
+        </field>
+    </record>
+    
+    <!-- Calendar Form View -->
+    <record id="view_sale_goal_calendar_form" model="ir.ui.view">
+        <field name="name">sale.goal.calendar.form</field>
+        <field name="model">sale.goal.calendar</field>
+        <field name="arch" type="xml">
+            <form string="Calendario Anual">
+                <header>
+                    <button name="action_generate_months" string="Generar Meses" type="object" 
+                            class="oe_highlight" invisible="month_ids"/>
+                    <button name="action_generate_weeks" string="Generar Semanas" type="object" 
+                            class="oe_highlight"/>
+                    <field name="state" widget="statusbar" statusbar_visible="draft,active"/>
+                </header>
+                <sheet>
+                    <div class="oe_title">
+                        <h1>
+                            <field name="name" readonly="1"/>
+                        </h1>
+                    </div>
+                    
+                    <group>
+                        <group>
+                            <field name="year"/>
+                            <field name="company_id" options="{'no_create': True}" groups="base.group_multi_company"/>
+                        </group>
+                        <group>
+                            <field name="total_weeks"/>
+                            <field name="config_id" readonly="1" force_save="1"/>
+                        </group>
+                    </group>
+                    
+                    <group>
+                        <p class="text-muted">Configure las fechas de inicio y fin de cada semana. Los cambios se aplicarán a todas las metas que usen este calendario.</p>
+                    </group>
+                    
+                    <notebook>
+                        <page name="weeks_by_month" string="Semanas por Mes">
+                            <field name="month_ids" nolabel="1">
+                                <list>
+                                    <field name="month_name"/>
+                                    <field name="week_count"/>
+                                </list>
+                                <form>
+                                    <sheet>
+                                        <group>
+                                            <field name="month_name" readonly="1"/>
+                                            <field name="week_count"/>
+                                            <field name="calendar_id" invisible="1"/>
+                                        </group>
+                                        <field name="week_ids" nolabel="1">
+                                            <list editable="bottom" delete="1">
+                                                <field name="week_number" readonly="1"/>
+                                                <field name="week_name" readonly="1"/>
+                                                <field name="start_date"/>
+                                                <field name="end_date"/>
+                                                <field name="work_days"/>
+                                            </list>
+                                        </field>
+                                    </sheet>
+                                </form>
+                            </field>
+                        </page>
+                    </notebook>
+                </sheet>
+            </form>
+        </field>
+    </record>
+    
+    <!-- Calendar List View -->
+    <record id="view_sale_goal_calendar_list" model="ir.ui.view">
+        <field name="name">sale.goal.calendar.list</field>
+        <field name="model">sale.goal.calendar</field>
+        <field name="arch" type="xml">
+            <list create="false">
+                <field name="name"/>
+                <field name="year"/>
+                <field name="company_id" groups="base.group_multi_company"/>
+                <field name="total_weeks"/>
+                <field name="state" widget="badge" decoration-info="state == 'draft'" decoration-success="state == 'active'"/>
+            </list>
+        </field>
+    </record>
+    
+    <!-- Action -->
+    <record id="action_sale_goal_config" model="ir.actions.act_window">
+        <field name="name">Configuración de Metas</field>
+        <field name="res_model">sale.goal.config</field>
+        <field name="view_mode">form</field>
+        <field name="target">inline</field>
+        <field name="res_id" ref="sale_goal_config_default"/>
+        <field name="context">{'create': False, 'delete': False}</field>
+    </record>
+    
+    <!-- Menu in Settings -->
+    <menuitem
+        id="menu_sale_goal_config"
+        name="Metas de Ventas"
+        parent="sale.menu_sale_config"
+        action="action_sale_goal_config"
+        sequence="100"/>
+    
+</odoo>

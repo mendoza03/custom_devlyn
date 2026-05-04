@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data noupdate="1">
+        <record id="sale_goal_config_default" model="sale.goal.config">
+            <field name="name">Configuración de Metas</field>
+            <field name="average_unit_price">4500000</field>
+            <field name="leads_per_unit">48</field>
+            <field name="prospect_rate">50.0</field>
+            <field name="meeting_rate">50.0</field>
+            <field name="opportunity_rate">33.33</field>
+            <field name="reserved_rate">25.0</field>
+            <field name="closed_rate">100.0</field>
+        </record>
+    </data>
+</odoo>

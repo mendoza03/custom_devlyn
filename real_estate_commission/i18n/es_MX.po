@@ -1,0 +1,544 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* real_estate_commission
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 17.0-20241007\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2024-11-04 14:56+0000\n"
+"PO-Revision-Date: 2024-11-04 14:56+0000\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+#. module: real_estate_commission
+#: model_terms:ir.ui.view,arch_db:real_estate_commission.view_move_form
+msgid "<span class=\"o_stat_text\">Commission</span>"
+msgstr "<span class=\"o_stat_text\">Comisiones</span>"
+
+#. module: real_estate_commission
+#: model:ir.model.fields,field_description:real_estate_commission.field_commission_calculate__message_needaction
+#: model:ir.model.fields,field_description:real_estate_commission.field_commission_scenary__message_needaction
+msgid "Action Needed"
+msgstr "Acción necesaria"
+
+#. module: real_estate_commission
+#: model:ir.model.fields,field_description:real_estate_commission.field_commission_calculate__activity_ids
+#: model:ir.model.fields,field_description:real_estate_commission.field_commission_scenary__activity_ids
+msgid "Activities"
+msgstr "Actividades"
+
+#. module: real_estate_commission
+#: model:ir.model.fields,field_description:real_estate_commission.field_commission_calculate__activity_exception_decoration
+#: model:ir.model.fields,field_description:real_estate_commission.field_commission_scenary__activity_exception_decoration
+msgid "Activity Exception Decoration"
+msgstr "Decoración de la actividad de excepción"
+
+#. module: real_estate_commission
+#: model:ir.model.fields,field_description:real_estate_commission.field_commission_calculate__activity_state
+#: model:ir.model.fields,field_description:real_estate_commission.field_commission_scenary__activity_state
+msgid "Activity State"
+msgstr "Estado de la actividad"
+
+#. module: real_estate_commission
+#: model:ir.model.fields,field_description:real_estate_commission.field_commission_calculate__activity_type_icon
+#: model:ir.model.fields,field_description:real_estate_commission.field_commission_scenary__activity_type_icon
+msgid "Activity Type Icon"
+msgstr "Icono del tipo de actividad"
+
+#. module: real_estate_commission
+#: model:ir.model.fields,field_description:real_estate_commission.field_commission_calculate__amount
+msgid "Amount"
+msgstr "Monto del inmueble"
+
+#. module: real_estate_commission
+#: model:ir.model.fields,field_description:real_estate_commission.field_commission_factor_sale__amount_total
+msgid "Amount total"
+msgstr "Monto total"
+
+#. module: real_estate_commission
+#: model:ir.model.fields,field_description:real_estate_commission.field_commission_calculate__message_attachment_count
+#: model:ir.model.fields,field_description:real_estate_commission.field_commission_scenary__message_attachment_count
+msgid "Attachment Count"
+msgstr "Número de archivos adjuntos"
+
+#. module: real_estate_commission
+#: model:ir.model,name:real_estate_commission.model_commission_calculate
+#: model:ir.model.fields,field_description:real_estate_commission.field_commission_factor_sale__calculate_id
+#: model:ir.ui.menu,name:real_estate_commission.commission_calculate_menu
+msgid "Calculate"
+msgstr "Cálculo"
+
+#. module: real_estate_commission
+#: model:ir.model.fields.selection,name:real_estate_commission.selection__commission_calculate__state__cancel
+msgid "Cancel"
+msgstr "Cancelar"
+
+#. module: real_estate_commission
+#: model:ir.model.fields,field_description:real_estate_commission.field_property_contract__commission_id
+#: model_terms:ir.ui.view,arch_db:real_estate_commission.view_property_contract_form
+msgid "Commission"
+msgstr "Comisión"
+
+#. module: real_estate_commission
+#: model:ir.actions.act_window,name:real_estate_commission.commission_calculate_action
+msgid "Commission calculate"
+msgstr "Cálculo de comisión"
+
+#. module: real_estate_commission
+#: model:ir.model,name:real_estate_commission.model_commission_factor
+msgid "Commission factor"
+msgstr "Factor de comisión"
+
+#. module: real_estate_commission
+#: model:ir.model,name:real_estate_commission.model_commission_factor_sale
+msgid "Commission factor sale"
+msgstr "Factor de comisión"
+
+#. module: real_estate_commission
+#: model:ir.model.fields,field_description:real_estate_commission.field_account_bank_statement_line__commission_on_the_deed_id
+#: model:ir.model.fields,field_description:real_estate_commission.field_account_move__commission_on_the_deed_id
+#: model:ir.model.fields,field_description:real_estate_commission.field_account_payment__commission_on_the_deed_id
+#: model:ir.model.fields,field_description:real_estate_commission.field_commission_calculate__commission_on_the_deed
+#: model:ir.model.fields,field_description:real_estate_commission.field_commission_factor_sale__commission_on_the_deed
+#: model:ir.model.fields,field_description:real_estate_commission.field_res_company__commission_on_the_deed
+#: model:ir.model.fields,field_description:real_estate_commission.field_res_config_settings__commission_on_the_deed
+msgid "Commission on the deed"
+msgstr "Comisión en la escritura"
+
+#. module: real_estate_commission
+#: model:ir.model.fields,field_description:real_estate_commission.field_commission_calculate__invoice_commission_on_the_deed_id
+msgid "Commission on the deed invoice"
+msgstr "Factura de comisión en la escritura"
+
+#. module: real_estate_commission
+#: model:ir.model.fields,field_description:real_estate_commission.field_commission_calculate__commission_percentage
+#: model:ir.model.fields,field_description:real_estate_commission.field_product_product__commission_percentage
+#: model:ir.model.fields,field_description:real_estate_commission.field_product_template__commission_percentage
+#: model:ir.model.fields,field_description:real_estate_commission.field_project_worksite__commission_percentage
+#: model:ir.model.fields,field_description:real_estate_commission.field_project_worksite__commission_percentage_parent
+msgid "Commission percentage"
+msgstr "Porcentaje de comisión"
+
+#. module: real_estate_commission
+#: model:ir.model.fields,field_description:real_estate_commission.field_commission_calculate__percentage_commission_on_the_deed
+#: model:ir.model.fields,field_description:real_estate_commission.field_commission_factor__default_percentage_commission_on_the_deed
+#: model:ir.model.fields,field_description:real_estate_commission.field_commission_factor_sale__percentage_commission_on_the_deed
+msgid "Commission percentage on the deed"
+msgstr "Porcentaje de comisión en la escritura"
+
+#. module: real_estate_commission
+#: model:ir.model.fields,field_description:real_estate_commission.field_commission_calculate__percentage_commission_upon_signing
+#: model:ir.model.fields,field_description:real_estate_commission.field_commission_factor__default_percentage_commission_upon_signing
+#: model:ir.model.fields,field_description:real_estate_commission.field_commission_factor_sale__percentage_commission_upon_signing
+msgid "Commission percentage upon signing the contract"
+msgstr "Porcentaje de comisión al firmar el contrato"
+
+#. module: real_estate_commission
+#: model_terms:ir.ui.view,arch_db:real_estate_commission.res_config_settings_view_form_inherit_module_name
+msgid "Commission percentages"
+msgstr "Porcentajes de comisión"
+
+#. module: real_estate_commission
+#: model:ir.actions.act_window,name:real_estate_commission.commission_scenary_action
+#: model:ir.model,name:real_estate_commission.model_commission_scenary
+msgid "Commission scenary"
+msgstr "Escenario"
+
+#. module: real_estate_commission
+#: model:ir.model.fields,field_description:real_estate_commission.field_account_bank_statement_line__commission_upon_signing_id
+#: model:ir.model.fields,field_description:real_estate_commission.field_account_move__commission_upon_signing_id
+#: model:ir.model.fields,field_description:real_estate_commission.field_account_payment__commission_upon_signing_id
+msgid "Commission upon signing"
+msgstr "Comisión al firmar el contrato"
+
+#. module: real_estate_commission
+#: model:ir.model.fields,field_description:real_estate_commission.field_commission_calculate__invoice_commission_upon_signing_id
+msgid "Commission upon signing invoice"
+msgstr "Factura de comisión al firmar  el contrato"
+
+#. module: real_estate_commission
+#: model:ir.model.fields,field_description:real_estate_commission.field_commission_calculate__commission_upon_signing
+#: model:ir.model.fields,field_description:real_estate_commission.field_commission_factor_sale__commission_upon_signing
+#: model:ir.model.fields,field_description:real_estate_commission.field_res_company__commission_upon_signing
+#: model:ir.model.fields,field_description:real_estate_commission.field_res_config_settings__commission_upon_signing
+msgid "Commission upon signing the contract"
+msgstr "Comisión al firmar el contrato"
+
+#. module: real_estate_commission
+#: model:ir.ui.menu,name:real_estate_commission.commissions_menu
+msgid "Commissions"
+msgstr "Comisiones"
+
+#. module: real_estate_commission
+#: model:ir.model,name:real_estate_commission.model_res_company
+msgid "Companies"
+msgstr "Empresas"
+
+#. module: real_estate_commission
+#: model:ir.model,name:real_estate_commission.model_res_config_settings
+msgid "Config Settings"
+msgstr "Ajustes de configuración"
+
+#. module: real_estate_commission
+#: model:ir.ui.menu,name:real_estate_commission.commissions_config_menu
+msgid "Configuration"
+msgstr "Configuración"
+
+#. module: real_estate_commission
+#: model:ir.model.fields.selection,name:real_estate_commission.selection__commission_calculate__state__confirm
+#: model_terms:ir.ui.view,arch_db:real_estate_commission.commission_calculate_view_form
+msgid "Confirm"
+msgstr "Confirmar"
+
+#. module: real_estate_commission
+#: model:ir.model.fields,field_description:real_estate_commission.field_commission_calculate__contract_id
+msgid "Contract"
+msgstr "Contrato"
+
+#. module: real_estate_commission
+#: model_terms:ir.ui.view,arch_db:real_estate_commission.commission_calculate_view_form
+msgid "Create invoice"
+msgstr "Crear factura"
+
+#. module: real_estate_commission
+#: model:ir.model.fields,field_description:real_estate_commission.field_commission_calculate__create_uid
+#: model:ir.model.fields,field_description:real_estate_commission.field_commission_factor__create_uid
+#: model:ir.model.fields,field_description:real_estate_commission.field_commission_factor_sale__create_uid
+#: model:ir.model.fields,field_description:real_estate_commission.field_commission_scenary__create_uid
+msgid "Created by"
+msgstr "Creado por"
+
+#. module: real_estate_commission
+#: model:ir.model.fields,field_description:real_estate_commission.field_commission_factor__create_date
+#: model:ir.model.fields,field_description:real_estate_commission.field_commission_factor_sale__create_date
+#: model:ir.model.fields,field_description:real_estate_commission.field_commission_scenary__create_date
+msgid "Created on"
+msgstr "Creado en"
+
+#. module: real_estate_commission
+#: model:ir.model.fields,field_description:real_estate_commission.field_commission_calculate__create_date
+msgid "Creation Date"
+msgstr "Creado en"
+
+#. module: real_estate_commission
+#: model:ir.model.fields,field_description:real_estate_commission.field_commission_calculate__display_name
+#: model:ir.model.fields,field_description:real_estate_commission.field_commission_factor__display_name
+#: model:ir.model.fields,field_description:real_estate_commission.field_commission_factor_sale__display_name
+#: model:ir.model.fields,field_description:real_estate_commission.field_commission_scenary__display_name
+msgid "Display Name"
+msgstr "Nombre en pantalla"
+
+#. module: real_estate_commission
+#: model:ir.model.fields.selection,name:real_estate_commission.selection__commission_calculate__state__draft
+msgid "Draft"
+msgstr "Borrador"
+
+#. module: real_estate_commission
+#: model:ir.model.fields,field_description:real_estate_commission.field_commission_factor__factor
+#: model:ir.model.fields,field_description:real_estate_commission.field_commission_factor_sale__factor
+msgid "Factor"
+msgstr ""
+
+#. module: real_estate_commission
+#: model_terms:ir.ui.view,arch_db:real_estate_commission.commission_calculate_view_form
+#: model_terms:ir.ui.view,arch_db:real_estate_commission.commission_scenary_view_form
+msgid "Factors"
+msgstr "Factores"
+
+#. module: real_estate_commission
+#: model:ir.model.fields,field_description:real_estate_commission.field_commission_calculate__message_follower_ids
+#: model:ir.model.fields,field_description:real_estate_commission.field_commission_scenary__message_follower_ids
+msgid "Followers"
+msgstr "Seguidores"
+
+#. module: real_estate_commission
+#: model:ir.model.fields,field_description:real_estate_commission.field_commission_calculate__message_partner_ids
+#: model:ir.model.fields,field_description:real_estate_commission.field_commission_scenary__message_partner_ids
+msgid "Followers (Partners)"
+msgstr "Seguidores (partners)"
+
+#. module: real_estate_commission
+#: model:ir.model.fields,help:real_estate_commission.field_commission_calculate__activity_type_icon
+#: model:ir.model.fields,help:real_estate_commission.field_commission_scenary__activity_type_icon
+msgid "Font awesome icon e.g. fa-tasks"
+msgstr "Icono de Font Awesome ej. fa-tasks"
+
+#. module: real_estate_commission
+#: model:ir.model.fields,field_description:real_estate_commission.field_commission_calculate__has_message
+#: model:ir.model.fields,field_description:real_estate_commission.field_commission_scenary__has_message
+msgid "Has Message"
+msgstr "Tiene un mensaje"
+
+#. module: real_estate_commission
+#: model:ir.model.fields,field_description:real_estate_commission.field_commission_calculate__id
+#: model:ir.model.fields,field_description:real_estate_commission.field_commission_factor__id
+#: model:ir.model.fields,field_description:real_estate_commission.field_commission_factor_sale__id
+#: model:ir.model.fields,field_description:real_estate_commission.field_commission_scenary__id
+msgid "ID"
+msgstr ""
+
+#. module: real_estate_commission
+#: model:ir.model.fields,field_description:real_estate_commission.field_commission_calculate__activity_exception_icon
+#: model:ir.model.fields,field_description:real_estate_commission.field_commission_scenary__activity_exception_icon
+msgid "Icon"
+msgstr "Icono"
+
+#. module: real_estate_commission
+#: model:ir.model.fields,help:real_estate_commission.field_commission_calculate__activity_exception_icon
+#: model:ir.model.fields,help:real_estate_commission.field_commission_scenary__activity_exception_icon
+msgid "Icon to indicate an exception activity."
+msgstr "Icono para indicar una actividad de excepción."
+
+#. module: real_estate_commission
+#: model:ir.model.fields,help:real_estate_commission.field_commission_calculate__message_needaction
+#: model:ir.model.fields,help:real_estate_commission.field_commission_scenary__message_needaction
+msgid "If checked, new messages require your attention."
+msgstr ""
+"Si se encuentra seleccionado, hay nuevos mensajes que requieren su atención."
+
+#. module: real_estate_commission
+#: model:ir.model.fields,help:real_estate_commission.field_commission_calculate__message_has_error
+#: model:ir.model.fields,help:real_estate_commission.field_commission_calculate__message_has_sms_error
+#: model:ir.model.fields,help:real_estate_commission.field_commission_scenary__message_has_error
+#: model:ir.model.fields,help:real_estate_commission.field_commission_scenary__message_has_sms_error
+msgid "If checked, some messages have a delivery error."
+msgstr "Si se encuentra seleccionado, algunos mensajes tienen error de envío."
+
+#. module: real_estate_commission
+#: model_terms:ir.ui.view,arch_db:real_estate_commission.commission_calculate_view_form
+msgid "Invoice"
+msgstr "Factura"
+
+#. module: real_estate_commission
+#: model:ir.model.fields,field_description:real_estate_commission.field_commission_calculate__message_is_follower
+#: model:ir.model.fields,field_description:real_estate_commission.field_commission_scenary__message_is_follower
+msgid "Is Follower"
+msgstr "Es un seguidor"
+
+#. module: real_estate_commission
+#: model:ir.model,name:real_estate_commission.model_account_move
+msgid "Journal Entry"
+msgstr "Asiento contable"
+
+#. module: real_estate_commission
+#: model:ir.model.fields,field_description:real_estate_commission.field_commission_calculate__write_uid
+#: model:ir.model.fields,field_description:real_estate_commission.field_commission_factor__write_uid
+#: model:ir.model.fields,field_description:real_estate_commission.field_commission_factor_sale__write_uid
+#: model:ir.model.fields,field_description:real_estate_commission.field_commission_scenary__write_uid
+msgid "Last Updated by"
+msgstr "Última actualización por"
+
+#. module: real_estate_commission
+#: model:ir.model.fields,field_description:real_estate_commission.field_commission_calculate__write_date
+#: model:ir.model.fields,field_description:real_estate_commission.field_commission_factor__write_date
+#: model:ir.model.fields,field_description:real_estate_commission.field_commission_factor_sale__write_date
+#: model:ir.model.fields,field_description:real_estate_commission.field_commission_scenary__write_date
+msgid "Last Updated on"
+msgstr "Última actualización el"
+
+#. module: real_estate_commission
+#: model:ir.model.fields,field_description:real_estate_commission.field_commission_calculate__factor_sale_line_ids
+#: model:ir.model.fields,field_description:real_estate_commission.field_commission_scenary__factor_line_ids
+msgid "Lines"
+msgstr "Líneas"
+
+#. module: real_estate_commission
+#: model_terms:ir.ui.view,arch_db:real_estate_commission.commission_calculate_view_form
+msgid "Load commissions"
+msgstr "Calcular comisiones"
+
+#. module: real_estate_commission
+#: model:ir.model.fields,field_description:real_estate_commission.field_commission_calculate__message_main_attachment_id
+#: model:ir.model.fields,field_description:real_estate_commission.field_commission_scenary__message_main_attachment_id
+msgid "Main Attachment"
+msgstr "Archivo adjunto principal"
+
+#. module: real_estate_commission
+#: model:ir.model.fields,field_description:real_estate_commission.field_commission_calculate__message_has_error
+#: model:ir.model.fields,field_description:real_estate_commission.field_commission_scenary__message_has_error
+msgid "Message Delivery error"
+msgstr "Error en el envío del mensaje"
+
+#. module: real_estate_commission
+#: model:ir.model.fields,field_description:real_estate_commission.field_commission_calculate__message_ids
+#: model:ir.model.fields,field_description:real_estate_commission.field_commission_scenary__message_ids
+msgid "Messages"
+msgstr "Mensajes"
+
+#. module: real_estate_commission
+#: model:ir.model.fields,field_description:real_estate_commission.field_commission_calculate__my_activity_date_deadline
+#: model:ir.model.fields,field_description:real_estate_commission.field_commission_scenary__my_activity_date_deadline
+msgid "My Activity Deadline"
+msgstr "Fecha límite de mi actividad"
+
+#. module: real_estate_commission
+#: model:ir.model.fields,field_description:real_estate_commission.field_commission_calculate__name
+#: model:ir.model.fields,field_description:real_estate_commission.field_commission_factor__name
+#: model:ir.model.fields,field_description:real_estate_commission.field_commission_factor_sale__name
+#: model:ir.model.fields,field_description:real_estate_commission.field_commission_scenary__name
+msgid "Name"
+msgstr "Nombre"
+
+#. module: real_estate_commission
+#: model:ir.model.fields,field_description:real_estate_commission.field_commission_calculate__activity_calendar_event_id
+#: model:ir.model.fields,field_description:real_estate_commission.field_commission_scenary__activity_calendar_event_id
+msgid "Next Activity Calendar Event"
+msgstr "Siguiente evento en el calendario de actividades"
+
+#. module: real_estate_commission
+#: model:ir.model.fields,field_description:real_estate_commission.field_commission_calculate__activity_date_deadline
+#: model:ir.model.fields,field_description:real_estate_commission.field_commission_scenary__activity_date_deadline
+msgid "Next Activity Deadline"
+msgstr "Fecha límite de siguiente actividad"
+
+#. module: real_estate_commission
+#: model:ir.model.fields,field_description:real_estate_commission.field_commission_calculate__activity_summary
+#: model:ir.model.fields,field_description:real_estate_commission.field_commission_scenary__activity_summary
+msgid "Next Activity Summary"
+msgstr "Resumen de la siguiente actividad"
+
+#. module: real_estate_commission
+#: model:ir.model.fields,field_description:real_estate_commission.field_commission_calculate__activity_type_id
+#: model:ir.model.fields,field_description:real_estate_commission.field_commission_scenary__activity_type_id
+msgid "Next Activity Type"
+msgstr "Tipo de la siguiente actividad"
+
+#. module: real_estate_commission
+#: model:ir.model.fields,field_description:real_estate_commission.field_commission_calculate__message_needaction_counter
+#: model:ir.model.fields,field_description:real_estate_commission.field_commission_scenary__message_needaction_counter
+msgid "Number of Actions"
+msgstr "Número de acciones"
+
+#. module: real_estate_commission
+#: model:ir.model.fields,field_description:real_estate_commission.field_commission_calculate__message_has_error_counter
+#: model:ir.model.fields,field_description:real_estate_commission.field_commission_scenary__message_has_error_counter
+msgid "Number of errors"
+msgstr "Número de errores"
+
+#. module: real_estate_commission
+#: model:ir.model.fields,help:real_estate_commission.field_commission_calculate__message_needaction_counter
+#: model:ir.model.fields,help:real_estate_commission.field_commission_scenary__message_needaction_counter
+msgid "Number of messages requiring action"
+msgstr "Número de mensajes que requieren una acción"
+
+#. module: real_estate_commission
+#: model:ir.model.fields,help:real_estate_commission.field_commission_calculate__message_has_error_counter
+#: model:ir.model.fields,help:real_estate_commission.field_commission_scenary__message_has_error_counter
+msgid "Number of messages with delivery error"
+msgstr "Número de mensajes con error de envío"
+
+#. module: real_estate_commission
+#: model:ir.model.fields,field_description:real_estate_commission.field_commission_factor_sale__percentage
+msgid "Percentage"
+msgstr "Porcentaje"
+
+#. module: real_estate_commission
+#: model:ir.model,name:real_estate_commission.model_project_worksite
+msgid "Project Worksite"
+msgstr "Desarrollo"
+
+#. module: real_estate_commission
+#: model:ir.model,name:real_estate_commission.model_product_template
+#: model:ir.model.fields,field_description:real_estate_commission.field_commission_calculate__property_id
+msgid "Property"
+msgstr "Unidades"
+
+#. module: real_estate_commission
+#: model:ir.model,name:real_estate_commission.model_property_contract
+msgid "Property Contract"
+msgstr "Contrato de la unidad"
+
+#. module: real_estate_commission
+#: model:ir.model.fields,field_description:real_estate_commission.field_commission_calculate__activity_user_id
+#: model:ir.model.fields,field_description:real_estate_commission.field_commission_scenary__activity_user_id
+msgid "Responsible User"
+msgstr "Usuario responsable"
+
+#. module: real_estate_commission
+#: model:ir.model.fields,field_description:real_estate_commission.field_commission_calculate__message_has_sms_error
+#: model:ir.model.fields,field_description:real_estate_commission.field_commission_scenary__message_has_sms_error
+msgid "SMS Delivery error"
+msgstr "Error de entrega de SMS"
+
+#. module: real_estate_commission
+#: model:ir.ui.menu,name:real_estate_commission.commissions_scenaries_menu
+msgid "Scenaries"
+msgstr "Escenarios"
+
+#. module: real_estate_commission
+#: model:ir.model.fields,field_description:real_estate_commission.field_commission_calculate__scenary_id
+#: model:ir.model.fields,field_description:real_estate_commission.field_commission_factor__scenary_id
+msgid "Scenary"
+msgstr "Escenario"
+
+#. module: real_estate_commission
+#: model:ir.ui.menu,name:real_estate_commission.commissions_settings_menu
+msgid "Settings"
+msgstr "Ajustes"
+
+#. module: real_estate_commission
+#: model:ir.model.fields,field_description:real_estate_commission.field_commission_calculate__state
+msgid "State"
+msgstr "Estado"
+
+#. module: real_estate_commission
+#: model:ir.model.fields,help:real_estate_commission.field_commission_calculate__activity_state
+#: model:ir.model.fields,help:real_estate_commission.field_commission_scenary__activity_state
+msgid ""
+"Status based on activities\n"
+"Overdue: Due date is already passed\n"
+"Today: Activity date is today\n"
+"Planned: Future activities."
+msgstr ""
+"Estado según las actividades\n"
+"Vencida: ya pasó la fecha límite\n"
+"Hoy: hoy es la fecha de la actividad\n"
+"Planeada: futuras actividades."
+
+#. module: real_estate_commission
+#: model:ir.model.fields,field_description:real_estate_commission.field_commission_calculate__total_commission
+msgid "Total commission"
+msgstr "Comisión total"
+
+#. module: real_estate_commission
+#: model:ir.model.fields,help:real_estate_commission.field_commission_calculate__activity_exception_decoration
+#: model:ir.model.fields,help:real_estate_commission.field_commission_scenary__activity_exception_decoration
+msgid "Type of the exception activity on record."
+msgstr "Tipo de actividad de excepción registrada."
+
+#. module: real_estate_commission
+#: model:ir.model.fields,field_description:real_estate_commission.field_commission_calculate__website_message_ids
+#: model:ir.model.fields,field_description:real_estate_commission.field_commission_scenary__website_message_ids
+msgid "Website Messages"
+msgstr "Mensajes del sitio web"
+
+#. module: real_estate_commission
+#: model:ir.model.fields,help:real_estate_commission.field_commission_calculate__website_message_ids
+#: model:ir.model.fields,help:real_estate_commission.field_commission_scenary__website_message_ids
+msgid "Website communication history"
+msgstr "Historial de comunicaciones del sitio web"
+
+#. module: real_estate_commission
+#: model:ir.model.fields,field_description:real_estate_commission.field_commission_calculate__worksite_id
+msgid "Worksite"
+msgstr "Sitio de trabajo"
+
+#. module: real_estate_commission
+#: model:ir.model.fields,field_description:real_estate_commission.field_commission_calculate__advance_payment_date
+msgid "Down payment date"
+msgstr "Fecha de enganche"
+
+#. module: real_estate_commission
+#: model:ir.model.fields,field_description:real_estate_commission.field_commission_calculate__date_start
+msgid "Start date"
+msgstr "Fecha de inicio"
+
+#. module: real_estate_commission
+#: model:ir.model.fields,field_description:real_estate_commission.field_commission_calculate__advance_payment_payment_id
+msgid "Advance Payment"
+msgstr "Estado del enganche"

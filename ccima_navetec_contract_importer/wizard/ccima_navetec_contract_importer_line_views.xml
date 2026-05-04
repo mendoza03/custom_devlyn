@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id="ccima_navetec_contract_importer_line_view_form" model="ir.ui.view">
+        <field name="name">ccima.navetec.contract.importer.line.view.form</field>
+        <field name="model">ccima.navetec.contract.importer.line</field>
+        <field name="arch" type="xml">
+            <form>
+                <sheet>
+                    <group>
+                        <group>
+                            <field name="filename"/>
+                        </group>
+                        <group>
+                            <field name="state"/>
+                        </group>
+                    </group>
+                    <group>
+                        <field name="message"/>
+                        <field name="data_text"/>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+</odoo>

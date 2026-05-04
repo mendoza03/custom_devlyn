@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id="commission_calculate_view_form" model="ir.ui.view">
+        <field name="name">commission.calculate.view.form</field>
+        <field name="model">commission.calculate</field>
+        <field name="arch" type="xml">
+            <form>
+                <header>
+                    <field name="state" widget="statusbar" statusbar_visible="draft,confirm,cancel"/>
+                    <button string="Load commissions" name="action_load_commissions" type="object" class="btn-info" invisible="state != 'draft'"/>
+                    <button string="Confirm" name="action_confirm" type="object" class="oe_highlight" invisible="state != 'draft' or not factor_sale_line_ids"/>
+                </header>
+                <sheet>
+                    <div class="oe_title">
+                        <h1>
+                            <field name="name" required="1"/>
+                        </h1>
+                    </div>
+                    <group>
+                        <group>
+                            <field name="property_id" readonly="state != 'draft'" domain="[('is_property', '=', True), ('state', '=', 'free')]" context="{'form_view_ref': 'real_estate_bits.view_property_form'}"/>
+                            <field name="worksite_id" invisible="1"/>
+                            <field name="advance_payment_date"/>
+                            <field name="date_start"/>
+                            <field name="commission_percentage" required="1"/>
+                            <field name="amount" required="1"/>
+                            <field name="advance_payment_payment_id"/>
+                            <field name="scenary_id" required="1"/>
+                        </group>
+                        <group>
+                            <field name="opportunity_id"/>
+                            <!-- <field name="total_commission"/> -->
+                            <field name="percentage_commission_upon_signing" invisible="1"/>
+                            <!-- <field name="commission_upon_signing"/> -->
+                            <field name="invoice_commission_upon_signing_id" invisible="1"/>
+                            <button name="action_view_invoice_commission_upon_signing" string="Invoice" type="object" class="oe_highlight" icon="fa-pencil-square-o" colspan="2" invisible="not invoice_commission_upon_signing_id"/>
+                            <button name="action_create_invoice_commission_upon_signing" string="Create invoice" type="object" class="oe_link ps-0" icon="fa-pencil-square-o" colspan="2" invisible="state != 'confirm' or invoice_commission_upon_signing_id"/>
+                            <field name="percentage_commission_on_the_deed" invisible="1"/>
+                            <!-- <field name="commission_on_the_deed"/> -->
+                            <field name="invoice_commission_on_the_deed_id" invisible="1"/>
+                            <button name="action_view_invoice_commission_on_the_deed" string="Invoice" type="object" class="oe_highlight" icon="fa-pencil-square-o" colspan="2" invisible="not invoice_commission_on_the_deed_id"/>
+                            <button name="action_create_invoice_commission_on_the_deed" string="Create invoice" type="object" class="oe_link ps-0" icon="fa-pencil-square-o" colspan="2" invisible="state != 'confirm' or invoice_commission_on_the_deed_id"/>
+                        </group>
+                    </group>
+                    <notebook>
+                        <page name="lines" string="Factors">
+                            <field name="factor_sale_line_ids" mode="list">
+                                <list editable="bottom">
+                                    <field name="name" readonly="1"/>
+                                    <field name="percentage" readonly="1"/>
+                                    <field name="factor"/>
+                                    <field name="amount_total"/>
+                                    <field name="percentage_commission_upon_signing"/>
+                                    <field name="commission_upon_signing"/>
+                                    <field name="percentage_commission_on_the_deed"/>
+                                    <field name="commission_on_the_deed"/>
+                                </list>
+                            </field>
+                        </page>
+                    </notebook>
+                </sheet>
+                <chatter reload_on_post="True" reload_on_attachment="True"/>
+            </form>
+        </field>
+    </record>
+
+    <record id="commission_calculate_view_list" model="ir.ui.view">
+        <field name="name">commission.calculate.view.list</field>
+        <field name="model">commission.calculate</field>
+        <field name="arch" type="xml">
+            <list>
+                <field name="name"/>
+                <field name="create_date"/>
+                <field name="property_id"/>
+                <field name="amount"/>
+                <field name="state" widget="badge" decoration-info="state == 'draft'" decoration-success="state == 'confirm'" decoration-muted="state == 'cancel'"/>
+            </list>
+        </field>
+    </record>
+
+    <record id="commission_calculate_action" model="ir.actions.act_window">
+        <field name="name">Commission calculate</field>
+        <field name="res_model">commission.calculate</field>
+        <field name="view_mode">list,form</field>
+    </record>
+
+</odoo>

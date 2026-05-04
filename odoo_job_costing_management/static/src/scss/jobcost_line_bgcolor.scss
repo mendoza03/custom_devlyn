@@ -1,0 +1,94 @@
+/* Apply background color, padding, and box-sizing to all relevant .o_data_cell elements */
+
+div[name="job_cost_line_ids"] .o_data_cell[name="date"],
+div[name="job_cost_line_ids"] .o_data_cell[name="job_type_id"],
+div[name="job_cost_line_ids"] .o_data_cell[name="product_id"],
+div[name="job_cost_line_ids"] .o_data_cell[name="basis"],
+div[name="job_cost_line_ids"] .o_data_cell[name="description"],
+div[name="job_cost_line_ids"] .o_data_cell[name="reference"]
+ {
+    background-color: #B0E0E6 !important;
+    padding: 10px;
+    box-sizing: border-box;
+}
+
+div[name="job_cost_line_ids"] .o_data_cell[name="product_qty"],
+div[name="job_cost_line_ids"] .o_data_cell[name="uom_id"],
+div[name="job_cost_line_ids"] .o_data_cell[name="cost_price"],
+div[name="job_cost_line_ids"] .o_data_cell[name="hours"] {
+    background-color: #FFDAB9 !important;
+    padding: 10px;
+    box-sizing: border-box;
+}
+
+/* Apply background color, padding, and box-sizing to all relevant .o_data_cell elements */
+div[name="job_cost_line_ids"] .o_data_cell[name="total_cost"],
+div[name="job_cost_line_ids"] .o_data_cell[name="actual_hour"],
+div[name="job_cost_line_ids"] .o_data_cell[name="actual_quantity"],
+div[name="job_cost_line_ids"] .o_data_cell[name="actual_invoice_quantity"] {
+    background-color: #98FB98 !important;
+    padding: 10px;
+    box-sizing: border-box;
+}
+
+div[name="job_labour_line_ids"] .o_data_cell[name="date"],
+div[name="job_labour_line_ids"] .o_data_cell[name="job_type_id"],
+div[name="job_labour_line_ids"] .o_data_cell[name="product_id"],
+div[name="job_labour_line_ids"] .o_data_cell[name="basis"],
+div[name="job_labour_line_ids"] .o_data_cell[name="description"],
+div[name="job_labour_line_ids"] .o_data_cell[name="reference"]
+ {
+    background-color: #B0E0E6 !important;
+    padding: 10px;
+    box-sizing: border-box;
+}
+
+div[name="job_labour_line_ids"] .o_data_cell[name="product_qty"],
+div[name="job_labour_line_ids"] .o_data_cell[name="uom_id"],
+div[name="job_labour_line_ids"] .o_data_cell[name="cost_price"],
+div[name="job_labour_line_ids"] .o_data_cell[name="hours"] {
+    background-color: #FFDAB9 !important;
+    padding: 10px;
+    box-sizing: border-box;
+}
+
+/* Apply background color, padding, and box-sizing to all relevant .o_data_cell elements */
+div[name="job_labour_line_ids"] .o_data_cell[name="total_cost"],
+div[name="job_labour_line_ids"] .o_data_cell[name="actual_hour"],
+div[name="job_labour_line_ids"] .o_data_cell[name="actual_quantity"],
+div[name="job_labour_line_ids"] .o_data_cell[name="actual_invoice_quantity"] {
+    background-color: #98FB98 !important;
+    padding: 10px;
+    box-sizing: border-box;
+}
+
+div[name="job_overhead_line_ids"] .o_data_cell[name="date"],
+div[name="job_overhead_line_ids"] .o_data_cell[name="job_type_id"],
+div[name="job_overhead_line_ids"] .o_data_cell[name="product_id"],
+div[name="job_overhead_line_ids"] .o_data_cell[name="basis"],
+div[name="job_overhead_line_ids"] .o_data_cell[name="description"],
+div[name="job_overhead_line_ids"] .o_data_cell[name="reference"]
+ {
+    background-color: #B0E0E6 !important;
+    padding: 10px;
+    box-sizing: border-box;
+}
+
+div[name="job_overhead_line_ids"] .o_data_cell[name="product_qty"],
+div[name="job_overhead_line_ids"] .o_data_cell[name="uom_id"],
+div[name="job_overhead_line_ids"] .o_data_cell[name="cost_price"],
+div[name="job_overhead_line_ids"] .o_data_cell[name="hours"] {
+    background-color: #FFDAB9 !important;
+    padding: 10px;
+    box-sizing: border-box;
+}
+
+/* Apply background color, padding, and box-sizing to all relevant .o_data_cell elements */
+div[name="job_overhead_line_ids"] .o_data_cell[name="total_cost"],
+div[name="job_overhead_line_ids"] .o_data_cell[name="actual_hour"],
+div[name="job_overhead_line_ids"] .o_data_cell[name="actual_quantity"],
+div[name="job_overhead_line_ids"] .o_data_cell[name="actual_invoice_quantity"] {
+    background-color: #98FB98 !important;
+    padding: 10px;
+    box-sizing: border-box;
+}

@@ -1,0 +1,1604 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* property_sales_analysis
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 18.0+e-20260119\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2026-02-16 06:47+0000\n"
+"PO-Revision-Date: 2026-02-16 06:47+0000\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+#. module: property_sales_analysis
+#: model:ir.model.fields,field_description:property_sales_analysis.field_property_sales_cluster_summary__sold_percentage
+#: model:ir.model.fields,field_description:property_sales_analysis.field_property_sales_summary__sold_percentage
+#: model:ir.model.fields,field_description:property_sales_analysis.field_property_sales_summary__sold_percentage_display
+#: model:ir.model.fields,field_description:property_sales_analysis.field_property_sales_week_summary__sold_percentage
+#: model:ir.model.fields,field_description:property_sales_analysis.field_property_sales_week_summary__sold_percentage_display
+msgid "% Apartado"
+msgstr "% Apartado"
+
+#. module: property_sales_analysis
+#: model:ir.model.fields,field_description:property_sales_analysis.field_property_sales_manager_summary__weekly_details
+#: model_terms:ir.ui.view,arch_db:property_sales_analysis.view_property_sales_manager_summary_form
+msgid "Actividad por Semana"
+msgstr ""
+
+#. module: property_sales_analysis
+#: model_terms:ir.ui.view,arch_db:property_sales_analysis.view_property_sales_cluster_summary_form
+#: model_terms:ir.ui.view,arch_db:property_sales_analysis.view_property_sales_manager_summary_form
+#: model_terms:ir.ui.view,arch_db:property_sales_analysis.view_property_sales_summary_form
+#: model_terms:ir.ui.view,arch_db:property_sales_analysis.view_property_sales_week_summary_form
+msgid "Actualizar Datos"
+msgstr ""
+
+#. module: property_sales_analysis
+#: model:ir.actions.act_window,name:property_sales_analysis.action_property_sales_summary
+#: model:ir.ui.menu,name:property_sales_analysis.menu_property_sales_summary
+msgid "Análisis de Ventas y Preventas"
+msgstr ""
+
+#. module: property_sales_analysis
+#: model:ir.model.fields,field_description:property_sales_analysis.field_property_sales_cluster_summary__calendar_id
+#: model:ir.model.fields,field_description:property_sales_analysis.field_property_sales_cluster_summary_generator__calendar_id
+#: model:ir.model.fields,field_description:property_sales_analysis.field_property_sales_manager_summary__calendar_id
+#: model:ir.model.fields,field_description:property_sales_analysis.field_property_sales_manager_summary_generator__calendar_id
+#: model:ir.model.fields,field_description:property_sales_analysis.field_property_sales_summary__calendar_id
+#: model:ir.model.fields,field_description:property_sales_analysis.field_property_sales_summary_generator__calendar_id
+#: model:ir.model.fields,field_description:property_sales_analysis.field_property_sales_week_summary__calendar_id
+#: model:ir.model.fields,field_description:property_sales_analysis.field_property_sales_week_summary_generator__calendar_id
+msgid "Calendar"
+msgstr "Calendario"
+
+#. module: property_sales_analysis
+#: model:ir.model.fields,field_description:property_sales_analysis.field_property_sales_cluster_summary__calendar_name
+#: model:ir.model.fields,field_description:property_sales_analysis.field_property_sales_manager_summary__calendar_name
+#: model:ir.model.fields,field_description:property_sales_analysis.field_property_sales_manager_week_detail__calendar_id
+#: model:ir.model.fields,field_description:property_sales_analysis.field_property_sales_summary__calendar_name
+#: model:ir.model.fields,field_description:property_sales_analysis.field_property_sales_week_cluster_detail__calendar_id
+#: model:ir.model.fields,field_description:property_sales_analysis.field_property_sales_week_cluster_summary__calendar_id
+#: model:ir.model.fields,field_description:property_sales_analysis.field_property_sales_week_property_detail__calendar_id
+#: model:ir.model.fields,field_description:property_sales_analysis.field_property_sales_week_summary__calendar_name
+#: model_terms:ir.ui.view,arch_db:property_sales_analysis.view_property_sales_week_cluster_summary_search
+#: model_terms:ir.ui.view,arch_db:property_sales_analysis.view_property_sales_week_property_detail_search
+msgid "Calendario"
+msgstr ""
+
+#. module: property_sales_analysis
+#: model_terms:ir.ui.view,arch_db:property_sales_analysis.view_property_sales_cluster_summary_generator_form
+#: model_terms:ir.ui.view,arch_db:property_sales_analysis.view_property_sales_manager_summary_generator_form
+#: model_terms:ir.ui.view,arch_db:property_sales_analysis.view_property_sales_summary_generator_form
+#: model_terms:ir.ui.view,arch_db:property_sales_analysis.view_property_sales_week_summary_generator_form
+msgid "Cancelar"
+msgstr ""
+
+#. module: property_sales_analysis
+#: model:ir.model.fields,field_description:property_sales_analysis.field_property_sales_cluster_summary__cluster_id
+#: model:ir.model.fields,field_description:property_sales_analysis.field_property_sales_cluster_summary__cluster_name
+#: model:ir.model.fields,field_description:property_sales_analysis.field_property_sales_cluster_summary_generator__cluster_id
+#: model:ir.model.fields,field_description:property_sales_analysis.field_property_sales_summary__cluster_id
+#: model:ir.model.fields,field_description:property_sales_analysis.field_property_sales_summary__cluster_name
+#: model:ir.model.fields,field_description:property_sales_analysis.field_property_sales_summary_generator__cluster_id
+#: model:ir.model.fields,field_description:property_sales_analysis.field_property_sales_week_cluster_detail__cluster_id
+#: model:ir.model.fields,field_description:property_sales_analysis.field_property_sales_week_cluster_detail__cluster_name
+#: model:ir.model.fields,field_description:property_sales_analysis.field_property_sales_week_cluster_summary__cluster_id
+#: model:ir.model.fields,field_description:property_sales_analysis.field_property_sales_week_cluster_summary__cluster_name
+#: model:ir.model.fields,field_description:property_sales_analysis.field_property_sales_week_property_detail__cluster_id
+#: model:ir.model.fields,field_description:property_sales_analysis.field_property_sales_week_property_detail__cluster_name
+#: model_terms:ir.ui.view,arch_db:property_sales_analysis.view_property_sales_week_cluster_summary_search
+#: model_terms:ir.ui.view,arch_db:property_sales_analysis.view_property_sales_week_property_detail_search
+msgid "Cluster"
+msgstr "Sitio de trabajo"
+
+#. module: property_sales_analysis
+#: model_terms:ir.ui.view,arch_db:property_sales_analysis.view_property_sales_cluster_summary_form
+msgid "Cluster Sales Summary"
+msgstr ""
+
+#. module: property_sales_analysis
+#: model_terms:ir.ui.view,arch_db:property_sales_analysis.view_property_sales_week_summary_form
+msgid "Clusters"
+msgstr ""
+
+#. module: property_sales_analysis
+#: model:ir.model.fields,field_description:property_sales_analysis.field_property_sales_week_summary__cluster_ids
+msgid "Clusters con Ventas"
+msgstr ""
+
+#. module: property_sales_analysis
+#: model:ir.model.fields,field_description:property_sales_analysis.field_property_sales_cluster_summary__company_id
+#: model:ir.model.fields,field_description:property_sales_analysis.field_property_sales_manager_summary__company_id
+#: model:ir.model.fields,field_description:property_sales_analysis.field_property_sales_manager_week_detail__company_id
+#: model:ir.model.fields,field_description:property_sales_analysis.field_property_sales_summary__company_id
+#: model:ir.model.fields,field_description:property_sales_analysis.field_property_sales_week_summary__company_id
+msgid "Company"
+msgstr "Compañía"
+
+#. module: property_sales_analysis
+#: model_terms:ir.ui.view,arch_db:property_sales_analysis.view_property_sales_cluster_summary_form
+#: model_terms:ir.ui.view,arch_db:property_sales_analysis.view_property_sales_manager_summary_form
+#: model_terms:ir.ui.view,arch_db:property_sales_analysis.view_property_sales_summary_form
+#: model_terms:ir.ui.view,arch_db:property_sales_analysis.view_property_sales_week_summary_form
+msgid "Configuración"
+msgstr ""
+
+#. module: property_sales_analysis
+#: model:ir.model.fields,field_description:property_sales_analysis.field_property_sales_cluster_summary__create_uid
+#: model:ir.model.fields,field_description:property_sales_analysis.field_property_sales_cluster_summary_generator__create_uid
+#: model:ir.model.fields,field_description:property_sales_analysis.field_property_sales_manager_summary__create_uid
+#: model:ir.model.fields,field_description:property_sales_analysis.field_property_sales_manager_summary_generator__create_uid
+#: model:ir.model.fields,field_description:property_sales_analysis.field_property_sales_manager_week_detail__create_uid
+#: model:ir.model.fields,field_description:property_sales_analysis.field_property_sales_summary__create_uid
+#: model:ir.model.fields,field_description:property_sales_analysis.field_property_sales_summary_generator__create_uid
+#: model:ir.model.fields,field_description:property_sales_analysis.field_property_sales_week_cluster_detail__create_uid
+#: model:ir.model.fields,field_description:property_sales_analysis.field_property_sales_week_cluster_summary__create_uid
+#: model:ir.model.fields,field_description:property_sales_analysis.field_property_sales_week_property_detail__create_uid
+#: model:ir.model.fields,field_description:property_sales_analysis.field_property_sales_week_summary__create_uid
+#: model:ir.model.fields,field_description:property_sales_analysis.field_property_sales_week_summary_generator__create_uid
+msgid "Created by"
+msgstr "Creado por"
+
+#. module: property_sales_analysis
+#: model:ir.model.fields,field_description:property_sales_analysis.field_property_sales_cluster_summary__create_date
+#: model:ir.model.fields,field_description:property_sales_analysis.field_property_sales_cluster_summary_generator__create_date
+#: model:ir.model.fields,field_description:property_sales_analysis.field_property_sales_manager_summary__create_date
+#: model:ir.model.fields,field_description:property_sales_analysis.field_property_sales_manager_summary_generator__create_date
+#: model:ir.model.fields,field_description:property_sales_analysis.field_property_sales_manager_week_detail__create_date
+#: model:ir.model.fields,field_description:property_sales_analysis.field_property_sales_summary__create_date
+#: model:ir.model.fields,field_description:property_sales_analysis.field_property_sales_summary_generator__create_date
+#: model:ir.model.fields,field_description:property_sales_analysis.field_property_sales_week_cluster_detail__create_date
+#: model:ir.model.fields,field_description:property_sales_analysis.field_property_sales_week_cluster_summary__create_date
+#: model:ir.model.fields,field_description:property_sales_analysis.field_property_sales_week_property_detail__create_date
+#: model:ir.model.fields,field_description:property_sales_analysis.field_property_sales_week_summary__create_date
+#: model:ir.model.fields,field_description:property_sales_analysis.field_property_sales_week_summary_generator__create_date
+msgid "Created on"
+msgstr "Creado el"
+
+#. module: property_sales_analysis
+#: model:ir.model.fields,help:property_sales_analysis.field_product_product__date_state_change
+#: model:ir.model.fields,help:property_sales_analysis.field_product_template__date_state_change
+msgid "Date when the property state changed to reserved"
+msgstr "Fecha en que la propiedad cambió a vendida, reservada o en renta"
+
+#. module: property_sales_analysis
+#: model:ir.model.fields,field_description:property_sales_analysis.field_property_sales_week_summary__has_desierto
+msgid "Desierto Activo"
+msgstr ""
+
+#. module: property_sales_analysis
+#: model_terms:ir.ui.view,arch_db:property_sales_analysis.view_property_sales_week_cluster_summary_form
+msgid "Detalle Consolidado"
+msgstr ""
+
+#. module: property_sales_analysis
+#: model:ir.ui.menu,name:property_sales_analysis.menu_property_sales_manager_week_detail
+msgid "Detalle Gerentes (Dashboard)"
+msgstr ""
+
+#. module: property_sales_analysis
+#: model:ir.ui.menu,name:property_sales_analysis.menu_property_sales_week_cluster_detail
+msgid "Detalle Semanal (Dashboard)"
+msgstr ""
+
+#. module: property_sales_analysis
+#: model_terms:ir.ui.view,arch_db:property_sales_analysis.view_property_sales_week_cluster_detail_list
+msgid "Detalle Semanal por Cluster/Obra"
+msgstr ""
+
+#. module: property_sales_analysis
+#: model_terms:ir.ui.view,arch_db:property_sales_analysis.view_property_sales_manager_summary_form
+msgid "Detalle de Gerente"
+msgstr ""
+
+#. module: property_sales_analysis
+#: model_terms:ir.ui.view,arch_db:property_sales_analysis.view_property_sales_manager_week_detail_list
+msgid "Detalle de Gerentes por Semana"
+msgstr ""
+
+#. module: property_sales_analysis
+#: model_terms:ir.ui.view,arch_db:property_sales_analysis.view_property_sales_week_property_detail_form
+msgid "Detalle de Propiedad"
+msgstr ""
+
+#. module: property_sales_analysis
+#: model_terms:ir.ui.view,arch_db:property_sales_analysis.view_property_sales_week_property_detail_list
+msgid "Detalle de Propiedades Vendidas"
+msgstr ""
+
+#. module: property_sales_analysis
+#: model_terms:ir.ui.view,arch_db:property_sales_analysis.view_property_sales_week_summary_form
+msgid "Detalle de Semana"
+msgstr ""
+
+#. module: property_sales_analysis
+#: model_terms:ir.ui.view,arch_db:property_sales_analysis.view_property_sales_manager_week_detail_form
+#: model_terms:ir.ui.view,arch_db:property_sales_analysis.view_property_sales_week_cluster_detail_form
+msgid "Detalle de Venta"
+msgstr ""
+
+#. module: property_sales_analysis
+#: model:ir.model.fields,field_description:property_sales_analysis.field_property_sales_week_summary__cluster_details
+#: model_terms:ir.ui.view,arch_db:property_sales_analysis.view_property_sales_week_summary_form
+msgid "Detalle por Cluster"
+msgstr ""
+
+#. module: property_sales_analysis
+#: model:ir.model.fields,field_description:property_sales_analysis.field_property_sales_week_summary__cluster_detail_ids
+msgid "Detalle por Cluster/Obra"
+msgstr ""
+
+#. module: property_sales_analysis
+#: model:ir.model.fields,field_description:property_sales_analysis.field_property_sales_week_summary__manager_details
+#: model_terms:ir.ui.view,arch_db:property_sales_analysis.view_property_sales_week_summary_form
+msgid "Detalle por Gerente"
+msgstr ""
+
+#. module: property_sales_analysis
+#: model:ir.model.fields,field_description:property_sales_analysis.field_property_sales_week_summary__property_detail_ids
+msgid "Detalle por Propiedades"
+msgstr ""
+
+#. module: property_sales_analysis
+#: model:ir.actions.act_window,name:property_sales_analysis.action_property_sales_week_property_detail
+#: model:ir.ui.menu,name:property_sales_analysis.menu_property_sales_week_property_detail
+#: model_terms:ir.ui.view,arch_db:property_sales_analysis.view_property_sales_week_summary_form
+msgid "Detalle por Propiedades (Dashboard)"
+msgstr ""
+
+#. module: property_sales_analysis
+#: model:ir.model.fields,field_description:property_sales_analysis.field_property_sales_manager_summary__week_detail_ids
+msgid "Detalle por Semana"
+msgstr ""
+
+#. module: property_sales_analysis
+#: model:ir.model.fields,field_description:property_sales_analysis.field_property_sales_cluster_summary__display_name
+#: model:ir.model.fields,field_description:property_sales_analysis.field_property_sales_cluster_summary_generator__display_name
+#: model:ir.model.fields,field_description:property_sales_analysis.field_property_sales_manager_summary__display_name
+#: model:ir.model.fields,field_description:property_sales_analysis.field_property_sales_manager_summary_generator__display_name
+#: model:ir.model.fields,field_description:property_sales_analysis.field_property_sales_manager_week_detail__display_name
+#: model:ir.model.fields,field_description:property_sales_analysis.field_property_sales_summary__display_name
+#: model:ir.model.fields,field_description:property_sales_analysis.field_property_sales_summary_generator__display_name
+#: model:ir.model.fields,field_description:property_sales_analysis.field_property_sales_week_cluster_detail__display_name
+#: model:ir.model.fields,field_description:property_sales_analysis.field_property_sales_week_cluster_summary__display_name
+#: model:ir.model.fields,field_description:property_sales_analysis.field_property_sales_week_property_detail__display_name
+#: model:ir.model.fields,field_description:property_sales_analysis.field_property_sales_week_summary__display_name
+#: model:ir.model.fields,field_description:property_sales_analysis.field_property_sales_week_summary_generator__display_name
+msgid "Display Name"
+msgstr "Nombre a Mostrar"
+
+#. module: property_sales_analysis
+#. odoo-python
+#: code:addons/property_sales_analysis/models/property_sales_week_summary_generator.py:0
+msgid "El calendario '%s' no tiene meses configurados."
+msgstr ""
+
+#. module: property_sales_analysis
+#. odoo-python
+#: code:addons/property_sales_analysis/models/property_sales_week_summary_generator.py:0
+msgid "El calendario '%s' no tiene semanas configuradas."
+msgstr ""
+
+#. module: property_sales_analysis
+#: model:ir.model.fields,field_description:property_sales_analysis.field_property_sales_week_property_detail__state
+msgid "Estado"
+msgstr ""
+
+#. module: property_sales_analysis
+#: model:ir.model.fields,field_description:property_sales_analysis.field_property_sales_week_summary__has_estepa
+msgid "Estepa Activo"
+msgstr ""
+
+#. module: property_sales_analysis
+#: model:ir.model.fields,field_description:property_sales_analysis.field_property_sales_week_summary__week_end
+msgid "Fin"
+msgstr ""
+
+#. module: property_sales_analysis
+#: model:ir.actions.act_window,name:property_sales_analysis.action_property_sales_summary_generator
+#: model:ir.ui.menu,name:property_sales_analysis.menu_property_sales_summary_generator
+msgid "Generar Análisis"
+msgstr ""
+
+#. module: property_sales_analysis
+#: model_terms:ir.ui.view,arch_db:property_sales_analysis.view_property_sales_summary_generator_form
+msgid "Generar Registros"
+msgstr ""
+
+#. module: property_sales_analysis
+#: model:ir.actions.act_window,name:property_sales_analysis.action_property_sales_week_summary_generator
+#: model_terms:ir.ui.view,arch_db:property_sales_analysis.view_property_sales_week_summary_generator_form
+msgid "Generar Resumen Semanal"
+msgstr ""
+
+#. module: property_sales_analysis
+#: model:ir.actions.act_window,name:property_sales_analysis.action_property_sales_manager_summary_generator
+#: model_terms:ir.ui.view,arch_db:property_sales_analysis.view_property_sales_manager_summary_generator_form
+msgid "Generar Resumen de Gerentes"
+msgstr ""
+
+#. module: property_sales_analysis
+#: model:ir.actions.act_window,name:property_sales_analysis.action_property_sales_cluster_summary_generator
+#: model_terms:ir.ui.view,arch_db:property_sales_analysis.view_property_sales_cluster_summary_generator_form
+msgid "Generar Resumen del Cluster"
+msgstr ""
+
+#. module: property_sales_analysis
+#: model:ir.ui.menu,name:property_sales_analysis.menu_property_sales_cluster_summary_generator
+msgid "Generar Resumen por Cluster"
+msgstr ""
+
+#. module: property_sales_analysis
+#: model:ir.model,name:property_sales_analysis.model_property_sales_cluster_summary_generator
+msgid "Generate Cluster Sales Summary"
+msgstr ""
+
+#. module: property_sales_analysis
+#: model:ir.model,name:property_sales_analysis.model_property_sales_manager_summary_generator
+msgid "Generate Manager Sales Summary"
+msgstr ""
+
+#. module: property_sales_analysis
+#: model:ir.model,name:property_sales_analysis.model_property_sales_summary_generator
+msgid "Generate Sales Summary for All Worksites"
+msgstr ""
+
+#. module: property_sales_analysis
+#: model:ir.model,name:property_sales_analysis.model_property_sales_week_summary_generator
+msgid "Generate Weekly Sales Summary"
+msgstr ""
+
+#. module: property_sales_analysis
+#: model:ir.model.fields,field_description:property_sales_analysis.field_property_sales_manager_summary__manager_id
+#: model:ir.model.fields,field_description:property_sales_analysis.field_property_sales_manager_summary__manager_name
+#: model:ir.model.fields,field_description:property_sales_analysis.field_property_sales_manager_week_detail__manager_id
+#: model:ir.model.fields,field_description:property_sales_analysis.field_property_sales_manager_week_detail__manager_name
+#: model:ir.model.fields,field_description:property_sales_analysis.field_property_sales_week_property_detail__manager_id
+#: model:ir.model.fields,field_description:property_sales_analysis.field_property_sales_week_property_detail__manager_name
+#: model_terms:ir.ui.view,arch_db:property_sales_analysis.view_property_sales_week_property_detail_search
+msgid "Gerente"
+msgstr ""
+
+#. module: property_sales_analysis
+#: model:ir.model.fields,field_description:property_sales_analysis.field_property_sales_cluster_summary__s1_managers
+#: model:ir.model.fields,field_description:property_sales_analysis.field_property_sales_summary__s1_managers
+msgid "Gerentes S1"
+msgstr ""
+
+#. module: property_sales_analysis
+#: model:ir.model.fields,field_description:property_sales_analysis.field_property_sales_cluster_summary__s10_managers
+#: model:ir.model.fields,field_description:property_sales_analysis.field_property_sales_summary__s10_managers
+msgid "Gerentes S10"
+msgstr ""
+
+#. module: property_sales_analysis
+#: model:ir.model.fields,field_description:property_sales_analysis.field_property_sales_cluster_summary__s11_managers
+#: model:ir.model.fields,field_description:property_sales_analysis.field_property_sales_summary__s11_managers
+msgid "Gerentes S11"
+msgstr ""
+
+#. module: property_sales_analysis
+#: model:ir.model.fields,field_description:property_sales_analysis.field_property_sales_cluster_summary__s12_managers
+#: model:ir.model.fields,field_description:property_sales_analysis.field_property_sales_summary__s12_managers
+msgid "Gerentes S12"
+msgstr ""
+
+#. module: property_sales_analysis
+#: model:ir.model.fields,field_description:property_sales_analysis.field_property_sales_cluster_summary__s13_managers
+#: model:ir.model.fields,field_description:property_sales_analysis.field_property_sales_summary__s13_managers
+msgid "Gerentes S13"
+msgstr ""
+
+#. module: property_sales_analysis
+#: model:ir.model.fields,field_description:property_sales_analysis.field_property_sales_cluster_summary__s14_managers
+#: model:ir.model.fields,field_description:property_sales_analysis.field_property_sales_summary__s14_managers
+msgid "Gerentes S14"
+msgstr ""
+
+#. module: property_sales_analysis
+#: model:ir.model.fields,field_description:property_sales_analysis.field_property_sales_cluster_summary__s15_managers
+#: model:ir.model.fields,field_description:property_sales_analysis.field_property_sales_summary__s15_managers
+msgid "Gerentes S15"
+msgstr ""
+
+#. module: property_sales_analysis
+#: model:ir.model.fields,field_description:property_sales_analysis.field_property_sales_cluster_summary__s16_managers
+#: model:ir.model.fields,field_description:property_sales_analysis.field_property_sales_summary__s16_managers
+msgid "Gerentes S16"
+msgstr ""
+
+#. module: property_sales_analysis
+#: model:ir.model.fields,field_description:property_sales_analysis.field_property_sales_cluster_summary__s17_managers
+#: model:ir.model.fields,field_description:property_sales_analysis.field_property_sales_summary__s17_managers
+msgid "Gerentes S17"
+msgstr ""
+
+#. module: property_sales_analysis
+#: model:ir.model.fields,field_description:property_sales_analysis.field_property_sales_cluster_summary__s18_managers
+#: model:ir.model.fields,field_description:property_sales_analysis.field_property_sales_summary__s18_managers
+msgid "Gerentes S18"
+msgstr ""
+
+#. module: property_sales_analysis
+#: model:ir.model.fields,field_description:property_sales_analysis.field_property_sales_cluster_summary__s19_managers
+#: model:ir.model.fields,field_description:property_sales_analysis.field_property_sales_summary__s19_managers
+msgid "Gerentes S19"
+msgstr ""
+
+#. module: property_sales_analysis
+#: model:ir.model.fields,field_description:property_sales_analysis.field_property_sales_cluster_summary__s2_managers
+#: model:ir.model.fields,field_description:property_sales_analysis.field_property_sales_summary__s2_managers
+msgid "Gerentes S2"
+msgstr ""
+
+#. module: property_sales_analysis
+#: model:ir.model.fields,field_description:property_sales_analysis.field_property_sales_cluster_summary__s20_managers
+#: model:ir.model.fields,field_description:property_sales_analysis.field_property_sales_summary__s20_managers
+msgid "Gerentes S20"
+msgstr ""
+
+#. module: property_sales_analysis
+#: model:ir.model.fields,field_description:property_sales_analysis.field_property_sales_cluster_summary__s21_managers
+#: model:ir.model.fields,field_description:property_sales_analysis.field_property_sales_summary__s21_managers
+msgid "Gerentes S21"
+msgstr ""
+
+#. module: property_sales_analysis
+#: model:ir.model.fields,field_description:property_sales_analysis.field_property_sales_cluster_summary__s22_managers
+#: model:ir.model.fields,field_description:property_sales_analysis.field_property_sales_summary__s22_managers
+msgid "Gerentes S22"
+msgstr ""
+
+#. module: property_sales_analysis
+#: model:ir.model.fields,field_description:property_sales_analysis.field_property_sales_cluster_summary__s23_managers
+#: model:ir.model.fields,field_description:property_sales_analysis.field_property_sales_summary__s23_managers
+msgid "Gerentes S23"
+msgstr ""
+
+#. module: property_sales_analysis
+#: model:ir.model.fields,field_description:property_sales_analysis.field_property_sales_cluster_summary__s24_managers
+#: model:ir.model.fields,field_description:property_sales_analysis.field_property_sales_summary__s24_managers
+msgid "Gerentes S24"
+msgstr ""
+
+#. module: property_sales_analysis
+#: model:ir.model.fields,field_description:property_sales_analysis.field_property_sales_cluster_summary__s25_managers
+#: model:ir.model.fields,field_description:property_sales_analysis.field_property_sales_summary__s25_managers
+msgid "Gerentes S25"
+msgstr ""
+
+#. module: property_sales_analysis
+#: model:ir.model.fields,field_description:property_sales_analysis.field_property_sales_cluster_summary__s26_managers
+#: model:ir.model.fields,field_description:property_sales_analysis.field_property_sales_summary__s26_managers
+msgid "Gerentes S26"
+msgstr ""
+
+#. module: property_sales_analysis
+#: model:ir.model.fields,field_description:property_sales_analysis.field_property_sales_cluster_summary__s27_managers
+#: model:ir.model.fields,field_description:property_sales_analysis.field_property_sales_summary__s27_managers
+msgid "Gerentes S27"
+msgstr ""
+
+#. module: property_sales_analysis
+#: model:ir.model.fields,field_description:property_sales_analysis.field_property_sales_cluster_summary__s28_managers
+#: model:ir.model.fields,field_description:property_sales_analysis.field_property_sales_summary__s28_managers
+msgid "Gerentes S28"
+msgstr ""
+
+#. module: property_sales_analysis
+#: model:ir.model.fields,field_description:property_sales_analysis.field_property_sales_cluster_summary__s29_managers
+#: model:ir.model.fields,field_description:property_sales_analysis.field_property_sales_summary__s29_managers
+msgid "Gerentes S29"
+msgstr ""
+
+#. module: property_sales_analysis
+#: model:ir.model.fields,field_description:property_sales_analysis.field_property_sales_cluster_summary__s3_managers
+#: model:ir.model.fields,field_description:property_sales_analysis.field_property_sales_summary__s3_managers
+msgid "Gerentes S3"
+msgstr ""
+
+#. module: property_sales_analysis
+#: model:ir.model.fields,field_description:property_sales_analysis.field_property_sales_cluster_summary__s30_managers
+#: model:ir.model.fields,field_description:property_sales_analysis.field_property_sales_summary__s30_managers
+msgid "Gerentes S30"
+msgstr ""
+
+#. module: property_sales_analysis
+#: model:ir.model.fields,field_description:property_sales_analysis.field_property_sales_cluster_summary__s31_managers
+#: model:ir.model.fields,field_description:property_sales_analysis.field_property_sales_summary__s31_managers
+msgid "Gerentes S31"
+msgstr ""
+
+#. module: property_sales_analysis
+#: model:ir.model.fields,field_description:property_sales_analysis.field_property_sales_cluster_summary__s32_managers
+#: model:ir.model.fields,field_description:property_sales_analysis.field_property_sales_summary__s32_managers
+msgid "Gerentes S32"
+msgstr ""
+
+#. module: property_sales_analysis
+#: model:ir.model.fields,field_description:property_sales_analysis.field_property_sales_cluster_summary__s33_managers
+#: model:ir.model.fields,field_description:property_sales_analysis.field_property_sales_summary__s33_managers
+msgid "Gerentes S33"
+msgstr ""
+
+#. module: property_sales_analysis
+#: model:ir.model.fields,field_description:property_sales_analysis.field_property_sales_cluster_summary__s34_managers
+#: model:ir.model.fields,field_description:property_sales_analysis.field_property_sales_summary__s34_managers
+msgid "Gerentes S34"
+msgstr ""
+
+#. module: property_sales_analysis
+#: model:ir.model.fields,field_description:property_sales_analysis.field_property_sales_cluster_summary__s35_managers
+#: model:ir.model.fields,field_description:property_sales_analysis.field_property_sales_summary__s35_managers
+msgid "Gerentes S35"
+msgstr ""
+
+#. module: property_sales_analysis
+#: model:ir.model.fields,field_description:property_sales_analysis.field_property_sales_cluster_summary__s36_managers
+#: model:ir.model.fields,field_description:property_sales_analysis.field_property_sales_summary__s36_managers
+msgid "Gerentes S36"
+msgstr ""
+
+#. module: property_sales_analysis
+#: model:ir.model.fields,field_description:property_sales_analysis.field_property_sales_cluster_summary__s37_managers
+#: model:ir.model.fields,field_description:property_sales_analysis.field_property_sales_summary__s37_managers
+msgid "Gerentes S37"
+msgstr ""
+
+#. module: property_sales_analysis
+#: model:ir.model.fields,field_description:property_sales_analysis.field_property_sales_cluster_summary__s38_managers
+#: model:ir.model.fields,field_description:property_sales_analysis.field_property_sales_summary__s38_managers
+msgid "Gerentes S38"
+msgstr ""
+
+#. module: property_sales_analysis
+#: model:ir.model.fields,field_description:property_sales_analysis.field_property_sales_cluster_summary__s39_managers
+#: model:ir.model.fields,field_description:property_sales_analysis.field_property_sales_summary__s39_managers
+msgid "Gerentes S39"
+msgstr ""
+
+#. module: property_sales_analysis
+#: model:ir.model.fields,field_description:property_sales_analysis.field_property_sales_cluster_summary__s4_managers
+#: model:ir.model.fields,field_description:property_sales_analysis.field_property_sales_summary__s4_managers
+msgid "Gerentes S4"
+msgstr ""
+
+#. module: property_sales_analysis
+#: model:ir.model.fields,field_description:property_sales_analysis.field_property_sales_cluster_summary__s40_managers
+#: model:ir.model.fields,field_description:property_sales_analysis.field_property_sales_summary__s40_managers
+msgid "Gerentes S40"
+msgstr ""
+
+#. module: property_sales_analysis
+#: model:ir.model.fields,field_description:property_sales_analysis.field_property_sales_cluster_summary__s41_managers
+#: model:ir.model.fields,field_description:property_sales_analysis.field_property_sales_summary__s41_managers
+msgid "Gerentes S41"
+msgstr ""
+
+#. module: property_sales_analysis
+#: model:ir.model.fields,field_description:property_sales_analysis.field_property_sales_cluster_summary__s42_managers
+#: model:ir.model.fields,field_description:property_sales_analysis.field_property_sales_summary__s42_managers
+msgid "Gerentes S42"
+msgstr ""
+
+#. module: property_sales_analysis
+#: model:ir.model.fields,field_description:property_sales_analysis.field_property_sales_cluster_summary__s43_managers
+#: model:ir.model.fields,field_description:property_sales_analysis.field_property_sales_summary__s43_managers
+msgid "Gerentes S43"
+msgstr ""
+
+#. module: property_sales_analysis
+#: model:ir.model.fields,field_description:property_sales_analysis.field_property_sales_cluster_summary__s44_managers
+#: model:ir.model.fields,field_description:property_sales_analysis.field_property_sales_summary__s44_managers
+msgid "Gerentes S44"
+msgstr ""
+
+#. module: property_sales_analysis
+#: model:ir.model.fields,field_description:property_sales_analysis.field_property_sales_cluster_summary__s45_managers
+#: model:ir.model.fields,field_description:property_sales_analysis.field_property_sales_summary__s45_managers
+msgid "Gerentes S45"
+msgstr ""
+
+#. module: property_sales_analysis
+#: model:ir.model.fields,field_description:property_sales_analysis.field_property_sales_cluster_summary__s46_managers
+#: model:ir.model.fields,field_description:property_sales_analysis.field_property_sales_summary__s46_managers
+msgid "Gerentes S46"
+msgstr ""
+
+#. module: property_sales_analysis
+#: model:ir.model.fields,field_description:property_sales_analysis.field_property_sales_cluster_summary__s47_managers
+#: model:ir.model.fields,field_description:property_sales_analysis.field_property_sales_summary__s47_managers
+msgid "Gerentes S47"
+msgstr ""
+
+#. module: property_sales_analysis
+#: model:ir.model.fields,field_description:property_sales_analysis.field_property_sales_cluster_summary__s48_managers
+#: model:ir.model.fields,field_description:property_sales_analysis.field_property_sales_summary__s48_managers
+msgid "Gerentes S48"
+msgstr ""
+
+#. module: property_sales_analysis
+#: model:ir.model.fields,field_description:property_sales_analysis.field_property_sales_cluster_summary__s49_managers
+#: model:ir.model.fields,field_description:property_sales_analysis.field_property_sales_summary__s49_managers
+msgid "Gerentes S49"
+msgstr ""
+
+#. module: property_sales_analysis
+#: model:ir.model.fields,field_description:property_sales_analysis.field_property_sales_cluster_summary__s5_managers
+#: model:ir.model.fields,field_description:property_sales_analysis.field_property_sales_summary__s5_managers
+msgid "Gerentes S5"
+msgstr ""
+
+#. module: property_sales_analysis
+#: model:ir.model.fields,field_description:property_sales_analysis.field_property_sales_cluster_summary__s50_managers
+#: model:ir.model.fields,field_description:property_sales_analysis.field_property_sales_summary__s50_managers
+msgid "Gerentes S50"
+msgstr ""
+
+#. module: property_sales_analysis
+#: model:ir.model.fields,field_description:property_sales_analysis.field_property_sales_cluster_summary__s51_managers
+#: model:ir.model.fields,field_description:property_sales_analysis.field_property_sales_summary__s51_managers
+msgid "Gerentes S51"
+msgstr ""
+
+#. module: property_sales_analysis
+#: model:ir.model.fields,field_description:property_sales_analysis.field_property_sales_cluster_summary__s52_managers
+#: model:ir.model.fields,field_description:property_sales_analysis.field_property_sales_summary__s52_managers
+msgid "Gerentes S52"
+msgstr ""
+
+#. module: property_sales_analysis
+#: model:ir.model.fields,field_description:property_sales_analysis.field_property_sales_cluster_summary__s53_managers
+#: model:ir.model.fields,field_description:property_sales_analysis.field_property_sales_summary__s53_managers
+msgid "Gerentes S53"
+msgstr ""
+
+#. module: property_sales_analysis
+#: model:ir.model.fields,field_description:property_sales_analysis.field_property_sales_cluster_summary__s6_managers
+#: model:ir.model.fields,field_description:property_sales_analysis.field_property_sales_summary__s6_managers
+msgid "Gerentes S6"
+msgstr ""
+
+#. module: property_sales_analysis
+#: model:ir.model.fields,field_description:property_sales_analysis.field_property_sales_cluster_summary__s7_managers
+#: model:ir.model.fields,field_description:property_sales_analysis.field_property_sales_summary__s7_managers
+msgid "Gerentes S7"
+msgstr ""
+
+#. module: property_sales_analysis
+#: model:ir.model.fields,field_description:property_sales_analysis.field_property_sales_cluster_summary__s8_managers
+#: model:ir.model.fields,field_description:property_sales_analysis.field_property_sales_summary__s8_managers
+msgid "Gerentes S8"
+msgstr ""
+
+#. module: property_sales_analysis
+#: model:ir.model.fields,field_description:property_sales_analysis.field_property_sales_cluster_summary__s9_managers
+#: model:ir.model.fields,field_description:property_sales_analysis.field_property_sales_summary__s9_managers
+msgid "Gerentes S9"
+msgstr ""
+
+#. module: property_sales_analysis
+#: model_terms:ir.ui.view,arch_db:property_sales_analysis.view_property_sales_week_cluster_summary_search
+#: model_terms:ir.ui.view,arch_db:property_sales_analysis.view_property_sales_week_property_detail_search
+msgid "Group By"
+msgstr ""
+
+#. module: property_sales_analysis
+#: model:ir.model.fields,field_description:property_sales_analysis.field_property_sales_cluster_summary__id
+#: model:ir.model.fields,field_description:property_sales_analysis.field_property_sales_cluster_summary_generator__id
+#: model:ir.model.fields,field_description:property_sales_analysis.field_property_sales_manager_summary__id
+#: model:ir.model.fields,field_description:property_sales_analysis.field_property_sales_manager_summary_generator__id
+#: model:ir.model.fields,field_description:property_sales_analysis.field_property_sales_manager_week_detail__id
+#: model:ir.model.fields,field_description:property_sales_analysis.field_property_sales_summary__id
+#: model:ir.model.fields,field_description:property_sales_analysis.field_property_sales_summary_generator__id
+#: model:ir.model.fields,field_description:property_sales_analysis.field_property_sales_week_cluster_detail__id
+#: model:ir.model.fields,field_description:property_sales_analysis.field_property_sales_week_cluster_summary__id
+#: model:ir.model.fields,field_description:property_sales_analysis.field_property_sales_week_property_detail__id
+#: model:ir.model.fields,field_description:property_sales_analysis.field_property_sales_week_summary__id
+#: model:ir.model.fields,field_description:property_sales_analysis.field_property_sales_week_summary_generator__id
+msgid "ID"
+msgstr ""
+
+#. module: property_sales_analysis
+#: model:ir.model.fields,field_description:property_sales_analysis.field_property_sales_manager_summary__total_amount_display
+#: model:ir.model.fields,field_description:property_sales_analysis.field_property_sales_manager_week_detail__sold_amount_display
+#: model:ir.model.fields,field_description:property_sales_analysis.field_property_sales_week_cluster_detail__sold_amount_display
+#: model:ir.model.fields,field_description:property_sales_analysis.field_property_sales_week_cluster_summary__sold_amount_display
+#: model:ir.model.fields,field_description:property_sales_analysis.field_property_sales_week_property_detail__sold_amount
+#: model:ir.model.fields,field_description:property_sales_analysis.field_property_sales_week_property_detail__sold_amount_display
+msgid "Importe"
+msgstr ""
+
+#. module: property_sales_analysis
+#: model:ir.model.fields,field_description:property_sales_analysis.field_property_sales_manager_summary__total_amount
+#: model:ir.model.fields,field_description:property_sales_analysis.field_property_sales_manager_week_detail__sold_amount
+#: model:ir.model.fields,field_description:property_sales_analysis.field_property_sales_week_cluster_detail__sold_amount
+#: model:ir.model.fields,field_description:property_sales_analysis.field_property_sales_week_cluster_summary__sold_amount
+msgid "Importe Total"
+msgstr ""
+
+#. module: property_sales_analysis
+#: model:ir.model.fields,field_description:property_sales_analysis.field_property_sales_week_summary__week_start
+msgid "Inicio"
+msgstr ""
+
+#. module: property_sales_analysis
+#: model:ir.model.fields,field_description:property_sales_analysis.field_property_sales_cluster_summary__write_uid
+#: model:ir.model.fields,field_description:property_sales_analysis.field_property_sales_cluster_summary_generator__write_uid
+#: model:ir.model.fields,field_description:property_sales_analysis.field_property_sales_manager_summary__write_uid
+#: model:ir.model.fields,field_description:property_sales_analysis.field_property_sales_manager_summary_generator__write_uid
+#: model:ir.model.fields,field_description:property_sales_analysis.field_property_sales_manager_week_detail__write_uid
+#: model:ir.model.fields,field_description:property_sales_analysis.field_property_sales_summary__write_uid
+#: model:ir.model.fields,field_description:property_sales_analysis.field_property_sales_summary_generator__write_uid
+#: model:ir.model.fields,field_description:property_sales_analysis.field_property_sales_week_cluster_detail__write_uid
+#: model:ir.model.fields,field_description:property_sales_analysis.field_property_sales_week_cluster_summary__write_uid
+#: model:ir.model.fields,field_description:property_sales_analysis.field_property_sales_week_property_detail__write_uid
+#: model:ir.model.fields,field_description:property_sales_analysis.field_property_sales_week_summary__write_uid
+#: model:ir.model.fields,field_description:property_sales_analysis.field_property_sales_week_summary_generator__write_uid
+msgid "Last Updated by"
+msgstr "Última Actualización por"
+
+#. module: property_sales_analysis
+#: model:ir.model.fields,field_description:property_sales_analysis.field_property_sales_cluster_summary__write_date
+#: model:ir.model.fields,field_description:property_sales_analysis.field_property_sales_cluster_summary_generator__write_date
+#: model:ir.model.fields,field_description:property_sales_analysis.field_property_sales_manager_summary__write_date
+#: model:ir.model.fields,field_description:property_sales_analysis.field_property_sales_manager_summary_generator__write_date
+#: model:ir.model.fields,field_description:property_sales_analysis.field_property_sales_manager_week_detail__write_date
+#: model:ir.model.fields,field_description:property_sales_analysis.field_property_sales_summary__write_date
+#: model:ir.model.fields,field_description:property_sales_analysis.field_property_sales_summary_generator__write_date
+#: model:ir.model.fields,field_description:property_sales_analysis.field_property_sales_week_cluster_detail__write_date
+#: model:ir.model.fields,field_description:property_sales_analysis.field_property_sales_week_cluster_summary__write_date
+#: model:ir.model.fields,field_description:property_sales_analysis.field_property_sales_week_property_detail__write_date
+#: model:ir.model.fields,field_description:property_sales_analysis.field_property_sales_week_summary__write_date
+#: model:ir.model.fields,field_description:property_sales_analysis.field_property_sales_week_summary_generator__write_date
+msgid "Last Updated on"
+msgstr "Última Actualización el"
+
+#. module: property_sales_analysis
+#: model_terms:ir.ui.view,arch_db:property_sales_analysis.view_property_sales_manager_summary_form
+#: model_terms:ir.ui.view,arch_db:property_sales_analysis.view_property_sales_week_summary_form
+msgid "Líneas de Detalle (Dashboard)"
+msgstr ""
+
+#. module: property_sales_analysis
+#: model:ir.model,name:property_sales_analysis.model_property_sales_manager_week_detail
+msgid "Manager Sales Detail by Week"
+msgstr ""
+
+#. module: property_sales_analysis
+#: model:ir.model.fields,field_description:property_sales_analysis.field_property_sales_cluster_summary__name
+#: model:ir.model.fields,field_description:property_sales_analysis.field_property_sales_manager_summary__name
+#: model:ir.model.fields,field_description:property_sales_analysis.field_property_sales_summary__name
+#: model:ir.model.fields,field_description:property_sales_analysis.field_property_sales_week_summary__name
+msgid "Name"
+msgstr "Nombre"
+
+#. module: property_sales_analysis
+#. odoo-python
+#: code:addons/property_sales_analysis/models/property_sales_manager_summary_generator.py:0
+msgid "No hay empleados activos en el sistema."
+msgstr ""
+
+#. module: property_sales_analysis
+#. odoo-python
+#: code:addons/property_sales_analysis/models/property_sales_week_summary_generator.py:0
+msgid ""
+"No se encontraron clusters en el sistema.\n"
+"\n"
+"Verifica que existan worksites sin parent_id."
+msgstr ""
+
+#. module: property_sales_analysis
+#. odoo-python
+#: code:addons/property_sales_analysis/models/property_sales_week_summary_generator.py:0
+msgid ""
+"No se encontraron obras en ningún cluster.\n"
+"\n"
+"Los clusters encontrados no tienen worksites hijos."
+msgstr ""
+
+#. module: property_sales_analysis
+#: model:ir.model.fields,field_description:property_sales_analysis.field_property_sales_week_cluster_detail__week_number
+#: model:ir.model.fields,field_description:property_sales_analysis.field_property_sales_week_cluster_summary__week_number
+#: model:ir.model.fields,field_description:property_sales_analysis.field_property_sales_week_property_detail__week_number
+msgid "Número de Semana"
+msgstr ""
+
+#. module: property_sales_analysis
+#: model:ir.model.fields,field_description:property_sales_analysis.field_property_sales_summary__worksite_name
+#: model:ir.model.fields,field_description:property_sales_analysis.field_property_sales_week_cluster_detail__worksite_id
+#: model:ir.model.fields,field_description:property_sales_analysis.field_property_sales_week_cluster_detail__worksite_name
+#: model:ir.model.fields,field_description:property_sales_analysis.field_property_sales_week_property_detail__worksite_id
+#: model:ir.model.fields,field_description:property_sales_analysis.field_property_sales_week_property_detail__worksite_name
+#: model_terms:ir.ui.view,arch_db:property_sales_analysis.view_property_sales_week_property_detail_search
+msgid "Obra"
+msgstr ""
+
+#. module: property_sales_analysis
+#: model:ir.model.fields,field_description:property_sales_analysis.field_property_sales_week_summary__worksites_list
+msgid "Obras"
+msgstr ""
+
+#. module: property_sales_analysis
+#: model_terms:ir.ui.view,arch_db:property_sales_analysis.view_property_sales_week_summary_form
+msgid "Obras con Ventas"
+msgstr ""
+
+#. module: property_sales_analysis
+#: model_terms:ir.ui.view,arch_db:property_sales_analysis.view_property_sales_manager_week_detail_search
+#: model_terms:ir.ui.view,arch_db:property_sales_analysis.view_property_sales_week_cluster_detail_search
+msgid "Por Calendario"
+msgstr ""
+
+#. module: property_sales_analysis
+#: model_terms:ir.ui.view,arch_db:property_sales_analysis.view_property_sales_week_cluster_detail_search
+msgid "Por Cluster"
+msgstr ""
+
+#. module: property_sales_analysis
+#: model_terms:ir.ui.view,arch_db:property_sales_analysis.view_property_sales_manager_week_detail_search
+msgid "Por Gerente"
+msgstr ""
+
+#. module: property_sales_analysis
+#: model_terms:ir.ui.view,arch_db:property_sales_analysis.view_property_sales_week_cluster_detail_search
+msgid "Por Obra"
+msgstr ""
+
+#. module: property_sales_analysis
+#: model_terms:ir.ui.view,arch_db:property_sales_analysis.view_property_sales_manager_week_detail_search
+#: model_terms:ir.ui.view,arch_db:property_sales_analysis.view_property_sales_week_cluster_detail_search
+msgid "Por Semana"
+msgstr ""
+
+#. module: property_sales_analysis
+#: model:ir.model,name:property_sales_analysis.model_product_template
+msgid "Property"
+msgstr "Propiedad"
+
+#. module: property_sales_analysis
+#: model:ir.model,name:property_sales_analysis.model_property_sales_week_property_detail
+msgid "Property Sales Detail by Week and Property"
+msgstr ""
+
+#. module: property_sales_analysis
+#: model:ir.model,name:property_sales_analysis.model_property_sales_week_cluster_detail
+msgid "Property Sales Detail by Week, Cluster and Worksite"
+msgstr ""
+
+#. module: property_sales_analysis
+#: model_terms:ir.ui.view,arch_db:property_sales_analysis.view_property_sales_summary_form
+msgid "Property Sales Summary"
+msgstr "Resumen de Ventas de Propiedades"
+
+#. module: property_sales_analysis
+#: model:ir.model,name:property_sales_analysis.model_property_sales_summary
+msgid "Property Sales Summary - Annual View"
+msgstr "Resumen de Ventas de Propiedades por Obra"
+
+#. module: property_sales_analysis
+#: model:ir.model,name:property_sales_analysis.model_property_sales_cluster_summary
+msgid "Property Sales Summary by Cluster (Consolidated)"
+msgstr ""
+
+#. module: property_sales_analysis
+#: model:ir.model,name:property_sales_analysis.model_property_sales_manager_summary
+msgid "Property Sales Summary by Manager"
+msgstr ""
+
+#. module: property_sales_analysis
+#: model:ir.model,name:property_sales_analysis.model_property_sales_week_summary
+msgid "Property Sales Summary by Week"
+msgstr ""
+
+#. module: property_sales_analysis
+#: model:ir.model,name:property_sales_analysis.model_property_sales_week_cluster_summary
+msgid "Property Sales Summary by Week and Cluster (Consolidated)"
+msgstr ""
+
+#. module: property_sales_analysis
+#: model:ir.model.fields,field_description:property_sales_analysis.field_property_sales_week_property_detail__property_id
+#: model:ir.model.fields,field_description:property_sales_analysis.field_property_sales_week_property_detail__property_name
+#: model_terms:ir.ui.view,arch_db:property_sales_analysis.view_property_sales_week_property_detail_form
+msgid "Propiedad"
+msgstr ""
+
+#. module: property_sales_analysis
+#: model:ir.model.fields,field_description:property_sales_analysis.field_property_sales_manager_week_detail__properties_list
+msgid "Propiedades"
+msgstr ""
+
+#. module: property_sales_analysis
+#: model:ir.model.fields,field_description:property_sales_analysis.field_property_sales_manager_summary__properties_list
+#: model_terms:ir.ui.view,arch_db:property_sales_analysis.view_property_sales_manager_summary_form
+msgid "Propiedades Vendidas"
+msgstr ""
+
+#. module: property_sales_analysis
+#: model:ir.model.fields,field_description:property_sales_analysis.field_property_sales_week_property_detail__property_ref
+msgid "Referencia"
+msgstr ""
+
+#. module: property_sales_analysis
+#: model_terms:ir.ui.view,arch_db:property_sales_analysis.view_property_sales_week_cluster_summary_list
+msgid "Resumen Consolidado por Cluster"
+msgstr ""
+
+#. module: property_sales_analysis
+#: model_terms:ir.ui.view,arch_db:property_sales_analysis.view_property_sales_week_summary_list
+msgid "Resumen Semanal"
+msgstr ""
+
+#. module: property_sales_analysis
+#: model:ir.model.fields,field_description:property_sales_analysis.field_property_sales_manager_week_detail__manager_summary_id
+msgid "Resumen de Gerente"
+msgstr ""
+
+#. module: property_sales_analysis
+#: model_terms:ir.ui.view,arch_db:property_sales_analysis.view_property_sales_manager_summary_list
+msgid "Resumen de Gerentes"
+msgstr ""
+
+#. module: property_sales_analysis
+#. odoo-python
+#: code:addons/property_sales_analysis/models/property_sales_week_summary_generator.py:0
+msgid ""
+"Resumen generado exitosamente:\n"
+"\n"
+"• %s semanas creadas\n"
+"• %s clusters procesados\n"
+"• %s obras en total\n"
+"• %s líneas consolidadas creadas\n"
+"• %s líneas detalladas creadas\n"
+"\n"
+"Ahora ejecute 'Actualizar Datos' en cada semana para calcular las ventas.\n"
+"Las líneas de propiedades se crearán automáticamente al actualizar."
+msgstr ""
+
+#. module: property_sales_analysis
+#: model:ir.actions.act_window,name:property_sales_analysis.action_property_sales_cluster_summary
+#: model:ir.model.fields,field_description:property_sales_analysis.field_property_sales_week_summary__cluster_summary_ids
+msgid "Resumen por Cluster"
+msgstr ""
+
+#. module: property_sales_analysis
+#: model:ir.actions.act_window,name:property_sales_analysis.action_property_sales_week_cluster_summary
+#: model:ir.ui.menu,name:property_sales_analysis.menu_property_sales_week_cluster_summary
+#: model_terms:ir.ui.view,arch_db:property_sales_analysis.view_property_sales_week_summary_form
+msgid "Resumen por Cluster (Dashboard)"
+msgstr ""
+
+#. module: property_sales_analysis
+#: model:ir.actions.act_window,name:property_sales_analysis.action_property_sales_manager_summary
+#: model:ir.ui.menu,name:property_sales_analysis.menu_property_sales_manager_summary
+msgid "Resumen por Gerentes"
+msgstr ""
+
+#. module: property_sales_analysis
+#: model:ir.actions.act_window,name:property_sales_analysis.action_property_sales_week_summary
+#: model:ir.ui.menu,name:property_sales_analysis.menu_property_sales_week_summary
+msgid "Resumen por Semanas"
+msgstr ""
+
+#. module: property_sales_analysis
+#: model:ir.ui.menu,name:property_sales_analysis.menu_property_sales_cluster_summary_list
+#: model_terms:ir.ui.view,arch_db:property_sales_analysis.view_property_sales_cluster_summary_list
+msgid "Resúmenes por Cluster"
+msgstr ""
+
+#. module: property_sales_analysis
+#: model:ir.model.fields,field_description:property_sales_analysis.field_property_sales_cluster_summary__s1_sold
+#: model:ir.model.fields,field_description:property_sales_analysis.field_property_sales_summary__s1_sold
+#: model_terms:ir.ui.view,arch_db:property_sales_analysis.view_property_sales_cluster_summary_form
+#: model_terms:ir.ui.view,arch_db:property_sales_analysis.view_property_sales_summary_form
+msgid "S1"
+msgstr ""
+
+#. module: property_sales_analysis
+#: model:ir.model.fields,field_description:property_sales_analysis.field_property_sales_cluster_summary__s10_sold
+#: model:ir.model.fields,field_description:property_sales_analysis.field_property_sales_summary__s10_sold
+#: model_terms:ir.ui.view,arch_db:property_sales_analysis.view_property_sales_cluster_summary_form
+#: model_terms:ir.ui.view,arch_db:property_sales_analysis.view_property_sales_summary_form
+msgid "S10"
+msgstr ""
+
+#. module: property_sales_analysis
+#: model:ir.model.fields,field_description:property_sales_analysis.field_property_sales_cluster_summary__s11_sold
+#: model:ir.model.fields,field_description:property_sales_analysis.field_property_sales_summary__s11_sold
+#: model_terms:ir.ui.view,arch_db:property_sales_analysis.view_property_sales_cluster_summary_form
+#: model_terms:ir.ui.view,arch_db:property_sales_analysis.view_property_sales_summary_form
+msgid "S11"
+msgstr ""
+
+#. module: property_sales_analysis
+#: model:ir.model.fields,field_description:property_sales_analysis.field_property_sales_cluster_summary__s12_sold
+#: model:ir.model.fields,field_description:property_sales_analysis.field_property_sales_summary__s12_sold
+#: model_terms:ir.ui.view,arch_db:property_sales_analysis.view_property_sales_cluster_summary_form
+#: model_terms:ir.ui.view,arch_db:property_sales_analysis.view_property_sales_summary_form
+msgid "S12"
+msgstr ""
+
+#. module: property_sales_analysis
+#: model:ir.model.fields,field_description:property_sales_analysis.field_property_sales_cluster_summary__s13_sold
+#: model:ir.model.fields,field_description:property_sales_analysis.field_property_sales_summary__s13_sold
+#: model_terms:ir.ui.view,arch_db:property_sales_analysis.view_property_sales_cluster_summary_form
+#: model_terms:ir.ui.view,arch_db:property_sales_analysis.view_property_sales_summary_form
+msgid "S13"
+msgstr ""
+
+#. module: property_sales_analysis
+#: model:ir.model.fields,field_description:property_sales_analysis.field_property_sales_cluster_summary__s14_sold
+#: model:ir.model.fields,field_description:property_sales_analysis.field_property_sales_summary__s14_sold
+#: model_terms:ir.ui.view,arch_db:property_sales_analysis.view_property_sales_cluster_summary_form
+#: model_terms:ir.ui.view,arch_db:property_sales_analysis.view_property_sales_summary_form
+msgid "S14"
+msgstr ""
+
+#. module: property_sales_analysis
+#: model:ir.model.fields,field_description:property_sales_analysis.field_property_sales_cluster_summary__s15_sold
+#: model:ir.model.fields,field_description:property_sales_analysis.field_property_sales_summary__s15_sold
+#: model_terms:ir.ui.view,arch_db:property_sales_analysis.view_property_sales_cluster_summary_form
+#: model_terms:ir.ui.view,arch_db:property_sales_analysis.view_property_sales_summary_form
+msgid "S15"
+msgstr ""
+
+#. module: property_sales_analysis
+#: model:ir.model.fields,field_description:property_sales_analysis.field_property_sales_cluster_summary__s16_sold
+#: model:ir.model.fields,field_description:property_sales_analysis.field_property_sales_summary__s16_sold
+#: model_terms:ir.ui.view,arch_db:property_sales_analysis.view_property_sales_cluster_summary_form
+#: model_terms:ir.ui.view,arch_db:property_sales_analysis.view_property_sales_summary_form
+msgid "S16"
+msgstr ""
+
+#. module: property_sales_analysis
+#: model:ir.model.fields,field_description:property_sales_analysis.field_property_sales_cluster_summary__s17_sold
+#: model:ir.model.fields,field_description:property_sales_analysis.field_property_sales_summary__s17_sold
+#: model_terms:ir.ui.view,arch_db:property_sales_analysis.view_property_sales_cluster_summary_form
+#: model_terms:ir.ui.view,arch_db:property_sales_analysis.view_property_sales_summary_form
+msgid "S17"
+msgstr ""
+
+#. module: property_sales_analysis
+#: model:ir.model.fields,field_description:property_sales_analysis.field_property_sales_cluster_summary__s18_sold
+#: model:ir.model.fields,field_description:property_sales_analysis.field_property_sales_summary__s18_sold
+#: model_terms:ir.ui.view,arch_db:property_sales_analysis.view_property_sales_cluster_summary_form
+#: model_terms:ir.ui.view,arch_db:property_sales_analysis.view_property_sales_summary_form
+msgid "S18"
+msgstr ""
+
+#. module: property_sales_analysis
+#: model:ir.model.fields,field_description:property_sales_analysis.field_property_sales_cluster_summary__s19_sold
+#: model:ir.model.fields,field_description:property_sales_analysis.field_property_sales_summary__s19_sold
+#: model_terms:ir.ui.view,arch_db:property_sales_analysis.view_property_sales_cluster_summary_form
+#: model_terms:ir.ui.view,arch_db:property_sales_analysis.view_property_sales_summary_form
+msgid "S19"
+msgstr ""
+
+#. module: property_sales_analysis
+#: model:ir.model.fields,field_description:property_sales_analysis.field_property_sales_cluster_summary__s2_sold
+#: model:ir.model.fields,field_description:property_sales_analysis.field_property_sales_summary__s2_sold
+#: model_terms:ir.ui.view,arch_db:property_sales_analysis.view_property_sales_cluster_summary_form
+#: model_terms:ir.ui.view,arch_db:property_sales_analysis.view_property_sales_summary_form
+msgid "S2"
+msgstr ""
+
+#. module: property_sales_analysis
+#: model:ir.model.fields,field_description:property_sales_analysis.field_property_sales_cluster_summary__s20_sold
+#: model:ir.model.fields,field_description:property_sales_analysis.field_property_sales_summary__s20_sold
+#: model_terms:ir.ui.view,arch_db:property_sales_analysis.view_property_sales_cluster_summary_form
+#: model_terms:ir.ui.view,arch_db:property_sales_analysis.view_property_sales_summary_form
+msgid "S20"
+msgstr ""
+
+#. module: property_sales_analysis
+#: model:ir.model.fields,field_description:property_sales_analysis.field_property_sales_cluster_summary__s21_sold
+#: model:ir.model.fields,field_description:property_sales_analysis.field_property_sales_summary__s21_sold
+#: model_terms:ir.ui.view,arch_db:property_sales_analysis.view_property_sales_cluster_summary_form
+#: model_terms:ir.ui.view,arch_db:property_sales_analysis.view_property_sales_summary_form
+msgid "S21"
+msgstr ""
+
+#. module: property_sales_analysis
+#: model:ir.model.fields,field_description:property_sales_analysis.field_property_sales_cluster_summary__s22_sold
+#: model:ir.model.fields,field_description:property_sales_analysis.field_property_sales_summary__s22_sold
+#: model_terms:ir.ui.view,arch_db:property_sales_analysis.view_property_sales_cluster_summary_form
+#: model_terms:ir.ui.view,arch_db:property_sales_analysis.view_property_sales_summary_form
+msgid "S22"
+msgstr ""
+
+#. module: property_sales_analysis
+#: model:ir.model.fields,field_description:property_sales_analysis.field_property_sales_cluster_summary__s23_sold
+#: model:ir.model.fields,field_description:property_sales_analysis.field_property_sales_summary__s23_sold
+#: model_terms:ir.ui.view,arch_db:property_sales_analysis.view_property_sales_cluster_summary_form
+#: model_terms:ir.ui.view,arch_db:property_sales_analysis.view_property_sales_summary_form
+msgid "S23"
+msgstr ""
+
+#. module: property_sales_analysis
+#: model:ir.model.fields,field_description:property_sales_analysis.field_property_sales_cluster_summary__s24_sold
+#: model:ir.model.fields,field_description:property_sales_analysis.field_property_sales_summary__s24_sold
+#: model_terms:ir.ui.view,arch_db:property_sales_analysis.view_property_sales_cluster_summary_form
+#: model_terms:ir.ui.view,arch_db:property_sales_analysis.view_property_sales_summary_form
+msgid "S24"
+msgstr ""
+
+#. module: property_sales_analysis
+#: model:ir.model.fields,field_description:property_sales_analysis.field_property_sales_cluster_summary__s25_sold
+#: model:ir.model.fields,field_description:property_sales_analysis.field_property_sales_summary__s25_sold
+#: model_terms:ir.ui.view,arch_db:property_sales_analysis.view_property_sales_cluster_summary_form
+#: model_terms:ir.ui.view,arch_db:property_sales_analysis.view_property_sales_summary_form
+msgid "S25"
+msgstr ""
+
+#. module: property_sales_analysis
+#: model:ir.model.fields,field_description:property_sales_analysis.field_property_sales_cluster_summary__s26_sold
+#: model:ir.model.fields,field_description:property_sales_analysis.field_property_sales_summary__s26_sold
+#: model_terms:ir.ui.view,arch_db:property_sales_analysis.view_property_sales_cluster_summary_form
+#: model_terms:ir.ui.view,arch_db:property_sales_analysis.view_property_sales_summary_form
+msgid "S26"
+msgstr ""
+
+#. module: property_sales_analysis
+#: model:ir.model.fields,field_description:property_sales_analysis.field_property_sales_cluster_summary__s27_sold
+#: model:ir.model.fields,field_description:property_sales_analysis.field_property_sales_summary__s27_sold
+#: model_terms:ir.ui.view,arch_db:property_sales_analysis.view_property_sales_cluster_summary_form
+#: model_terms:ir.ui.view,arch_db:property_sales_analysis.view_property_sales_summary_form
+msgid "S27"
+msgstr ""
+
+#. module: property_sales_analysis
+#: model:ir.model.fields,field_description:property_sales_analysis.field_property_sales_cluster_summary__s28_sold
+#: model:ir.model.fields,field_description:property_sales_analysis.field_property_sales_summary__s28_sold
+#: model_terms:ir.ui.view,arch_db:property_sales_analysis.view_property_sales_cluster_summary_form
+#: model_terms:ir.ui.view,arch_db:property_sales_analysis.view_property_sales_summary_form
+msgid "S28"
+msgstr ""
+
+#. module: property_sales_analysis
+#: model:ir.model.fields,field_description:property_sales_analysis.field_property_sales_cluster_summary__s29_sold
+#: model:ir.model.fields,field_description:property_sales_analysis.field_property_sales_summary__s29_sold
+#: model_terms:ir.ui.view,arch_db:property_sales_analysis.view_property_sales_cluster_summary_form
+#: model_terms:ir.ui.view,arch_db:property_sales_analysis.view_property_sales_summary_form
+msgid "S29"
+msgstr ""
+
+#. module: property_sales_analysis
+#: model:ir.model.fields,field_description:property_sales_analysis.field_property_sales_cluster_summary__s3_sold
+#: model:ir.model.fields,field_description:property_sales_analysis.field_property_sales_summary__s3_sold
+#: model_terms:ir.ui.view,arch_db:property_sales_analysis.view_property_sales_cluster_summary_form
+#: model_terms:ir.ui.view,arch_db:property_sales_analysis.view_property_sales_summary_form
+msgid "S3"
+msgstr ""
+
+#. module: property_sales_analysis
+#: model:ir.model.fields,field_description:property_sales_analysis.field_property_sales_cluster_summary__s30_sold
+#: model:ir.model.fields,field_description:property_sales_analysis.field_property_sales_summary__s30_sold
+#: model_terms:ir.ui.view,arch_db:property_sales_analysis.view_property_sales_cluster_summary_form
+#: model_terms:ir.ui.view,arch_db:property_sales_analysis.view_property_sales_summary_form
+msgid "S30"
+msgstr ""
+
+#. module: property_sales_analysis
+#: model:ir.model.fields,field_description:property_sales_analysis.field_property_sales_cluster_summary__s31_sold
+#: model:ir.model.fields,field_description:property_sales_analysis.field_property_sales_summary__s31_sold
+#: model_terms:ir.ui.view,arch_db:property_sales_analysis.view_property_sales_cluster_summary_form
+#: model_terms:ir.ui.view,arch_db:property_sales_analysis.view_property_sales_summary_form
+msgid "S31"
+msgstr ""
+
+#. module: property_sales_analysis
+#: model:ir.model.fields,field_description:property_sales_analysis.field_property_sales_cluster_summary__s32_sold
+#: model:ir.model.fields,field_description:property_sales_analysis.field_property_sales_summary__s32_sold
+#: model_terms:ir.ui.view,arch_db:property_sales_analysis.view_property_sales_cluster_summary_form
+#: model_terms:ir.ui.view,arch_db:property_sales_analysis.view_property_sales_summary_form
+msgid "S32"
+msgstr ""
+
+#. module: property_sales_analysis
+#: model:ir.model.fields,field_description:property_sales_analysis.field_property_sales_cluster_summary__s33_sold
+#: model:ir.model.fields,field_description:property_sales_analysis.field_property_sales_summary__s33_sold
+#: model_terms:ir.ui.view,arch_db:property_sales_analysis.view_property_sales_cluster_summary_form
+#: model_terms:ir.ui.view,arch_db:property_sales_analysis.view_property_sales_summary_form
+msgid "S33"
+msgstr ""
+
+#. module: property_sales_analysis
+#: model:ir.model.fields,field_description:property_sales_analysis.field_property_sales_cluster_summary__s34_sold
+#: model:ir.model.fields,field_description:property_sales_analysis.field_property_sales_summary__s34_sold
+#: model_terms:ir.ui.view,arch_db:property_sales_analysis.view_property_sales_cluster_summary_form
+#: model_terms:ir.ui.view,arch_db:property_sales_analysis.view_property_sales_summary_form
+msgid "S34"
+msgstr ""
+
+#. module: property_sales_analysis
+#: model:ir.model.fields,field_description:property_sales_analysis.field_property_sales_cluster_summary__s35_sold
+#: model:ir.model.fields,field_description:property_sales_analysis.field_property_sales_summary__s35_sold
+#: model_terms:ir.ui.view,arch_db:property_sales_analysis.view_property_sales_cluster_summary_form
+#: model_terms:ir.ui.view,arch_db:property_sales_analysis.view_property_sales_summary_form
+msgid "S35"
+msgstr ""
+
+#. module: property_sales_analysis
+#: model:ir.model.fields,field_description:property_sales_analysis.field_property_sales_cluster_summary__s36_sold
+#: model:ir.model.fields,field_description:property_sales_analysis.field_property_sales_summary__s36_sold
+#: model_terms:ir.ui.view,arch_db:property_sales_analysis.view_property_sales_cluster_summary_form
+#: model_terms:ir.ui.view,arch_db:property_sales_analysis.view_property_sales_summary_form
+msgid "S36"
+msgstr ""
+
+#. module: property_sales_analysis
+#: model:ir.model.fields,field_description:property_sales_analysis.field_property_sales_cluster_summary__s37_sold
+#: model:ir.model.fields,field_description:property_sales_analysis.field_property_sales_summary__s37_sold
+#: model_terms:ir.ui.view,arch_db:property_sales_analysis.view_property_sales_cluster_summary_form
+#: model_terms:ir.ui.view,arch_db:property_sales_analysis.view_property_sales_summary_form
+msgid "S37"
+msgstr ""
+
+#. module: property_sales_analysis
+#: model:ir.model.fields,field_description:property_sales_analysis.field_property_sales_cluster_summary__s38_sold
+#: model:ir.model.fields,field_description:property_sales_analysis.field_property_sales_summary__s38_sold
+#: model_terms:ir.ui.view,arch_db:property_sales_analysis.view_property_sales_cluster_summary_form
+#: model_terms:ir.ui.view,arch_db:property_sales_analysis.view_property_sales_summary_form
+msgid "S38"
+msgstr ""
+
+#. module: property_sales_analysis
+#: model:ir.model.fields,field_description:property_sales_analysis.field_property_sales_cluster_summary__s39_sold
+#: model:ir.model.fields,field_description:property_sales_analysis.field_property_sales_summary__s39_sold
+#: model_terms:ir.ui.view,arch_db:property_sales_analysis.view_property_sales_cluster_summary_form
+#: model_terms:ir.ui.view,arch_db:property_sales_analysis.view_property_sales_summary_form
+msgid "S39"
+msgstr ""
+
+#. module: property_sales_analysis
+#: model:ir.model.fields,field_description:property_sales_analysis.field_property_sales_cluster_summary__s4_sold
+#: model:ir.model.fields,field_description:property_sales_analysis.field_property_sales_summary__s4_sold
+#: model_terms:ir.ui.view,arch_db:property_sales_analysis.view_property_sales_cluster_summary_form
+#: model_terms:ir.ui.view,arch_db:property_sales_analysis.view_property_sales_summary_form
+msgid "S4"
+msgstr ""
+
+#. module: property_sales_analysis
+#: model:ir.model.fields,field_description:property_sales_analysis.field_property_sales_cluster_summary__s40_sold
+#: model:ir.model.fields,field_description:property_sales_analysis.field_property_sales_summary__s40_sold
+#: model_terms:ir.ui.view,arch_db:property_sales_analysis.view_property_sales_cluster_summary_form
+#: model_terms:ir.ui.view,arch_db:property_sales_analysis.view_property_sales_summary_form
+msgid "S40"
+msgstr ""
+
+#. module: property_sales_analysis
+#: model:ir.model.fields,field_description:property_sales_analysis.field_property_sales_cluster_summary__s41_sold
+#: model:ir.model.fields,field_description:property_sales_analysis.field_property_sales_summary__s41_sold
+#: model_terms:ir.ui.view,arch_db:property_sales_analysis.view_property_sales_cluster_summary_form
+#: model_terms:ir.ui.view,arch_db:property_sales_analysis.view_property_sales_summary_form
+msgid "S41"
+msgstr ""
+
+#. module: property_sales_analysis
+#: model:ir.model.fields,field_description:property_sales_analysis.field_property_sales_cluster_summary__s42_sold
+#: model:ir.model.fields,field_description:property_sales_analysis.field_property_sales_summary__s42_sold
+#: model_terms:ir.ui.view,arch_db:property_sales_analysis.view_property_sales_cluster_summary_form
+#: model_terms:ir.ui.view,arch_db:property_sales_analysis.view_property_sales_summary_form
+msgid "S42"
+msgstr ""
+
+#. module: property_sales_analysis
+#: model:ir.model.fields,field_description:property_sales_analysis.field_property_sales_cluster_summary__s43_sold
+#: model:ir.model.fields,field_description:property_sales_analysis.field_property_sales_summary__s43_sold
+#: model_terms:ir.ui.view,arch_db:property_sales_analysis.view_property_sales_cluster_summary_form
+#: model_terms:ir.ui.view,arch_db:property_sales_analysis.view_property_sales_summary_form
+msgid "S43"
+msgstr ""
+
+#. module: property_sales_analysis
+#: model:ir.model.fields,field_description:property_sales_analysis.field_property_sales_cluster_summary__s44_sold
+#: model:ir.model.fields,field_description:property_sales_analysis.field_property_sales_summary__s44_sold
+#: model_terms:ir.ui.view,arch_db:property_sales_analysis.view_property_sales_cluster_summary_form
+#: model_terms:ir.ui.view,arch_db:property_sales_analysis.view_property_sales_summary_form
+msgid "S44"
+msgstr ""
+
+#. module: property_sales_analysis
+#: model:ir.model.fields,field_description:property_sales_analysis.field_property_sales_cluster_summary__s45_sold
+#: model:ir.model.fields,field_description:property_sales_analysis.field_property_sales_summary__s45_sold
+#: model_terms:ir.ui.view,arch_db:property_sales_analysis.view_property_sales_cluster_summary_form
+#: model_terms:ir.ui.view,arch_db:property_sales_analysis.view_property_sales_summary_form
+msgid "S45"
+msgstr ""
+
+#. module: property_sales_analysis
+#: model:ir.model.fields,field_description:property_sales_analysis.field_property_sales_cluster_summary__s46_sold
+#: model:ir.model.fields,field_description:property_sales_analysis.field_property_sales_summary__s46_sold
+#: model_terms:ir.ui.view,arch_db:property_sales_analysis.view_property_sales_cluster_summary_form
+#: model_terms:ir.ui.view,arch_db:property_sales_analysis.view_property_sales_summary_form
+msgid "S46"
+msgstr ""
+
+#. module: property_sales_analysis
+#: model:ir.model.fields,field_description:property_sales_analysis.field_property_sales_cluster_summary__s47_sold
+#: model:ir.model.fields,field_description:property_sales_analysis.field_property_sales_summary__s47_sold
+#: model_terms:ir.ui.view,arch_db:property_sales_analysis.view_property_sales_cluster_summary_form
+#: model_terms:ir.ui.view,arch_db:property_sales_analysis.view_property_sales_summary_form
+msgid "S47"
+msgstr ""
+
+#. module: property_sales_analysis
+#: model:ir.model.fields,field_description:property_sales_analysis.field_property_sales_cluster_summary__s48_sold
+#: model:ir.model.fields,field_description:property_sales_analysis.field_property_sales_summary__s48_sold
+#: model_terms:ir.ui.view,arch_db:property_sales_analysis.view_property_sales_cluster_summary_form
+#: model_terms:ir.ui.view,arch_db:property_sales_analysis.view_property_sales_summary_form
+msgid "S48"
+msgstr ""
+
+#. module: property_sales_analysis
+#: model:ir.model.fields,field_description:property_sales_analysis.field_property_sales_cluster_summary__s49_sold
+#: model:ir.model.fields,field_description:property_sales_analysis.field_property_sales_summary__s49_sold
+#: model_terms:ir.ui.view,arch_db:property_sales_analysis.view_property_sales_cluster_summary_form
+#: model_terms:ir.ui.view,arch_db:property_sales_analysis.view_property_sales_summary_form
+msgid "S49"
+msgstr ""
+
+#. module: property_sales_analysis
+#: model:ir.model.fields,field_description:property_sales_analysis.field_property_sales_cluster_summary__s5_sold
+#: model:ir.model.fields,field_description:property_sales_analysis.field_property_sales_summary__s5_sold
+#: model_terms:ir.ui.view,arch_db:property_sales_analysis.view_property_sales_cluster_summary_form
+#: model_terms:ir.ui.view,arch_db:property_sales_analysis.view_property_sales_summary_form
+msgid "S5"
+msgstr ""
+
+#. module: property_sales_analysis
+#: model:ir.model.fields,field_description:property_sales_analysis.field_property_sales_cluster_summary__s50_sold
+#: model:ir.model.fields,field_description:property_sales_analysis.field_property_sales_summary__s50_sold
+#: model_terms:ir.ui.view,arch_db:property_sales_analysis.view_property_sales_cluster_summary_form
+#: model_terms:ir.ui.view,arch_db:property_sales_analysis.view_property_sales_summary_form
+msgid "S50"
+msgstr ""
+
+#. module: property_sales_analysis
+#: model:ir.model.fields,field_description:property_sales_analysis.field_property_sales_cluster_summary__s51_sold
+#: model:ir.model.fields,field_description:property_sales_analysis.field_property_sales_summary__s51_sold
+#: model_terms:ir.ui.view,arch_db:property_sales_analysis.view_property_sales_cluster_summary_form
+#: model_terms:ir.ui.view,arch_db:property_sales_analysis.view_property_sales_summary_form
+msgid "S51"
+msgstr ""
+
+#. module: property_sales_analysis
+#: model:ir.model.fields,field_description:property_sales_analysis.field_property_sales_cluster_summary__s52_sold
+#: model:ir.model.fields,field_description:property_sales_analysis.field_property_sales_summary__s52_sold
+#: model_terms:ir.ui.view,arch_db:property_sales_analysis.view_property_sales_cluster_summary_form
+#: model_terms:ir.ui.view,arch_db:property_sales_analysis.view_property_sales_summary_form
+msgid "S52"
+msgstr ""
+
+#. module: property_sales_analysis
+#: model:ir.model.fields,field_description:property_sales_analysis.field_property_sales_cluster_summary__s53_sold
+#: model:ir.model.fields,field_description:property_sales_analysis.field_property_sales_summary__s53_sold
+#: model_terms:ir.ui.view,arch_db:property_sales_analysis.view_property_sales_cluster_summary_form
+#: model_terms:ir.ui.view,arch_db:property_sales_analysis.view_property_sales_summary_form
+msgid "S53"
+msgstr ""
+
+#. module: property_sales_analysis
+#: model:ir.model.fields,field_description:property_sales_analysis.field_property_sales_cluster_summary__s6_sold
+#: model:ir.model.fields,field_description:property_sales_analysis.field_property_sales_summary__s6_sold
+#: model_terms:ir.ui.view,arch_db:property_sales_analysis.view_property_sales_cluster_summary_form
+#: model_terms:ir.ui.view,arch_db:property_sales_analysis.view_property_sales_summary_form
+msgid "S6"
+msgstr ""
+
+#. module: property_sales_analysis
+#: model:ir.model.fields,field_description:property_sales_analysis.field_property_sales_cluster_summary__s7_sold
+#: model:ir.model.fields,field_description:property_sales_analysis.field_property_sales_summary__s7_sold
+#: model_terms:ir.ui.view,arch_db:property_sales_analysis.view_property_sales_cluster_summary_form
+#: model_terms:ir.ui.view,arch_db:property_sales_analysis.view_property_sales_summary_form
+msgid "S7"
+msgstr ""
+
+#. module: property_sales_analysis
+#: model:ir.model.fields,field_description:property_sales_analysis.field_property_sales_cluster_summary__s8_sold
+#: model:ir.model.fields,field_description:property_sales_analysis.field_property_sales_summary__s8_sold
+#: model_terms:ir.ui.view,arch_db:property_sales_analysis.view_property_sales_cluster_summary_form
+#: model_terms:ir.ui.view,arch_db:property_sales_analysis.view_property_sales_summary_form
+msgid "S8"
+msgstr ""
+
+#. module: property_sales_analysis
+#: model:ir.model.fields,field_description:property_sales_analysis.field_property_sales_cluster_summary__s9_sold
+#: model:ir.model.fields,field_description:property_sales_analysis.field_property_sales_summary__s9_sold
+#: model_terms:ir.ui.view,arch_db:property_sales_analysis.view_property_sales_cluster_summary_form
+#: model_terms:ir.ui.view,arch_db:property_sales_analysis.view_property_sales_summary_form
+msgid "S9"
+msgstr ""
+
+#. module: property_sales_analysis
+#: model:ir.model.fields,field_description:property_sales_analysis.field_property_sales_week_summary__has_sabana
+msgid "Sabana Activo"
+msgstr ""
+
+#. module: property_sales_analysis
+#: model:ir.model.fields,field_description:property_sales_analysis.field_property_sales_manager_week_detail__week_name
+#: model:ir.model.fields,field_description:property_sales_analysis.field_property_sales_manager_week_detail__week_number
+#: model:ir.model.fields,field_description:property_sales_analysis.field_property_sales_week_cluster_detail__week_id
+#: model:ir.model.fields,field_description:property_sales_analysis.field_property_sales_week_cluster_detail__week_name
+#: model:ir.model.fields,field_description:property_sales_analysis.field_property_sales_week_cluster_summary__week_id
+#: model:ir.model.fields,field_description:property_sales_analysis.field_property_sales_week_cluster_summary__week_name
+#: model:ir.model.fields,field_description:property_sales_analysis.field_property_sales_week_property_detail__week_id
+#: model:ir.model.fields,field_description:property_sales_analysis.field_property_sales_week_property_detail__week_name
+#: model:ir.model.fields,field_description:property_sales_analysis.field_property_sales_week_summary__week_number
+#: model_terms:ir.ui.view,arch_db:property_sales_analysis.view_property_sales_week_cluster_summary_search
+#: model_terms:ir.ui.view,arch_db:property_sales_analysis.view_property_sales_week_property_detail_form
+#: model_terms:ir.ui.view,arch_db:property_sales_analysis.view_property_sales_week_property_detail_search
+msgid "Semana"
+msgstr ""
+
+#. module: property_sales_analysis
+#: model:ir.model.fields,field_description:property_sales_analysis.field_property_sales_week_cluster_detail__week_number_str
+#: model:ir.model.fields,field_description:property_sales_analysis.field_property_sales_week_cluster_summary__week_number_str
+#: model:ir.model.fields,field_description:property_sales_analysis.field_property_sales_week_property_detail__week_number_str
+#: model:ir.model.fields,field_description:property_sales_analysis.field_property_sales_week_summary__week_number_str
+msgid "Semana Nº"
+msgstr ""
+
+#. module: property_sales_analysis
+#: model_terms:ir.ui.view,arch_db:property_sales_analysis.view_property_sales_cluster_summary_form
+#: model_terms:ir.ui.view,arch_db:property_sales_analysis.view_property_sales_summary_form
+msgid "Semanas 1-7"
+msgstr ""
+
+#. module: property_sales_analysis
+#: model_terms:ir.ui.view,arch_db:property_sales_analysis.view_property_sales_cluster_summary_form
+#: model_terms:ir.ui.view,arch_db:property_sales_analysis.view_property_sales_summary_form
+msgid "Semanas 14-20"
+msgstr ""
+
+#. module: property_sales_analysis
+#: model_terms:ir.ui.view,arch_db:property_sales_analysis.view_property_sales_cluster_summary_form
+#: model_terms:ir.ui.view,arch_db:property_sales_analysis.view_property_sales_summary_form
+msgid "Semanas 21-26"
+msgstr ""
+
+#. module: property_sales_analysis
+#: model_terms:ir.ui.view,arch_db:property_sales_analysis.view_property_sales_cluster_summary_form
+#: model_terms:ir.ui.view,arch_db:property_sales_analysis.view_property_sales_summary_form
+msgid "Semanas 27-33"
+msgstr ""
+
+#. module: property_sales_analysis
+#: model_terms:ir.ui.view,arch_db:property_sales_analysis.view_property_sales_cluster_summary_form
+#: model_terms:ir.ui.view,arch_db:property_sales_analysis.view_property_sales_summary_form
+msgid "Semanas 34-39"
+msgstr ""
+
+#. module: property_sales_analysis
+#: model_terms:ir.ui.view,arch_db:property_sales_analysis.view_property_sales_cluster_summary_form
+#: model_terms:ir.ui.view,arch_db:property_sales_analysis.view_property_sales_summary_form
+msgid "Semanas 40-46"
+msgstr ""
+
+#. module: property_sales_analysis
+#: model_terms:ir.ui.view,arch_db:property_sales_analysis.view_property_sales_cluster_summary_form
+#: model_terms:ir.ui.view,arch_db:property_sales_analysis.view_property_sales_summary_form
+msgid "Semanas 47-53"
+msgstr ""
+
+#. module: property_sales_analysis
+#: model_terms:ir.ui.view,arch_db:property_sales_analysis.view_property_sales_cluster_summary_form
+#: model_terms:ir.ui.view,arch_db:property_sales_analysis.view_property_sales_summary_form
+msgid "Semanas 8-13"
+msgstr ""
+
+#. module: property_sales_analysis
+#: model:ir.model.fields,field_description:property_sales_analysis.field_product_product__date_state_change
+#: model:ir.model.fields,field_description:property_sales_analysis.field_product_template__date_state_change
+msgid "State Change Date"
+msgstr "Fecha de Cambio de Estado"
+
+#. module: property_sales_analysis
+#: model_terms:ir.ui.view,arch_db:property_sales_analysis.view_property_sales_summary_list
+msgid "Total"
+msgstr ""
+
+#. module: property_sales_analysis
+#: model:ir.model.fields,field_description:property_sales_analysis.field_property_sales_cluster_summary__total_sold
+#: model:ir.model.fields,field_description:property_sales_analysis.field_property_sales_summary__total_sold
+msgid "Total Apartado"
+msgstr "Total Apartado"
+
+#. module: property_sales_analysis
+#: model:ir.model.fields,field_description:property_sales_analysis.field_property_sales_cluster_summary__total_lots
+#: model:ir.model.fields,field_description:property_sales_analysis.field_property_sales_summary__total_lots
+#: model:ir.model.fields,field_description:property_sales_analysis.field_property_sales_week_summary__total_lots
+msgid "Total Lotes"
+msgstr "Total de Lotes"
+
+#. module: property_sales_analysis
+#: model:ir.model.fields,field_description:property_sales_analysis.field_property_sales_manager_summary__total_sold
+msgid "Total Vendido"
+msgstr ""
+
+#. module: property_sales_analysis
+#: model_terms:ir.ui.view,arch_db:property_sales_analysis.view_property_sales_manager_summary_form
+#: model_terms:ir.ui.view,arch_db:property_sales_analysis.view_property_sales_summary_form
+#: model_terms:ir.ui.view,arch_db:property_sales_analysis.view_property_sales_week_summary_form
+msgid "Totales"
+msgstr ""
+
+#. module: property_sales_analysis
+#: model_terms:ir.ui.view,arch_db:property_sales_analysis.view_property_sales_cluster_summary_form
+msgid "Totales Consolidados"
+msgstr ""
+
+#. module: property_sales_analysis
+#: model_terms:ir.ui.view,arch_db:property_sales_analysis.view_property_sales_cluster_summary_form
+#: model_terms:ir.ui.view,arch_db:property_sales_analysis.view_property_sales_summary_form
+msgid "Trimestre 1 (S1-S13)"
+msgstr ""
+
+#. module: property_sales_analysis
+#: model_terms:ir.ui.view,arch_db:property_sales_analysis.view_property_sales_cluster_summary_form
+#: model_terms:ir.ui.view,arch_db:property_sales_analysis.view_property_sales_summary_form
+msgid "Trimestre 2 (S14-S26)"
+msgstr ""
+
+#. module: property_sales_analysis
+#: model_terms:ir.ui.view,arch_db:property_sales_analysis.view_property_sales_cluster_summary_form
+#: model_terms:ir.ui.view,arch_db:property_sales_analysis.view_property_sales_summary_form
+msgid "Trimestre 3 (S27-S39)"
+msgstr ""
+
+#. module: property_sales_analysis
+#: model_terms:ir.ui.view,arch_db:property_sales_analysis.view_property_sales_cluster_summary_form
+#: model_terms:ir.ui.view,arch_db:property_sales_analysis.view_property_sales_summary_form
+msgid "Trimestre 4 (S40-S53)"
+msgstr ""
+
+#. module: property_sales_analysis
+#: model:ir.model.fields,field_description:property_sales_analysis.field_property_sales_week_summary__has_tundra
+msgid "Tundra Activo"
+msgstr ""
+
+#. module: property_sales_analysis
+#: model_terms:ir.ui.view,arch_db:property_sales_analysis.view_property_sales_week_property_detail_form
+msgid "Ubicación"
+msgstr ""
+
+#. module: property_sales_analysis
+#: model:ir.model.fields,field_description:property_sales_analysis.field_property_sales_week_summary__total_sold
+msgid "Vendido en Semana"
+msgstr ""
+
+#. module: property_sales_analysis
+#: model_terms:ir.ui.view,arch_db:property_sales_analysis.view_property_sales_week_property_detail_form
+msgid "Venta"
+msgstr ""
+
+#. module: property_sales_analysis
+#: model:ir.actions.act_window,name:property_sales_analysis.action_property_sales_week_cluster_detail
+msgid "Ventas Semanales por Cluster/Obra"
+msgstr ""
+
+#. module: property_sales_analysis
+#: model:ir.actions.act_window,name:property_sales_analysis.action_property_sales_manager_week_detail
+msgid "Ventas de Gerentes por Semana"
+msgstr ""
+
+#. module: property_sales_analysis
+#: model:ir.model.fields,field_description:property_sales_analysis.field_property_sales_manager_summary__cluster_details
+#: model_terms:ir.ui.view,arch_db:property_sales_analysis.view_property_sales_manager_summary_form
+msgid "Ventas por Cluster"
+msgstr ""
+
+#. module: property_sales_analysis
+#: model:ir.model.fields,field_description:property_sales_analysis.field_property_sales_summary__worksite_id
+msgid "Worksite"
+msgstr "Clúster"
+
+#. module: property_sales_analysis
+#: model_terms:ir.ui.view,arch_db:property_sales_analysis.view_property_sales_summary_form
+msgid "🐛 DEBUG"
+msgstr ""

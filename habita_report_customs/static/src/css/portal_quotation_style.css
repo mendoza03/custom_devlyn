@@ -1,0 +1,153 @@
+@font-face {
+   font-family: 'futura-family';
+   src: url('/habita_report_customs/static/src/fonts/FuturaPTBook.otf') format('truetype');  
+   font-weight: normal;
+   font-style: normal;
+}
+
+.habita-horizontal-line {
+    width: 100%;
+    height: 5px;
+    background-color: #002855;
+    border: none;
+    margin-bottom: 5px;
+}
+
+.habita-tiny-horizontal-line {
+    width: 100%;
+    height: 1px;
+    background-color: #002855;
+    border: none;
+}
+
+.habita-font{
+    font-family: futura-family;
+}
+
+.habita-col-6-style{
+    font-family: 'futura-family';
+    padding-left: 0px;
+    padding-right: 0px;
+}
+
+.habita-title {
+    font-family: futura-family;
+    display: table;
+    width: 100%;
+    margin-bottom: 5px;
+}
+
+.habita-title .logo {
+    display: table-cell;
+    width:100%; 
+    padding-right: 10px;
+    vertical-align: middle;
+}
+
+.habita-title .logo img {
+    height: 100%;
+    max-height: 100px;
+    width: auto;
+}
+
+.habita-title .title {
+    display: table-cell;
+    width: 80%;
+    height: 50px;
+    font-size: 24px;    
+    font-weight: bold;
+    color: #002855; 
+    background-color: #D6E0F2;
+    text-align: center;
+    line-height: 50px;
+}
+.habita-title-subtitle {
+    font-family: futura-family;
+    background-color: #D6E0F2;
+    width: 100%;    
+    text-align: center; 
+    color: #002855; 
+    font-size: 12px;    
+}
+
+.habita-expiration-table-style{
+    font-family: futura-family !important;
+    border-collapse: collapse !important;
+}
+
+.habita-expiration-table-style th, 
+.habita-expiration-table-style td {
+    font-size: 10.72px;
+    border-top: 0px solid white !important;
+    border-right: 0px solid white !important;
+    border-left: 0px solid white !important;
+    border-bottom: 0px solid white !important;
+}
+
+.habita-table-style {
+    font-family: 'futura-family';
+    border-collapse: collapse;
+    background-color: #D6E0F2;
+}
+
+.habita-table-style th, 
+.habita-table-style td {
+    text-align: center;
+    border: 1px solid #ddd;
+}
+
+.habita-table-style th {
+    background-color: #D6E0F2;
+}
+
+.habita-table-style .highlight {
+    background-color: #002060; 
+    color: white;
+    font-weight: bold;
+}
+
+
+.habita-product-table-style{
+    font-family: 'futura-family';
+    border-collapse: collapse;
+}
+
+.habita-product-table-style th, 
+.habita-product-table-style td {
+    border: none;
+    font-size: 10.72px;
+    border-bottom: 2px solid #00A1CA;
+}
+
+.habita-finance-table-style{
+    font-family: 'futura-family';
+    border-collapse: collapse;
+}
+
+.habita-finance-table-style th, 
+.habita-finance-table-style td {
+    border: none;
+    font-size: 10.72px;
+    border-bottom: 2px solid #000000;
+}
+
+.habita-table-header {
+    background-color: #D6E0F2;   
+    color: #002855;
+    font-weight: bold;
+}
+
+.no-padding{
+    padding: 0; 
+}
+
+.no-margin{
+    margin: 0; 
+}
+
+.highlight {
+    background-color: #002060;
+    color: white;
+    /* padding-left: 25px; */
+}
+

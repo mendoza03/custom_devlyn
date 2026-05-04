@@ -1,0 +1,454 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <!-- List View -->
+    <record id="view_property_sales_cluster_summary_list" model="ir.ui.view">
+        <field name="name">property.sales.cluster.summary.list</field>
+        <field name="model">property.sales.cluster.summary</field>
+        <field name="arch" type="xml">
+            <list string="Resúmenes por Cluster">
+                <field name="cluster_name"/>
+                <field name="calendar_name"/>
+                <field name="total_lots"/>
+                <field name="total_sold"/>
+                <field name="sold_percentage_display"/>
+            </list>
+        </field>
+    </record>
+
+    <!-- Form View -->
+    <record id="view_property_sales_cluster_summary_form" model="ir.ui.view">
+        <field name="name">property.sales.cluster.summary.form</field>
+        <field name="model">property.sales.cluster.summary</field>
+        <field name="arch" type="xml">
+            <form string="Cluster Sales Summary">
+                <header>
+                    <button name="action_refresh"
+                            type="object"
+                            string="Actualizar Datos"
+                            class="btn-primary"/>
+                </header>
+                <sheet>
+                    <div class="oe_title">
+                        <h1>
+                            <field name="cluster_name" readonly="1"/>
+                        </h1>
+                    </div>
+                    <group>
+                        <group string="Configuración">
+                            <field name="cluster_id" invisible="1"/>
+                            <field name="calendar_id"/>
+                            <field name="company_id"/>
+                        </group>
+                        <group string="Totales Consolidados">
+                            <field name="total_lots"/>
+                            <field name="total_sold"/>
+                            <field name="sold_percentage_display"/>
+                        </group>
+                    </group>
+                    
+                    <notebook>
+                        <page string="Trimestre 1 (S1-S13)" name="q1">
+                            <group>
+                                <group string="Semanas 1-7">
+                                    <label for="s1_sold" string="S1"/>
+                                    <div>
+                                        <field name="s1_sold" class="oe_inline"/>
+                                        <field name="s1_managers" readonly="1" class="text-muted"/>
+                                    </div>
+                                    
+                                    <label for="s2_sold" string="S2"/>
+                                    <div>
+                                        <field name="s2_sold" class="oe_inline"/>
+                                        <field name="s2_managers" readonly="1" class="text-muted"/>
+                                    </div>
+                                    
+                                    <label for="s3_sold" string="S3"/>
+                                    <div>
+                                        <field name="s3_sold" class="oe_inline"/>
+                                        <field name="s3_managers" readonly="1" class="text-muted"/>
+                                    </div>
+                                    
+                                    <label for="s4_sold" string="S4"/>
+                                    <div>
+                                        <field name="s4_sold" class="oe_inline"/>
+                                        <field name="s4_managers" readonly="1" class="text-muted"/>
+                                    </div>
+                                    
+                                    <label for="s5_sold" string="S5"/>
+                                    <div>
+                                        <field name="s5_sold" class="oe_inline"/>
+                                        <field name="s5_managers" readonly="1" class="text-muted"/>
+                                    </div>
+                                    
+                                    <label for="s6_sold" string="S6"/>
+                                    <div>
+                                        <field name="s6_sold" class="oe_inline"/>
+                                        <field name="s6_managers" readonly="1" class="text-muted"/>
+                                    </div>
+                                    
+                                    <label for="s7_sold" string="S7"/>
+                                    <div>
+                                        <field name="s7_sold" class="oe_inline"/>
+                                        <field name="s7_managers" readonly="1" class="text-muted"/>
+                                    </div>
+                                </group>
+                                
+                                <group string="Semanas 8-13">
+                                    <label for="s8_sold" string="S8"/>
+                                    <div>
+                                        <field name="s8_sold" class="oe_inline"/>
+                                        <field name="s8_managers" readonly="1" class="text-muted"/>
+                                    </div>
+                                    
+                                    <label for="s9_sold" string="S9"/>
+                                    <div>
+                                        <field name="s9_sold" class="oe_inline"/>
+                                        <field name="s9_managers" readonly="1" class="text-muted"/>
+                                    </div>
+                                    
+                                    <label for="s10_sold" string="S10"/>
+                                    <div>
+                                        <field name="s10_sold" class="oe_inline"/>
+                                        <field name="s10_managers" readonly="1" class="text-muted"/>
+                                    </div>
+                                    
+                                    <label for="s11_sold" string="S11"/>
+                                    <div>
+                                        <field name="s11_sold" class="oe_inline"/>
+                                        <field name="s11_managers" readonly="1" class="text-muted"/>
+                                    </div>
+                                    
+                                    <label for="s12_sold" string="S12"/>
+                                    <div>
+                                        <field name="s12_sold" class="oe_inline"/>
+                                        <field name="s12_managers" readonly="1" class="text-muted"/>
+                                    </div>
+                                    
+                                    <label for="s13_sold" string="S13"/>
+                                    <div>
+                                        <field name="s13_sold" class="oe_inline"/>
+                                        <field name="s13_managers" readonly="1" class="text-muted"/>
+                                    </div>
+                                </group>
+                            </group>
+                        </page>
+                        
+                        <page string="Trimestre 2 (S14-S26)" name="q2">
+                            <group>
+                                <group string="Semanas 14-20">
+                                    <label for="s14_sold" string="S14"/>
+                                    <div>
+                                        <field name="s14_sold" class="oe_inline"/>
+                                        <field name="s14_managers" readonly="1" class="text-muted"/>
+                                    </div>
+                                    
+                                    <label for="s15_sold" string="S15"/>
+                                    <div>
+                                        <field name="s15_sold" class="oe_inline"/>
+                                        <field name="s15_managers" readonly="1" class="text-muted"/>
+                                    </div>
+                                    
+                                    <label for="s16_sold" string="S16"/>
+                                    <div>
+                                        <field name="s16_sold" class="oe_inline"/>
+                                        <field name="s16_managers" readonly="1" class="text-muted"/>
+                                    </div>
+                                    
+                                    <label for="s17_sold" string="S17"/>
+                                    <div>
+                                        <field name="s17_sold" class="oe_inline"/>
+                                        <field name="s17_managers" readonly="1" class="text-muted"/>
+                                    </div>
+                                    
+                                    <label for="s18_sold" string="S18"/>
+                                    <div>
+                                        <field name="s18_sold" class="oe_inline"/>
+                                        <field name="s18_managers" readonly="1" class="text-muted"/>
+                                    </div>
+                                    
+                                    <label for="s19_sold" string="S19"/>
+                                    <div>
+                                        <field name="s19_sold" class="oe_inline"/>
+                                        <field name="s19_managers" readonly="1" class="text-muted"/>
+                                    </div>
+                                    
+                                    <label for="s20_sold" string="S20"/>
+                                    <div>
+                                        <field name="s20_sold" class="oe_inline"/>
+                                        <field name="s20_managers" readonly="1" class="text-muted"/>
+                                    </div>
+                                </group>
+                                
+                                <group string="Semanas 21-26">
+                                    <label for="s21_sold" string="S21"/>
+                                    <div>
+                                        <field name="s21_sold" class="oe_inline"/>
+                                        <field name="s21_managers" readonly="1" class="text-muted"/>
+                                    </div>
+                                    
+                                    <label for="s22_sold" string="S22"/>
+                                    <div>
+                                        <field name="s22_sold" class="oe_inline"/>
+                                        <field name="s22_managers" readonly="1" class="text-muted"/>
+                                    </div>
+                                    
+                                    <label for="s23_sold" string="S23"/>
+                                    <div>
+                                        <field name="s23_sold" class="oe_inline"/>
+                                        <field name="s23_managers" readonly="1" class="text-muted"/>
+                                    </div>
+                                    
+                                    <label for="s24_sold" string="S24"/>
+                                    <div>
+                                        <field name="s24_sold" class="oe_inline"/>
+                                        <field name="s24_managers" readonly="1" class="text-muted"/>
+                                    </div>
+                                    
+                                    <label for="s25_sold" string="S25"/>
+                                    <div>
+                                        <field name="s25_sold" class="oe_inline"/>
+                                        <field name="s25_managers" readonly="1" class="text-muted"/>
+                                    </div>
+                                    
+                                    <label for="s26_sold" string="S26"/>
+                                    <div>
+                                        <field name="s26_sold" class="oe_inline"/>
+                                        <field name="s26_managers" readonly="1" class="text-muted"/>
+                                    </div>
+                                </group>
+                            </group>
+                        </page>
+                        
+                        <page string="Trimestre 3 (S27-S39)" name="q3">
+                            <group>
+                                <group string="Semanas 27-33">
+                                    <label for="s27_sold" string="S27"/>
+                                    <div>
+                                        <field name="s27_sold" class="oe_inline"/>
+                                        <field name="s27_managers" readonly="1" class="text-muted"/>
+                                    </div>
+                                    
+                                    <label for="s28_sold" string="S28"/>
+                                    <div>
+                                        <field name="s28_sold" class="oe_inline"/>
+                                        <field name="s28_managers" readonly="1" class="text-muted"/>
+                                    </div>
+                                    
+                                    <label for="s29_sold" string="S29"/>
+                                    <div>
+                                        <field name="s29_sold" class="oe_inline"/>
+                                        <field name="s29_managers" readonly="1" class="text-muted"/>
+                                    </div>
+                                    
+                                    <label for="s30_sold" string="S30"/>
+                                    <div>
+                                        <field name="s30_sold" class="oe_inline"/>
+                                        <field name="s30_managers" readonly="1" class="text-muted"/>
+                                    </div>
+                                    
+                                    <label for="s31_sold" string="S31"/>
+                                    <div>
+                                        <field name="s31_sold" class="oe_inline"/>
+                                        <field name="s31_managers" readonly="1" class="text-muted"/>
+                                    </div>
+                                    
+                                    <label for="s32_sold" string="S32"/>
+                                    <div>
+                                        <field name="s32_sold" class="oe_inline"/>
+                                        <field name="s32_managers" readonly="1" class="text-muted"/>
+                                    </div>
+                                    
+                                    <label for="s33_sold" string="S33"/>
+                                    <div>
+                                        <field name="s33_sold" class="oe_inline"/>
+                                        <field name="s33_managers" readonly="1" class="text-muted"/>
+                                    </div>
+                                </group>
+                                
+                                <group string="Semanas 34-39">
+                                    <label for="s34_sold" string="S34"/>
+                                    <div>
+                                        <field name="s34_sold" class="oe_inline"/>
+                                        <field name="s34_managers" readonly="1" class="text-muted"/>
+                                    </div>
+                                    
+                                    <label for="s35_sold" string="S35"/>
+                                    <div>
+                                        <field name="s35_sold" class="oe_inline"/>
+                                        <field name="s35_managers" readonly="1" class="text-muted"/>
+                                    </div>
+                                    
+                                    <label for="s36_sold" string="S36"/>
+                                    <div>
+                                        <field name="s36_sold" class="oe_inline"/>
+                                        <field name="s36_managers" readonly="1" class="text-muted"/>
+                                    </div>
+                                    
+                                    <label for="s37_sold" string="S37"/>
+                                    <div>
+                                        <field name="s37_sold" class="oe_inline"/>
+                                        <field name="s37_managers" readonly="1" class="text-muted"/>
+                                    </div>
+                                    
+                                    <label for="s38_sold" string="S38"/>
+                                    <div>
+                                        <field name="s38_sold" class="oe_inline"/>
+                                        <field name="s38_managers" readonly="1" class="text-muted"/>
+                                    </div>
+                                    
+                                    <label for="s39_sold" string="S39"/>
+                                    <div>
+                                        <field name="s39_sold" class="oe_inline"/>
+                                        <field name="s39_managers" readonly="1" class="text-muted"/>
+                                    </div>
+                                </group>
+                            </group>
+                        </page>
+                        
+                        <page string="Trimestre 4 (S40-S53)" name="q4">
+                            <group>
+                                <group string="Semanas 40-46">
+                                    <label for="s40_sold" string="S40"/>
+                                    <div>
+                                        <field name="s40_sold" class="oe_inline"/>
+                                        <field name="s40_managers" readonly="1" class="text-muted"/>
+                                    </div>
+                                    
+                                    <label for="s41_sold" string="S41"/>
+                                    <div>
+                                        <field name="s41_sold" class="oe_inline"/>
+                                        <field name="s41_managers" readonly="1" class="text-muted"/>
+                                    </div>
+                                    
+                                    <label for="s42_sold" string="S42"/>
+                                    <div>
+                                        <field name="s42_sold" class="oe_inline"/>
+                                        <field name="s42_managers" readonly="1" class="text-muted"/>
+                                    </div>
+                                    
+                                    <label for="s43_sold" string="S43"/>
+                                    <div>
+                                        <field name="s43_sold" class="oe_inline"/>
+                                        <field name="s43_managers" readonly="1" class="text-muted"/>
+                                    </div>
+                                    
+                                    <label for="s44_sold" string="S44"/>
+                                    <div>
+                                        <field name="s44_sold" class="oe_inline"/>
+                                        <field name="s44_managers" readonly="1" class="text-muted"/>
+                                    </div>
+                                    
+                                    <label for="s45_sold" string="S45"/>
+                                    <div>
+                                        <field name="s45_sold" class="oe_inline"/>
+                                        <field name="s45_managers" readonly="1" class="text-muted"/>
+                                    </div>
+                                    
+                                    <label for="s46_sold" string="S46"/>
+                                    <div>
+                                        <field name="s46_sold" class="oe_inline"/>
+                                        <field name="s46_managers" readonly="1" class="text-muted"/>
+                                    </div>
+                                </group>
+                                
+                                <group string="Semanas 47-53">
+                                    <label for="s47_sold" string="S47"/>
+                                    <div>
+                                        <field name="s47_sold" class="oe_inline"/>
+                                        <field name="s47_managers" readonly="1" class="text-muted"/>
+                                    </div>
+                                    
+                                    <label for="s48_sold" string="S48"/>
+                                    <div>
+                                        <field name="s48_sold" class="oe_inline"/>
+                                        <field name="s48_managers" readonly="1" class="text-muted"/>
+                                    </div>
+                                    
+                                    <label for="s49_sold" string="S49"/>
+                                    <div>
+                                        <field name="s49_sold" class="oe_inline"/>
+                                        <field name="s49_managers" readonly="1" class="text-muted"/>
+                                    </div>
+                                    
+                                    <label for="s50_sold" string="S50"/>
+                                    <div>
+                                        <field name="s50_sold" class="oe_inline"/>
+                                        <field name="s50_managers" readonly="1" class="text-muted"/>
+                                    </div>
+                                    
+                                    <label for="s51_sold" string="S51"/>
+                                    <div>
+                                        <field name="s51_sold" class="oe_inline"/>
+                                        <field name="s51_managers" readonly="1" class="text-muted"/>
+                                    </div>
+                                    
+                                    <label for="s52_sold" string="S52"/>
+                                    <div>
+                                        <field name="s52_sold" class="oe_inline"/>
+                                        <field name="s52_managers" readonly="1" class="text-muted"/>
+                                    </div>
+                                    
+                                    <label for="s53_sold" string="S53"/>
+                                    <div>
+                                        <field name="s53_sold" class="oe_inline"/>
+                                        <field name="s53_managers" readonly="1" class="text-muted"/>
+                                    </div>
+                                </group>
+                            </group>
+                        </page>
+                    </notebook>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <!-- Generator Form -->
+    <record id="view_property_sales_cluster_summary_generator_form" model="ir.ui.view">
+        <field name="name">property.sales.cluster.summary.generator.form</field>
+        <field name="model">property.sales.cluster.summary.generator</field>
+        <field name="arch" type="xml">
+            <form>
+                <group>
+                    <field name="cluster_id" domain="[('parent_id', '=', False)]"/>
+                    <field name="calendar_id"/>
+                </group>
+                <footer>
+                    <button name="action_generate"
+                            type="object"
+                            string="Generar Resumen del Cluster"
+                            class="btn-primary"/>
+                    <button string="Cancelar" class="btn-secondary" special="cancel"/>
+                </footer>
+            </form>
+        </field>
+    </record>
+
+    <!-- Actions -->
+    <record id="action_property_sales_cluster_summary" model="ir.actions.act_window">
+        <field name="name">Resumen por Cluster</field>
+        <field name="res_model">property.sales.cluster.summary</field>
+        <field name="view_mode">list,form</field>
+    </record>
+
+    <record id="action_property_sales_cluster_summary_generator" model="ir.actions.act_window">
+        <field name="name">Generar Resumen del Cluster</field>
+        <field name="res_model">property.sales.cluster.summary.generator</field>
+        <field name="view_mode">form</field>
+        <field name="target">new</field>
+    </record>
+
+    <!-- Menus -->
+    <menuitem id="menu_property_sales_cluster_summary_generator"
+              name="Generar Resumen por Cluster"
+              parent="real_estate_bits.menu_real_estate_root"
+              action="action_property_sales_cluster_summary_generator"
+              sequence="15"/>
+
+    <menuitem id="menu_property_sales_cluster_summary_list"
+              name="Resúmenes por Cluster"
+              parent="real_estate_bits.menu_real_estate_root"
+              action="action_property_sales_cluster_summary"
+              sequence="16"/>
+
+</odoo>

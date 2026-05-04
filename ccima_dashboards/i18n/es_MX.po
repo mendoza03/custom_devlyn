@@ -1,0 +1,36 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* ccima_dashboards
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 18.0+e-20260119\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2026-02-06 07:32+0000\n"
+"PO-Revision-Date: 2026-02-06 07:32+0000\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+#. module: ccima_dashboards
+#: model:ir.ui.menu,name:ccima_dashboards.menu_dashboard_advisor
+msgid "Advisor Dashboard"
+msgstr "Tablero de Asesor"
+
+#. module: ccima_dashboards
+#: model:ir.ui.menu,name:ccima_dashboards.menu_dashboard_control
+msgid "Control and Measurement Board"
+msgstr "Tablero Control y Medición"
+
+#. module: ccima_dashboards
+#: model:ir.ui.menu,name:ccima_dashboards.menu_dashboard_management
+msgid "Management Dashboard"
+msgstr "Tablero de Dirección"
+
+#. module: ccima_dashboards
+#: model:ir.ui.menu,name:ccima_dashboards.menu_dashboard_manager
+msgid "Manager Dashboard"
+msgstr "Tablero de Gerente"

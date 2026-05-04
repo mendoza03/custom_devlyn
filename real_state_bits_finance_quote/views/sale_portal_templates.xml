@@ -1,0 +1,220 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <template id="sale_order_portal_content_real_state_customs" name="Sale Template Inherit" inherit_id="sale.sale_order_portal_content">
+        <xpath expr="//section[@id='details']" position="after">
+            <section id="content-finance">
+                <div class="table-responsive">
+                    <table class="table" id="sale_finance_lines">
+                        <thead class="bg-100">
+                            <tr>
+                                <th class="text-start">Finance: </th>
+                                <t t-if="sale_order.finance_ids">
+                                    <t t-foreach="sale_order.finance_ids" t-as="finance">
+                                        <th class="text-start"> <span t-field="finance.name"/> </th>
+                                    </t>
+                                </t>
+                            </tr>
+                        </thead>
+                        <tbody class="sale_tbody">
+                            <tr>
+                                <td>% Discount</td>
+                                <t t-if="sale_order.financial_lines">
+                                    <t t-foreach="sale_order.financial_lines" t-as="lines">
+                                        <td> <span t-esc="lines.promotion_id.porcent * 100"/> </td>
+                                    </t>
+                                </t>
+                            </tr>
+                            <tr>
+                                <td>Finance in months:</td>
+                                <t t-if="sale_order.financial_lines">
+                                    <t t-foreach="sale_order.financial_lines" t-as="lines">
+                                        <td> <span t-field="lines.finance_months"/> </td>
+                                    </t>
+                                </t>
+                            </tr>
+                            <tr>
+                                <td>CAT</td>
+                                <t t-if="sale_order.finance_ids">
+                                    <t t-foreach="sale_order.finance_ids" t-as="line">
+                                        <td> <span t-esc="line.cat * 100"/>% </td>
+                                    </t>
+                                </t>
+                            </tr>
+                            <tr>
+                                <td>P.U. with discount:</td>
+                                <t t-if="sale_order.financial_lines">
+                                    <t t-foreach="sale_order.financial_lines" t-as="lines">
+                                        <td> <span t-field="lines.pu_discount" t-options='{"widget": "float", "precision": 2}'/> </td>
+                                    </t>
+                                </t>
+                            </tr>
+                            <tr>
+                                <td>Lot Price withour Discount:</td>
+                                <t t-if="sale_order.financial_lines">
+                                    <t t-foreach="sale_order.financial_lines" t-as="lines">
+                                        <t t-if="sale_order.order_line">
+                                            <td> <span t-field="sale_order.order_line[0].price_unit" t-options='{"widget": "float", "precision": 2}'/> </td>                                            
+                                        </t>
+                                    </t>
+                                </t>
+                            </tr>
+                            <tr>
+                                <td>Discount:</td>
+                                <t t-if="sale_order.financial_lines">
+                                    <t t-foreach="sale_order.financial_lines" t-as="lines">
+                                        <td> <span t-field="lines.discount_total" t-options='{"widget": "float", "precision": 2}'/> </td>
+                                    </t>
+                                </t>
+                            </tr>
+                            <tr>
+                                <td>Gradual Initial Investment:</td>
+                                <t t-if="sale_order.financial_lines">
+                                    <t t-foreach="sale_order.financial_lines" t-as="lines">
+                                        <td> <span t-field="lines.gradual_initial_investment" t-options='{"widget": "float", "precision": 2}'/> </td>
+                                    </t>
+                                </t>
+                            </tr>
+                            <tr>
+                                <td>% Hitch</td>
+                                <t t-if="sale_order.financial_lines">
+                                    <t t-foreach="sale_order.financial_lines" t-as="lines">
+                                        <td> <span t-esc="lines.hitch_porcent * 100"/>% </td>
+                                    </t>    
+                                </t>
+                            </tr>
+                            <tr>
+                                <td>Hitch</td>
+                                <t t-if="sale_order.financial_lines">
+                                    <t t-foreach="sale_order.financial_lines" t-as="lines">
+                                        <td> <span t-field="lines.hitch" t-options='{"widget": "float", "precision": 2}'/> </td>
+                                    </t>
+                                </t>
+                            </tr>
+                            <tr>
+                                <td>Amount Financial:</td>
+                                <t t-if="sale_order.financial_lines">
+                                    <t t-foreach="sale_order.financial_lines" t-as="lines">
+                                        <td> <span t-field="lines.amount_finance" t-options='{"widget": "float", "precision": 2}'/> </td>
+                                    </t>
+                                </t>
+                            </tr>
+                            <tr>
+                                <td>Monthly of 1 to 48</td>
+                                <t t-if="sale_order.financial_lines">
+                                    <t t-foreach="sale_order.financial_lines" t-as="lines">
+                                        <td> <span t-field="lines.financial_line_1" t-options='{"widget": "float", "precision": 2}'/> </td>
+                                    </t> 
+                                </t>
+                            </tr>
+                            <tr>
+                                <td>Monthly of 49 to 120</td>
+                                <t t-if="sale_order.financial_lines">
+                                    <t t-foreach="sale_order.financial_lines" t-as="lines">
+                                        <td> <span t-field="lines.financial_line_2" t-options='{"widget": "float", "precision": 2}'/> </td>
+                                    </t>
+                                </t>
+                            </tr>
+                            <tr>
+                                <td>Monthly of 121 to 180</td>
+                                <t t-if="sale_order.financial_lines">
+                                    <t t-foreach="sale_order.financial_lines" t-as="lines">
+                                        <td> <span t-field="lines.financial_line_3" t-options='{"widget": "float", "precision": 2}'/> </td>
+                                    </t>
+                                </t>
+                            </tr>
+                            <tr>
+                                <td>Monthly of 181 to 240</td>
+                                <t t-if="sale_order.financial_lines">
+                                    <t t-foreach="sale_order.financial_lines" t-as="lines">
+                                        <td> <span t-field="lines.financial_line_4" t-options='{"widget": "float", "precision": 2}'/> </td>
+                                    </t>
+                                </t>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </section>
+            <t t-if="sale_order.difer_hitch">
+                <div id="name-hitch" class="row">
+                    <h2 class="my-0 col-12 col-lg flex-grow-1 mb-1 mb-lg-0">
+                        Difered Hitch
+                    </h2>
+                </div>
+                <section id="difer-hitch">
+                    <div class="table-responsive">
+                        <table class="table">
+                            <thead class="bg-100">
+                                <th class="text-start">Finance: </th>
+                                <t t-if="sale_order.finance_ids">
+                                    <t t-foreach="sale_order.finance_ids" t-as="finance">
+                                        <th class="text-start"> <span t-field="finance.name"/> </th>
+                                    </t>
+                                </t>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>Amount Total Hitch</td>
+                                    <t t-if="sale_order.financial_lines">
+                                        <t t-foreach="sale_order.financial_lines" t-as="hitch">
+                                            <td> <span t-esc="hitch.hitch"  t-options='{"widget": "float", "precision": 2}' /></td>
+                                        </t>
+                                    </t>
+                                </tr>
+                                <tr>
+                                    <td>Months to Difer</td>
+                                    <t t-if="sale_order.hitch_ids">
+                                        <t t-foreach="sale_order.hitch_ids" t-as="hitch">
+                                            <td> <span t-field="hitch.months"/> </td>
+                                        </t>
+                                    </t>
+                                </tr>
+                                <tr>
+                                    <td>Amount per month</td>
+                                    <t t-if="sale_order.hitch_ids">
+                                        <t t-foreach="sale_order.hitch_ids" t-as="hitch">
+                                            <td> <span t-field="hitch.amount"  t-options='{"widget": "float", "precision": 2}'/> </td>
+                                        </t>
+                                    </t>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </section>
+            </t>
+            
+        </xpath>
+    </template>
+    
+    <template id="sale_order_portal_template_custmoms" name="add selection" inherit_id="sale.sale_order_portal_template">
+        <xpath expr="//main[@id='sign-dialog']//span" position="after">
+            <br/>
+            <span> Finance to Select</span>
+            <div>
+                <select class="form-select">
+                    <option selected="" disabled="" value=""> <span>Choose...</span> </option>
+                    <t t-foreach="sale_order.finance_ids" t-as="finance">
+                        <option t-att-value="finance.id"><t t-out="finance.name"/></option>
+                    </t>
+                </select>
+            </div>
+
+            <div>
+                <br/>
+                <label for="legal_status">Personería jurídica</label>
+                <select id="legal_status" class="form-control mt-1">
+                    <option value="">Select Personería jurídica</option>
+                </select>
+            </div>
+        </xpath>
+        <xpath expr="//div[hasclass('o_download_pdf')]" position="after">
+            <t t-if="sale_order.ebroshure_file">
+                <div class="o_download_pdf d-flex gap-1 flex-lg-column flex-xl-row">
+                    <div class="flex-grow-1">
+                        <a class="btn btn-secondary o_print_btn d-block" t-attf-href="/web/content/sale.order/{{sale_order.id}}/ebroshure_file/ebrosure.pdf?download=true" title="Download Ebrosure"><i class="fa fa-print"/> Download Ebrosure</a>
+                    </div>
+                </div>
+            </t>
+        </xpath>
+    </template>
+</odoo>

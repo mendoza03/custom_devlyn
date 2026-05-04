@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id="purchase_order_form" model="ir.ui.view">
+        <field name="name">purchase.order.view.form.inherit</field>
+        <field name="model">purchase.order</field>
+        <field name="inherit_id" ref="purchase.purchase_order_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//notebook" position="inside">
+                <page name="budget" string="Budget" invisible="not budget_id">
+                    <group>
+                        <group>
+                            <field name="budget_id"/>
+                        </group>
+                    </group>
+                </page>
+            </xpath>
+            <xpath expr="//page[@name='products']/field[@name='order_line']/list/field[@name='product_id']" position="after">
+                <field name="product_tmpl_id" column_invisible="1"/>
+                <field name="task_id" domain="[('type', '=', 'task'), ('budget_id', '=', parent.budget_id)]" invisible="not parent.budget_id" options="{'no_create': 1}"/>
+                <field name="concept_id" domain="[('type', '=', 'concept'), ('budget_id', '=', parent.budget_id), ('parent_id', '=', task_id)]" invisible="not parent.budget_id" readonly="not task_id" options="{'no_create': 1}"/>
+                <field name="budget_item_id" domain="[('type', '=', 'budget_item'), ('budget_id', '=', parent.budget_id), ('parent_id', '=', concept_id), ('product_id', '=', product_tmpl_id)]" invisible="not parent.budget_id" readonly="not concept_id or not product_id" options="{'no_create': 1}"/>
+            </xpath>
+        </field>
+    </record>
+
+</odoo>

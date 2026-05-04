@@ -1,0 +1,2 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_../extra-addons/addons-ccima/ccima_energy_../extra-addons/addons-ccima/ccima_energy,../extra-addons/addons-ccima/ccima_energy.../extra-addons/addons-ccima/ccima_energy,model_../extra-addons/addons-ccima/ccima_energy_../extra-addons/addons-ccima/ccima_energy,base.group_user,1,1,1,1

@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <data>
+        <record id="rent_term_form_view" model="ir.ui.view">
+            <field name="name">rent.term.form.view</field>
+            <field name="model">rent.term</field>
+            <field name="arch" type="xml">
+                <form>
+                    <sheet>
+                        <div class="oe_title">
+                            <label for="name"/>
+                            <h1>
+                                <field name="name" placeholder="e.g. Heavy Machinery Rental Agreement.."/>
+                            </h1>
+                        </div>
+                        <notebook>
+                            <page name="terms_and_conditions" string="Terms &amp; Conditions">
+                                <field name="description"/>
+                            </page>
+                        </notebook>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+        <record id="rent_term_tree_view" model="ir.ui.view">
+            <field name="name">rent.term.list.view</field>
+            <field name="model">rent.term</field>
+            <field name="arch" type="xml">
+                <list>
+                    <field name="name"/>
+                </list>
+            </field>
+        </record>
+        <record id="action_rent_term" model="ir.actions.act_window">
+            <field name="name">Rent Terms</field>
+            <field name="res_model">rent.term</field>
+            <field name="view_mode">list,form</field>
+        </record>
+    </data>
+</odoo>

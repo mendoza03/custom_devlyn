@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <record id="action_export_property_sale_statement" model="ir.actions.server">
+        <field name="name">Download Sale Statement (XLSX)</field>
+        <field name="model_id" ref="your_module.model_your_model"/> <!-- Reemplaza por tu modelo -->
+        <field name="binding_model_id" ref="your_module.model_your_model"/>
+        <field name="state">code</field>
+        <field name="code">action = env['your.model'].browse(record.id).export_xlsx()</field>
+    </record>
+</odoo>

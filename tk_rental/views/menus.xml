@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <data>
+        <menuitem id="main_menu_rental" name="Rental"
+                  web_icon="tk_rental,static/description/icon.png"/>
+
+        <menuitem id="menu_rental_dashboard"
+                  name="Dashboard"
+                  parent="main_menu_rental"
+                  action="action_rental_dashboard"
+                  sequence="0"/>
+
+        <menuitem id="menu_rent_order"
+                  name="Contracts"
+                  parent="main_menu_rental"
+                  action="action_rent_order"
+                  sequence="1"/>
+
+        <menuitem id="menu_customer"
+                  name="Customers"
+                  parent="main_menu_rental"
+                  action="contacts.action_contacts"
+                  sequence="2"/>
+
+        <menuitem id="menu_action_delivery_order"
+                  name="Delivery Orders"
+                  parent="main_menu_rental"
+                  action="action_delivery_order"
+                  sequence="3"/>
+
+        <menuitem id="menu_action_return_order"
+                  name="Return Orders"
+                  parent="main_menu_rental"
+                  action="action_return_order"
+                  sequence="4"/>
+
+        <menuitem id="menu_rent_invoices"
+                  name="Invoices"
+                  parent="main_menu_rental"
+                  action="action_rent_invoices"
+                  sequence="5"/>
+
+        <menuitem id="menu_rent_product"
+                  name="Rental Equipments"
+                  parent="main_menu_rental"
+                  action="action_rent_product"
+                  sequence="6"/>
+
+        <menuitem id="menu_rent_reports" name="Reporting" parent="main_menu_rental" sequence="7"/>
+        <menuitem id="menu_renting_items_report"
+                  name="Renting Items History"
+                  parent="menu_rent_reports"
+                  action="action_renting_items_list_menu"
+                  sequence="1"/>
+        <menuitem id="menu_equipment_odometer_report"
+                  name="Equipment Odometer History"
+                  parent="menu_rent_reports"
+                  action="action_equipment_odometer_report_list_menu"
+                  sequence="2"/>
+
+        <menuitem id="menu_rent_term"
+                  name="Terms Templates"
+                  parent="main_menu_rental"
+                  action="action_rent_term"
+                  sequence="8"/>
+    </data>
+</odoo>

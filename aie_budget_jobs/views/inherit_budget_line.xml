@@ -1,0 +1,21 @@
+<odoo>
+    <data>
+        <record id="master_budget_line_view_tree_inherit_product_id" model="ir.ui.view">
+            <field name="name">master.budget.line.tree.inherit.product_id</field>
+            <field name="model">master.budget.line</field>
+            <field name="inherit_id" ref="aie_master_budget.master_budget_line_view_tree"/>
+            <field name="arch" type="xml">
+                <field name="product_id" position="replace">
+                    <field name="product_id"
+                           required="type in ['budget_item', 'concept']"
+                           invisible="type not in ['budget_item', 'concept']"/>
+                </field>
+                <field name="product_uom" position="replace">
+                    <field name="product_uom"
+                           required="type in ['budget_item', 'concept']"
+                           invisible="type not in ['budget_item', 'concept']"/>
+                </field>
+            </field>
+        </record>
+    </data>
+</odoo>

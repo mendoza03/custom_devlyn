@@ -1,0 +1,191 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <data>
+        <record id="renting_items_form_view" model="ir.ui.view">
+            <field name="name">renting.items.form.view</field>
+            <field name="model">renting.items</field>
+            <field name="arch" type="xml">
+                <form>
+                    <sheet>
+                        <group>
+                            <group>
+                                <field name="product_ids" invisible="1"/>
+                            </group>
+                            <group string="Equipment Contract Durations">
+                                <field name="start_date" required="1"/>
+                                <field name="return_date" required="1"/>
+                                <field name="total_hours" invisible="1"/>
+                                <field name="total_contract_days"/>
+                                <field name="status" invisible="1"/>
+                            </group>
+                        </group>
+                        <group string="Equipment Details">
+                            <group>
+                                <field name="product_id" options="{'no_create': True, 'no_create_edit': True}"/>
+                                <field name="serial_number" readonly="1" force_save="1"/>
+                                <field name="description"/>
+                                <field name="rent_order_id" invisible="1"/>
+                            </group>
+                            <group>
+                                <field name="product_qty"/>
+                                <field name="equipment_renting_info_id" required="1"
+                                       options="{'no_create': True, 'no_create_edit': True}"/>
+                                <label for="renting_amount" string="Renting Amount"/>
+                                <div class="address_format">
+                                    <field name="renting_amount" style="width: auto;"/>
+                                    <strong>&#160;&#160;Unit&#160;&#160;</strong>
+                                    <field name="range" style="margin-left: 15px; width: auto;"/>
+                                </div>
+                                <field name="renting_days"/>
+                                <field name="total_day_diff"/>
+                                <field name="company_id" invisible="1"/>
+                                <field name="currency_id" invisible="1"/>
+                            </group>
+                        </group>
+                        <group>
+                            <group string="Is Any Extra Hours ?">
+                                <field name="is_any_extra_hours"/>
+                                <field name="extra_hours" invisible="is_any_extra_hours == False"/>
+                                <field name="extra_hour_price" invisible="is_any_extra_hours == False"/>
+                            </group>
+                            <group string="Total Estimations">
+                                <field name="rent_amount"/>
+                                <field name="extra_hour_amount" invisible="is_any_extra_hours == False"/>
+                                <field name="rent_per_unit"/>
+                                <field name="total_amount"/>
+                            </group>
+                        </group>
+                        <notebook>
+                            <page name="renting_items_image" string="Renting Items Images">
+                                <field name="renting_items_image_ids" nolabel="1">
+                                    <form>
+                                        <sheet>
+                                            <div class="oe_title float-left">
+                                                <label for="name"/>
+                                                <h1>
+                                                    <field name="name" placeholder="e.g. Name"/>
+                                                </h1>
+                                            </div>
+                                            <div style="width: 40%; height: 40%;" class="float-right">
+                                                <field name="avatar" style="width: 40%; height: 40%;"
+                                                       class="img-thumbnail float-right" widget="image" required="1"/>
+                                            </div>
+                                        </sheet>
+                                    </form>
+                                    <kanban string="Renting Images">
+                                        <field name="id"/>
+                                        <field name="name"/>
+                                        <field name="avatar"/>
+                                        <templates>
+                                            <t t-name="kanban-box">
+                                                <div class="card oe_kanban_global_click p-0 border-0">
+                                                    <div class="row">
+                                                        <div class="col-8">
+                                                            <strong>
+                                                                <field name="name"/>
+                                                            </strong>
+                                                        </div>
+                                                        <div class="col-4 text-end">
+                                                            <!-- below 100 Kb: good -->
+                                                            <t t-if="record.avatar.raw_value.length &lt; 100*1000">
+                                                                <t t-set="size_status" t-value="'text-bg-success'"/>
+                                                                <t t-set="message">Acceptable file size</t>
+                                                            </t>
+                                                            <!-- below 1000 Kb: decent -->
+                                                            <t t-elif="record.avatar.raw_value.length &lt; 1000*1000">
+                                                                <t t-set="size_status" t-value="'text-bg-warning'"/>
+                                                                <t t-set="message">Huge file size. The image
+                                                                    should be optimized/reduced.
+                                                                </t>
+                                                            </t>
+                                                            <!-- above 1000 Kb: bad -->
+                                                            <t t-else="1">
+                                                                <t t-set="size_status" t-value="'text-bg-danger'"/>
+                                                                <t t-set="message">Optimization required! Reduce the
+                                                                    image size or increase your compression settings.
+                                                                </t>
+                                                            </t>
+                                                            <span t-attf-class="badge #{size_status} o_product_image_size"
+                                                                  t-esc="record.avatar.value" t-att-title="message"/>
+                                                        </div>
+                                                    </div>
+                                                    <hr class="mb-1 mt-1"/>
+                                                    <div class="o_squared_image">
+                                                        <img class="card-img-top"
+                                                             style="height:223px;object-fit: cover;"
+                                                             t-att-src="kanban_image('renting.items.image', 'avatar', record.id.raw_value)"
+                                                             t-att-alt="record.name.value"/>
+                                                    </div>
+                                                </div>
+                                            </t>
+                                        </templates>
+                                    </kanban>
+                                </field>
+                            </page>
+                        </notebook>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+        <record id="renting_items_tree_view" model="ir.ui.view">
+            <field name="name">renting.items.list.view</field>
+            <field name="model">renting.items</field>
+            <field name="arch" type="xml">
+                <list>
+                    <field name="product_id"/>
+                    <field name="serial_number"/>
+                    <field name="start_date"/>
+                    <field name="return_date"/>
+                    <field name="product_qty"/>
+                    <field name="equipment_renting_info_id"/>
+                    <field name="renting_amount"/>
+                    <field name="range" string="Unit"/>
+                    <field name="rent_amount"/>
+                    <field name="extra_hour_amount"/>
+                    <field name="rent_per_unit"/>
+                    <field name="total_amount"/>
+                    <field name="company_id" column_invisible="True"/>
+                    <field name="currency_id" column_invisible="True"/>
+                </list>
+            </field>
+        </record>
+
+        <record id="renting_items_menu_tree_view" model="ir.ui.view">
+            <field name="name">renting.items.menu.list.view</field>
+            <field name="model">renting.items</field>
+            <field name="arch" type="xml">
+                <list create="False" edit="False" duplicate="False">
+                    <field name="product_id"/>
+                    <field name="serial_number"/>
+                    <field name="start_date"/>
+                    <field name="return_date"/>
+                    <field name="product_qty"/>
+                    <field name="equipment_renting_info_id"/>
+                    <field name="renting_amount"/>
+                    <field name="range" string="Unit"/>
+                    <field name="rent_amount"/>
+                    <field name="extra_hour_amount"/>
+                    <field name="rent_per_unit"/>
+                    <field name="total_amount"/>
+                    <field name="company_id" column_invisible="True"/>
+                    <field name="currency_id" column_invisible="True"/>
+                </list>
+            </field>
+        </record>
+
+        <record id="action_renting_items" model="ir.actions.act_window">
+            <field name="name">Renting Items</field>
+            <field name="res_model">renting.items</field>
+            <field name="view_mode">list,form</field>
+        </record>
+
+        <record id="action_renting_items_list_menu" model="ir.actions.act_window">
+            <field name="name">Renting Items</field>
+            <field name="res_model">renting.items</field>
+            <field name="view_mode">list</field>
+            <field name="view_ids"
+                   eval="[(5, 0, 0),
+                  (0, 0, {'view_mode': 'list', 'view_id': ref('tk_rental.renting_items_menu_tree_view')})]"/>
+        </record>
+    </data>
+</odoo>

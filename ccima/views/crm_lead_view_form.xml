@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>    
+    <record id="crm_lead_view_form_inherit_ccima" model="ir.ui.view">
+        <field name="name">crm.view.form.inherit</field>
+        <field name="model">crm.lead</field>
+        <field name="inherit_id" ref="crm.crm_lead_view_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//page[@name='extra']//field[@name='medium_id']" position="after">
+                <field name="Recommended_by"/>
+            </xpath>
+
+            <xpath expr="//sheet//field[@name='user_id']" position="before">
+                <field name="legal_personality"/>
+            </xpath>
+
+            <xpath expr="//page[@name='extra']//field[@name='medium_id']" position="attributes">
+                <attribute name="options">{'no_create': True}</attribute>
+            </xpath>
+            
+            <xpath expr="//page[@name='lead']//field[@name='medium_id']" position="attributes">
+                <attribute name="options">{'no_create': True}</attribute>
+            </xpath>
+
+            <xpath expr="//field[@name='user_id']" position="after">
+                <field name="has_saleman_assigner_group" invisible="True"/>
+            </xpath>
+
+            <xpath expr="//field[@name='user_id']" position="attributes">
+                <attribute name="readonly">not has_saleman_assigner_group</attribute>
+            </xpath>
+
+            <xpath expr="//notebook" position="inside">
+                <page string="Documents">
+                    <field name="project_worksite_id" invisible="True"/>
+                    <field name="attachment_line_ids" class="o_website_sale_image_list"
+                        mode="kanban" add-label="Add a Document" nolabel="1"/>
+                </page>
+            </xpath>
+        </field>
+    </record>
+</odoo>

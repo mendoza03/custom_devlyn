@@ -1,0 +1,242 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    
+    <!-- List View -->
+    <record id="view_sale_goal_tree" model="ir.ui.view">
+        <field name="name">sale.goal.tree</field>
+        <field name="model">sale.goal</field>
+        <field name="arch" type="xml">
+            <list string="Metas de Ventas" default_order="company_id, year desc, position, user_id">
+                <field name="name"/>
+                <field name="company_id" groups="base.group_multi_company"/>
+                <field name="year"/>
+                <field name="position"/>
+                <field name="user_id"/>
+                <field name="parent_id"/>
+                <field name="currency_id" column_invisible="1"/>
+                <field name="annual_amount" sum="Total" widget="monetary"/>
+                <field name="annual_units" sum="Total"/>
+                <field name="annual_leads" sum="Total"/>
+                <field name="annual_prospect" sum="Total"/>
+                <field name="annual_meeting" sum="Total"/>
+                <field name="state" widget="badge" decoration-info="state == 'draft'" decoration-success="state == 'active'" decoration-muted="state == 'done'"/>
+            </list>
+        </field>
+    </record>
+    
+    <!-- Week List View -->
+    <record id="view_sale_goal_week_tree" model="ir.ui.view">
+        <field name="name">sale.goal.week.tree</field>
+        <field name="model">sale.goal.week</field>
+        <field name="arch" type="xml">
+            <list string="Semanas" create="false" delete="false" edit="false">
+                <field name="week_name"/>
+                <field name="period_id"/>
+                <field name="start_date"/>
+                <field name="end_date"/>
+                <field name="work_days"/>
+                <field name="weekly_leads"/>
+                <field name="weekly_prospect"/>
+                <field name="weekly_meeting"/>
+                <field name="daily_leads"/>
+                <field name="daily_prospect"/>
+            </list>
+        </field>
+    </record>
+    
+    <!-- Week Action -->
+    <record id="action_sale_goal_week" model="ir.actions.act_window">
+        <field name="name">Semanas</field>
+        <field name="res_model">sale.goal.week</field>
+        <field name="view_mode">list</field>
+        <field name="domain">[('goal_id', '=', active_id)]</field>
+        <field name="context">{'default_goal_id': active_id}</field>
+    </record>
+    
+    <!-- Form View -->
+    <record id="view_sale_goal_form" model="ir.ui.view">
+        <field name="name">sale.goal.form</field>
+        <field name="model">sale.goal</field>
+        <field name="arch" type="xml">
+            <form string="Meta de Ventas">
+                <header>
+                    <button name="action_generate_periods" string="Generar Períodos" type="object" 
+                            class="oe_highlight" invisible="state != 'draft' or period_ids"/>
+                    <button name="action_recalculate" string="Recalcular" type="object" 
+                            invisible="state != 'active'"/>
+                    <button name="action_close" string="Cerrar Meta" type="object" 
+                            class="oe_highlight" invisible="state != 'active'" 
+                            confirm="¿Está seguro de cerrar esta meta? No podrá editarla después."/>
+                    <field name="state" widget="statusbar" statusbar_visible="draft,active,done"/>
+                </header>
+                <sheet>
+                    <div class="oe_button_box" name="button_box">
+                        <button name="action_open_parent" type="object" 
+                                class="oe_stat_button" icon="fa-level-up" 
+                                invisible="not parent_id">
+                            <div class="o_field_widget o_stat_info">
+                                <span class="o_stat_text">Meta</span>
+                                <span class="o_stat_text">Padre</span>
+                            </div>
+                        </button>
+                        <button name="action_open_children" type="object" 
+                                class="oe_stat_button" icon="fa-users" 
+                                invisible="child_count == 0">
+                            <field name="child_count" widget="statinfo" string="Metas Hijas"/>
+                        </button>
+                        <button type="action" name="%(action_sale_goal_week)d" 
+                                class="oe_stat_button" icon="fa-calendar" 
+                                invisible="week_count == 0"
+                                context="{'default_goal_id': id, 'search_default_goal_id': id}">
+                            <field name="week_count" widget="statinfo" string="Semanas"/>
+                        </button>
+                    </div>
+                    
+                    <div class="oe_title">
+                        <h1>
+                            <field name="name" readonly="1"/>
+                        </h1>
+                    </div>
+                    
+                    <group>
+                        <group string="Información General">
+                            <field name="company_id" options="{'no_create': True}" groups="base.group_multi_company"/>
+                            <field name="year"/>
+                            <field name="position"/>
+                            <field name="user_id" options="{'no_create': True}"/>
+                        </group>
+                        <group string="Jerarquía y Meta">
+                            <field name="parent_id" options="{'no_create': True}"/>
+                            <field name="currency_id" invisible="1"/>
+                            <field name="annual_amount" widget="monetary"/>
+                        </group>
+                    </group>
+                    
+                    <notebook>
+                        <!-- Page 1: ANUAL -->
+                        <page name="annual" string="ANUAL">
+                            <group>
+                                <group string="Objetivos Anuales">
+                                    <field name="annual_units"/>
+                                    <field name="annual_leads"/>
+                                    <field name="annual_prospect"/>
+                                    <field name="annual_meeting"/>
+                                </group>
+                                <group string="Embudo de Conversión Anual">
+                                    <field name="annual_opportunity"/>
+                                    <field name="annual_reserved"/>
+                                    <field name="annual_closed"/>
+                                </group>
+                            </group>
+                        </page>
+                        
+                        <!-- Page 2: MENSUAL -->
+                        <page name="monthly" string="MENSUAL">
+                            <field name="period_ids" nolabel="1" 
+                                   readonly="state == 'done'">
+                                <list editable="bottom" create="false" delete="false">
+                                    <field name="period_name" readonly="1"/>
+                                    <field name="currency_id" column_invisible="1"/>
+                                    <field name="monthly_amount" widget="monetary" sum="Total"/>
+                                    <field name="monthly_units" readonly="1" sum="Total"/>
+                                    <field name="monthly_leads" readonly="1" sum="Total"/>
+                                    <field name="monthly_prospect" readonly="1" sum="Total"/>
+                                    <field name="monthly_meeting" readonly="1" sum="Total"/>
+                                    <field name="monthly_opportunity" readonly="1" sum="Total"/>
+                                    <field name="monthly_reserved" readonly="1" sum="Total"/>
+                                    <field name="monthly_closed" readonly="1" sum="Total"/>
+                                    <field name="week_count" readonly="1"/>
+                                </list>
+                            </field>
+                        </page>
+                        
+                        <!-- Page 3: SEMANAL -->
+                        <page name="weekly" string="SEMANAL">
+                            <field name="week_ids" nolabel="1" 
+                                   readonly="state == 'done'">
+                                <list editable="bottom" create="false" delete="false">
+                                    <field name="period_id" column_invisible="1"/>
+                                    <field name="week_name" readonly="1"/>
+                                    <field name="start_date" readonly="1"/>
+                                    <field name="end_date" readonly="1"/>
+                                    <field name="work_days" readonly="1"/>
+                                    <field name="currency_id" column_invisible="1"/>
+                                    <field name="weekly_amount" widget="monetary" readonly="1"/>
+                                    <field name="weekly_leads" sum="Total"/>
+                                    <field name="weekly_prospect" readonly="1" sum="Total"/>
+                                    <field name="weekly_meeting" readonly="1" sum="Total"/>
+                                    <field name="weekly_opportunity" readonly="1" sum="Total"/>
+                                    <field name="weekly_reserved" readonly="1" sum="Total"/>
+                                    <field name="weekly_closed" readonly="1" sum="Total"/>
+                                </list>
+                            </field>
+                        </page>
+                        
+                        <!-- Page 4: DIARIO -->
+                        <page name="daily" string="DIARIO">
+                            <field name="week_ids" nolabel="1" readonly="1">
+                                <list create="false" delete="false" edit="false">
+                                    <field name="week_name"/>
+                                    <field name="work_days" string="Días Lab..."/>
+                                    <field name="currency_id" column_invisible="1"/>
+                                    <field name="daily_amount" widget="monetary" string="Importe/Día"/>
+                                    <field name="daily_leads" string="Leads/Día"/>
+                                    <field name="daily_prospect" string="Prospect..."/>
+                                    <field name="daily_meeting" string="Cita/Día"/>
+                                    <field name="daily_opportunity" string="Oportunidad/Día"/>
+                                    <field name="daily_reserved" string="Apartado/Día"/>
+                                    <field name="daily_closed" string="Cierre/Día"/>
+                                </list>
+                            </field>
+                        </page>
+                    </notebook>
+                </sheet>
+            </form>
+        </field>
+    </record>
+    
+    <!-- Search View -->
+    <record id="view_sale_goal_search" model="ir.ui.view">
+        <field name="name">sale.goal.search</field>
+        <field name="model">sale.goal</field>
+        <field name="arch" type="xml">
+            <search string="Buscar Metas">
+                <field name="name"/>
+                <field name="user_id"/>
+                <field name="year"/>
+                <field name="position"/>
+                <field name="parent_id"/>
+                <separator/>
+                <filter string="Borradores" name="draft" domain="[('state', '=', 'draft')]"/>
+                <filter string="Activas" name="active" domain="[('state', '=', 'active')]"/>
+                <filter string="Cerradas" name="done" domain="[('state', '=', 'done')]"/>
+                <separator/>
+                <group expand="0" string="Agrupar Por">
+                    <filter string="Empresa" name="group_company" context="{'group_by': 'company_id'}"/>
+                    <filter string="Año" name="group_year" context="{'group_by': 'year'}"/>
+                    <filter string="Posición" name="group_position" context="{'group_by': 'position'}"/>
+                    <filter string="Estado" name="group_state" context="{'group_by': 'state'}"/>
+                    <filter string="Meta Padre" name="group_parent" context="{'group_by': 'parent_id'}"/>
+                </group>
+            </search>
+        </field>
+    </record>
+    
+    <!-- Action -->
+    <record id="action_sale_goal" model="ir.actions.act_window">
+        <field name="name">Metas de Ventas</field>
+        <field name="res_model">sale.goal</field>
+        <field name="view_mode">list,form</field>
+        <field name="context">{'search_default_active': 1}</field>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+                Crear una nueva meta de ventas
+            </p>
+            <p>
+                Define metas anuales por importe y el sistema calculará automáticamente
+                los objetivos de leads, prospectos, citas y demás etapas del embudo de ventas.
+            </p>
+        </field>
+    </record>
+    
+</odoo>

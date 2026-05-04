@@ -1,0 +1,182 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <data>
+        <template id="return_order_details_report_template">
+            <t t-call="web.html_container">
+                <t t-foreach="docs" t-as="order">
+                    <t t-call="web.external_layout">
+                        <div class="page">
+                            <div id="add" class="row mt32 mb32">
+                                <div class="col-4">
+                                    <strong>Shipping Address:</strong>
+                                    <br/>
+                                    <span t-field="order.shipping_street"/>
+                                    <br/>
+                                    <span t-field="order.shipping_street2"/>
+                                    <br/>
+                                    <span t-field="order.shipping_city"/>&#160;
+                                    <span t-field="order.shipping_state_id"/>&#160;
+                                    <span t-field="order.shipping_zip"/>&#160;
+                                    <br/>
+                                    <span t-field="order.shipping_country_id"/>
+                                </div>
+                                <div class="col-4">
+                                    <strong>Billing Address:</strong>
+                                    <br/>
+                                    <span t-field="order.billing_street"/>
+                                    <br/>
+                                    <span t-field="order.billing_street2"/>
+                                    <br/>
+                                    <span t-field="order.billing_city"/>&#160;
+                                    <span t-field="order.billing_state_id"/>&#160;
+                                    <span t-field="order.billing_zip"/>&#160;
+                                    <br/>
+                                    <span t-field="order.billing_country_id"/>
+                                </div>
+                                <div class="col-4">
+                                    <strong>Contract Duration:</strong>
+                                    <br/>
+                                    <strong>Start Date</strong>
+                                    <br/>
+                                    <span t-field="order.start_date"/>
+                                    <br/>
+                                    <strong>Return Date</strong>
+                                    <br/>
+                                    <span t-field="order.return_date"/>
+                                </div>
+                            </div>
+                            <br/>
+                            <div id="information" class="row mt32 mb32">
+                                <div class="col-4" t-if="order.order_number" name="order_number">
+                                    <strong>Order Number</strong>
+                                    <p class="m-0" t-field="order.order_number"/>
+                                </div>
+                                <div class="col-4" t-if="order.customer_id" name="customer_id">
+                                    <strong>Customer</strong>
+                                    <p class="m-0" t-field="order.customer_id"/>
+                                </div>
+                                <div class="col-4" t-if="order.responsible_id" name="responsible_id">
+                                    <strong>Responsible</strong>
+                                    <p class="m-0" t-field="order.responsible_id"/>
+                                </div>
+                            </div>
+                            <br/>
+                            <table class="table table-sm o_main_table table-borderless mt-4" style="font-size: 12px;">
+                                <tr style="border-bottom: 1px solid darkgray;">
+                                    <td style="text-align: left; padding: 2px;">
+                                        <strong>Equipment</strong>
+                                    </td>
+                                    <td style="text-align: right; padding: 2px;">
+                                        <strong>Qty</strong>
+                                    </td>
+                                    <td style="text-align: right; padding: 2px;">
+                                        <strong>Delivery Order</strong>
+                                    </td>
+                                    <td style="text-align: left; padding: 2px;">
+                                        <strong>Status</strong>
+                                    </td>
+                                    <td style="text-align: right; padding: 2px;">
+                                        <strong>Return Damage Charges</strong>
+                                    </td>
+                                </tr>
+                                <t t-foreach="order.equipment_delivery_ids" t-as="equipment">
+                                    <tr style="border-bottom: 1px solid darkgray;">
+                                        <td style="text-align: left; padding: 2px;">
+                                            <span t-field="equipment.product_id"/>
+                                        </td>
+                                        <td style="text-align: right; padding: 2px;">
+                                            <span t-field="equipment.product_qty"/>
+                                        </td>
+                                        <td style="text-align: right; padding: 2px;">
+                                            <span t-field="equipment.deliver_order_id"/>
+                                        </td>
+                                        <td style="text-align: left; padding: 2px;">
+                                            <span t-field="equipment.state"/>
+                                        </td>
+                                        <td style="text-align: right; padding: 2px;">
+                                            <span t-field="equipment.return_charge"/>
+                                        </td>
+                                    </tr>
+                                </t>
+                                <tr>
+                                    <td colspan="4">
+                                    </td>
+                                    <td style="text-align: right;padding-top: 1rem;">
+                                        <strong>Total</strong>
+                                        <span t-field="order.total_damage_charge"/>
+                                    </td>
+                                </tr>
+                            </table>
+                            <p style="page-break-after: always;"/>
+                            <table class="table table-bordered table-sm" t-if="order.equipment_delivery_ids">
+                                <tr>
+                                    <td style="text-align: center; font-size: 12px; background-color: #F8F8F8;"
+                                        colspan="100%">
+                                        <strong>Equipment Images</strong>
+                                    </td>
+                                </tr>
+                                <t t-foreach="order.equipment_delivery_ids" t-as="equip_delivery">
+                                    <tr>
+                                        <td colspan="100%">
+                                            <span t-field="equip_delivery.product_id"/>
+                                        </td>
+                                    </tr>
+                                    <t t-set="ap_tag" t-value="str('&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td&gt;')"/>
+                                    <t t-set="img_count" t-value="0"/>
+                                    <t t-if="equip_delivery.equipment_delivery_image_ids">
+                                        <tr>
+                                            <td colspan="100%">
+                                                <t t-foreach="equip_delivery.equipment_delivery_image_ids" t-as="img">
+                                                    <t t-set="img_count" t-value="img_count + 1"/>
+                                                    <div style="display: inline-block;text-align:center;">
+                                                        <t t-if="img.avatar">
+                                                            <img t-att-src="image_data_uri(img.avatar)"
+                                                                 style="width: 160px; height: 160px;"/>
+                                                        </t>
+                                                        <h6>
+                                                            <span t-field="img.name"/>
+                                                        </h6>
+                                                    </div>
+                                                    <t t-if="img_count % 5 == 0">
+                                                        <t t-raw="ap_tag"/>
+                                                    </t>
+                                                </t>
+                                            </td>
+                                        </tr>
+                                    </t>
+                                </t>
+                            </table>
+                            <p style="page-break-after:always;"/>
+                            <table class="table table-bordered table-sm" style="width: 100%;" t-if="order.description">
+                                <tr>
+                                    <td style="text-align: center; font-size: 12px; background-color: #F8F8F8;">
+                                        <strong>Terms &amp; Conditions</strong>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <span t-field="order.rent_term_id"/>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <span t-field="order.description"/>
+                                    </td>
+                                </tr>
+                            </table>
+                        </div>
+                    </t>
+                </t>
+            </t>
+        </template>
+    </data>
+    <record id="action_return_order_details_report_template" model="ir.actions.report">
+        <field name="name">Return Order Details</field>
+        <field name="model">rent.order</field>
+        <field name="report_type">qweb-pdf</field>
+        <field name="report_name">tk_rental.return_order_details_report_template</field>
+        <field name="report_file">tk_rental.return_order_details_report_template</field>
+        <field name="binding_model_id" ref="model_rent_order"/>
+        <field name="binding_type">report</field>
+    </record>
+</odoo>

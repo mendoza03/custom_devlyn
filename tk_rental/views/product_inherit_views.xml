@@ -1,0 +1,365 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <data>
+        <!--product inherit view-->
+        <record id="rent_product_form_view" model="ir.ui.view">
+            <field name="name">rent.product.form.view</field>
+            <field name="model">product.product</field>
+            <field name="inherit_id" ref="product.product_normal_form_view"/>
+            <field name="arch" type="xml">
+                <xpath expr="//form/header" position="inside">
+                    <field name="maintenance_equipment_id" invisible="1"/>
+                    <button string="Create Maintenance" name="action_create_maintenance" type="object"
+                            class="btn-primary" confirm="Are you sure you want to create maintenance"/>
+                </xpath>
+                <xpath expr="//button[@name='action_open_documents']" position="before">
+                    <div class="oe_button_box" name="button_box">
+                        <button class="oe_stat_button" type="object" name="action_equipment_hours_views"
+                                icon="fa-clock-o">
+                            <div class="o_stat_info">
+                                <span class="o_stat_value">
+                                    <field name="hours_count"/>
+                                </span>
+                                <span class="o_stat_text">Total Hours</span>
+                            </div>
+                        </button>
+                        <button class="oe_stat_button" type="object" name="action_equipment_odometer_views"
+                                icon="fa-dashboard">
+                            <div class="o_stat_info">
+                                <span class="o_stat_value">
+                                    <field name="odometer_count"/>
+                                </span>
+                                <span class="o_stat_text">Odometer</span>
+                            </div>
+                        </button>
+                        <button class="oe_stat_button" type="object" name="action_maintenances_view" icon="fa-gears">
+                            <div class="o_stat_info">
+                                <span class="o_stat_value">
+                                    <field name="maintenance_count"/>
+                                </span>
+                                <span class="o_stat_text">Equip Maintenances</span>
+                            </div>
+                        </button>
+                        <button class="oe_stat_button" type="object" name="action_maintenances_request_view"
+                                icon="fa-wrench">
+                            <div class="o_stat_info">
+                                <span class="o_stat_value">
+                                    <field name="request_count"/>
+                                </span>
+                                <span class="o_stat_text">Maintenances Reqs</span>
+                            </div>
+                        </button>
+                    </div>
+                </xpath>
+                <xpath expr="//label[@for='purchase_ok']" position="after">
+                    <span class="d-inline-block">
+                        <field name="can_be_rental"/>
+                        <label for="can_be_rental"/>
+                    </span>
+                    <span class="d-inline-block">
+                        <field name="is_vehicle"/>
+                        <label for="is_vehicle"/>
+                    </span>
+                </xpath>
+                <xpath expr="//field[@name='default_code']" position="after">
+                    <field name="serial_number"/>
+                    <label for="last_odometer_val" invisible="not is_vehicle"/>
+                    <div class="o_row" invisible="not is_vehicle">
+                        <field name="last_odometer_val"/>
+                        <field name="odometer_unit" required="is_vehicle" string="Odometer Unit"/>
+                    </div>
+                    <field name="maintenance_hours"/>
+                </xpath>
+                <xpath expr="//field[@name='serial_number']" position="attributes">
+                    <attribute name="required">can_be_rental == True</attribute>
+                </xpath>
+                <xpath expr="//page[@name='general_information']" position="after">
+                    <page name="pricing_details" string="Pricing Details">
+                        <field name="equipment_renting_info_ids" nolabel="1">
+                            <form>
+                                <sheet>
+                                    <div class="oe_title">
+                                        <label for="rate_name"/>
+                                        <h1>
+                                            <field name="rate_name" placeholder="e.g. Name"/>
+                                        </h1>
+                                    </div>
+                                    <group>
+                                        <group>
+                                            <field name="rate_name"/>
+                                            <field name="renting_day"/>
+                                            <field name="rate"/>
+                                        </group>
+                                        <group>
+                                            <field name="range"/>
+                                            <field name="renting_hours"/>
+                                            <field name="extra_hour_price"/>
+                                            <field name="company_id" invisible="1"/>
+                                            <field name="currency_id" invisible="1"/>
+                                        </group>
+                                    </group>
+                                </sheet>
+                            </form>
+                            <list editable="bottom">
+                                <field name="rate_name"/>
+                                <field name="range"/>
+                                <field name="renting_day"/>
+                                <field name="renting_hours"/>
+                                <field name="rate"/>
+                                <field name="extra_hour_price"/>
+                                <field name="company_id" column_invisible="True"/>
+                                <field name="currency_id" column_invisible="True"/>
+                            </list>
+                        </field>
+                    </page>
+                    <page name="depreciation" string="Depreciation">
+                        <group>
+                            <group>
+                                <field name="life_span"/>
+                                <field name="equipment_value"/>
+                            </group>
+                            <group>
+                                <field name="date_of_purchase"/>
+                                <field name="starting_profit"/>
+                            </group>
+                        </group>
+                    </page>
+                    <page name="equipment_images" string="Equipment Images">
+                        <field name="equipment_image_ids" nolabel="1">
+                            <form>
+                                <sheet>
+                                    <div class="oe_title float-left">
+                                        <label for="name"/>
+                                        <h1>
+                                            <field name="name" placeholder="e.g. Name"/>
+                                        </h1>
+                                    </div>
+                                    <div style="width: 40%; height: 40%;" class="float-right">
+                                        <field name="avatar" style="width: 40%; height: 40%;"
+                                               class="img-thumbnail float-right" widget="image" required="1"/>
+                                    </div>
+                                </sheet>
+                            </form>
+                            <kanban string="Equipment Images">
+                                <field name="id"/>
+                                <field name="name"/>
+                                <field name="avatar"/>
+                                <templates>
+                                    <t t-name="kanban-box">
+                                        <div class="card oe_kanban_global_click p-0 border-0">
+                                            <div class="row">
+                                                <div class="col-8">
+                                                    <strong>
+                                                        <field name="name"/>
+                                                    </strong>
+                                                </div>
+                                                <div class="col-4 text-end">
+                                                    <!-- below 100 Kb: good -->
+                                                    <t t-if="record.avatar.raw_value.length &lt; 100*1000">
+                                                        <t t-set="size_status" t-value="'text-bg-success'"/>
+                                                        <t t-set="message">Acceptable file size</t>
+                                                    </t>
+                                                    <!-- below 1000 Kb: decent -->
+                                                    <t t-elif="record.avatar.raw_value.length &lt; 1000*1000">
+                                                        <t t-set="size_status" t-value="'text-bg-warning'"/>
+                                                        <t t-set="message">Huge file size. The image
+                                                            should be optimized/reduced.
+                                                        </t>
+                                                    </t>
+                                                    <!-- above 1000 Kb: bad -->
+                                                    <t t-else="1">
+                                                        <t t-set="size_status" t-value="'text-bg-danger'"/>
+                                                        <t t-set="message">Optimization required! Reduce the
+                                                            image size or increase your compression settings.
+                                                        </t>
+                                                    </t>
+                                                    <span t-attf-class="badge #{size_status} o_product_image_size"
+                                                          t-esc="record.avatar.value" t-att-title="message"/>
+                                                </div>
+                                            </div>
+                                            <hr class="mb-1 mt-1"/>
+                                            <div class="o_squared_image">
+                                                <img class="card-img-top"
+                                                     style="height:223px;object-fit: cover;"
+                                                     t-att-src="kanban_image('equipment.image', 'avatar', record.id.raw_value)"
+                                                     t-att-alt="record.name.value"/>
+                                            </div>
+                                        </div>
+                                    </t>
+                                </templates>
+                            </kanban>
+                        </field>
+                    </page>
+                </xpath>
+            </field>
+        </record>
+        <record id="rent_product_search_view" model="ir.ui.view">
+            <field name="name">rent.product.search.view</field>
+            <field name="model">product.product</field>
+            <field name="inherit_id" ref="product.product_search_form_view"/>
+            <field name="arch" type="xml">
+                <xpath expr="//search" position="inside">
+                    <filter string="Can be Rental" name="can_be_rental"
+                            domain="[('can_be_rental', '=', True)]"/>
+                </xpath>
+            </field>
+        </record>
+        <record id="action_rent_product" model="ir.actions.act_window">
+            <field name="name">Rental Equipment</field>
+            <field name="res_model">product.product</field>
+            <field name="domain">[('type', '=', 'consu')]</field>
+            <field name="context">{'search_default_can_be_rental': 1,'default_type':'consu'}</field>
+            <field name="view_mode">kanban,list,form,search</field>
+        </record>
+    </data>
+
+    <!--product template view-->
+    <record id="rent_product_template_from_view" model="ir.ui.view">
+        <field name="name">rent.product.template.from.view</field>
+        <field name="model">product.template</field>
+        <field name="inherit_id" ref="product.product_template_only_form_view"/>
+        <field name="arch" type="xml">
+            <xpath expr="//label[@for='purchase_ok']" position="after">
+                <span class="d-inline-block">
+                    <field name="can_be_rental"/>
+                    <label for="can_be_rental"/>
+                </span>
+                <span class="d-inline-block">
+                    <field name="is_vehicle"/>
+                    <label for="is_vehicle"/>
+                </span>
+            </xpath>
+            <xpath expr="//field[@name='default_code']" position="after">
+                <field name="serial_number"/>
+            </xpath>
+            <xpath expr="//field[@name='serial_number']" position="attributes">
+                <attribute name="required">can_be_rental == True</attribute>
+            </xpath>
+            <xpath expr="//page[@name='general_information']" position="after">
+                <page name="pricing_details" string="Pricing Details">
+                    <field name="equipment_renting_info_ids" nolabel="1">
+                        <form>
+                            <sheet>
+                                <div class="oe_title">
+                                    <label for="rate_name"/>
+                                    <h1>
+                                        <field name="rate_name" placeholder="e.g. Name"/>
+                                    </h1>
+                                </div>
+                                <group>
+                                    <group>
+                                        <field name="rate_name"/>
+                                        <field name="renting_day"/>
+                                        <field name="rate"/>
+                                    </group>
+                                    <group>
+                                        <field name="range"/>
+                                        <field name="renting_hours"/>
+                                        <field name="extra_hour_price"/>
+                                        <field name="company_id" invisible="1"/>
+                                        <field name="currency_id" invisible="1"/>
+                                    </group>
+                                </group>
+                            </sheet>
+                        </form>
+                        <list editable="bottom">
+                            <field name="rate_name"/>
+                            <field name="range"/>
+                            <field name="renting_day"/>
+                            <field name="renting_hours"/>
+                            <field name="rate"/>
+                            <field name="extra_hour_price"/>
+                            <field name="company_id" column_invisible="True"/>
+                            <field name="currency_id" column_invisible="True"/>
+                        </list>
+                    </field>
+                </page>
+                <page name="depreciation" string="Depreciation">
+                    <group>
+                        <group>
+                            <field name="life_span"/>
+                            <field name="equipment_value"/>
+                        </group>
+                        <group>
+                            <field name="date_of_purchase"/>
+                            <field name="starting_profit"/>
+                        </group>
+                    </group>
+                </page>
+                <page name="equipment_images" string="Equipment Images">
+                    <field name="equipment_image_ids" nolabel="1">
+                        <form>
+                            <sheet>
+                                <div class="oe_title float-left">
+                                    <label for="name"/>
+                                    <h1>
+                                        <field name="name" placeholder="e.g. Name"/>
+                                    </h1>
+                                </div>
+                                <div style="width: 40%; height: 40%;" class="float-right">
+                                    <field name="avatar" style="width: 40%; height: 40%;"
+                                           class="img-thumbnail float-right" widget="image" required="1"/>
+                                </div>
+                            </sheet>
+                        </form>
+                        <kanban string="Equipment Images">
+                            <field name="id"/>
+                            <field name="name"/>
+                            <field name="avatar"/>
+                            <templates>
+                                <t t-name="kanban-box">
+                                    <div class="card oe_kanban_global_click p-0 border-0">
+                                        <div class="row">
+                                            <div class="col-8">
+                                                <strong>
+                                                    <field name="name"/>
+                                                </strong>
+                                            </div>
+                                            <div class="col-4 text-end">
+                                                <!-- below 100 Kb: good -->
+                                                <t t-if="record.avatar.raw_value.length &lt; 100*1000">
+                                                    <t t-set="size_status" t-value="'text-bg-success'"/>
+                                                    <t t-set="message">Acceptable file size</t>
+                                                </t>
+                                                <!-- below 1000 Kb: decent -->
+                                                <t t-elif="record.avatar.raw_value.length &lt; 1000*1000">
+                                                    <t t-set="size_status" t-value="'text-bg-warning'"/>
+                                                    <t t-set="message">Huge file size. The image
+                                                        should be optimized/reduced.
+                                                    </t>
+                                                </t>
+                                                <!-- above 1000 Kb: bad -->
+                                                <t t-else="1">
+                                                    <t t-set="size_status" t-value="'text-bg-danger'"/>
+                                                    <t t-set="message">Optimization required! Reduce the
+                                                        image size or increase your compression settings.
+                                                    </t>
+                                                </t>
+                                                <span t-attf-class="badge #{size_status} o_product_image_size"
+                                                      t-esc="record.avatar.value" t-att-title="message"/>
+                                            </div>
+                                        </div>
+                                        <hr class="mb-1 mt-1"/>
+                                        <div class="o_squared_image">
+                                            <img class="card-img-top"
+                                                 style="height:223px;object-fit: cover;"
+                                                 t-att-src="kanban_image('equipment.image', 'avatar', record.id.raw_value)"
+                                                 t-att-alt="record.name.value"/>
+                                        </div>
+                                    </div>
+                                </t>
+                            </templates>
+                        </kanban>
+                    </field>
+                </page>
+            </xpath>
+        </field>
+    </record>
+    <record id="action_rent_product_template" model="ir.actions.act_window">
+        <field name="name">Rental Equipments</field>
+        <field name="res_model">product.template</field>
+        <field name="domain">[('type', '=', 'consu')]</field>
+        <field name="context">{'default_type':'consu'}</field>
+        <field name="view_mode">kanban,list,form,search</field>
+    </record>
+</odoo>

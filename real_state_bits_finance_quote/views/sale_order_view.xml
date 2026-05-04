@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id="view_order_form_inherit_real_estate_bits" model="ir.ui.view">
+        <field name="name">sale.order.view.form.inherit</field>
+        <field name="model">sale.order</field>
+        <field name="inherit_id" ref="sale.view_order_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//button[@name='action_view_invoice']" position="before">
+                <button type="object" name="action_view_properties" class="oe_stat_button" icon="fa-book" invisible="contracts == 0">
+                    <field name="contracts" widget="statinfo" string="Reservations"/>
+                </button>
+            </xpath>
+            <xpath expr="//header//button[@name='action_quotation_send']" position="before">
+                <button string="Calculate Financial" name="calculate_financial_lines" type="object" class="oe_highlight" invisible="state not in 'draft'"/>
+                <button string="Generar enganche" name="action_calculate_difered_hitch" type="object" class="oe_highlight" invisible="not difer_hitch or state not in 'draft'"/>
+            </xpath>
+            <xpath expr="//field[@name='partner_id']" position="after">
+                <field name="finance_ids" widget="many2many_tags" required="True" options="{'no_create':True}"/>
+                <field name="hitch_porcent" widget="percentage" />
+                <field name="annual_capital_gains_yield" widget="percentage" readonly="state not in 'draft'" />
+                <field name="annual_capital_gains_yield_years" readonly="state not in 'draft'" />
+                <field name="extra_hitch_porcent" widget="percentage" invisible="True" />
+                <field name="section_date" />
+                <field name="finance_id" domain="[('id','in',finance_ids)]" options="{'no_create':True, 'no_create_edit:':True}" />
+                <field name="ebroshure_file" invisible="not ebroshure_file" filename="ebroshure_filename" />
+                <field name="ebroshure_filename" invisible="True"/>
+            </xpath>
+            <xpath expr="//field[@name='payment_term_id']" position="after">
+                <field name="difer_hitch" />
+                <div class="o_row" style="width: 50% !important" invisible="not difer_hitch">
+                    <label for="val_defer" />
+                    <field name="val_defer" invisible="not difer_hitch" required="difer_hitch"/>
+                    <span>Months</span>
+                </div>
+                <field name="total_hitch"/>
+            </xpath>
+            <xpath expr="//notebook//page[@name='order_lines']" position="after">
+                <page name="financial_amounts" string="Finance">
+                    <field name="financial_lines" required="True">
+                        <list string="Financial Lines" create="False" delete="False" editable="bottom">
+                            <field name="order_id" column_invisible="True" />
+                            <field name="discount_total" column_invisible="True" />
+                            <field name="interest_id" column_invisible="True" />
+                            <field name="amount_total" column_invisible="True" />
+                            <field name="gradual_initial_investment" column_invisible="True" />
+                            <field name="hitch" column_invisible="True" />
+                            <field name="amount_finance" column_invisible="True" />
+                            <field name="pu_discount" column_invisible="True" />
+                            <field name="name" readonly="True" />
+                            <field name="finance_months" readonly="True" />
+                            <field name="pu_discount" readonly="True" />
+                            <field name="financial_line_1" column_invisible="True" />
+                            <field name="financial_line_2" column_invisible="True" />
+                            <field name="financial_line_3" column_invisible="True" />
+                            <field name="financial_line_4" column_invisible="True" />
+                            <field name="promotion_id" options="{'no_create':True, 'no_create_edit':True,'no_open':True}" domain="[('id', 'in', domain_promotion_ids)]" />
+                            <field name="domain_promotion_ids" widget="many2many_tags" column_invisible="True" />
+                            <field name="discount_total" readonly="True" />
+                            <field name="amount_total" readonly="True" />
+                            <field name="gradual_initial_investment" readonly="True" string="Inversion Inicial Gradual" />
+                            <field name="hitch_porcent" widget="percentage" readonly="True" />
+                            <field name="hitch" readonly="True" />
+                            <field name="amount_finance" readonly="True" />
+                            <field name="financial_line_1" optional="hide" readonly="True" />
+                            <field name="financial_line_2" optional="hide" readonly="True" />
+                            <field name="financial_line_3" optional="hide" readonly="True" />
+                            <field name="financial_line_4" optional="hide" readonly="True" />
+                        </list>
+                    </field>
+                </page>
+                <page name="hitch_difer" string="Difered Hitch" invisible="not difer_hitch">
+                    <field name="hitch_ids">
+                        <list create="False" delete="False" open="False" editable="bottom">
+                            <field name="name" />
+                            <field name="order_id" column_invisible="True" />
+                            <field name="finance_id" column_invisible="True" />
+                            <field name="months" readonly="True" />
+                            <field name="period_payment" />
+                            <field name="hitch" readonly="True" widget="percentage" column_invisible="True" />
+                            <field name="amount" readonly="True" />
+                        </list>
+                    </field>
+                </page>
+            </xpath>
+            <xpath expr="//button[@name='action_view_delivery']" position="attributes">
+                <attribute name="invisible">True</attribute>
+            </xpath>
+        </field>
+    </record>
+
+</odoo>

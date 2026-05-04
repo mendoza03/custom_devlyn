@@ -1,0 +1,6 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_master_budget,access.master.budget,model_master_budget,group_access_aie_master_budget_user,1,0,0,0
+access_master_budget_line,access.master.budget.line,model_master_budget_line,group_access_aie_master_budget_user,1,0,0,0
+access_master_budget,access.master.budget,model_master_budget,group_access_aie_master_budget_admin,1,1,1,1
+access_master_budget_line,access.master.budget.line,model_master_budget_line,group_access_aie_master_budget_admin,1,1,1,1
+access_master_budget_line_update,access.master.budget.line.update,model_master_budget_line_update,group_access_aie_master_budget_admin,1,1,1,1

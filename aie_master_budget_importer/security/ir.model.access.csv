@@ -1,0 +1,3 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_master_budget_importer_line,access.master.budget.importer.line,model_master_budget_importer_line,aie_master_budget.group_access_aie_master_budget_admin,1,1,1,1
+access_master_budget_importer,access.master.budget.importer,model_master_budget_importer,aie_master_budget.group_access_aie_master_budget_admin,1,1,1,1

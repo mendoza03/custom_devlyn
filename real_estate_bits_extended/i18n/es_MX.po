@@ -1,0 +1,123 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* real_estate_bits_extended
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 18.0+e-20241220\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2025-01-21 02:14+0000\n"
+"PO-Revision-Date: 2025-01-21 02:14+0000\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+#. module: real_estate_bits_extended
+#: model:ir.actions.act_window,name:real_estate_bits_extended.additional_expense_action
+#: model:ir.model,name:real_estate_bits_extended.model_project_property_additional
+#: model_terms:ir.ui.view,arch_db:real_estate_bits_extended.additional_expense_view_form
+msgid "Additional expense"
+msgstr "Gasto adicional"
+
+#. module: real_estate_bits_extended
+#: model:ir.model.fields,field_description:real_estate_bits_extended.field_product_product__additional_expense_ids
+#: model:ir.model.fields,field_description:real_estate_bits_extended.field_product_template__additional_expense_ids
+#: model:ir.ui.menu,name:real_estate_bits_extended.additional_expense_menu
+#: model_terms:ir.ui.view,arch_db:real_estate_bits_extended.additional_expense_view_list
+msgid "Additional expenses"
+msgstr "Gastos adicionales"
+
+#. module: real_estate_bits_extended
+#: model:ir.actions.act_window,name:real_estate_bits_extended.project_amenities_action
+#: model:ir.ui.menu,name:real_estate_bits_extended.project_amenities_menu
+#: model_terms:ir.ui.view,arch_db:real_estate_bits_extended.project_amenities_view_list
+#: model_terms:ir.ui.view,arch_db:real_estate_bits_extended.project_worksite_form
+msgid "Amenities"
+msgstr "Amenidades"
+
+#. module: real_estate_bits_extended
+#: model:ir.model.fields,field_description:real_estate_bits_extended.field_project_amenities__code
+msgid "Code"
+msgstr "Código"
+
+#. module: real_estate_bits_extended
+#: model:ir.model.fields,field_description:real_estate_bits_extended.field_project_property_additional__create_uid
+msgid "Created by"
+msgstr "Creado por"
+
+#. module: real_estate_bits_extended
+#: model:ir.model.fields,field_description:real_estate_bits_extended.field_project_property_additional__create_date
+msgid "Created on"
+msgstr "Creado en"
+
+#. module: real_estate_bits_extended
+#: model:ir.model.fields,field_description:real_estate_bits_extended.field_project_property_additional__display_name
+msgid "Display Name"
+msgstr "Nombre visible"
+
+#. module: real_estate_bits_extended
+#: model:ir.model.fields,field_description:real_estate_bits_extended.field_project_property_additional__id
+msgid "ID"
+msgstr ""
+
+#. module: real_estate_bits_extended
+#: model:ir.model.fields,field_description:real_estate_bits_extended.field_product_product__is_additional_expense
+#: model:ir.model.fields,field_description:real_estate_bits_extended.field_product_template__is_additional_expense
+msgid "Is additional expense"
+msgstr "Es un gasto adicional"
+
+#. module: real_estate_bits_extended
+#: model:ir.model.fields,field_description:real_estate_bits_extended.field_project_property_additional__write_uid
+msgid "Last Updated by"
+msgstr "Última actualización por"
+
+#. module: real_estate_bits_extended
+#: model:ir.model.fields,field_description:real_estate_bits_extended.field_project_property_additional__write_date
+msgid "Last Updated on"
+msgstr "Última actualización en"
+
+#. module: real_estate_bits_extended
+#: model:ir.model.fields,field_description:real_estate_bits_extended.field_product_product__number_bathrooms
+#: model:ir.model.fields,field_description:real_estate_bits_extended.field_product_template__number_bathrooms
+msgid "Number of bathrooms"
+msgstr "Núm. de baños"
+
+#. module: real_estate_bits_extended
+#: model:ir.model.fields,field_description:real_estate_bits_extended.field_product_product__number_bedrooms
+#: model:ir.model.fields,field_description:real_estate_bits_extended.field_product_template__number_bedrooms
+msgid "Number of bedrooms"
+msgstr "Núm. de habitaciones"
+
+#. module: real_estate_bits_extended
+#: model:ir.model.fields,field_description:real_estate_bits_extended.field_project_property_additional__product_id
+msgid "Product"
+msgstr "Producto"
+
+#. module: real_estate_bits_extended
+#: model:ir.model,name:real_estate_bits_extended.model_project_amenities
+msgid "Project Amenities"
+msgstr "Amenidades"
+
+#. module: real_estate_bits_extended
+#: model:ir.model,name:real_estate_bits_extended.model_product_template
+#: model:ir.model.fields,field_description:real_estate_bits_extended.field_project_property_additional__property_id
+msgid "Property"
+msgstr "Producto"
+
+#. module: real_estate_bits_extended
+#: model_terms:ir.ui.view,arch_db:real_estate_bits_extended.view_property_form
+msgid "Specs"
+msgstr "Especificaciones"
+
+#. module: real_estate_bits_extended
+#: model:ir.model.fields,field_description:real_estate_bits_extended.field_project_property_additional__price_subtotal
+msgid "Subtotal"
+msgstr ""
+
+#. module: real_estate_bits_extended
+#: model:ir.ui.menu,name:real_estate_bits_extended.worksite_menu
+msgid "Worksites"
+msgstr "Sitios de trabajo"

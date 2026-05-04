@@ -1,0 +1,16 @@
+<odoo>
+  <record id="view_account_report_master_budget_options" model="ir.ui.view">
+    <field name="name">master.budget.report.options</field>
+    <field name="model">account.report.options</field>
+    <field name="arch" type="xml">
+      <div class="o_account_report_options"/>
+    </field>
+  </record>
+
+  <record id="account_report_master_budget" model="account.report">
+    <field name="name">Master Budget Report</field>
+    <field name="custom_handler_model_id" ref="model_master_budget_report_handler"/>
+    <field name="root_report_id" eval="False"/>
+    <field name="options_view_id" ref="view_account_report_master_budget_options"/> <!-- esta es la clave -->
+  </record>
+</odoo>

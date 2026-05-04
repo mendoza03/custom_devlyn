@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+  <record id="view_mm_contract_document_form" model="ir.ui.view">
+    <field name="name">mm.contract.document.form</field>
+    <field name="model">mm.contract.document</field>
+    <field name="arch" type="xml">
+      <form string="Contract Document">
+        <header>
+          <button name="action_render" type="object" string="Render" class="btn-primary"/>
+          <button name="action_print_pdf" type="object" string="Print PDF"/>
+        </header>
+        <sheet>
+          <group>
+            <field name="name"/>
+            <field name="template_id"/>
+            <field name="res_model" readonly="1"/>
+            <field name="res_id" readonly="1"/>
+          </group>
+
+          <notebook>
+            <page string="Rendered">
+              <field name="rendered_header" widget="html" readonly="1"/>
+              <field name="rendered_body" widget="html" readonly="1"/>
+              <field name="rendered_footer" widget="html" readonly="1"/>
+            </page>
+          </notebook>
+        </sheet>
+      </form>
+    </field>
+  </record>
+
+  <record id="view_mm_contract_document_list" model="ir.ui.view">
+    <field name="name">mm.contract.document.list</field>
+    <field name="model">mm.contract.document</field>
+    <field name="arch" type="xml">
+      <list>
+        <field name="name"/>
+        <field name="template_id"/>
+        <field name="res_model"/>
+        <field name="res_id"/>
+        <field name="create_date"/>
+      </list>
+    </field>
+  </record>
+</odoo>

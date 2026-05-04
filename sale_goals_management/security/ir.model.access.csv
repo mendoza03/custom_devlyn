@@ -1,0 +1,8 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_sale_goal_config_user,sale.goal.config.user,model_sale_goal_config,base.group_user,1,1,1,0
+access_sale_goal_user,sale.goal.user,model_sale_goal,base.group_user,1,1,1,1
+access_sale_goal_period_user,sale.goal.period.user,model_sale_goal_period,base.group_user,1,1,1,0
+access_sale_goal_week_user,sale.goal.week.user,model_sale_goal_week,base.group_user,1,1,1,0
+access_sale_goal_calendar_user,sale.goal.calendar.user,model_sale_goal_calendar,base.group_user,1,1,1,1
+access_sale_goal_calendar_month_user,sale.goal.calendar.month.user,model_sale_goal_calendar_month,base.group_user,1,1,1,0
+access_sale_goal_calendar_week_user,sale.goal.calendar.week.user,model_sale_goal_calendar_week,base.group_user,1,1,1,0

@@ -1,0 +1,43 @@
+<odoo>
+    <data noupdate="1">
+        <record id="default_utm_source_cima_1" model="utm.source">
+            <field name="name">Cliente Leal</field>
+        </record>
+        <record id="default_utm_source_cima_2" model="utm.source">
+            <field name="name">Familiar</field>
+        </record>
+        <record id="default_utm_source_cima_3" model="utm.source">
+            <field name="name">Conocido</field>
+        </record>
+        <record id="default_utm_source_cima_4" model="utm.source">
+            <field name="name">Expo</field>
+        </record>
+        <record id="default_utm_source_cima_5" model="utm.source">
+            <field name="name">Página Web</field>
+        </record>
+        <record id="default_utm_source_cima_6" model="utm.source">
+            <field name="name">Recomendación</field>
+        </record>
+        <record id="default_utm_source_cima_7" model="utm.source">
+            <field name="name">Base de Datos</field>
+        </record>
+        <record id="default_utm_source_cima_8" model="utm.source">
+            <field name="name">Redes Sociales</field>
+        </record>
+        <record id="default_utm_source_cima_9" model="utm.source">
+            <field name="name">Brokers</field>
+        </record>
+        <record id="default_utm_source_cima_10" model="utm.source">
+            <field name="name">Chat</field>
+        </record>
+        <record id="default_utm_source_cima_11" model="utm.source">
+            <field name="name">Cambaceo</field>
+        </record>
+        <record id="default_utm_source_cima_12" model="utm.source">
+            <field name="name">Guardias</field>
+        </record>
+        <record id="default_utm_source_cima_13" model="utm.source">
+            <field name="name">Google ADS </field>
+        </record>
+    </data>
+</odoo>

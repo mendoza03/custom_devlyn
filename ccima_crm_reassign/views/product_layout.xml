@@ -1,0 +1,132 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+  <!-- Vista formulario para product.layout.design -->
+  <record id="view_product_layout_design_form" model="ir.ui.view">
+    <field name="name">product.layout.design.form</field>
+    <field name="model">product.layout.design</field>
+    <field name="arch" type="xml">
+      <form string="Layout Design">
+        <sheet>
+            <header>
+              <button name="action_open_html_layout"
+                      type="object"
+                      string="Ver diseño visual"
+                      class="btn-primary"/>
+            </header>
+          <group>
+            <field name="name"/>
+            <field name="image" widget="image" class="oe_avatar"/>
+          </group>
+          <notebook>
+            <page string="Spots">
+              <field name="spot_ids" mode="list">
+                <list>
+                  <field name="name"/>
+                  <field name="product_id"/>
+                  <field name="pos_x"/>
+                  <field name="pos_y"/>
+                </list>
+              </field>
+            </page>
+          </notebook>
+        </sheet>
+      </form>
+    </field>
+  </record>
+
+  <!-- Vista lista -->
+  <record id="view_product_layout_design_list" model="ir.ui.view">
+    <field name="name">product.layout.design.list</field>
+    <field name="model">product.layout.design</field>
+    <field name="arch" type="xml">
+      <list>
+        <field name="name"/>
+      </list>
+    </field>
+  </record>
+
+  <!-- Acción -->
+  <record id="action_product_layout_design" model="ir.actions.act_window">
+    <field name="name">Product Layouts</field>
+    <field name="res_model">product.layout.design</field>
+    <field name="view_mode">list,form</field>
+  </record>
+
+  <!-- Menú -->
+  <menuitem id="menu_product_layout_root"
+            name="Product Layouts"
+            parent="stock.menu_stock_root"
+            action="action_product_layout_design"/>
+
+  <!-- QWeb Template -->
+  <template id="product_layout_design_view">
+    <t t-call="web.external_layout">
+      <div class="page">
+        <h2><t t-esc="doc.name"/></h2>
+        <t t-set="image_url" t-value="'/web/image/product.layout.design/%s/image' % design.id"/>
+<div t-att-style="'position: relative; width: 1000px; height: 600px; background-image: url(%s); background-size: contain; background-repeat: no-repeat; border: 1px solid #ccc;' % image_url">
+          <t t-foreach="doc.spot_ids" t-as="spot">
+            <div t-attf-style="position: absolute;
+                               top:{{ spot.pos_y }}px;
+                               left:{{ spot.pos_x }}px;
+                               width: 120px;
+                               height: 80px;
+                               background: #ffffffcc;
+                               border: 1px solid #000;
+                               padding: 4px;
+                               font-size: 12px;">
+              <strong><t t-esc="spot.name"/></strong><br/>
+              <t t-esc="spot.product_id.name"/><br/>
+              <t t-esc="spot.product_id.default_code"/><br/>
+              <t t-esc="spot.product_id.qty_available"/> u.
+            </div>
+          </t>
+        </div>
+      </div>
+    </t>
+  </template>
+
+    <template id="product_layout_html_template" name="Product Layout HTML">
+  <t t-call="website.layout">
+    <div class="container my-4">
+      <h2><t t-esc="design.name"/></h2>
+      <div t-attf-style="position: relative;
+                         width: 1000px;
+                         height: 600px;
+                         background-image: url('/web/image/product.layout.design/{{ design.id }}/image');
+                         background-size: contain;
+                         background-repeat: no-repeat;
+                         border: 1px solid #ccc;">
+        <t t-foreach="design.spot_ids" t-as="spot">
+          <div t-attf-style="position: absolute;
+                             top:{{ spot.pos_y }}px;
+                             left:{{ spot.pos_x }}px;
+                             width: 120px;
+                             height: 80px;
+                             background: #ffffffcc;
+                             border: 1px solid #000;
+                             padding: 4px;
+                             font-size: 12px;">
+            <strong><t t-esc="spot.name"/></strong><br/>
+            <t t-esc="spot.product_id.name"/><br/>
+            <t t-esc="spot.product_id.default_code"/><br/>
+            <t t-esc="spot.product_id.qty_available"/> u.
+          </div>
+        </t>
+      </div>
+    </div>
+  </t>
+</template>
+
+
+  <!-- Reporte -->
+  <record id="action_report_product_layout" model="ir.actions.report">
+    <field name="name">Product Layout Design</field>
+    <field name="model">product.layout.design</field>
+    <field name="report_type">qweb-pdf</field>
+    <field name="report_name">your_module_name.product_layout_design_view</field>
+    <field name="report_file">your_module_name.product_layout_design_view</field>
+    <field name="print_report_name">'Layout - %s' % (object.name)</field>
+  </record>
+</odoo>
+

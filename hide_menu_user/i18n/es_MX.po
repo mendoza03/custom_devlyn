@@ -1,0 +1,241 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* hide_menu_user
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 18.0+e-20251121\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2025-11-27 20:28+0000\n"
+"PO-Revision-Date: 2025-11-27 20:28+0000\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"Language: es\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+#. module: hide_menu_user
+#: model_terms:ir.ui.view,arch_db:hide_menu_user.view_users_form
+msgid ""
+"<strong>Note:</strong> Individual restrictions are applied in addition to "
+"any group restrictions above."
+msgstr ""
+"<strong>Nota:</strong> Las restricciones individuales se aplican además de "
+"cualquier restricción de grupo anterior."
+
+#. module: hide_menu_user
+#: model_terms:ir.ui.view,arch_db:hide_menu_user.edit_menu_access
+msgid ""
+"<strong>Note:</strong> This list shows all users who have this menu restricted, \n"
+"                        either individually or through restriction groups."
+msgstr ""
+"<strong>Nota:</strong> Esta lista muestra todos los usuarios que tienen este menú restringido, \n"
+"                        ya sea individualmente o a través de grupos de restricción."
+
+#. module: hide_menu_user
+#: model:ir.model.fields,field_description:hide_menu_user.field_menu_restriction_group__active
+#: model_terms:ir.ui.view,arch_db:hide_menu_user.view_menu_restriction_group_search
+msgid "Active"
+msgstr "Activo"
+
+#. module: hide_menu_user
+#: model_terms:ir.ui.view,arch_db:hide_menu_user.view_menu_restriction_group_form
+#: model_terms:ir.ui.view,arch_db:hide_menu_user.view_menu_restriction_group_search
+msgid "Archived"
+msgstr "Archivado"
+
+#. module: hide_menu_user
+#: model:ir.model.fields,help:hide_menu_user.field_res_users__is_admin
+msgid "Check if the user is an admin."
+msgstr "Verificar si el usuario es un administrador."
+
+#. module: hide_menu_user
+#: model_terms:ir.actions.act_window,help:hide_menu_user.action_menu_restriction_group
+msgid "Create a Menu Restriction Group"
+msgstr "Crear un Grupo de Restricción de Menús"
+
+#. module: hide_menu_user
+#: model:ir.model.fields,field_description:hide_menu_user.field_menu_restriction_group__create_uid
+msgid "Created by"
+msgstr "Creado por"
+
+#. module: hide_menu_user
+#: model:ir.model.fields,field_description:hide_menu_user.field_menu_restriction_group__create_date
+msgid "Created on"
+msgstr "Creado el"
+
+#. module: hide_menu_user
+#: model:ir.model.fields,field_description:hide_menu_user.field_menu_restriction_group__display_name
+msgid "Display Name"
+msgstr "Nombre Mostrado"
+
+#. module: hide_menu_user
+#: model:ir.model.fields,help:hide_menu_user.field_res_users__is_show_specific_menu
+msgid "Field determine to show the hide specific menu"
+msgstr "Campo que determina si mostrar el menú de ocultar específico"
+
+#. module: hide_menu_user
+#: model_terms:ir.ui.view,arch_db:hide_menu_user.view_menu_restriction_group_search
+msgid "Group By"
+msgstr "Agrupar por"
+
+#. module: hide_menu_user
+#: model:ir.model.fields,field_description:hide_menu_user.field_menu_restriction_group__name
+msgid "Group Name"
+msgstr "Nombre del Grupo"
+
+#. module: hide_menu_user
+#: model:ir.model.fields,help:hide_menu_user.field_res_users__restriction_group_ids
+msgid "Groups that restrict menus for this user"
+msgstr "Grupos que restringen menús para este usuario"
+
+#. module: hide_menu_user
+#: model:ir.model.fields,field_description:hide_menu_user.field_res_users__hide_menu_ids
+msgid "Hidden Menu"
+msgstr "Menú Oculto"
+
+#. module: hide_menu_user
+#: model:ir.model.fields,field_description:hide_menu_user.field_menu_restriction_group__hide_menu_ids
+#: model_terms:ir.ui.view,arch_db:hide_menu_user.view_menu_restriction_group_form
+#: model_terms:ir.ui.view,arch_db:hide_menu_user.view_menu_restriction_group_list
+msgid "Hidden Menus"
+msgstr "Menús Ocultos"
+
+#. module: hide_menu_user
+#: model_terms:ir.ui.view,arch_db:hide_menu_user.view_users_form
+msgid "Hide Specific Menu"
+msgstr "Ocultar Menú Específico"
+
+#. module: hide_menu_user
+#: model:ir.model.fields,field_description:hide_menu_user.field_menu_restriction_group__id
+msgid "ID"
+msgstr "ID"
+
+#. module: hide_menu_user
+#: model:ir.model.fields,help:hide_menu_user.field_menu_restriction_group__active
+msgid "If unchecked, restrictions will not apply"
+msgstr "Si no está marcado, las restricciones no se aplicarán"
+
+#. module: hide_menu_user
+#: model_terms:ir.ui.view,arch_db:hide_menu_user.view_users_form
+msgid "Individual Menu Restrictions"
+msgstr "Restricciones de Menú Individuales"
+
+#. module: hide_menu_user
+#: model:ir.model.fields,field_description:hide_menu_user.field_res_users__is_admin
+msgid "Is Admin"
+msgstr "Es Administrador"
+
+#. module: hide_menu_user
+#: model:ir.model.fields,field_description:hide_menu_user.field_res_users__is_show_specific_menu
+msgid "Is Show Specific Menu"
+msgstr "Mostrar Menú Específico"
+
+#. module: hide_menu_user
+#: model:ir.model.fields,field_description:hide_menu_user.field_menu_restriction_group__write_uid
+msgid "Last Updated by"
+msgstr "Última actualización por"
+
+#. module: hide_menu_user
+#: model:ir.model.fields,field_description:hide_menu_user.field_menu_restriction_group__write_date
+msgid "Last Updated on"
+msgstr "Última actualización el"
+
+#. module: hide_menu_user
+#: model:ir.model,name:hide_menu_user.model_ir_ui_menu
+msgid "Menu"
+msgstr "Menú"
+
+#. module: hide_menu_user
+#: model:ir.model,name:hide_menu_user.model_menu_restriction_group
+#: model_terms:ir.ui.view,arch_db:hide_menu_user.view_menu_restriction_group_form
+msgid "Menu Restriction Group"
+msgstr "Grupo de Restricción de Menús"
+
+#. module: hide_menu_user
+#: model:ir.actions.act_window,name:hide_menu_user.action_menu_restriction_group
+#: model:ir.ui.menu,name:hide_menu_user.menu_menu_restriction_group
+#: model_terms:ir.ui.view,arch_db:hide_menu_user.view_menu_restriction_group_list
+#: model_terms:ir.ui.view,arch_db:hide_menu_user.view_menu_restriction_group_search
+msgid "Menu Restriction Groups"
+msgstr "Grupos de Restricción de Menús"
+
+#. module: hide_menu_user
+#: model_terms:ir.actions.act_window,help:hide_menu_user.action_menu_restriction_group
+msgid ""
+"Menu Restriction Groups allow you to hide specific menus for multiple users at once.\n"
+"                Simply create a group, add users, and select which menus to hide."
+msgstr ""
+"Los Grupos de Restricción de Menús te permiten ocultar menús específicos para múltiples usuarios a la vez.\n"
+"                Simplemente crea un grupo, agrega usuarios y selecciona qué menús ocultar."
+
+#. module: hide_menu_user
+#: model:ir.model.fields,help:hide_menu_user.field_menu_restriction_group__hide_menu_ids
+msgid "Menus that will be hidden for users in this group"
+msgstr "Menús que se ocultarán para los usuarios de este grupo"
+
+#. module: hide_menu_user
+#: model:ir.model.fields,help:hide_menu_user.field_menu_restriction_group__name
+msgid "Name of the restriction group"
+msgstr "Nombre del grupo de restricción"
+
+#. module: hide_menu_user
+#: model:ir.model.fields,field_description:hide_menu_user.field_menu_restriction_group__menu_count
+msgid "Number of Hidden Menus"
+msgstr "Número de Menús Ocultos"
+
+#. module: hide_menu_user
+#: model:ir.model.fields,field_description:hide_menu_user.field_menu_restriction_group__user_count
+msgid "Number of Users"
+msgstr "Número de Usuarios"
+
+#. module: hide_menu_user
+#: model_terms:ir.ui.view,arch_db:hide_menu_user.edit_menu_access
+msgid "Restrict users"
+msgstr "Restringir usuarios"
+
+#. module: hide_menu_user
+#: model:ir.model.fields,field_description:hide_menu_user.field_ir_ui_menu__restrict_user_ids
+msgid "Restricted Users"
+msgstr "Usuarios Restringidos"
+
+#. module: hide_menu_user
+#: model:ir.model.fields,field_description:hide_menu_user.field_res_users__restriction_group_count
+#: model:ir.model.fields,field_description:hide_menu_user.field_res_users__restriction_group_ids
+#: model_terms:ir.ui.view,arch_db:hide_menu_user.view_users_form
+msgid "Restriction Groups"
+msgstr "Grupos de Restricción"
+
+#. module: hide_menu_user
+#: model:ir.model.fields,help:hide_menu_user.field_res_users__hide_menu_ids
+msgid "Select menu items that need to be hidden to this user individually."
+msgstr "Seleccione los elementos de menú que necesitan ser ocultados a este usuario individualmente."
+
+#. module: hide_menu_user
+#: model:ir.model,name:hide_menu_user.model_res_users
+msgid "User"
+msgstr "Usuario"
+
+#. module: hide_menu_user
+#: model:ir.model.fields,field_description:hide_menu_user.field_menu_restriction_group__user_ids
+#: model_terms:ir.ui.view,arch_db:hide_menu_user.view_menu_restriction_group_form
+#: model_terms:ir.ui.view,arch_db:hide_menu_user.view_menu_restriction_group_list
+msgid "Users"
+msgstr "Usuarios"
+
+#. module: hide_menu_user
+#: model:ir.model.fields,help:hide_menu_user.field_ir_ui_menu__restrict_user_ids
+msgid "Users restricted from accessing this menu."
+msgstr "Usuarios con acceso restringido a este menú."
+
+#. module: hide_menu_user
+#: model:ir.model.fields,help:hide_menu_user.field_menu_restriction_group__user_ids
+msgid "Users that belong to this restriction group"
+msgstr "Usuarios que pertenecen a este grupo de restricción"
+
+#. module: hide_menu_user
+#: model_terms:ir.ui.view,arch_db:hide_menu_user.view_menu_restriction_group_form
+msgid "e.g. Sales Team Limited"
+msgstr "ej. Equipo de Ventas Limitado"

@@ -1,0 +1,13 @@
+<odoo>
+    <record id="property_reservation_form_view_inherit_contract_date" model="ir.ui.view">
+        <field name="name">property.reservation.form.contract.date.inherit</field>
+        <field name="model">property.reservation</field>
+        <field name="inherit_id" ref="real_estate_bits.property_reservation_form_view"/>
+
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='deposit']" position="after">
+                <field name="contract_date"/>
+            </xpath>
+        </field>
+    </record>
+</odoo>

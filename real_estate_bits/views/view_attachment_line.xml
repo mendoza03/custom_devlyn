@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <data>
+
+        <record id="view_attachment_line_kanban" model="ir.ui.view">
+            <field name="name">Attachment Kanban</field>
+            <field name="model">attachment.line</field>
+            <field name="arch" type="xml">
+                <kanban edit="false" import="false">
+                    <field name="id"/>
+                    <field name="name"/>
+                    <field name="mimetype"/>
+                    <field name="image_1920"/>
+                    <field name="sequence" widget="handle"/>
+                    <field name="filetype"/>
+                    <templates>
+                        <t t-name="kanban-menu">
+                            <a t-attf-href="/web/content/attachment.line/#{record.id.raw_value}/file?download=true"
+                               download="" class="dropdown-item">
+                                Download
+                            </a>
+                            <a t-if="widget.deletable" role="menuitem" type="delete" class="dropdown-item">Delete</a>
+                        </t>
+                        <t t-name="kanban-box">
+                            <div class="oe_kanban_global_area oe_kanban_global_click o_kanban_attachment">
+                                <div class="o_kanban_image">
+                                    <div class="o_kanban_image_wrapper">
+                                        <img t-if="record.filetype.value == 'Image'" alt="Document" width="100"
+                                             height="100" class="o_attachment_image"
+                                             t-att-src="kanban_image('attachment.line', 'image_1920', record.id.raw_value)"/>
+                                        <div t-else="" class="o_image o_image_thumbnail"
+                                             t-att-data-mimetype="record.mimetype.value"/>
+                                    </div>
+                                </div>
+                                <div class="o_kanban_details">
+                                    <div class="o_kanban_details_wrapper">
+                                        <div t-att-title="record.name.raw_value" class="o_kanban_record_title">
+                                            <field name="name" class="o_text_overflow"/>
+                                        </div>
+
+                                        <div class="o_kanban_record_bottom">
+                                            <time class="oe_kanban_bottom_left">
+                                                <field name="create_date" widget="date"/>
+                                            </time>
+                                            <div class="oe_kanban_bottom_right">
+                                                <field name="create_uid" widget="many2one_avatar_user"/>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </t>
+                    </templates>
+                </kanban>
+            </field>
+        </record>
+
+        <record model="ir.ui.view" id="view_attachment_line_form">
+            <field name="name">Attachment Form</field>
+            <field name="model">attachment.line</field>
+            <field name="arch" type="xml">
+                <form>
+                    <sheet>
+                        <field name="sequence" invisible="1"/>
+                        <div class="row o_website_sale_image_modal">
+                            <div class="col-md-6 col-xl-5">
+                                <label for="name" string="Document Name"/>
+                                <h2>
+                                    <field name="name" placeholder="Document Name" required="1"/>
+                                </h2>
+                            </div>
+                        </div>
+                        <group>
+                            <group>
+                                <field name="is_visible" invisible="1"/>
+                                <field name="filetype" invisible="not is_visible"/>
+                                <field name="is_brochure" string="Brochure" invisible="filetype == 'image'"/>
+                            </group>
+                            <group>
+                                <field name="image_1920" widget="image" invisible="filetype != 'image'"/>
+                                <field name="file" widget="pdf_viewer" invisible="filetype == 'image'"/>
+                            </group>
+                        </group>
+
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <record id="view_attachment_line_search" model="ir.ui.view">
+            <field name="name">Attachment Search</field>
+            <field name="model">attachment.line</field>
+            <field name="arch" type="xml">
+                <search string="Documents">
+                    <searchpanel>
+                        <field name="project_worksite_id" icon="fa-building" enable_counters="1"/>
+                        <field name="property_id" icon="fa-building" enable_counters="1"/>
+                    </searchpanel>
+                </search>
+            </field>
+        </record>
+
+        <record model="ir.actions.act_window" id="action_attachment_lines_act_window">
+            <field name="name">Documents</field>
+            <field name="res_model">attachment.line</field>
+            <field name="view_mode">kanban,list,form</field>
+        </record>
+
+    </data>
+</odoo>

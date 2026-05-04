@@ -1,0 +1,26 @@
+<odoo>
+  <record id="job_costing_report" model="account.report">
+    <field name="name">Job Costing Report</field>
+    <field name="custom_handler_model_id" ref="aie_budget_jobs.model_job_costing_report_handler"/>
+    <field name="column_ids" eval="[
+      (0, 0, {'name': 'Date', 'expression_label': 'date'}),
+      (0, 0, {'name': 'Type', 'expression_label': 'job_type_id'}),
+      (0, 0, {'name': 'Product', 'expression_label': 'product_id'}),
+      (0, 0, {'name': 'Quantity', 'expression_label': 'product_qty'}),
+      (0, 0, {'name': 'UoM', 'expression_label': 'uom_id'}),
+      (0, 0, {'name': 'Cost Price', 'expression_label': 'cost_price'}),
+    ]"/>
+  </record>
+
+  <record id="action_job_costing_report" model="ir.actions.client">
+    <field name="name">Job Costing Report</field>
+    <field name="tag">account_report</field>
+    <field name="context" eval="{'report_id': ref('aie_budget_jobs.job_costing_report')}"/>
+  </record>
+
+  <menuitem id="menu_job_costing_report"
+            name="Job Costing Report"
+            parent="odoo_job_costing_management.menu_job_managmt"
+            action="action_job_costing_report"
+            sequence="35"/>
+</odoo>

@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <data>
+        <record id="equipment_odometer_view_list" model="ir.ui.view">
+            <field name="name">equipment.odometer.view.list</field>
+            <field name="model">equipment.odometer</field>
+            <field name="arch" type="xml">
+                <list editable="bottom">
+                    <field name="create_date" widget="date"/>
+                    <field name="product_id"/>
+                    <field name="current_readings"/>
+                    <field name="last_readings"/>
+                    <field name="unit" readonly="1"/>
+                </list>
+            </field>
+        </record>
+
+        <record id="equipment_odometer_search_view" model="ir.ui.view">
+            <field name="name">equipment.odometer.search.view</field>
+            <field name="model">equipment.odometer</field>
+            <field name="arch" type="xml">
+                <search>
+                    <field name="product_id"/>
+                    <group string="Group By">
+                        <filter name="product_id" string="Equipment"
+                                context="{'group_by': 'product_id'}"/>
+                    </group>
+                </search>
+            </field>
+        </record>
+
+        <record id="equipment_odometer_menu_list_view" model="ir.ui.view">
+            <field name="name">equipment.odometer.menu.list.view</field>
+            <field name="model">equipment.odometer</field>
+            <field name="arch" type="xml">
+                <list edit="False" create="False" duplicate="False">
+                    <field name="create_date" widget="date"/>
+                    <field name="product_id"/>
+                    <field name="current_readings"/>
+                    <field name="last_readings"/>
+                    <field name="unit"/>
+                </list>
+            </field>
+        </record>
+
+        <record id="action_equipment_odometer_report_list_menu" model="ir.actions.act_window">
+            <field name="name">Equipments Odometer</field>
+            <field name="res_model">equipment.odometer</field>
+            <field name="view_mode">list,search</field>
+            <field name="view_ids"
+                   eval="[(5, 0, 0),
+                          (0, 0, {'view_mode': 'list', 'view_id': ref('equipment_odometer_menu_list_view')})]"/>
+            <field name="search_view_id" ref="tk_rental.equipment_odometer_search_view"/>
+        </record>
+    </data>
+</odoo>

@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id="view_condominium_worksite_inherit_form" model="ir.ui.view">
+        <field name="name">condominium.worksite.inherit.form</field>
+        <field name="model">condominium.worksite</field>
+        <field name="inherit_id" ref="real_estate_bits.condominium_worksite_form"/>
+        <field name="arch" type="xml">
+
+
+            <xpath expr="//field[@name='company_id']" position="after">
+                <field name="url"/>
+            </xpath>
+
+            <xpath expr="//field[@name='available_area']" position="after">
+                <button name="action_open_url"
+                    type="object"
+                    string="Disponibilidad"
+                    class="btn-primary"/>
+            </xpath>
+
+            <xpath expr="//field[@name='available_units']" position="after">
+                <field name="total_units" string="Unidades totales" readonly="1"/>
+            </xpath>
+
+            <xpath expr="//td[label[@for='total_area']]" position="replace">
+                <td class="o_td_label">
+                    <label string="Area total" for="total_area"/>
+                </td>
+            </xpath>
+
+            <xpath expr="//div[contains(@class,'oe_button_box')]" position="inside">
+                <button
+                  type="object"
+                  name="action_open_no_config_products"
+                  class="oe_stat_button"
+                  icon="fa-cubes"
+                  invisible="no_config_product_count == 0">
+                  <field name="no_config_product_count" widget="statinfo" string="No Config"/>
+                </button>
+              </xpath>
+
+        </field>
+    </record>
+
+
+
+</odoo>

@@ -1,0 +1,408 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <template id="property_sale_contract_doc">
+        <t t-call="web.external_layout">
+            <div class="page" style="line-height: 1.6;">
+                <div class="row mt8">
+                    <div class="col-4"/>
+                    <div class="col-4">
+                        <h6>
+                            <u>
+                                DRAFT OF AGREEMENT FOR SALE
+                            </u>
+                        </h6>
+                    </div>
+                    <div class="col-4"/>
+                </div>
+                <br/>
+                <br/>
+                THIS AGREEMENT FOR SALE is made and executed on this the____________ day _____________ of ___________,
+                200-
+                BETWEEN
+                <br/>
+                <br/>
+                Mr. ____________s/o. ____________ aged_________________ years residing at _____________Hereinafter
+                called "The SELLER" (which expression shall mean and include her legal heirs, successors,
+                successors-in-interest, executors, administrators, legal representatives, attorneys and assigns) of ONE
+                PART. AND
+                <br/>
+                <br/>
+                Mr. ______________ s /o __________ aged­ ________ years residing at__________ ___Hereinafter referred as
+                "The PURCHASER" (represented by his power of attorney) which expression shall mean and include his
+                heirs, successors, executors, administrators, legal representatives, attorneys and assigns of the OTHER
+                PART. WHEREAS THE SELLER is the absolute owner in possession and enjoyment of the more fully described
+                in the schedule hereunder and hereafter called the "SCHEDULE PROPERTY.
+                <br/>
+                <br/>
+                WHEREAS the property more fully described in the schedule hereunder is the self acquired property of the
+                SELLER who purchased the same from Mr._____________ in and by sale deed dated _____________ and
+                registered as Doct No._________of Book 1 Volume No______________Page No_____to_________, registered on
+                and filed on the file of the Sub-Registrar,
+                <br/>
+                <br/>
+                WHEREAS the SELLER is the absolute owner of the property, and he has been enjoying the same with
+                absolute right, and he has clear and marketable title to the Schedule Property WHEREAS the SELLER being
+                in need of funds for the purpose of ________________ has decided to sell the property more fully
+                described in the Schedule hereunder and the PURCHASER has offered to purchase the same. WHEREAS the
+                SELLER offered to sell and transfer the schedule property to the PURCHASER for a sale consideration of
+                Rs.___________(Rupees___________ only) and the PURCHASER herein has agreed to purchase the same for the
+                aforesaid consideration on the following terms and conditions:
+                <br/>
+                <br/>
+                NOW THIS AGREEMENT WITNESS AS FOLLOWS:
+                <br/>
+                <br/>
+                The Sale consideration of the Schedule Property is fixed at Rs. __________ (Rupees________ only).
+                The PURCHASER has paid a sum of Rs.___________(Rupees _________ only) by cash/ cheque /D.D.
+                bearing No _________ drawn on ___________ dated________ as advance, the receipt of which sum the SELLER
+                hereby acknowledges.
+                <br/>
+                <br/>
+                The balance payment of Rs._____________(Rupees _________ only) will be paid by the PURCHASER to the
+                SELLER at the time of execution of the absolute Sale Deed and thus completing the Sale transaction.
+                The parties herein covenant to complete the Sale transaction and to execute the Absolute Sale Deed by
+                the end of
+                <br/>
+                <br/>
+                The SELLER confirms with the PURCHASER that he/she has not entered into any agreement for sale, mortgage
+                or exchange whatsoever with any other person relating to the Schedule Property of this Agreement.
+                The SELLER hereby assures the PURCHASER and he/she has absolute power to convey the same and there are
+                no encumbrances, liens, charges, Government dues, attachments, acquisition, or requisition, proceedings
+                etc.
+                The SELLER agrees to put the PURCHASER in absolute and vacant possession of the schedule property after
+                executing the sale deed and registering the same in the jurisdictional Sub-Registrar's office.
+                The SELLER covenants with the PURCHASER that he/she shall not do any act, deed or thing creating any
+                charge, lien or encumbrance in respect of the schedule property during the subsistence of this
+                Agreement.
+                The SELLER has specifically agreed and covenants with the PURCHASER that he/she shall do all acts, deeds
+                and things which are necessary and requisite to convey absolute and marketable title in respect of the
+                schedule property in favour of the PURCHASER or his nominee.
+                <br/>
+                <br/>
+                IT IS AGREED between the parties that all expenses towards Stamp Duty and Registration charges shall be
+                borne by the PURCHASER only.
+                <br/>
+                <br/>
+                The PURCHASER shall have the right to nominate or assign his right under this agreement to any person /
+                persons of his choice and the SELLER shall execute the Sale Deed as per terms and conditions of this
+                Agreement in favour of the PURCHASER or his nominee or assignee.
+                <br/>
+                <br/>
+                The SELLER has agreed to get consent deed duly executed to this Sale transaction from his wife/her
+                husband, sons and daughters on or before date of registration of Sale Deed and assured that they all
+                join to execute sale deed in favour of the purchaser.
+                <br/>
+                <br/>
+                It is hereby expressly provided and agreed by the parties here to that both parties are entitled to
+                enforce specific performance of the agreement against each other in case of breach of any conditions
+                mentioned in this Agreement.
+                <br/>
+                <br/>
+                The original of the "AGREEMENT" signed by both the parties shall be with the PURCHASER and copy of the
+                same similarly signed shall be with the SELLER.
+                <br/>
+                <br/>
+                SCHEDULE
+                <br/>
+                <br/>
+                IN WITNESS WHEREOF the SELLER and the PURCHASER have signed this Agreement of Sale on the day month and
+                year herein above-mentioned in the presence of the witnesses:
+                <br/>
+                <br/>
+                WITNESSES:
+                <br/>
+                <br/>
+                1.
+                <br/>
+                <br/>
+                2.
+                <br/>
+                <br/>
+                Signed by SELLER_____________
+                <br/>
+                <br/>
+                In presence of
+                <br/>
+                <br/>
+                Signed by PURCHASER______________
+                <br/>
+                <br/>
+                In presence of
+                <br/>
+            </div>
+        </t>
+    </template>
+
+    <template id="property_rental_contract_doc">
+        <t t-call="web.external_layout">
+            <div class="page" style="line-height: 1.6;">
+                <div class="row mt8">
+                    <div class="col-4"/>
+                    <div class="col-4">
+                        <h4>
+                            <u>
+                                RENTAL AGREEMENT
+                            </u>
+                        </h4>
+                    </div>
+                    <div class="col-4"/>
+                </div>
+                <div class="row mt8">
+                    This RENTAL AGREEMENT is executed at (PLACE) on this (Date) day of (Month), (Year) by
+                    and between:
+                    <br/>
+                    <br/>
+                    (Name of the Owner),
+                    <br/>
+                    <br/>
+                    S/o or D/o. (Father’s Name of the Owner),
+                    <br/>
+                    <br/>
+                    (Permanent Address of the Owner)
+                    <br/>
+                    <br/>
+                    (hereinafter jointly and severally called the “OWNER”, which expression shall include their
+                    heirs, legal representatives, successors and assigns) of the ONE PART:
+                    <br/>
+                    <br/>
+                    AND, in favour of:
+                    <br/>
+                    <br/>
+                    (Name of the Tenant),
+                    <br/>
+                    <br/>
+                    S/o or D/o. (Father’s Name of the Tenant),
+                    <br/>
+                    <br/>
+                    Working/Studying at (Address of the Office/Studying Institution)
+                    <br/>
+                    <br/>
+                    having a permanent address at Complete permanent Address of the Tenant
+                    <br/>
+                    <br/>
+                    (hereinafter called the “TENANT”, which expression shall include its legal representatives,
+                    successors and assigns) of the OTHER PART.
+                    <br/>
+                    <br/>
+                    WHEREAS the Owner is the absolute owner of the property situated at (Complete Address of
+                    the Rented Property) as detailed in Annexure-I, hereinafter referred to as "Demised Premises".
+                    <br/>
+                    <br/>
+                    WHEREAS the Tenant has requested the Owner to grant Rent with respect to the Schedule
+                    Premises and the Owner has agreed to rent out to the Tenant the Property with two-wheeler and
+                    four-wheeler parking space in the ground floor for residential purposes only, on the following
+                    terms and conditions:
+                    <br/>
+                    <br/>
+                    <u>NOW THIS DEED WITNESSETH AS FOLLOWS:</u>
+                    <br/>
+                    <br/>
+                    1. The rent in respect of the “Demised Premises” shall commence from (Starting Date of
+                    Agreement) and shall be valid till (Expiry Date of Agreement). Thereafter, the same may be
+                    extended further on mutual consent of both the parties.
+                    <br/>
+                    <br/>
+                    2. That the Tenant shall pay to the Owner a monthly rent of Rs.(Amount of rent in Numbers),
+                    excluding electricity and water bill. The rent shall be paid on or before 7th day of each month
+                    without fail.
+                    <br/>
+                    <br/>
+                    3. That the Tenant shall pay to the Owner a monthly maintenance charge of Rs.(Amount in
+                    Numbers) towards the maintenance of Generator &amp; Elevator, Salaries towards guards, Charges
+                    for Electricity Maintenance for Common Areas, Charges towards cleaning of Common Areas
+                    and towards maintaining the lawn.
+                    <br/>
+                    <br/>
+                    4. That the Tenant shall pay for the running cost of elevator and generator separately to the
+                    Owner.
+                    <br/>
+                    <br/>
+                    5. That during the Rent period, in addition to the rental amount payable to the Owner, the Tenant
+                    shall pay for the use of electricity and water as per bills received from the authorities concerned
+                    directly. For all the dues of electricity bills and water bills till the date the possession of the
+                    premises is handed over by the Owner to the Tenant it is the responsibility of the Owner to pay
+                    and clear them according to the readings on the respective meters. At the time of handing over
+                    possession of the premises back to the Owner by Tenant, it is the responsibility of the Tenant to
+                    pay electricity &amp; water bills, as presented by the Departments concerned according to the
+                    readings on the respective meters upto the date of vacation of the property.
+                    <br/>
+                    <br/>
+                    6. The Tenant will pay to the Owner an interest-free refundable security deposit of Rs.(Amount
+                    in Numbers) vide cheque no (Cheque Number) dated (date of the cheque) at the time of signing
+                    the Rent Agreement. The said amount of the Security deposit shall be refunded by the Owner to
+                    the Tenant at the time of handing over possession of the demised premises by the Tenant upon
+                    expiry or sooner termination of this Rent after adjusting any dues (if any) or cost towards
+                    damages caused by the negligence of the Tenant or the person he is responsible for, normal wear
+                    &amp; tear and damages due to act of god exempted. In case the Owner fails to refund the security
+                    deposit to the Tenant on early termination or expiry of the Rent agreement, the Tenant is entitled
+                    to hold possession of the Rented premises, without payment of rent and/or any other charges
+                    whatsoever, till such time the Owner refunds the security deposit to the Tenant. This is without
+                    prejudice and in addition to the other remedies available to the Tenant to recover the amount
+                    from the Owner.
+                    <br/>
+                    <br/>
+                    7. That all the sanitary, electrical and other fittings and fixtures and appliances in the premises
+                    shall be handed over from the Owner to the Tenant in good working condition.
+                    <br/>
+                    <br/>
+                    8. That the Tenant shall not sublet, assign or part with the demised premises in whole or part
+                    thereof to any person in any circumstances whatsoever and the same shall be used for the
+                    bonafide residential purposes only.
+                    <br/>
+                    <br/>
+                    9. That the day-to-day minor repairs will be the responsibility for the Tenant at his/her own
+                    expense. However, any structural or major repairs, if so required, shall be carried out by the
+                    Owner.
+                    <br/>
+                    <br/>
+                    10. That no structural additions or alterations shall be made by the Tenant in the premises
+                    without the prior written consent of the Owner but the Tenant can install air-conditioners in the
+                    space provided and other electrical gadgets and make such changes for the purposes as may be
+                    necessary, at his own cost. On termination of the tenancy or earlier, the Tenant will be entitled to
+                    remove such equipment and restore the changes made, if any, to the original state.
+                    <br/>
+                    <br/>
+                    11. That the Owner shall hold the right to visit in person or through his authorized agent(s),
+                    servants, workmen etc., to enter upon the demised premises for inspection (not exceeding once in
+                    a month) or to carry out repairs / construction, as and when required.
+                    <br/>
+                    <br/>
+                    12. That the Tenant shall comply with all the rules and regulations of the local authority
+                    applicable to the demised premises. The premises will be used only for residential purposes of its
+                    employees, families and guests.
+                    <br/>
+                    <br/>
+                    13. That the Owner shall pay for all taxes/cesses levied on the premises by the local or
+                    government authorities in the way of property tax for the premises and so on. Further, any other
+                    payment in the nature of subscription or periodical fee to the welfare association shall be paid by
+                    the Owner.
+                    <br/>
+                    <br/>
+                    14. That the Owner will keep the Tenant free and harmless from any claims, proceedings,
+                    demands, or actions by others with respect to quiet possession of the premises.
+                    <br/>
+                    <br/>
+                    15. That this Rent Agreement can be terminated before the expiry of this tenancy period by
+                    serving One-month prior notice in writing by either party.
+                    <br/>
+                    <br/>
+                    16. The Tenant shall maintain the Demised Premises in good and tenable condition and all the
+                    minor repairs such as leakage in the sanitary fittings, water taps and electrical usage etc. shall
+                    be carried out by the Tenant. That it shall be the responsibility of the Tenant to hand over the
+                    vacant and peaceful possession of the demised premises on expiry of the Rent period, or on its early
+                    termination, as stated hereinabove in the same condition subject to natural wear and tear.
+                    <br/>
+                    <br/>
+                    17. That in case, where the Premises are not vacated by the Tenant, at the termination of the Rent
+                    period, the Tenant will pay damages calculated at two times the rent for any period of occupation
+                    commencing from the expiry of the Rent period. The payment of damages as aforesaid will not
+                    preclude the Owner from initiating legal proceedings against the Tenant for recovering
+                    possession of premises or for any other purpose.
+                    <br/>
+                    <br/>
+                    18. That both the parties shall observe and adhere to the terms and conditions contained
+                    hereinabove.
+                    <br/>
+                    <br/>
+                    19. That the Tenant and Owners represent and warrant that they are fully empowered and
+                    competent to make this Rent. That both the parties have read over and understood all the contents
+                    of this agreement and have signed the same without any force or pressure from any side.
+                    <br/>
+                    <br/>
+                    20. In case of any dispute to this agreement and the clauses herein, the same will be settled in the
+                    jurisdiction of the (city) civil courts.
+                    <br/>
+                    <br/>
+                    21. That the Rent Agreement will be registered in front of the Registrar and the charges towards
+                    stamp duty, court fee &amp; lawyer/coordinator will be equally borne by the Owner and Tenant.
+                </div>
+                <div class="row mt-8">
+                    <div class="col-4"/>
+                    <div class="col-4">
+                        <h4>
+                            ANNEXURE-I
+                        </h4>
+                    </div>
+                    <div class="col-4"/>
+                </div>
+                <div class="row mt-8">
+                    The (Complete Address) of the Property, consisting (Number of Bedrooms) bedrooms, living
+                    room, family lounge, kitchen, servant room and inbuilt fittings &amp; fixtures and inventory of
+                    (Number of Fans), (Number of CFL Lights), (Number of Geyser), (Number of Mirrors).
+                    <br/>
+                    <br/>
+                    <b>IN WITNESS WHEREOF BOTH PARTIES AGREES AND SIGNS THIS AGREEMENT ON THIS DAY AND YEAR</b>
+                    <br/>
+                    <br/>
+                    WITNESSES:
+                    1. (Name of the Witness)
+                    <br/>
+                    <br/>
+                    (Signature of the Witness)
+                    <br/>
+                    <br/>
+                    (Address of the Witness)
+                    <br/>
+                    <br/>
+                    2. (Name of the Witness)
+                    <br/>
+                    <br/>
+                    (Signature of the Witness)
+                    <br/>
+                    <br/>
+                    (Address of the Witness)
+                    <br/>
+                    <br/>
+                </div>
+                <div class="row mt-8">
+                    <div class="col-6">
+                        (Signature of the Owner)
+                        <br/>
+                        <br/>
+                        (Name of the Owner)
+                        <br/>
+                        <br/>
+                        OWNER
+                        <br/>
+                        <br/>
+                    </div>
+                    <div class="col-6">
+                        (Signature of the Tenant)
+                        <br/>
+                        <br/>
+                        (Name of the Tenant)
+                        <br/>
+                        <br/>
+                        TENANT
+                    </div>
+                </div>
+            </div>
+        </t>
+    </template>
+
+    <template id="property_sale_contract_template">
+        <t t-call="web.html_container">
+            <t t-foreach="docs" t-as="o">
+                <t t-if="o.contract_type == 'is_rental'">
+                    <t t-call="real_estate_bits.property_rental_contract_doc" t-lang="o.partner_id.lang"/>
+                </t>
+                <t t-else="">
+                    <t t-call="real_estate_bits.property_sale_contract_doc" t-lang="o.partner_id.lang"/>
+                </t>
+            </t>
+        </t>
+    </template>
+
+    <record id="action_report_property_sale_contract" model="ir.actions.report">
+        <field name="name">Property Contract</field>
+        <field name="model">property.contract</field>
+        <field name="report_type">qweb-pdf</field>
+        <field name="print_report_name">'Property Sale Contract - %s' % object.name</field>
+        <field name="report_name">real_estate_bits.property_sale_contract_template</field>
+        <field name="report_file">real_estate_bits.property_sale_contract_template</field>
+        <field name="binding_model_id" ref="model_property_contract"/>
+        <field name="binding_type">report</field>
+    </record>
+
+</odoo>

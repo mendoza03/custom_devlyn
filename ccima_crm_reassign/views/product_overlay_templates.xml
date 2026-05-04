@@ -1,0 +1,248 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+  <template id="product_image_overlay_page" name="Product Image Overlay Page">
+    <t t-call="website.layout">
+      <div id="wrap" class="oe_structure">
+        <section class="container py-4">
+          <h3 class="mb-3">Product Image Overlay</h3>
+
+          <!-- Form: product + image + overlay builder -->
+          <form id="pio_form" action="/product/overlay/preview" method="POST" enctype="multipart/form-data" class="mb-4">
+            <input type="hidden" name="csrf_token" t-att-value="request.csrf_token()"/>
+            <input type="hidden" id="overlays_json" name="overlays_json" value="[]"/>
+
+            <div class="row g-3">
+              <div class="col-lg-4">
+                <label class="form-label fw-semibold">Product</label>
+                <select name="product_id" class="form-select" required="1">
+                  <option value="">-- Select a product --</option>
+                  <t t-foreach="products" t-as="p">
+                    <option t-att-value="p.id"
+                            t-att-selected="product and p.id == product.id and 'selected' or None">
+                      <t t-esc="p.display_name"/>
+                    </option>
+                  </t>
+                </select>
+              </div>
+
+              <div class="col-lg-5">
+                <label class="form-label fw-semibold">Upload Image</label>
+                <input id="image_file" class="form-control" type="file" name="image_file" accept="image/*" required="1"/>
+              </div>
+
+              <div class="col-lg-3 d-flex align-items-end">
+                <button class="btn btn-primary w-100" type="submit" id="btn_render">Render</button>
+              </div>
+            </div>
+
+            <!-- Overlay Builder Panel -->
+            <div class="card mt-4">
+              <div class="card-body">
+                <h5 class="card-title mb-3">Overlay Builder</h5>
+                <div class="row g-3">
+                  <div class="col-md-3">
+                    <label class="form-label">Source</label>
+                    <select id="src" class="form-select">
+                      <option value="name">Product (Name)</option>
+                      <option value="default_code">Internal Reference</option>
+                      <option value="list_price">List Price</option>
+                      <option value="uom">UoM</option>
+                      <option value="category">Category</option>
+                      <option value="qty_available">Qty Available</option>
+                      <option value="">(Custom text)</option>
+                    </select>
+                  </div>
+                  <div class="col-md-3">
+                    <label class="form-label">Title (optional)</label>
+                    <input id="title" class="form-control" type="text" placeholder="BOX"/>
+                  </div>
+                  <div class="col-md-6">
+                    <label class="form-label">Custom text (only if Source is empty)</label>
+                    <input id="free_text" class="form-control" type="text" placeholder="e.g., PROMO: -20%"/>
+                  </div>
+
+                  <div class="col-12"><hr/></div>
+
+                  <div class="col-md-2">
+                    <label class="form-label">Left X (%)</label>
+                    <input id="x_pct" class="form-control" type="number" step="0.01" min="0" max="100" value="6"/>
+                  </div>
+                  <div class="col-md-2">
+                    <label class="form-label">Top Y (%)</label>
+                    <input id="y_pct" class="form-control" type="number" step="0.01" min="0" max="100" value="6"/>
+                  </div>
+                  <div class="col-md-2">
+                    <label class="form-label">Width (%)</label>
+                    <input id="w_pct" class="form-control" type="number" step="0.01" min="1" max="100" value="28"/>
+                  </div>
+                  <div class="col-md-2">
+                    <label class="form-label">Height (%)</label>
+                    <input id="h_pct" class="form-control" type="number" step="0.01" min="1" max="100" value="12"/>
+                  </div>
+                  <div class="col-md-4 d-flex align-items-end">
+                    <button class="btn btn-outline-primary me-2" type="button" id="btn_add">Add box</button>
+                    <button class="btn btn-outline-secondary" type="button" id="btn_clear">Clear all</button>
+                  </div>
+                </div>
+
+                <!-- Live list of boxes -->
+                <div class="table-responsive mt-3">
+                  <table class="table table-sm align-middle">
+                    <thead>
+                      <tr>
+                        <th>#</th>
+                        <th>Source</th>
+                        <th>Title</th>
+                        <th>X%</th>
+                        <th>Y%</th>
+                        <th>W%</th>
+                        <th>H%</th>
+                        <th></th>
+                      </tr>
+                    </thead>
+                    <tbody id="boxes_tbody"></tbody>
+                  </table>
+                </div>
+              </div>
+            </div>
+          </form>
+
+          <!-- Preview -->
+          <t t-if="image_data_url">
+            <div id="pio_wrapper" class="pio-wrapper mt-4">
+              <img id="pio_img" t-att-src="image_data_url" alt="Base image" class="pio-img"/>
+              <div id="pio_layer" class="pio-layer" aria-hidden="true">
+                <t t-foreach="overlays" t-as="o">
+                  <div class="pio-box"
+                       t-attf-style="left:#{o['x_pct']}%; top:#{o['y_pct']}%; width:#{o['w_pct']}%; height:#{o['h_pct']}%;">
+                    <p class="pio-title" t-esc="o.get('title') or ''"/>
+                    <p class="pio-text" t-esc="o.get('text') or ''"/>
+                  </div>
+                </t>
+              </div>
+            </div>
+
+            <p class="text-muted mt-3">
+              Tip: click the image to copy coordinates (x%, y%) to the builder (and console).
+            </p>
+          </t>
+        </section>
+      </div>
+
+      <style>
+        .pio-wrapper { position: relative; max-width: 1024px; margin: 0 auto; }
+        .pio-img { width: 100%; height: auto; display: block; border-radius: 10px; }
+        .pio-layer { position: absolute; inset: 0; pointer-events: none; }
+        .pio-box {
+          position: absolute; box-sizing: border-box;
+          border: 2px solid rgba(14,165,233,.9);
+          background: rgba(14,165,233,.12);
+          border-radius: 12px; padding: 10px 12px;
+          backdrop-filter: blur(2px);
+          pointer-events: auto;
+          overflow: hidden;
+        }
+        .pio-title { font-weight: 700; margin: 0 0 4px 0; font-size: 14px; }
+        .pio-text  { margin: 0; font-size: 13px; line-height: 1.25; }
+      </style>
+
+      <script type="text/javascript">
+        (function () {
+          // --- State ---
+          const overlays = [];
+          const $form = document.getElementById("pio_form");
+          const $hidden = document.getElementById("overlays_json");
+          const $tbody = document.getElementById("boxes_tbody");
+
+          const $src = document.getElementById("src");
+          const $title = document.getElementById("title");
+          const $free = document.getElementById("free_text");
+          const $x = document.getElementById("x_pct");
+          const $y = document.getElementById("y_pct");
+          const $w = document.getElementById("w_pct");
+          const $h = document.getElementById("h_pct");
+
+          const $btnAdd = document.getElementById("btn_add");
+          const $btnClear = document.getElementById("btn_clear");
+          const $btnRender = document.getElementById("btn_render");
+
+          function clamp01(v){ v = Number(v||0); if (v<0) v=0; if (v>100) v=100; return Number(v.toFixed(2)); }
+
+          function renderTable(){
+            $tbody.innerHTML = "";
+            overlays.forEach((o, idx) => {
+              const tr = document.createElement("tr");
+              tr.innerHTML = `
+                <td>${idx+1}</td>
+                <td>${o.source || "(custom)"}</td>
+                <td>${o.title || ""}</td>
+                <td>${o.x_pct}</td>
+                <td>${o.y_pct}</td>
+                <td>${o.w_pct}</td>
+                <td>${o.h_pct}</td>
+                <td class="text-end">
+                  <button type="button" class="btn btn-sm btn-outline-danger" data-del="${idx}">Remove</button>
+                </td>
+              `;
+              $tbody.appendChild(tr);
+            });
+          }
+
+          $tbody.addEventListener("click", (ev) => {
+            const i = ev.target && ev.target.getAttribute("data-del");
+            if (i !== null && i !== undefined) {
+              overlays.splice(Number(i), 1);
+              renderTable();
+            }
+          });
+
+          $btnAdd.addEventListener("click", () => {
+            const obj = {
+              source: $src.value || "",
+              title: ($title.value || "").trim(),
+              text:  ($free.value || "").trim(),
+              x_pct: clamp01($x.value),
+              y_pct: clamp01($y.value),
+              w_pct: clamp01($w.value || 20),
+              h_pct: clamp01($h.value || 12),
+            };
+            overlays.push(obj);
+            renderTable();
+          });
+
+          $btnClear.addEventListener("click", () => {
+            overlays.splice(0, overlays.length);
+            renderTable();
+          });
+
+          // Before submit -> dump JSON
+          $form.addEventListener("submit", () => {
+            $hidden.value = JSON.stringify(overlays);
+          });
+
+          // Click-to-pick coordinates on preview image (after first render)
+          const img = document.getElementById("pio_img");
+          const wrap = document.getElementById("pio_wrapper");
+          if (img && wrap) {
+            wrap.addEventListener("click", (ev) => {
+              const rect = img.getBoundingClientRect();
+              if (ev.clientX < rect.left || ev.clientX > rect.right || ev.clientY < rect.top || ev.clientY > rect.bottom) {
+                return;
+              }
+              const x = ev.clientX - rect.left;
+              const y = ev.clientY - rect.top;
+              const x_pct = (x / rect.width) * 100;
+              const y_pct = (y / rect.height) * 100;
+              const sx = Number(x_pct.toFixed(2));
+              const sy = Number(y_pct.toFixed(2));
+              console.log("Click coords ->", { x_pct: sx, y_pct: sy });
+              // auto-fill the builder inputs
+              $x.value = sx;
+              $y.value = sy;
+            });
+          }
+        })();
+      </script>
+    </t>
+  </template>
+</odoo>

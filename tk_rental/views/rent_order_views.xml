@@ -1,0 +1,525 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <data>
+        <record id="rent_order_form_view" model="ir.ui.view">
+            <field name="name">rent.order.form.view</field>
+            <field name="model">rent.order</field>
+            <field name="arch" type="xml">
+                <form>
+                    <header>
+                        <field name="button_visible" invisible="1"/>
+                        <field name="status" widget="statusbar"
+                               statusbar_visible="draft,quotation,quotation_sent,in_progress,delivery,return,close"/>
+
+                        <button string="Quotation" name="draft_to_quotation" type="object" class="oe_highlight"
+                                invisible="status != 'draft'"/>
+
+                        <button string="Sent Quotation by Mail" name="quotation_to_send_quotation" type="object"
+                                class="btn btn-info" invisible="status != 'quotation'"/>
+
+                        <button string="Approve" name="quotation_sent_to_approve" type="object" class="btn btn-success"
+                                invisible="status != 'quotation_sent'"/>
+
+                        <button string="Create Invoice" name="get_create_rental_invoice" type="object"
+                                class="oe_highlight" invisible="status != 'approve'"/>
+
+                        <button string="Reject" name="quotation_sent_to_reject" type="object" class="btn btn-danger"
+                                invisible="status != 'quotation_sent'"/>
+
+                        <button string="Reset to Draft" name="reject_to_draft" type="object" class="btn btn-info"
+                                invisible="status != 'reject'"/>
+
+                        <button string="Create Delivery" name="action_create_delivery_order" type="object"
+                                class="oe_highlight" invisible="status != 'in_progress'"/>
+
+                        <button string="Delivered" name="in_delivery_to_delivery" type="object" class="oe_highlight"
+                                invisible="status != 'in_delivery'"/>
+
+                        <button string="Return" name="delivery_to_return" type="object" class="oe_highlight"
+                                invisible="status != 'delivery'"/>
+
+                        <button name="action_create_extra_hour_invoice" type="object" class="btn btn-primary"
+                                string="Create Extra Hour Charge Invoice"
+                                invisible="extra_hour_invoice_type != 'together' or status != 'return' or button_visible == True"/>
+
+                        <button string="Update Odometer" name="%(update_last_odometer_wizard_action)d" type="action"
+                                class="btn btn-info" invisible="status != 'return'"/>
+
+                        <button string="Close" name="return_to_close" type="object" class="btn btn-success"
+                                invisible="status != 'return'"/>
+
+                        <button string="Cancel" name="close_to_cancel" type="object" class="btn btn-danger"
+                                invisible="status in ['draft', 'cancel', 'delivery', 'return', 'close']"/>
+                    </header>
+                    <sheet>
+                        <div class="oe_button_box" name="button_box" position="inside">
+                            <button class="oe_stat_button" type="object" name="action_rent_invoice_view"
+                                    icon="fa-pencil-square-o" invisible="invoice_count == 0">
+                                <field string="Invoices" name="invoice_count" widget="statinfo"/>
+                            </button>
+                            <button class="oe_stat_button" type="object" name="action_delivery_order_view"
+                                    icon="fa-truck" invisible="delivery_order_count == 0">
+                                <field string="Delivery Orders" name="delivery_order_count" widget="statinfo"/>
+                            </button>
+                            <button class="oe_stat_button" type="object" name="action_return_order_view"
+                                    icon="fa-truck" invisible="return_order_count == 0">
+                                <field string="Return Orders" name="return_order_count" widget="statinfo"/>
+                            </button>
+                        </div>
+                        <div class="oe_title">
+                            <h1>
+                                <field name="order_number"/>
+                            </h1>
+                        </div>
+                        <group>
+                            <group string="Customer Details">
+                                <field name="customer_id" readonly="status != 'draft'"
+                                       options="{'no_create': True, 'no_create_edit': True}"/>
+                                <field name="phone" readonly="status != 'draft'"/>
+                                <field name="email" readonly="status != 'draft'"/>
+                            </group>
+                            <group string="Contract Details">
+                                <field name="start_date" readonly="status != 'draft'"/>
+                                <field name="return_date" readonly="status != 'draft'"/>
+                            </group>
+                        </group>
+
+                        <group>
+                            <group string="Shipping Address">
+                                <span class="o_form_label o_td_label" name="address_name">Address</span>
+                                <div class="o_address_format">
+                                    <field name="shipping_street" placeholder="Street..." class="o_address_street"
+                                           readonly="status != 'draft'"/>
+                                    <field name="shipping_street2" placeholder="Street 2..." class="o_address_street"
+                                           readonly="status != 'draft'"/>
+                                    <field name="shipping_city" placeholder="City" class="o_address_city"
+                                           readonly="status != 'draft'" required="1"/>
+                                    <field name="shipping_state_id" class="o_address_state" placeholder="State"
+                                           options="{'no_create': True, 'no_create_edit': True, 'no_open': True}"
+                                           readonly="status != 'draft'"/>
+                                    <field name="shipping_zip" placeholder="ZIP" class="o_address_zip"
+                                           readonly="status != 'draft'"/>
+                                    <field name="shipping_country_id" placeholder="Country" class="o_address_country"
+                                           options="{'no_create': True, 'no_create_edit': True, 'no_open': True}"
+                                           readonly="status != 'draft'"/>
+                                </div>
+                            </group>
+                            <group string="Invoice Details" invisible="invoice_id == False">
+                                <label for="invoice_id" class="mt-1"/>
+                                <div name="invoice_id">
+                                    <field name="invoice_id" readonly="1" class="oe_inline" force_save="1"
+                                           style="width: auto;"/>
+                                    <field name="invoice_payment_state" widget="badge"
+                                           style="margin-left: 10px; width: auto;"
+                                           decoration-success="invoice_payment_state == 'paid'"
+                                           decoration-danger="invoice_payment_state == 'not_paid'"
+                                           decoration-info="invoice_payment_state == 'in_payment'"
+                                           decoration-warning="invoice_payment_state in ('partial', 'reversed')"/>
+                                </div>
+                            </group>
+                        </group>
+                        <group>
+                            <group string="Billing Address">
+                                <span class="o_form_label o_td_label" name="address_name">Address</span>
+                                <div class="o_address_format">
+                                    <field name="billing_street" placeholder="Street..." class="o_address_street"
+                                           readonly="status != 'draft'"/>
+                                    <field name="billing_street2" placeholder="Street 2..." class="o_address_street"
+                                           readonly="status != 'draft'"/>
+                                    <field name="billing_city" placeholder="City" class="o_address_city"
+                                           readonly="status != 'draft'" required="1"/>
+                                    <field name="billing_state_id" class="o_address_state" placeholder="State"
+                                           options="{'no_create': True, 'no_create_edit': True, 'no_open': True}"
+                                           readonly="status != 'draft'"/>
+                                    <field name="billing_zip" placeholder="ZIP" class="o_address_zip"
+                                           readonly="status != 'draft'"/>
+                                    <field name="billing_country_id" placeholder="Country" class="o_address_country"
+                                           options="{'no_create': True, 'no_create_edit': True, 'no_open': True}"
+                                           readonly="status != 'draft'"/>
+                                </div>
+                            </group>
+                            <group string="Delivery Order Details"
+                                   invisible="status not in ['in_progress', 'in_delivery', 'delivery', 'return', 'close']">
+                                <field name="delivery_type" widget="radio" options="{'horizontal': true}" readonly="1"/>
+                                <field name="warehouse_id" options="{'no_create': True, 'no_create_edit': True}"
+                                       required="status in ['in_progress', 'in_delivery', 'delivery', 'return', 'close']"
+                                       readonly="status in ['delivery', 'return', 'close']"/>
+                                <field name="delivery_order_id" invisible="1"/>
+                                <field name="extra_hour_invoice_type" widget="radio" options="{'horizontal': true}"
+                                       invisible="status not in ['return', 'close']"
+                                       readonly="button_visible != False or status == 'close'"/>
+                            </group>
+                        </group>
+                        <group>
+                            <group>
+                                <field name="responsible_id" widget="many2one_avatar_user" readonly="status != 'draft'"
+                                       options="{'no_create': True, 'no_create_edit': True}"/>
+                            </group>
+                        </group>
+                        <notebook>
+                            <page name="renting_items" string="Renting Items">
+                                <field name="renting_items_ids" readonly="invoice_id != False"
+                                       context="{'default_start_date': start_date, 'default_return_date': return_date}">
+                                    <list>
+                                        <field name="product_id"/>
+                                        <field name="serial_number"/>
+                                        <field name="start_date"/>
+                                        <field name="return_date"/>
+                                        <field name="product_qty"/>
+                                        <field name="equipment_renting_info_id"/>
+                                        <field name="renting_amount"/>
+                                        <field name="range" string="Unit"/>
+                                        <field name="rent_amount"/>
+                                        <field name="extra_hour_amount"/>
+                                        <field name="rent_per_unit"/>
+                                        <field name="total_amount"/>
+                                        <field name="company_id" column_invisible="True"/>
+                                        <field name="currency_id" column_invisible="True"/>
+                                    </list>
+                                </field>
+                                <div class="row">
+                                    <div class="col-10">
+                                    </div>
+                                    <div class="col-2" style="text-align: right;">
+                                        <h6>
+                                            Total Estimations
+                                            <hr style="margin: 5px;"/>
+                                        </h6>
+                                        Total:
+                                        <field name="total_item_cost"/>
+                                        <field name="company_id" invisible="1"/>
+                                        <field name="currency_id" invisible="1"/>
+                                    </div>
+                                </div>
+                            </page>
+                            <page name="equipments_delivery" string="Equipments Delivery"
+                                  invisible="status not in ['in_delivery', 'delivery', 'return', 'close']">
+                                <field name="equipment_delivery_ids" nolabel="1" force_save="1"
+                                       readonly="status == 'close'">
+                                    <form>
+                                        <sheet>
+                                            <separator string="Equipment Details" name="equipment_details"/>
+                                            <group>
+                                                <group>
+                                                    <field name="product_id" readonly="deliver_order_id != False"/>
+                                                    <field name="product_qty" readonly="deliver_order_id != False"/>
+                                                </group>
+                                                <group>
+                                                    <field name="description" readonly="deliver_order_id != False"/>
+                                                    <label for="deliver_order_id" string="Deliver Order"
+                                                           invisible="deliver_order_id == False"/>
+                                                    <div class="address_format" invisible="deliver_order_id == False">
+                                                        <field name="deliver_order_id" style="width: auto;"
+                                                               readonly="1"/>
+                                                        <field name="state" widget="badge" optional="show"
+                                                               decoration-info="state == 'draft'"
+                                                               decoration-danger="state == 'cancel'"
+                                                               decoration-warning="state in ('waiting', 'assigned')"
+                                                               decoration-success="state in ('confirmed', 'done')"
+                                                               style="margin-left: 15px; width: auto;"/>
+                                                    </div>
+                                                </group>
+                                            </group>
+                                            <group>
+                                                <group string="Is Any Extra Hours ?">
+                                                    <field name="is_any_extra_hours"
+                                                           readonly="extra_hour_invoice_id != False"/>
+                                                    <field name="extra_hours" invisible="is_any_extra_hours == False"
+                                                           readonly="extra_hour_invoice_id != False"/>
+                                                    <field name="extra_hour_price"
+                                                           invisible="is_any_extra_hours == False"
+                                                           readonly="extra_hour_invoice_id != False"/>
+                                                    <field name="total_charge" invisible="is_any_extra_hours == False"/>
+                                                    <label for="extra_hour_invoice_id" string="Extra Hour Invoice"
+                                                           invisible="extra_hour_invoice_id == False"/>
+                                                    <div class="address_format"
+                                                         invisible="extra_hour_invoice_id == False">
+                                                        <field name="extra_hour_invoice_id" style="width: auto;"
+                                                               readonly="1"/>
+                                                        <field name="extra_invoice_state" widget="badge"
+                                                               decoration-danger="extra_invoice_state == 'not_paid'"
+                                                               decoration-warning="extra_invoice_state in ('partial', 'in_payment')"
+                                                               decoration-success="extra_invoice_state in ('paid', 'reversed')"
+                                                               invisible="extra_invoice_state in 'invoicing_legacy'"
+                                                               optional="show" style="margin-left: 15px; width: auto;"/>
+                                                    </div>
+                                                </group>
+                                                <group string="Return Damage Charge Invoice Details">
+                                                    <field name="return_charge" readonly="invoice_id != False"/>
+                                                    <field name="total_damage_charge"/>
+                                                    <field name="company_id" invisible="1"/>
+                                                    <field name="currency_id" invisible="1"/>
+                                                    <label for="invoice_id" string="Damage Invoice"
+                                                           invisible="invoice_id == False"/>
+                                                    <div class="address_format" invisible="invoice_id == False">
+                                                        <field name="invoice_id" style="width: auto;" readonly="1"/>
+                                                        <field name="invoice_state" widget="badge"
+                                                               decoration-danger="invoice_state == 'not_paid'"
+                                                               decoration-warning="invoice_state in ('partial', 'in_payment')"
+                                                               decoration-success="invoice_state in ('paid', 'reversed')"
+                                                               invisible="invoice_state in 'invoicing_legacy'"
+                                                               optional="show" style="margin-left: 15px; width: auto;"/>
+                                                    </div>
+                                                </group>
+                                            </group>
+                                            <notebook>
+                                                <page name="equipment_delivery_image"
+                                                      string="Equipment Return Order Images">
+                                                    <field name="equipment_delivery_image_ids" nolabel="1">
+                                                        <form>
+                                                            <sheet>
+                                                                <div class="oe_title float-left">
+                                                                    <label for="name"/>
+                                                                    <h1>
+                                                                        <field name="name" placeholder="e.g. Name"/>
+                                                                    </h1>
+                                                                </div>
+                                                                <div style="width: 40%; height: 40%;"
+                                                                     class="float-right">
+                                                                    <field name="avatar"
+                                                                           style="width: 40%; height: 40%;"
+                                                                           class="img-thumbnail float-right"
+                                                                           widget="image" required="1"/>
+                                                                </div>
+                                                            </sheet>
+                                                        </form>
+                                                        <kanban string="Equipment Return Order Images">
+                                                            <field name="id"/>
+                                                            <field name="name"/>
+                                                            <field name="avatar"/>
+                                                            <templates>
+                                                                <t t-name="kanban-box">
+                                                                    <div class="card oe_kanban_global_click p-0 border-0">
+                                                                        <div class="row">
+                                                                            <div class="col-8">
+                                                                                <strong>
+                                                                                    <field name="name"/>
+                                                                                </strong>
+                                                                            </div>
+                                                                            <div class="col-4 text-end">
+                                                                                <!-- below 100 Kb: good -->
+                                                                                <t t-if="record.avatar.raw_value.length &lt; 100*1000">
+                                                                                    <t t-set="size_status"
+                                                                                       t-value="'text-bg-success'"/>
+                                                                                    <t t-set="message">Acceptable file
+                                                                                        size
+                                                                                    </t>
+                                                                                </t>
+                                                                                <!-- below 1000 Kb: decent -->
+                                                                                <t t-elif="record.avatar.raw_value.length &lt; 1000*1000">
+                                                                                    <t t-set="size_status"
+                                                                                       t-value="'text-bg-warning'"/>
+                                                                                    <t t-set="message">Huge file size.
+                                                                                        The image
+                                                                                        should be optimized/reduced.
+                                                                                    </t>
+                                                                                </t>
+                                                                                <!-- above 1000 Kb: bad -->
+                                                                                <t t-else="1">
+                                                                                    <t t-set="size_status"
+                                                                                       t-value="'text-bg-danger'"/>
+                                                                                    <t t-set="message">Optimization
+                                                                                        required! Reduce the
+                                                                                        image size or increase your
+                                                                                        compression settings.
+                                                                                    </t>
+                                                                                </t>
+                                                                                <span t-attf-class="badge #{size_status} o_product_image_size"
+                                                                                      t-esc="record.avatar.value"
+                                                                                      t-att-title="message"/>
+                                                                            </div>
+                                                                        </div>
+                                                                        <hr class="mb-1 mt-1"/>
+                                                                        <div class="o_squared_image">
+                                                                            <img class="card-img-top"
+                                                                                 style="height:223px;object-fit: cover;"
+                                                                                 t-att-src="kanban_image('equipment.delivery.image', 'avatar', record.id.raw_value)"
+                                                                                 t-att-alt="record.name.value"/>
+                                                                        </div>
+                                                                    </div>
+                                                                </t>
+                                                            </templates>
+                                                        </kanban>
+                                                    </field>
+                                                </page>
+                                            </notebook>
+                                        </sheet>
+                                    </form>
+                                    <list create="false">
+                                        <field name="product_id" required="1"/>
+                                        <field name="description"/>
+                                        <field name="product_qty" required="1"/>
+                                        <field name="deliver_order_id" widget="many2one_button"/>
+                                        <field name="state" widget="badge" optional="show"
+                                               decoration-info="state == 'draft'"
+                                               decoration-danger="state == 'cancel'"
+                                               decoration-warning="state in ('waiting', 'assigned')"
+                                               decoration-success="state in ('confirmed', 'done')"/>
+                                        <field name="invoice_id" column_invisible="1"/>
+                                        <field name="is_any_extra_hours" column_invisible="1"/>
+                                        <field name="extra_hour_invoice_id" column_invisible="1"/>
+                                        <button name="action_create_return_charge_invoice" type="object"
+                                                class="btn btn-outline-info"
+                                                string="Create Return Damage Charge Invoice"
+                                                invisible="parent.return_order_count == 0 or invoice_id != False or parent.status == 'close'"/>
+
+                                        <button name="action_create_extra_hour_invoice" type="object"
+                                                class="btn btn-outline-primary"
+                                                string="Create Extra Hour Charge Invoice"
+                                                invisible="parent.extra_hour_invoice_type != 'single' or is_any_extra_hours == False or extra_hour_invoice_id != False"/>
+                                    </list>
+                                </field>
+                                <div class="row">
+                                    <div class="col-9">
+                                    </div>
+                                    <div class="col-3" style="text-align: right;">
+                                        <h6>
+                                            Total Estimations
+                                            <hr style="margin: 5px;"/>
+                                        </h6>
+                                        Total Damage Charges:
+                                        <field name="total_damage_charge"/>
+                                        <br/>
+                                        Total Extra Hour Charges:
+                                        <field name="extra_hour_charge"/>
+                                        <field name="company_id" invisible="1"/>
+                                        <field name="currency_id" invisible="1"/>
+                                    </div>
+                                </div>
+                            </page>
+                            <page name="terms_conditions" string="Terms &amp; Conditions">
+                                <group>
+                                    <group>
+                                        <field name="rent_term_id" readonly="status == 'close'"
+                                               options="{'no_create': True, 'no_create_edit': True}"/>
+                                    </group>
+                                </group>
+                                <separator string="Descriptions" name="descriptions"/>
+                                <field name="description" readonly="status == 'close'"/>
+                            </page>
+                            <page name="reject_reasons" string="Reject Reasons" invisible="status != 'reject'">
+                                <field name="reject_reason"/>
+                            </page>
+                        </notebook>
+                    </sheet>
+                    <chatter reload_on_post="True" reload_on_attachment="True"/>
+                </form>
+            </field>
+        </record>
+        <record id="rent_order_list_view" model="ir.ui.view">
+            <field name="name">rent.order.list.view</field>
+            <field name="model">rent.order</field>
+            <field name="arch" type="xml">
+                <list>
+                    <field name="order_number"/>
+                    <field name="customer_id"/>
+                    <field name="phone"/>
+                    <field name="email"/>
+                    <field name="start_date"/>
+                    <field name="return_date"/>
+                    <field name="delivery_type"/>
+                    <field name="responsible_id" widget="many2one_avatar_user"/>
+                    <field name="status" widget="badge" optional="show"
+                           decoration-info="status in ('draft', 'quotation')"
+                           decoration-danger="status in ('cancel', 'reject')"
+                           decoration-warning="status in ('quotation_sent', 'in_progress', 'return')"
+                           decoration-success="status in ('delivery', 'approve', 'close')"/>
+                </list>
+            </field>
+        </record>
+        <record id="rent_order_kanban_view" model="ir.ui.view">
+            <field name="name">rent.order.kanban.view</field>
+            <field name="model">rent.order</field>
+            <field name="arch" type="xml">
+                <kanban class="o_kanban_mobile" sample="1" records_draggable="false">
+                    <field name="id"/>
+                    <field name="order_number"/>
+                    <field name="customer_id"/>
+                    <field name="start_date"/>
+                    <field name="return_date"/>
+                    <field name="status"/>
+                    <templates>
+                        <t t-name="kanban-box">
+                            <div t-attf-class="oe_kanban_card oe_kanban_global_click">
+                                <div class="o_kanban_record_top mb16">
+                                    <div class="o_kanban_record_headings mt4">
+                                        <strong>
+                                            <field name="order_number"/>
+                                        </strong>
+                                        <br/>
+                                        <span>
+                                            <field name="customer_id"/>
+                                        </span>
+                                    </div>
+                                    <strong>
+                                        <field name="responsible_id" widget="many2one_avatar_user"/>
+                                    </strong>
+                                </div>
+                                <div class="o_kanban_record_bottom">
+                                    <div class="oe_kanban_bottom_left text-muted">
+                                        <span>
+                                            <field name="start_date"/>&#160;-
+                                            <field name="return_date"/>
+                                        </span>
+                                    </div>
+                                    <div class="oe_kanban_bottom_right">
+                                        <field name="status" widget="label_selection" style="font-size: 12px;"
+                                               options="{'classes': {'draft': 'info', 'quotation': 'info', 'quotation_sent': 'warning', 'in_progress': 'warning', 'return': 'warning', 'delivery': 'success', 'approve': 'success', 'close': 'success', 'cancel': 'danger', 'reject': 'danger'}}"/>
+                                    </div>
+                                </div>
+                            </div>
+                        </t>
+                    </templates>
+                </kanban>
+            </field>
+        </record>
+        <record id="rent_order_calendar_view" model="ir.ui.view">
+            <field name="name">rent.order.calendar.view</field>
+            <field name="model">rent.order</field>
+            <field name="arch" type="xml">
+                <calendar string="Rent Order Calendar"
+                          date_start="start_date"
+                          event_open_popup="true"
+                          mode="month"
+                          color="status"
+                          scales="day,month,year"
+                          quick_create="False">
+                    <field name="order_number"/>
+                    <field name="customer_id"/>
+                    <field name="phone"/>
+                    <field name="email"/>
+                    <field name="delivery_type"/>
+                    <field name="customer_id" filters="1"/>
+                    <field name="status" widget="badge" optional="show"
+                           decoration-info="status in ('draft', 'quotation')"
+                           decoration-danger="status in ('cancel', 'reject')"
+                           decoration-warning="status in ('quotation_sent', 'in_progress', 'return')"
+                           decoration-success="status in ('delivery', 'approve', 'close')"/>
+                </calendar>
+            </field>
+        </record>
+        <record id="rent_order_search_view" model="ir.ui.view">
+            <field name="name">rent.order.search.view</field>
+            <field name="model">rent.order</field>
+            <field name="arch" type="xml">
+                <search>
+                    <field name="order_number"/>
+                    <group string="Group By">
+                        <filter name="customer_id" string="Customer"
+                                context="{'group_by': 'customer_id'}"/>
+                        <filter name="delivery_type" string="Delivery Type"
+                                context="{'group_by': 'delivery_type'}"/>
+                        <filter name="status" string="Status"
+                                context="{'group_by': 'status'}"/>
+                    </group>
+                </search>
+            </field>
+        </record>
+        <record id="action_rent_order" model="ir.actions.act_window">
+            <field name="name">Rent Contracts</field>
+            <field name="res_model">rent.order</field>
+            <field name="view_mode">kanban,list,form,search,calendar,activity</field>
+            <field name="context">{'search_default_status': 1}</field>
+        </record>
+    </data>
+</odoo>

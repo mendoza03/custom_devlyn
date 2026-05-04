@@ -1,0 +1,242 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<templates id="template" xml:space="preserve">
+    <t t-name="tk_rental.rent_dashboard" owl="1">
+        <section class="section rental_dashboard">
+            <div class="container">
+                 <div class="row">
+                    <div class="col-md-12 mt32">
+                        <h4 class="tk-primary">All Static</h4>
+                        <hr class="border-primary"/>
+                    </div>
+                     <div class="col-md-2 mb-2 mt8 mb16"
+                          t-on-click="() => this.viewRentOrderStatsDetails('all')">
+                        <div class="card purple-bg p-32">
+                            <div class="card-body purple-bg tk-card-body">
+                                <img alt="users" width="40"
+                                     src="tk_rental/static/src/img/dashboard/1-rental.svg"/>
+                                <h4 class="tk-st-1">Orders</h4>
+                                <h6 class="tk-st-2">
+                                    <t t-esc="state.rentOrderStats['total_rent_orders']"/>
+                                </h6>
+                            </div>
+                        </div>
+                     </div>
+                     <div class="col-md-2 mb-2 mt8 mb16"
+                          t-on-click="() => this.viewRentOrderStatsDetails('draft')">
+                         <div class="card info-bg p-32">
+                             <div class="card-body info-bg tk-card-body">
+                                 <img alt="users" width="40"
+                                      src="tk_rental/static/src/img/dashboard/2-draft.svg"/>
+                                 <h4 class="tk-st-1">Draft</h4>
+                                 <h6 class="tk-st-2">
+                                     <t t-esc="state.rentOrderStats['draft_stages']"/>
+                                 </h6>
+                             </div>
+                         </div>
+                     </div>
+                     <div class="col-md-2 mb-2 mt8 mb16"
+                          t-on-click="() => this.viewRentOrderStatsDetails('in_progress')">
+                         <div class="card warn-bg p-32">
+                             <div class="card-body warn-bg tk-card-body">
+                                 <img alt="users" width="40"
+                                      src="tk_rental/static/src/img/dashboard/3-progress.svg"/>
+                                 <h4 class="tk-st-1">In Progress</h4>
+                                 <h6 class="tk-st-2">
+                                     <t t-esc="state.rentOrderStats['in_progress_stages']"/>
+                                 </h6>
+                             </div>
+                         </div>
+                     </div>
+                     <div class="col-md-2 mb-2 mt8 mb16"
+                          t-on-click="() => this.viewRentOrderStatsDetails('close')">
+                         <div class="card active-bg p-32">
+                             <div class="card-body active-bg tk-card-body">
+                                 <img alt="users" width="40"
+                                      src="tk_rental/static/src/img/dashboard/4-close.svg"/>
+                                 <h4 class="tk-st-1">Closed</h4>
+                                 <h6 class="tk-st-2">
+                                     <t t-esc="state.rentOrderStats['closed_orders']"/>
+                                 </h6>
+                             </div>
+                         </div>
+                     </div>
+                     <div class="col-md-2 mb-2 mt8 mb16"
+                          t-on-click="() => this.viewRentOrderStatsDetails('cancel')">
+                         <div class="card danger-bg p-32">
+                             <div class="card-body danger-bg tk-card-body">
+                                 <img alt="users" width="40"
+                                      src="tk_rental/static/src/img/dashboard/5-cancel.svg"/>
+                                 <h4 class="tk-st-1">Cancelled</h4>
+                                 <h6 class="tk-st-2">
+                                     <t t-esc="state.rentOrderStats['cancel_orders']"/>
+                                 </h6>
+                             </div>
+                         </div>
+                     </div>
+                     <div class="col-md-2 mb-2 mt8 mb16"
+                          t-on-click="() => this.viewRentOrderStatsDetails('reject')">
+                         <div class="card terminate-bg p-32">
+                             <div class="card-body terminate-bg tk-card-body">
+                                 <img alt="users" width="40"
+                                      src="tk_rental/static/src/img/dashboard/6-reject.svg"/>
+                                 <h4 class="tk-st-1">Rejects</h4>
+                                 <h6 class="tk-st-2">
+                                     <t t-esc="state.rentOrderStats['reject_stages']"/>
+                                 </h6>
+                             </div>
+                         </div>
+                     </div>
+                 </div>
+
+                <div class="row">
+                    <div class="col-md-4 mt32">
+                        <h4 class="tk-primary">Rent Quotation Details</h4>
+                        <hr class="border-primary"/>
+                        <div class="row">
+                             <div class="col-md-6 mb-6 mt8 mb16"
+                                  t-on-click="() => this.viewRentOrderStatsDetails('quotation')">
+                                <div class="card info-bg p-32">
+                                    <div class="card-body info-bg tk-card-body">
+                                        <img alt="users" width="40"
+                                             src="tk_rental/static/src/img/dashboard/7-quote.svg"/>
+                                        <h4 class="tk-st-1">Quotations</h4>
+                                        <h6 class="tk-st-2">
+                                            <t t-esc="state.rentOrderStats['quotation_stages']"/>
+                                        </h6>
+                                    </div>
+                                </div>
+                             </div>
+                            <div class="col-md-6 mb-6 mt8 mb16"
+                                 t-on-click="() => this.viewRentOrderStatsDetails('quotation_sent')">
+                                <div class="card warn-bg p-32">
+                                    <div class="card-body warn-bg tk-card-body">
+                                        <img alt="users" width="40"
+                                             src="tk_rental/static/src/img/dashboard/8-sent.svg"/>
+                                        <h4 class="tk-st-1">Sent</h4>
+                                        <h6 class="tk-st-2">
+                                            <t t-esc="state.rentOrderStats['quotation_sent_stages']"/>
+                                        </h6>
+                                    </div>
+                                </div>
+                             </div>
+                            <div class="col-md-12 mb-12 mt8 mb16"
+                                 t-on-click="() => this.viewRentOrderStatsDetails('approve')">
+                                <div class="card active-bg p-32">
+                                    <div class="card-body active-bg tk-card-body">
+                                        <img alt="users" width="40"
+                                             src="tk_rental/static/src/img/dashboard/9-approved.svg"/>
+                                        <h4 class="tk-st-1">Approved</h4>
+                                        <h6 class="tk-st-2">
+                                            <t t-esc="state.rentOrderStats['quotation_approve']"/>
+                                        </h6>
+                                    </div>
+                                </div>
+                             </div>
+                        </div>
+                    </div>
+
+                    <div class="col-md-8 mt32">
+                        <h4 class="tk-primary">Rent Order Status</h4>
+                        <hr class="border-primary"/>
+                        <div class="tk-os-chart" t-ref="rent_order_status_graph">
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-md-6 mt32">
+                        <h4 class="tk-primary">Delivery Orders</h4>
+                        <hr class="border-primary"/>
+                        <div class="row">
+                             <div class="col-md-4 mb-4 mt8 mb16"
+                                  t-on-click="() => this.viewDeliveryOrders('not_done')">
+                                <div class="card info-bg p-32">
+                                    <div class="card-body info-bg tk-card-body">
+                                        <img alt="users" width="40"
+                                             src="tk_rental/static/src/img/dashboard/10-draft-delivery.svg"/>
+                                        <h4 class="tk-st-1">Draft</h4>
+                                        <h6 class="tk-st-2">
+                                            <t t-esc="state.deliveryOrderStates['delivery_orders']"/>
+                                        </h6>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-4 mb-4 mt8 mb16"
+                                 t-on-click="() => this.viewDeliveryOrders('done')">
+                                <div class="card active-bg p-32">
+                                    <div class="card-body active-bg tk-card-body">
+                                        <img alt="users" width="40"
+                                             src="tk_rental/static/src/img/dashboard/11-complete.svg"/>
+                                        <h4 class="tk-st-1">Completed</h4>
+                                        <h6 class="tk-st-2">
+                                            <t t-esc="state.deliveryOrderStates['done_delivery_orders']"/>
+                                        </h6>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-4 mb-4 mt8 mb16"
+                                 t-on-click="() => this.viewRentOrderStatsDetails('in_delivery')">
+                                <div class="card warn-bg p-32">
+                                    <div class="card-body warn-bg tk-card-body">
+                                        <img alt="users" width="40"
+                                             src="tk_rental/static/src/img/dashboard/12-pending.svg"/>
+                                        <h4 class="tk-st-1">Pending</h4>
+                                        <h6 class="tk-st-2">
+                                            <t t-esc="state.rentOrderStats['in_delivery_stages']"/>
+                                        </h6>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-md-6 mt32">
+                        <h4 class="tk-primary">Return Orders</h4>
+                        <hr class="border-primary"/>
+                        <div class="row">
+                             <div class="col-md-4 mb-4 mt8 mb16"
+                                  t-on-click="() => this.viewReturnOrders('not_done')">
+                                <div class="card info-bg p-32">
+                                    <div class="card-body info-bg tk-card-body">
+                                        <img alt="users" width="40"
+                                             src="tk_rental/static/src/img/dashboard/13-draft-return.svg"/>
+                                        <h4 class="tk-st-1">Draft</h4>
+                                        <h6 class="tk-st-2">
+                                            <t t-esc="state.returnOrderStates['return_orders']"/>
+                                        </h6>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-4 mb-4 mt8 mb16"
+                                 t-on-click="() => this.viewReturnOrders('done')">
+                                <div class="card active-bg p-32">
+                                    <div class="card-body active-bg tk-card-body">
+                                        <img alt="users" width="40"
+                                             src="tk_rental/static/src/img/dashboard/14-completed.svg"/>
+                                        <h4 class="tk-st-1">Completed</h4>
+                                        <h6 class="tk-st-2">
+                                            <t t-esc="state.returnOrderStates['return_delivery_orders']"/>
+                                        </h6>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-4 mb-4 mt8 mb16"
+                                 t-on-click="() => this.viewRentOrderStatsDetails('return')">
+                                <div class="card success-bg p-32">
+                                    <div class="card-body success-bg tk-card-body">
+                                        <img alt="users" width="40"
+                                             src="tk_rental/static/src/img/dashboard/15-returns.svg"/>
+                                        <h4 class="tk-st-1">Returns</h4>
+                                        <h6 class="tk-st-2">
+                                            <t t-esc="state.rentOrderStats['return_stages']"/>
+                                        </h6>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </t>
+</templates>
