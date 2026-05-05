@@ -1,7 +1,623 @@
-# Translation placeholder for Helpdesk SLA Enterprise XLSX Reports.
+#. module: helpdesk_sla_enterprise_xlsx
+#: model:ir.model,name:helpdesk_sla_enterprise_xlsx.model_helpdesk_sla_report_wizard
+msgid "Helpdesk SLA Report Wizard"
+msgstr "Asistente de Reporte SLA de Helpdesk"
+
+#. module: helpdesk_sla_enterprise_xlsx
+#: model:ir.model.fields,field_description:helpdesk_sla_enterprise_xlsx.field_helpdesk_sla_report_wizard__name
+msgid "SLA Report"
+msgstr "Reporte SLA"
+
+#. module: helpdesk_sla_enterprise_xlsx
+#: model:ir.model.fields,field_description:helpdesk_sla_enterprise_xlsx.field_helpdesk_sla_report_wizard__date_from
+msgid "Date From"
+msgstr "Fecha Desde"
+
+#. module: helpdesk_sla_enterprise_xlsx
+#: model:ir.model.fields,field_description:helpdesk_sla_enterprise_xlsx.field_helpdesk_sla_report_wizard__date_to
+msgid "Date To"
+msgstr "Fecha Hasta"
+
+#. module: helpdesk_sla_enterprise_xlsx
+#: model:ir.model.fields,field_description:helpdesk_sla_enterprise_xlsx.field_helpdesk_sla_report_wizard__team_ids
+msgid "Teams"
+msgstr "Equipos"
+
+#. module: helpdesk_sla_enterprise_xlsx
+#: model:ir.model.fields,field_description:helpdesk_sla_enterprise_xlsx.field_helpdesk_sla_report_wizard__user_ids
+msgid "Assigned Users"
+msgstr "Usuarios Asignados"
+
+#. module: helpdesk_sla_enterprise_xlsx
+#: model:ir.model.fields,field_description:helpdesk_sla_enterprise_xlsx.field_helpdesk_sla_report_wizard__include_open_tickets
+msgid "Include Open Tickets"
+msgstr "Incluir Tickets Abiertos"
+
+#. module: helpdesk_sla_enterprise_xlsx
+#: model:ir.model.fields,field_description:helpdesk_sla_enterprise_xlsx.field_helpdesk_sla_report_wizard__breached_only
+msgid "Breached Only"
+msgstr "Solo Incumplidos"
+
+#. module: helpdesk_sla_enterprise_xlsx
+#: model:ir.model.fields,field_description:helpdesk_sla_enterprise_xlsx.field_helpdesk_sla_report_wizard__include_first_response
+msgid "Include First Response Metrics"
+msgstr "Incluir Métricas de Primera Respuesta"
+
+#. module: helpdesk_sla_enterprise_xlsx
+#: model:ir.model.fields,field_description:helpdesk_sla_enterprise_xlsx.field_helpdesk_sla_report_wizard__include_no_sla
+msgid "Include Tickets Without SLA"
+msgstr "Incluir Tickets sin SLA"
+
+#. module: helpdesk_sla_enterprise_xlsx
+#: model:ir.model.fields,field_description:helpdesk_sla_enterprise_xlsx.field_helpdesk_sla_report_wizard__sla_target_hours
+msgid "Fallback SLA Target Hours"
+msgstr "Horas Objetivo SLA (Alternativo)"
+
+#. module: helpdesk_sla_enterprise_xlsx
+#: model:ir.model.fields,help:helpdesk_sla_enterprise_xlsx.field_helpdesk_sla_report_wizard__sla_target_hours
+msgid "Used only when the ticket does not have native Odoo SLA status information."
+msgstr "Se usa solo cuando el ticket no tiene información nativa de SLA en Odoo."
+
+#. module: helpdesk_sla_enterprise_xlsx
+#: model:ir.model.fields,field_description:helpdesk_sla_enterprise_xlsx.field_helpdesk_sla_report_wizard__company_id
+msgid "Company"
+msgstr "Compañía"
+
+#. module: helpdesk_sla_enterprise_xlsx
+#: code:addons/helpdesk_sla_enterprise_xlsx/models/helpdesk_sla_report_wizard.py:0
+#, python-format
+msgid "Date From cannot be greater than Date To."
+msgstr "La fecha desde no puede ser mayor que la fecha hasta."
+
+#. module: helpdesk_sla_enterprise_xlsx
+#: code:addons/helpdesk_sla_enterprise_xlsx/models/helpdesk_sla_report_wizard.py:0
+#, python-format
+msgid "Fallback SLA Target Hours must be greater than zero."
+msgstr "Las horas objetivo SLA deben ser mayores que cero."
+
+#. module: helpdesk_sla_enterprise_xlsx
+#: model:ir.ui.view,arch_db:helpdesk_sla_enterprise_xlsx.view_helpdesk_sla_report_wizard_form
+msgid "Generate SLA Enterprise Report"
+msgstr "Generar Reporte SLA Empresarial"
+
+#. module: helpdesk_sla_enterprise_xlsx
+#: model:ir.ui.view,arch_db:helpdesk_sla_enterprise_xlsx.view_helpdesk_sla_report_wizard_form
+msgid "Period"
+msgstr "Período"
+
+#. module: helpdesk_sla_enterprise_xlsx
+#: model:ir.ui.view,arch_db:helpdesk_sla_enterprise_xlsx.view_helpdesk_sla_report_wizard_form
+msgid "Filters"
+msgstr "Filtros"
+
+#. module: helpdesk_sla_enterprise_xlsx
+#: model:ir.ui.view,arch_db:helpdesk_sla_enterprise_xlsx.view_helpdesk_sla_report_wizard_form
+msgid "Report Options"
+msgstr "Opciones del Reporte"
+
+#. module: helpdesk_sla_enterprise_xlsx
+#: model:ir.ui.view,arch_db:helpdesk_sla_enterprise_xlsx.view_helpdesk_sla_report_wizard_form
+msgid "Report Output"
+msgstr "Salida del Reporte"
+
+#. module: helpdesk_sla_enterprise_xlsx
+#: model:ir.ui.view,arch_db:helpdesk_sla_enterprise_xlsx.view_helpdesk_sla_report_wizard_form
+msgid "This report generates an enterprise XLSX workbook with executive KPIs, SLA details, team summary, agent summary, and monthly summary."
+msgstr "Este reporte genera un archivo XLSX empresarial con KPIs ejecutivos, detalles de SLA, resumen por equipo, resumen por agente y resumen mensual."
+
+#. module: helpdesk_sla_enterprise_xlsx
+#: model:ir.ui.view,arch_db:helpdesk_sla_enterprise_xlsx.view_helpdesk_sla_report_wizard_form
+msgid "Export Enterprise XLSX"
+msgstr "Exportar XLSX Empresarial"
+
+#. module: helpdesk_sla_enterprise_xlsx
+#: model:ir.ui.view,arch_db:helpdesk_sla_enterprise_xlsx.view_helpdesk_sla_report_wizard_form
+msgid "Cancel"
+msgstr "Cancelar"
+
+#. module: helpdesk_sla_enterprise_xlsx
+#: model:ir.actions.act_window,name:helpdesk_sla_enterprise_xlsx.action_helpdesk_sla_report_wizard
+msgid "Generate SLA Enterprise Report"
+msgstr "Generar Reporte SLA Empresarial"
+
+#. module: helpdesk_sla_enterprise_xlsx
+#: model:ir.ui.menu,name:helpdesk_sla_enterprise_xlsx.menu_helpdesk_sla_enterprise_reports
+msgid "SLA Reports"
+msgstr "Reportes SLA"
+
+#. module: helpdesk_sla_enterprise_xlsx
+#: model:ir.ui.menu,name:helpdesk_sla_enterprise_xlsx.menu_helpdesk_sla_enterprise_generate
+msgid "Generate SLA Report"
+msgstr "Generar Reporte SLA"
+
+#. module: helpdesk_sla_enterprise_xlsx
+#: model:ir.ui.view,arch_db:helpdesk_sla_enterprise_xlsx.view_helpdesk_sla_report_wizard_form
+msgid "Report Output"
+msgstr "Salida del Reporte"
+
+#. module: helpdesk_sla_enterprise_xlsx
+#: model:ir.ui.view,arch_db:helpdesk_sla_enterprise_xlsx.view_helpdesk_sla_report_wizard_form
+msgid "This report generates an enterprise XLSX workbook with executive KPIs, SLA details, team summary, agent summary, and monthly summary."
+msgstr "Este reporte genera un archivo XLSX empresarial con KPIs ejecutivos, detalles de SLA, resumen por equipo, resumen por agente y resumen mensual."
+
+#. module: helpdesk_sla_enterprise_xlsx
+#: model:ir.ui.view,arch_db:helpdesk_sla_enterprise_xlsx.view_helpdesk_sla_report_wizard_form
+msgid "Export Enterprise XLSX"
+msgstr "Exportar XLSX Empresarial"
+
+#. module: helpdesk_sla_enterprise_xlsx
+#: model:ir.ui.view,arch_db:helpdesk_sla_enterprise_xlsx.view_helpdesk_sla_report_wizard_form
+msgid "Cancel"
+msgstr "Cancelar"
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* helpdesk_sla_enterprise_xlsx
+#
 msgid ""
 msgstr ""
-"Project-Id-Version: Helpdesk SLA Enterprise XLSX Reports 19.0\n"
+"Project-Id-Version: Odoo Server 19.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2026-05-05 13:57+0000\n"
+"PO-Revision-Date: 2026-05-05 10:16-0400\n"
+"Last-Translator: \n"
+"Language-Team: \n"
 "Language: es\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Generator: Poedit 3.4.2\n"
+
+#. module: helpdesk_sla_enterprise_xlsx
+#. odoo-python
+#: code:addons/helpdesk_sla_enterprise_xlsx/services/helpdesk_sla_xlsx_builder.py:0
+msgid " Summary"
+msgstr "Resumen"
+
+#. module: helpdesk_sla_enterprise_xlsx
+#. odoo-python
+#: code:addons/helpdesk_sla_enterprise_xlsx/services/helpdesk_sla_xlsx_builder.py:0
+msgid "Agent"
+msgstr "Agente"
+
+#. module: helpdesk_sla_enterprise_xlsx
+#. odoo-python
+#: code:addons/helpdesk_sla_enterprise_xlsx/services/helpdesk_sla_xlsx_builder.py:0
+msgid "Agent Summary"
+msgstr "Resumen del Agente"
+
+#. module: helpdesk_sla_enterprise_xlsx
+#. odoo-python
+#: code:addons/helpdesk_sla_enterprise_xlsx/services/helpdesk_sla_xlsx_builder.py:0
+msgid "All"
+msgstr "Todos"
+
+#. module: helpdesk_sla_enterprise_xlsx
+#. odoo-python
+#: code:addons/helpdesk_sla_enterprise_xlsx/services/helpdesk_sla_xlsx_builder.py:0
+msgid "Applied Filters"
+msgstr "Aplicar Filtros"
+
+#. module: helpdesk_sla_enterprise_xlsx
+#. odoo-python
+#: code:addons/helpdesk_sla_enterprise_xlsx/services/helpdesk_sla_xlsx_builder.py:0
+#: model:ir.model.fields,field_description:helpdesk_sla_enterprise_xlsx.field_helpdesk_sla_report_wizard__user_ids
+msgid "Assigned Users"
+msgstr "Usuarios Asignados"
+
+#. module: helpdesk_sla_enterprise_xlsx
+#. odoo-python
+#: code:addons/helpdesk_sla_enterprise_xlsx/services/helpdesk_sla_xlsx_builder.py:0
+msgid "Audit Source"
+msgstr "Fuente de Auditoría"
+
+#. module: helpdesk_sla_enterprise_xlsx
+#. odoo-python
+#: code:addons/helpdesk_sla_enterprise_xlsx/services/helpdesk_sla_xlsx_builder.py:0
+msgid "Avg First Response Hours"
+msgstr "Promedio de horas para la primera respuesta"
+
+#. module: helpdesk_sla_enterprise_xlsx
+#. odoo-python
+#: code:addons/helpdesk_sla_enterprise_xlsx/services/helpdesk_sla_xlsx_builder.py:0
+msgid "Avg Resolution Hours"
+msgstr "Promedio de hora para la solución"
+
+#. module: helpdesk_sla_enterprise_xlsx
+#. odoo-python
+#: code:addons/helpdesk_sla_enterprise_xlsx/services/helpdesk_sla_xlsx_builder.py:0
+#: model:ir.model.fields,field_description:helpdesk_sla_enterprise_xlsx.field_helpdesk_sla_report_wizard__breached_only
+msgid "Breached Only"
+msgstr "Solo Incumplidos"
+
+#. module: helpdesk_sla_enterprise_xlsx
+#: model_terms:ir.ui.view,arch_db:helpdesk_sla_enterprise_xlsx.view_helpdesk_sla_report_wizard_form
+msgid "Cancel"
+msgstr "Cancelar"
+
+#. module: helpdesk_sla_enterprise_xlsx
+#. odoo-python
+#: code:addons/helpdesk_sla_enterprise_xlsx/services/helpdesk_sla_xlsx_builder.py:0
+msgid "Category"
+msgstr "Categoría"
+
+#. module: helpdesk_sla_enterprise_xlsx
+#. odoo-python
+#: code:addons/helpdesk_sla_enterprise_xlsx/services/helpdesk_sla_xlsx_builder.py:0
+msgid "Closed Date"
+msgstr "Fecha de Cierre"
+
+#. module: helpdesk_sla_enterprise_xlsx
+#: model:ir.model.fields,field_description:helpdesk_sla_enterprise_xlsx.field_helpdesk_sla_report_wizard__company_id
+msgid "Company"
+msgstr "Compañía"
+
+#. module: helpdesk_sla_enterprise_xlsx
+#. odoo-python
+#: code:addons/helpdesk_sla_enterprise_xlsx/services/helpdesk_sla_xlsx_builder.py:0
+msgid "Created Date"
+msgstr "Fecha de Creación"
+
+#. module: helpdesk_sla_enterprise_xlsx
+#: model:ir.model.fields,field_description:helpdesk_sla_enterprise_xlsx.field_helpdesk_sla_report_wizard__create_uid
+msgid "Created by"
+msgstr "Creado por"
+
+#. module: helpdesk_sla_enterprise_xlsx
+#: model:ir.model.fields,field_description:helpdesk_sla_enterprise_xlsx.field_helpdesk_sla_report_wizard__create_date
+msgid "Created on"
+msgstr "Creado por"
+
+#. module: helpdesk_sla_enterprise_xlsx
+#. odoo-python
+#: code:addons/helpdesk_sla_enterprise_xlsx/services/helpdesk_sla_xlsx_builder.py:0
+msgid "Customer"
+msgstr "Cliente"
+
+#. module: helpdesk_sla_enterprise_xlsx
+#: model:ir.model.fields,field_description:helpdesk_sla_enterprise_xlsx.field_helpdesk_sla_report_wizard__date_from
+msgid "Date From"
+msgstr "Fecha Desde"
+
+#. module: helpdesk_sla_enterprise_xlsx
+#. odoo-python
+#: code:addons/helpdesk_sla_enterprise_xlsx/wizard/helpdesk_sla_report_wizard.py:0
+msgid "Date From cannot be greater than Date To."
+msgstr "La fecha desde no puede ser mayor que la fecha hasta."
+
+#. module: helpdesk_sla_enterprise_xlsx
+#: model:ir.model.fields,field_description:helpdesk_sla_enterprise_xlsx.field_helpdesk_sla_report_wizard__date_to
+msgid "Date To"
+msgstr "Fecha Hasta"
+
+#. module: helpdesk_sla_enterprise_xlsx
+#: model:ir.model.fields,field_description:helpdesk_sla_enterprise_xlsx.field_helpdesk_sla_report_service__display_name
+#: model:ir.model.fields,field_description:helpdesk_sla_enterprise_xlsx.field_helpdesk_sla_report_wizard__display_name
+#: model:ir.model.fields,field_description:helpdesk_sla_enterprise_xlsx.field_helpdesk_sla_xlsx_builder__display_name
+msgid "Display Name"
+msgstr "Nombre a Mostrar"
+
+#. module: helpdesk_sla_enterprise_xlsx
+#: model_terms:ir.ui.view,arch_db:helpdesk_sla_enterprise_xlsx.view_helpdesk_sla_report_wizard_form
+msgid "Export Enterprise XLSX"
+msgstr "Exportar XLSX"
+
+#. module: helpdesk_sla_enterprise_xlsx
+#. odoo-python
+#: code:addons/helpdesk_sla_enterprise_xlsx/services/helpdesk_sla_xlsx_builder.py:0
+msgid "Failed SLA Policies"
+msgstr "Políticas SLA Incumplidas"
+
+#. module: helpdesk_sla_enterprise_xlsx
+#. odoo-python
+#: code:addons/helpdesk_sla_enterprise_xlsx/services/helpdesk_sla_xlsx_builder.py:0
+#: model:ir.model.fields,field_description:helpdesk_sla_enterprise_xlsx.field_helpdesk_sla_report_wizard__sla_target_hours
+msgid "Fallback SLA Target Hours"
+msgstr "Horas Objetivo SLA (Alternativo)"
+
+#. module: helpdesk_sla_enterprise_xlsx
+#. odoo-python
+#: code:addons/helpdesk_sla_enterprise_xlsx/wizard/helpdesk_sla_report_wizard.py:0
+msgid "Fallback SLA Target Hours must be greater than zero."
+msgstr "Las horas objetivo SLA alternativas deben ser mayores que cero."
+
+#. module: helpdesk_sla_enterprise_xlsx
+#: model_terms:ir.ui.view,arch_db:helpdesk_sla_enterprise_xlsx.view_helpdesk_sla_report_wizard_form
+msgid "Filters"
+msgstr "Filtros"
+
+#. module: helpdesk_sla_enterprise_xlsx
+#. odoo-python
+#: code:addons/helpdesk_sla_enterprise_xlsx/services/helpdesk_sla_xlsx_builder.py:0
+msgid "First Response Date"
+msgstr "Fecha de la primer Respuesta"
+
+#. module: helpdesk_sla_enterprise_xlsx
+#. odoo-python
+#: code:addons/helpdesk_sla_enterprise_xlsx/services/helpdesk_sla_xlsx_builder.py:0
+msgid "First Response Hours"
+msgstr "Promedio de horas para la primera respuesta"
+
+#. module: helpdesk_sla_enterprise_xlsx
+#: model:ir.actions.act_window,name:helpdesk_sla_enterprise_xlsx.action_helpdesk_sla_report_wizard
+#: model_terms:ir.ui.view,arch_db:helpdesk_sla_enterprise_xlsx.view_helpdesk_sla_report_wizard_form
+msgid "Generate SLA Enterprise Report"
+msgstr "Generar Reporte SLA Empresarial"
+
+#. module: helpdesk_sla_enterprise_xlsx
+#: model:ir.ui.menu,name:helpdesk_sla_enterprise_xlsx.menu_helpdesk_sla_enterprise_generate
+msgid "Generate SLA Report"
+msgstr "Generar Reporte SLA"
+
+#. module: helpdesk_sla_enterprise_xlsx
+#. odoo-python
+#: code:addons/helpdesk_sla_enterprise_xlsx/services/helpdesk_sla_xlsx_builder.py:0
+msgid "Generated for: %s"
+msgstr ""
+
+#. module: helpdesk_sla_enterprise_xlsx
+#. odoo-python
+#: code:addons/helpdesk_sla_enterprise_xlsx/services/helpdesk_sla_xlsx_builder.py:0
+msgid "Helpdesk SLA Report"
+msgstr "Reporte SLA de Helpdesk"
+
+#. module: helpdesk_sla_enterprise_xlsx
+#: model:ir.model,name:helpdesk_sla_enterprise_xlsx.model_helpdesk_sla_report_service
+msgid "Helpdesk SLA Report Service"
+msgstr "Reporte SLA de Servicios"
+
+#. module: helpdesk_sla_enterprise_xlsx
+#: model:ir.model,name:helpdesk_sla_enterprise_xlsx.model_helpdesk_sla_report_wizard
+msgid "Helpdesk SLA Report Wizard"
+msgstr "Asistente de Reporte SLA de Helpdesk"
+
+#. module: helpdesk_sla_enterprise_xlsx
+#: model:ir.model,name:helpdesk_sla_enterprise_xlsx.model_helpdesk_sla_xlsx_builder
+msgid "Helpdesk SLA XLSX Builder"
+msgstr ""
+
+#. module: helpdesk_sla_enterprise_xlsx
+#: model:ir.model.fields,field_description:helpdesk_sla_enterprise_xlsx.field_helpdesk_sla_report_service__id
+#: model:ir.model.fields,field_description:helpdesk_sla_enterprise_xlsx.field_helpdesk_sla_report_wizard__id
+#: model:ir.model.fields,field_description:helpdesk_sla_enterprise_xlsx.field_helpdesk_sla_xlsx_builder__id
+msgid "ID"
+msgstr ""
+
+#. module: helpdesk_sla_enterprise_xlsx
+#: model:ir.model.fields,field_description:helpdesk_sla_enterprise_xlsx.field_helpdesk_sla_report_wizard__include_first_response
+msgid "Include First Response Metrics"
+msgstr "Incluir Métricas de Primera Respuesta"
+
+#. module: helpdesk_sla_enterprise_xlsx
+#. odoo-python
+#: code:addons/helpdesk_sla_enterprise_xlsx/services/helpdesk_sla_xlsx_builder.py:0
+#: model:ir.model.fields,field_description:helpdesk_sla_enterprise_xlsx.field_helpdesk_sla_report_wizard__include_open_tickets
+msgid "Include Open Tickets"
+msgstr "Incluir Tickets Abiertos"
+
+#. module: helpdesk_sla_enterprise_xlsx
+#. odoo-python
+#: code:addons/helpdesk_sla_enterprise_xlsx/services/helpdesk_sla_xlsx_builder.py:0
+#: model:ir.model.fields,field_description:helpdesk_sla_enterprise_xlsx.field_helpdesk_sla_report_wizard__include_no_sla
+msgid "Include Tickets Without SLA"
+msgstr "Incluir Tickets sin SLA"
+
+#. module: helpdesk_sla_enterprise_xlsx
+#. odoo-python
+#: code:addons/helpdesk_sla_enterprise_xlsx/services/helpdesk_sla_xlsx_builder.py:0
+msgid "KPI"
+msgstr ""
+
+#. module: helpdesk_sla_enterprise_xlsx
+#: model:ir.model.fields,field_description:helpdesk_sla_enterprise_xlsx.field_helpdesk_sla_report_wizard__write_uid
+msgid "Last Updated by"
+msgstr "Ultima actualización de"
+
+#. module: helpdesk_sla_enterprise_xlsx
+#: model:ir.model.fields,field_description:helpdesk_sla_enterprise_xlsx.field_helpdesk_sla_report_wizard__write_date
+msgid "Last Updated on"
+msgstr "Ultima actualización el"
+
+#. module: helpdesk_sla_enterprise_xlsx
+#. odoo-python
+#: code:addons/helpdesk_sla_enterprise_xlsx/services/helpdesk_sla_xlsx_builder.py:0
+msgid "Monthly Summary"
+msgstr "Reporte mensual"
+
+#. module: helpdesk_sla_enterprise_xlsx
+#: model:ir.model.fields,field_description:helpdesk_sla_enterprise_xlsx.field_helpdesk_sla_report_wizard__name
+msgid "Name"
+msgstr "Reporte SLA"
+
+#. module: helpdesk_sla_enterprise_xlsx
+#. odoo-python
+#: code:addons/helpdesk_sla_enterprise_xlsx/services/helpdesk_sla_xlsx_builder.py:0
+msgid "Native SLA Policies"
+msgstr "Políticas nativas SLA"
+
+#. module: helpdesk_sla_enterprise_xlsx
+#. odoo-python
+#: code:addons/helpdesk_sla_enterprise_xlsx/services/helpdesk_sla_xlsx_builder.py:0
+msgid "Nearest SLA Deadline"
+msgstr "Fecha límite de SLA más cercana"
+
+#. module: helpdesk_sla_enterprise_xlsx
+#. odoo-python
+#: code:addons/helpdesk_sla_enterprise_xlsx/services/helpdesk_sla_xlsx_builder.py:0
+msgid "No"
+msgstr ""
+
+#. module: helpdesk_sla_enterprise_xlsx
+#: model_terms:ir.ui.view,arch_db:helpdesk_sla_enterprise_xlsx.view_helpdesk_sla_report_wizard_form
+msgid "Period"
+msgstr "Periodo"
+
+#. module: helpdesk_sla_enterprise_xlsx
+#. odoo-python
+#: code:addons/helpdesk_sla_enterprise_xlsx/services/helpdesk_sla_xlsx_builder.py:0
+msgid "Period: %s to %s"
+msgstr ""
+
+#. module: helpdesk_sla_enterprise_xlsx
+#. odoo-python
+#: code:addons/helpdesk_sla_enterprise_xlsx/services/helpdesk_sla_xlsx_builder.py:0
+msgid "Reference"
+msgstr "Referencia"
+
+#. module: helpdesk_sla_enterprise_xlsx
+#: model_terms:ir.ui.view,arch_db:helpdesk_sla_enterprise_xlsx.view_helpdesk_sla_report_wizard_form
+msgid "Report Options"
+msgstr "Opciones del Reporte"
+
+#. module: helpdesk_sla_enterprise_xlsx
+#: model_terms:ir.ui.view,arch_db:helpdesk_sla_enterprise_xlsx.view_helpdesk_sla_report_wizard_form
+msgid "Report Output"
+msgstr "Reporte"
+
+#. module: helpdesk_sla_enterprise_xlsx
+#. odoo-python
+#: code:addons/helpdesk_sla_enterprise_xlsx/services/helpdesk_sla_xlsx_builder.py:0
+msgid "Resolution Hours"
+msgstr "Horas para dar solución"
+
+#. module: helpdesk_sla_enterprise_xlsx
+#. odoo-python
+#: code:addons/helpdesk_sla_enterprise_xlsx/services/helpdesk_sla_xlsx_builder.py:0
+msgid "SLA Breached"
+msgstr "SLA Incumplido"
+
+#. module: helpdesk_sla_enterprise_xlsx
+#. odoo-python
+#: code:addons/helpdesk_sla_enterprise_xlsx/services/helpdesk_sla_xlsx_builder.py:0
+msgid "SLA Compliance %"
+msgstr "% de Cumplimiento de SLA"
+
+#. module: helpdesk_sla_enterprise_xlsx
+#. odoo-python
+#: code:addons/helpdesk_sla_enterprise_xlsx/services/helpdesk_sla_xlsx_builder.py:0
+msgid "SLA Details"
+msgstr "Detalles del SLA"
+
+#. module: helpdesk_sla_enterprise_xlsx
+#. odoo-python
+#: code:addons/helpdesk_sla_enterprise_xlsx/services/helpdesk_sla_xlsx_builder.py:0
+msgid "SLA Met"
+msgstr "SLA Cumplido "
+
+#. module: helpdesk_sla_enterprise_xlsx
+#: model:res.groups,name:helpdesk_sla_enterprise_xlsx.group_helpdesk_sla_report_manager
+msgid "SLA Report Manager"
+msgstr "Gestor del reportes la"
+
+#. module: helpdesk_sla_enterprise_xlsx
+#: model:res.groups,name:helpdesk_sla_enterprise_xlsx.group_helpdesk_sla_report_user
+msgid "SLA Report User"
+msgstr "Usuario"
+
+#. module: helpdesk_sla_enterprise_xlsx
+#: model:ir.ui.menu,name:helpdesk_sla_enterprise_xlsx.menu_helpdesk_sla_enterprise_reports
+msgid "SLA Reports"
+msgstr "Reportes SLA"
+
+#. module: helpdesk_sla_enterprise_xlsx
+#. odoo-python
+#: code:addons/helpdesk_sla_enterprise_xlsx/services/helpdesk_sla_xlsx_builder.py:0
+msgid "SLA Status"
+msgstr "Estado del reportes la"
+
+#. module: helpdesk_sla_enterprise_xlsx
+#. odoo-python
+#: code:addons/helpdesk_sla_enterprise_xlsx/services/helpdesk_sla_xlsx_builder.py:0
+msgid "Stage"
+msgstr "Estado"
+
+#. module: helpdesk_sla_enterprise_xlsx
+#. odoo-python
+#: code:addons/helpdesk_sla_enterprise_xlsx/services/helpdesk_sla_xlsx_builder.py:0
+msgid "Subcategory"
+msgstr "Subcategoria"
+
+#. module: helpdesk_sla_enterprise_xlsx
+#. odoo-python
+#: code:addons/helpdesk_sla_enterprise_xlsx/services/helpdesk_sla_xlsx_builder.py:0
+msgid "Successful SLA Policies"
+msgstr "Políticas SLA Cumplidas"
+
+#. module: helpdesk_sla_enterprise_xlsx
+#. odoo-python
+#: code:addons/helpdesk_sla_enterprise_xlsx/services/helpdesk_sla_xlsx_builder.py:0
+msgid "Team"
+msgstr "Equipo"
+
+#. module: helpdesk_sla_enterprise_xlsx
+#. odoo-python
+#: code:addons/helpdesk_sla_enterprise_xlsx/services/helpdesk_sla_xlsx_builder.py:0
+msgid "Team Summary"
+msgstr "Resumen del equipo"
+
+#. module: helpdesk_sla_enterprise_xlsx
+#. odoo-python
+#: code:addons/helpdesk_sla_enterprise_xlsx/services/helpdesk_sla_xlsx_builder.py:0
+#: model:ir.model.fields,field_description:helpdesk_sla_enterprise_xlsx.field_helpdesk_sla_report_wizard__team_ids
+msgid "Teams"
+msgstr "Equipos"
+
+#. module: helpdesk_sla_enterprise_xlsx
+#. odoo-python
+#: code:addons/helpdesk_sla_enterprise_xlsx/services/helpdesk_sla_xlsx_builder.py:0
+msgid "The Python package 'xlsxwriter' is required to export this report."
+msgstr ""
+
+#. module: helpdesk_sla_enterprise_xlsx
+#: model_terms:ir.ui.view,arch_db:helpdesk_sla_enterprise_xlsx.view_helpdesk_sla_report_wizard_form
+msgid ""
+"This report generates an enterprise XLSX workbook with executive KPIs,\n"
+"                        SLA details, team summary, agent summary, and monthly summary."
+msgstr "Este reporte genera un archivo XLSX empresarial con KPIs ejecutivos, detalles de SLA, resumen por equipo, resumen por agente y resumen mensual."
+
+#. module: helpdesk_sla_enterprise_xlsx
+#. odoo-python
+#: code:addons/helpdesk_sla_enterprise_xlsx/services/helpdesk_sla_xlsx_builder.py:0
+msgid "Ticket"
+msgstr "Ticket"
+
+#. module: helpdesk_sla_enterprise_xlsx
+#. odoo-python
+#: code:addons/helpdesk_sla_enterprise_xlsx/services/helpdesk_sla_xlsx_builder.py:0
+msgid "Tickets With Native SLA"
+msgstr "Tickets con SLA nativo"
+
+#. module: helpdesk_sla_enterprise_xlsx
+#. odoo-python
+#: code:addons/helpdesk_sla_enterprise_xlsx/services/helpdesk_sla_xlsx_builder.py:0
+msgid "Tickets Without Native SLA"
+msgstr "Tickets sin SLA nativo"
+
+#. module: helpdesk_sla_enterprise_xlsx
+#. odoo-python
+#: code:addons/helpdesk_sla_enterprise_xlsx/services/helpdesk_sla_xlsx_builder.py:0
+msgid "Total Closed Tickets"
+msgstr "Total de Tickets Cerrados"
+
+#. module: helpdesk_sla_enterprise_xlsx
+#. odoo-python
+#: code:addons/helpdesk_sla_enterprise_xlsx/services/helpdesk_sla_xlsx_builder.py:0
+msgid "Total Tickets"
+msgstr "Total de Tickets"
+
+#. module: helpdesk_sla_enterprise_xlsx
+#: model:ir.model.fields,help:helpdesk_sla_enterprise_xlsx.field_helpdesk_sla_report_wizard__sla_target_hours
+msgid "Used only when the ticket does not have native Odoo SLA status information."
+msgstr "Se usa solo cuando el ticket no tiene información nativa de SLA en Odoo."
+
+#. module: helpdesk_sla_enterprise_xlsx
+#. odoo-python
+#: code:addons/helpdesk_sla_enterprise_xlsx/services/helpdesk_sla_xlsx_builder.py:0
+msgid "Value"
+msgstr "Valor"
+
+#. module: helpdesk_sla_enterprise_xlsx
+#. odoo-python
+#: code:addons/helpdesk_sla_enterprise_xlsx/services/helpdesk_sla_xlsx_builder.py:0
+msgid "Yes"
+msgstr "Si"

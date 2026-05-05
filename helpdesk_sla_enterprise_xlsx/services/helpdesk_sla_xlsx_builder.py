@@ -23,9 +23,9 @@ class HelpdeskSLAXlsxBuilder(models.AbstractModel):
         formats = self._get_formats(workbook)
         self._write_executive_summary(workbook, formats, wizard, payload)
         self._write_details(workbook, formats, wizard, payload["rows"])
-        self._write_summary_sheet(workbook, formats, "Team Summary", payload["team_summary"])
-        self._write_summary_sheet(workbook, formats, "Agent Summary", payload["agent_summary"])
-        self._write_summary_sheet(workbook, formats, "Monthly Summary", payload["month_summary"])
+        self._write_summary_sheet(workbook, formats, _("Team Summary"), payload["team_summary"])
+        self._write_summary_sheet(workbook, formats, _("Agent Summary"), payload["agent_summary"])
+        self._write_summary_sheet(workbook, formats, _("Monthly Summary"), payload["month_summary"])
 
         workbook.close()
         output.seek(0)
@@ -87,38 +87,40 @@ class HelpdeskSLAXlsxBuilder(models.AbstractModel):
         ws = workbook.add_worksheet("Executive Summary")
         summary = payload["summary"]
 
-        ws.write(0, 0, "Helpdesk SLA Report", formats["title"])
-        ws.write(1, 0, "Generated for: %s" % (wizard.company_id.display_name or ""), formats["subtitle"])
-        ws.write(2, 0, "Period: %s to %s" % (wizard.date_from, wizard.date_to), formats["subtitle"])
+        ws.write(0, 0,  _("Helpdesk SLA Report"), formats["title"])
+        ws.write(1, 0,  _("Generated for: %s") % (wizard.company_id.display_name or ""), formats["subtitle"])
+        ws.write(2, 0,  _("Period: %s to %s") % (wizard.date_from, wizard.date_to), formats["subtitle"])
 
         kpis = [
-            ("Total Closed Tickets", summary["total"]),
-            ("SLA Met", summary["met"]),
-            ("SLA Breached", summary["breached"]),
-            ("SLA Compliance %", summary["compliance"]),
-            ("Tickets With Native SLA", summary["with_sla"]),
-            ("Tickets Without Native SLA", summary["without_sla"]),
-            ("Avg Resolution Hours", summary["avg_resolution"]),
-            ("Avg First Response Hours", summary["avg_first_response"]),
+            (_("Total Closed Tickets"), summary["total"]),
+            (_("SLA Met"), summary["met"]),
+            (_("SLA Breached"), summary["breached"]),
+            (_("SLA Compliance %"), summary["compliance"]),
+            (_("Tickets With Native SLA"), summary["with_sla"]),
+            (_("Tickets Without Native SLA"), summary["without_sla"]),
+            (_("Avg Resolution Hours"), summary["avg_resolution"]),
+            (_("Avg First Response Hours"), summary["avg_first_response"]),
         ]
 
         row = 5
-        ws.write(row, 0, "KPI", formats["header"])
-        ws.write(row, 1, "Value", formats["header"])
+        ws.write(row, 0, _("KPI"), formats["header"])
+        ws.write(row, 1, _("Value"), formats["header"])
         for label, value in kpis:
             row += 1
             ws.write(row, 0, label, formats["kpi_label"])
             ws.write(row, 1, value, formats["kpi_value"])
 
-        ws.write(5, 3, "Applied Filters", formats["header"])
+        ws.write(5, 3, _("Applied Filters"), formats["header"])
+
         filters = [
-            ("Teams", ", ".join(wizard.team_ids.mapped("display_name")) or "All"),
-            ("Assigned Users", ", ".join(wizard.user_ids.mapped("display_name")) or "All"),
-            ("Breached Only", "Yes" if wizard.breached_only else "No"),
-            ("Include Open Tickets", "Yes" if wizard.include_open_tickets else "No"),
-            ("Include Tickets Without SLA", "Yes" if wizard.include_no_sla else "No"),
-            ("Fallback SLA Target Hours", wizard.sla_target_hours),
+            (_("Teams"), ", ".join(wizard.team_ids.mapped("display_name")) or _("All")),
+            (_("Assigned Users"), ", ".join(wizard.user_ids.mapped("display_name")) or _("All")),
+            (_("Breached Only"), _("Yes") if wizard.breached_only else _("No")),
+            (_("Include Open Tickets"), _("Yes") if wizard.include_open_tickets else _("No")),
+            (_("Include Tickets Without SLA"), _("Yes") if wizard.include_no_sla else _("No")),
+            (_("Fallback SLA Target Hours"), wizard.sla_target_hours),
         ]
+
 
         frow = 6
         for label, value in filters:
@@ -132,28 +134,28 @@ class HelpdeskSLAXlsxBuilder(models.AbstractModel):
         ws.set_column(4, 4, 45)
 
     def _write_details(self, workbook, formats, wizard, rows):
-        ws = workbook.add_worksheet("SLA Details")
+        ws = workbook.add_worksheet(_("SLA Details"))
 
         headers = [
-            "Ticket",
-            "Reference",
-            "Team",
-            "Agent",
-            "Customer",
-            "Stage",
-            "Category",
-            "Subcategory",
-            "Created Date",
-            "Closed Date",
-            "First Response Date",
-            "Nearest SLA Deadline",
-            "First Response Hours",
-            "Resolution Hours",
-            "Native SLA Policies",
-            "Failed SLA Policies",
-            "Successful SLA Policies",
-            "SLA Status",
-            "Audit Source",
+            _("Ticket"),
+            _("Reference"),
+            _("Team"),
+            _("Agent"),
+            _("Customer"),
+            _("Stage"),
+            _("Category"),
+            _("Subcategory"),
+            _("Created Date"),
+            _("Closed Date"),
+            _("First Response Date"),
+            _("Nearest SLA Deadline"),
+            _("First Response Hours"),
+            _("Resolution Hours"),
+            _("Native SLA Policies"),
+            _("Failed SLA Policies"),
+            _("Successful SLA Policies"),
+            _("SLA Status"),
+            _("Audit Source"),
         ]
 
         for col, header in enumerate(headers):
@@ -203,15 +205,15 @@ class HelpdeskSLAXlsxBuilder(models.AbstractModel):
     def _write_summary_sheet(self, workbook, formats, title, rows):
         ws = workbook.add_worksheet(title[:31])
         headers = [
-            title.replace(" Summary", ""),
-            "Total Tickets",
-            "SLA Met",
-            "SLA Breached",
-            "SLA Compliance %",
-            "Tickets With Native SLA",
-            "Tickets Without Native SLA",
-            "Avg Resolution Hours",
-            "Avg First Response Hours",
+            title.replace(_(" Summary"), ""),
+            _("Total Tickets"),
+            _("SLA Met"),
+            _("SLA Breached"),
+            _("SLA Compliance %"),
+            _("Tickets With Native SLA"),
+            _("Tickets Without Native SLA"),
+            _("Avg Resolution Hours"),
+            _("Avg First Response Hours"),
         ]
 
         for col, header in enumerate(headers):
