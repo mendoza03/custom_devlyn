@@ -6,8 +6,10 @@ import pytz
 from lxml import etree
 
 from odoo import api, fields, models, _
+from odoo import Command
 from odoo.exceptions import UserError, ValidationError
 from odoo.osv import expression
+from odoo.tools import html2plaintext
 from odoo.tools.safe_eval import safe_eval
 
 _logger = logging.getLogger(__name__)
@@ -302,6 +304,33 @@ class HelpdeskTicket(models.Model):
         for rec in self:
             rec.x_category_id = False
             rec.x_subcategory_id = False
+            rec.user_id = False
+
+    @api.onchange("x_subcategory_id")
+    def _onchange_x_subcategory_id_validate_user(self):
+        for rec in self:
+            allowed_users = rec._get_allowed_subcategory_users()
+            if allowed_users and rec.user_id not in allowed_users:
+                rec.user_id = False
+
+    @api.depends("team_id", "x_subcategory_id", "x_subcategory_id.user_ids")
+    def _compute_domain_user_ids(self):
+        super()._compute_domain_user_ids()
+        for rec in self:
+            allowed_users = rec._get_allowed_subcategory_users()
+            base_domain_user_ids = rec.domain_user_ids.ids
+            if allowed_users:
+                filtered_user_ids = [
+                    user_id for user_id in base_domain_user_ids
+                    if user_id in allowed_users.ids
+                ]
+                rec.domain_user_ids = [Command.set(filtered_user_ids)]
+
+    def _get_allowed_subcategory_users(self):
+        self.ensure_one()
+        if not self.x_subcategory_id:
+            return self.env["res.users"]
+        return self.x_subcategory_id.user_ids.filtered(lambda user: not user.share)
 
     @api.depends("stage_id.sequence", "stage_id.name")
     def _compute_x_is_stage_new(self):
@@ -2341,6 +2370,7 @@ class HelpdeskTicket(models.Model):
         return False
 
     @api.constrains(
+        "x_detailed_description",
         "x_subcategory_code",
         "x_category_id",
         "x_subcategory_id",
@@ -2408,9 +2438,20 @@ class HelpdeskTicket(models.Model):
         "x_supply_manager_approval_attached",
         "x_toner_below_15",
         "x_attachment_line_ids",
+        "user_id",
     )
     def _check_dynamic_required_fields(self):
         for rec in self:
+            allowed_users = rec._get_allowed_subcategory_users()
+            if allowed_users and rec.user_id and rec.user_id not in allowed_users:
+                raise ValidationError(
+                    _("El usuario asignado no pertenece a los usuarios permitidos para la subcategoría seleccionada.")
+                )
+            detailed_description_text = html2plaintext(rec.x_detailed_description or "").strip()
+            if len(detailed_description_text) > 200:
+                raise ValidationError(
+                    _("La descripción detallada no puede exceder 200 caracteres.")
+                )
             error_message = rec._get_dynamic_required_fields_error()
             if error_message:
                 raise ValidationError(error_message)

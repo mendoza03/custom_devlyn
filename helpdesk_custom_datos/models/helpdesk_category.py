@@ -23,6 +23,14 @@ class HelpdeskTicketSubcategory(models.Model):
 
     name = fields.Char(required=True)
     category_id = fields.Many2one("helpdesk.ticket.category", required=True, ondelete="cascade")
+    user_ids = fields.Many2many(
+        "res.users",
+        "helpdesk_ticket_subcategory_res_users_rel",
+        "subcategory_id",
+        "user_id",
+        string="Usuarios asignables",
+        domain=[("share", "=", False)],
+    )
     sequence = fields.Integer(default=10)
     active = fields.Boolean(default=True)
     code = fields.Char(string="Código", index=True)
