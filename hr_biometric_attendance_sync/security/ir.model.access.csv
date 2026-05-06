@@ -1,0 +1,7 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_hr_biometric_event_officer,hr.biometric.event officer,model_hr_biometric_event,hr_attendance.group_hr_attendance_officer,1,0,0,0
+access_hr_biometric_event_manager,hr.biometric.event manager,model_hr_biometric_event,hr_attendance.group_hr_attendance_manager,1,1,1,1
+access_hr_biometric_sync_cursor_manager,hr.biometric.sync.cursor manager,model_hr_biometric_sync_cursor,hr_attendance.group_hr_attendance_manager,1,1,1,1
+access_hr_biometric_sync_run_officer,hr.biometric.sync.run officer,model_hr_biometric_sync_run,hr_attendance.group_hr_attendance_officer,1,0,0,0
+access_hr_biometric_sync_run_manager,hr.biometric.sync.run manager,model_hr_biometric_sync_run,hr_attendance.group_hr_attendance_manager,1,1,1,1
+access_hr_biometric_sync_config_manager,hr.biometric.sync.config manager,model_hr_biometric_sync_config,hr_attendance.group_hr_attendance_manager,1,1,1,1

@@ -1,0 +1,25 @@
+<odoo>
+    <record id="view_biometric_attendance_summary_list" model="ir.ui.view">
+        <field name="name">biometric.attendance.summary.list</field>
+        <field name="model">biometric.attendance.summary</field>
+        <field name="arch" type="xml">
+            <list>
+                <field name="summary_date"/>
+                <field name="employee_id"/>
+                <field name="user_id"/>
+                <field name="login"/>
+                <field name="first_check_in"/>
+                <field name="last_check_out"/>
+                <field name="total_worked_hours"/>
+                <field name="segments"/>
+                <field name="open_segments"/>
+            </list>
+        </field>
+    </record>
+
+    <record id="action_biometric_attendance_summary" model="ir.actions.act_window">
+        <field name="name">Attendance Summary</field>
+        <field name="res_model">biometric.attendance.summary</field>
+        <field name="view_mode">list</field>
+    </record>
+</odoo>

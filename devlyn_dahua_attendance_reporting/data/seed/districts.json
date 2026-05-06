@@ -1,0 +1,236 @@
+[
+  {
+    "legacy_district_id": 10000,
+    "legacy_region_id": 1,
+    "legacy_zone_id": 100,
+    "name": "CERRADAS"
+  },
+  {
+    "legacy_district_id": 10101,
+    "legacy_region_id": 1,
+    "legacy_zone_id": 101,
+    "name": "NOROESTE D1"
+  },
+  {
+    "legacy_district_id": 10102,
+    "legacy_region_id": 1,
+    "legacy_zone_id": 101,
+    "name": "NOROESTE D2"
+  },
+  {
+    "legacy_district_id": 10103,
+    "legacy_region_id": 1,
+    "legacy_zone_id": 101,
+    "name": "NOROESTE D3"
+  },
+  {
+    "legacy_district_id": 10104,
+    "legacy_region_id": 1,
+    "legacy_zone_id": 101,
+    "name": "NOROESTE D4"
+  },
+  {
+    "legacy_district_id": 10105,
+    "legacy_region_id": 1,
+    "legacy_zone_id": 101,
+    "name": "NOROESTE D5"
+  },
+  {
+    "legacy_district_id": 10106,
+    "legacy_region_id": 1,
+    "legacy_zone_id": 101,
+    "name": "NOROESTE D6"
+  },
+  {
+    "legacy_district_id": 10107,
+    "legacy_region_id": 1,
+    "legacy_zone_id": 101,
+    "name": "NOROESTE D7"
+  },
+  {
+    "legacy_district_id": 10201,
+    "legacy_region_id": 1,
+    "legacy_zone_id": 102,
+    "name": "NORESTE D1"
+  },
+  {
+    "legacy_district_id": 10202,
+    "legacy_region_id": 1,
+    "legacy_zone_id": 102,
+    "name": "NORESTE D2"
+  },
+  {
+    "legacy_district_id": 10203,
+    "legacy_region_id": 1,
+    "legacy_zone_id": 102,
+    "name": "NORESTE D3"
+  },
+  {
+    "legacy_district_id": 10204,
+    "legacy_region_id": 1,
+    "legacy_zone_id": 102,
+    "name": "NORESTE D4"
+  },
+  {
+    "legacy_district_id": 10205,
+    "legacy_region_id": 1,
+    "legacy_zone_id": 102,
+    "name": "NORESTE D5"
+  },
+  {
+    "legacy_district_id": 10206,
+    "legacy_region_id": 1,
+    "legacy_zone_id": 102,
+    "name": "Distrito 06"
+  },
+  {
+    "legacy_district_id": 10301,
+    "legacy_region_id": 1,
+    "legacy_zone_id": 103,
+    "name": "CENTRO D1"
+  },
+  {
+    "legacy_district_id": 10302,
+    "legacy_region_id": 1,
+    "legacy_zone_id": 103,
+    "name": "CENTRO D2"
+  },
+  {
+    "legacy_district_id": 10303,
+    "legacy_region_id": 1,
+    "legacy_zone_id": 103,
+    "name": "CENTRO D3"
+  },
+  {
+    "legacy_district_id": 10304,
+    "legacy_region_id": 1,
+    "legacy_zone_id": 103,
+    "name": "CENTRO D4"
+  },
+  {
+    "legacy_district_id": 10305,
+    "legacy_region_id": 1,
+    "legacy_zone_id": 103,
+    "name": "CENTRO D5"
+  },
+  {
+    "legacy_district_id": 10306,
+    "legacy_region_id": 1,
+    "legacy_zone_id": 103,
+    "name": "CENTRO D6"
+  },
+  {
+    "legacy_district_id": 10401,
+    "legacy_region_id": 1,
+    "legacy_zone_id": 104,
+    "name": "METROPOLITANA D1"
+  },
+  {
+    "legacy_district_id": 10402,
+    "legacy_region_id": 1,
+    "legacy_zone_id": 104,
+    "name": "METROPOLITANA D2"
+  },
+  {
+    "legacy_district_id": 10403,
+    "legacy_region_id": 1,
+    "legacy_zone_id": 104,
+    "name": "METROPOLITANA D3"
+  },
+  {
+    "legacy_district_id": 10404,
+    "legacy_region_id": 1,
+    "legacy_zone_id": 104,
+    "name": "METROPOLITANA D4"
+  },
+  {
+    "legacy_district_id": 10405,
+    "legacy_region_id": 1,
+    "legacy_zone_id": 104,
+    "name": "METROPOLITANA D5"
+  },
+  {
+    "legacy_district_id": 10406,
+    "legacy_region_id": 1,
+    "legacy_zone_id": 104,
+    "name": "METROPOLITANA D6"
+  },
+  {
+    "legacy_district_id": 10407,
+    "legacy_region_id": 1,
+    "legacy_zone_id": 104,
+    "name": "METROPOLITANA D7"
+  },
+  {
+    "legacy_district_id": 10408,
+    "legacy_region_id": 1,
+    "legacy_zone_id": 108,
+    "name": "METROPOLITANA D7"
+  },
+  {
+    "legacy_district_id": 10409,
+    "legacy_region_id": 1,
+    "legacy_zone_id": 100,
+    "name": "METROPOLITANA D7"
+  },
+  {
+    "legacy_district_id": 10501,
+    "legacy_region_id": 1,
+    "legacy_zone_id": 105,
+    "name": "SUR D1"
+  },
+  {
+    "legacy_district_id": 10502,
+    "legacy_region_id": 1,
+    "legacy_zone_id": 105,
+    "name": "SUR D2"
+  },
+  {
+    "legacy_district_id": 10503,
+    "legacy_region_id": 1,
+    "legacy_zone_id": 105,
+    "name": "SUR D3"
+  },
+  {
+    "legacy_district_id": 10504,
+    "legacy_region_id": 1,
+    "legacy_zone_id": 105,
+    "name": "SUR D4"
+  },
+  {
+    "legacy_district_id": 10505,
+    "legacy_region_id": 1,
+    "legacy_zone_id": 105,
+    "name": "SUR D5"
+  },
+  {
+    "legacy_district_id": 10506,
+    "legacy_region_id": 1,
+    "legacy_zone_id": 105,
+    "name": "SUR D6"
+  },
+  {
+    "legacy_district_id": 10507,
+    "legacy_region_id": 1,
+    "legacy_zone_id": 105,
+    "name": "SUR D7"
+  },
+  {
+    "legacy_district_id": 10508,
+    "legacy_region_id": 1,
+    "legacy_zone_id": 105,
+    "name": "SUR D8"
+  },
+  {
+    "legacy_district_id": 10606,
+    "legacy_region_id": 1,
+    "legacy_zone_id": 106,
+    "name": "Distrito 06"
+  },
+  {
+    "legacy_district_id": 50000,
+    "legacy_region_id": 5,
+    "legacy_zone_id": 500,
+    "name": "Distrito 00"
+  }
+]

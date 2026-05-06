@@ -1,0 +1,20 @@
+{
+    "name": "Odoo Biometric Bridge",
+    "version": "19.0.1.0.0",
+    "summary": "Custom auth bridge for OIDC + biometric liveness",
+    "author": "BSP",
+    "depends": ["web", "auth_oauth", "mail", "hr_attendance"],
+    "data": [
+        "security/ir.model.access.csv",
+        "data/biometric_policy_data.xml",
+        "views/biometric_auth_event_views.xml",
+        "views/biometric_auth_alert_views.xml",
+        "views/biometric_device_views.xml",
+        "views/biometric_policy_views.xml",
+        "views/biometric_attendance_summary_views.xml",
+        "views/biometric_menu.xml",
+    ],
+    "installable": True,
+    "application": False,
+    "license": "LGPL-3",
+}

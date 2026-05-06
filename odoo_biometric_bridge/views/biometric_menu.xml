@@ -1,0 +1,9 @@
+<odoo>
+    <menuitem id="menu_biometric_root" name="Biometric Security" parent="base.menu_administration" sequence="80" groups="base.group_system"/>
+
+    <menuitem id="menu_biometric_events" name="Events" parent="menu_biometric_root" action="action_biometric_auth_event" sequence="10" groups="base.group_system"/>
+    <menuitem id="menu_biometric_alerts" name="Alerts" parent="menu_biometric_root" action="action_biometric_auth_alert" sequence="20" groups="base.group_system"/>
+    <menuitem id="menu_biometric_devices" name="Devices" parent="menu_biometric_root" action="action_biometric_device" sequence="30" groups="base.group_system"/>
+    <menuitem id="menu_biometric_policy" name="Policy" parent="menu_biometric_root" action="action_biometric_policy" sequence="40" groups="base.group_system"/>
+    <menuitem id="menu_biometric_attendance_summary" name="Attendance Summary" parent="menu_biometric_root" action="action_biometric_attendance_summary" sequence="50" groups="base.group_system"/>
+</odoo>

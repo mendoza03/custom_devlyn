@@ -1,0 +1,40 @@
+<odoo>
+    <record id="view_biometric_policy_form" model="ir.ui.view">
+        <field name="name">biometric.policy.form</field>
+        <field name="model">biometric.policy</field>
+        <field name="arch" type="xml">
+            <form>
+                <sheet>
+                    <group>
+                        <field name="name"/>
+                        <field name="active"/>
+                        <field name="biometric_mode"/>
+                        <field name="attendance_sync_enabled"/>
+                        <field name="admin_demo_login"/>
+                        <field name="liveness_threshold"/>
+                        <field name="liveness_max_attempts"/>
+                        <field name="gps_required"/>
+                        <field name="geofence_enforced"/>
+                    </group>
+                    <group string="Alerts">
+                        <field name="alert_country_change"/>
+                        <field name="alert_asn_change"/>
+                        <field name="alert_new_device"/>
+                        <field name="alert_low_score"/>
+                    </group>
+                    <group string="URLs and API">
+                        <field name="auth_base_url"/>
+                        <field name="erp_base_url"/>
+                        <field name="api_key" password="True"/>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="action_biometric_policy" model="ir.actions.act_window">
+        <field name="name">Biometric Policy</field>
+        <field name="res_model">biometric.policy</field>
+        <field name="view_mode">form</field>
+    </record>
+</odoo>

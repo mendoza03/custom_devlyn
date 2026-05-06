@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="view_hr_biometric_event_search" model="ir.ui.view">
+        <field name="name">hr.biometric.event.search</field>
+        <field name="model">hr.biometric.event</field>
+        <field name="arch" type="xml">
+            <search>
+                <field name="normalized_event_id"/>
+                <field name="user_id_on_device"/>
+                <field name="card_name"/>
+                <field name="employee_id"/>
+                <field name="device_id_resolved"/>
+                <field name="door_name"/>
+                <field name="sync_status"/>
+                <field name="attendance_action"/>
+                <filter name="filter_processed" string="Procesado" domain="[('sync_status', 'in', ['check_in_created', 'check_out_written'])]"/>
+                <filter name="filter_duplicates" string="Duplicado" domain="[('sync_status', '=', 'duplicate_ignored')]"/>
+                <filter name="filter_employee_not_found" string="Sin empleado" domain="[('sync_status', '=', 'employee_not_found')]"/>
+                <filter name="filter_auto_closed" string="Autocerrado" domain="[('attendance_auto_closed', '=', True)]"/>
+                <filter name="filter_error" string="Error" domain="[('sync_status', '=', 'error')]"/>
+                <separator/>
+                <filter name="group_by_status" string="Estado" context="{'group_by': 'sync_status'}"/>
+                <filter name="group_by_employee" string="Empleado" context="{'group_by': 'employee_id'}"/>
+                <filter name="group_by_device" string="Dispositivo" context="{'group_by': 'device_id_resolved'}"/>
+            </search>
+        </field>
+    </record>
+
+    <record id="view_hr_biometric_event_tree" model="ir.ui.view">
+        <field name="name">hr.biometric.event.tree</field>
+        <field name="model">hr.biometric.event</field>
+        <field name="arch" type="xml">
+            <list create="false" delete="false" default_order="event_occurred_at_utc desc">
+                <field name="normalized_event_id"/>
+                <field name="event_local_display"/>
+                <field name="user_id_on_device"/>
+                <field name="card_name"/>
+                <field name="employee_id"/>
+                <field name="device_id_resolved"/>
+                <field name="door_name"/>
+                <field name="granted_state"/>
+                <field name="attendance_action"/>
+                <field name="sync_status"/>
+                <field name="attendance_id"/>
+                <field name="message"/>
+            </list>
+        </field>
+    </record>
+
+    <record id="view_hr_biometric_event_form" model="ir.ui.view">
+        <field name="name">hr.biometric.event.form</field>
+        <field name="model">hr.biometric.event</field>
+        <field name="arch" type="xml">
+            <form create="false" delete="false">
+                <sheet>
+                    <group>
+                        <group>
+                            <field name="name"/>
+                            <field name="normalized_event_id"/>
+                            <field name="event_kind"/>
+                            <field name="event_occurred_at_utc"/>
+                            <field name="event_local_display"/>
+                            <field name="event_local_date"/>
+                            <field name="source_raw_request_id"/>
+                        </group>
+                        <group>
+                            <field name="sync_status"/>
+                            <field name="attendance_action"/>
+                            <field name="attendance_id"/>
+                            <field name="attendance_auto_closed"/>
+                            <field name="auto_close_reason"/>
+                            <field name="inference_mode"/>
+                        </group>
+                    </group>
+                    <group>
+                        <group>
+                            <field name="user_id_on_device"/>
+                            <field name="card_name"/>
+                            <field name="employee_id"/>
+                            <field name="device_id_resolved"/>
+                            <field name="identity_resolution"/>
+                        </group>
+                        <group>
+                            <field name="door_name"/>
+                            <field name="reader_id"/>
+                            <field name="direction_raw"/>
+                            <field name="granted_state"/>
+                            <field name="source_ip"/>
+                            <field name="dedupe_reference_event_id"/>
+                        </group>
+                    </group>
+                    <notebook>
+                        <page string="Notas">
+                            <field name="message" nolabel="1"/>
+                        </page>
+                        <page string="Payload">
+                            <field name="payload_json" nolabel="1"/>
+                        </page>
+                    </notebook>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="action_hr_biometric_event" model="ir.actions.act_window">
+        <field name="name">Eventos biométricos</field>
+        <field name="res_model">hr.biometric.event</field>
+        <field name="view_mode">list,form</field>
+        <field name="search_view_id" ref="view_hr_biometric_event_search"/>
+    </record>
+
+    <record id="action_hr_biometric_event_exceptions" model="ir.actions.act_window">
+        <field name="name">Excepciones biométricas</field>
+        <field name="res_model">hr.biometric.event</field>
+        <field name="view_mode">list,form</field>
+        <field name="search_view_id" ref="view_hr_biometric_event_search"/>
+        <field name="domain">[('sync_status', 'in', ['duplicate_ignored', 'employee_not_found', 'denied_ignored', 'after_close_review', 'error'])]</field>
+    </record>
+</odoo>

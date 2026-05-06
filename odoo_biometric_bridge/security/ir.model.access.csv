@@ -1,0 +1,9 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_biometric_auth_event_user,access.biometric.auth.event.user,model_biometric_auth_event,base.group_user,1,0,0,0
+access_biometric_auth_event_admin,access.biometric.auth.event.admin,model_biometric_auth_event,base.group_system,1,1,1,1
+access_biometric_auth_alert_user,access.biometric.auth.alert.user,model_biometric_auth_alert,base.group_user,1,0,0,0
+access_biometric_auth_alert_admin,access.biometric.auth.alert.admin,model_biometric_auth_alert,base.group_system,1,1,1,1
+access_biometric_device_user,access.biometric.device.user,model_biometric_device,base.group_user,1,0,0,0
+access_biometric_device_admin,access.biometric.device.admin,model_biometric_device,base.group_system,1,1,1,1
+access_biometric_policy_admin,access.biometric.policy.admin,model_biometric_policy,base.group_system,1,1,1,1
+access_biometric_attendance_summary_admin,access.biometric.attendance.summary.admin,model_biometric_attendance_summary,base.group_system,1,0,0,0
