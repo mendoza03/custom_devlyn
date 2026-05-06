@@ -49,6 +49,7 @@ class InheritPropertyContract(models.Model):
             ('12', 'annual'),
         ],
         string='Periodicity',
+        default='1',
     )
     order_id = fields.Many2one('sale.order', string='Order Id')
     moratorium_interest = fields.Float(string='Moratorium Interest')
@@ -310,24 +311,43 @@ class InheritPropertyContract(models.Model):
                     date_payment = add_months(date_payment, int(repetition))
                     self.date_to = date_payment
 
-
             date_hitch = self.date_payment
 
             if self.is_difered_hitch:
                 if not self.periodicity_hitch:
-                    raise ValidationError(_('You must select a Periodicity for the Hitch'))
-                if self.hitch_difered_months == 0:
+                    self.periodicity_hitch = '1'
+
+                if self.hitch_difered_months <= 0:
                     raise ValidationError(_('The months for difered hitch should be greater than 0'))
+
+                total_hitch = (self.advance_payment or 0.0) + (self.extra_down_payment or 0.0)
+                difered_value = total_hitch / self.hitch_difered_months if self.hitch_difered_months else 0.0
 
                 for i in range(0, self.hitch_difered_months):
                     date_line = list(filter(lambda x: x.get('date') == date_hitch, vals))
 
                     if date_line:
-                        difered_value = (self.advance_payment / self.hitch_difered_months)
                         date_line[0]['difered_hitch'] = difered_value
+                    else:
+                        vals.append({
+                            'count_line': len(vals) + 1,
+                            'name': 'Enganche diferido',
+                            'serial': ind,
+                            'journal_id': int(
+                                self.env['ir.config_parameter']
+                                .sudo()
+                                .get_param('real_estate_bits.income_journal')
+                            ),
+                            'amount': difered_value,
+                            'interest': 0.0,
+                            'amount_capital': 0.0,
+                            'initial_balance': 0.0,
+                            'difered_hitch': difered_value,
+                            'date': date_hitch,
+                        })
+                        ind += 1
 
-                    prev_hitch = date_hitch
-                    date_hitch = add_months(date_hitch, int(self.periodicity_hitch))
+                    date_hitch = add_months(date_hitch, int(self.periodicity_hitch or '1'))
 
 
             for line in vals:
