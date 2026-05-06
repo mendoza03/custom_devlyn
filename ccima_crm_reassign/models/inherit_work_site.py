@@ -134,47 +134,44 @@ class WorksiteInherit(models.Model):
 
         final_amount_field = 'final_amount'
         list_amount_field = 'list_amount'
+        paid_amount_field = 'paid_amount'
 
         for rec in self:
-            # --- NEW: total_condominios ---
             child_worksites = Worksite.search([('parent_id', '=', rec.id)]).ids
-            if child_worksites:
-                rec.total_condominios = Condo.search_count([('parent_id', 'in', child_worksites)])
-            else:
-                rec.total_condominios = 0
 
-            # --- your current logic ---
+            rec.total_condominios = Condo.search_count([('parent_id', 'in', child_worksites)]) if child_worksites else 0
             rec.total_goal = sum(rec.child_ids.mapped('goal')) if rec.child_ids else (rec.goal or 0.0)
 
             products = rec._get_kpi_products()
 
-            total_property_area = sum(products.mapped('property_area') or [])
-            total_income = sum(products.mapped(final_amount_field) or [])
-
             free_products = products.filtered(lambda p: (p.state or '') == 'free')
             sold_products = products.filtered(lambda p: (p.state or '') == 'sold')
             reserved_products = products.filtered(lambda p: (p.state or '') == 'reserved')
-            total_unit_products = products.filtered(lambda p: (p.state or '') in ('free', 'sold'))
+            sold_reserved_products = sold_products | reserved_products
 
-            rec.total_sell = sum((free_products.mapped(list_amount_field) or []))
-            rec.sell = (
-                    sum((sold_products.mapped(final_amount_field) or [])) +
-                    sum((reserved_products.mapped(final_amount_field) or []))
-            )
+            rec.total_units_kpi = len(sold_products | free_products)
+            rec.total_area_kpi = (rec.sold_area or 0.0) + (rec.available_area or 0.0)
+            rec.total_property_area = rec.total_area_kpi
+
+            rec.sell = sum(sold_reserved_products.mapped(final_amount_field) or [])
             rec.sold_amount = rec.sell
-            rec.amount_to_sell = rec.total_goal - rec.sell
+            rec.total_sell = rec.sold_amount
 
-            rec.total_available = sum((free_products.mapped(list_amount_field) or []))
-            rec.total_units_kpi = len(total_unit_products)
-            rec.total_area_kpi = total_property_area
-            rec.total_property_area = total_property_area
-            rec.percent_sell_l = rec._safe_div(rec.sold_units, rec.total_units)
-
-            rec.percent_sell = rec._safe_div(rec.sell, rec.total_goal)
-            rec.prom = rec._safe_div(rec.sell, rec.sold_area)
-            rec.total_income = total_income
-            rec.to_sell = sum((free_products.mapped(final_amount_field) or []))
+            rec.total_available = sum(free_products.mapped(list_amount_field) or [])
             rec.inventory = rec.total_available
+
+            rec.amount_to_sell = rec.total_goal - rec.sold_amount
+            rec.to_sell = rec.amount_to_sell
+
+            rec.percent_sell_l = rec._safe_div(rec.sold_units, rec.total_units)
+            rec.percent_sell = rec._safe_div(rec.sold_amount, rec.total_goal)
+
+            rec.prom = rec._safe_div(rec.sold_amount, rec.sold_area)
+
+            if paid_amount_field in self.env['product.template']._fields:
+                rec.total_income = sum(sold_reserved_products.mapped(paid_amount_field) or [])
+            else:
+                rec.total_income = sum(sold_reserved_products.mapped(final_amount_field) or [])
 
     def action_open_url(self):
         for record in self:

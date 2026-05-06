@@ -4,76 +4,88 @@
     <record id="view_project_worksite_inherit_form_tabs" model="ir.ui.view">
         <field name="name">project.worksite.inherit.form.tabs</field>
         <field name="model">project.worksite</field>
-        <field name="inherit_id" ref="real_estate_bits.project_worksite_form"/>
+        <field name="inherit_id" ref="real_estate_bits.project_worksite_form" />
         <field name="arch" type="xml">
             <xpath expr="//sheet/notebook" position="inside">
                 <page string="Legal">
                     <group>
-                        <field name="related_public_deeds"/>
-                        <field name="recent_public_deed"/>
-                        <field name="otherwise_clause"/>
-                        <field name="compliance_clause"/>
-                        <field name="company_legal_name"/>
-                        <field name="company_legal_rep"/>
-                        <field name="company_constitutive_act"/>
-                        <field name="company_notary"/>
-                        <field name="company_address"/>
-                        <field name="company_email"/>
+                        <field name="related_public_deeds" />
+                        <field name="recent_public_deed" />
+                        <field name="otherwise_clause" />
+                        <field name="compliance_clause" />
+                        <field name="company_legal_name" />
+                        <field name="company_legal_rep" />
+                        <field name="company_constitutive_act" />
+                        <field name="company_notary" />
+                        <field name="company_address" />
+                        <field name="company_email" />
                     </group>
                 </page>
                 <page string="Presentation">
-                    <field name="documents_presentation" mode="kanban" context="{'default_document_type': 'presentation', 'default_lead_id': False}"/>
+                    <field name="documents_presentation" mode="kanban"
+                        context="{'default_document_type': 'presentation', 'default_lead_id': False}" />
                 </page>
                 <page string="Master">
-                    <field name="documents_master" mode="kanban" context="{'default_document_type': 'master', 'default_lead_id': False}"/>
+                    <field name="documents_master" mode="kanban"
+                        context="{'default_document_type': 'master', 'default_lead_id': False}" />
                 </page>
                 <page string="Sunning">
-                    <field name="documents_sunning" mode="kanban" context="{'default_document_type': 'sunning', 'default_lead_id': False}"/>
+                    <field name="documents_sunning" mode="kanban"
+                        context="{'default_document_type': 'sunning', 'default_lead_id': False}" />
                 </page>
                 <page string="Technical specifications amenities">
-                    <field name="documents_amenities" mode="kanban" context="{'default_document_type': 'amenities', 'default_lead_id': False}"/>
+                    <field name="documents_amenities" mode="kanban"
+                        context="{'default_document_type': 'amenities', 'default_lead_id': False}" />
                 </page>
                 <page string="Location">
-                    <field name="documents_location" mode="kanban" context="{'default_document_type': 'location', 'default_lead_id': False}"/>
+                    <field name="documents_location" mode="kanban"
+                        context="{'default_document_type': 'location', 'default_lead_id': False}" />
                 </page>
                 <page string="Flyers">
-                    <field name="documents_flyers" mode="kanban" context="{'default_document_type': 'flyers', 'default_lead_id': False}"/>
+                    <field name="documents_flyers" mode="kanban"
+                        context="{'default_document_type': 'flyers', 'default_lead_id': False}" />
                 </page>
                 <page string="Rules">
-                    <field name="documents_rules" mode="kanban" context="{'default_document_type': 'rules', 'default_lead_id': False}"/>
+                    <field name="documents_rules" mode="kanban"
+                        context="{'default_document_type': 'rules', 'default_lead_id': False}" />
                 </page>
                 <page string="Payment procedure">
-                    <field name="documents_procedure" mode="kanban" context="{'default_document_type': 'procedure', 'default_lead_id': False}"/>
+                    <field name="documents_procedure" mode="kanban"
+                        context="{'default_document_type': 'procedure', 'default_lead_id': False}" />
                 </page>
                 <page string="Virtual tour">
-                    <field name="documents_tour" mode="kanban" context="{'default_document_type': 'tour', 'default_lead_id': False}"/>
+                    <field name="documents_tour" mode="kanban"
+                        context="{'default_document_type': 'tour', 'default_lead_id': False}" />
                 </page>
                 <page string="Videos">
-                    <field name="documents_videos" mode="kanban" context="{'default_document_type': 'videos', 'default_lead_id': False}"/>
+                    <field name="documents_videos" mode="kanban"
+                        context="{'default_document_type': 'videos', 'default_lead_id': False}" />
                 </page>
                 <page string="Work progress">
-                    <field name="documents_work" mode="kanban" context="{'default_document_type': 'work', 'default_lead_id': False}"/>
+                    <field name="documents_work" mode="kanban"
+                        context="{'default_document_type': 'work', 'default_lead_id': False}" />
                 </page>
                 <page string="Draft contract">
-                    <field name="documents_contract" mode="kanban" context="{'default_document_type': 'contract', 'default_lead_id': False}"/>
+                    <field name="documents_contract" mode="kanban"
+                        context="{'default_document_type': 'contract', 'default_lead_id': False}" />
                 </page>
                 <page string="Availability">
-                    <field name="documents_availability" mode="kanban" context="{'default_document_type': 'availability', 'default_lead_id': False}"/>
+                    <field name="documents_availability" mode="kanban"
+                        context="{'default_document_type': 'availability', 'default_lead_id': False}" />
                 </page>
 
             </xpath>
 
             <xpath expr="//field[@name='project_type']" position="after">
-                <field name="url"/>
+                <field name="url" />
             </xpath>
 
 
-
-            <xpath expr="//form[1]/sheet[1]/notebook[1]/page[7]" position="replace"/>
-              <xpath expr="//form[1]/sheet[1]/notebook[1]/page[6]" position="replace"/>
-              <xpath expr="//form[1]/sheet[1]/notebook[1]/page[5]" position="replace"/>
-              <xpath expr="//form[1]/sheet[1]/notebook[1]/page[4]" position="replace"/>
-              <xpath expr="//form[1]/sheet[1]/notebook[1]/page[3]" position="replace"/>
+            <xpath expr="//form[1]/sheet[1]/notebook[1]/page[7]" position="replace" />
+            <xpath expr="//form[1]/sheet[1]/notebook[1]/page[6]" position="replace" />
+            <xpath expr="//form[1]/sheet[1]/notebook[1]/page[5]" position="replace" />
+            <xpath expr="//form[1]/sheet[1]/notebook[1]/page[4]" position="replace" />
+            <xpath expr="//form[1]/sheet[1]/notebook[1]/page[3]" position="replace" />
 
 
         </field>
@@ -82,14 +94,16 @@
     <record id="view_sub_project_worksite_inherit_sales_kpis" model="ir.ui.view">
         <field name="name">sub.project.worksite.inherit.sales.kpis</field>
         <field name="model">project.worksite</field>
-        <field name="inherit_id" ref="real_estate_bits.sub_project_worksite_form"/>
+        <field name="inherit_id" ref="real_estate_bits.sub_project_worksite_form" />
         <field name="arch" type="xml">
             <xpath expr="//field[@name='available_area']" position="after">
-                <field name="total_units_kpi" readonly="1"/>
-                <field name="total_area_kpi" readonly="1"/>
-                <field name="sold_amount" readonly="1"/>
-                <field name="amount_to_sell" readonly="1"/>
-                <field name="to_sell" readonly="1"/>
+                <field name="total_units_kpi" string="Unidades totales" readonly="1" />
+                <field name="total_area_kpi" string="Area total" readonly="1" />
+                <field name="inventory" string="Importe Disponible" readonly="1" />
+                <field name="amount_to_sell" string="Por vender" readonly="1" />
+                <field name="prom" string="Precio promedio" readonly="1" />
+                <field name="percent_sell" string="% Vendido $" widget="percentage" readonly="1" />
+                <field name="total_income" string="Ingresos totales" readonly="1" />
             </xpath>
         </field>
     </record>
