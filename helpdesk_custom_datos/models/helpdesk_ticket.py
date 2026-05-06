@@ -182,7 +182,7 @@ class HelpdeskTicket(models.Model):
 
     @api.model
     def _default_creator_email(self):
-        return self.env.user.email or self.env.user.partner_id.email or False
+        email = self.env.user.email or self.env.user.partner_id.email or False
 
     @api.model
     def _default_creator_phone(self):
@@ -265,12 +265,26 @@ class HelpdeskTicket(models.Model):
     x_centro_sap = fields.Char(string="Centro SAP", copy=False)
     x_branch_id = fields.Many2one(
         "devlyn.catalog.branch",
-        string="Sucursal",
+        string="Óptica",
         domain=[("active", "=", True)],
         copy=False,
         ondelete="restrict",
         default=lambda self: self._default_creator_branch(),
     )
+
+    created_by_user_id = fields.Many2one(
+        'res.users',
+        default=lambda self: self.env.user,
+        readonly=True,
+    )
+
+    user_id = fields.Many2one(
+        'res.users',
+        string='Assigned to',
+        default=lambda self: self.env.user,
+        readonly=True,
+    )
+
     x_numero_telefonico = fields.Char(
         string="Número telefónico",
         copy=False,
@@ -286,6 +300,17 @@ class HelpdeskTicket(models.Model):
         store=False,
     )
     x_commitment_date = fields.Date(string="Fecha compromiso", copy=False)
+
+    @api.onchange('x_general_description')
+    def _onchange_set_user(self):
+        if not self.user_id:
+            self.user_id = self.env.user
+
+    @api.onchange('email')
+    def _onchange_email(self):
+        if self.email and not self.email.lower().endswith('@devlyn.com.mx'):
+            self.email = False
+            raise UserError("El correo debe ser @devlyn.com.mx")
 
     @api.onchange("x_general_description")
     def _onchange_x_general_description_set_name(self):
@@ -599,6 +624,11 @@ class HelpdeskTicket(models.Model):
                 vals["x_numero_telefonico"] = self._default_creator_phone()
             if not vals.get("x_correo"):
                 vals["x_correo"] = self._default_creator_email()
+
+            correo = vals.get("x_correo")
+            if correo and not correo.lower().endswith("@devlyn.com.mx"):
+                raise UserError("El correo debe ser @devlyn.com.mx")
+
             if not vals.get("x_branch_id"):
                 ticket_user = self.env["res.users"].browse(vals.get("user_id")) if vals.get("user_id") else self.env.user
                 if ticket_user.x_branch_id:

@@ -72,4 +72,15 @@
         <field name="groups" eval="[(4, ref('helpdesk_custom_datos.group_helpdesk_ticket_all'))]"/>
     </record>
 
+    <!-- Usuarios solo ven sus tickets -->
+    <record id="helpdesk_ticket_user_own_only" model="ir.rule">
+        <field name="name">Helpdesk: User Own Tickets</field>
+        <field name="model_id" ref="helpdesk.model_helpdesk_ticket"/>
+        <field name="groups" eval="[(4, ref('helpdesk.group_helpdesk_user'))]"/>
+        <field name="domain_force">
+            [('created_by_user_id', '=', user.id)]
+        </field>
+    </record>
+
+
 </odoo>
