@@ -1,0 +1,4 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_helpdesk_cancel_reason_user,helpdesk.cancel.reason.user,model_helpdesk_cancel_reason,helpdesk.group_helpdesk_user,1,0,0,0
+access_helpdesk_cancel_reason_manager,helpdesk.cancel.reason.manager,model_helpdesk_cancel_reason,helpdesk_inherit.group_helpdesk_cancel_manager,1,1,1,1
+access_helpdesk_cancel_ticket_wizard_manager,helpdesk.cancel.ticket.wizard.manager,model_helpdesk_cancel_ticket_wizard,helpdesk_inherit.group_helpdesk_cancel_manager,1,1,1,1

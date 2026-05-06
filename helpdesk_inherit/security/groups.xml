@@ -1,0 +1,6 @@
+<odoo>
+    <record id="group_helpdesk_cancel_manager" model="res.groups">
+        <field name="name">Helpdesk Cancellation Manager</field>
+        <field name="implied_ids" eval="[(4, ref('helpdesk.group_helpdesk_user'))]"/>
+    </record>
+</odoo>
