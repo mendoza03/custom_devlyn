@@ -10,6 +10,7 @@
         "data/ir_cron_data.xml",
         "views/helpdesk_section_views.xml",
         "views/helpdesk_ticket_form_replace.xml",
+        "views/helpdesk_sap_center_views.xml",
         "views/res_users_views.xml",
         "views/helpdesk_ticket_tree_new_tab.xml",
         "views/helpdesk_ticket_attachments_views.xml",

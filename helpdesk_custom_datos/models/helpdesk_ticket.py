@@ -182,7 +182,8 @@ class HelpdeskTicket(models.Model):
 
     @api.model
     def _default_creator_email(self):
-        email = self.env.user.email or self.env.user.partner_id.email or False
+        email = self.user_id.email or False
+        return email
 
     @api.model
     def _default_creator_phone(self):
@@ -262,14 +263,20 @@ class HelpdeskTicket(models.Model):
             )
 
     x_general_description = fields.Char(string="Descripción General", required=True)
-    x_centro_sap = fields.Char(string="Centro SAP", copy=False)
-    x_branch_id = fields.Many2one(
-        "devlyn.catalog.branch",
-        string="Óptica",
-        domain=[("active", "=", True)],
+
+    x_centro_sap = fields.Many2one(
+        'helpdesk.sap.center',
+        string='Centro SAP',
         copy=False,
-        ondelete="restrict",
-        default=lambda self: self._default_creator_branch(),
+        ondelete='restrict',
+    )
+
+    x_branch_id = fields.Many2one(
+        'devlyn.catalog.branch',
+        string='Óptica',
+        domain=[('active', '=', True)],
+        copy=False,
+        ondelete='restrict',
     )
 
     created_by_user_id = fields.Many2one(
@@ -290,32 +297,51 @@ class HelpdeskTicket(models.Model):
         default=lambda self: self._default_creator_phone(),
     )
     x_correo = fields.Char(
-        string="Correo",
+        string='Correo',
         copy=False,
-        default=lambda self: self._default_creator_email(),
     )
+
     x_is_stage_new = fields.Boolean(
         compute="_compute_x_is_stage_new",
         store=False,
     )
     x_commitment_date = fields.Date(string="Fecha compromiso", copy=False)
 
+    @api.onchange('user_id')
+    def _onchange_user_id_set_sap_center(self):
+        for rec in self:
+            rec.x_centro_sap = rec.user_id.sap_center_id
+
+    @api.onchange('x_centro_sap')
+    def _onchange_x_centro_sap(self):
+        for rec in self:
+            rec.x_branch_id = rec.x_centro_sap.x_branch_id
+
+    @api.onchange('user_id')
+    def _onchange_user_id_set_email(self):
+        for rec in self:
+            rec.x_correo = (
+                    rec.user_id.email
+                    or rec.user_id.partner_id.email
+                    or False
+            )
+
     @api.onchange('x_general_description')
     def _onchange_set_user(self):
         if not self.user_id:
             self.user_id = self.env.user
 
-    @api.onchange('email')
-    def _onchange_email(self):
-        if self.email and not self.email.lower().endswith('@devlyn.com.mx'):
-            self.email = False
-            raise UserError("El correo debe ser @devlyn.com.mx")
-
-    @api.onchange("x_correo")
-    def _onchange_x_correo(self):
-        if self.x_correo and not self.x_correo.lower().endswith("@devlyn.com.mx"):
-            self.x_correo = False
-            raise UserError("El correo debe ser @devlyn.com.mx")
+    # @api.onchange('email')
+    # def _onchange_email(self):
+    #     if self.email and not self.email.lower().endswith('@devlyn.com.mx'):
+    #         self.email = False
+    #         raise UserError("El correo debe ser @devlyn.com.mx")
+    #
+    # @api.onchange("x_correo")
+    # def _onchange_x_correo(self):
+    #     if self.x_correo and not self.x_correo.lower().endswith("@devlyn.com.mx"):
+    #         self.x_correo = False
+    #         raise UserError("El correo debe ser @devlyn.com.mx")
 
     @api.onchange("x_general_description")
     def _onchange_x_general_description_set_name(self):
@@ -731,7 +757,14 @@ class HelpdeskTicket(models.Model):
         "helpdesk.ticket.subcategory",
         string="Subcategoría",
         required=True,
-        domain="[('category_id', '=', x_category_id)]",
+        domain="""
+            [
+                ('category_id', '=', x_category_id),
+                '|',
+                ('user_ids', '=', False),
+                ('user_ids', 'in', [uid])
+            ]
+        """,
     )
 
     x_subcategory_code = fields.Char(
