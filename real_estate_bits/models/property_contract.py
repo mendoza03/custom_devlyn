@@ -146,6 +146,30 @@ class Contract(models.Model):
 
     split_contract = fields.Boolean("Split contract")
 
+    down_payment_month0_date = fields.Date(
+        string="Enganche Mensualidad 0"
+    )
+
+    contract_total_price = fields.Float(
+        string="Precio Total"
+    )
+
+    contract_final_down_payment = fields.Float(
+        string="Enganche Final"
+    )
+
+    contract_amount_to_finance = fields.Float(
+        string="Monto a Financiar"
+    )
+
+    contract_delivery_date = fields.Date(
+        string="Fecha de Entrega"
+    )
+
+    contract_financing_months = fields.Integer(
+        string="Meses de Financiamiento"
+    )
+
     @api.model_create_multi
     def create(self, vals_list):
         contracts = super(Contract, self).create(vals_list)
@@ -489,6 +513,7 @@ class Contract(models.Model):
         self.template_id = self.reservation_id.template_id.id
         self.type = self.reservation_id.type
         self.property_area = self.reservation_id.property_area
+        self.action_update_contract_finance_values()
         # if self.template_id:
         #     self.loan_line_ids = self._prepare_lines(self.date_payment)
 
@@ -727,3 +752,59 @@ class Contract(models.Model):
                 for contract in contract_ids:
                     if contract and contract.id:
                         template.sudo().send_mail(contract.id, force_send=True)
+
+    def action_update_contract_finance_values(self):
+        SaleOrder = self.env["sale.order"]
+
+        for contract in self:
+            reservation = contract.reservation_id
+            property_id = contract.property_id
+
+            sale = False
+            if reservation and "order_id" in reservation._fields and reservation.order_id:
+                sale = reservation.order_id
+            elif property_id:
+                sale = SaleOrder.search([
+                    ("order_line.product_template_id", "=", property_id.id),
+                    ("finance_id", "!=", False),
+                ], order="id desc", limit=1)
+
+            if not sale or not sale.finance_id:
+                continue
+
+            finance_line = sale.financial_lines.filtered(
+                lambda l: l.interest_id and l.interest_id.id == sale.finance_id.id
+            )
+
+            if not finance_line:
+                finance_line = sale.financial_lines.filtered(
+                    lambda l: l.name == sale.finance_id.name
+                )
+
+            if not finance_line:
+                continue
+
+            finance_line = finance_line[0]
+
+            reservation_date = False
+            if reservation and reservation.date:
+                reservation_date = fields.Datetime.to_datetime(reservation.date).date()
+
+            amount_total = finance_line.amount_total or 0.0
+            discount_total = finance_line.discount_total or 0.0
+            hitch_percent = finance_line.hitch_porcent or sale.hitch_porcent or 0.0
+
+            amount_after_discount = amount_total - discount_total
+
+            final_down_payment = amount_after_discount * hitch_percent
+            amount_to_finance = amount_after_discount
+            total_price = final_down_payment + amount_to_finance
+
+            contract.write({
+                "down_payment_month0_date": reservation_date + relativedelta(days=10) if reservation_date else False,
+                "contract_total_price": total_price,
+                "contract_final_down_payment": final_down_payment,
+                "contract_amount_to_finance": amount_to_finance,
+                "contract_delivery_date": reservation_date + relativedelta(months=property_id.month_deliver or 0) if reservation_date and property_id else False,
+                "contract_financing_months": sale.finance_id.duration_month or 0,
+            })
