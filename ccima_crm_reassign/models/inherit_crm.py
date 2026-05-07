@@ -366,8 +366,8 @@ class CrmLeadCcima(models.Model):
                         pr_line = self.env['loan.line'].search([('contract_id', '=', pr_contract.id),('count_line', '=', 1)])
                         if pr_line:
                             date_del = pr_line.date
-                            month_qty = pt.month_deliver
-                            date_deliver = pr_line.date + relativedelta(months=pt.month_deliver)
+                            month_qty = (pt.month_deliver or 0) - 1
+                            date_deliver = pr_line.date + relativedelta(months=month_qty)
                             date_f_m = pr_line.date
 
 

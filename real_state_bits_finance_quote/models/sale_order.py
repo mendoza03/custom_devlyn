@@ -34,7 +34,7 @@ class SaleOrderInherit(models.Model):
     annual_capital_gains_yield_years = fields.Integer(string="Projection of years", default=4)
     total_hitch = fields.Float(string="Total hitch paid")
 
-    @api.onchange('finance_id')
+    @api.onchange('finance_id', 'financial_lines', 'financial_lines.hitch')
     def _onchange_finance_id_set_total_hitch(self):
         for record in self:
             record.total_hitch = 0.0
@@ -43,8 +43,13 @@ class SaleOrderInherit(models.Model):
                 continue
 
             line = record.financial_lines.filtered(
-                lambda l: l.name == record.finance_id.name
+                lambda l: l.interest_id.id == record.finance_id.id
             )
+
+            if not line:
+                line = record.financial_lines.filtered(
+                    lambda l: l.name == record.finance_id.name
+                )
 
             if line:
                 record.total_hitch = line[0].hitch or 0.0
@@ -312,6 +317,7 @@ class SaleOrderInherit(models.Model):
                 values = {
                     'name': finance.name,
                     'finance_months': finance.duration_month,
+                    'interest_id': finance.id,
                     'hitch_porcent': self.hitch_porcent,
                     'amount_total': amount,
                     'hitch_porcent': self.hitch_porcent,
