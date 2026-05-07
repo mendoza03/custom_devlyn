@@ -83,6 +83,12 @@ class ProductCcima(models.Model):
         default=False,
     )
 
+    precio_unitario_venta = fields.Float(
+        string="Precio Unitario Venta",
+        compute="_compute_precio_unitario_venta",
+        store=False,
+    )
+
     def _sync_lead_source(self):
         for product in self:
             if product.lead:
@@ -108,3 +114,38 @@ class ProductCcima(models.Model):
             self._sync_lead_source()
         return res
 
+
+    def _compute_precio_unitario_venta(self):
+        SaleOrder = self.env["sale.order"]
+
+        for product in self:
+            product.precio_unitario_venta = 0.0
+
+            if not product.property_area:
+                continue
+
+            sale = SaleOrder.search([
+                ("order_line.product_template_id", "=", product.id),
+                ("finance_id", "!=", False),
+            ], order="id desc", limit=1)
+
+            if not sale or not sale.finance_id:
+                continue
+
+            finance_line = sale.financial_lines.filtered(
+                lambda l: l.interest_id and l.interest_id.id == sale.finance_id.id
+            )
+
+            if not finance_line:
+                finance_line = sale.financial_lines.filtered(
+                    lambda l: l.name == sale.finance_id.name
+                )
+
+            if not finance_line or not finance_line[0].promotion_id:
+                continue
+
+            porcent = finance_line[0].promotion_id.porcent or 0.0
+
+            product.precio_unitario_venta = (
+                (product.list_amount or 0.0) * porcent
+            ) / product.property_area
