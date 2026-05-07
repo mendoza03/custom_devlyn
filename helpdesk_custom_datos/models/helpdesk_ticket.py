@@ -119,7 +119,7 @@ class HelpdeskTicket(models.Model):
             field_name
             for field_name in self._fields
             if field_name.startswith("x_")
-        } | {"user_id", "name"}
+        } | {"name"}
 
     def _get_locked_fields_after_create(self):
         return {
@@ -282,7 +282,6 @@ class HelpdeskTicket(models.Model):
         'res.users',
         string='Assigned to',
         default=lambda self: self.env.user,
-        readonly=True,
     )
 
     x_numero_telefonico = fields.Char(
@@ -310,6 +309,12 @@ class HelpdeskTicket(models.Model):
     def _onchange_email(self):
         if self.email and not self.email.lower().endswith('@devlyn.com.mx'):
             self.email = False
+            raise UserError("El correo debe ser @devlyn.com.mx")
+
+    @api.onchange("x_correo")
+    def _onchange_x_correo(self):
+        if self.x_correo and not self.x_correo.lower().endswith("@devlyn.com.mx"):
+            self.x_correo = False
             raise UserError("El correo debe ser @devlyn.com.mx")
 
     @api.onchange("x_general_description")
@@ -683,6 +688,9 @@ class HelpdeskTicket(models.Model):
 
         if vals.get("x_general_description") and not vals.get("name"):
             vals["name"] = vals["x_general_description"]
+        correo = vals.get("x_correo")
+        if correo and not correo.lower().endswith("@devlyn.com.mx"):
+            raise UserError("El correo debe ser @devlyn.com.mx")
         self._normalize_optional_ticket_format_vals(vals)
         self._validate_optional_ticket_formats(vals)
         for record in self:
@@ -2234,11 +2242,11 @@ class HelpdeskTicket(models.Model):
                 continue
             if rec.x_toner_below_15 == "no":
                 raise ValidationError(
-                    _("No se puede crear el ticket porque el envío de tóner no procede si el porcentaje es mayor al 15%%.")
+                    _("No se puede crear el ticket porque el envío de tóner no procede si el porcentaje es mayor al 15%.")
                 )
             if rec.x_toner_below_15 == "si" and not rec.x_attachment_line_ids:
                 raise ValidationError(
-                    _("Debes adjuntar al menos un archivo en Anexos cuando el tóner es menor o igual al 15%%.")
+                    _("Debes adjuntar al menos un archivo en Anexos cuando el tóner es menor o igual al 15%.")
                 )
 
     def _get_dynamic_required_fields_error(self):

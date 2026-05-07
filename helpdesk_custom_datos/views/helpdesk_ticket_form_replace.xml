@@ -47,9 +47,7 @@
         <field name="domain_user_ids" invisible="1" />
         <field name="create_uid" string="Creado por" />
         <field name="user_id"
-            domain="['&amp;', ('id', 'in', domain_user_ids), ('share', '=', False)]"
             widget="many2one_avatar_user"
-            required="1"
         />
     </group>
     <group>
