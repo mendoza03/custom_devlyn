@@ -11,6 +11,15 @@ class DiferHitch(models.Model):
     hitch = fields.Float(string="Hitch %")
     amount = fields.Float(string="Amount hitch")
     months = fields.Integer(string="Months")
-    period_payment = fields.Selection([('2','Bimonthly'),('3','Quarterly'),('6','Biannual')],string="Periodicity" )
+    period_payment = fields.Selection(
+        [
+            ('1', 'Monthly'),
+            ('2', 'Bimonthly'),
+            ('3', 'Quarterly'),
+            ('6', 'Biannual'),
+        ],
+        string="Periodicity",
+        default='1'
+    )
     finance_id = fields.Many2one('modality.finance.line', string="Finance Line Id")
     order_id = fields.Many2one('sale.order', string="Order Id")

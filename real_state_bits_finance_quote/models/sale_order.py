@@ -344,21 +344,29 @@ class SaleOrderInherit(models.Model):
 
     def _difered_hitch(self, finance_ids):
         hitch_ids = []
+
         if self.difer_hitch:
             if not self.val_defer > 0:
                 raise ValidationError(_('The month to difer should be greater than 0'))
-            for finance in self.finance_ids:
-                hitch_ids.append((0,0,{
-                    'name': _('%(finance_name)s financing: Hitch to %(val_defer)s month(s)', finance_name=finance.name, val_defer=str(self.val_defer)),
-                    'hitch': self.hitch_porcent / self.val_defer,
-                    'amount': ((self.order_line[0].product_template_id.net_price * self.hitch_porcent) - self.total_hitch) / self.val_defer,
-                    'months': self.val_defer
+
+            finance_lines = self.financial_lines.filtered(lambda l: l.id in finance_ids)
+
+            for finance_line in finance_lines:
+                base_amount = (finance_line.amount_total or 0.0) - (finance_line.discount_total or 0.0)
+                hitch_total = base_amount * (finance_line.hitch_porcent or self.hitch_porcent or 0.0)
+                hitch_monthly_amount = hitch_total / self.val_defer
+
+                hitch_ids.append((0, 0, {
+                    'name': _('%(finance_name)s financing: Hitch to %(val_defer)s month(s)',
+                            finance_name=finance_line.name,
+                            val_defer=str(self.val_defer)),
+                    'hitch': (finance_line.hitch_porcent or self.hitch_porcent or 0.0) / self.val_defer,
+                    'amount': hitch_monthly_amount,
+                    'months': self.val_defer,
+                    'period_payment': '1',
+                    'finance_id': finance_line.id,
                 }))
-            if finance_ids:
-                i = 0
-                for i in range(i,len(finance_ids)):
-                    hitch_ids[i][2]['finance_id'] = finance_ids[i]
-                    i =+ 1
+
         return hitch_ids
 
     def _get_finance_modality(self):
