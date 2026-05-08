@@ -1253,6 +1253,16 @@
         <field name="code">atraso_lente_contacto</field>
     </record>
 
+    <record id="helpdesk_ticket_subcategory_receta_lc_atraso_lente_contacto_proveedor"
+        model="helpdesk.ticket.subcategory">
+        <field name="name">Atraso lente de contacto proveedor</field>
+        <field name="category_id"
+            ref="helpdesk_ticket_category_receta_lc_lente_contacto" />
+        <field name="sequence">20</field>
+        <field name="active">True</field>
+        <field name="code">atraso_lente_contacto_proveedor</field>
+    </record>
+
     <record id="helpdesk_ticket_subcategory_garantia_calidad_select"
         model="helpdesk.ticket.subcategory">
         <field name="name">-- seleccionar --</field>

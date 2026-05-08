@@ -65,6 +65,7 @@ window.addEventListener('load', function () {
         'devolucion_sin_entregar':                 'block-devolucion_sin_entregar',
         'pedido_sin_envio':                        'block-pedido_sin_envio',
         'atraso_lente_contacto':                   'block-atraso_lente_contacto',
+        'atraso_lente_contacto_proveedor':         'block-atraso_lente_contacto_proveedor',
         'busqueda_armazon':                        'block-busqueda_armazon',
         'calidad_micas':                           'block-calidad_micas',
         'calidad_armazon':                         'block-calidad_armazon',
@@ -512,6 +513,11 @@ window.addEventListener('load', function () {
         // NUEVO: receta LC
         if (currentCategorySlug === 'receta_lc_lente_contacto' && code === 'atraso_lente_contacto') {
             showBlock('block-receta_lc_atraso_lente_contacto');
+            return;
+        }
+
+        if (currentCategorySlug === 'receta_lc_lente_contacto' && code === 'atraso_lente_contacto_proveedor') {
+            showBlock('block-receta_lc_atraso_lente_contacto_proveedor');
             return;
         }
 

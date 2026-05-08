@@ -2309,6 +2309,39 @@
                         </div>
                     </div>
 
+                    <div id="block-receta_lc_atraso_lente_contacto_proveedor" class="col-12 subcategory-block" style="display:none;">
+                        <div class="card border-success">
+                            <div class="card-header m-2 bg-success text-white"><strong>Atraso lente de contacto proveedor</strong></div>
+                            <div class="card-body row g-3">
+                                <div class="col-12">
+                                    <strong>*</strong>
+                                </div>
+                                <div class="col-md-4">
+                                    <label>OT (*)</label>
+                                    <input type="text" name="x_lc_ot_number" class="form-control"/>
+                                </div>
+                                <div class="col-md-4">
+                                    <label>Pedido (*)</label>
+                                    <input type="text" name="x_lc_order_number" class="form-control"/>
+                                </div>
+                                <div class="col-md-4">
+                                    <label>Pedido Colectivo</label>
+                                    <input type="text" name="x_lc_collective_order" class="form-control"/>
+                                </div>
+                                <div class="col-md-4">
+                                    <label>Proveedor (*)</label>
+                                    <select name="x_lc_provider" class="form-select">
+                                        <option value="select">-- seleccionar --</option>
+                                        <option value="alcon">Alcon</option>
+                                        <option value="ciba">Ciba</option>
+                                        <option value="novartis">Novartis</option>
+                                        <option value="otro">Otro</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
                     <div id="block-busqueda_armazon" class="col-12 subcategory-block" style="display:none;">
                         <div class="card border-success">
                             <div class="card-header m-2 bg-success text-white"><strong>Búsqueda de armazón</strong></div>

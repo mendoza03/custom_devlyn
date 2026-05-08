@@ -130,6 +130,14 @@
                             <group col="6">
                                 <field name="x_job_type"
                                     required="x_subcategory_code == 'trabajos_atrasados'" />
+                                <field name="x_invoice"
+                                    required="x_subcategory_code == 'trabajos_atrasados'" />
+                                <field name="x_caja"
+                                    required="x_subcategory_code == 'trabajos_atrasados'" />
+                                <field name="x_escenario"
+                                    required="x_subcategory_code == 'trabajos_atrasados'" />
+                                <field name="x_nueva_fecha_prov"
+                                    required="x_subcategory_code == 'trabajos_atrasados'" />
                             </group>
 
                             <div class="mt8">
@@ -1548,7 +1556,7 @@
 
                         <!-- CAMBIO 2: Antes usaba x_is_receta_lc + subcategory_code -->
                         <div class="mt16"
-                            invisible="not x_is_atraso_lente_contacto_receta">
+                            invisible="not x_is_atraso_lente_contacto_receta or x_subcategory_code == 'atraso_lente_contacto_proveedor'">
 
                             <div class="o_form_sheet bg-success text-white p-2 rounded-2 mb-3">
                                 <strong>Atraso lente de contacto</strong>
@@ -1563,6 +1571,29 @@
                                     required="x_is_atraso_lente_contacto_receta" />
                                 <field name="x_lc_order_number"
                                     required="x_is_atraso_lente_contacto_receta" />
+                                <field name="x_lc_provider"
+                                    required="x_is_atraso_lente_contacto_receta" />
+                            </group>
+
+                        </div>
+
+                        <div class="mt16"
+                            invisible="not x_is_atraso_lente_contacto_receta or x_subcategory_code != 'atraso_lente_contacto_proveedor'">
+
+                            <div class="o_form_sheet bg-success text-white p-2 rounded-2 mb-3">
+                                <strong>Atraso lente de contacto proveedor</strong>
+                            </div>
+
+                            <div class="mt8">
+                                <strong>*</strong>
+                            </div>
+
+                            <group col="4">
+                                <field name="x_lc_ot_number"
+                                    required="x_is_atraso_lente_contacto_receta" />
+                                <field name="x_lc_order_number"
+                                    required="x_is_atraso_lente_contacto_receta" />
+                                <field name="x_lc_collective_order" />
                                 <field name="x_lc_provider"
                                     required="x_is_atraso_lente_contacto_receta" />
                             </group>

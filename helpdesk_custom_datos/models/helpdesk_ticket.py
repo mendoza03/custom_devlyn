@@ -875,6 +875,10 @@ class HelpdeskTicket(models.Model):
     )
     x_original_order_number = fields.Char(string="N° de pedido original", copy=False)
     x_job_type = fields.Char(string="Tipo de Trabajo", copy=False)
+    x_invoice = fields.Char(string="Invoice", copy=False)
+    x_caja = fields.Char(string="Caja", copy=False)
+    x_escenario = fields.Char(string="Escenario", copy=False)
+    x_nueva_fecha_prov = fields.Date(string="Nueva fecha prov", copy=False)
     x_order_type_imagen = fields.Selection(
         [
             ("select", "-- seleccionar --"),
@@ -1771,6 +1775,10 @@ class HelpdeskTicket(models.Model):
     )
     x_lc_ot_number = fields.Char(string="OT (*)", copy=False)
     x_lc_order_number = fields.Char(string="Pedido (*)", copy=False)
+    x_lc_collective_order = fields.Char(
+        string="Pedido Colectivo",
+        copy=False,
+    )
 
     x_lc_provider = fields.Selection(
         [
@@ -2174,7 +2182,10 @@ class HelpdeskTicket(models.Model):
                 and rec.x_category_id.id == online_id
             )
             rec.x_is_atraso_lente_contacto_receta = bool(
-                rec.x_subcategory_code == "atraso_lente_contacto"
+                rec.x_subcategory_code in (
+                    "atraso_lente_contacto",
+                    "atraso_lente_contacto_proveedor",
+                )
                 and receta_id
                 and rec.x_category_id.id == receta_id
             )
@@ -2383,6 +2394,10 @@ class HelpdeskTicket(models.Model):
             return self._get_required_fields_error(
                 [
                     "x_job_type",
+                    "x_invoice",
+                    "x_caja",
+                    "x_escenario",
+                    "x_nueva_fecha_prov",
                     "x_original_order_number",
                     "x_order_number",
                     "x_customer_warehouse",
@@ -2501,6 +2516,7 @@ class HelpdeskTicket(models.Model):
         "x_is_seguimiento_solicitud_resurtido",
         "x_lc_ot_number",
         "x_lc_order_number",
+        "x_lc_collective_order",
         "x_lc_provider",
         "x_online_fulfillment",
         "x_online_sale_date",
@@ -2530,6 +2546,10 @@ class HelpdeskTicket(models.Model):
         "x_authorized_by",
         "x_lab_indicated",
         "x_job_type",
+        "x_invoice",
+        "x_caja",
+        "x_escenario",
+        "x_nueva_fecha_prov",
         "x_original_order_number",
         "x_shipping_guide_number",
         "x_frame_bag_number",
