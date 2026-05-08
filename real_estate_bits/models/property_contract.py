@@ -767,9 +767,7 @@ class Contract(models.Model):
     @api.depends(
         "reservation_id",
         "reservation_id.date",
-        "reservation_id.order_id",
         "property_id",
-        "property_id.month_deliver",
     )
     def _compute_contract_finance_values(self):
         SaleOrder = self.env["sale.order"]
@@ -826,6 +824,8 @@ class Contract(models.Model):
             amount_to_finance = amount_after_discount
             total_price = final_down_payment + amount_to_finance
 
+            month_deliver = getattr(property_id, "month_deliver", 0) or 0
+
             contract.down_payment_month0_date = (
                 reservation_date + relativedelta(days=10)
                 if reservation_date else False
@@ -836,7 +836,7 @@ class Contract(models.Model):
             contract.contract_amount_to_finance = amount_to_finance
 
             contract.contract_delivery_date = (
-                reservation_date + relativedelta(months=property_id.month_deliver or 0)
+                reservation_date + relativedelta(months=month_deliver)
                 if reservation_date and property_id else False
             )
 
