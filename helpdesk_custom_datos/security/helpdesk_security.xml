@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
 
+    <!-- Grupo especial: usuarios que pueden ver todos los tickets -->
     <record model="res.groups.privilege" id="res_groups_privilege_helpdesk_ticket_visibility">
         <field name="name">Helpdesk Ticket Visibility</field>
         <field name="category_id" ref="base.module_category_services"/>
@@ -10,85 +11,81 @@
         <field name="name">Ver todos los tickets de Helpdesk</field>
         <field name="sequence">10</field>
         <field name="privilege_id" ref="res_groups_privilege_helpdesk_ticket_visibility"/>
-        <field name="comment">Permite ver todos los tickets de Helpdesk sin otorgar permisos administrativos.</field>
+        <field name="comment">Permite ver todos los tickets de Helpdesk sin permisos administrativos.</field>
         <field name="implied_ids" eval="[(4, ref('helpdesk.group_helpdesk_user'))]"/>
     </record>
 
-    <record id="group_helpdesk_ticket_user_assignment_manager" model="res.groups">
-        <field name="name">Editar asignado de tickets Helpdesk</field>
-        <field name="sequence">20</field>
-        <field name="privilege_id" ref="res_groups_privilege_helpdesk_ticket_visibility"/>
-        <field name="comment">Permite cambiar manualmente el usuario asignado en los tickets de Helpdesk.</field>
-        <field name="implied_ids" eval="[(4, ref('helpdesk.group_helpdesk_user'))]"/>
-    </record>
-
-    <function model="res.groups" name="write">
-        <value eval="[ref('base.default_user_group')]"/>
-        <value eval="{'implied_ids': [(3, ref('helpdesk.group_helpdesk_manager'))]}"/>
-    </function>
-
+    <!-- Quitar reglas estándar de Helpdesk que limitan visibilidad -->
     <delete id="helpdesk.helpdesk_ticket_user_rule" model="ir.rule"/>
     <delete id="helpdesk.helpdesk_sla_report_analysis_rule_user" model="ir.rule"/>
     <delete id="helpdesk.helpdesk_ticket_report_analysis_rule_user" model="ir.rule"/>
 
-    <record id="helpdesk_ticket_assigned_user_rule" model="ir.rule">
-        <field name="name">Helpdesk Ticket User: Assigned Tickets</field>
-        <field name="model_id" ref="helpdesk.model_helpdesk_ticket"/>
-        <field name="domain_force">[('user_id', '=', user.id)]</field>
-        <field name="groups" eval="[(4, ref('helpdesk.group_helpdesk_user'))]"/>
-    </record>
-
-    <record id="helpdesk_sla_report_analysis_assigned_user_rule" model="ir.rule">
-        <field name="name">Helpdesk SLA Report: Assigned Tickets</field>
-        <field name="model_id" ref="helpdesk.model_helpdesk_sla_report_analysis"/>
-        <field name="domain_force">[('ticket_id.user_id', '=', user.id)]</field>
-        <field name="groups" eval="[(4, ref('helpdesk.group_helpdesk_user'))]"/>
-    </record>
-
-    <record id="helpdesk_ticket_report_analysis_assigned_user_rule" model="ir.rule">
-        <field name="name">Helpdesk Ticket Report: Assigned Tickets</field>
-        <field name="model_id" ref="helpdesk.model_helpdesk_ticket_report_analysis"/>
-        <field name="domain_force">[('ticket_id.user_id', '=', user.id)]</field>
-        <field name="groups" eval="[(4, ref('helpdesk.group_helpdesk_user'))]"/>
-    </record>
-
-    <record id="helpdesk_team_all_tickets_rule" model="ir.rule">
-        <field name="name">Helpdesk Team: All Tickets Visibility</field>
-        <field name="model_id" ref="helpdesk.model_helpdesk_team"/>
-        <field name="domain_force">[(1, '=', 1)]</field>
-        <field name="groups" eval="[(4, ref('helpdesk_custom_datos.group_helpdesk_ticket_all'))]"/>
-    </record>
-
-    <record id="helpdesk_ticket_all_tickets_rule" model="ir.rule">
-        <field name="name">Helpdesk Ticket: All Tickets Visibility</field>
-        <field name="model_id" ref="helpdesk.model_helpdesk_ticket"/>
-        <field name="domain_force">[(1, '=', 1)]</field>
-        <field name="groups" eval="[(4, ref('helpdesk_custom_datos.group_helpdesk_ticket_all'))]"/>
-    </record>
-
-    <record id="helpdesk_sla_report_analysis_all_tickets_rule" model="ir.rule">
-        <field name="name">Helpdesk SLA Report: All Tickets Visibility</field>
-        <field name="model_id" ref="helpdesk.model_helpdesk_sla_report_analysis"/>
-        <field name="domain_force">[(1, '=', 1)]</field>
-        <field name="groups" eval="[(4, ref('helpdesk_custom_datos.group_helpdesk_ticket_all'))]"/>
-    </record>
-
-    <record id="helpdesk_ticket_report_analysis_all_tickets_rule" model="ir.rule">
-        <field name="name">Helpdesk Ticket Report: All Tickets Visibility</field>
-        <field name="model_id" ref="helpdesk.model_helpdesk_ticket_report_analysis"/>
-        <field name="domain_force">[(1, '=', 1)]</field>
-        <field name="groups" eval="[(4, ref('helpdesk_custom_datos.group_helpdesk_ticket_all'))]"/>
-    </record>
-
-    <!-- Usuarios solo ven sus tickets -->
-    <record id="helpdesk_ticket_user_own_only" model="ir.rule">
-        <field name="name">Helpdesk: User Own Tickets</field>
+    <!-- Usuario Helpdesk normal:
+         ve tickets creados por él O asignados a él -->
+    <record id="helpdesk_ticket_user_own_or_assigned_rule" model="ir.rule">
+        <field name="name">Helpdesk Ticket: Own or Assigned</field>
         <field name="model_id" ref="helpdesk.model_helpdesk_ticket"/>
         <field name="groups" eval="[(4, ref('helpdesk.group_helpdesk_user'))]"/>
         <field name="domain_force">
-            [('created_by_user_id', '=', user.id)]
+            [
+                '|',
+                ('created_by_user_id', '=', user.id),
+                ('user_id', '=', user.id)
+            ]
         </field>
     </record>
 
+    <!-- Usuario con grupo especial:
+         ve todos los tickets -->
+    <record id="helpdesk_ticket_all_tickets_rule" model="ir.rule">
+        <field name="name">Helpdesk Ticket: All Tickets</field>
+        <field name="model_id" ref="helpdesk.model_helpdesk_ticket"/>
+        <field name="groups" eval="[(4, ref('helpdesk_custom_datos.group_helpdesk_ticket_all'))]"/>
+        <field name="domain_force">[(1, '=', 1)]</field>
+    </record>
+
+    <!-- Reporte SLA: normal ve solo propios/asignados -->
+    <record id="helpdesk_sla_report_user_own_or_assigned_rule" model="ir.rule">
+        <field name="name">Helpdesk SLA Report: Own or Assigned</field>
+        <field name="model_id" ref="helpdesk.model_helpdesk_sla_report_analysis"/>
+        <field name="groups" eval="[(4, ref('helpdesk.group_helpdesk_user'))]"/>
+        <field name="domain_force">
+            [
+                '|',
+                ('ticket_id.created_by_user_id', '=', user.id),
+                ('ticket_id.user_id', '=', user.id)
+            ]
+        </field>
+    </record>
+
+    <!-- Reporte SLA: grupo especial ve todo -->
+    <record id="helpdesk_sla_report_all_tickets_rule" model="ir.rule">
+        <field name="name">Helpdesk SLA Report: All Tickets</field>
+        <field name="model_id" ref="helpdesk.model_helpdesk_sla_report_analysis"/>
+        <field name="groups" eval="[(4, ref('helpdesk_custom_datos.group_helpdesk_ticket_all'))]"/>
+        <field name="domain_force">[(1, '=', 1)]</field>
+    </record>
+
+    <!-- Reporte Tickets: normal ve solo propios/asignados -->
+    <record id="helpdesk_ticket_report_user_own_or_assigned_rule" model="ir.rule">
+        <field name="name">Helpdesk Ticket Report: Own or Assigned</field>
+        <field name="model_id" ref="helpdesk.model_helpdesk_ticket_report_analysis"/>
+        <field name="groups" eval="[(4, ref('helpdesk.group_helpdesk_user'))]"/>
+        <field name="domain_force">
+            [
+                '|',
+                ('ticket_id.created_by_user_id', '=', user.id),
+                ('ticket_id.user_id', '=', user.id)
+            ]
+        </field>
+    </record>
+
+    <!-- Reporte Tickets: grupo especial ve todo -->
+    <record id="helpdesk_ticket_report_all_tickets_rule" model="ir.rule">
+        <field name="name">Helpdesk Ticket Report: All Tickets</field>
+        <field name="model_id" ref="helpdesk.model_helpdesk_ticket_report_analysis"/>
+        <field name="groups" eval="[(4, ref('helpdesk_custom_datos.group_helpdesk_ticket_all'))]"/>
+        <field name="domain_force">[(1, '=', 1)]</field>
+    </record>
 
 </odoo>
