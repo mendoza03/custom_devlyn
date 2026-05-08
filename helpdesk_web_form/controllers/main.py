@@ -137,6 +137,9 @@ class HelpdeskController(http.Controller):
         if category_slug == "receta_lc_lente_contacto" and subcategory_code == "atraso_lente_contacto":
             return "block-receta_lc_atraso_lente_contacto", ""
 
+        if category_slug == "receta_lc_lente_contacto" and subcategory_code == "atraso_lente_contacto_proveedor":
+            return "block-receta_lc_atraso_lente_contacto_proveedor", ""
+
         if category_slug == "papeleria_seguimiento" and subcategory_code == "seguimiento_solicitud":
             return "block-papeleria_seguimiento", ""
 
@@ -629,6 +632,12 @@ class HelpdeskController(http.Controller):
 
             # ── Online: atraso lente de contacto ──────────────────────────────
             'x_online_work_order_number':       _str('x_online_work_order_number'),
+
+            # ── Receta LC: atraso lente de contacto ───────────────────────────
+            'x_lc_ot_number':                   _str('x_lc_ot_number'),
+            'x_lc_order_number':                _str('x_lc_order_number'),
+            'x_lc_collective_order':            _str('x_lc_collective_order'),
+            'x_lc_provider':                    _sel('x_lc_provider'),
 
             # ── Búsqueda de armazón ───────────────────────────────────────────
             'x_frame_search_sale_order':        _str('x_frame_search_sale_order'),
