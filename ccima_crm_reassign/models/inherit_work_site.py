@@ -134,12 +134,16 @@ class WorksiteInherit(models.Model):
 
         final_amount_field = 'final_amount'
         list_amount_field = 'list_amount'
-        paid_amount_field = 'paid_amount'
+        paid_amount_field = 'total_paid'
 
         for rec in self:
             child_worksites = Worksite.search([('parent_id', '=', rec.id)]).ids
 
-            rec.total_condominios = Condo.search_count([('parent_id', 'in', child_worksites)]) if child_worksites else 0
+            rec.total_condominios = (
+                Condo.search_count([('parent_id', 'in', child_worksites)])
+                if child_worksites else 0
+            )
+
             rec.total_goal = sum(rec.child_ids.mapped('goal')) if rec.child_ids else (rec.goal or 0.0)
 
             products = rec._get_kpi_products()
@@ -150,6 +154,7 @@ class WorksiteInherit(models.Model):
             sold_reserved_products = sold_products | reserved_products
 
             rec.total_units_kpi = len(sold_products | free_products)
+
             rec.total_area_kpi = (rec.sold_area or 0.0) + (rec.available_area or 0.0)
             rec.total_property_area = rec.total_area_kpi
 
@@ -160,7 +165,7 @@ class WorksiteInherit(models.Model):
             rec.total_available = sum(free_products.mapped(list_amount_field) or [])
             rec.inventory = rec.total_available
 
-            rec.amount_to_sell = rec.total_goal - rec.sold_amount
+            rec.amount_to_sell = (rec.total_goal or 0.0) - (rec.sold_amount or 0.0)
             rec.to_sell = rec.amount_to_sell
 
             rec.percent_sell_l = rec._safe_div(rec.sold_units, rec.total_units)
@@ -171,7 +176,7 @@ class WorksiteInherit(models.Model):
             if paid_amount_field in self.env['product.template']._fields:
                 rec.total_income = sum(sold_reserved_products.mapped(paid_amount_field) or [])
             else:
-                rec.total_income = sum(sold_reserved_products.mapped(final_amount_field) or [])
+                rec.total_income = 0.0
 
     def action_open_url(self):
         for record in self:

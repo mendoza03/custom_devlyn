@@ -147,27 +147,39 @@ class Contract(models.Model):
     split_contract = fields.Boolean("Split contract")
 
     down_payment_month0_date = fields.Date(
-        string="Enganche Mensualidad 0"
+        string="Enganche Mensualidad 0",
+        compute="_compute_contract_finance_values",
+        store=True,
     )
 
     contract_total_price = fields.Float(
-        string="Precio Total"
+        string="Precio Total",
+        compute="_compute_contract_finance_values",
+        store=True,
     )
 
     contract_final_down_payment = fields.Float(
-        string="Enganche Final"
+        string="Enganche Final",
+        compute="_compute_contract_finance_values",
+        store=True,
     )
 
     contract_amount_to_finance = fields.Float(
-        string="Monto a Financiar"
+        string="Monto a Financiar",
+        compute="_compute_contract_finance_values",
+        store=True,
     )
 
     contract_delivery_date = fields.Date(
-        string="Fecha de Entrega"
+        string="Fecha de Entrega",
+        compute="_compute_contract_finance_values",
+        store=True,
     )
 
     contract_financing_months = fields.Integer(
-        string="Meses de Financiamiento"
+        string="Meses de Financiamiento",
+        compute="_compute_contract_finance_values",
+        store=True,
     )
 
     @api.model_create_multi
@@ -513,7 +525,6 @@ class Contract(models.Model):
         self.template_id = self.reservation_id.template_id.id
         self.type = self.reservation_id.type
         self.property_area = self.reservation_id.property_area
-        self.action_update_contract_finance_values()
         # if self.template_id:
         #     self.loan_line_ids = self._prepare_lines(self.date_payment)
 
@@ -753,14 +764,29 @@ class Contract(models.Model):
                     if contract and contract.id:
                         template.sudo().send_mail(contract.id, force_send=True)
 
-    def action_update_contract_finance_values(self):
+    @api.depends(
+        "reservation_id",
+        "reservation_id.date",
+        "reservation_id.order_id",
+        "property_id",
+        "property_id.month_deliver",
+    )
+    def _compute_contract_finance_values(self):
         SaleOrder = self.env["sale.order"]
 
         for contract in self:
+            contract.down_payment_month0_date = False
+            contract.contract_total_price = 0.0
+            contract.contract_final_down_payment = 0.0
+            contract.contract_amount_to_finance = 0.0
+            contract.contract_delivery_date = False
+            contract.contract_financing_months = 0
+
             reservation = contract.reservation_id
             property_id = contract.property_id
 
             sale = False
+
             if reservation and "order_id" in reservation._fields and reservation.order_id:
                 sale = reservation.order_id
             elif property_id:
@@ -800,11 +826,18 @@ class Contract(models.Model):
             amount_to_finance = amount_after_discount
             total_price = final_down_payment + amount_to_finance
 
-            contract.write({
-                "down_payment_month0_date": reservation_date + relativedelta(days=10) if reservation_date else False,
-                "contract_total_price": total_price,
-                "contract_final_down_payment": final_down_payment,
-                "contract_amount_to_finance": amount_to_finance,
-                "contract_delivery_date": reservation_date + relativedelta(months=property_id.month_deliver or 0) if reservation_date and property_id else False,
-                "contract_financing_months": sale.finance_id.duration_month or 0,
-            })
+            contract.down_payment_month0_date = (
+                reservation_date + relativedelta(days=10)
+                if reservation_date else False
+            )
+
+            contract.contract_total_price = total_price
+            contract.contract_final_down_payment = final_down_payment
+            contract.contract_amount_to_finance = amount_to_finance
+
+            contract.contract_delivery_date = (
+                reservation_date + relativedelta(months=property_id.month_deliver or 0)
+                if reservation_date and property_id else False
+            )
+
+            contract.contract_financing_months = sale.finance_id.duration_month or 0

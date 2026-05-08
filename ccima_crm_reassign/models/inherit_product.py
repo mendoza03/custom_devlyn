@@ -11,7 +11,11 @@ class ProductCcima(models.Model):
     lot = fields.Char(string='Lot')
     surface = fields.Float(string='Surface')
     list_price = fields.Float(string='List Price')
-    list_amount = fields.Float(string='List Amount', compute='_compute_list_amount')
+    list_amount = fields.Float(
+        string='List Amount',
+        compute='_compute_list_amount',
+        store=True,
+    )
     capital_gains = fields.Float(string='Capital Gains')
     discount = fields.Float(string="Discount")
     net_amount = fields.Float(string="Net Amount")
@@ -96,12 +100,13 @@ class ProductCcima(models.Model):
                     "source_id": product.x_lead_source_id.id or False,
                 })
 
+    @api.depends('property_area', 'price_per_m')
     def _compute_list_amount(self):
         for record in self:
-            if record.property_area and record.price_per_m:
-                record.list_amount = record.property_area * record.price_per_m
-            else:
-                record.list_amount = 0.0
+            record.list_amount = (
+                (record.property_area or 0.0) *
+                (record.price_per_m or 0.0)
+            )
 
     def write(self, vals):
         res = super().write(vals)

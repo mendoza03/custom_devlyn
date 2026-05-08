@@ -52,7 +52,8 @@
                                 <field name="terrain_type" />
                                 <field name="property_area" />
                                 <field name="price_per_m" string="Unit Price" required="1" />
-                                <field name="list_amount" />
+                                <field name="list_amount" string="Importe de lista"
+                                    sum="Total Importe de lista" />
                                 <field name="capital_gains" />
                                 <field name="property_date" />
                                 <field name="month_deliver" />
