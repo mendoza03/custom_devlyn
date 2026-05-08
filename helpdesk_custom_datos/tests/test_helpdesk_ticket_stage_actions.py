@@ -38,7 +38,6 @@ class TestHelpdeskTicketStageActions(HelpdeskCommon):
             "team_id": self.test_team.id,
             "stage_id": self.stage_new.id,
             "x_general_description": "Stage actions test ticket",
-            "x_centro_sap": "SAP001",
             "x_numero_telefonico": "5512345678",
             "x_correo": "stage.actions@devlyn.com.mx",
             "x_section_id": self.section.id,

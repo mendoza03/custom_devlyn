@@ -26,6 +26,7 @@ SOLVED_STAGE_NAMES = {"Solved", "Solucionado"}
 CANCELLED_STAGE_NAMES = {"Cancelled", "Cancelado"}
 NEW_STAGE_NAMES = {"New", "Nuevo"}
 REQUIRED_VIEW_FIELD_SPECS_CACHE = {}
+USER_ID_EDIT_GROUP = "helpdesk_custom_datos.group_helpdesk_ticket_user_assignment_manager"
 
 
 class HelpdeskTicket(models.Model):
@@ -121,14 +122,6 @@ class HelpdeskTicket(models.Model):
             if field_name.startswith("x_")
         } | {"name"}
 
-    def _get_locked_fields_after_create(self):
-        return {
-            "x_centro_sap",
-            "x_branch_id",
-            "x_numero_telefonico",
-            "x_correo",
-        }
-
     def _is_new_stage(self):
         self.ensure_one()
         stage_name = (self.stage_id.name or "").strip()
@@ -182,8 +175,8 @@ class HelpdeskTicket(models.Model):
 
     @api.model
     def _default_creator_email(self):
-        email = self.user_id.email or False
-        return email
+        user = self.env.user
+        return user.email or user.partner_id.email or False
 
     @api.model
     def _default_creator_phone(self):
@@ -195,6 +188,30 @@ class HelpdeskTicket(models.Model):
     @api.model
     def _default_creator_branch(self):
         return self.env.user.x_branch_id
+
+    @api.model
+    def _current_user_can_edit_user_id(self):
+        return self.env.user.has_group(USER_ID_EDIT_GROUP)
+
+    @api.model
+    def _apply_readonly_contact_defaults(self, vals, record=None):
+        creator_user = self.env.user
+
+        if not vals.get("x_centro_sap") and not (record and record.x_centro_sap) and creator_user.sap_center_id:
+            vals["x_centro_sap"] = creator_user.sap_center_id.id
+
+        if not vals.get("x_branch_id") and not (record and record.x_branch_id) and creator_user.x_branch_id:
+            vals["x_branch_id"] = creator_user.x_branch_id.id
+
+        if not vals.get("x_numero_telefonico") and not (record and record.x_numero_telefonico):
+            phone = self._default_creator_phone()
+            if phone:
+                vals["x_numero_telefonico"] = phone
+
+        if not vals.get("x_correo") and not (record and record.x_correo):
+            email = self._default_creator_email()
+            if email:
+                vals["x_correo"] = email
 
     @api.model
     def _get_inactivity_timezone(self, ticket):
@@ -305,12 +322,17 @@ class HelpdeskTicket(models.Model):
         compute="_compute_x_is_stage_new",
         store=False,
     )
+    x_can_edit_user_id = fields.Boolean(
+        compute="_compute_x_can_edit_user_id",
+        store=False,
+    )
     x_commitment_date = fields.Date(string="Fecha compromiso", copy=False)
 
     @api.onchange('user_id')
     def _onchange_user_id_set_sap_center(self):
         for rec in self:
-            rec.x_centro_sap = rec.user_id.sap_center_id
+            if rec.user_id and not rec.x_centro_sap:
+                rec.x_centro_sap = rec.user_id.sap_center_id
 
     @api.onchange('x_centro_sap')
     def _onchange_x_centro_sap(self):
@@ -320,11 +342,12 @@ class HelpdeskTicket(models.Model):
     @api.onchange('user_id')
     def _onchange_user_id_set_email(self):
         for rec in self:
-            rec.x_correo = (
-                    rec.user_id.email
-                    or rec.user_id.partner_id.email
-                    or False
-            )
+            if rec.user_id and not rec.x_correo:
+                rec.x_correo = (
+                        rec.user_id.email
+                        or rec.user_id.partner_id.email
+                        or False
+                )
 
     @api.onchange('x_general_description')
     def _onchange_set_user(self):
@@ -366,8 +389,8 @@ class HelpdeskTicket(models.Model):
     def _onchange_x_subcategory_id_validate_user(self):
         for rec in self:
             allowed_users = rec._get_allowed_subcategory_users()
-            if allowed_users and rec.user_id not in allowed_users:
-                rec.user_id = False
+            if allowed_users:
+                rec.user_id = allowed_users[:1]
 
     @api.depends("team_id", "x_subcategory_id", "x_subcategory_id.user_ids")
     def _compute_domain_user_ids(self):
@@ -388,10 +411,22 @@ class HelpdeskTicket(models.Model):
             return self.env["res.users"]
         return self.x_subcategory_id.user_ids.filtered(lambda user: not user.share)
 
+    def _get_first_subcategory_user(self, subcategory=None):
+        self.ensure_one()
+        subcategory = subcategory or self.x_subcategory_id
+        if not subcategory:
+            return self.env["res.users"]
+        return subcategory.user_ids.filtered(lambda user: not user.share)[:1]
+
     @api.depends("stage_id.sequence", "stage_id.name")
     def _compute_x_is_stage_new(self):
         for rec in self:
             rec.x_is_stage_new = rec._is_new_stage() if rec.stage_id else True
+
+    def _compute_x_can_edit_user_id(self):
+        can_edit = self._current_user_can_edit_user_id()
+        for rec in self:
+            rec.x_can_edit_user_id = can_edit
 
     @api.model
     def _get_optional_ticket_format_rules(self):
@@ -644,10 +679,31 @@ class HelpdeskTicket(models.Model):
                 _("Al cambiar el estatus a 'En proceso de solución', se debe seleccionar la fecha compromiso.")
             )
 
+    @api.model
+    def _apply_subcategory_user_assignment_rules(self, vals, record=None):
+        if "x_subcategory_id" in vals:
+            subcategory = self.env["helpdesk.ticket.subcategory"].browse(vals["x_subcategory_id"])
+            auto_user = record._get_first_subcategory_user(subcategory) if record else subcategory.user_ids.filtered(
+                lambda user: not user.share
+            )[:1]
+            if not self._current_user_can_edit_user_id():
+                if auto_user:
+                    vals["user_id"] = auto_user.id
+                else:
+                    vals.pop("user_id", None)
+            return
+
+        if "user_id" in vals and not self._current_user_can_edit_user_id():
+            raise UserError(
+                _("Solo los usuarios del grupo autorizado pueden cambiar el asignado del ticket.")
+            )
+
     @api.model_create_multi
     def create(self, vals_list):
         for vals in vals_list:
             self._prepare_website_logged_user_values(vals)
+            self._apply_subcategory_user_assignment_rules(vals)
+            self._apply_readonly_contact_defaults(vals)
 
             if vals.get("x_general_description") and not vals.get("name"):
                 vals["name"] = vals["x_general_description"]
@@ -655,10 +711,6 @@ class HelpdeskTicket(models.Model):
                 vals["x_numero_telefonico"] = self._default_creator_phone()
             if not vals.get("x_correo"):
                 vals["x_correo"] = self._default_creator_email()
-
-            correo = vals.get("x_correo")
-            if correo and not correo.lower().endswith("@devlyn.com.mx"):
-                raise UserError("El correo debe ser @devlyn.com.mx")
 
             if not vals.get("x_branch_id"):
                 ticket_user = self.env["res.users"].browse(vals.get("user_id")) if vals.get("user_id") else self.env.user
@@ -687,16 +739,11 @@ class HelpdeskTicket(models.Model):
         return tickets
 
     def write(self, vals):
-        locked_after_create_fields = self._get_locked_fields_after_create().intersection(vals)
-        if locked_after_create_fields and not self.env.user.has_group("helpdesk.group_helpdesk_manager"):
-            labels = []
-            for field_name in locked_after_create_fields:
-                field = self._fields.get(field_name)
-                labels.append(field.string if field else field_name)
-            raise UserError(
-                _("No se pueden modificar estos datos una vez creado el ticket:\n- %s")
-                % "\n- ".join(labels)
-            )
+        vals = dict(vals)
+        if vals:
+            for record in self:
+                record._apply_subcategory_user_assignment_rules(vals, record=record)
+                record._apply_readonly_contact_defaults(vals, record=record)
 
         blocked_fields = self._get_locked_fields_outside_new_stage().intersection(vals)
         blocked_tickets = self.filtered(lambda ticket: not ticket._is_new_stage())
@@ -714,9 +761,6 @@ class HelpdeskTicket(models.Model):
 
         if vals.get("x_general_description") and not vals.get("name"):
             vals["name"] = vals["x_general_description"]
-        correo = vals.get("x_correo")
-        if correo and not correo.lower().endswith("@devlyn.com.mx"):
-            raise UserError("El correo debe ser @devlyn.com.mx")
         self._normalize_optional_ticket_format_vals(vals)
         self._validate_optional_ticket_formats(vals)
         for record in self:
@@ -760,9 +804,6 @@ class HelpdeskTicket(models.Model):
         domain="""
             [
                 ('category_id', '=', x_category_id),
-                '|',
-                ('user_ids', '=', False),
-                ('user_ids', 'in', [uid])
             ]
         """,
     )
@@ -2151,9 +2192,11 @@ class HelpdeskTicket(models.Model):
     def _is_empty_required_value(self, value):
         if value in (False, None, "", []):
             return True
+        if isinstance(value, models.BaseModel):
+            return not bool(value)
         if isinstance(value, str) and not value.strip():
             return True
-        if value == "select":
+        if isinstance(value, str) and value == "select":
             return True
         return False
 

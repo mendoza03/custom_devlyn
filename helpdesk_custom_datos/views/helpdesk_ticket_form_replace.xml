@@ -13,6 +13,7 @@
                 <form string="Ticket">
                     <field name="name" invisible="1" />
                     <field name="x_is_stage_new" invisible="1" />
+                    <field name="x_can_edit_user_id" invisible="1" />
 
                     <header>
                         <button name="action_set_stage_new" type="object" string="Nuevo"
@@ -28,36 +29,38 @@
                         <field name="stage_id" widget="statusbar" options="{'clickable': False}" />
                     </header>
 
-                    <sheet readonly="not x_is_stage_new">
-                        <div class="oe_title">
+                    <div class="oe_title">
+                        <label for="x_general_description" string="Descripción General (*)" />
+                        <h1>
+                            <field name="x_general_description"
+                                placeholder=""
+                                required="1"
+                                class="oe_inline"
+                            />
+                        </h1>
+                    </div>
 
-                            <label for="x_general_description" string="Descripción General (*)" />
-                            <h1>
-                                <field name="x_general_description"
-                                    placeholder=""
-                                    required="1"
-                                    class="oe_inline"
-                                />
-                            </h1>
-                        </div>
+                    <group string="Datos de contacto">
+                        <group>
+                            <field name="domain_user_ids" invisible="1" />
+                            <field name="create_uid" string="Creado por" />
+                            <field name="user_id"
+                                widget="many2one_avatar_user"
+                                readonly="not x_can_edit_user_id"
+                            />
+                        </group>
+                        <group>
+                            <field name="x_centro_sap" readonly="1" required="1" />
+                            <field name="x_commitment_date" readonly="1" />
+                            <field name="x_branch_id" readonly="1" required="1" />
+                            <field name="x_numero_telefonico" readonly="1" required="1" />
+                            <field name="x_correo" readonly="1" required="1" />
+                        </group>
+                    </group>
+
+                    <sheet readonly="not x_is_stage_new">
                         <field name="x_is_devoluciones_reales_section" invisible="1" />
 
-                        <group string="Datos de contacto">
-    <group>
-        <field name="domain_user_ids" invisible="1" />
-        <field name="create_uid" string="Creado por" />
-        <field name="user_id"
-            widget="many2one_avatar_user"
-        />
-    </group>
-    <group>
-        <field name="x_centro_sap" readonly="id" required="1" />
-        <field name="x_commitment_date" readonly="1" />
-        <field name="x_branch_id" readonly="id" required="1" />
-        <field name="x_numero_telefonico" readonly="id" required="1" />
-        <field name="x_correo" readonly="id" required="1" />
-    </group>
-</group>
                         <group string="Datos generales">
                             <group>
                                 <field name="x_section_id" />
@@ -100,7 +103,7 @@
                                     ENVIO MICAS SIN CORTAR</strong>
                             </div>
 
-                            <group string="Micas sin cortar" col="6">
+                            <group string="Micas sin cortar" col="2">
                                 <field name="x_order_number"
                                     required="x_subcategory_code == 'micas_sin_cortar'" />
                                 <field name="x_bag"
