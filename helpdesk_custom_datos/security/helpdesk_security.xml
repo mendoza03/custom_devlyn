@@ -1,31 +1,94 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
 
-    <!-- Grupo especial: usuarios que pueden ver todos los tickets -->
-    <record model="res.groups.privilege" id="res_groups_privilege_helpdesk_ticket_visibility">
-        <field name="name">Helpdesk Ticket Visibility</field>
-        <field name="category_id" ref="base.module_category_services"/>
+    <!-- ===================================================== -->
+    <!-- PRIVILEGIO -->
+    <!-- ===================================================== -->
+
+    <record model="res.groups.privilege"
+            id="res_groups_privilege_helpdesk_ticket_visibility">
+
+        <field name="name">
+            Helpdesk Ticket Visibility
+        </field>
+
+        <field name="category_id"
+               ref="base.module_category_services"/>
+
     </record>
 
-    <record id="group_helpdesk_ticket_all" model="res.groups">
-        <field name="name">Ver todos los tickets de Helpdesk</field>
+    <!-- ===================================================== -->
+    <!-- GRUPO: SOLO TICKETS PROPIOS -->
+    <!-- ===================================================== -->
+
+    <record id="group_helpdesk_ticket_own_only"
+            model="res.groups">
+
+        <field name="name">
+            Ver solo tickets propios
+        </field>
+
+        <field name="sequence">9</field>
+
+        <field name="privilege_id"
+               ref="res_groups_privilege_helpdesk_ticket_visibility"/>
+
+        <field name="implied_ids"
+               eval="[(4, ref('helpdesk.group_helpdesk_user'))]"/>
+
+    </record>
+
+    <!-- ===================================================== -->
+    <!-- GRUPO: VER TODOS -->
+    <!-- ===================================================== -->
+
+    <record id="group_helpdesk_ticket_all"
+            model="res.groups">
+
+        <field name="name">
+            Ver todos los tickets de Helpdesk
+        </field>
+
         <field name="sequence">10</field>
-        <field name="privilege_id" ref="res_groups_privilege_helpdesk_ticket_visibility"/>
-        <field name="comment">Permite ver todos los tickets de Helpdesk sin permisos administrativos.</field>
-        <field name="implied_ids" eval="[(4, ref('helpdesk.group_helpdesk_user'))]"/>
+
+        <field name="privilege_id"
+               ref="res_groups_privilege_helpdesk_ticket_visibility"/>
+
+        <field name="implied_ids"
+               eval="[(4, ref('helpdesk.group_helpdesk_user'))]"/>
+
     </record>
 
-    <!-- Quitar reglas estándar de Helpdesk que limitan visibilidad -->
-    <delete id="helpdesk.helpdesk_ticket_user_rule" model="ir.rule"/>
-    <delete id="helpdesk.helpdesk_sla_report_analysis_rule_user" model="ir.rule"/>
-    <delete id="helpdesk.helpdesk_ticket_report_analysis_rule_user" model="ir.rule"/>
+    <!-- ===================================================== -->
+    <!-- ELIMINAR REGLAS ORIGINALES -->
+    <!-- ===================================================== -->
 
-    <!-- Usuario Helpdesk normal:
-         ve tickets creados por él O asignados a él -->
-    <record id="helpdesk_ticket_user_own_or_assigned_rule" model="ir.rule">
-        <field name="name">Helpdesk Ticket: Own or Assigned</field>
-        <field name="model_id" ref="helpdesk.model_helpdesk_ticket"/>
-        <field name="groups" eval="[(4, ref('helpdesk.group_helpdesk_user'))]"/>
+    <delete id="helpdesk.helpdesk_ticket_user_rule"
+            model="ir.rule"/>
+
+    <delete id="helpdesk.helpdesk_sla_report_analysis_rule_user"
+            model="ir.rule"/>
+
+    <delete id="helpdesk.helpdesk_ticket_report_analysis_rule_user"
+            model="ir.rule"/>
+
+    <!-- ===================================================== -->
+    <!-- SOLO TICKETS PROPIOS -->
+    <!-- ===================================================== -->
+
+    <record id="helpdesk_ticket_user_own_or_assigned_rule"
+            model="ir.rule">
+
+        <field name="name">
+            Helpdesk Ticket: Own or Assigned
+        </field>
+
+        <field name="model_id"
+               ref="helpdesk.model_helpdesk_ticket"/>
+
+        <field name="groups"
+               eval="[(4, ref('helpdesk_custom_datos.group_helpdesk_ticket_own_only'))]"/>
+
         <field name="domain_force">
             [
                 '|',
@@ -33,22 +96,49 @@
                 ('user_id', '=', user.id)
             ]
         </field>
+
     </record>
 
-    <!-- Usuario con grupo especial:
-         ve todos los tickets -->
-    <record id="helpdesk_ticket_all_tickets_rule" model="ir.rule">
-        <field name="name">Helpdesk Ticket: All Tickets</field>
-        <field name="model_id" ref="helpdesk.model_helpdesk_ticket"/>
-        <field name="groups" eval="[(4, ref('helpdesk_custom_datos.group_helpdesk_ticket_all'))]"/>
-        <field name="domain_force">[(1, '=', 1)]</field>
+    <!-- ===================================================== -->
+    <!-- VER TODOS -->
+    <!-- ===================================================== -->
+
+    <record id="helpdesk_ticket_all_tickets_rule"
+            model="ir.rule">
+
+        <field name="name">
+            Helpdesk Ticket: All Tickets
+        </field>
+
+        <field name="model_id"
+               ref="helpdesk.model_helpdesk_ticket"/>
+
+        <field name="groups"
+               eval="[(4, ref('helpdesk_custom_datos.group_helpdesk_ticket_all'))]"/>
+
+        <field name="domain_force">
+            [(1, '=', 1)]
+        </field>
+
     </record>
 
-    <!-- Reporte SLA: normal ve solo propios/asignados -->
-    <record id="helpdesk_sla_report_user_own_or_assigned_rule" model="ir.rule">
-        <field name="name">Helpdesk SLA Report: Own or Assigned</field>
-        <field name="model_id" ref="helpdesk.model_helpdesk_sla_report_analysis"/>
-        <field name="groups" eval="[(4, ref('helpdesk.group_helpdesk_user'))]"/>
+    <!-- ===================================================== -->
+    <!-- SLA REPORT - SOLO PROPIOS -->
+    <!-- ===================================================== -->
+
+    <record id="helpdesk_sla_report_user_rule"
+            model="ir.rule">
+
+        <field name="name">
+            Helpdesk SLA Report: Own or Assigned
+        </field>
+
+        <field name="model_id"
+               ref="helpdesk.model_helpdesk_sla_report_analysis"/>
+
+        <field name="groups"
+               eval="[(4, ref('helpdesk_custom_datos.group_helpdesk_ticket_own_only'))]"/>
+
         <field name="domain_force">
             [
                 '|',
@@ -56,21 +146,49 @@
                 ('ticket_id.user_id', '=', user.id)
             ]
         </field>
+
     </record>
 
-    <!-- Reporte SLA: grupo especial ve todo -->
-    <record id="helpdesk_sla_report_all_tickets_rule" model="ir.rule">
-        <field name="name">Helpdesk SLA Report: All Tickets</field>
-        <field name="model_id" ref="helpdesk.model_helpdesk_sla_report_analysis"/>
-        <field name="groups" eval="[(4, ref('helpdesk_custom_datos.group_helpdesk_ticket_all'))]"/>
-        <field name="domain_force">[(1, '=', 1)]</field>
+    <!-- ===================================================== -->
+    <!-- SLA REPORT - VER TODOS -->
+    <!-- ===================================================== -->
+
+    <record id="helpdesk_sla_report_all_rule"
+            model="ir.rule">
+
+        <field name="name">
+            Helpdesk SLA Report: All
+        </field>
+
+        <field name="model_id"
+               ref="helpdesk.model_helpdesk_sla_report_analysis"/>
+
+        <field name="groups"
+               eval="[(4, ref('helpdesk_custom_datos.group_helpdesk_ticket_all'))]"/>
+
+        <field name="domain_force">
+            [(1, '=', 1)]
+        </field>
+
     </record>
 
-    <!-- Reporte Tickets: normal ve solo propios/asignados -->
-    <record id="helpdesk_ticket_report_user_own_or_assigned_rule" model="ir.rule">
-        <field name="name">Helpdesk Ticket Report: Own or Assigned</field>
-        <field name="model_id" ref="helpdesk.model_helpdesk_ticket_report_analysis"/>
-        <field name="groups" eval="[(4, ref('helpdesk.group_helpdesk_user'))]"/>
+    <!-- ===================================================== -->
+    <!-- REPORT ANALYSIS - SOLO PROPIOS -->
+    <!-- ===================================================== -->
+
+    <record id="helpdesk_ticket_report_user_rule"
+            model="ir.rule">
+
+        <field name="name">
+            Helpdesk Ticket Report: Own or Assigned
+        </field>
+
+        <field name="model_id"
+               ref="helpdesk.model_helpdesk_ticket_report_analysis"/>
+
+        <field name="groups"
+               eval="[(4, ref('helpdesk_custom_datos.group_helpdesk_ticket_own_only'))]"/>
+
         <field name="domain_force">
             [
                 '|',
@@ -78,14 +196,30 @@
                 ('ticket_id.user_id', '=', user.id)
             ]
         </field>
+
     </record>
 
-    <!-- Reporte Tickets: grupo especial ve todo -->
-    <record id="helpdesk_ticket_report_all_tickets_rule" model="ir.rule">
-        <field name="name">Helpdesk Ticket Report: All Tickets</field>
-        <field name="model_id" ref="helpdesk.model_helpdesk_ticket_report_analysis"/>
-        <field name="groups" eval="[(4, ref('helpdesk_custom_datos.group_helpdesk_ticket_all'))]"/>
-        <field name="domain_force">[(1, '=', 1)]</field>
+    <!-- ===================================================== -->
+    <!-- REPORT ANALYSIS - VER TODOS -->
+    <!-- ===================================================== -->
+
+    <record id="helpdesk_ticket_report_all_rule"
+            model="ir.rule">
+
+        <field name="name">
+            Helpdesk Ticket Report: All
+        </field>
+
+        <field name="model_id"
+               ref="helpdesk.model_helpdesk_ticket_report_analysis"/>
+
+        <field name="groups"
+               eval="[(4, ref('helpdesk_custom_datos.group_helpdesk_ticket_all'))]"/>
+
+        <field name="domain_force">
+            [(1, '=', 1)]
+        </field>
+
     </record>
 
 </odoo>
