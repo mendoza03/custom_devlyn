@@ -60,6 +60,79 @@
     </record>
 
     <!-- ===================================================== -->
+    <!-- GRUPO: VER TICKETS POR SUBCATEGORIA -->
+    <!-- ===================================================== -->
+
+    <record id="group_helpdesk_ticket_subcategory_only"
+            model="res.groups">
+
+        <field name="name">
+            Ver tickets por subcategoria asignada
+        </field>
+
+        <field name="sequence">11</field>
+
+        <field name="privilege_id"
+               ref="res_groups_privilege_helpdesk_ticket_visibility"/>
+
+        <field name="implied_ids"
+               eval="[(4, ref('helpdesk.group_helpdesk_user'))]"/>
+
+    </record>
+
+    <!-- ===================================================== -->
+    <!-- GRUPO: PERMITIR EDITAR USUARIO ASIGNADO -->
+    <!-- ===================================================== -->
+
+    <record id="group_helpdesk_ticket_user_assignment_manager"
+            model="res.groups">
+
+        <field name="name">
+            Editar usuario asignado en tickets
+        </field>
+
+        <field name="sequence">12</field>
+
+        <field name="privilege_id"
+               ref="res_groups_privilege_helpdesk_ticket_visibility"/>
+
+        <field name="implied_ids"
+               eval="[(4, ref('helpdesk.group_helpdesk_user'))]"/>
+
+    </record>
+
+    <!-- ===================================================== -->
+    <!-- GRUPO: PERMITIR CAMBIO DE ESTADO -->
+    <!-- ===================================================== -->
+
+    <record id="group_helpdesk_ticket_stage_manager"
+            model="res.groups">
+
+        <field name="name">
+            Cambiar estado de tickets
+        </field>
+
+        <field name="sequence">13</field>
+
+        <field name="privilege_id"
+               ref="res_groups_privilege_helpdesk_ticket_visibility"/>
+
+        <field name="implied_ids"
+               eval="[(4, ref('helpdesk.group_helpdesk_user'))]"/>
+
+    </record>
+
+    <!-- ===================================================== -->
+    <!-- AJUSTE: USUARIO INTERNO NO DEBE HEREDAR MANAGER -->
+    <!-- ===================================================== -->
+
+    <record id="base.default_user_group"
+            model="res.groups">
+        <field name="implied_ids"
+               eval="[(3, ref('helpdesk.group_helpdesk_manager')), (4, ref('helpdesk.group_helpdesk_user'))]"/>
+    </record>
+
+    <!-- ===================================================== -->
     <!-- ELIMINAR REGLAS ORIGINALES -->
     <!-- ===================================================== -->
 
@@ -118,6 +191,37 @@
 
         <field name="domain_force">
             [(1, '=', 1)]
+        </field>
+
+    </record>
+
+    <!-- ===================================================== -->
+    <!-- SOLO TICKETS POR SUBCATEGORIA -->
+    <!-- ===================================================== -->
+
+    <record id="helpdesk_ticket_subcategory_user_rule"
+            model="ir.rule">
+
+        <field name="name">
+            Helpdesk Ticket: Subcategory Users
+        </field>
+
+        <field name="model_id"
+               ref="helpdesk.model_helpdesk_ticket"/>
+
+        <field name="groups"
+               eval="[(4, ref('helpdesk_custom_datos.group_helpdesk_ticket_subcategory_only'))]"/>
+
+        <field name="domain_force">
+            [
+                '|',
+                '|',
+                ('x_subcategory_id.user_ids', 'in', [user.id]),
+                '|',
+                ('x_subcategory_id', 'in', user.x_helpdesk_subcategory_ids.ids),
+                ('x_category_id', 'in', user.x_helpdesk_category_ids.ids),
+                ('x_section_id', 'in', user.x_helpdesk_section_ids.ids)
+            ]
         </field>
 
     </record>

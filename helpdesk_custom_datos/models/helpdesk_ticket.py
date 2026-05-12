@@ -27,6 +27,7 @@ CANCELLED_STAGE_NAMES = {"Cancelled", "Cancelado"}
 NEW_STAGE_NAMES = {"New", "Nuevo"}
 REQUIRED_VIEW_FIELD_SPECS_CACHE = {}
 USER_ID_EDIT_GROUP = "helpdesk_custom_datos.group_helpdesk_ticket_user_assignment_manager"
+STAGE_EDIT_GROUP = "helpdesk_custom_datos.group_helpdesk_ticket_stage_manager"
 
 
 class HelpdeskTicket(models.Model):
@@ -194,6 +195,10 @@ class HelpdeskTicket(models.Model):
         return self.env.user.has_group(USER_ID_EDIT_GROUP)
 
     @api.model
+    def _current_user_can_edit_stage_id(self):
+        return self.env.is_superuser() or self.env.user.has_group(STAGE_EDIT_GROUP)
+
+    @api.model
     def _apply_readonly_contact_defaults(self, vals, record=None):
         creator_user = self.env.user
 
@@ -326,6 +331,10 @@ class HelpdeskTicket(models.Model):
         compute="_compute_x_can_edit_user_id",
         store=False,
     )
+    x_can_edit_stage_id = fields.Boolean(
+        compute="_compute_x_can_edit_stage_id",
+        store=False,
+    )
     x_commitment_date = fields.Date(string="Fecha compromiso", copy=False)
 
     @api.onchange('user_id')
@@ -411,6 +420,51 @@ class HelpdeskTicket(models.Model):
             return self.env["res.users"]
         return self.x_subcategory_id.user_ids.filtered(lambda user: not user.share)
 
+    def _get_allowed_sections_for_current_user(self):
+        user = self.env.user
+        assigned_subcategories = self.env["helpdesk.ticket.subcategory"].search(
+            [("user_ids", "in", [user.id])]
+        )
+        sections = user.x_helpdesk_section_ids
+        if user.x_helpdesk_category_ids:
+            sections |= user.x_helpdesk_category_ids.mapped("section_id")
+        if user.x_helpdesk_subcategory_ids:
+            sections |= user.x_helpdesk_subcategory_ids.mapped("category_id.section_id")
+        if assigned_subcategories:
+            sections |= assigned_subcategories.mapped("category_id.section_id")
+        return sections
+
+    def _get_allowed_categories_for_current_user(self):
+        user = self.env.user
+        assigned_subcategories = self.env["helpdesk.ticket.subcategory"].search(
+            [("user_ids", "in", [user.id])]
+        )
+        categories = user.x_helpdesk_category_ids
+        if user.x_helpdesk_subcategory_ids:
+            categories |= user.x_helpdesk_subcategory_ids.mapped("category_id")
+        if assigned_subcategories:
+            categories |= assigned_subcategories.mapped("category_id")
+        if user.x_helpdesk_section_ids:
+            categories |= self.env["helpdesk.ticket.category"].search(
+                [("section_id", "in", user.x_helpdesk_section_ids.ids)]
+            )
+        return categories
+
+    def _get_allowed_subcategories_for_current_user(self):
+        user = self.env.user
+        subcategories = user.x_helpdesk_subcategory_ids | self.env["helpdesk.ticket.subcategory"].search(
+            [("user_ids", "in", [user.id])]
+        )
+        if user.x_helpdesk_category_ids:
+            subcategories |= self.env["helpdesk.ticket.subcategory"].search(
+                [("category_id", "in", user.x_helpdesk_category_ids.ids)]
+            )
+        if user.x_helpdesk_section_ids:
+            subcategories |= self.env["helpdesk.ticket.subcategory"].search(
+                [("category_id.section_id", "in", user.x_helpdesk_section_ids.ids)]
+            )
+        return subcategories
+
     def _get_first_subcategory_user(self, subcategory=None):
         self.ensure_one()
         subcategory = subcategory or self.x_subcategory_id
@@ -427,6 +481,32 @@ class HelpdeskTicket(models.Model):
         can_edit = self._current_user_can_edit_user_id()
         for rec in self:
             rec.x_can_edit_user_id = can_edit
+
+    def _compute_x_can_edit_stage_id(self):
+        can_edit = self._current_user_can_edit_stage_id()
+        for rec in self:
+            rec.x_can_edit_stage_id = can_edit
+
+    def _compute_x_allowed_helpdesk_scope_ids(self):
+        allowed_sections = self._get_allowed_sections_for_current_user()
+        allowed_categories = self._get_allowed_categories_for_current_user()
+        allowed_subcategories = self._get_allowed_subcategories_for_current_user()
+        for rec in self:
+            rec.x_allowed_section_ids = [Command.set(allowed_sections.ids)]
+            rec.x_allowed_category_ids = [Command.set(allowed_categories.ids)]
+            rec.x_allowed_subcategory_ids = [Command.set(allowed_subcategories.ids)]
+
+    def _validate_current_user_helpdesk_scope(self, vals):
+        allowed_sections = self._get_allowed_sections_for_current_user().ids
+        allowed_categories = self._get_allowed_categories_for_current_user().ids
+        allowed_subcategories = self._get_allowed_subcategories_for_current_user().ids
+
+        if vals.get("x_section_id") and vals["x_section_id"] not in allowed_sections:
+            raise ValidationError(_("No tienes acceso a la sección seleccionada."))
+        if vals.get("x_category_id") and vals["x_category_id"] not in allowed_categories:
+            raise ValidationError(_("No tienes acceso a la categoría seleccionada."))
+        if vals.get("x_subcategory_id") and vals["x_subcategory_id"] not in allowed_subcategories:
+            raise ValidationError(_("No tienes acceso a la subcategoría seleccionada."))
 
     @api.model
     def _get_optional_ticket_format_rules(self):
@@ -701,6 +781,7 @@ class HelpdeskTicket(models.Model):
     @api.model_create_multi
     def create(self, vals_list):
         for vals in vals_list:
+            self._validate_current_user_helpdesk_scope(vals)
             self._prepare_website_logged_user_values(vals)
             self._apply_subcategory_user_assignment_rules(vals)
             self._apply_readonly_contact_defaults(vals)
@@ -740,6 +821,11 @@ class HelpdeskTicket(models.Model):
 
     def write(self, vals):
         vals = dict(vals)
+        if "stage_id" in vals and not self._current_user_can_edit_stage_id():
+            target_stage_id = vals.get("stage_id")
+            if any(ticket.stage_id.id != target_stage_id for ticket in self):
+                raise UserError(_("No tienes permisos para cambiar el estado del ticket."))
+        self._validate_current_user_helpdesk_scope(vals)
         if vals:
             for record in self:
                 record._apply_subcategory_user_assignment_rules(vals, record=record)
@@ -788,13 +874,30 @@ class HelpdeskTicket(models.Model):
 
         return result
 
-    x_section_id = fields.Many2one("helpdesk.section", string="Sección", required=True)
+    x_section_id = fields.Many2one(
+        "helpdesk.section",
+        string="Sección",
+        required=True,
+        domain="[('id', 'in', x_allowed_section_ids)]",
+    )
+
+    x_allowed_section_ids = fields.Many2many(
+        "helpdesk.section",
+        compute="_compute_x_allowed_helpdesk_scope_ids",
+        store=False,
+    )
 
     x_category_id = fields.Many2one(
         "helpdesk.ticket.category",
         string="Categoría",
         required=True,
-        domain="[('section_id', '=', x_section_id)]",
+        domain="[('id', 'in', x_allowed_category_ids), ('section_id', '=', x_section_id)]",
+    )
+
+    x_allowed_category_ids = fields.Many2many(
+        "helpdesk.ticket.category",
+        compute="_compute_x_allowed_helpdesk_scope_ids",
+        store=False,
     )
 
     x_subcategory_id = fields.Many2one(
@@ -803,9 +906,16 @@ class HelpdeskTicket(models.Model):
         required=True,
         domain="""
             [
+                ('id', 'in', x_allowed_subcategory_ids),
                 ('category_id', '=', x_category_id),
             ]
         """,
+    )
+
+    x_allowed_subcategory_ids = fields.Many2many(
+        "helpdesk.ticket.subcategory",
+        compute="_compute_x_allowed_helpdesk_scope_ids",
+        store=False,
     )
 
     x_subcategory_code = fields.Char(

@@ -16,10 +16,63 @@ class ResUsers(models.Model):
         string='Centro SAP',
     )
 
+    x_helpdesk_section_ids = fields.Many2many(
+        "helpdesk.section",
+        "res_users_helpdesk_section_rel",
+        "user_id",
+        "section_id",
+        string="Secciones Helpdesk permitidas",
+    )
+
+    x_helpdesk_category_ids = fields.Many2many(
+        "helpdesk.ticket.category",
+        "res_users_helpdesk_category_rel",
+        "user_id",
+        "category_id",
+        string="Categorias Helpdesk permitidas",
+    )
+
+    x_helpdesk_subcategory_ids = fields.Many2many(
+        "helpdesk.ticket.subcategory",
+        "res_users_helpdesk_subcategory_rel",
+        "user_id",
+        "subcategory_id",
+        string="Subcategorias Helpdesk permitidas",
+    )
+
     @api.onchange('sap_center_id')
     def _onchange_sap_center_id(self):
         for rec in self:
             rec.x_branch_id = rec.sap_center_id.x_branch_id
+
+    @api.onchange("x_helpdesk_section_ids")
+    def _onchange_x_helpdesk_section_ids(self):
+        for rec in self:
+            if not rec.x_helpdesk_section_ids:
+                continue
+            rec.x_helpdesk_category_ids = rec.x_helpdesk_category_ids.filtered(
+                lambda category: category.section_id in rec.x_helpdesk_section_ids
+            )
+            rec.x_helpdesk_subcategory_ids = rec.x_helpdesk_subcategory_ids.filtered(
+                lambda subcategory: subcategory.category_id.section_id in rec.x_helpdesk_section_ids
+            )
+
+    @api.onchange("x_helpdesk_category_ids")
+    def _onchange_x_helpdesk_category_ids(self):
+        for rec in self:
+            if rec.x_helpdesk_category_ids:
+                rec.x_helpdesk_section_ids |= rec.x_helpdesk_category_ids.mapped("section_id")
+                rec.x_helpdesk_subcategory_ids = rec.x_helpdesk_subcategory_ids.filtered(
+                    lambda subcategory: subcategory.category_id in rec.x_helpdesk_category_ids
+                )
+
+    @api.onchange("x_helpdesk_subcategory_ids")
+    def _onchange_x_helpdesk_subcategory_ids(self):
+        for rec in self:
+            if rec.x_helpdesk_subcategory_ids:
+                categories = rec.x_helpdesk_subcategory_ids.mapped("category_id")
+                rec.x_helpdesk_category_ids |= categories
+                rec.x_helpdesk_section_ids |= categories.mapped("section_id")
 
     @api.model_create_multi
     def create(self, vals_list):
@@ -44,6 +97,9 @@ class ResUsers(models.Model):
         return super().SELF_READABLE_FIELDS + [
             "x_branch_id",
             "sap_center_id",
+            "x_helpdesk_section_ids",
+            "x_helpdesk_category_ids",
+            "x_helpdesk_subcategory_ids",
         ]
 
     @property
@@ -51,4 +107,7 @@ class ResUsers(models.Model):
         return super().SELF_WRITEABLE_FIELDS + [
             "x_branch_id",
             "sap_center_id",
+            "x_helpdesk_section_ids",
+            "x_helpdesk_category_ids",
+            "x_helpdesk_subcategory_ids",
         ]

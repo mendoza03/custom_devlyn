@@ -1,4 +1,5 @@
 from odoo.addons.helpdesk.tests.common import HelpdeskCommon
+from odoo.tests import new_test_user
 
 
 class TestHelpdeskTicketOnchange(HelpdeskCommon):
@@ -40,3 +41,23 @@ class TestHelpdeskTicketOnchange(HelpdeskCommon):
 
         self.assertFalse(ticket.x_category_id)
         self.assertFalse(ticket.x_subcategory_id)
+
+    def test_allowed_scope_includes_subcategory_user_assignment(self):
+        scoped_user = new_test_user(
+            self.env,
+            login="helpdesk_scope_by_subcategory",
+            groups="base.group_user,helpdesk.group_helpdesk_user",
+            company_id=self.main_company_id,
+        )
+        self.subcategory_a.user_ids = [(4, scoped_user.id)]
+
+        ticket = self.env["helpdesk.ticket"].with_user(scoped_user).new({
+            "team_id": self.test_team.id,
+            "stage_id": self.stage_new.id,
+            "x_general_description": "Scope by subcategory user",
+        })
+        ticket._compute_x_allowed_helpdesk_scope_ids()
+
+        self.assertIn(self.section_a, ticket.x_allowed_section_ids)
+        self.assertIn(self.category_a, ticket.x_allowed_category_ids)
+        self.assertIn(self.subcategory_a, ticket.x_allowed_subcategory_ids)

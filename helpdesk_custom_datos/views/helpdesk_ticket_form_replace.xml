@@ -14,18 +14,24 @@
                     <field name="name" invisible="1" />
                     <field name="x_is_stage_new" invisible="1" />
                     <field name="x_can_edit_user_id" invisible="1" />
+                    <field name="x_can_edit_stage_id" invisible="1" />
 
                     <header>
                         <button name="action_set_stage_new" type="object" string="Nuevo"
-                            class="btn btn-secondary" />
+                            class="btn btn-secondary"
+                            invisible="not x_can_edit_stage_id" />
                         <button name="action_open_in_progress_wizard" type="object"
-                            string="En proceso de solución" class="btn btn-primary" />
+                            string="En proceso de solución" class="btn btn-primary"
+                            invisible="not x_can_edit_stage_id" />
                         <button name="action_set_stage_on_hold" type="object" string="En espera"
-                            class="btn btn-secondary" />
+                            class="btn btn-secondary"
+                            invisible="not x_can_edit_stage_id" />
                         <button name="action_set_stage_solved" type="object" string="Solucionado"
-                            class="btn btn-secondary" />
+                            class="btn btn-secondary"
+                            invisible="not x_can_edit_stage_id" />
                         <button name="action_set_stage_cancelled" type="object"
-                            string="Cancelado" class="btn btn-secondary" />
+                            string="Cancelado" class="btn btn-secondary"
+                            invisible="not x_can_edit_stage_id" />
                         <field name="stage_id" widget="statusbar" options="{'clickable': False}" />
                     </header>
 
@@ -43,6 +49,9 @@
                     <group string="Datos de contacto">
                         <group>
                             <field name="domain_user_ids" invisible="1" />
+                            <field name="x_allowed_section_ids" invisible="1" />
+                            <field name="x_allowed_category_ids" invisible="1" />
+                            <field name="x_allowed_subcategory_ids" invisible="1" />
                             <field name="create_uid" string="Creado por" />
                             <field name="user_id"
                                 widget="many2one_avatar_user"
@@ -50,9 +59,11 @@
                             />
                         </group>
                         <group>
-                            <field name="x_centro_sap" readonly="1" required="1" />
+                            <field name="x_centro_sap" readonly="1" required="1"
+                                options="{'no_open': True}" />
                             <field name="x_commitment_date" readonly="1" />
-                            <field name="x_branch_id" readonly="1" required="1" />
+                            <field name="x_branch_id" readonly="1" required="1"
+                                options="{'no_open': True}" />
                             <field name="x_numero_telefonico" readonly="1" required="1" />
                             <field name="x_correo" readonly="1" required="1" />
                         </group>
@@ -2208,6 +2219,11 @@
     <field name="inherit_id" ref="helpdesk.helpdesk_ticket_view_kanban"/>
     <field name="priority">100</field>
     <field name="arch" type="xml">
+        <xpath expr="//kanban" position="attributes">
+            <attribute name="js_class"/>
+            <attribute name="on_create"/>
+            <attribute name="quick_create_view"/>
+        </xpath>
         <xpath expr="//kanban" position="inside">
             <field name="create_uid"/>
             <field name="x_centro_sap"/>
