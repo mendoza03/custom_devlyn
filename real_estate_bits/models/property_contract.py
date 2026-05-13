@@ -763,7 +763,6 @@ class Contract(models.Model):
                 for contract in contract_ids:
                     if contract and contract.id:
                         template.sudo().send_mail(contract.id, force_send=True)
-
     @api.depends(
         "reservation_id",
         "reservation_id.date",
@@ -818,16 +817,17 @@ class Contract(models.Model):
             discount_total = finance_line.discount_total or 0.0
             hitch_percent = finance_line.hitch_porcent or sale.hitch_porcent or 0.0
 
-            amount_after_discount = amount_total - discount_total
+            hitch_price = amount_total * hitch_percent
+            discount_hitch = discount_total * hitch_percent
 
-            final_down_payment = amount_after_discount * hitch_percent
-            amount_to_finance = amount_after_discount
+            final_down_payment = hitch_price - discount_hitch
+            amount_to_finance = amount_total - discount_total
             total_price = final_down_payment + amount_to_finance
 
-            month_deliver = getattr(property_id, "month_deliver", 0) or 0
+            month_deliver = max((getattr(property_id, "month_deliver", 0) or 0) - 1, 0)
 
             contract.down_payment_month0_date = (
-                reservation_date + relativedelta(days=10)
+                reservation_date + relativedelta(days=5)
                 if reservation_date else False
             )
 
