@@ -226,13 +226,20 @@ class SaleOrderInherit(models.Model):
             raise ValidationError(_('You should choose a modality finance'))
 
         sale_amount_total = 0.0
-        financial_line = self.financial_lines.filtered(
-            lambda l: l.name == self.finance_id.name
-        )
-        if financial_line:
-            sale_amount_total = financial_line[0].amount_finance + financial_line[0].hitch
 
-        print('sale_amount_total',sale_amount_total)
+        financial_line = self.financial_lines.filtered(
+            lambda l: l.interest_id and l.interest_id.id == self.finance_id.id
+        )
+
+        if not financial_line:
+            financial_line = self.financial_lines.filtered(
+                lambda l: l.name == self.finance_id.name
+            )
+
+        if financial_line:
+            sale_amount_total = financial_line[0].gradual_initial_investment or 0.0
+
+        print('sale_amount_total_gradual_initial_investment', sale_amount_total)
 
         values = {
             'date': datetime.now(),

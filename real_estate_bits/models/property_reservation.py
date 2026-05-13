@@ -6,7 +6,7 @@ from odoo import api, fields, models
 from odoo.exceptions import UserError
 from odoo.tools.translate import _
 from .project_worksite import PROJECT_WORKSITE_TYPE
-
+from dateutil.relativedelta import relativedelta
 
 class PropertyReservation(models.Model):
     _name = "property.reservation"
@@ -143,14 +143,36 @@ class PropertyReservation(models.Model):
         self.property_id.write({"state": "free"})
 
     def action_confirm(self):
-        if self.name == 'New' or not self.name:
-            self.name = self.env["ir.sequence"].next_by_code("property.booking")
-        self.write({"state": "confirmed"})
-        self.property_id.write({"state": "reserved"})
-        if self.order_id.opportunity_id:
-            stage = self.env['crm.stage'].search([ ('name', '=', 'Apartado')], limit=1)
-            if stage:
-                self.order_id.opportunity_id.write({"stage_id": stage.id})
+        for reservation in self:
+            if reservation.name == 'New' or not reservation.name:
+                reservation.name = reservation.env["ir.sequence"].next_by_code("property.booking")
+
+            reservation.write({"state": "confirmed"})
+
+            property_id = reservation.property_id
+            if property_id:
+                reservation_date = False
+                if reservation.date:
+                    reservation_date = fields.Datetime.to_datetime(reservation.date).date()
+
+                vals = {
+                    "state": "reserved",
+                    "property_date": reservation_date,
+                }
+
+                if "date_deliver" in property_id._fields:
+                    month_deliver = max((getattr(property_id, "month_deliver", 0) or 0) - 1, 0)
+                    vals["date_deliver"] = (
+                        reservation_date + relativedelta(months=month_deliver)
+                        if reservation_date else False
+                    )
+
+                property_id.write(vals)
+
+            if "order_id" in reservation._fields and reservation.order_id and reservation.order_id.opportunity_id:
+                stage = reservation.env["crm.stage"].search([("name", "=", "Apartado")], limit=1)
+                if stage:
+                    reservation.order_id.opportunity_id.write({"stage_id": stage.id})
 
 
 

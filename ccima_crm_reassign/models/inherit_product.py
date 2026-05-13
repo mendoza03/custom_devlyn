@@ -126,9 +126,6 @@ class ProductCcima(models.Model):
         for product in self:
             product.precio_unitario_venta = 0.0
 
-            if not product.property_area:
-                continue
-
             sale = SaleOrder.search([
                 ("order_line.product_template_id", "=", product.id),
                 ("finance_id", "!=", False),
@@ -150,11 +147,8 @@ class ProductCcima(models.Model):
                 continue
 
             finance_line = finance_line[0]
-
-            amount_total = finance_line.amount_total or 0.0
-            discount_total = finance_line.discount_total or 0.0
             percent = finance_line.promotion_id.porcent or 0.0
 
             product.precio_unitario_venta = (
-                (amount_total - discount_total) * percent
-            ) / product.property_area
+                (product.price_per_m or 0.0) * percent
+            )

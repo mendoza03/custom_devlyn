@@ -327,9 +327,9 @@ class CrmLeadCcima(models.Model):
                     payments_no_interest = _fmt_currency(fl.financial_line_1)
                     payments_interest_1 = _fmt_currency(fl.financial_line_2)
                     payments_interest_1_25 = _fmt_currency(fl.financial_line_3)
-                    payments_no_interest_pt = fl.financial_line_1
-                    payments_interest_1_pt  = fl.financial_line_2
-                    payments_interest_1_25_pt  = fl.financial_line_3
+                    payments_no_interest_pt = msi_months
+                    payments_interest_1_pt = fl.financial_line_2
+                    payments_interest_1_25_pt = fl.financial_line_3
                     priceperm = (fl.amount_finance + fl.hitch) / pt.property_area
                     if fl.promotion_id:
                         earlypaymentper = fl.promotion_id.porcent_financial
@@ -372,20 +372,28 @@ class CrmLeadCcima(models.Model):
 
 
 
-            m0=0
+            m0 = 0
             m1 = 0
             m125 = 0
+            msi_months = 0
+
             if getattr(so, 'finance_id', False):
-                mf = getattr(so, 'finance_id', False).name
-                fina = getattr(so, 'finance_id', False)
-                if fina and fina.payment_term_ids:
-                    terms = fina.payment_term_ids
+                fina = so.finance_id
+                mf = fina.name or ''
+
+                if fina.payment_term_ids:
+                    terms = fina.payment_term_ids.sorted(key=lambda t: t.end_month or 0)
+                    msi_months = terms[0].end_month if len(terms) > 0 else 0
 
                     m0 = terms[0].end_month if len(terms) > 0 else 0
-                    m1 = (terms[1].end_month - m0) if len(terms) > 1 else 0
-                    m125 = (terms[2].end_month - m1) if len(terms) > 2 else 0
+
+                    m1 = (
+                        (terms[1].end_month or 0) - (terms[0].end_month or 0)
+                        if len(terms) > 1 else 0
+                    )
+                    m125 = fina.duration_month or 0
             else:
-                mf= ''
+                mf = ''
 
             Employee = self.env['hr.employee']
 
