@@ -301,6 +301,29 @@ class CrmLeadCcima(models.Model):
             total_ds = 0
             total_price = ''
             total_price_am = 0
+            m0 = 0
+            m1 = 0
+            m125 = 0
+            msi_months = 0
+
+            if getattr(so, 'finance_id', False):
+                fina = so.finance_id
+                mf = fina.name or ''
+
+                if fina.payment_term_ids:
+                    terms = fina.payment_term_ids.sorted(key=lambda t: t.end_month or 0)
+                    msi_months = terms[0].end_month if len(terms) > 0 else 0
+
+                    m0 = terms[0].end_month if len(terms) > 0 else 0
+
+                    m1 = (
+                        (terms[1].end_month or 0) - (terms[0].end_month or 0)
+                        if len(terms) > 1 else 0
+                    )
+                    m125 = fina.duration_month or 0
+            else:
+                mf = ''
+                
             if so:
                 total_price = _fmt_currency(so.amount_total) if so.amount_total is not False else ''
                 total_price_am = so.amount_total if so.amount_total is not False else 0
@@ -363,37 +386,17 @@ class CrmLeadCcima(models.Model):
                                 total_pay += line.amount_to_capital
                                 total_pay += line.amount_paid
 
-                        pr_line = self.env['loan.line'].search([('contract_id', '=', pr_contract.id),('count_line', '=', 1)])
+                        pr_line = self.env['loan.line'].search([
+                            ('contract_id', '=', pr_contract.id),
+                            ('count_line', '=', 1)
+                        ], order='date asc, id asc', limit=1)
+
                         if pr_line:
-                            date_del = pr_line.date
-                            month_qty = (pt.month_deliver or 0) - 1
+                            month_qty = max((pt.month_deliver or 0) - 1, 0)
                             date_deliver = pr_line.date + relativedelta(months=month_qty)
                             date_f_m = pr_line.date
 
 
-
-            m0 = 0
-            m1 = 0
-            m125 = 0
-            msi_months = 0
-
-            if getattr(so, 'finance_id', False):
-                fina = so.finance_id
-                mf = fina.name or ''
-
-                if fina.payment_term_ids:
-                    terms = fina.payment_term_ids.sorted(key=lambda t: t.end_month or 0)
-                    msi_months = terms[0].end_month if len(terms) > 0 else 0
-
-                    m0 = terms[0].end_month if len(terms) > 0 else 0
-
-                    m1 = (
-                        (terms[1].end_month or 0) - (terms[0].end_month or 0)
-                        if len(terms) > 1 else 0
-                    )
-                    m125 = fina.duration_month or 0
-            else:
-                mf = ''
 
             Employee = self.env['hr.employee']
 
