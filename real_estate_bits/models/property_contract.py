@@ -767,9 +767,7 @@ class Contract(models.Model):
     @api.depends(
         "reservation_id",
         "reservation_id.date",
-        "reservation_id.order_id",
         "property_id",
-        "property_id.month_deliver",
     )
     def _compute_contract_finance_values(self):
         SaleOrder = self.env["sale.order"]
@@ -827,7 +825,9 @@ class Contract(models.Model):
             amount_to_finance = amount_total - discount_total
             total_price = final_down_payment + amount_to_finance
 
-            month_deliver = max((getattr(property_id, "month_deliver", 0) or 0) - 1, 0)
+            month_deliver = 0
+            if property_id and "month_deliver" in property_id._fields:
+                month_deliver = max((property_id.month_deliver or 0) - 1, 0)
 
             contract.down_payment_month0_date = (
                 reservation_date + relativedelta(days=5)
