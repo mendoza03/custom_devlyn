@@ -763,10 +763,13 @@ class Contract(models.Model):
                 for contract in contract_ids:
                     if contract and contract.id:
                         template.sudo().send_mail(contract.id, force_send=True)
+
     @api.depends(
         "reservation_id",
         "reservation_id.date",
+        "reservation_id.order_id",
         "property_id",
+        "property_id.month_deliver",
     )
     def _compute_contract_finance_values(self):
         SaleOrder = self.env["sale.order"]

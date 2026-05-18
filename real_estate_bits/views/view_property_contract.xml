@@ -180,6 +180,16 @@
                             </group>
                         </group>
                         <separator string="Payment Details" colspan="4" />
+                        <group>
+                            <group string="Contract Finance Summary">
+                                <field name="down_payment_month0_date" readonly="1" />
+                                <field name="contract_total_price" readonly="1" />
+                                <field name="contract_final_down_payment" readonly="1" />
+                                <field name="contract_amount_to_finance" readonly="1" />
+                                <field name="contract_delivery_date" readonly="1" />
+                                <field name="contract_financing_months" readonly="1" />
+                            </group>
+                        </group>
                         <group invisible="contract_type == 'is_rental'">
                             <group>
                                 <field name="pricing" readonly="state != 'draft'" />
@@ -189,17 +199,6 @@
                                 <field name="template_id"
                                     readonly="state != 'draft'"
                                     required="contract_type == 'is_ownership'" />
-                                <field name="down_payment_month0_date" readonly="1" />
-
-                                <field name="contract_total_price" readonly="1" />
-
-                                <field name="contract_final_down_payment" readonly="1" />
-
-                                <field name="contract_amount_to_finance" readonly="1" />
-
-                                <field name="contract_delivery_date" readonly="1" />
-
-                                <field name="contract_financing_months" readonly="1" />
 
                                 <field name="account_income" required="1" />
                             </group>
