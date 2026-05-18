@@ -148,38 +148,32 @@ class Contract(models.Model):
 
     down_payment_month0_date = fields.Date(
         string="Enganche Mensualidad 0",
-        compute="_compute_contract_finance_values",
-        store=True,
+        compute="_compute_contract_finance_values"
     )
 
     contract_total_price = fields.Float(
         string="Precio Total",
-        compute="_compute_contract_finance_values",
-        store=True,
+        compute="_compute_contract_finance_values"
     )
 
     contract_final_down_payment = fields.Float(
         string="Enganche Final",
-        compute="_compute_contract_finance_values",
-        store=True,
+        compute="_compute_contract_finance_values"
     )
 
     contract_amount_to_finance = fields.Float(
         string="Monto a Financiar",
-        compute="_compute_contract_finance_values",
-        store=True,
+        compute="_compute_contract_finance_values"
     )
 
     contract_delivery_date = fields.Date(
         string="Fecha de Entrega",
-        compute="_compute_contract_finance_values",
-        store=True,
+        compute="_compute_contract_finance_values"
     )
 
     contract_financing_months = fields.Integer(
         string="Meses de Financiamiento",
-        compute="_compute_contract_finance_values",
-        store=True,
+        compute="_compute_contract_finance_values"
     )
 
     @api.model_create_multi
