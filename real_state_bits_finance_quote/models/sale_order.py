@@ -422,30 +422,89 @@ class SaleOrderInherit(models.Model):
 class InheritSaleOrderLine(models.Model):
     _inherit = 'sale.order.line'
 
-    @api.depends('product_id', 'product_uom', 'product_uom_qty')
-    def _compute_price_unit(self):
+    def _get_property_price_per_m(self):
+        self.ensure_one()
+        product = self.product_id
+        product_tmpl = product.product_tmpl_id
+
+        price_per_m = getattr(product, 'price_per_m', 0.0) or getattr(product_tmpl, 'price_per_m', 0.0)
+        list_price = product.lst_price or product_tmpl.list_price or 0.0
+
+        return price_per_m if price_per_m and price_per_m > 0 else list_price
+
+    def _get_property_area(self):
+        self.ensure_one()
+        product = self.product_id
+        product_tmpl = product.product_tmpl_id
+
+        area = getattr(product, 'property_area', 0.0) or getattr(product_tmpl, 'property_area', 0.0)
+        return area if area and area > 0 else 1.0
+
+    @api.onchange('product_id')
+    def _onchange_product_id_property_price(self):
         for line in self:
+            if not line.product_id or line.display_type:
+                continue
+
+            line.product_uom_qty = line._get_property_area()
+            line.price_unit = line._get_property_price_per_m()
+
+    @api.depends(
+        'product_id',
+        'product_uom',
+        'product_uom_qty',
+        'product_id.lst_price',
+        'product_id.product_tmpl_id.list_price',
+    )
+    def _compute_price_unit(self):
+        super()._compute_price_unit()
+        for line in self:
+            if not line.product_id or line.display_type:
+                continue
+
             if line.qty_invoiced > 0 or (line.product_id.expense_policy == 'cost' and line.is_expense):
                 continue
-            if not line.product_uom or not line.product_id:
-                line.price_unit = 0.0
-            else:
-                line.price_unit = line.product_id.product_tmpl_id.price_per_m
 
+            line.price_unit = line._get_property_price_per_m()
 
-    @api.depends('display_type', 'product_id', 'product_packaging_qty')
+    @api.depends(
+        'display_type',
+        'product_id',
+    )
     def _compute_product_uom_qty(self):
         for line in self:
             if line.display_type:
                 line.product_uom_qty = 0.0
                 continue
-            line.product_uom_qty = line.product_id.product_tmpl_id.property_area if line.product_id.product_tmpl_id.property_area > 0 else 1
-    
+
+            if line.product_id:
+                line.product_uom_qty = line._get_property_area()
+            else:
+                line.product_uom_qty = 1.0
+
     @api.model_create_multi
-    def create(self, vals_list: Dict[str, any]) -> None:
+    def create(self, vals_list):
         records = super().create(vals_list)
+
         for record in records:
-            tax_0_percentage = self.env['account.tax'].with_company(record.company_id.id).search([('type_tax_use','=','sale'),('name','=','0%'),('company_id','=',record.company_id.id)])
-            tax_16_percentage = self.env['account.tax'].with_company(record.company_id.id).search([('type_tax_use','=','sale'),('name','=','16%'),('company_id','=',record.company_id.id)])
+            if record.product_id and not record.display_type:
+                if not record.price_unit:
+                    record.price_unit = record._get_property_price_per_m()
+                if not record.product_uom_qty or record.product_uom_qty == 1:
+                    record.product_uom_qty = record._get_property_area()
+
+            tax_0_percentage = self.env['account.tax'].with_company(record.company_id.id).search([
+                ('type_tax_use', '=', 'sale'),
+                ('name', '=', '0%'),
+                ('company_id', '=', record.company_id.id)
+            ], limit=1)
+
+            tax_16_percentage = self.env['account.tax'].with_company(record.company_id.id).search([
+                ('type_tax_use', '=', 'sale'),
+                ('name', '=', '16%'),
+                ('company_id', '=', record.company_id.id)
+            ], limit=1)
+
             record.tax_id = tax_0_percentage if record.order_id else tax_16_percentage
+
         return records
