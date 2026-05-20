@@ -86,6 +86,11 @@ class PropertyReservation(models.Model):
 
     count_commissions_bills = fields.Integer(compute="_compute_commissions_bills")
 
+    total_reservation = fields.Float(
+        string="Total en Reserva",
+        readonly=True,
+    )
+
     def _compute_commissions_bills(self):
         bill_obj = self.env["account.move"]
         for rec in self:

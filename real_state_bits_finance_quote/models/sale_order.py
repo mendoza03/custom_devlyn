@@ -249,6 +249,7 @@ class SaleOrderInherit(models.Model):
             'property_id': self.order_line[0].product_template_id.id,
             'currency_id': self.currency_id.id,
             'price_total': sale_amount_total,
+            'total_reservation': sale_amount_total,
             'project_id': self.order_line[0].product_template_id.project_worksite_id.id if self.order_line[0].product_template_id and self.order_line[0].product_template_id.project_worksite_id else False,
         }
         reservation_id = self.env['property.reservation'].create(values)
@@ -320,22 +321,45 @@ class SaleOrderInherit(models.Model):
             if self.order_line[0].product_template_id.promotion_ids:
                 promotion_ids = self.order_line[0].product_template_id.promotion_ids.ids
             for finance in self.finance_ids:
-                amount = self.amount_total
+                amount = self.amount_total or 0.0
+
+                hitch_amount = amount * self.hitch_porcent if self.hitch_porcent > 0 else 0.0
+                discount_total = 0.0
+
+                amount_finance = self._get_amount_finance_after_hitch_and_discount(
+                    amount_total=amount,
+                    hitch_amount=hitch_amount,
+                    discount_total=discount_total,
+                )
+
                 values = {
                     'name': finance.name,
                     'finance_months': finance.duration_month,
                     'interest_id': finance.id,
                     'hitch_porcent': self.hitch_porcent,
                     'amount_total': amount,
-                    'hitch_porcent': self.hitch_porcent,
-                    'hitch': amount * self.hitch_porcent if self.hitch_porcent > 0 else 0,
-                    'amount_finance': amount - (amount * self.hitch_porcent),
-                    'domain_promotion_ids': [(6,0, self.order_line[0].product_template_id.promotion_ids.ids if self.order_line[0].product_template_id.promotion_ids else self.order_line[0].product_template_id.worksite_id.promotion_ids.ids if self.order_line[0].product_template_id.worksite_id.promotion_ids else [])]
+                    'hitch': hitch_amount,
+                    'hitch_no_discount': hitch_amount,
+                    'discount_total': discount_total,
+                    'amount_finance': amount_finance,
+                    'domain_promotion_ids': [
+                        (
+                            6,
+                            0,
+                            self.order_line[0].product_template_id.promotion_ids.ids
+                            if self.order_line[0].product_template_id.promotion_ids
+                            else self.order_line[0].product_template_id.worksite_id.promotion_ids.ids
+                            if self.order_line[0].product_template_id.worksite_id.promotion_ids
+                            else []
+                        )
+                    ],
                 }
+
                 if finance.payment_term_ids:
-                    payment_lines = self._get_paymemt_lines(finance.payment_term_ids,values['amount_finance'])
+                    payment_lines = self._get_paymemt_lines(finance.payment_term_ids, amount_finance)
                     values.update(payment_lines)
-                finance_lines.append((0,0,values))
+
+                finance_lines.append((0, 0, values))
             self.write({
                 'financial_lines': [(5,0,0)] + finance_lines,
             })
@@ -388,7 +412,12 @@ class SaleOrderInherit(models.Model):
     def _get_finance_lines(self):
         return self.financial_lines
                 
+    def _get_amount_finance_after_hitch_and_discount(self, amount_total, hitch_amount, discount_total):
+        amount_total = amount_total or 0.0
+        hitch_amount = hitch_amount or 0.0
+        discount_total = discount_total or 0.0
 
+        return max(amount_total - hitch_amount - discount_total, 0.0)
 
 class InheritSaleOrderLine(models.Model):
     _inherit = 'sale.order.line'

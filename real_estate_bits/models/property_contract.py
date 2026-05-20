@@ -813,18 +813,15 @@ class Contract(models.Model):
             hitch_percent = finance_line.hitch_porcent or sale.hitch_porcent or 0.0
 
             hitch_price = amount_total * hitch_percent
-            discount_hitch = discount_total * hitch_percent
 
-            final_down_payment = hitch_price - discount_hitch
+            final_down_payment = hitch_price - (discount_total * hitch_percent)
+
             amount_to_finance = amount_total - discount_total
+
             total_price = final_down_payment + amount_to_finance
 
-            month_deliver = 0
-            if property_id and "month_deliver" in property_id._fields:
-                month_deliver = max((property_id.month_deliver or 0) - 1, 0)
-
             contract.down_payment_month0_date = (
-                reservation_date + relativedelta(days=5)
+                reservation_date + relativedelta(days=10)
                 if reservation_date else False
             )
 
@@ -832,9 +829,19 @@ class Contract(models.Model):
             contract.contract_final_down_payment = final_down_payment
             contract.contract_amount_to_finance = amount_to_finance
 
+            months_delivery = 0
+
+            if property_id:
+                if "month_deliver" in property_id._fields:
+                    months_delivery = property_id.month_deliver or 0
+                elif "delivery_months" in property_id._fields:
+                    months_delivery = property_id.delivery_months or 0
+                elif "months_delivery" in property_id._fields:
+                    months_delivery = property_id.months_delivery or 0
+
             contract.contract_delivery_date = (
-                reservation_date + relativedelta(months=month_deliver)
-                if reservation_date and property_id else False
+                reservation_date + relativedelta(months=months_delivery)
+                if reservation_date and months_delivery else False
             )
 
             contract.contract_financing_months = sale.finance_id.duration_month or 0
